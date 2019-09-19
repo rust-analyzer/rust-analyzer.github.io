@@ -71,3 +71,31 @@ footer {
 footer > p {
     margin-bottom: 0;
 }
+
+.post-list {
+    margin-left: 0;
+    list-style: none;
+    align-self: center;
+}
+
+.post-list > li {
+    margin-top: 2em;
+}
+
+.post-list h2 {
+    margin-top: 0;
+    font-size: 2em;
+}
+
+.post-meta {
+    color: #828282;
+}
+
+.post-link {
+    display: block;
+    text-decoration: none;
+}
+
+.post-link:hover {
+    text-decoration: underline;
+}
