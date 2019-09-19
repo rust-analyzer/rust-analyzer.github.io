@@ -1,5 +1,7 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 h1, h2, h3 { font-weight: 300; }
@@ -9,6 +11,7 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    font-family: "Open Sans", "DejaVu Sans", sans-serif;
 }
 
 main {
@@ -41,10 +44,9 @@ footer {
 }
 
 .nav-link {
-	font-family: "Open Sans", "DejaVu Sans", sans-serif;
-	font-weight: 400;
-	font-style: normal;
-	color: rgba(0, 0, 0, .8);
+    font-weight: 400;
+    font-style: normal;
+    color: rgba(0, 0, 0, .8);
     text-decoration: none;
 }
 
@@ -59,7 +61,6 @@ footer {
 
 .footer-link {
     padding-left: 2ch;
-    font-family: "Open Sans", "DejaVu Sans", sans-serif;
     font-weight: 600;
     font-style: normal;
     text-decoration: none;
@@ -70,6 +71,21 @@ footer {
 }
 footer > p {
     margin-bottom: 0;
+}
+
+.greeting {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    text-align: center;
+}
+
+.greeting > h1 {
+    font-weight: bold;
+    font-size: 3em;
+}
+
+.greeting > p {
+    font-size: 2em;
 }
 
 .post-list {

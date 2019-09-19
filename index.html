@@ -2,14 +2,22 @@
 layout: default
 ---
 
-<ul class="post-list">
-{% for post in site.posts %}
-<li>
-  <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+<section class="greeting">
+    <h1>rust-analyzer</h1>
 
-  <h2>
-    <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-  </h2>
-</li>
-{% endfor %}
+    <p>
+        Bringing <em>great</em> IDE experience to the Rust programming language.
+    </p>
+</section>
+
+
+<ul class="post-list">
+    {% for post in site.posts %}
+    <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+        <h2>
+            <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h2>
+    </li>
+    {% endfor %}
 </ul>
