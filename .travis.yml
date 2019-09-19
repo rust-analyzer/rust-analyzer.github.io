@@ -1,0 +1,18 @@
+os: linux
+dist: xenial
+language: ruby
+cache: bundler
+
+script:
+  - bundle exec jekyll build
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  local-dir: _site
+  branch: master
+  target_branch: master
+  on:
+    branch: src
