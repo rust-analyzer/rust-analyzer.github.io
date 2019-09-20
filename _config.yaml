@@ -3,3 +3,5 @@ description: "rust-analyzer: building a better Rust IDE"
 baseurl: ""
 url: "https://rust-analyzer.github.io/"
 github_username: rust-analyzer
+exclude:
+  - wasm-demo

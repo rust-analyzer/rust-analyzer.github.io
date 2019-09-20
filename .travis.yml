@@ -3,8 +3,7 @@ dist: xenial
 language: ruby
 cache: bundler
 
-script:
-  - bundle exec jekyll build
+script: ./build.sh
 
 deploy:
   provider: pages
