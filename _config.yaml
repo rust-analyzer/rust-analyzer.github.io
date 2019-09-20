@@ -4,5 +4,5 @@ baseurl: ""
 url: "https://rust-analyzer.github.io/"
 github_username: rust-analyzer
 exclude:
-  - wasm-demo
+  - wasm-demo/
   - vendor
