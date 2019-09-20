@@ -1,7 +1,13 @@
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600";
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+p {
+    margin-bottom: 1em;
 }
 
 h1, h2, h3 { font-weight: 300; }
@@ -23,16 +29,6 @@ main {
     padding-right: 2ch;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    width: 100%;
-    max-width: 80ch;
-    padding: 1ch;
-    border-bottom: 1px solid rgba(0, 0, 0, .8);
-}
-
 footer {
     display: flex;
     justify-content: center;
@@ -41,22 +37,6 @@ footer {
     max-width: 80ch;
     padding: 1ch;
     border-top: 1px solid rgba(0, 0, 0, .8);
-}
-
-.nav-link {
-    font-weight: 400;
-    font-style: normal;
-    color: rgba(0, 0, 0, .8);
-    text-decoration: none;
-}
-
-.nav-link:hover {
-    color: rgba(0, 0, 0, .8);
-    text-decoration: underline;
-}
-
-.site-title {
-    font-size: 1.5em;
 }
 
 .footer-link {
@@ -73,20 +53,42 @@ footer > p {
     margin-bottom: 0;
 }
 
+section {
+    margin-bottom: 2em;
+}
+
+section > h2 {
+    margin-bottom: 1em;
+}
+
 .greeting {
     margin-top: 3em;
-    margin-bottom: 3em;
     text-align: center;
 }
 
 .greeting > h1 {
-    font-weight: bold;
+    font-weight: 400;
     font-size: 3em;
 }
 
 .greeting > p {
     font-size: 2em;
 }
+
+.source > img {
+    width: 1em;
+    height: 1em;
+}
+
+.source {
+    color: black;
+    text-decoration: none;
+    font-size: 2em;
+}
+.source:hover {
+    text-decoration: underline;
+}
+
 
 .post-list {
     margin-left: 0;
@@ -105,10 +107,10 @@ footer > p {
 
 .post-meta {
     color: #828282;
+    font-weight: 400;
 }
 
 .post-link {
-    display: block;
     text-decoration: none;
 }
 

@@ -8,16 +8,55 @@ layout: default
     <p>
         Bringing <em>great</em> IDE experience to the Rust programming language.
     </p>
+
+    <a class="source" href="https://rust-analyzer.github.io/">
+        <img src="/assets/github.svg"> Source
+    </a>
 </section>
 
+<section class="installation">
+    <h2>Installation</h2>
 
-<ul class="post-list">
-    {% for post in site.posts %}
-    <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <h2>
-            <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-    </li>
-    {% endfor %}
-</ul>
+    <p>
+        rust-analyzer is in the alpha stage, installation requires building from source.
+        To install the language server and VS Code plugin, use
+    </p>
+
+    <p>
+        <code>
+<pre>$ git clone https://github.com/rust-analyzer/rust-analyzer && cd rust-analyzer
+$ cargo install-ra</pre>
+        </code>
+
+    </p>
+
+    <p>
+        See the <a href="https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user">manual</a> for
+        alternative installation methods and support for other editors.
+    </p>
+
+</section>
+
+<section class="support">
+    <h2>Support</h2>
+
+    rust-analyzer is a free and open source project, developed by
+    <a href="https://ferrous-systems.com/">Ferrous Systems</a>
+    with support from multiple companies and individuals.
+    Donate to rust-analyzer on <a href="https://opencollective.com/rust-analyzer/">Open Collective</a>.
+</section>
+
+<section>
+    <h2>Latest News</h2>
+
+    <ul class="post-list">
+        {% for post in site.posts %}
+        <li>
+            <h3>
+                <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span> <a class="post-link"
+                    href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+            </h3>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
