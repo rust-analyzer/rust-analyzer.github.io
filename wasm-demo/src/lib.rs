@@ -1,10 +1,14 @@
 #![cfg(target_arch = "wasm32")]
 #![allow(non_snake_case)]
 
-use ra_ide_api::{Analysis, CompletionItemKind, FileId, FilePosition, LineCol, Severity};
+use ra_ide_api::{
+    Analysis, CompletionItemKind, FileId, FilePosition, InsertTextFormat, LineCol, Severity,
+};
 use ra_syntax::{SyntaxKind, TextRange};
 use wasm_bindgen::prelude::*;
 
+mod conv;
+use conv::*;
 mod return_types;
 use return_types::*;
 
@@ -89,40 +93,33 @@ impl WorldState {
     }
 
     pub fn completions(&self, line_number: u32, column: u32) -> JsValue {
-        let pos = self.file_pos(line_number, column);
         log::warn!("completions");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+        let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
+
         let res = match self.analysis.completions(pos).unwrap() {
             Some(items) => items,
             None => return JsValue::NULL,
         };
 
+        log::warn!("{:#?}", res);
+
         let items: Vec<_> = res
             .into_iter()
             .map(|item| CompletionItem {
-                kind: match item.kind() {
-                    Some(CompletionItemKind::Snippet) => 25,
-                    Some(CompletionItemKind::Keyword) => 17,
-                    Some(CompletionItemKind::Module) => 8,
-                    Some(CompletionItemKind::Function) => 1,
-                    Some(CompletionItemKind::BuiltinType) => 6,
-                    Some(CompletionItemKind::Struct) => 6,
-                    Some(CompletionItemKind::Enum) => 15,
-                    Some(CompletionItemKind::EnumVariant) => 16,
-                    Some(CompletionItemKind::Binding) => 4,
-                    Some(CompletionItemKind::Field) => 3,
-                    Some(CompletionItemKind::Static) => 13,
-                    Some(CompletionItemKind::Const) => 14,
-                    Some(CompletionItemKind::Trait) => 7,
-                    Some(CompletionItemKind::TypeAlias) => 6,
-                    Some(CompletionItemKind::Method) => 0,
-                    Some(CompletionItemKind::TypeParam) => 24,
-                    Some(CompletionItemKind::Macro) => 0,
-                    _ => 25,
-                },
+                kind: item.kind().unwrap_or(CompletionItemKind::Struct).conv(),
                 label: item.label().to_string(),
                 range: self.range(item.source_range()),
                 detail: item.detail().map(|it| it.to_string()),
                 insertText: item.text_edit().as_atoms()[0].insert.clone(),
+                insertTextRules: match item.insert_text_format() {
+                    InsertTextFormat::PlainText => CompletionItemInsertTextRule::None,
+                    InsertTextFormat::Snippet => CompletionItemInsertTextRule::InsertAsSnippet,
+                },
+                documentation: item
+                    .documentation()
+                    .map(|doc| MarkdownString { value: doc.as_str().to_string() }),
+                filterText: item.lookup().to_string(),
             })
             .collect();
         serde_wasm_bindgen::to_value(&items).unwrap()
