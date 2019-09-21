@@ -1,6 +1,9 @@
 use super::return_types;
-use ra_ide_api::{CompletionItemKind, FileId, FilePosition, LineCol, LineIndex};
+use ra_ide_api::{
+    CompletionItem, CompletionItemKind, FileId, FilePosition, InsertTextFormat, LineCol, LineIndex,
+};
 use ra_syntax::TextRange;
+use ra_text_edit::AtomTextEdit;
 
 pub trait Conv {
     type Output;
@@ -67,6 +70,65 @@ impl Conv for CompletionItemKind {
             CompletionItemKind::Method => Method,
             CompletionItemKind::TypeParam => TypeParameter,
             CompletionItemKind::Macro => Method,
+        }
+    }
+}
+
+impl ConvWith<&LineIndex> for &AtomTextEdit {
+    type Output = return_types::TextEdit;
+
+    fn conv_with(self, line_index: &LineIndex) -> Self::Output {
+        let text = self.insert.clone();
+        return_types::TextEdit { range: self.delete.conv_with(line_index), text }
+    }
+}
+
+impl ConvWith<&LineIndex> for CompletionItem {
+    type Output = return_types::CompletionItem;
+
+    fn conv_with(self, line_index: &LineIndex) -> Self::Output {
+        let mut additional_text_edits = Vec::new();
+        let mut text_edit = None;
+        // LSP does not allow arbitrary edits in completion, so we have to do a
+        // non-trivial mapping here.
+        for atom_edit in self.text_edit().as_atoms() {
+            if self.source_range().is_subrange(&atom_edit.delete) {
+                text_edit = Some(if atom_edit.delete == self.source_range() {
+                    atom_edit.conv_with(line_index)
+                } else {
+                    assert!(self.source_range().end() == atom_edit.delete.end());
+                    let range1 =
+                        TextRange::from_to(atom_edit.delete.start(), self.source_range().start());
+                    let range2 = self.source_range();
+                    let edit1 = AtomTextEdit::replace(range1, String::new());
+                    let edit2 = AtomTextEdit::replace(range2, atom_edit.insert.clone());
+                    additional_text_edits.push(edit1.conv_with(line_index));
+                    edit2.conv_with(line_index)
+                })
+            } else {
+                assert!(self.source_range().intersection(&atom_edit.delete).is_none());
+                additional_text_edits.push(atom_edit.conv_with(line_index));
+            }
+        }
+        let return_types::TextEdit { range, text } = text_edit.unwrap();
+
+        return_types::CompletionItem {
+            kind: self.kind().unwrap_or(CompletionItemKind::Struct).conv(),
+            label: self.label().to_string(),
+            range,
+            detail: self.detail().map(|it| it.to_string()),
+            insertText: text,
+            insertTextRules: match self.insert_text_format() {
+                InsertTextFormat::PlainText => return_types::CompletionItemInsertTextRule::None,
+                InsertTextFormat::Snippet => {
+                    return_types::CompletionItemInsertTextRule::InsertAsSnippet
+                }
+            },
+            documentation: self
+                .documentation()
+                .map(|doc| return_types::MarkdownString { value: doc.as_str().to_string() }),
+            filterText: self.lookup().to_string(),
+            additionalTextEdits: additional_text_edits,
         }
     }
 }

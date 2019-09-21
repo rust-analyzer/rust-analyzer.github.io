@@ -18,3 +18,4 @@ serde-wasm-bindgen = "0.1"
 
 ra_ide_api = { git = "https://github.com/rust-analyzer/rust-analyzer", features = ["wasm"] }
 ra_syntax =  { git = "https://github.com/rust-analyzer/rust-analyzer" }
+ra_text_edit =  { git = "https://github.com/rust-analyzer/rust-analyzer" }

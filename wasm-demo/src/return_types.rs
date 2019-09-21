@@ -77,6 +77,7 @@ pub struct CompletionItem {
     pub insertTextRules: CompletionItemInsertTextRule,
     pub documentation: Option<MarkdownString>,
     pub filterText: String,
+    pub additionalTextEdits: Vec<TextEdit>,
 }
 
 #[allow(dead_code)]
@@ -108,7 +109,7 @@ pub enum CompletionItemKind {
     Customcolor = 22,
     Folder = 23,
     TypeParameter = 24,
-    Snippet = 25
+    Snippet = 25,
 }
 
 #[allow(dead_code)]
@@ -117,12 +118,12 @@ pub enum CompletionItemKind {
 pub enum CompletionItemInsertTextRule {
     None = 0,
     /**
-      * Adjust whitespace/indentation of multiline insert texts to
-      * match the current line indentation.
-      */
+     * Adjust whitespace/indentation of multiline insert texts to
+     * match the current line indentation.
+     */
     KeepWhitespace = 1,
     /**
-      * `insertText` is a snippet.
-      */
+     * `insertText` is a snippet.
+     */
     InsertAsSnippet = 4,
 }

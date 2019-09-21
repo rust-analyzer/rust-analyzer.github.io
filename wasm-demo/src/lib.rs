@@ -1,7 +1,7 @@
 #![cfg(target_arch = "wasm32")]
 #![allow(non_snake_case)]
 
-use ra_ide_api::{Analysis, CompletionItemKind, FileId, FilePosition, InsertTextFormat, Severity};
+use ra_ide_api::{Analysis, FileId, FilePosition, Severity};
 use ra_syntax::SyntaxKind;
 use wasm_bindgen::prelude::*;
 
@@ -82,26 +82,7 @@ impl WorldState {
             None => return JsValue::NULL,
         };
 
-        log::warn!("{:#?}", res);
-
-        let items: Vec<_> = res
-            .into_iter()
-            .map(|item| CompletionItem {
-                kind: item.kind().unwrap_or(CompletionItemKind::Struct).conv(),
-                label: item.label().to_string(),
-                range: item.source_range().conv_with(&line_index),
-                detail: item.detail().map(|it| it.to_string()),
-                insertText: item.text_edit().as_atoms()[0].insert.clone(),
-                insertTextRules: match item.insert_text_format() {
-                    InsertTextFormat::PlainText => CompletionItemInsertTextRule::None,
-                    InsertTextFormat::Snippet => CompletionItemInsertTextRule::InsertAsSnippet,
-                },
-                documentation: item
-                    .documentation()
-                    .map(|doc| MarkdownString { value: doc.as_str().to_string() }),
-                filterText: item.lookup().to_string(),
-            })
-            .collect();
+        let items: Vec<_> = res.into_iter().map(|item| item.conv_with(&line_index)).collect();
         serde_wasm_bindgen::to_value(&items).unwrap()
     }
 

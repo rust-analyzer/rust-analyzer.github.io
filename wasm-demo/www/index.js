@@ -146,10 +146,8 @@ monaco.languages.onLanguage(modeId, async () => {
     });
     monaco.languages.registerCompletionItemProvider(modeId, {
         triggerCharacters: [".", ":", "="],
-        provideCompletionItems(m, pos, ctx) {
-            console.warn(ctx)
+        provideCompletionItems(m, pos) {
             const suggestions = state.completions(pos.lineNumber, pos.column)
-            console.warn(suggestions)
             return { suggestions }
         },
     });
