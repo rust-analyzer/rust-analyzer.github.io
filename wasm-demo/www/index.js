@@ -156,12 +156,19 @@ monaco.languages.onLanguage(modeId, async () => {
         provideSignatureHelp(m, pos) {
             const value = state.signature_help(pos.lineNumber, pos.column);
             if (!value) return null;
-            console.log(value)
             return {
                 value,
                 dispose() { },
             };
         },
+    });
+    monaco.languages.registerDefinitionProvider(modeId, {
+        provideDefinition: (m, pos) => state.definition(pos.lineNumber, pos.column)
+            .map(def => ({ ...def, uri: m.uri })),
+    });
+    monaco.languages.registerTypeDefinitionProvider(modeId, {
+        provideTypeDefinition: (m, pos) => state.type_definition(pos.lineNumber, pos.column)
+            .map(def => ({ ...def, uri: m.uri })),
     });
 
     class TokenState {

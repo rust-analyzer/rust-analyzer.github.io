@@ -156,3 +156,10 @@ pub struct SignatureHelp {
     pub activeSignature: u32,
     pub activeParameter: Option<usize>,
 }
+
+#[derive(Serialize)]
+pub struct LocationLink {
+    pub originSelectionRange: Range,
+    pub range: Range,
+    pub targetSelectionRange: Range,
+}

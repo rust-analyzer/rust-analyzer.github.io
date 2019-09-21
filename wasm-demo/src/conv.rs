@@ -1,7 +1,7 @@
 use super::return_types;
 use ra_ide_api::{
     CompletionItem, CompletionItemKind, Documentation, FileId, FilePosition, FunctionSignature,
-    InsertTextFormat, LineCol, LineIndex, Severity,
+    InsertTextFormat, LineCol, LineIndex, NavigationTarget, RangeInfo, Severity,
 };
 use ra_syntax::TextRange;
 use ra_text_edit::AtomTextEdit;
@@ -190,5 +190,27 @@ impl Conv for FunctionSignature {
             .collect();
 
         SignatureInformation { label, documentation, parameters }
+    }
+}
+
+impl ConvWith<&LineIndex> for RangeInfo<Vec<NavigationTarget>> {
+    type Output = Vec<return_types::LocationLink>;
+    fn conv_with(self, line_index: &LineIndex) -> Self::Output {
+        let selection = self.range.conv_with(&line_index);
+        self.info
+            .into_iter()
+            .map(|nav| {
+                let range = nav.full_range().conv_with(&line_index);
+
+                let target_selection_range =
+                    nav.focus_range().map(|it| it.conv_with(&line_index)).unwrap_or(range);
+
+                return_types::LocationLink {
+                    originSelectionRange: selection,
+                    range,
+                    targetSelectionRange: target_selection_range,
+                }
+            })
+            .collect()
     }
 }

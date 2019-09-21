@@ -221,4 +221,32 @@ impl WorldState {
         };
         serde_wasm_bindgen::to_value(&result).unwrap()
     }
+
+    pub fn definition(&self, line_number: u32, column: u32) -> JsValue {
+        log::warn!("definition");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
+        let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
+        let nav_info = match self.analysis.goto_definition(pos) {
+            Ok(Some(nav_info)) => nav_info,
+            _ => return JsValue::NULL,
+        };
+
+        let res = nav_info.conv_with(&line_index);
+        serde_wasm_bindgen::to_value(&res).unwrap()
+    }
+
+    pub fn type_definition(&self, line_number: u32, column: u32) -> JsValue {
+        log::warn!("type_definition");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
+        let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
+        let nav_info = match self.analysis.goto_type_definition(pos) {
+            Ok(Some(nav_info)) => nav_info,
+            _ => return JsValue::NULL,
+        };
+
+        let res = nav_info.conv_with(&line_index);
+        serde_wasm_bindgen::to_value(&res).unwrap()
+    }
 }
