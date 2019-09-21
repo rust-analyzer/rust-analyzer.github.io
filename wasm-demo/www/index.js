@@ -49,6 +49,13 @@ import 'monaco-editor/esm/vs/editor/standalone/browser/toggleHighContrast/toggle
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import * as rustConf from 'monaco-editor/esm/vs/basic-languages/rust/rust';
 import exampleCode from './example-code';
+import encoding from 'text-encoding';
+
+if (typeof TextEncoder === "undefined") {
+    // Edge polyfill, https://rustwasm.github.io/docs/wasm-bindgen/reference/browser-support.html
+    self.TextEncoder = encoding.TextEncoder
+    self.TextDecoder = encoding.TextDecoder
+}
 
 import './index.css';
 
