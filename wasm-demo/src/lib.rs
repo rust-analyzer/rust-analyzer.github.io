@@ -1,10 +1,8 @@
 #![cfg(target_arch = "wasm32")]
 #![allow(non_snake_case)]
 
-use ra_ide_api::{
-    Analysis, CompletionItemKind, FileId, FilePosition, InsertTextFormat, LineCol, Severity,
-};
-use ra_syntax::{SyntaxKind, TextRange};
+use ra_ide_api::{Analysis, CompletionItemKind, FileId, FilePosition, InsertTextFormat, Severity};
+use ra_syntax::SyntaxKind;
 use wasm_bindgen::prelude::*;
 
 mod conv;
@@ -39,12 +37,14 @@ impl WorldState {
         self.analysis = analysis;
         self.file_id = file_id;
 
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
         let highlights: Vec<_> = self
             .analysis
             .highlight(file_id)
             .unwrap()
             .into_iter()
-            .map(|hl| Highlight { tag: Some(hl.tag), range: self.range(hl.range) })
+            .map(|hl| Highlight { tag: Some(hl.tag), range: hl.range.conv_with(&line_index) })
             .collect();
 
         let diagnostics: Vec<_> = self
@@ -54,7 +54,7 @@ impl WorldState {
             .into_iter()
             .map(|d| {
                 let Range { startLineNumber, startColumn, endLineNumber, endColumn } =
-                    self.range(d.range);
+                    d.range.conv_with(&line_index);
                 Diagnostic {
                     message: d.message,
                     severity: match d.severity {
@@ -72,31 +72,11 @@ impl WorldState {
         serde_wasm_bindgen::to_value(&UpdateResult { diagnostics, highlights }).unwrap()
     }
 
-    fn file_pos(&self, line: u32, col_utf16: u32) -> FilePosition {
-        // monaco doesn't work zero-based
-        let line_col = LineCol { line: line - 1, col_utf16: col_utf16 - 1 };
-        let offset = self.analysis.file_line_index(self.file_id).unwrap().offset(line_col);
-        FilePosition { file_id: self.file_id, offset }
-    }
-
-    fn range(&self, text_range: TextRange) -> Range {
-        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
-        let start = line_index.line_col(text_range.start());
-        let end = line_index.line_col(text_range.end());
-
-        Range {
-            startLineNumber: start.line + 1,
-            startColumn: start.col_utf16 + 1,
-            endLineNumber: end.line + 1,
-            endColumn: end.col_utf16 + 1,
-        }
-    }
-
     pub fn completions(&self, line_number: u32, column: u32) -> JsValue {
         log::warn!("completions");
         let line_index = self.analysis.file_line_index(self.file_id).unwrap();
-        let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
 
+        let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
         let res = match self.analysis.completions(pos).unwrap() {
             Some(items) => items,
             None => return JsValue::NULL,
@@ -109,7 +89,7 @@ impl WorldState {
             .map(|item| CompletionItem {
                 kind: item.kind().unwrap_or(CompletionItemKind::Struct).conv(),
                 label: item.label().to_string(),
-                range: self.range(item.source_range()),
+                range: item.source_range().conv_with(&line_index),
                 detail: item.detail().map(|it| it.to_string()),
                 insertText: item.text_edit().as_atoms()[0].insert.clone(),
                 insertTextRules: match item.insert_text_format() {
@@ -126,22 +106,27 @@ impl WorldState {
     }
 
     pub fn hover(&self, line_number: u32, column: u32) -> JsValue {
-        let pos = self.file_pos(line_number, column);
         log::warn!("hover");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
+        let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
         let info = match self.analysis.hover(pos).unwrap() {
             Some(info) => info,
             _ => return JsValue::NULL,
         };
 
         let value = info.info.to_markup();
-        let hover =
-            Hover { contents: vec![MarkdownString { value }], range: self.range(info.range) };
+        let hover = Hover {
+            contents: vec![MarkdownString { value }],
+            range: info.range.conv_with(&line_index),
+        };
 
         serde_wasm_bindgen::to_value(&hover).unwrap()
     }
 
     pub fn code_lenses(&self) -> JsValue {
         log::warn!("code_lenses");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
 
         let results: Vec<_> = self
             .analysis
@@ -167,11 +152,11 @@ impl WorldState {
                     .info
                     .iter()
                     .map(|target| target.focus_range().unwrap_or(target.full_range()))
-                    .map(|range| self.range(range))
+                    .map(|range| range.conv_with(&line_index))
                     .collect();
 
                 Some(CodeLensSymbol {
-                    range: self.range(it.node_range),
+                    range: it.node_range.conv_with(&line_index),
                     command: Some(Command {
                         id: "editor.action.showReferences".into(),
                         title,
@@ -185,36 +170,44 @@ impl WorldState {
     }
 
     pub fn references(&self, line_number: u32, column: u32) -> JsValue {
-        let pos = self.file_pos(line_number, column);
         log::warn!("references");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
+        let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
         let info = match self.analysis.find_all_refs(pos).unwrap() {
             Some(info) => info,
             _ => return JsValue::NULL,
         };
 
-        let res: Vec<_> =
-            info.into_iter().map(|r| Highlight { tag: None, range: self.range(r.range) }).collect();
+        let res: Vec<_> = info
+            .into_iter()
+            .map(|r| Highlight { tag: None, range: r.range.conv_with(&line_index) })
+            .collect();
         serde_wasm_bindgen::to_value(&res).unwrap()
     }
 
     pub fn prepare_rename(&self, line_number: u32, column: u32) -> JsValue {
-        let pos = self.file_pos(line_number, column);
         log::warn!("prepare_rename");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
+        let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
         let refs = match self.analysis.find_all_refs(pos).unwrap() {
             None => return JsValue::NULL,
             Some(refs) => refs,
         };
 
         let declaration = refs.declaration();
-        let range = self.range(declaration.range());
+        let range = declaration.range().conv_with(&line_index);
         let text = declaration.name().to_string();
 
         serde_wasm_bindgen::to_value(&RenameLocation { range, text }).unwrap()
     }
 
     pub fn rename(&self, line_number: u32, column: u32, new_name: &str) -> JsValue {
-        let pos = self.file_pos(line_number, column);
         log::warn!("rename");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
+        let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
         let change = match self.analysis.rename(pos, new_name) {
             Ok(Some(change)) => change,
             _ => return JsValue::NULL,
@@ -225,7 +218,10 @@ impl WorldState {
             .source_file_edits
             .iter()
             .flat_map(|sfe| sfe.edit.as_atoms())
-            .map(|atom| TextEdit { range: self.range(atom.delete), text: atom.insert.clone() })
+            .map(|atom| TextEdit {
+                range: atom.delete.conv_with(&line_index),
+                text: atom.insert.clone(),
+            })
             .collect();
 
         serde_wasm_bindgen::to_value(&result).unwrap()
