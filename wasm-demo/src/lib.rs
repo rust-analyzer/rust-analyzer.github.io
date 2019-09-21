@@ -1,7 +1,7 @@
 #![cfg(target_arch = "wasm32")]
 #![allow(non_snake_case)]
 
-use ra_ide_api::{Analysis, FileId, FilePosition, LineCol, Severity};
+use ra_ide_api::{Analysis, CompletionItemKind, FileId, FilePosition, LineCol, Severity};
 use ra_syntax::{SyntaxKind, TextRange};
 use wasm_bindgen::prelude::*;
 
@@ -30,6 +30,7 @@ impl WorldState {
     }
 
     pub fn update(&mut self, code: String) -> JsValue {
+        log::warn!("update");
         let (analysis, file_id) = Analysis::from_single_file(code);
         self.analysis = analysis;
         self.file_id = file_id;
@@ -87,12 +88,44 @@ impl WorldState {
         }
     }
 
-    pub fn on_dot_typed(&self, line_number: u32, column: u32) {
+    pub fn completions(&self, line_number: u32, column: u32) -> JsValue {
         let pos = self.file_pos(line_number, column);
-        log::warn!("on_dot_typed");
-        let res = self.analysis.on_dot_typed(pos).unwrap();
+        log::warn!("completions");
+        let res = match self.analysis.completions(pos).unwrap() {
+            Some(items) => items,
+            None => return JsValue::NULL,
+        };
 
-        log::debug!("{:?}", res);
+        let items: Vec<_> = res
+            .into_iter()
+            .map(|item| CompletionItem {
+                kind: match item.kind() {
+                    Some(CompletionItemKind::Snippet) => 25,
+                    Some(CompletionItemKind::Keyword) => 17,
+                    Some(CompletionItemKind::Module) => 8,
+                    Some(CompletionItemKind::Function) => 1,
+                    Some(CompletionItemKind::BuiltinType) => 6,
+                    Some(CompletionItemKind::Struct) => 6,
+                    Some(CompletionItemKind::Enum) => 15,
+                    Some(CompletionItemKind::EnumVariant) => 16,
+                    Some(CompletionItemKind::Binding) => 4,
+                    Some(CompletionItemKind::Field) => 3,
+                    Some(CompletionItemKind::Static) => 13,
+                    Some(CompletionItemKind::Const) => 14,
+                    Some(CompletionItemKind::Trait) => 7,
+                    Some(CompletionItemKind::TypeAlias) => 6,
+                    Some(CompletionItemKind::Method) => 0,
+                    Some(CompletionItemKind::TypeParam) => 24,
+                    Some(CompletionItemKind::Macro) => 0,
+                    _ => 25,
+                },
+                label: item.label().to_string(),
+                range: self.range(item.source_range()),
+                detail: item.detail().map(|it| it.to_string()),
+                insertText: item.text_edit().as_atoms()[0].insert.clone(),
+            })
+            .collect();
+        serde_wasm_bindgen::to_value(&items).unwrap()
     }
 
     pub fn hover(&self, line_number: u32, column: u32) -> JsValue {

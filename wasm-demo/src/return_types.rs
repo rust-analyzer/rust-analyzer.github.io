@@ -65,3 +65,12 @@ pub struct RenameLocation {
     pub range: Range,
     pub text: String,
 }
+
+#[derive(Serialize)]
+pub struct CompletionItem {
+    pub label: String,
+    pub range: Range,
+    pub kind: u32,
+    pub detail: Option<String>,
+    pub insertText: String,
+}
