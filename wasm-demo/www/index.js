@@ -144,6 +144,13 @@ monaco.languages.onLanguage(modeId, async () => {
         },
         resolveRenameLocation: (_, pos) => state.prepare_rename(pos.lineNumber, pos.column),
     });
+    monaco.languages.registerCompletionItemProvider(modeId, {
+        triggerCharacters: [".", ":", "="],
+        provideCompletionItems(m, pos) {
+            const suggestions = state.completions(pos.lineNumber, pos.column)
+            return { suggestions }
+        },
+    });
 
     class TokenState {
         constructor(line = 0) {
