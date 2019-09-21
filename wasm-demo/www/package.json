@@ -9,7 +9,7 @@
   "author": "rust-analyzer developers",
   "license": "(MIT OR Apache-2.0)",
   "dependencies": {
-    "monaco-editor": "^0.16.2",
+    "monaco-editor": "^0.18.1",
     "wasm_demo": "file:../pkg"
   },
   "devDependencies": {

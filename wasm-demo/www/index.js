@@ -93,8 +93,8 @@ monaco.languages.onLanguage(modeId, async () => {
     });
     monaco.languages.registerCodeLensProvider(modeId, {
         provideCodeLenses(m) {
-            const lenses = state.code_lenses();
-            return lenses.map(({ range, command }) => {
+            const code_lenses = state.code_lenses();
+            const lenses = code_lenses.map(({ range, command }) => {
                 const position = {
                     column: range.startColumn,
                     lineNumber: range.startLineNumber,
@@ -114,6 +114,8 @@ monaco.languages.onLanguage(modeId, async () => {
                     }
                 };
             });
+
+            return { lenses, dispose() { } };
         },
     });
     monaco.languages.registerReferenceProvider(modeId, {
