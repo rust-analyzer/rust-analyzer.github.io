@@ -1,6 +1,7 @@
 use super::return_types;
 use ra_ide_api::{
     CompletionItem, CompletionItemKind, FileId, FilePosition, InsertTextFormat, LineCol, LineIndex,
+    Severity,
 };
 use ra_syntax::TextRange;
 use ra_text_edit::AtomTextEdit;
@@ -50,7 +51,7 @@ impl ConvWith<&LineIndex> for TextRange {
 impl Conv for CompletionItemKind {
     type Output = return_types::CompletionItemKind;
 
-    fn conv(self) -> <Self as Conv>::Output {
+    fn conv(self) -> Self::Output {
         use return_types::CompletionItemKind::*;
         match self {
             CompletionItemKind::Keyword => Keyword,
@@ -70,6 +71,17 @@ impl Conv for CompletionItemKind {
             CompletionItemKind::Method => Method,
             CompletionItemKind::TypeParam => TypeParameter,
             CompletionItemKind::Macro => Method,
+        }
+    }
+}
+
+impl Conv for Severity {
+    type Output = return_types::MarkerSeverity;
+
+    fn conv(self) -> Self::Output {
+        match self {
+            Severity::Error => return_types::MarkerSeverity::Error,
+            Severity::WeakWarning => return_types::MarkerSeverity::Hint,
         }
     }
 }

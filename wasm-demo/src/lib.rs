@@ -1,7 +1,7 @@
 #![cfg(target_arch = "wasm32")]
 #![allow(non_snake_case)]
 
-use ra_ide_api::{Analysis, FileId, FilePosition, Severity};
+use ra_ide_api::{Analysis, FileId, FilePosition};
 use ra_syntax::SyntaxKind;
 use wasm_bindgen::prelude::*;
 
@@ -57,10 +57,7 @@ impl WorldState {
                     d.range.conv_with(&line_index);
                 Diagnostic {
                     message: d.message,
-                    severity: match d.severity {
-                        Severity::Error => 8,       // monaco MarkerSeverity.Error
-                        Severity::WeakWarning => 1, // monaco MarkerSeverity.Hint
-                    },
+                    severity: d.severity.conv(),
                     startLineNumber,
                     startColumn,
                     endLineNumber,
@@ -199,10 +196,7 @@ impl WorldState {
             .source_file_edits
             .iter()
             .flat_map(|sfe| sfe.edit.as_atoms())
-            .map(|atom| TextEdit {
-                range: atom.delete.conv_with(&line_index),
-                text: atom.insert.clone(),
-            })
+            .map(|atom| atom.conv_with(&line_index))
             .collect();
 
         serde_wasm_bindgen::to_value(&result).unwrap()
