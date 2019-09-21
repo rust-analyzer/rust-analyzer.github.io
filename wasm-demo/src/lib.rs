@@ -1,7 +1,7 @@
 #![cfg(target_arch = "wasm32")]
 #![allow(non_snake_case)]
 
-use ra_ide_api::{Analysis, FileId, FilePosition, Severity};
+use ra_ide_api::{Analysis, FileId, FilePosition};
 use ra_syntax::SyntaxKind;
 use wasm_bindgen::prelude::*;
 
@@ -57,10 +57,7 @@ impl WorldState {
                     d.range.conv_with(&line_index);
                 Diagnostic {
                     message: d.message,
-                    severity: match d.severity {
-                        Severity::Error => 8,       // monaco MarkerSeverity.Error
-                        Severity::WeakWarning => 1, // monaco MarkerSeverity.Hint
-                    },
+                    severity: d.severity.conv(),
                     startLineNumber,
                     startColumn,
                     endLineNumber,
@@ -199,12 +196,57 @@ impl WorldState {
             .source_file_edits
             .iter()
             .flat_map(|sfe| sfe.edit.as_atoms())
-            .map(|atom| TextEdit {
-                range: atom.delete.conv_with(&line_index),
-                text: atom.insert.clone(),
-            })
+            .map(|atom| atom.conv_with(&line_index))
             .collect();
 
         serde_wasm_bindgen::to_value(&result).unwrap()
+    }
+
+    pub fn signature_help(&self, line_number: u32, column: u32) -> JsValue {
+        log::warn!("signature_help");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
+        let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
+        let call_info = match self.analysis.call_info(pos) {
+            Ok(Some(call_info)) => call_info,
+            _ => return JsValue::NULL,
+        };
+
+        let sig_info = call_info.signature.conv();
+
+        let result = SignatureHelp {
+            signatures: [sig_info],
+            activeSignature: 0,
+            activeParameter: call_info.active_parameter,
+        };
+        serde_wasm_bindgen::to_value(&result).unwrap()
+    }
+
+    pub fn definition(&self, line_number: u32, column: u32) -> JsValue {
+        log::warn!("definition");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
+        let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
+        let nav_info = match self.analysis.goto_definition(pos) {
+            Ok(Some(nav_info)) => nav_info,
+            _ => return JsValue::NULL,
+        };
+
+        let res = nav_info.conv_with(&line_index);
+        serde_wasm_bindgen::to_value(&res).unwrap()
+    }
+
+    pub fn type_definition(&self, line_number: u32, column: u32) -> JsValue {
+        log::warn!("type_definition");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
+        let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
+        let nav_info = match self.analysis.goto_type_definition(pos) {
+            Ok(Some(nav_info)) => nav_info,
+            _ => return JsValue::NULL,
+        };
+
+        let res = nav_info.conv_with(&line_index);
+        serde_wasm_bindgen::to_value(&res).unwrap()
     }
 }

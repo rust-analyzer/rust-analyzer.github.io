@@ -58,7 +58,17 @@ pub struct Diagnostic {
     pub startColumn: u32,
     pub endLineNumber: u32,
     pub endColumn: u32,
-    pub severity: u32,
+    pub severity: MarkerSeverity,
+}
+
+#[allow(dead_code)]
+#[derive(Serialize_repr)]
+#[repr(u8)]
+pub enum MarkerSeverity {
+    Hint = 1,
+    Info = 2,
+    Warning = 4,
+    Error = 8,
 }
 
 #[derive(Serialize)]
@@ -126,4 +136,30 @@ pub enum CompletionItemInsertTextRule {
      * `insertText` is a snippet.
      */
     InsertAsSnippet = 4,
+}
+
+#[derive(Serialize)]
+pub struct ParameterInformation {
+    pub label: String,
+}
+
+#[derive(Serialize)]
+pub struct SignatureInformation {
+    pub label: String,
+    pub documentation: Option<MarkdownString>,
+    pub parameters: Vec<ParameterInformation>,
+}
+
+#[derive(Serialize)]
+pub struct SignatureHelp {
+    pub signatures: [SignatureInformation; 1],
+    pub activeSignature: u32,
+    pub activeParameter: Option<usize>,
+}
+
+#[derive(Serialize)]
+pub struct LocationLink {
+    pub originSelectionRange: Range,
+    pub range: Range,
+    pub targetSelectionRange: Range,
 }
