@@ -201,4 +201,24 @@ impl WorldState {
 
         serde_wasm_bindgen::to_value(&result).unwrap()
     }
+
+    pub fn signature_help(&self, line_number: u32, column: u32) -> JsValue {
+        log::warn!("signature_help");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
+        let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
+        let call_info = match self.analysis.call_info(pos) {
+            Ok(Some(call_info)) => call_info,
+            _ => return JsValue::NULL,
+        };
+
+        let sig_info = call_info.signature.conv();
+
+        let result = SignatureHelp {
+            signatures: [sig_info],
+            activeSignature: 0,
+            activeParameter: call_info.active_parameter,
+        };
+        serde_wasm_bindgen::to_value(&result).unwrap()
+    }
 }

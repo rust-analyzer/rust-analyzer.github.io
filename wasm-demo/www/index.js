@@ -53,8 +53,8 @@ import encoding from 'text-encoding';
 
 if (typeof TextEncoder === "undefined") {
     // Edge polyfill, https://rustwasm.github.io/docs/wasm-bindgen/reference/browser-support.html
-    self.TextEncoder = encoding.TextEncoder
-    self.TextDecoder = encoding.TextDecoder
+    self.TextEncoder = encoding.TextEncoder;
+    self.TextDecoder = encoding.TextDecoder;
 }
 
 import './index.css';
@@ -118,7 +118,7 @@ monaco.languages.onLanguage(modeId, async () => {
                             position,
                             references,
                         ],
-                    }
+                    },
                 };
             });
 
@@ -147,8 +147,20 @@ monaco.languages.onLanguage(modeId, async () => {
     monaco.languages.registerCompletionItemProvider(modeId, {
         triggerCharacters: [".", ":", "="],
         provideCompletionItems(m, pos) {
-            const suggestions = state.completions(pos.lineNumber, pos.column)
-            return { suggestions }
+            const suggestions = state.completions(pos.lineNumber, pos.column);
+            return { suggestions };
+        },
+    });
+    monaco.languages.registerSignatureHelpProvider(modeId, {
+        signatureHelpTriggerCharacters: ['(', ','],
+        provideSignatureHelp(m, pos) {
+            const value = state.signature_help(pos.lineNumber, pos.column);
+            if (!value) return null;
+            console.log(value)
+            return {
+                value,
+                dispose() { },
+            };
         },
     });
 

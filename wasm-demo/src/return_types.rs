@@ -137,3 +137,22 @@ pub enum CompletionItemInsertTextRule {
      */
     InsertAsSnippet = 4,
 }
+
+#[derive(Serialize)]
+pub struct ParameterInformation {
+    pub label: String,
+}
+
+#[derive(Serialize)]
+pub struct SignatureInformation {
+    pub label: String,
+    pub documentation: Option<MarkdownString>,
+    pub parameters: Vec<ParameterInformation>,
+}
+
+#[derive(Serialize)]
+pub struct SignatureHelp {
+    pub signatures: [SignatureInformation; 1],
+    pub activeSignature: u32,
+    pub activeParameter: Option<usize>,
+}

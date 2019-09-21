@@ -1,7 +1,7 @@
 use super::return_types;
 use ra_ide_api::{
-    CompletionItem, CompletionItemKind, FileId, FilePosition, InsertTextFormat, LineCol, LineIndex,
-    Severity,
+    CompletionItem, CompletionItemKind, Documentation, FileId, FilePosition, FunctionSignature,
+    InsertTextFormat, LineCol, LineIndex, Severity,
 };
 use ra_syntax::TextRange;
 use ra_text_edit::AtomTextEdit;
@@ -136,11 +136,59 @@ impl ConvWith<&LineIndex> for CompletionItem {
                     return_types::CompletionItemInsertTextRule::InsertAsSnippet
                 }
             },
-            documentation: self
-                .documentation()
-                .map(|doc| return_types::MarkdownString { value: doc.as_str().to_string() }),
+            documentation: self.documentation().map(|doc| doc.conv()),
             filterText: self.lookup().to_string(),
             additionalTextEdits: additional_text_edits,
         }
+    }
+}
+
+impl Conv for Documentation {
+    type Output = return_types::MarkdownString;
+    fn conv(self) -> Self::Output {
+        fn code_line_ignored_by_rustdoc(line: &str) -> bool {
+            let trimmed = line.trim();
+            trimmed == "#" || trimmed.starts_with("# ") || trimmed.starts_with("#\t")
+        }
+
+        let mut processed_lines = Vec::new();
+        let mut in_code_block = false;
+        for line in self.as_str().lines() {
+            if in_code_block && code_line_ignored_by_rustdoc(line) {
+                continue;
+            }
+
+            if line.starts_with("```") {
+                in_code_block ^= true
+            }
+
+            let line = if in_code_block && line.starts_with("```") && !line.contains("rust") {
+                "```rust"
+            } else {
+                line
+            };
+
+            processed_lines.push(line);
+        }
+
+        return_types::MarkdownString { value: processed_lines.join("\n") }
+    }
+}
+
+impl Conv for FunctionSignature {
+    type Output = return_types::SignatureInformation;
+    fn conv(self) -> Self::Output {
+        use return_types::{ParameterInformation, SignatureInformation};
+
+        let label = self.to_string();
+        let documentation = self.doc.map(|it| it.conv());
+
+        let parameters: Vec<ParameterInformation> = self
+            .parameters
+            .into_iter()
+            .map(|param| ParameterInformation { label: param })
+            .collect();
+
+        SignatureInformation { label, documentation, parameters }
     }
 }
