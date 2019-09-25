@@ -183,7 +183,14 @@ monaco.languages.onLanguage(modeId, async () => {
     });
     monaco.languages.registerDocumentSymbolProvider(modeId, {
         provideDocumentSymbols: () => state.document_symbols(),
-    })
+    });
+    monaco.languages.registerOnTypeFormattingEditProvider(modeId, {
+        autoFormatTriggerCharacters: [".", "="],
+        provideOnTypeFormattingEdits: (_, pos, ch) => state.type_formatting(pos.lineNumber, pos.column, ch),
+    });
+    monaco.languages.registerFoldingRangeProvider(modeId, {
+        provideFoldingRanges: () => state.folding_ranges(),
+    });
 
     class TokenState {
         constructor(line = 0) {

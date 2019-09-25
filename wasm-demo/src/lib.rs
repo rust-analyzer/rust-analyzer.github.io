@@ -2,7 +2,7 @@
 #![allow(non_snake_case)]
 
 use ra_ide_api::{Analysis, FileId, FilePosition};
-use ra_syntax::SyntaxKind;
+use ra_syntax::{SyntaxKind, TextUnit};
 use wasm_bindgen::prelude::*;
 
 mod conv;
@@ -291,5 +291,38 @@ impl WorldState {
         }
 
         serde_wasm_bindgen::to_value(&res).unwrap()
+    }
+
+    pub fn type_formatting(&self, line_number: u32, column: u32, ch: char) -> JsValue {
+        log::warn!("type_formatting");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
+        let mut pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
+        pos.offset = pos.offset - TextUnit::of_char('.');
+
+        let edit = match ch {
+            '=' => self.analysis.on_eq_typed(pos),
+            '.' => self.analysis.on_dot_typed(pos),
+            _ => return JsValue::NULL,
+        };
+
+        let edit = match edit {
+            Ok(Some(mut it)) => it.source_file_edits.pop().unwrap(),
+            _ => return JsValue::NULL,
+        };
+
+        let change: Vec<TextEdit> = edit.edit.conv_with(&line_index);
+        serde_wasm_bindgen::to_value(&change).unwrap()
+    }
+
+    pub fn folding_ranges(&self) -> JsValue {
+        log::warn!("folding_ranges");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+        return if let Ok(folds) = self.analysis.folding_ranges(self.file_id) {
+            let res: Vec<_> = folds.into_iter().map(|fold| fold.conv_with(&line_index)).collect();
+            serde_wasm_bindgen::to_value(&res).unwrap()
+        } else {
+            JsValue::NULL
+        };
     }
 }

@@ -215,3 +215,18 @@ pub struct DocumentSymbol {
     pub selectionRange: Range,
     pub children: Option<Vec<DocumentSymbol>>,
 }
+
+#[derive(Serialize)]
+#[serde(rename_all = "lowercase")]
+pub enum FoldingRangeKind {
+    Comment,
+    Imports,
+    Region,
+}
+
+#[derive(Serialize)]
+pub struct FoldingRange {
+    pub start: u32,
+    pub end: u32,
+    pub kind: Option<FoldingRangeKind>,
+}

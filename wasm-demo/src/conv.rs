@@ -1,10 +1,10 @@
 use super::return_types;
 use ra_ide_api::{
-    CompletionItem, CompletionItemKind, Documentation, FileId, FilePosition, FunctionSignature,
-    InsertTextFormat, LineCol, LineIndex, NavigationTarget, RangeInfo, Severity,
+    CompletionItem, CompletionItemKind, Documentation, FileId, FilePosition, Fold, FoldKind,
+    FunctionSignature, InsertTextFormat, LineCol, LineIndex, NavigationTarget, RangeInfo, Severity,
 };
 use ra_syntax::{SyntaxKind, TextRange};
-use ra_text_edit::AtomTextEdit;
+use ra_text_edit::{AtomTextEdit, TextEdit};
 
 pub trait Conv {
     type Output;
@@ -233,6 +233,32 @@ impl Conv for SyntaxKind {
             SyntaxKind::CONST_DEF => SymbolKind::Constant,
             SyntaxKind::IMPL_BLOCK => SymbolKind::Object,
             _ => SymbolKind::Variable,
+        }
+    }
+}
+
+impl ConvWith<&LineIndex> for TextEdit {
+    type Output = Vec<return_types::TextEdit>;
+
+    fn conv_with(self, ctx: &LineIndex) -> Self::Output {
+        self.as_atoms().iter().map(|atom| atom.conv_with(ctx)).collect()
+    }
+}
+
+impl ConvWith<&LineIndex> for Fold {
+    type Output = return_types::FoldingRange;
+
+    fn conv_with(self, ctx: &LineIndex) -> Self::Output {
+        let range = self.range.conv_with(&ctx);
+        return_types::FoldingRange {
+            start: range.startLineNumber,
+            end: range.endLineNumber,
+            kind: match self.kind {
+                FoldKind::Comment => Some(return_types::FoldingRangeKind::Comment),
+                FoldKind::Imports => Some(return_types::FoldingRangeKind::Imports),
+                FoldKind::Mods => None,
+                FoldKind::Block => None,
+            },
         }
     }
 }
