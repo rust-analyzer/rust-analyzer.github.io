@@ -12,8 +12,11 @@ use return_types::*;
 
 #[wasm_bindgen(start)]
 pub fn start() {
-    console_error_panic_hook::set_once();
-    console_log::init_with_level(log::Level::Warn).expect("could not install logging hook");
+    #[cfg(feature = "dev")]
+    {
+        console_error_panic_hook::set_once();
+        console_log::init_with_level(log::Level::Warn).expect("could not install logging hook");
+    }
     log::info!("worker initialized")
 }
 
@@ -129,7 +132,7 @@ impl WorldState {
                 let positions = nav_info
                     .info
                     .iter()
-                    .map(|target| target.focus_range().unwrap_or(target.full_range()))
+                    .map(|target| target.focus_range().unwrap_or_else(|| target.full_range()))
                     .map(|range| range.conv_with(&line_index))
                     .collect();
 
