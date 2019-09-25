@@ -126,10 +126,15 @@ monaco.languages.onLanguage(modeId, async () => {
         },
     });
     monaco.languages.registerReferenceProvider(modeId, {
-        provideReferences: (m, pos) => state.references(pos.lineNumber, pos.column).map(({ range }) => ({ uri: m.uri, range })),
+        provideReferences(m, pos, { includeDeclaration }) {
+            const references = state.references(pos.lineNumber, pos.column, includeDeclaration);
+            if (references) {
+                return references.map(({ range }) => ({ uri: m.uri, range }));
+            }
+        },
     });
     monaco.languages.registerDocumentHighlightProvider(modeId, {
-        provideDocumentHighlights: (_, pos) => state.references(pos.lineNumber, pos.column),
+        provideDocumentHighlights: (_, pos) => state.references(pos.lineNumber, pos.column, true),
     });
     monaco.languages.registerRenameProvider(modeId, {
         provideRenameEdits: (m, pos, newName) => {
@@ -176,6 +181,14 @@ monaco.languages.onLanguage(modeId, async () => {
     monaco.languages.registerTypeDefinitionProvider(modeId, {
         provideTypeDefinition(m, pos) {
             const list = state.type_definition(pos.lineNumber, pos.column);
+            if (list) {
+                return list.map(def => ({ ...def, uri: m.uri }));
+            }
+        },
+    });
+    monaco.languages.registerImplementationProvider(modeId, {
+        provideImplementation(m, pos) {
+            const list = state.goto_implementation(pos.lineNumber, pos.column);
             if (list) {
                 return list.map(def => ({ ...def, uri: m.uri }));
             }

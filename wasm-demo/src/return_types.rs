@@ -216,6 +216,7 @@ pub struct DocumentSymbol {
     pub children: Option<Vec<DocumentSymbol>>,
 }
 
+#[allow(dead_code)]
 #[derive(Serialize)]
 #[serde(rename_all = "lowercase")]
 pub enum FoldingRangeKind {

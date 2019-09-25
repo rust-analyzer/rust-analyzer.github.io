@@ -150,7 +150,7 @@ impl WorldState {
         serde_wasm_bindgen::to_value(&results).unwrap()
     }
 
-    pub fn references(&self, line_number: u32, column: u32) -> JsValue {
+    pub fn references(&self, line_number: u32, column: u32, include_declaration: bool) -> JsValue {
         log::warn!("references");
         let line_index = self.analysis.file_line_index(self.file_id).unwrap();
 
@@ -160,10 +160,17 @@ impl WorldState {
             _ => return JsValue::NULL,
         };
 
-        let res: Vec<_> = info
-            .into_iter()
-            .map(|r| Highlight { tag: None, range: r.range.conv_with(&line_index) })
-            .collect();
+        let res: Vec<_> = if include_declaration {
+            info.into_iter()
+                .map(|r| Highlight { tag: None, range: r.range.conv_with(&line_index) })
+                .collect()
+        } else {
+            info.references()
+                .iter()
+                .map(|r| Highlight { tag: None, range: r.range.conv_with(&line_index) })
+                .collect()
+        };
+
         serde_wasm_bindgen::to_value(&res).unwrap()
     }
 
@@ -324,5 +331,18 @@ impl WorldState {
         } else {
             JsValue::NULL
         };
+    }
+
+    pub fn goto_implementation(&self, line_number: u32, column: u32) -> JsValue {
+        log::warn!("goto_implementation");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
+        let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
+        let nav_info = match self.analysis.goto_implementation(pos) {
+            Ok(Some(it)) => it,
+            _ => return JsValue::NULL,
+        };
+        let res = nav_info.conv_with(&line_index);
+        serde_wasm_bindgen::to_value(&res).unwrap()
     }
 }
