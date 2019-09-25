@@ -249,4 +249,44 @@ impl WorldState {
         let res = nav_info.conv_with(&line_index);
         serde_wasm_bindgen::to_value(&res).unwrap()
     }
+
+    pub fn document_symbols(&self) -> JsValue {
+        log::warn!("document_symbols");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
+        let struct_nodes = match self.analysis.file_structure(self.file_id) {
+            Ok(struct_nodes) => struct_nodes,
+            _ => return JsValue::NULL,
+        };
+        let mut parents: Vec<(DocumentSymbol, Option<usize>)> = Vec::new();
+
+        for symbol in struct_nodes {
+            let doc_symbol = DocumentSymbol {
+                name: symbol.label.clone(),
+                detail: symbol.detail.unwrap_or(symbol.label),
+                kind: symbol.kind.conv(),
+                range: symbol.node_range.conv_with(&line_index),
+                children: None,
+                tags: [if symbol.deprecated { SymbolTag::Deprecated } else { SymbolTag::None }],
+                containerName: None,
+                selectionRange: symbol.navigation_range.conv_with(&line_index),
+            };
+            parents.push((doc_symbol, symbol.parent));
+        }
+        let mut res = Vec::new();
+        while let Some((node, parent)) = parents.pop() {
+            match parent {
+                None => res.push(node),
+                Some(i) => {
+                    let children = &mut parents[i].0.children;
+                    if children.is_none() {
+                        *children = Some(Vec::new());
+                    }
+                    children.as_mut().unwrap().push(node);
+                }
+            }
+        }
+
+        serde_wasm_bindgen::to_value(&res).unwrap()
+    }
 }

@@ -3,7 +3,7 @@ use ra_ide_api::{
     CompletionItem, CompletionItemKind, Documentation, FileId, FilePosition, FunctionSignature,
     InsertTextFormat, LineCol, LineIndex, NavigationTarget, RangeInfo, Severity,
 };
-use ra_syntax::TextRange;
+use ra_syntax::{SyntaxKind, TextRange};
 use ra_text_edit::AtomTextEdit;
 
 pub trait Conv {
@@ -212,5 +212,27 @@ impl ConvWith<&LineIndex> for RangeInfo<Vec<NavigationTarget>> {
                 }
             })
             .collect()
+    }
+}
+
+impl Conv for SyntaxKind {
+    type Output = return_types::SymbolKind;
+
+    fn conv(self) -> Self::Output {
+        use return_types::SymbolKind;
+        match self {
+            SyntaxKind::FN_DEF => SymbolKind::Function,
+            SyntaxKind::STRUCT_DEF => SymbolKind::Struct,
+            SyntaxKind::ENUM_DEF => SymbolKind::Enum,
+            SyntaxKind::ENUM_VARIANT => SymbolKind::EnumMember,
+            SyntaxKind::TRAIT_DEF => SymbolKind::Interface,
+            SyntaxKind::MODULE => SymbolKind::Module,
+            SyntaxKind::TYPE_ALIAS_DEF => SymbolKind::TypeParameter,
+            SyntaxKind::RECORD_FIELD_DEF => SymbolKind::Field,
+            SyntaxKind::STATIC_DEF => SymbolKind::Constant,
+            SyntaxKind::CONST_DEF => SymbolKind::Constant,
+            SyntaxKind::IMPL_BLOCK => SymbolKind::Object,
+            _ => SymbolKind::Variable,
+        }
     }
 }

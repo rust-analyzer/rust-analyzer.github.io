@@ -134,13 +134,14 @@ monaco.languages.onLanguage(modeId, async () => {
     monaco.languages.registerRenameProvider(modeId, {
         provideRenameEdits: (m, pos, newName) => {
             const edits = state.rename(pos.lineNumber, pos.column, newName);
-            if (!edits) return null;
-            return {
-                edits: [{
-                    resource: m.uri,
-                    edits,
-                }],
-            };
+            if (edits) {
+                return {
+                    edits: [{
+                        resource: m.uri,
+                        edits,
+                    }],
+                };
+            }
         },
         resolveRenameLocation: (_, pos) => state.prepare_rename(pos.lineNumber, pos.column),
     });
@@ -148,7 +149,9 @@ monaco.languages.onLanguage(modeId, async () => {
         triggerCharacters: [".", ":", "="],
         provideCompletionItems(m, pos) {
             const suggestions = state.completions(pos.lineNumber, pos.column);
-            return { suggestions };
+            if (suggestions) {
+                return { suggestions };
+            }
         },
     });
     monaco.languages.registerSignatureHelpProvider(modeId, {
@@ -163,13 +166,24 @@ monaco.languages.onLanguage(modeId, async () => {
         },
     });
     monaco.languages.registerDefinitionProvider(modeId, {
-        provideDefinition: (m, pos) => state.definition(pos.lineNumber, pos.column)
-            .map(def => ({ ...def, uri: m.uri })),
+        provideDefinition(m, pos) {
+            const list = state.definition(pos.lineNumber, pos.column);
+            if (list) {
+                return list.map(def => ({ ...def, uri: m.uri }));
+            }
+        },
     });
     monaco.languages.registerTypeDefinitionProvider(modeId, {
-        provideTypeDefinition: (m, pos) => state.type_definition(pos.lineNumber, pos.column)
-            .map(def => ({ ...def, uri: m.uri })),
+        provideTypeDefinition(m, pos) {
+            const list = state.type_definition(pos.lineNumber, pos.column);
+            if (list) {
+                return list.map(def => ({ ...def, uri: m.uri }));
+            }
+        },
     });
+    monaco.languages.registerDocumentSymbolProvider(modeId, {
+        provideDocumentSymbols: () => state.document_symbols(),
+    })
 
     class TokenState {
         constructor(line = 0) {
@@ -186,8 +200,10 @@ monaco.languages.onLanguage(modeId, async () => {
 
     function fixTag(tag) {
         switch (tag) {
+            case 'builtin': return 'variable.predefined';
+            case 'attribute': return 'key';
+            case 'macro': return 'number.hex';
             case 'literal': return 'number';
-            case 'function': return 'identifier';
             default: return tag;
         }
     }
