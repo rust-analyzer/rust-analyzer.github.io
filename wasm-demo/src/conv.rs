@@ -1,10 +1,10 @@
 use super::return_types;
 use ra_ide_api::{
-    CompletionItem, CompletionItemKind, Documentation, FileId, FilePosition, FunctionSignature,
-    InsertTextFormat, LineCol, LineIndex, NavigationTarget, RangeInfo, Severity,
+    CompletionItem, CompletionItemKind, Documentation, FileId, FilePosition, Fold, FoldKind,
+    FunctionSignature, InsertTextFormat, LineCol, LineIndex, NavigationTarget, RangeInfo, Severity,
 };
-use ra_syntax::TextRange;
-use ra_text_edit::AtomTextEdit;
+use ra_syntax::{SyntaxKind, TextRange};
+use ra_text_edit::{AtomTextEdit, TextEdit};
 
 pub trait Conv {
     type Output;
@@ -212,5 +212,53 @@ impl ConvWith<&LineIndex> for RangeInfo<Vec<NavigationTarget>> {
                 }
             })
             .collect()
+    }
+}
+
+impl Conv for SyntaxKind {
+    type Output = return_types::SymbolKind;
+
+    fn conv(self) -> Self::Output {
+        use return_types::SymbolKind;
+        match self {
+            SyntaxKind::FN_DEF => SymbolKind::Function,
+            SyntaxKind::STRUCT_DEF => SymbolKind::Struct,
+            SyntaxKind::ENUM_DEF => SymbolKind::Enum,
+            SyntaxKind::ENUM_VARIANT => SymbolKind::EnumMember,
+            SyntaxKind::TRAIT_DEF => SymbolKind::Interface,
+            SyntaxKind::MODULE => SymbolKind::Module,
+            SyntaxKind::TYPE_ALIAS_DEF => SymbolKind::TypeParameter,
+            SyntaxKind::RECORD_FIELD_DEF => SymbolKind::Field,
+            SyntaxKind::STATIC_DEF => SymbolKind::Constant,
+            SyntaxKind::CONST_DEF => SymbolKind::Constant,
+            SyntaxKind::IMPL_BLOCK => SymbolKind::Object,
+            _ => SymbolKind::Variable,
+        }
+    }
+}
+
+impl ConvWith<&LineIndex> for TextEdit {
+    type Output = Vec<return_types::TextEdit>;
+
+    fn conv_with(self, ctx: &LineIndex) -> Self::Output {
+        self.as_atoms().iter().map(|atom| atom.conv_with(ctx)).collect()
+    }
+}
+
+impl ConvWith<&LineIndex> for Fold {
+    type Output = return_types::FoldingRange;
+
+    fn conv_with(self, ctx: &LineIndex) -> Self::Output {
+        let range = self.range.conv_with(&ctx);
+        return_types::FoldingRange {
+            start: range.startLineNumber,
+            end: range.endLineNumber,
+            kind: match self.kind {
+                FoldKind::Comment => Some(return_types::FoldingRangeKind::Comment),
+                FoldKind::Imports => Some(return_types::FoldingRangeKind::Imports),
+                FoldKind::Mods => None,
+                FoldKind::Block => None,
+            },
+        }
     }
 }

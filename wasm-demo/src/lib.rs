@@ -2,7 +2,7 @@
 #![allow(non_snake_case)]
 
 use ra_ide_api::{Analysis, FileId, FilePosition};
-use ra_syntax::SyntaxKind;
+use ra_syntax::{SyntaxKind, TextUnit};
 use wasm_bindgen::prelude::*;
 
 mod conv;
@@ -12,8 +12,11 @@ use return_types::*;
 
 #[wasm_bindgen(start)]
 pub fn start() {
-    console_error_panic_hook::set_once();
-    console_log::init_with_level(log::Level::Warn).expect("could not install logging hook");
+    #[cfg(feature = "dev")]
+    {
+        console_error_panic_hook::set_once();
+        console_log::init_with_level(log::Level::Warn).expect("could not install logging hook");
+    }
     log::info!("worker initialized")
 }
 
@@ -129,7 +132,7 @@ impl WorldState {
                 let positions = nav_info
                     .info
                     .iter()
-                    .map(|target| target.focus_range().unwrap_or(target.full_range()))
+                    .map(|target| target.focus_range().unwrap_or_else(|| target.full_range()))
                     .map(|range| range.conv_with(&line_index))
                     .collect();
 
@@ -147,7 +150,7 @@ impl WorldState {
         serde_wasm_bindgen::to_value(&results).unwrap()
     }
 
-    pub fn references(&self, line_number: u32, column: u32) -> JsValue {
+    pub fn references(&self, line_number: u32, column: u32, include_declaration: bool) -> JsValue {
         log::warn!("references");
         let line_index = self.analysis.file_line_index(self.file_id).unwrap();
 
@@ -157,10 +160,17 @@ impl WorldState {
             _ => return JsValue::NULL,
         };
 
-        let res: Vec<_> = info
-            .into_iter()
-            .map(|r| Highlight { tag: None, range: r.range.conv_with(&line_index) })
-            .collect();
+        let res: Vec<_> = if include_declaration {
+            info.into_iter()
+                .map(|r| Highlight { tag: None, range: r.range.conv_with(&line_index) })
+                .collect()
+        } else {
+            info.references()
+                .iter()
+                .map(|r| Highlight { tag: None, range: r.range.conv_with(&line_index) })
+                .collect()
+        };
+
         serde_wasm_bindgen::to_value(&res).unwrap()
     }
 
@@ -246,6 +256,92 @@ impl WorldState {
             _ => return JsValue::NULL,
         };
 
+        let res = nav_info.conv_with(&line_index);
+        serde_wasm_bindgen::to_value(&res).unwrap()
+    }
+
+    pub fn document_symbols(&self) -> JsValue {
+        log::warn!("document_symbols");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
+        let struct_nodes = match self.analysis.file_structure(self.file_id) {
+            Ok(struct_nodes) => struct_nodes,
+            _ => return JsValue::NULL,
+        };
+        let mut parents: Vec<(DocumentSymbol, Option<usize>)> = Vec::new();
+
+        for symbol in struct_nodes {
+            let doc_symbol = DocumentSymbol {
+                name: symbol.label.clone(),
+                detail: symbol.detail.unwrap_or(symbol.label),
+                kind: symbol.kind.conv(),
+                range: symbol.node_range.conv_with(&line_index),
+                children: None,
+                tags: [if symbol.deprecated { SymbolTag::Deprecated } else { SymbolTag::None }],
+                containerName: None,
+                selectionRange: symbol.navigation_range.conv_with(&line_index),
+            };
+            parents.push((doc_symbol, symbol.parent));
+        }
+        let mut res = Vec::new();
+        while let Some((node, parent)) = parents.pop() {
+            match parent {
+                None => res.push(node),
+                Some(i) => {
+                    let children = &mut parents[i].0.children;
+                    if children.is_none() {
+                        *children = Some(Vec::new());
+                    }
+                    children.as_mut().unwrap().push(node);
+                }
+            }
+        }
+
+        serde_wasm_bindgen::to_value(&res).unwrap()
+    }
+
+    pub fn type_formatting(&self, line_number: u32, column: u32, ch: char) -> JsValue {
+        log::warn!("type_formatting");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
+        let mut pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
+        pos.offset = pos.offset - TextUnit::of_char('.');
+
+        let edit = match ch {
+            '=' => self.analysis.on_eq_typed(pos),
+            '.' => self.analysis.on_dot_typed(pos),
+            _ => return JsValue::NULL,
+        };
+
+        let edit = match edit {
+            Ok(Some(mut it)) => it.source_file_edits.pop().unwrap(),
+            _ => return JsValue::NULL,
+        };
+
+        let change: Vec<TextEdit> = edit.edit.conv_with(&line_index);
+        serde_wasm_bindgen::to_value(&change).unwrap()
+    }
+
+    pub fn folding_ranges(&self) -> JsValue {
+        log::warn!("folding_ranges");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+        return if let Ok(folds) = self.analysis.folding_ranges(self.file_id) {
+            let res: Vec<_> = folds.into_iter().map(|fold| fold.conv_with(&line_index)).collect();
+            serde_wasm_bindgen::to_value(&res).unwrap()
+        } else {
+            JsValue::NULL
+        };
+    }
+
+    pub fn goto_implementation(&self, line_number: u32, column: u32) -> JsValue {
+        log::warn!("goto_implementation");
+        let line_index = self.analysis.file_line_index(self.file_id).unwrap();
+
+        let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
+        let nav_info = match self.analysis.goto_implementation(pos) {
+            Ok(Some(it)) => it,
+            _ => return JsValue::NULL,
+        };
         let res = nav_info.conv_with(&line_index);
         serde_wasm_bindgen::to_value(&res).unwrap()
     }

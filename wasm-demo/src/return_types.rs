@@ -163,3 +163,71 @@ pub struct LocationLink {
     pub range: Range,
     pub targetSelectionRange: Range,
 }
+
+#[allow(dead_code)]
+#[derive(Serialize_repr)]
+#[repr(u8)]
+pub enum SymbolTag {
+    None = 0,
+    Deprecated = 1,
+}
+
+#[allow(dead_code)]
+#[derive(Serialize_repr)]
+#[repr(u8)]
+pub enum SymbolKind {
+    File = 0,
+    Module = 1,
+    Namespace = 2,
+    Package = 3,
+    Class = 4,
+    Method = 5,
+    Property = 6,
+    Field = 7,
+    Constructor = 8,
+    Enum = 9,
+    Interface = 10,
+    Function = 11,
+    Variable = 12,
+    Constant = 13,
+    String = 14,
+    Number = 15,
+    Boolean = 16,
+    Array = 17,
+    Object = 18,
+    Key = 19,
+    Null = 20,
+    EnumMember = 21,
+    Struct = 22,
+    Event = 23,
+    Operator = 24,
+    TypeParameter = 25,
+}
+
+#[derive(Serialize)]
+pub struct DocumentSymbol {
+    pub name: String,
+    pub detail: String,
+    pub kind: SymbolKind,
+    pub tags: [SymbolTag; 1],
+    pub containerName: Option<String>,
+    pub range: Range,
+    pub selectionRange: Range,
+    pub children: Option<Vec<DocumentSymbol>>,
+}
+
+#[allow(dead_code)]
+#[derive(Serialize)]
+#[serde(rename_all = "lowercase")]
+pub enum FoldingRangeKind {
+    Comment,
+    Imports,
+    Region,
+}
+
+#[derive(Serialize)]
+pub struct FoldingRange {
+    pub start: u32,
+    pub end: u32,
+    pub kind: Option<FoldingRangeKind>,
+}
