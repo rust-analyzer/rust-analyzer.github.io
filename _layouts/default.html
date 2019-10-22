@@ -17,6 +17,12 @@
 </head>
 
 <body>
+  {% if page.url != "/" %}
+  <header>
+    <a class="nav-link site-title" href="{{ site.baseurl }}/">{{ site.title }}</a>
+  </header>
+  {% endif %}
+
   <main>
     {{ content }}
   </main>
