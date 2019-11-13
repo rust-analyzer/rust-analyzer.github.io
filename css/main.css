@@ -4,19 +4,20 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    line-height: 1.5;
 }
 
 p {
-    margin-bottom: 1em;
+    margin-top: 1.5em;
 }
 pre {
-    margin-bottom: 1em;
+    margin-top: 1.5em;
 }
-ul {
-    margin-bottom: 1em;
+ul, ol {
+    margin-top: 1.5em;
 }
 h1, h2 {
-    margin-bottom: 1em;
+    margin-top: 1.5em;
 }
 ul, ol {
     margin-left: 1em;
