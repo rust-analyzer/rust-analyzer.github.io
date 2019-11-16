@@ -155,7 +155,7 @@ impl WorldState {
         let line_index = self.analysis.file_line_index(self.file_id).unwrap();
 
         let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
-        let info = match self.analysis.find_all_refs(pos).unwrap() {
+        let info = match self.analysis.find_all_refs(pos, None).unwrap() {
             Some(info) => info,
             _ => return JsValue::NULL,
         };
@@ -179,7 +179,7 @@ impl WorldState {
         let line_index = self.analysis.file_line_index(self.file_id).unwrap();
 
         let pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
-        let refs = match self.analysis.find_all_refs(pos).unwrap() {
+        let refs = match self.analysis.find_all_refs(pos, None).unwrap() {
             None => return JsValue::NULL,
             Some(refs) => refs,
         };
@@ -305,13 +305,9 @@ impl WorldState {
         let line_index = self.analysis.file_line_index(self.file_id).unwrap();
 
         let mut pos = Position { line_number, column }.conv_with((&line_index, self.file_id));
-        pos.offset = pos.offset - TextUnit::of_char('.');
+        pos.offset -= TextUnit::of_char('.');
 
-        let edit = match ch {
-            '=' => self.analysis.on_eq_typed(pos),
-            '.' => self.analysis.on_dot_typed(pos),
-            _ => return JsValue::NULL,
-        };
+        let edit = self.analysis.on_char_typed(pos, ch);
 
         let edit = match edit {
             Ok(Some(mut it)) => it.source_file_edits.pop().unwrap(),
@@ -325,12 +321,12 @@ impl WorldState {
     pub fn folding_ranges(&self) -> JsValue {
         log::warn!("folding_ranges");
         let line_index = self.analysis.file_line_index(self.file_id).unwrap();
-        return if let Ok(folds) = self.analysis.folding_ranges(self.file_id) {
+        if let Ok(folds) = self.analysis.folding_ranges(self.file_id) {
             let res: Vec<_> = folds.into_iter().map(|fold| fold.conv_with(&line_index)).collect();
             serde_wasm_bindgen::to_value(&res).unwrap()
         } else {
             JsValue::NULL
-        };
+        }
     }
 
     pub fn goto_implementation(&self, line_number: u32, column: u32) -> JsValue {
