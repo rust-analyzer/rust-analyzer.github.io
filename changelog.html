@@ -1,0 +1,15 @@
+---
+layout: default
+---
+<h2>This Week In rust-analyzer</h2>
+
+<ul class="post-list">
+    {% for post in site.categories.changelog %}
+    <li>
+        <h3>
+            <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span> <a class="post-link"
+                href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h3>
+    </li>
+    {% endfor %}
+</ul>

@@ -59,16 +59,41 @@ $ cargo xtask install</code></pre>
 </section>
 
 <section>
-    <h2>Latest News</h2>
+    <h2>News</h2>
 
     <ul class="post-list">
-        {% for post in site.posts %}
+        {% assign post = site.categories.changelog.first %}
         <li>
             <h3>
-                <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span> <a class="post-link"
-                    href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+                <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
             </h3>
         </li>
-        {% endfor %}
+
+        <li>
+            <h3>
+                <a class="post-link" href="/changelog">All</a>
+            </h3>
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Posts</h2>
+
+    <ul class="post-list">
+        {% assign post = site.categories.blog.first %}
+        <li>
+            <h3>
+                <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+                <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+            </h3>
+        </li>
+
+        <li>
+            <h3>
+                <a class="post-link" href="/posts">All</a>
+            </h3>
+        </li>
     </ul>
 </section>
