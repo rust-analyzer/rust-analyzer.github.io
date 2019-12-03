@@ -40,7 +40,6 @@ header {
     width: 100%;
     max-width: 80ch;
     padding: 1ch;
-    margin-bottom: 1em;
     border-bottom: 1px solid rgba(0, 0, 0, .8);
 }
 
@@ -73,6 +72,7 @@ footer {
     width: 100%;
     max-width: 80ch;
     padding: 1ch;
+    margin-top: 1em;
     border-top: 1px solid rgba(0, 0, 0, .8);
 }
 
@@ -87,11 +87,7 @@ footer {
     color: rgba(0, 0, 0, .8)
 }
 footer > p {
-    margin-bottom: 0;
-}
-
-section {
-    margin-bottom: 2em;
+    margin-top: 0;
 }
 
 .greeting {
