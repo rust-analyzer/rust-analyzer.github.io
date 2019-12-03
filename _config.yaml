@@ -6,3 +6,5 @@ github_username: rust-analyzer
 exclude:
   - wasm-demo/
   - vendor
+plugins:
+  - jekyll-redirect-from

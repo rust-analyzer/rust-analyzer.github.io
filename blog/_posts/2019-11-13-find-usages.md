@@ -2,6 +2,7 @@
 layout: post
 title:  "Find Usages"
 date:   2019-11-13 11:00:00 +0200
+redirect_from: "/2019/11/13/find-usages.html"
 ---
 
 Last month, rust-analyzer gained an exciting new feature: find usages. It was implemented by [@viorina] in [#1892].
