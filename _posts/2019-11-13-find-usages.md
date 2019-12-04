@@ -139,7 +139,7 @@ In general, laziness (ability to ignore most of the code) and incrementality (ab
 First and foremost, an IDE requires laziness, although incrementality can be used as well to speed some things up.
 
 In particular, it is possible to make the text-based phase of reference search incremental.
-An IDE can main a trigram index: for each three-byte sequence, a list of files and positions where this sequence occurs.
+An IDE can maintain a trigram index: for each three-byte sequence, a list of files and positions where this sequence occurs.
 Unlike symbol tables, such index is easy to maintain, as any change in a file can only affect trigrams from this file.
 The index can then be used to speedup text search.
 The result is the following *find usages* funnel:
