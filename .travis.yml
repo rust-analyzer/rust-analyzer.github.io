@@ -2,6 +2,9 @@ os: linux
 dist: xenial
 language: ruby
 cache: bundler
+branches:
+  except:
+  - staging.tmp
 
 script: ./build.sh
 
