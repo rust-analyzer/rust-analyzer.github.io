@@ -7,7 +7,7 @@ date:   2019-11-13 11:00:00 +0200
 Last month, rust-analyzer gained an exciting new feature: find usages. It was implemented by [@viorina] in [#1892].
 
 This post describes how the feature works under the hood.
-It's an excellent case study to compare approaches of traditional compilers with IDE-oriented compilers (shortened to IDE from now one).
+It's an excellent case study to compare approaches of traditional compilers with IDE-oriented compilers (shortened to IDE from now on).
 
 [@viorina]: https://github.com/viorina
 [#1892]:    https://github.com/rust-analyzer/rust-analyzer/pull/1892
@@ -139,7 +139,7 @@ In general, laziness (ability to ignore most of the code) and incrementality (ab
 First and foremost, an IDE requires laziness, although incrementality can be used as well to speed some things up.
 
 In particular, it is possible to make the text-based phase of reference search incremental.
-An IDE can main a trigram index: for each three-byte sequence, a list of files and positions where this sequence occurs.
+An IDE can maintain a trigram index: for each three-byte sequence, a list of files and positions where this sequence occurs.
 Unlike symbol tables, such index is easy to maintain, as any change in a file can only affect trigrams from this file.
 The index can then be used to speedup text search.
 The result is the following *find usages* funnel:
