@@ -6,7 +6,7 @@ branches:
   except:
   - staging.tmp
 
-script: ./build.sh
+script: bundle exec jekyll build
 
 deploy:
   provider: pages
