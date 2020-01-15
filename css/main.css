@@ -1,10 +1,5 @@
-@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600";
-
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    line-height: 1.5;
 }
 
 p {
@@ -16,8 +11,13 @@ pre {
 ul, ol {
     margin-top: 1.5em;
 }
-h1, h2 {
+h1 {
     margin-top: 1.5em;
+    font-size: 2.3em;
+}
+h2 {
+    margin-top: 1.5em;
+    font-size: 2em;
 }
 ul, ol {
     margin-left: 1em;
@@ -25,55 +25,126 @@ ul, ol {
 
 h1, h2, h3 { font-weight: 300; }
 
+a:link, a:visited {
+    color: #1c6fef;
+}
+
+html {
+    min-height: 100%;
+    margin: 0;
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
     font-family: "Open Sans", "DejaVu Sans", sans-serif;
+    font-size: 20px;
+    line-height: 1.5em;
+    margin: 0;
 }
 
 header {
+    width: 100%;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
+}
+
+#header-inner {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: stretch;
     width: 100%;
     max-width: 80ch;
     padding: 1ch;
-    border-bottom: 1px solid rgba(0, 0, 0, .8);
+    margin: 0 auto;
 }
 
-.nav-link {
+#header-logo {
+    display: block;
+    width: 200px;
+    margin-right: 7px;
+}
+
+#header-logo:hover, #header-logo:focus {
+    opacity: 0.8;
+}
+
+a.nav-link, a.site-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: .3s;
+}
+
+a.nav-link {
+    min-height: 40px;
+    padding: 0 20px;
 	font-family: "Open Sans", "DejaVu Sans", sans-serif;
 	font-weight: 400;
 	font-style: normal;
 	color: rgba(0, 0, 0, .8);
     text-decoration: none;
+    border-radius: 4px;
 }
 
-.nav-link:hover {
-    color: rgba(0, 0, 0, .8);
-    text-decoration: underline;
+a.nav-link:hover {
+    background-color: #eeeeee;
+}
+
+#logo {
+    width: calc(20% + 250px)
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 18px;
+    }
+    
+    #header-logo {
+        width: 150px;
+    }
+    
+    a.nav-link {
+        padding: 0 7px;
+    }
+    
+    #logo {
+        width: 95%;
+        max-width: 360px;
+    }
+}
+
+@media (max-width: 450px) {
+    body {
+        font-size: 15px;
+    }
+    
+    #header-logo {
+        width: 110px;
+    }
 }
 
 main {
-    display: flex;
-    flex-direction: column;
+    flex-grow: 1;
     width: 100%;
     max-width: 80ch;
     padding-left: 2ch;
     padding-right: 2ch;
+    margin: 0 auto;
 }
 
 footer {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
     width: 100%;
-    max-width: 80ch;
-    padding: 1ch;
+    padding: 2ch;
+    text-align: center;
     margin-top: 1em;
-    border-top: 1px solid rgba(0, 0, 0, .8);
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
+}
+
+footer p {
+    margin: 0;
 }
 
 .footer-link {
@@ -91,7 +162,7 @@ footer > p {
 }
 
 .greeting {
-    margin-top: 3em;
+    margin: 2em 0 1em 0;
     text-align: center;
 }
 
@@ -101,21 +172,25 @@ footer > p {
 }
 
 .greeting > p {
-    font-size: 2em;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    margin: 2em 0 1em;
 }
 
 .source > img {
     width: 1em;
     height: 1em;
+    vertical-align: -3px;
 }
 
-.source {
+a.source {
     color: black;
     text-decoration: none;
-    font-size: 2em;
+    font-size: 1.4em;
 }
-.source:hover {
+a.source:hover {
     text-decoration: underline;
+    text-decoration-thickness: 2px;
 }
 
 
@@ -134,7 +209,7 @@ footer > p {
 }
 
 .post-meta {
-    color: #828282;
+    color: #666666;
     font-weight: 300;
     /* Help me! I know there should be some subgrid magic to align these spans... */
     display: inline-block;
