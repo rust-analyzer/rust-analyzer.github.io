@@ -3,24 +3,27 @@
 }
 
 p {
-    margin-top: 1.5em;
+    margin-top: 1.5rem;
 }
 pre {
-    margin-top: 1.5em;
+    margin-top: 1.5rem;
 }
 ul, ol {
-    margin-top: 1.5em;
+    margin-top: 1.5rem;
 }
 h1 {
-    margin-top: 1.5em;
-    font-size: 2.3em;
+    margin-top: 3.6rem;
+    font-size: 2.3rem;
+    line-height: 3.4rem;
 }
 h2 {
-    margin-top: 1.5em;
-    font-size: 2em;
+    margin: 3rem 0 2rem;
+    font-size: 2rem;
+    line-height: 3rem;
+    
 }
 ul, ol {
-    margin-left: 1em;
+    margin-left: 1rem;
 }
 
 h1, h2, h3 { font-weight: 300; }
@@ -32,6 +35,9 @@ a:link, a:visited {
 html {
     min-height: 100%;
     margin: 0;
+    /* ~15px on 360px wide display, ~20px on 1800px wide display */
+    font-size: calc(85.9375% + 0.3472vw);
+    line-height: 1.5rem;
 }
 
 body {
@@ -40,8 +46,6 @@ body {
     align-items: center;
     min-height: 100vh;
     font-family: "Open Sans", "DejaVu Sans", sans-serif;
-    font-size: 20px;
-    line-height: 1.5em;
     margin: 0;
 }
 
@@ -63,8 +67,9 @@ header {
 
 #header-logo {
     display: block;
-    width: 200px;
-    margin-right: 7px;
+    width: calc(17vw + 4rem);
+    max-width: 200px;
+    margin-right: 0.4rem;
 }
 
 #header-logo:hover, #header-logo:focus {
@@ -75,12 +80,10 @@ a.nav-link, a.site-title {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    transition: .3s;
 }
 
 a.nav-link {
     min-height: 40px;
-    padding: 0 20px;
 	font-family: "Open Sans", "DejaVu Sans", sans-serif;
 	font-weight: 400;
 	font-style: normal;
@@ -90,40 +93,12 @@ a.nav-link {
 }
 
 a.nav-link:hover {
-    background-color: #eeeeee;
+    text-decoration: underline;
 }
 
 #logo {
-    width: calc(20% + 250px)
-}
-
-@media (max-width: 600px) {
-    body {
-        font-size: 18px;
-    }
-    
-    #header-logo {
-        width: 150px;
-    }
-    
-    a.nav-link {
-        padding: 0 7px;
-    }
-    
-    #logo {
-        width: 95%;
-        max-width: 360px;
-    }
-}
-
-@media (max-width: 450px) {
-    body {
-        font-size: 15px;
-    }
-    
-    #header-logo {
-        width: 110px;
-    }
+    width: calc(20% + 13rem);
+    max-width: 95%;
 }
 
 main {
@@ -139,7 +114,7 @@ footer {
     width: 100%;
     padding: 2ch;
     text-align: center;
-    margin-top: 1em;
+    margin-top: 1rem;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
 }
 
@@ -162,31 +137,31 @@ footer > p {
 }
 
 .greeting {
-    margin: 2em 0 1em 0;
+    margin: 5rem 0 1rem 0;
     text-align: center;
 }
 
 .greeting > h1 {
     font-weight: 400;
-    font-size: 3em;
+    font-size: 3rem;
 }
 
 .greeting > p {
-    font-size: 1.5em;
-    line-height: 1.5em;
-    margin: 2em 0 1em;
+    font-size: 1.5rem;
+    line-height: 2.2rem;
+    margin: 2.3em 0 1.25rem;
 }
 
 .source > img {
-    width: 1em;
-    height: 1em;
-    vertical-align: -3px;
+    width: 1.4rem;
+    height: 1.4rem;
+    vertical-align: -0.11rem;
 }
 
 a.source {
     color: black;
     text-decoration: none;
-    font-size: 1.4em;
+    font-size: 1.4rem;
 }
 a.source:hover {
     text-decoration: underline;
@@ -200,12 +175,12 @@ a.source:hover {
 }
 
 .post-list > li {
-    margin-top: 2em;
+    margin-top: 2rem;
 }
 
 .post-list h2 {
     margin-top: 0;
-    font-size: 2em;
+    font-size: 2rem;
 }
 
 .post-meta {
