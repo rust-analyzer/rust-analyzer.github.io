@@ -1,29 +1,44 @@
-@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600";
-
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    line-height: 1.5;
 }
 
 p {
-    margin-top: 1.5em;
+    margin-top: 1.5rem;
 }
 pre {
-    margin-top: 1.5em;
+    margin-top: 1.5rem;
 }
 ul, ol {
-    margin-top: 1.5em;
+    margin-top: 1.5rem;
 }
-h1, h2 {
-    margin-top: 1.5em;
+h1 {
+    margin-top: 3.6rem;
+    font-size: 2.3rem;
+    line-height: 3.4rem;
+}
+h2 {
+    margin: 3rem 0 2rem;
+    font-size: 2rem;
+    line-height: 3rem;
+    
 }
 ul, ol {
-    margin-left: 1em;
+    margin-left: 1rem;
 }
 
 h1, h2, h3 { font-weight: 300; }
+
+a:link, a:visited {
+    color: #1c6fef;
+}
+
+html {
+    min-height: 100%;
+    margin: 0;
+    /* ~15px on 360px wide display, ~20px on 1800px wide display */
+    font-size: calc(85.9375% + 0.3472vw);
+    line-height: 1.5rem;
+}
 
 body {
     display: flex;
@@ -31,53 +46,84 @@ body {
     align-items: center;
     min-height: 100vh;
     font-family: "Open Sans", "DejaVu Sans", sans-serif;
+    margin: 0;
 }
 
 header {
+    width: 100%;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
+}
+
+#header-inner {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: stretch;
     width: 100%;
     max-width: 80ch;
     padding: 1ch;
-    border-bottom: 1px solid rgba(0, 0, 0, .8);
+    margin: 0 auto;
 }
 
-.nav-link {
+#header-logo {
+    display: block;
+    width: calc(17vw + 4rem);
+    max-width: 200px;
+    margin-right: 0.4rem;
+}
+
+#header-logo:hover, #header-logo:focus {
+    opacity: 0.8;
+}
+
+a.nav-link, a.site-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+a.nav-link {
+    min-height: 40px;
 	font-family: "Open Sans", "DejaVu Sans", sans-serif;
 	font-weight: 400;
 	font-style: normal;
 	color: rgba(0, 0, 0, .8);
     text-decoration: none;
+    border-radius: 4px;
 }
 
-.nav-link:hover {
-    color: rgba(0, 0, 0, .8);
+a.nav-link:hover {
     text-decoration: underline;
 }
 
+#logo {
+    width: calc(20% + 13rem);
+    max-width: 95%;
+}
+
 main {
-    display: flex;
-    flex-direction: column;
+    flex-grow: 1;
     width: 100%;
     max-width: 80ch;
     padding-left: 2ch;
     padding-right: 2ch;
+    margin: 0 auto;
 }
 
 footer {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
     width: 100%;
-    max-width: 80ch;
-    padding: 1ch;
-    margin-top: 1em;
-    border-top: 1px solid rgba(0, 0, 0, .8);
+    padding: 2ch;
+    text-align: center;
+    margin-top: 1rem;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
+}
+
+footer p {
+    margin: 0;
 }
 
 .footer-link {
-    padding-left: 2ch;
+    margin: 0 1ch;
     font-weight: 600;
     font-style: normal;
     text-decoration: none;
@@ -91,31 +137,35 @@ footer > p {
 }
 
 .greeting {
-    margin-top: 3em;
+    margin: 5rem 0 1rem 0;
     text-align: center;
 }
 
 .greeting > h1 {
     font-weight: 400;
-    font-size: 3em;
+    font-size: 3rem;
 }
 
 .greeting > p {
-    font-size: 2em;
+    font-size: 1.5rem;
+    line-height: 2.2rem;
+    margin: 2.3em 0 1.25rem;
 }
 
 .source > img {
-    width: 1em;
-    height: 1em;
+    width: 1.4rem;
+    height: 1.4rem;
+    vertical-align: -0.11rem;
 }
 
-.source {
+a.source {
     color: black;
     text-decoration: none;
-    font-size: 2em;
+    font-size: 1.4rem;
 }
-.source:hover {
+a.source:hover {
     text-decoration: underline;
+    text-decoration-thickness: 2px;
 }
 
 
@@ -125,16 +175,16 @@ footer > p {
 }
 
 .post-list > li {
-    margin-top: 2em;
+    margin-top: 2rem;
 }
 
 .post-list h2 {
     margin-top: 0;
-    font-size: 2em;
+    font-size: 2rem;
 }
 
 .post-meta {
-    color: #828282;
+    color: #666666;
     font-weight: 300;
     /* Help me! I know there should be some subgrid magic to align these spans... */
     display: inline-block;
@@ -148,4 +198,168 @@ footer > p {
 
 .post-link:hover {
     text-decoration: underline;
+}
+
+/* Color scheme for code, same as the one used by ferrous-systems.com */
+pre {
+    padding: 1ch;
+    background-color:#f8f8f8;
+}
+
+.highlight .cm {
+    color:#999988;
+    font-style:italic
+}
+.highlight .cp {
+    color:#999999;
+    font-weight:bold
+}
+.highlight .c1 {
+    color:#999988;
+    font-style:italic
+}
+.highlight .cs {
+    color:#999999;
+    font-weight:bold;
+    font-style:italic
+}
+.highlight .c,
+.highlight .cd {
+    color:#999988;
+    font-style:italic
+}
+.highlight .err {
+    color:#a61717;
+    background-color:#e3d2d2
+}
+.highlight .gd {
+    color:#000000;
+    background-color:#ffdddd
+}
+.highlight .ge {
+    color:#000000;
+    font-style:italic
+}
+.highlight .gr {
+    color:#aa0000
+}
+.highlight .gh {
+    color:#999999
+}
+.highlight .gi {
+    color:#000000;
+    background-color:#ddffdd
+}
+.highlight .go {
+    color:#888888
+}
+.highlight .gp {
+    color:#555555
+}
+.highlight .gs {
+    font-weight:bold
+}
+.highlight .gu {
+    color:#aaaaaa
+}
+.highlight .gt {
+    color:#aa0000
+}
+.highlight .kc,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr {
+    color:#000000;
+    font-weight:bold
+}
+.highlight .kt {
+    color:#445588;
+    font-weight:bold
+}
+.highlight .k,
+.highlight .kv {
+    color:#000000;
+    font-weight:bold
+}
+.highlight .mf,
+.highlight .mh,
+.highlight .il,
+.highlight .mi,
+.highlight .mo,
+.highlight .m,
+.highlight .mb,
+.highlight .mx {
+    color:#009999
+}
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .s2,
+.highlight .se,
+.highlight .sh,
+.highlight .si,
+.highlight .sx {
+    color:#d14
+}
+.highlight .sr {
+    color:#009926
+}
+.highlight .s1 {
+    color:#d14
+}
+.highlight .ss {
+    color:#990073
+}
+.highlight .s {
+    color:#d14
+}
+.highlight .na {
+    color:#008080
+}
+.highlight .bp {
+    color:#999999
+}
+.highlight .nb {
+    color:#0086B3
+}
+.highlight .nc {
+    color:#445588;
+    font-weight:bold
+}
+.highlight .no {
+    color:#008080
+}
+.highlight .nd {
+    color:#3c5d5d;
+    font-weight:bold
+}
+.highlight .ni {
+    color:#800080
+}
+.highlight .ne,
+.highlight .nf,
+.highlight .nl {
+    color:#990000;
+    font-weight:bold
+}
+.highlight .nn {
+    color:#555555
+}
+.highlight .nt {
+    color:#000080
+}
+.highlight .vc,
+.highlight .vg,
+.highlight .vi,
+.highlight .nv {
+    color:#008080
+}
+.highlight .ow,
+.highlight .o {
+    color:#000000;
+    font-weight:bold
+}
+.highlight .w {
+    color:#bbbbbb
 }

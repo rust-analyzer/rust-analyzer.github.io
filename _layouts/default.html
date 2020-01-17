@@ -2,6 +2,7 @@
 <html lang="en-US">
 
 <head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,10 +28,14 @@
 <body>
   {% if page.url != "/" %}
   <header>
-    <a class="nav-link site-title" href="{{ site.baseurl }}/">{{ site.title }}</a>
-    <a class="nav-link" href="/blog">Blog</a>
-    <a class="nav-link" href="/thisweek">Changelog</a>
-    <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+    <div id="header-inner">
+      <a class="site-title" href="{{ site.baseurl }}/">
+        <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+      </a>
+      <a class="nav-link" href="/blog">Blog</a>
+      <a class="nav-link" href="/thisweek">Changelog</a>
+      <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+    </div>
   </header>
   {% endif %}
 
@@ -40,7 +45,7 @@
 
   <footer>
     <p>
-      <a href="{{ "/feed.xml" | prepend: site.baseurl }}" class="footer-link">
+      <a href="{{ '/feed.xml' | prepend: site.baseurl }}" class="footer-link">
         <i class="fa fa-rss"></i> rss
       </a>
       <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
