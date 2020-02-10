@@ -48,4 +48,4 @@ Release: release:2020-02-10[]
 * pr:3069[] refactor interface for creating assists groups.
 * pr:3081[] automate release process.
 * pr:3029[] extract `ra_ide_db` crate to improve compile times and code organization.
-* https://github.com/rust-analyzer/rust-analyzer.github.io/pull/31[`ust-analyzer.github.io#31`] switch changelogs from markdown to AsciiDoctor.
+* https://github.com/rust-analyzer/rust-analyzer.github.io/pull/31[`rust-analyzer.github.io#31`] switch changelogs from markdown to AsciiDoctor.
