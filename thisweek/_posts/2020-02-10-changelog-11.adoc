@@ -10,16 +10,16 @@ Release: release:2020-02-10[]
 * pr:3053[] VS Code extension now tries to automatically download the latest release.
   Additionally, the extension is now published to the Marketplace:
   https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer.
-  Note that if you want to continue using rust-analyzer built from sources, you need to add
-  +
-  [source,json]
-  ----
-  {
+  Note that if you want to continue using rust-analyzer build from sources, you need to add
++
+[source,json]
+----
+{
       "rust-analyzer.raLspServerPath": "ra_lsp_server"
-  }
-  ----
-  +
-  to `settings.json`
+}
+----
++
+to `settings.json`
 
 * pr:2981[] changed the way `onEnter` handler works in VS Code.
   We no longer register a custom `ontype` command.
