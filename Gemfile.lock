@@ -3,6 +3,7 @@ GEM
   specs:
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    asciidoctor (2.0.10)
     colorator (1.1.0)
     concurrent-ruby (1.1.5)
     em-websocket (0.5.1)
@@ -27,6 +28,9 @@ GEM
       pathutil (~> 0.9)
       rouge (>= 1.7, < 4)
       safe_yaml (~> 1.0)
+    jekyll-asciidoc (3.0.0)
+      asciidoctor (>= 1.5.0)
+      jekyll (>= 3.0.0)
     jekyll-redirect-from (0.15.0)
       jekyll (>= 3.3, < 5.0)
     jekyll-sass-converter (1.5.2)
@@ -58,6 +62,7 @@ PLATFORMS
 
 DEPENDENCIES
   jekyll (~> 3.8)
+  jekyll-asciidoc
   jekyll-redirect-from
 
 BUNDLED WITH
