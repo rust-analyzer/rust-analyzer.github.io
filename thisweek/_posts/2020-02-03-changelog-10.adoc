@@ -2,37 +2,36 @@
 :sectanchors:
 :page-layout: post
 
-Commit: https://github.com/rust-analyzer/rust-analyzer/commit/c57ed0cfb29bc2b311299eebb4f7820a31068a37[`c57ed0c`] +
-Release: https://github.com/rust-analyzer/rust-analyzer/releases/tag/2020-02-03[`2020-02-03`]
+Commit: commit:c57ed0cfb29bc2b311299eebb4f7820a31068a37[] +
+Release: release:2020-02-03[]
 
 == New Features
 
-* https://github.com/rust-analyzer/rust-analyzer/pull/2963[`#2963`] add auto-import support to Emacs.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2978[`#2978`] support auto-import for functions.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2982[`#2982`] merge imports when auto-importing.
+* pr:2963[] add auto-import support to Emacs.
+* pr:2978[] support auto-import for functions.
+* pr:2982[] merge imports when auto-importing.
 
 == Fixes
 
-* https://github.com/rust-analyzer/rust-analyzer/pull/2933[`#2933`] don't compute diagnostics on the main thread.
+* pr:2933[] don't compute diagnostics on the main thread.
   That fixes a long-standing issue with peformance degradation due to `cargo check`.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2810[`#2810`] make magical search of struct literals work in more contexts.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2916[`#2916`] fix slow `cargo check` performance due to unbuffered reads.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2924[`#2924`] avoid spawning more than one Cargo for `cargo check`.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2917[`#2917`] prefer imports starting with `std` for auto import.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2937[`#2937`] fix an issue where `cargo check` got stuck in an infinite loop if some procedural macro printed to stdout.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2970[`#2970`] fix some clint-side bugs with syntax highlighting.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2972[`#2972`], a fun one, prevent a child process for flipping rust-analyzer's stdin into non-blocking mode.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2959[`#2959`] fix a bug where diagnostics from `cargo check` were obsolete.
+* pr:2810[] make magical search of struct literals work in more contexts.
+* pr:2916[] fix slow `cargo check` performance due to unbuffered reads.
+* pr:2924[] avoid spawning more than one Cargo for `cargo check`.
+* pr:2917[] prefer imports starting with `std` for auto import.
+* pr:2937[] fix an issue where `cargo check` got stuck in an infinite loop if some procedural macro printed to stdout.
+* pr:2970[] fix some clint-side bugs with syntax highlighting.
+* pr:2972[], a fun one, prevent a child process for flipping rust-analyzer's stdin into non-blocking mode.
+* pr:2959[] fix a bug where diagnostics from `cargo check` were obsolete.
 
 == Internal Improvements
 
-* https://github.com/rust-analyzer/rust-analyzer/pull/2872[`#2872`] update Chalk.
-  This should fix some cases of extremely slow trait checking.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2934[`#2934`] log error if the main loop turns takes too long.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2931[`#2931`] document `test_utils` module.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2940[`#2940`], https://github.com/rust-analyzer/rust-analyzer/pull/2941[`#2941`] update developer documentation.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2943[`#2943`] improve memory usage tracking infrastructure.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2895[`#2895`] make internal profiling infrastructure more maintainable.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2967[`#2967`] speed up the build of rust-analyzer by using profile overrides.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2987[`#2987`], https://github.com/rust-analyzer/rust-analyzer/pull/2986[`#2986`], https://github.com/rust-analyzer/rust-analyzer/pull/2989[`#2989`] cleanup VS Code extension.
-* https://github.com/rust-analyzer/rust-analyzer/pull/2991[`#2991`], https://github.com/rust-analyzer/rust-analyzer/pull/2998[`#2998`] unsuccessfully try to improve TypeScript build process.
+* pr:2872[] update Chalk. This should fix some cases of extremely slow trait checking.
+* pr:2934[] log error if the main loop turns takes too long.
+* pr:2931[] document `test_utils` module.
+* pr:2940[], pr:2941[] update developer documentation.
+* pr:2943[] improve memory usage tracking infrastructure.
+* pr:2895[] make internal profiling infrastructure more maintainable.
+* pr:2967[] speed up the build of rust-analyzer by using profile overrides.
+* pr:2987[], pr:2986[], pr:2989[] cleanup VS Code extension.
+* pr:2991[], pr:2998[] unsuccessfully try to improve TypeScript build process.
