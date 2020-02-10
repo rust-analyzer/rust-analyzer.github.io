@@ -1,26 +1,24 @@
----
-layout: post
-title:  "Changelog #1"
-date:   2019-12-04 02:12:00 +0100
----
+= Changelog #1
+:sectanchors:
+:page-layout: post
 
-Commit: [`c6e4cad`](https://github.com/rust-analyzer/rust-analyzer/commit/c6e4cadfce300d14dccdb74e3d5f0e44008e7985)
+Commit: commit:c6e4cadfce300d14dccdb74e3d5f0e44008e7985[]
 
-## New Features
+== New Features
 
-* [`#2388`](https://github.com/rust-analyzer/rust-analyzer/pull/2388) added a more informative message for `missing fields` diagnostics.
-* [`#2445`](https://github.com/rust-analyzer/rust-analyzer/pull/2445) added type inference for range expressions.
-* [`#2018`](https://github.com/rust-analyzer/rust-analyzer/pull/2018) adds an initial version of **add custom impl** assist, which switches from a `#[derive]` to a manual impl.
+* pr:2388[] added a more informative message for `missing fields` diagnostics.
+* pr:2445[] added type inference for range expressions.
+* pr:2018[] adds an initial version of **add custom impl** assist, which switches from a `#[derive]` to a manual impl.
 
-## Fixes
+== Fixes
 
 * Update chalk to fix infinite memory usage in some cases.
-* [`#2406`](https://github.com/rust-analyzer/rust-analyzer/pull/2406) slightly better hygiene handling in macros.
-* [`#2453`](https://github.com/rust-analyzer/rust-analyzer/pull/2453) employed salsa's cycle-handling functionality to gracefully handle some error conditions instead of panicking.
-* [`#2455`](https://github.com/rust-analyzer/rust-analyzer/pull/2455) add required special-casing for name-resolution of primitive types.
-* [`#2463`](https://github.com/rust-analyzer/rust-analyzer/pull/2463) fixed method resolution order.
+* pr:2406[] slightly better hygiene handling in macros.
+* pr:2453[] employed salsa's cycle-handling functionality to gracefully handle some error conditions instead of panicking.
+* pr:2455[] add required special-casing for name-resolution of primitive types.
+* pr:2463[] fixed method resolution order.
 
-## Internal Improvements
+== Internal Improvements
 
 * Extract `hir_ty` crate.
 * Separate compiler-internal `hir_ty::Ty` from IDE-visible `hir::Type`.

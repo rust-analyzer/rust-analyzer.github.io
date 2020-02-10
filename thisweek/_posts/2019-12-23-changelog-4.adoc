@@ -1,36 +1,34 @@
----
-layout: post
-title:  "Changelog #4"
-date:   2019-12-23 03:12:00 +0100
----
+# Changelog #4
+:sectanchors:
+:page-layout: post
 
-Commit: [`ce07a2d`](https://github.com/rust-analyzer/rust-analyzer/commit/ce07a2daa9e53aa86a769f8641b14c2878444fbc)
+Commit: commit:ce07a2daa9e53aa86a769f8641b14c2878444fbc[]
 
-## New Features
+== New Features
 
-* [`#2577`](https://github.com/rust-analyzer/rust-analyzer/pull/2577) by default for VS Code, rely on client-side file watching.
-* [`#2568`](https://github.com/rust-analyzer/rust-analyzer/pull/2568) add option to disable `--all-targets` flag for `cargo watch`.
-* [`#2594`](https://github.com/rust-analyzer/rust-analyzer/pull/2594) type hints don't show default type arguments.
-* [`#2592`](https://github.com/rust-analyzer/rust-analyzer/pull/2592) initial type-inference for index expressions.
-* [`#2616`](https://github.com/rust-analyzer/rust-analyzer/pull/2616), [`#2619`](https://github.com/rust-analyzer/rust-analyzer/pull/2619) improve type-inference for closures.
-* [`#2617`](https://github.com/rust-analyzer/rust-analyzer/pull/2617) don't use approximate name resolution when computing hover.
-* [`#2623`](https://github.com/rust-analyzer/rust-analyzer/pull/2623) expand macros in impls.
-* [`#2628`](https://github.com/rust-analyzer/rust-analyzer/pull/2628) parse macros 2.0.
-* [`#2641`](https://github.com/rust-analyzer/rust-analyzer/pull/2641) parse const generics.
-* [`#2648`](https://github.com/rust-analyzer/rust-analyzer/pull/2648) rudimentary name resolution for local items.
+* pr:2577[] by default for VS Code, rely on client-side file watching.
+* pr:2568[] add option to disable `--all-targets` flag for `cargo watch`.
+* pr:2594[] type hints don't show default type arguments.
+* pr:2592[] initial type-inference for index expressions.
+* pr:2616[], pr:2619[] improve type-inference for closures.
+* pr:2617[] don't use approximate name resolution when computing hover.
+* pr:2623[] expand macros in impls.
+* pr:2628[] parse macros 2.0.
+* pr:2641[] parse const generics.
+* pr:2648[] rudimentary name resolution for local items.
 
-## Fixes
+== Fixes
 
-* [`#2577`](https://github.com/rust-analyzer/rust-analyzer/pull/2577) better parser recovery for lambdas.
-* [`#2562`](https://github.com/rust-analyzer/rust-analyzer/pull/2562) correctly compute goto target range for a target inside a macro.
-* [`#2575`](https://github.com/rust-analyzer/rust-analyzer/pull/2575) correctly highlight `cargo watch` errors inside macros.
-* [`#2595`](https://github.com/rust-analyzer/rust-analyzer/pull/2595) fix parsing of expressions expanded by macros.
-* [`#2637`](https://github.com/rust-analyzer/rust-analyzer/pull/2637) optimize inlay hints.
-* [`#2643`](https://github.com/rust-analyzer/rust-analyzer/pull/2643) optimize change tracking.
+* pr:2577[] better parser recovery for lambdas.
+* pr:2562[] correctly compute goto target range for a target inside a macro.
+* pr:2575[] correctly highlight `cargo watch` errors inside macros.
+* pr:2595[] fix parsing of expressions expanded by macros.
+* pr:2637[] optimize inlay hints.
+* pr:2643[] optimize change tracking.
 
-## Internal Improvements
+== Internal Improvements
 
-* [`#2581`](https://github.com/rust-analyzer/rust-analyzer/pull/2581) refactor `hir::Path` to separate paths with and without generic arguments on the type level.
-* [`#2583`](https://github.com/rust-analyzer/rust-analyzer/pull/2583) better prettier config for TypeScript extension
-* [`#2545`](https://github.com/rust-analyzer/rust-analyzer/pull/2545) add ids to all tokens (this is groundwork for hygiene and better support for IDE features inside macro calls).
-* [`#2629`](https://github.com/rust-analyzer/rust-analyzer/pull/2629) remove imports from hir.
+* pr:2581[] refactor `hir::Path` to separate paths with and without generic arguments on the type level.
+* pr:2583[] better prettier config for TypeScript extension
+* pr:2545[] add ids to all tokens (this is groundwork for hygiene and better support for IDE features inside macro calls).
+* pr:2629[] remove imports from hir.

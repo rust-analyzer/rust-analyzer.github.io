@@ -1,22 +1,20 @@
----
-layout: post
-title:  "Changelog #6"
-date:   2020-01-06 03:01:00 +0100
----
+# Changelog #6
+:sectanchors:
+:page-layout: post
 
-Commit: [`07340a6`](https://github.com/rust-analyzer/rust-analyzer/commit/07340a62cc1b34efcebfc9f4cfc42f655edd2fc8)
+Commit: commit:07340a62cc1b34efcebfc9f4cfc42f655edd2fc8[]
 
-## New Features
+== New Features
 
-## Fixes
+== Fixes
 
-* [`#2672`](https://github.com/rust-analyzer/rust-analyzer/pull/2672) fix macro expansion of repetitions.
-* [`#2722`](https://github.com/rust-analyzer/rust-analyzer/pull/2722) fix cargo watch tests on windows.
-* [`#2734`](https://github.com/rust-analyzer/rust-analyzer/pull/2734) fix panic in type inference.
+* pr:2672[] fix macro expansion of repetitions.
+* pr:2722[] fix cargo watch tests on windows.
+* pr:2734[] fix panic in type inference.
 
-## Internal Improvements
+== Internal Improvements
 
 * Restructure Vs Code extension
-* [`#2703`](https://github.com/rust-analyzer/rust-analyzer/pull/2703) remove support for old-style syntax highlighting.
-* [`#2731`](https://github.com/rust-analyzer/rust-analyzer/pull/2731) improve internal profiling infrastructure.
-* [`#2743`](https://github.com/rust-analyzer/rust-analyzer/pull/2743) use a declarative macro instead of an external `.ron` file to describe input to AST code generation.
+* pr:2703[] remove support for old-style syntax highlighting.
+* pr:2731[] improve internal profiling infrastructure.
+* pr:2743[] use a declarative macro instead of an external `.ron` file to describe input to AST code generation.

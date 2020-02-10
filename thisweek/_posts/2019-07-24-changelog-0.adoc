@@ -1,67 +1,41 @@
----
-layout: post
-title:  "Changelog #0"
-date:   2019-07-24 14:34:00 +0200
-redirect_from: "/2019/07/24/changelog-0.html"
----
+= Changelog #0
+:sectanchors:
+:page-layout: post
 
 Hello!
 
 This is the first instance of a monthly changelog for rust-analyzer. Notable
 changes since last month include:
 
-## New Features
+== New Features
 
-- Initial support for `.await` syntax ([#1558]).
-- Type inference for `?` ([#1512]).
-- Completion for type aliases ([#1472]).
-- Mutable variables are underlined ([#1544], [#1550]).
-- `add_impl_members` adds types ([#1476]).
-- Sumbodules with raw names and `#[path]` are resolved ([#1478], [#1499]).
-- Correctly add obligations in function methods ([#1496]).
-- Initial type inference for `for` loops ([#1501]).
-- Use bounds on generic parameters during type inference ([#1515]).
-- Completions works for fields of enum variants and in patterns ([#1525], [#1572]).
-- Show types of local variables in completion ([#1582]).
+* pr:1558[] initial support for `.await` syntax.
+- pr:1512[] type inference for `?`.
+- pr:1472[] completion for type aliases.
+- pr:1544[], pr:1550[] mutable variables are underlined.
+- pr:1476[] `add_impl_members` adds types.
+- pr:1478[], pr:1499[] sumbodules with raw names and `#[path]` are resolved.
+- pr:1496[] correctly add obligations in function methods.
+- pr:1501[] initial type inference for `for` loops.
+- pr:1515[] use bounds on generic parameters during type inference.
+- pr:1525[], pr:1572[] completions works for fields of enum variants and in patterns.
+- pr:1582[] show types of local variables in completion.
 
-## Fixes
+== Fixes
 
-- Make goto definition work with various Vim clients ([#1511]).
-- Diagnostics are collected for a single file ([#1494]).
-- Show code lens for `fn main` ([#1536]).
-- Fix discovery of lang items ([#1514]).
+- pr:1511[] make goto definition work with various Vim clients.
+- pr:1494[] diagnostics are collected for a single file.
+- pr:1536[] show code lens for `fn main`.
+- pr:1514[] fix discovery of lang items.
 
-## Internal Improvements
+== Internal Improvements
 
-- Share the lexer with rustc ([#1575]).
-- Migrate to the new version of rowan library, improving memory usage of syntax trees for 60% ([#1545]).
-- Pick up floundering work from chalk ([#1532]).
-- Many improvements and cleanups by (@kjeremy).
+- pr:1575[] s the lexer with rustc.
+- pr:1545[] migrate to the new version of rowan library, improving memory usage of syntax trees for 60%.
+- pr:1532[] pick up floundering work from chalk.
+- Many improvements and cleanups by https://github.com/kjeremy[@kjeremy].
 
 
-The highlight of the month is probably [#1575].
+The highlight of the month is probably pr:1575[].
 The end-game for rust-analyzer is to become a different front-end for the code that rustc itself uses.
 This pull request is the first step on this path: now, rust-analyzer and rustc use the same code for lexing Rust.
-
-[#1472]: https://github.com/rust-analyzer/rust-analyzer/pull/1472
-[#1476]: https://github.com/rust-analyzer/rust-analyzer/pull/1476
-[#1478]: https://github.com/rust-analyzer/rust-analyzer/pull/1478
-[#1494]: https://github.com/rust-analyzer/rust-analyzer/pull/1494
-[#1496]: https://github.com/rust-analyzer/rust-analyzer/pull/1496
-[#1499]: https://github.com/rust-analyzer/rust-analyzer/pull/1499
-[#1501]: https://github.com/rust-analyzer/rust-analyzer/pull/1501
-[#1511]: https://github.com/rust-analyzer/rust-analyzer/pull/1511
-[#1512]: https://github.com/rust-analyzer/rust-analyzer/pull/1512
-[#1514]: https://github.com/rust-analyzer/rust-analyzer/pull/1514
-[#1515]: https://github.com/rust-analyzer/rust-analyzer/pull/1515
-[#1525]: https://github.com/rust-analyzer/rust-analyzer/pull/1525
-[#1532]: https://github.com/rust-analyzer/rust-analyzer/pull/1532
-[#1536]: https://github.com/rust-analyzer/rust-analyzer/pull/1536
-[#1544]: https://github.com/rust-analyzer/rust-analyzer/pull/1544
-[#1545]: https://github.com/rust-analyzer/rust-analyzer/pull/1545
-[#1550]: https://github.com/rust-analyzer/rust-analyzer/pull/1550
-[#1558]: https://github.com/rust-analyzer/rust-analyzer/pull/1558
-[#1572]: https://github.com/rust-analyzer/rust-analyzer/pull/1572
-[#1575]: https://github.com/rust-analyzer/rust-analyzer/pull/1575
-[#1582]: https://github.com/rust-analyzer/rust-analyzer/pull/1582
-[@kjeremy]: https://github.com/kjeremy
