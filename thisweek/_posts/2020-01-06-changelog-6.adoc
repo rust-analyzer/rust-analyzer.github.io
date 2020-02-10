@@ -1,0 +1,20 @@
+# Changelog #6
+:sectanchors:
+:page-layout: post
+
+Commit: commit:07340a62cc1b34efcebfc9f4cfc42f655edd2fc8[]
+
+== New Features
+
+== Fixes
+
+* pr:2672[] fix macro expansion of repetitions.
+* pr:2722[] fix cargo watch tests on windows.
+* pr:2734[] fix panic in type inference.
+
+== Internal Improvements
+
+* Restructure Vs Code extension
+* pr:2703[] remove support for old-style syntax highlighting.
+* pr:2731[] improve internal profiling infrastructure.
+* pr:2743[] use a declarative macro instead of an external `.ron` file to describe input to AST code generation.

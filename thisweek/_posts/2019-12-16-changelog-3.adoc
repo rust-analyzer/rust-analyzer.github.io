@@ -1,0 +1,29 @@
+# Changelog #3
+:sectanchors:
+:page-layout: post
+
+Commit: commit:0ef8ace012b19b76ee99b283801d0d17a3b72b4b[]
+
+== New Features
+
+* pr:2511[] implement `ra_lsp_server --version`.
+* pr:2523[] implement extend selection for tuple patterns.
+* pr:2550[] type inference for unary `!`.
+* pr:2548[] allow to select cargo features (by default, `--all-features` is used).
+* pr:2559[] use more fine-grained tags for syntax highlighting (`literal.byte`, `literal.char`, ...)
+
+== Fixes
+
+* pr:2565[] fix bug with syntax highlighting not updating on windows.
+* pr:2519[] fix name resolution for types in traits.
+* pr:2535[] don't trigger signature help on typing `)`.
+* pr:2552[] fix goto definition target when the cursor is between tokens.
+* pr:2567[] fix type inference for `impl Trait` syntax.
+
+== Internal Improvements
+
+* pr:2510[] restore source maps for the typescript extension.
+* pr:2525[] use ES2018 for VS Code extension.
+* pr:2526[] upgrade to LSP 3.15.
+* pr:2537[] lookup hir nodes by their parents, and not only by the source location.
+* pr:2561[] split  `Path` into non-generic `ModPath` and generic `Path`.

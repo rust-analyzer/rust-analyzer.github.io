@@ -1,0 +1,27 @@
+# Changelog #2
+:sectanchors:
+:page-layout: post
+
+Commit: commit:e3a9e806bae14fbeb5d7369d7b7871ba87353316[]
+
+== New Features
+
+* pr:2500[] goto definition works inside `format!`-like macros.
+* pr:2477[] pass the right `--edition` to `rustfmt`
+* pr:2479[] support some build-in derives
+* pr:2492[], pr:2494[] goto definition and syntax highlighting work properly for type parameters
+
+
+== Fixes
+
+* pr:2487[] fix type inference for references
+* pr:2466[] fix imports being considered resolved to early
+
+== Internal Improvements
+
+* pr:2474[] more cleanly separate inline and out-of-line module
+* pr:2480[] discover the relevant hir for AST more reliably
+* pr:2484[] implement `DynMap` -- a dynamically typed heterogeneous map to
+  make it easy to plumb stuff through compiler layers
+* pr:2499[] refactor `code_model` module, which is the API for accessing
+  compiler's data from the IDE.

@@ -1,0 +1,33 @@
+# Changelog #8
+:sectanchors:
+:page-layout: post
+
+Commit: commit:de2409702ba639f06cf340f5e3f3b7e671021d1b[] +
+Release: release:2020-01-20[]
+
+
+== New Features
+
+* pr:2824[] defer starting `cargo check` until workspace is loaded.
+* pr:2843[] display inlay hints for function parameter names.
+* https://github.com/rust-analyzer/rust-analyzer.github.io/pull/24[`rust-analyzer.github.io#24`] rust-analyzer has a new logo and a refreshed website.
+  Thanks https://github.com/Aloso[@Aloso]!
+
+
+== Fixes
+
+* pr:2837[] syntax highlighting was https://accidentallyquadratic.tumblr.com/[accidentally quadratic].
+* pr:2852[] don't parse child modules when computing diagnostics for a module.
+* pr:2853[] reduce the amount of blocking `cargo check` does.
+* pr:2827[], pr:2813[], pr:2867[] fix outer attributes on expressions in some cases.
+* pr:2877[] more precise active range for "add explicit type" assist.
+
+
+== Internal Improvements
+
+* pr:2818[] recover from panics inside of chalk.
+* pr:2834[] remove code duplication from syntax validation routines.
+* pr:2841[] use consistent style for assist labels.
+* pr:2856[] more orthogonal design for `ast::Path` editing API.
+* pr:2716[] groundwork for assists with multiple actions.
+* pr:2862[] new infrastructure for mapping source code to internal hir representation, which should prevent problems like quadratic syntax highlighting.

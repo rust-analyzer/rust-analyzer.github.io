@@ -1,0 +1,47 @@
+= Changelog #7
+:sectanchors:
+:page-layout: post
+
+Commit: commit:a30129be5ae8fd3dc698cc035339ed651b30de02[] +
+Release: release:2020-01-13[]
+
+We now publish binary releases to GitHub 🎁!
+Note that this is the first release, so things are expected to go wrong.
+Release process is orchestrated by https://github.com/rust-analyzer/rust-analyzer/blob/ab6e992c8719ed58c66309c5274f8a13807e6afa/.github/workflows/release.yaml[this workflow].
+
+Additionally, the VS Code extension is renamed to `rust-analyzer` (the old name was `ra-lsp`).
+`cargo xtask install` should automatically remove the old extension, but, if you use the binary release, you'd have to uninstall manually.
+
+We also got a new sponsor: https://freiheit.com[freiheit.com]!
+If you use rust-analyzer at work, consider asking your company to support its development!
+
+== New Features
+
+* pr:2724[] basic support for const-generic parsing.
+* pr:2738[] invoking reference search on `{` searches for struct literals.
+  image:https://user-images.githubusercontent.com/1711539/72264442-10acd300-361b-11ea-8d2d-0d48eff2f1c1.gif[]
+* pr:2698[] initial support for call hierarchy.
+  image:https://user-images.githubusercontent.com/6868531/71634596-6d57c900-2beb-11ea-9957-d1bb1aa92d3b.png[]
+* pr:2732[] add configuration option to silence the error message about missing Cargo.toml.
+* pr:2779[] support for parsing trait aliases.
+* pr:2749[] initial support for read/write classification of accesses in reference search.
+* pr:2727[] `add impl members` assist now correctly qualifies paths.
+* pr:2712[] extend selection works in macro calls.
+  image:https://user-images.githubusercontent.com/1711539/72265573-025fb680-361d-11ea-82d1-ccf5fe524767.gif[]
+
+== Fixes
+
+* pr:2753[] epic one-line change by @michalt which enables salsa fast-path for incremental validation of libraries.
+* pr:2785[] fix macro expansion in expression positions.
+* pr:2786[] fix hover for local variables.
+* pr:2807[] fix goto implementation for derived implementations.
+* pr:2788[] outline correctly displays `#[macro_export]`ed macro rules.
+* pr:2816[] add `macro_rules` snippet.
+
+
+== Internal Improvements
+
+* pr:2771[] make issues like `#2753` less likely.
+* pr:2768[] rename VS Code extension to `rust-analyzer`.
+* pr:2820[] publish binary releases.
+* https://github.com/rust-lang/compiler-team/issues/237[`compiler-team/#237`] initial research for parser library-ification.

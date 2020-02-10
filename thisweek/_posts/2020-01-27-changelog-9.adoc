@@ -1,0 +1,27 @@
+# Changelog #9
+:sectanchors:
+:page-layout: post
+
+Commit: commit:87e1baf2421d80bf6d6acd776e29827196931a32[] +
+Release: release:2020-01-27[]
+
+== New Features
+
+* pr:2887[] auto import assist.
+  image:https://user-images.githubusercontent.com/1711539/73185119-cf89e800-411d-11ea-9213-d6eac89256c4.gif[]
+* pr:2883[] enable semantic highlighting inside macros.
+  image:https://user-images.githubusercontent.com/1711539/73185287-137ced00-411e-11ea-93ed-e415daa9c5dd.gif[]
+* pr:2899[] detect popular macro-based test frameworks for the purposes of the "Run ..." lenses/keybinding.
+
+== Fixes
+
+* pr:2901[] cancel pending requests when shutdown is initiated.
+* pr:2907[] inline variable does not remove unused variables.
+* pr:2906[] fix a bug on windows where main loop was starved by background tasks.
+
+
+== Internal Improvements
+
+* pr:2893[] add a guided tour of lossless syntax trees to the dev docs.
+* pr:2891[] remove code duplication in validation.
+* pr:2898[] cleanup `cargo watch` state management.

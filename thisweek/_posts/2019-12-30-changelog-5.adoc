@@ -1,0 +1,25 @@
+# Changelog #5
+:sectanchors:
+:page-layout: post
+
+Commit: commit:9cad88dd95773f9ede6233fd7d0f3a076c5cda61[]
+
+== New Features
+
+* pr:2668[] move `cargo watch` integration to the server side. Now it is available for every editor, and not only for VS Code.
+* pr:2661[] type inference for `async` functions.
+* pr:2663[] "add missing impl members" assists now substitutes type parameters.
+* pr:2657[] type hints for closures are less verbose.
+* pr:2667[] account for visibility modifiers during name resolution.
+* pr:2061[] use existing TextMate scopes infrastructure for color theme customization.
+
+== Fixes
+
+* pr:2658[] don't pass empty set of features to Cargo.
+* pr:2673[] correctly don't add parent item to the scope of a nested item.
+* pr:2650[] correctly display types of macro call expressions.
+
+== Internal Improvements
+
+* pr:2679[] use lang-items infrastructure for resolving known traits.
+* pr:2684[] simplify build process for the TypeScript extension.
