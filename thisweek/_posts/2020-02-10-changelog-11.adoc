@@ -10,7 +10,7 @@ Release: release:2020-02-10[]
 * pr:3053[] VS Code extension now tries to automatically download the latest release.
   Additionally, the extension is now published to the Marketplace:
   https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer.
-  Note that if you want to continue using rust-analyzer build from sources, you need to add
+  Note that if you want to continue using rust-analyzer built from sources, you need to add
   +
   [source,json]
   ----
@@ -25,7 +25,7 @@ Release: release:2020-02-10[]
   We no longer register a custom `ontype` command.
   Instead, we provide a shortcut, bound to kbd::[Enter].
   If you have `enableEnhancedTyping: false` in you settings, you'll want to disable this shortcut.
-* pr:3050[] implement argument-position `impl Trait`.
+* pr:3050[] implement argument-position `impl Trait` again (support for `impl Trait` was removed with the Chalk upgrade last week). Return-position `impl Trait` support will still have to wait for Chalk.
 * pr:2911[] display errors from the lexer.
 * pr:2962[] groundwork for `use Trait as _` syntax.
 * pr:2948[] **Add Explicit Type** assist now can replace `_` types.
