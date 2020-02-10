@@ -1,0 +1,39 @@
+= Changelog #11
+:sectanchors:
+:page-layout: post
+
+Commit: commit:5b703bdc582be427ee62d250b3d3290165c36b8c[] +
+Release: release:2020-02-10[]
+
+== New Features
+
+* pr:3053[] VS Code extension now tries to automatically download the latest release. Additionally, the extension is now published to the Marketplace:
+https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer
+
+* pr:2981[] changed the way `onEnter` handler works in VS Code.
+  We no longer register a custom `ontype` command.
+  Instead, we provide a shortcut, bound to kbd::[Enter].
+  If you have `enableEnhancedTyping: false` in you settings, you'll want to disable this shortcut.
+* pr:3050[] implement argument-position `impl Trait`.
+* pr:2911[] display errors from the lexer.
+* pr:2962[] groundwork for `use Trait as _` syntax.
+* pr:2948[] **Add Explicit Type** assist now can replace `_` types.
+* pr:3040[] rework value parameter parsing to use 2018 edition syntax.
+* pr:3054[] move Emacs support upstream.
+
+
+== Fixes
+
+* pr:3017[] correctly handle crates with `-` in names.
+* pr:3044[] don't crash when receiving unknown file for cargo diagnostics.
+* pr:3047[] fix parsing of `async unsafe` functions.
+
+== Internal Improvements
+
+* pr:3024[] fix leaking observers and promises in VS Code extension.
+* pr:3001[], pr:3003[] reduce the number of TypeScript dependencies.
+* pr:3018[], pr:3045[] refactor some assists to use type-safe AST editing API.
+* pr:3031[], pr:3034[], pr:3063[] refactor auto-import infrastructure.
+* pr:3069[] refactor interface for creating assists groups.
+* pr:3081[] automate release process.
+* https://github.com/rust-analyzer/rust-analyzer.github.io/pull/31[`ust-analyzer.github.io#31`] switch changelogs from markdown to AsciiDoctor.
