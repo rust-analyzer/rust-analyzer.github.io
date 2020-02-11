@@ -17,7 +17,7 @@ layout: default
     </a>
 </section>
 
-<section class="installation">
+<section class="installation paragraph lead">
     <h2>Installation</h2>
 
     <p>
@@ -39,10 +39,10 @@ $ cargo xtask install</code></pre>
     </p> -->
 </section>
 
-<section class="support">
+<section class="support paragraph lead">
     <h2>Support</h2>
 
-    <p>
+    <p class="lead">
         rust-analyzer is a free and open source project, developed by
         <a href="https://ferrous-systems.com/">Ferrous Systems</a>
         with support from multiple companies and individuals.
@@ -63,40 +63,28 @@ $ cargo xtask install</code></pre>
 </section>
 
 <section>
-    <h2>Latest News</h2>
+    <h2><span class="post-first-col">Latest News</span> <a class="post-link" href="/thisweek">All</a></h2>
 
     <ul class="post-list">
         {% assign post = site.categories.thisweek.first %}
         <li>
             <h3>
-                <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+                <span class="post-meta post-first-col">{{ post.date | date: "%b %-d, %Y" }}</span>
                 <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-            </h3>
-        </li>
-
-        <li>
-            <h3>
-                <a class="post-link" href="/thisweek">All</a>
             </h3>
         </li>
     </ul>
 </section>
 
 <section>
-    <h2>Latest Post</h2>
+    <h2><span class="post-first-col">Latest Post</span> <a class="post-link" href="/blog">All</a></h2>
 
     <ul class="post-list">
         {% assign post = site.categories.blog.first %}
         <li>
             <h3>
-                <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+                <span class="post-meta post-first-col">{{ post.date | date: "%b %-d, %Y" }}</span>
                 <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-            </h3>
-        </li>
-
-        <li>
-            <h3>
-                <a class="post-link" href="/blog">All</a>
             </h3>
         </li>
     </ul>
