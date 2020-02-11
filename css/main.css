@@ -119,6 +119,23 @@ a.source:hover {
     text-decoration-thickness: 2px;
 }
 
+.sponsors {
+    font-size: 1.21875em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.sponsors > ul {
+    flex-grow: 1;
+    align-self: center;
+}
+
+.sponsors > ul > li {
+    list-style: none;
+}
+
+
 .post-list {
     margin-left: 0;
     list-style: none;

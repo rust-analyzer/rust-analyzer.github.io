@@ -17,29 +17,37 @@ layout: default
     </a>
 </section>
 
-<section class="installation paragraph lead">
-    <h2>Installation</h2>
-
+<section class="paragraph lead">
+    <h2>About</h2>
     <p>
-        rust-analyzer is in the alpha stage, installation requires building from source.
-        To install the language server and VS Code plugin, use
+        rust-analyzer is an implementation of <a href="https://microsoft.github.io/language-server-protocol/">Language
+            Server Protocol</a> for the <a href="https://www.rust-lang.org/">Rust</a> programming language.
+        It provides features like completion and goto definition for many code editors, including VS Code, Emacs and
+        Vim.
     </p>
-
-    <pre><code>$ git clone https://github.com/rust-analyzer/rust-analyzer && cd rust-analyzer
-$ cargo xtask install</code></pre>
-
-    <p>
-        See the <a href="https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user">manual</a> for
-        alternative installation methods and support for other editors.
-    </p>
-
-    <!-- <p>
-        Limited <a href="/wasm-demo.html"> WASM Demo</a>.
-        Note: large download.
-    </p> -->
 </section>
 
-<section class="support paragraph lead">
+<section class="paragraph lead">
+    <h2>Quick Start</h2>
+
+    <p>
+        For VS Code, install <a
+            href="https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer">rust-analyzer</a> extension
+        from the marketplace.
+        Prebuild language server binaries for Windows, Linux and Mac are available on the <a
+            href="https://github.com/rust-analyzer/rust-analyzer/releases">releases</a> page.
+    </p>
+
+    <p>
+        Instructions for other editors, building from source and the list of features are found in
+
+        <a href="https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/user" class="manual">
+            <strong>the manual.</strong>
+        </a>
+    </p>
+</section>
+
+<section class="paragraph lead">
     <h2>Support</h2>
 
     <p class="lead">
@@ -52,12 +60,17 @@ $ cargo xtask install</code></pre>
 
     <p>
         The following companies contributed significantly towards rust-analyzer development:
-        <ul>
-            <li><a href="https://ferrous-systems.com/">Ferrous Systems</a></li>
-            <li><a href="https://www.mozilla.org/">Mozilla</a></li>
-            <li><a href="https://embark-studios.com">Embark Studios</a></li>
-            <li><a href="https://www.freiheit.com/">freiheit.com</a></li>
-        </ul>
+
+        <div class="sponsors">
+            <ul>
+                <li><a href="https://ferrous-systems.com/">Ferrous Systems</a></li>
+                <li><a href="https://www.mozilla.org/">Mozilla</a></li>
+            </ul>
+            <ul>
+                <li><a href="https://embark-studios.com">Embark Studios</a></li>
+                <li><a href="https://www.freiheit.com/">freiheit.com</a></li>
+            </ul>
+        </div>
     </p>
 
 </section>
