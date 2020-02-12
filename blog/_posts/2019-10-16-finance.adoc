@@ -9,7 +9,7 @@ The goal is to find out how much rust-analyzer costs now, formulate financial go
 Note that "rust-analyzer" here refers to the umbrella project of "making great Rust IDE from first-principles", and not to the specific rust-analyzer binary.
 The long term plan is to merge all of rustc, rls and rust-analyzer into a single tool, and there are already some first steps in this direction.
 
-At the moment, the de-facto project lead is me, https://opencollective.com/rust-analyzer/[@matklad].
+At the moment, the de-facto project lead is me, https://github.com/matklad[@matklad].
 I do both engineering tasks (code, design, mentoring) as well as project-management tasks (like writing this post).
 I am employed by Ferrous Systems, and dedicate half of my time to rust-analyzer.
 No one else at Ferrous is involved in rust-analyzer on a daily basis, but I do occasionally ask other folks for help in non-coding areas.
@@ -39,7 +39,7 @@ The current scheme for payouts is as follows:
 
 * contributors who make recurring, significant changes, influence design and co-maintain subsystems are eligible for payouts
 * the exact conditions are discussed on the case by case bases
-* the decision requires consensus from https://github.com/matklad/[@matklad], https://github.com/matklad/[@flodiebold], https://github.com/skade/[@skade] and the contributor
+* the decision requires consensus from https://github.com/matklad[@matklad], https://github.com/flodiebold[@flodiebold], https://github.com/skade[@skade] and the contributor
 * the final arrangement is made public
 
 The biggest weakness of this scheme is that the decision quorum is not well-balanced.
