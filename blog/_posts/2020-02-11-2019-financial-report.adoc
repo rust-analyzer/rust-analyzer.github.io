@@ -22,4 +22,4 @@ Our biggest Open Collective sponsors in 2019 were:
 
 If you use rust-analyzer professionally, consider asking your company to sponsor the development of this project.
 
-As a reminder, we publish https://rust-analyzer.github.io/thisweek[weekly changelog] to report the progress on rust-analyzer.
+As a reminder, we publish https://rust-analyzer.github.io/thisweek[weekly changelog] to report the progress on rust-analyzer and explain where the money go.
