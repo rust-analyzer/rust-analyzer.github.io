@@ -2,7 +2,7 @@
 :sectanchors:
 :page-layout: post
 
-This is a short financial report for Open Collective money for 2019.
+This is a short financial report for https://opencollective.com/rust-analyzer/[Open Collective] money for 2019.
 
 We've got 9933 EUR on open collective after fees.
 We've rounded that number up to 10000 (using some funds from this year) and split it into two buckets:
@@ -20,6 +20,6 @@ Our biggest Open Collective sponsors in 2019 were:
 
 <3
 
-If you use rust-analyzer professionally, consider asking your company to sponsor the development of this project.
+If you use rust-analyzer professionally, consider asking your company to https://opencollective.com/rust-analyzer/[sponsor] the development of this project.
 
 As a reminder, we publish https://rust-analyzer.github.io/thisweek[weekly changelog] to report the progress on rust-analyzer and explain where the money go.
