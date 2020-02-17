@@ -38,7 +38,7 @@ image::https://user-images.githubusercontent.com/16367467/74607251-8ce17d00-50d7
 
 == Internal Improvements
 
-* pr:3139[] bump VS Code requirenment to 1.41.
+* pr:3139[] bump VS Code requirenment to 1.42.
 * pr:3086[] automate publishing of the VS Code extension.
 * pr:3062[] preliminary work on type inference for slice patterns.
 * pr:3136[] rewrite `xtask`s in a more declarative style.
