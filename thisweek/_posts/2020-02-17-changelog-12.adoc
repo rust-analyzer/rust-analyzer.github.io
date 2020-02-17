@@ -1,0 +1,50 @@
+= Changelog #12
+:sectanchors:
+:page-layout: post
+
+Commit: commit:94fb9ad6b3167e8b8073a09fcf0cb135f383d3d2[] +
+Release: release:2020-02-17[]
+
+== New Features
+
+* pr:[3140] we now have a basic manual: https://rust-analyzer.github.io/manual.html.
+  PRs with improvements are welcome!
+* pr:[3108] complete default function, types and constants in impl blocks:
++
+image::https://user-images.githubusercontent.com/1711539/74660243-0d66b300-5196-11ea-8327-205b1262e7a2.gif[]
+* pr:[3169] display fields when completing an enum variant:
++
+image::https://user-images.githubusercontent.com/16367467/74607251-8ce17d00-50d7-11ea-9d4d-38d198a4aec0.png[]
+* pr:[3099] initial implementation of Structural Search & Replace.
+* pr:[3074] initial support for OR-patterns.
+* pr:[3064] rename works inside macros.
+* pr:[3120] support auto-import of traits for unresolved method calls in some cases.
+* pr:[3162] VS Code extension automatically downloads the correct server binary release.
+* pr:[3153] when running a Cargo test, pass `--exact` flag.
+* pr:[3181] add ability to pass additional arguments to `rustfmt`.
+
+== Fixes
+
+* pr:[3084] better error reporting around workspace loading.
+* pr:[3102] better error reporting when deserializing wrong config.
+* pr:[3092] fix error when starting the server immediately after download.
+* pr:[3100] improved error handling when downloading the server binary.
+* pr:[3114] fix type inference for match arms of unknown type.
+* pr:[3121] during auto-import, don't insert `use` statements before inner attributes.
+* pr:[3127] support unnamed arguments in function pointers.
+* pr:[3143] fix name resolution for `std::sync::atomic::AtomicX` types.
+* pr:[3145] `Self` inside trait's default methods implements the trait.
+* pr:[3150] increase the limit on the number of iterations the name resolution algorithm can do.
+
+== Internal Improvements
+
+* pr:[3139] bump VS Code requirenment to 1.41.
+* pr:[3086] automate publishing of the VS Code extension.
+* pr:[3062] preliminary work on type inference for slice patterns.
+* pr:[3136] rewrite `xtask`s in a more declarative style.
+* pr:[3131] simplify configuration handling in VS Code extension.
+* pr:[3157] add randomization to `analysis-stats`, which should help with debugging non-determinism issues.
+* pr:[3171] enable profiling for `analysis-bench`.
+* pr:[3174], pr:[#3174] improve debugging settings for VS Code extension.
+* pr:[3179] refactor macro expansion.
+* pr:[3190], pr:[3191] simplify VS Code extension life cycle.
