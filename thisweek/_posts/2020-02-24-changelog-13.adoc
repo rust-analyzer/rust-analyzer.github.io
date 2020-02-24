@@ -1,0 +1,55 @@
+= Changelog #13
+:sectanchors:
+:page-layout: post
+
+Commit: commit:cba3c991c8188e87363bbff190e9528606140808[] +
+Release: release:2020-02-24[]
+
+== New Features
+
+* pr:3216[] language server binary is renamed from `ra_lsp_server` to `rust-analyzer`.
+  Additionally, `rust-analyzer.lspServerPath` config is renamed to `rust-analyzer.serverPath`
+
+* pr:3199[], pr:3200[] merge `ra_cli` batch processing utils with the main `rust-analyzer` binary.
+  Now you can, eg, run `rust-analyzer analysis-stats path/to/my/project` to type check all functions in batch.
+  This is intended to help with debugging rust-analyzer itself.
+
+* pr:3206[] automatically install `rust-src` component.
+* pr:3231[] add **Remove mut** assist.
+* pr:3252[] for syntax highlighting, take token color customization into account.
+* pr:3269[] document inlay hints.
+* pr:3278[], pr:3279[] show inlay hints in more cases.
+* pr:3275[] document structural search and replace.
+
+== Fixes
+
+* pr:3229[] fix a crash with non-ascii whitespace in doc-comments.
+* pr:3228[] fix hover for for code inside macro calls.
+* pr:3233[] extend selection correctly handles commas in tuple patterns
+* pr:3239[] remove dependency on libbacktrace.
+* pr:3241[] **Fill missing fields** fix works with enum variants as well.
+* pr:3215[] exclude methods from non-parameter types introduced by generic constraints
+* pr:3248[] fix custom `onEnter` not triggering at the start of a doc comment
+* pr:3251[], pr:3282[] better error messages when workspace loading fails.
+* pr:3259[] fix handing of associated type.
+* pr:3244[] renaming a module now renames both the file and the references to the module.
+* pr:3262[] correctly distinguish between const patterns and bindings.
+* pr:3260[] fix name resolution rules for build-in types.
+* pr:3230[] fix macro expansion for invalid tokens.
+* pr:3277[] gracefully handle cancellation errors in VS Code plugin.
+* pr:3289[], pr:3290[] don't break the kbd:[Enter] key if rust-analyzer returns an error.
+
+
+== Internal Improvements
+
+* pr:3195[] remove dependency on `proptest` property based testing library to
+  improve compile times.
+* pr:3209[], pr:3205[], pr:3258[] switch TypeScript extension linter to eslint.
+* pr:3214[] document all modules in the language server crate.
+* pr:3026[] simplify internal representation of syntax errors.
+* pr:3234[], pr:3235[], pr:3236[] refactor handing of symbols/defs in IDE.
+* pr:3242[] make sure that, by default, rust-analyzer does not depend on C code.
+* pr:3247[] make `rust-analyzer --version` more useful and reliable.
+* pr:3263[] use chalk for unsizing coercions.
+* pr:3274[] refactor navigation-related code to use hir instead of AST.
+* pr:3261[] setup client-side logging infrastructure.
