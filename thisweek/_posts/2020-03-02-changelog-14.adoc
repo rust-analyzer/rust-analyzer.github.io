@@ -1,0 +1,64 @@
+= Changelog #14
+:sectanchors:
+:page-layout: post
+
+Commit: commit:2c8f136b162e795a32e7dff2d0456c323377575d[] +
+Release: release:2020-03-02[]
+
+== New Features
+
+* pr:3159[], pr:3321[], pr:3322[] switch syntax highlighting implementation to use the new proposed semantic token LSP/VS Code API.To try this out:
+** install vscode plugin from source (using `cargo xtask install --client-code`)
+** set `"rust-analyzer.highlighting.semanticTokens": true,` in settings,
+** install the recent VS Code Insiders
+** run `code` as `code-insiders --enable-proposed-api matklad.rust-analyzer` (handy https://github.com/matklad/config/blob/0864beea2f19b9130ac1349c74a2b255df2fb0e8/bin/code[bash wrapper])
+
+* pr:3362[] remove kbd:[ctrl+r] default keybinding for running tests & binaries, to avoid conflict with a build-in keybinding.
+  You might want to assign shortcut for this action, it is a productivity booster!
++
+image::https://user-images.githubusercontent.com/1711539/75686456-93a5ed80-5c9c-11ea-83b3-05adecfd07c2.gif[]
+
+* pr:3349[] rust-analyzer now highlights code in rust-analyzer's own tests as rust:
++
+image::https://user-images.githubusercontent.com/1711539/75685194-77a14c80-5c9a-11ea-86b0-5ac223451b10.png[]
+
+* pr:3294[] when joining lines, unwrap single-statement blocks if possible.
+* pr:3285[] structural search replace now correctly ignores whitespace differences.
+* pr:3357[] **change visibility** assist now works with consts:
++
+image::https://user-images.githubusercontent.com/1711539/75685982-c56a8480-5c9b-11ea-84ca-a9cf07bfe0ce.gif[]
+
+* pr:3355[] add completion & docs for `featureFlag` configuration in VS Code extension.
+* pr:3309[] look for `Cargo.toml` not only in the root and parent directory, but also among one-level child directories.
+* pr:3387[] type inference for slice patterns.
+* pr:3397[] add minimal metatdata to VS Code extension.
+
+== Fixes
+
+* pr:3314[], pr:3325[], pr:3350[], pr:3366[] fix a lot of range-mapping bugs for recursive macro invocations.
+* pr:3308[] fix conflict for `Enter` key with VS Code vim extension.
+  If rust-analyzer's custom on enter behavior causes you trouble, you can disable it by removing the corresponding shortcut from the settings.
+* pr:3364[] correctly handle unions in IDEs.
+* pr:3367[] finally fix highlighting and name goto definition for constants in patterns, like `None`.
+* pr:3376[] fix a common false-positive type mismatch.
+* pr:3380[] use unsizing in method resolution & autoderef for indexing.
+* pr:3384[] fix name resolution for paths with repeated `super` segments.
+
+== Internal Improvements
+
+* pr:3222[] redo the interface between "compiler" and "IDE".
+  IDE no longer needs to explicitly track the file a particular bit of syntax tree originated from.
+* pr:3296[] bump TypeScript version.
+* pr:3299[] more type safe way to deal with custom LSP extensions.
+* pr:3298[] update chalk.
+* pr:3316[] remove code duplication in assists tests.
+* pr:3324[], pr:3335[], pr:3344[], pr:3346[] refactor syntax highlighting infrastructure to be more future proof and robust.
+* pr:3329[], pr:3330[] run `cargo audit` and `npm audit` on CI.
+* pr:3337[] remove unused dependencies.
+* pr:3340[] gate CI on eslint.
+* pr:3351[] better API for working with string literals.
+* pr:3360[] fix parsing of attributes in let statements.
+* pr:3370[] extract code for adding a new `use` item to a separate module.
+* pr:3374[] cleanup API for constructing syntax trees for paths.
+* pr:3375[] cleanup API for editing syntax trees.
+* pr:3377[] simplify API for getting semantic definitions from syntax trees.
