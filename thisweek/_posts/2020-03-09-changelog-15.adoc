@@ -1,0 +1,57 @@
+= Changelog #15
+:sectanchors:
+:page-layout: post
+
+Commit: commit:5770fa71fa822c998b4d3b57cf1f001dfd84e6e8[] +
+Release: release:2020-03-09[]
+
+== New Features
+
+* pr:3513[] code completion in macro calls.
++
+image::https://user-images.githubusercontent.com/906069/76160803-92a60d80-612d-11ea-8b51-9566cbb4c773.gif[]
+
+* pr:3432[] insert argument snippets when completing function calls.
++
+image::https://user-images.githubusercontent.com/1711539/76219227-cd837080-6215-11ea-8d0d-a9447b1d26b1.gif[]
++
+Insertion of snippets is controled by `completion.insertion.add-argument-snippets` feature flag.
+
+* pr:3498[] when completing function call, trigger parameter hints automatically.
+* pr:3500[] more concise mode for parameter hints:
++
+image::https://user-images.githubusercontent.com/1711539/76219505-39fe6f80-6216-11ea-9bc2-f2591388c5e6.png[]
++
+It is controlled by `call-info.full` feature flag.
+
+* pr:3392[] support for eager `concat!` macro.
+* pr:3456[] publish nightly binary releases: https://github.com/rust-analyzer/rust-analyzer/releases/tag/nightly[releases/tag/nightly].
+* pr:3474[] on start up, initiate analysis of files even if there were no explicit requests for it.
+* pr:3490[] support aliases and Self in struct literals.
+* pr:3494[] implement `include!` macro.
+* pr:3499[] resolve `Self::AssocTy` in impls.
+* pr:3516[] account for visibility during code completion.
+* pr:3514[] flag to update the server binary automatically, without asking.
+* pr:3519[] hover on item now includes full module path.
+
+== Fixes
+
+* pr:3378[] fix inlay hints to work correctly in VS Code for several opened editors.
+* pr:3388[] don't show wrong inlay hints in a diff view.
+* pr:3430[] use correct name when completing re-exported functions.
+* pr:3509[] disallow `include!` macro to include itself.
+* pr:3520[] don't show trivial type hints for unit structs.
+* pr:3526[] silence "Rust file outside current workspace" warning.
+
+
+== Internal Improvements
+
+* pr:3502[] don't cache Chalk solver. Counter-intuitively, this allows improves performance by allowing caching elsewhere.
+* pr:3405[], pr:3427[], pr:3428[] refactor reference and definitions to better accommodate edge cases like field init shorthand.
+* pr:3440[], pr:3426[], pr:3443[] refactor reference search infrastructure.
+* pr:3413[] update chalk.
+* pr:3425[] fix macro expansion for a single dollar.
+* pr:3458[] add `cargo xtask dist` for building the distribution package.
+* pr:3489[] make sure that during expression lowering every non-missing expression gets a source.
+* pr:3487[] add some editing API for manipulating use statements.
+* pr:3497[] specify additional label on profiling calls, to see, for example, which functions are slow to typecheck.
