@@ -1,0 +1,53 @@
+= Changelog #16
+:sectanchors:
+:page-layout: post
+
+Commit: commit:ebab250b6bffaafb347ce431d5f4c9eeab4aa7e3[] +
+Release: release:2020-03-16[]
+
+== New Features
+
+* pr:3534[] Implement nightly channel for VS Code.
+  You can enabled nightly channel by setting
++
+[source]
+----
+"rust-analyzer.updates.channel": "nightly"
+----
+option.
+
+* pr:3561[] add `Debug` code lens. It requires `vscode-lldb` extension to work.
++
+image::https://user-images.githubusercontent.com/1711539/76760335-bf8d9c80-678d-11ea-80c3-8e8b12a36690.gif[]
+
+* pr:3506[] Trigger associated item completion when typing a name of the item.
++
+image::https://user-images.githubusercontent.com/1711539/76758522-1ee9ad80-678a-11ea-84cd-111739ecd379.gif[]
+
+* pr:3549[] initial support for the `env!` macro.
+* pr:3543[] separate options for controlling type and parameter inlay hints:
+  `rust-analyzer.inlayHints.typeHints` and `rust-analyzer.inlayHints.parameterHints`.
+* pr:3591[] initial support for local `macro_rules`.
+* pr:3587[] replace "workspace loaded" notification with a progress bar.
+
+== Fixes
+
+* pr:3552[] fix completion for partially unknown types.
+* pr:3542[] rename works correctly for field init shortcut.
++
+image::https://user-images.githubusercontent.com/1711539/76759028-28bfe080-678b-11ea-9fb5-5ab6e6476814.gif[]
+* pr:3557[] on kbd:[Enter], continue multiline non-doc comments.
+* pr:3558[] fix parsing of binary expressions where rhs is a block.
+* pr:3564[] correctly handle multi-spand diagnostics/fixits from rustc/clippy.
+* pr:3553[] show completion for all namespaces.
+* pr:3574[] fix completion for `HashMap::new`.
+* pr:3576[] correctly parse variadic `+extern "C"+` functions.
+* pr:3595[] fix completion of trait items.
+* pr:3573[] by default, run `cargo check` for all crates in workspace.
+
+== Internal Improvements
+
+* pr:3551[] slightly refactor feature flags.
+* pr:3562[] implement `fmt::Display` for all AST nodes.
+* pr:3577[] protect against diverging macro expansion.
+* pr:3540[] split **Structural Search Replace** into query validation and execution.
