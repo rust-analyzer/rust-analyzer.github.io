@@ -24,7 +24,8 @@ image::https://user-images.githubusercontent.com/1711539/76760335-bf8d9c80-678d-
 +
 image::https://user-images.githubusercontent.com/1711539/76758522-1ee9ad80-678a-11ea-84cd-111739ecd379.gif[]
 
-* pr:3549[] initial support for the `env!` macro.
+* pr:3549[] initial support for the `env!` macro. This unlocks preliminary support for `include!(concat!(env!("OUT_DIR"), "/foo.rs"))` pattern.
+  At the moment, value for `OUT_DIR` should be specified in the settings, using `rust-analyzer.additionalOutDirs` key. 
 * pr:3543[] separate options for controlling type and parameter inlay hints:
   `rust-analyzer.inlayHints.typeHints` and `rust-analyzer.inlayHints.parameterHints`.
 * pr:3591[] initial support for local `macro_rules`.
