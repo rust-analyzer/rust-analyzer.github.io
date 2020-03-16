@@ -5,6 +5,9 @@
 Commit: commit:5770fa71fa822c998b4d3b57cf1f001dfd84e6e8[] +
 Release: release:2020-03-09[]
 
+Heads up: this update requires VS Code 1.43.0.
+In general, rust-analyzer requires the latest version of VS Code at the moment.
+
 == New Features
 
 * pr:3513[] code completion in macro calls.
