@@ -95,12 +95,6 @@ $ cargo xtask install
 ----
 
 You'll need Cargo, nodejs and npm for this.
-To make VS Code use the freshly built server, add this to the settings:
-
-[source,json]
-----
-{ "rust-analyzer.serverPath": "rust-analyzer" }
-----
 
 Note that installing via `xtask install` does not work for VS Code Remote, instead you'll need to install the `.vsix` manually.
 
@@ -114,6 +108,21 @@ page, or you can install it from source using the following command:
 [source,bash]
 ----
 $ cargo xtask install --server
+----
+
+==== Arch Linux
+
+`rust-analyzer` binary can be installed from AUR (Arch User Repository):
+
+- https://aur.archlinux.org/packages/rust-analyzer-bin[`rust-analyzer-bin`] (binary from GitHub releases)
+- https://aur.archlinux.org/packages/rust-analyzer[`rust-analyzer`] (built from latest tagged source)
+- https://aur.archlinux.org/packages/rust-analyzer-git[`rust-analyzer-git`] (latest git version)
+
+Install it with AUR helper of your choice, for example:
+
+[source,bash]
+----
+$ yay -S rust-analyzer-bin
 ----
 
 === Emacs

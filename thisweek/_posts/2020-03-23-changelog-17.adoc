@@ -1,0 +1,48 @@
+= Changelog #17
+:sectanchors:
+:page-layout: post
+
+Commit: commit:aaa6961aa6d19b405dd2e837a09ac96ed6ace995[] +
+Release: release:2020-03-23[]
+
+== New Features
+
+* pr:3582[] fetch appropriate value of `OUT_DIR` from `cargo check`.
+  This enables rust-analyzer to work correctly with crates which use compile-time code generation. This might significantly slow-down startup time (as we need to run `cargo check` build), so this functionality is disabled by default.
+  To enable, set:
++
+[source,json]
+----
+"rust-analyzer.cargoFeatures.loadOutDirsFromCheck": true
+----
+* pr:3580[] macro expander is not more tolerant for syntax errors, which makes code completion inside macros more robust.
+* pr:3623[] **Fill Match Arms** assist now works even if some arms are already present.
+* pr:3607[] and instructions for installing rust-analyzer from AUR.
+* pr:3640[], pr:3651[] assist to merge imports with a common prefix.
++
+image::https://user-images.githubusercontent.com/1711539/77323042-ea8b6980-6d14-11ea-8cb6-23dccafaa024.gif[]
+* pr:3662[] correctly part arbitrary enum discriminants.
+* pr:3663[] installation from source uses `rust-analyzer` from `$PATH` by default.
+* pr:3677[] include `macro_rules!` macros in workspace symbols.
+
+== Fixes
+
+* pr:3541[] correctly complete constants and paths in patterns.
+* pr:3668[] don't suggest **Invert If** assist for `if let` syntax.
+* pr:3671[] fix infinite loop in macro expansion during completion.
+* pr:3674[] use correct name for the library if it is renamed in Cargo.toml.
+* pr:3673[] guard against runaway macro expansion in expressions.
+* pr:3681[] only suggest machine-applicable suggestions from `cargo check`.
+* pr:3678[] fix rename behavior in macros.
+
+== Internal Improvements
+
+* pr:3584[] use `dyn Trait` when working with salsa database, which improves compile times in release mode.
+* pr:3606[], pr:3608[], pr:3610[] improve audit on CI.
+* pr:3614[] in the TypeScript extension, be more explicit about persistent state.
+* pr:3626[] check trailing whitespace on CI.
+* pr:3629[] simplify and streamline plugin auto-update.
+* pr:3635[] simplify extension versioning scheme.
+* pr:3656[] simplify arena API.
+* pr:3672[] assists documentation generator skips hidden files.
+* pr:3632[] log errors from `cargo check`.
