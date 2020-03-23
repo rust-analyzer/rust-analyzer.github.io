@@ -15,7 +15,7 @@ Release: release:2020-03-23[]
 ----
 "rust-analyzer.cargoFeatures.loadOutDirsFromCheck": true
 ----
-* pr:3580[] macro expander is not more tolerant for syntax errors, which makes code completion inside macros more robust.
+* pr:3580[] macro expander is now more tolerant for syntax errors, which makes code completion inside macros more robust.
 * pr:3623[] **Fill Match Arms** assist now works even if some arms are already present.
 * pr:3607[] and instructions for installing rust-analyzer from AUR.
 * pr:3640[], pr:3651[] assist to merge imports with a common prefix.
