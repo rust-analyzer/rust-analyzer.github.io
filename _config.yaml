@@ -6,5 +6,13 @@ github_username: rust-analyzer
 exclude:
   - wasm-demo/
   - vendor
+
 plugins:
-  - jekyll-redirect-from
+- jekyll-asciidoc
+- jekyll-redirect-from
+
+asciidoctor:
+  attributes:
+    - source-highlighter=rouge
+    - source-linenums-option=_
+    - rouge-style=github

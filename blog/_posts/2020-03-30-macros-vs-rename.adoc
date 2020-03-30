@@ -1,0 +1,94 @@
+= Macros vs Rename
+:sectanchors:
+:page-layout: post
+
+
+I've already written before about how precise code completion is impossible to do inside Rust macros:
+https://github.com/matklad/proc-caesar. Today I'd like to write a short note about another impossibility result:
+
+====
+Correct automatic rename is not possible in a language with rust-style macros.
+====
+
+
+Consider the following example:
+
+[source,rust]
+----
+macro_rules! call_foo {
+    () => { foo() };
+}
+
+mod a {
+    fn foo() {}
+
+    fn main() {
+        call_foo!();
+    }
+}
+
+mod b {
+    fn foo() {}
+
+    fn main() {
+        call_foo!();
+    }
+}
+----
+
+What is the expected result for renaming `a::foo` to `bar`?
+There isn't one, as the same macro refers to different `foo` at different call-sites!
+
+But the problem is even deeper than ambiguity.
+Consider this (silly) crate:
+
+[source,rust]
+----
+#[doc(hidden)]
+pub const HELLO: &str = "hello";
+
+#[macro_export]
+macro_rules! say_hello {
+    () => { println!("{}", $crate::HELLO) }
+}
+----
+
+In this case, it is pretty clear what we want to get after renaming `HELLO` to `GREETING`:
+
+[source,rust]
+----
+#[doc(hidden)]
+pub const GREETING: &str = "hello";
+
+#[macro_export]
+macro_rules! say_hello {
+    () => { println!("{}", $crate::GREETING) }
+}
+----
+
+Unfortunately, it is impossible to formalize this transformation.
+To the human reader, it is _obvious_ that the right hand side of a macro should be parsed as an expression.
+But this intuition is flawed -- the right hand side is just a sequence of tokens, and it receives a meaning only when we call the macro.
+And there's no guarantee, in general case, that it would be interpreted as an expression:
+
+[source,rust]
+----
+macro_rules! say_hello {
+    () => { println!("{}", $crate::GREETING) };
+    ($tt:tt) => {
+        stringify!(crate::say_hello!()).len()
+    };
+}
+
+fn main() {
+    let x = say_hello!(92);
+    print!("{}", x);
+}
+----
+
+Together this means that the theoretically best definition of *correct automated rename* we can get in Rust is limited.
+We can handle code outside the macros and code inside macro calls.
+For macro definitions, at best we can give a list of locations that require manual intervention.
+
+It also seems plausible that, with some heuristic, we can infer renames in macro definitions as well.
+For example, we can look at all call sites of the macro, and see if they all agree that a certain token in the macro definition needs change.
