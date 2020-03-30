@@ -73,16 +73,17 @@ And there's no guarantee, in general case, that it would be interpreted as an ex
 
 [source,rust]
 ----
-macro_rules! say_hello {
-    () => { println!("{}", $crate::GREETING) };
-    ($tt:tt) => {
-        stringify!(crate::say_hello!()).len()
-    };
+#[doc(hidden)]
+pub const HELLO: &str = "hello";
+
+macro_rules! m {
+    ($($tt:tt)*) => { $($tt)*($crate::HELLO) };
 }
 
 fn main() {
-    let x = say_hello!(92);
-    print!("{}", x);
+    let expr = m!(std::convert::identity);
+    let tt = m!(stringify!);
+    println!("expr = {},tt = {}", expr, tt)
 }
 ----
 
