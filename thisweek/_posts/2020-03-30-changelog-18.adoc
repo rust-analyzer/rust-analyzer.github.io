@@ -1,0 +1,42 @@
+= Changelog #18
+:sectanchors:
+:page-layout: post
+
+Commit: commit:9e12b9e6fdc03ea6bc35a88cfb5d5d6751672ec8[] +
+Release: release:2020-03-30[]
+
+== New Features
+
+* pr:3710[] display inlay hints for method chains (controlled by `rust-analyzer.inlayHints.chainingHints` config).
++
+image::https://user-images.githubusercontent.com/1711539/77911990-0ef5c180-7292-11ea-9779-7ce60d8e7b2e.png[]
+* pr:3689[] **Fill Match Arms** assist now handles tuples of enums.
+* pr:3685[] auto import now works for macros.
+* pr:3704[] add troubleshooting section to the manual.
+* pr:3694[] completion for fields does not suggest already specified fields.
+* pr:3732[] assist to replace `.unwrap` with a `match`.
+* pr:3742[] assist to replace `let` with `if let`.
+* pr:3693[] **Rust Analyzer: version** command now shows tag in addition to commit hash.
+
+== Fixes
+
+* pr:3698[] `dbg!` postfix completion wraps the reference.
+* pr:3703[] don't enabled proposed APIs on stable release.
+* pr:3707[] use real visibility in reference search.
+* pr:3714[] correctly detect x86 CPU architecture.
+* pr:3717[] always expand macros during code analysis.
+* pr:3722[] fix parsing lambdas with return type.
+* pr:3724[] blame the right queries for memory usage.
+* pr:3725[] fix TypeScript memory leak on server restart.
+* pr:3745[] **Merge Imports** assist correctly handles `*`.
+* pr:3764[] fix index out of bounds error during workspace loading.
+* pr:3761[] **Fill Match Arms** assist correctly preserves comments.
+
+== Internal Improvements
+
+* pr:3753[] introduce `stdx` crate for storing missing batteries.
+* pr:3695[] simplify configuration handling.
+* pr:3708[] generalize syntax rewriting infrastructure to allow removal of nodes.
+* pr:3664[], pr:3692[], pr:3727[] groundwork for procedural macros support.
+* pr:3726[] refactor **Rust Analyzer: Status** command.
+* pr:3754[] use auto-joining threads for managing `cargo watch`.

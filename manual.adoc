@@ -57,7 +57,7 @@ To disable this notification put the following to `settings.json`
 ----
 ====
 
-The server binary is stored in `~/.config/Code/User/globalStorage/matklad.rust-analyzer`.
+The server binary is stored in `~/.config/Code/User/globalStorage/matklad.rust-analyzer` (Linux) or in `~/.Library/Application Support/Code/User/globalStorage/matklad.rust-analyzer` (macOS) or in `%APPDATA%\Code\User\globalStorage` (Windows).
 
 Note that we only support the latest version of VS Code.
 
@@ -97,6 +97,16 @@ $ cargo xtask install
 You'll need Cargo, nodejs and npm for this.
 
 Note that installing via `xtask install` does not work for VS Code Remote, instead you'll need to install the `.vsix` manually.
+
+==== Troubleshooting
+
+Here are some useful self-diagnostic commands:
+
+* **Rust Analyzer: Show RA Version** shows the version of `rust-analyzer` binary
+* **Rust Analyzer: Status** prints some statistics about the server, like the few latest LSP requests
+* To enable server-side logging, run with `env RUST_LOG=info` and see `Output > Rust Analyzer Language Server` in VS Code's panel.
+* To log all LSP requests, add `"rust-analyzer.trace.server": "verbose"` to the settings and look for `Server Trace` in the panel.
+* To enable client-side logging, add `"rust-analyzer.trace.extension": true` to the settings and open the `Console` tab of VS Code developer tools.
 
 === Language Server Binary
 
