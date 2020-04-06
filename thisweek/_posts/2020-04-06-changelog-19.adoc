@@ -1,0 +1,90 @@
+= Changelog #19
+:sectanchors:
+:page-layout: post
+
+Commit: commit:ec3fb1cdb4f1808a11fb6057550ed721c2aa36a9[] +
+Release: release:2020-04-06[]
+
+== New Features
+
+* **BREAKING** pr:3824[] changed the name of many options. The current set is specified https://github.com/rust-analyzer/rust-analyzer/blob/ec3fb1cdb4f1808a11fb6057550ed721c2aa36a9/editors/code/package.json#L176-L390[here]. If you are using a non-VS Code client, note that rust-analyzer now asks for
+`rust-analyzer` secion of configuration, and expects this config to be present in `initializationOptions`.
+
+* pr:3804[], pr:3825[] it is now possible to use arbitrary command for on the fly error checking:
++
+[source,json]
+----
+{
+    "rust-analyzer.checkOnSave.overrideCommand": [
+        "./x.py", "check", "--json-output"
+    ]
+}
+----
+* pr:3807[], pr:3825[] similarly, it is now possible to completely override `rustfmt` command.
+
+* pr:3820[] remove support for old syntax highlighting. To use the new semantic tokens highlighting:
+. install the recent vscode insiders build
+. add
++
+[source,json]
+----
+{
+    "rust-analyzer.highlighting.semanticTokens": true,
+    "editor.semanticHighlighting.enabled": false,
+}
+----
++
+to config
+. run vscode as `code-insiders  matklad.rust-analyzer`
+. make sure to use a color theme with support for syntax highlighitng.
+. Rust specific tokens and modifiers are listed https://github.com/rust-analyzer/rust-analyzer/blob/ec3fb1cdb4f1808a11fb6057550ed721c2aa36a9/editors/code/package.json#L489-L531[here]. For example, to underline all `mut` and `&mut` variables, add this to `settings.json`:
++
+[source,json]
+----
+"editor.tokenColorCustomizationsExperimental": {
+    "*.mutable": {
+        "fontStyle": "underline"
+    }
+}
+----
+
+* pr:3814[] add **Implement From for enum variant** assist
++
+image::https://user-images.githubusercontent.com/1711539/78559964-8f2da100-7815-11ea-99a4-00b431df7022.gif[]
+
+* pr:3746[] add **Create function** assist.
++
+image::https://user-images.githubusercontent.com/1711539/78560241-111dca00-7816-11ea-89a4-5489ddf6d9dc.gif[]
+
+* pr:3840[] automatically add call parenthesis for tuple-like enum variants
++
+image::https://user-images.githubusercontent.com/1711539/78560584-9a350100-7816-11ea-93ad-66bf625fcb93.gif[]
+
+* pr:3666[] handle some configuration changes without server restart.
+* pr:3777[] populate default task list in VS Code with cargo commands.
+* pr:3765[] SSR no longer takes field order into account.
+* pr:3829[] SSR treats method call and UFCS equivalently.
+* pr:3779[] code completion for recrod literals now suggest only fields which are not already present.
+
+== Fixes
+
+* pr:3785[] attach doc comments to declaration even if there's a blank line after comment.
+* pr:3781[], pr:3819[] make **Run** action correctly handle the case with several major versions of the package in the crate graph.
+* pr:3786[] **Fill Match Arms** assits does not leave the floating comma behind.
+* pr:3797[] don't show chaining hints for record literals and unit structs.
+* pr:3844[] make sure that default configuration values are honored.
+* pr:3857[] fix inference of function pointer return types.
+* pr:3858[] don't show return type for `()`-returning function.
+
+== Internal Improvements
+
+* pr:3817[], pr:3815[], pr:3816[] **Show Syntax Tree** internal command now has syntax highlighting and auto scroll from source.
+* pr:3805[], pr:3806[], pr:3811[] lower literal patterns.
+* pr:3790[] use uniiform naming (`config`) for all configuration-related functionality.
+* pr:3792[], pr:3802[] inspired by Emacs, rename "cargo watch" functionality to flycheck.
+* pr:3738[], pr:3800[] more groundwork for proc-macro support.
+* pr:3793[] add integrated test for code-generating build.rs.
+* pr:3795[] decouple flycheck and project model.
+* pr:3809[] reduce the number of structs holding configuration from three to one.
+* pr:3836[] wrap macros in pattern position into `ast::MacroPat` node to not confuse them with expressions.
+* pr:3744[] upgrade chalk.
