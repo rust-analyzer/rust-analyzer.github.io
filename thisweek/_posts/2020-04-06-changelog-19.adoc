@@ -35,7 +35,7 @@ Release: release:2020-04-06[]
 ----
 +
 to config
-. run vscode as `code-insiders  matklad.rust-analyzer`
+. run vscode as `code-insiders --enabled-proposed-api matklad.rust-analyzer`
 . make sure to use a color theme with support for syntax highlighitng.
 . Rust specific tokens and modifiers are listed https://github.com/rust-analyzer/rust-analyzer/blob/ec3fb1cdb4f1808a11fb6057550ed721c2aa36a9/editors/code/package.json#L489-L531[here]. For example, to underline all `mut` and `&mut` variables, add this to `settings.json`:
 +
