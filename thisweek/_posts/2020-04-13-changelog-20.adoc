@@ -1,0 +1,54 @@
+= Changelog #20
+:sectanchors:
+:page-layout: post
+
+Commit: commit:c388130f5ffbcbe7d3131213a24d12d02f769b87[] +
+Release: release:2020-04-13[]
+
+== New Features
+
+* pr:3875[] new release strategy: we now just promote Sunday's nightly to stable.
+* pr:3899[] enables semantic highlighting by default.
+* pr:3706[], pr:3884[], pr:3938[] show native rust-analyzer's diagnostics for not exhaustive patterns.
+  As a reminder, all rust-analyzer diagnostics can be disabled with `"rust-analyzer.diagnostics.enable"` setting.
+* pr:3925[] **Reorder record fields** assist to sort the fields in the declaration order.
++
+image::https://user-images.githubusercontent.com/1711539/79140307-10f27100-7db8-11ea-9f3b-b246a7283bdf.gif[]
+
+* pr:3902[] improve documentation for Sublime Text.
+* pr:3880[], pr:3918[] process cfg attributes on fields and methods.
+* pr:3901[], pr:3910[] add more heuristics for hiding obvious param hints.
+* pr:3905[] handle patterns with ellipsis.
+* pr:3935[] generated trait methods now use `todo!` rather than `unimplemented!`.
+
+== Fixes
+
+* pr:3933[] fix accidentally quadratic behavior when expanding the `include!` macro.
+* pr:3868[] fix panic in Chalk.
+* pr:3872[] fix `"rust-analyzer.checkOnSave.command"` option.
+* pr:3878[] when completing a macro call, don't add `()` if they are already there.
+* pr:3892[] fix "parser is stuck" error during macro expansion.
+* pr:3912[] fix parsing of where clauses with `Fn` traits.
+* pr:3939[] canonicalize paths coming from `cargo metadata`.
+
+== Internal Improvements
+
+* pr:3944[] speed up type inference by up to 30% percent.
+* pr:3867[] add `CI` checks for stray `eprintln`s.
+* pr:3842[], pr:3906[], pr:3920[] copy libprocmacro from rustc.
+  We will be using this library to load proc macro dynamic libraries.
+* pr:3863[] use `.rast` extension for serialized syntax trees in tests.
+  This adds syntax highlighting!
+* pr:3876[] rename `complete_scope` to hopefully less confusing `complete_unqualified_path`.
+* pr:3882[] centralize the logic for computing missing struct fields.
+* pr:3826[] when doing syntax highlighting, produce a flat list of ranges.
+* pr:3909[] generate token accessors.
+* pr:3913[] remove allocation from the "least common ancestor" algorithm.
+* pr:3915[] format generated code in a more readable way.
+* pr:3917[] improve `tt::Subtree` debug print.
+* pr:3748[] implement Chalk's debug methods using TLS.
+* pr:3926[] align tokens names with `syn` somewhat.
+* pr:3940[] use `actions-rs` for `cargo audit`.
+* pr:3942[] more precise typing of TypeScript config.
+* pr:3949[] cleanup cfg handling.
+* pr:3951[], pr:3955[] simplify and unify grammar for record literals and patterns.
