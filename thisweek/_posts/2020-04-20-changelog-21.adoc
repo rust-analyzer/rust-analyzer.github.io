@@ -1,0 +1,80 @@
+= Changelog #21
+:sectanchors:
+:page-layout: post
+:!figure-caption:
+
+Commit: commit:90f837829d4f2c1054751de2de695ba1c0b8ae5c[] +
+Release: release:2020-04-20[]
+
+== New Features
+
+* pr:3958[] Initial support for proc-macros
++
+image::https://user-images.githubusercontent.com/1711539/79734928-c57c1d80-82f7-11ea-93a5-9081087402e0.gif[]
++
+To enable it, set the following settings:
+[source,json]
+----
+{
+    "rust-analyzer.cargo.loadOutDirsFromCheck": true,
+    "rust-analyzer.procMacro.enabled": true
+}
+----
+
+* pr:3990[] switch to Chalk recursive solver.
+  This significantly improves type inference when associated types are involved,
+  for example, with iterators:
++
+.Before
+image::https://user-images.githubusercontent.com/1711539/79728444-3a4a5a00-82ee-11ea-83ab-1f3e539dde69.png[]
++
+.After
+image::https://user-images.githubusercontent.com/1711539/79728643-8ac1b780-82ee-11ea-867a-b231d46b89a0.png[]
+
+* pr:4034[] add `unresolvedReference` semantic tag for names which rust-analyzer fails to resolve.
+  Adding to VS Code config
++
+[source,json]
+----
+"editor.tokenColorCustomizationsExperimental": {
+    "unresolvedReference": "#FF0000"
+}
+----
++
+will give fast feedback about unresolved references, highlighting them in red.
+No default highlighting is set, as rust-analyzer still has a fair number of false positives.
++
+image::https://user-images.githubusercontent.com/1711539/79669212-42a17880-81ba-11ea-9274-bceac6448914.gif[]
+
+
+* pr:3962[] don't assign shortcut for **Parent Module** command.
+  The original shortcut was kbd:[ctrl+u], but it conflicts with VS Code build-in.
+  It is recommended to assign custom shortcut for `rust-analyzer.parentModule` action.
+* pr:3965[] implement inline associated type bounds.
+* pr:3966[] add support for bounds on associated types in trait definitions.
+* pr:4026[] omit more parameter hints in the presence of underscores.
+* pr:3894[] implement exhaustiveness checking for record enum variants.
+
+== Fixes
+
+* pr:3961[] fix extraneous comma when merging import.
+* pr:3969[] **Add Function** assist now uses `todo!` macro.
+* pr:3967[] handle `Self::Type` in trait definitions when referring to own associated type.
+* pr:3948[] fix inlay hints config synchronization between client and server.
+* pr:3979[] fix missing match arm false positive for enum with no variants.
+* pr:4010[] fix diagnostics ranges in macros.
+* pr:4011[] fix self-fulfilling completion.
+* pr:4012[] fix panic on ellipsis in pattern.
+* pr:4021[] fix type equality for dyn Trait.
+* pr:4022[] fix panic in syntax highlighting.
+* pr:4023[] fix another crash from wrong binders.
+* pr:4027[] don't qualify builtins in generated code.
+* pr:4036[] fix name resolution in guard closes and record patterns.
+
+== Internal Improvements
+
+* pr:3971[] add `rust-analyzer diagnostics` command for batch processing.
+* pr:3964[] nicer Chalk debug logs.
+* pr:3994[], pr:4016[] don't expose implementation details of `SyntaxNodePtr`.
+* pr:3995[] separate project discovery from project loading.
+* pr:4008[] add more info about what failed in tidy tests.
