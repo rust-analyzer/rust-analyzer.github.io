@@ -13,6 +13,7 @@ Release: release:2020-04-20[]
 image::https://user-images.githubusercontent.com/1711539/79734928-c57c1d80-82f7-11ea-93a5-9081087402e0.gif[]
 +
 To enable it, set the following settings:
++
 [source,json]
 ----
 {
