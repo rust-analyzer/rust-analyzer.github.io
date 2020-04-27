@@ -1,0 +1,67 @@
+= Changelog #22
+:sectanchors:
+:page-layout: post
+
+Commit: commit:7a9ba1657daa9fd90c639dcd937da11b4f526675[] +
+Release: release:2020-04-27[]
+
+== New Features
+
+* pr:4065[], pr:4128[] complete unqualifed enum variants
++
+image::https://user-images.githubusercontent.com/1711539/80367186-ecec6080-888a-11ea-8968-37f93424106a.gif[]
+* pr:4105[] code completion for attributes.
+* pr:3954[] we now pre-select completion variant if it matches the expected type.
+* pr:4006[] syntax highlighting for format strings
++
+image::https://user-images.githubusercontent.com/1711539/80368064-6e90be00-888c-11ea-9395-85d6c3371000.png[]
+* pr:4069[], pr:4070[], pr:4158[] improve documentation.
+* pr:4098[] add setup instructions for YouCompleteMe.
+* pr:4082[] implement `rust-analyzer --help`.
+* pr:4090[] fix naming of two config options:
+** `featureFlags.lsp.diagnostics` -> `diagnostics.enable` (enables native rust-analyzer diagnostics)
+** `procMacro.enabled` -> `procMacro.enable` (enables support for procedural macros)
+* pr:4092[] allow running `#[ignore]` tests.
+* pr:4107[] custom `onEnter` command is disabled by default. To re-enable it, use the following config:
++
+[source,json]
+----
+{
+    "key": "Enter",
+    "command": "rust-analyzer.onEnter",
+    "when": "editorTextFocus && !suggestWidgetVisible && editorLangId == rust"
+},
+----
+* pr:4111[] support for `extern "C" {}` blocks.
+* pr:3998[] **Add Function** assist can now add functions in other files.
+* pr:4133[] eagerly prime caches to reduce startup latency in certain vim setups.
+* pr:4137[] prefer core/alloc paths on #![no_std].
+* pr:4136[] support `#[cfg]` on expressions.
+* pr:4154[] add `cargo test` to the lits of **Run** commands.
+
+== Fixes
+
+* pr:4096[] fix default `tasks.json` generation.
+* pr:4057[] fix panic in split_imports assist.
+* pr:4076[] fix handing of `derive` attributes for macros.
+* pr:4078[] do not add default and closure types in 'add explicit type' assist.
+* pr:4106[] fix panic in type inference.
+* pr:4116[], pr:4117[] honor client's snippet capability.
+* pr:4113[] honor hierarchical document symbols client capability.
+* pr:4126[] don't omit methods with `self` from path completion.
+* pr:4127[] more helpful diagnostic message if `PATH` doesn't contain `cargo` (this PR also broke everything)
+* pr:4129[] unbreak everything.
+* pr:4134[] fix panic on empty doc comment.
+* pr:4139[] fix infinite macro loop on an empty repetition.
+* pr:4146[] completion doesn't add `()` when completiing high-order function argument.
+
+== Internal Improvements
+
+* pr:4060[] update chalk, the new version uses more caching and should be faster.
+* pr:4061[], pr:4066[], pr:4101[] cleanups of proc macro infrastructure.
+* pr:4094[] show stderr from proc macro server.
+* pr:4038[] when generating code for AST, move boring impl out of the way.
+* pr:4080[], pr:4081[] improve **Show Syntax Tree** internal action.
+* pr:4099[], pr:4108[] hide implementation details of "pointer" to a syntax tree node.
+* pr:4131[] switch to `text-size` crate for representing text offsets and ranges.
+* pr:4135[] rename `StructField` -> `Field` everywhere.
