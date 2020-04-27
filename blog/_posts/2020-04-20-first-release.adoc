@@ -1,0 +1,212 @@
+= First Release
+:sectanchors:
+:experimental:
+:page-layout: post
+
+I am pleased to announce the first alpha release of rust-analyzer -- a new "IDE backend" for the https://www.rust-lang.org/[Rust] programming language.
+Support rust-analyzer on https://opencollective.com/rust-analyzer/[Open Collective].
+
+Wait a second... Haven't people been using rust-analyzer for a long time now?
+Well, yes, but we've never actually made a release announcement, so here's one!
+Better late than never :-)
+
+== What exactly is rust-analyzer?
+
+Broadly speaking, rust-analyzer is a new compiler front-end for the Rust programming language, aimed at drastically improving IDE integration.
+If you are familiar with C# ecosystem, rust-analyzer is to rustc what https://github.com/dotnet/roslyn[Roslyn] is to the original C# compiler.
+
+More specifically the goal of rust-analyzer project is improving Rust IDE support to the standard expected of a modern language.
+Under this umbrella project the following activities take place:
+
+* We build the `rust-analyzer` binary, an implementation of the https://microsoft.github.io/language-server-protocol/[language server protocol], which can provide a basic IDE experience for Rust today.
+* We use `rust-analyzer` as a workbench and a laboratory for investigating approaches to lazy and incremental compilation.
+* We try to modularize the existing `rustc` compiler and extract *production ready* components for sharing with `rust-analyzer`.
+
+For the users, the most immediately relevant facet is the first one -- a language server you can install to get smart code completion in [.line-through]##Emacs## your favorite editor.
+This is what this post focuses on.
+
+== What is its relationship with RLS?
+
+Rust had a language server for quite some time now -- the https://github.com/rust-lang/rls[RLS].
+RLS and rust-analyzer use fundamentally different architectures for understanding Rust.
+RLS works by running a compiler on the whole project and dumping a huge JSON file with facts derived during the compilation process.
+rust-analyzer works by maintaining a persistent compiler process, which is able to analyze code on-demand as it changes.
+Concretely, after every keystroke RLS looks at every function body and re-typechecks it;  rust-analyzer generally processes only the code in the currently opened file(s), reusing name resolution results if possible.
+
+rust-analyzer started as an experiment and a proof-of-concept, but today it is becoming increasingly clear that:
+
+* rust-analyzer already provides a better experience than RLS for many users.
+* rust-analyzer is further ahead on the road towards the envisioned end-state of a fully on-demand, fully incremental Rust compiler.
+
+So we've opened https://github.com/rust-lang/rfcs/pull/2912[RFC 2912].
+That RFC proposes a process of replacing RLS with rust-analyzer as the official LSP implementation for Rust.
+
+== What is its relationship with IntelliJ Rust?
+
+https://intellij-rust.github.io/[IntelliJ Rust] is a plugin providing Rust support for IDEs build on top of https://www.jetbrains.com/opensource/idea/[IntelliJ Platform].
+The rust-analyzer project is indebted to IntelliJ Rust: it builds on the same architectural ideas and patterns, and is directly inspired by the experience of developing IntelliJ Rust.
+
+IntelliJ Rust contains its own implementation of an IDE-ready compiler frontend, implemented in Kotlin.
+This engine is very advanced, but, by design, does not use LSP.
+IntelliJ Rust is a production ready Rust IDE and is wholly recommended for users of JetBrains' products.
+
+== Quick Start
+
+https://rust-analyzer.github.io/manual.html[The manual] contains detailed documentation, so in this blog post I want to just quickly run through the most exciting features.
+
+rust-analyzer is compatible with any editor that supports LSP, and has dedicated plugins for
+https://github.com/fannheyward/coc-rust-analyzer[Vim],
+https://github.com/emacs-lsp/lsp-mode/blob/3d6283f936dff2098e36b149fc414ea7acd332c8/lsp-rust.el[Emacs]
+and https://github.com/rust-analyzer/rust-analyzer/tree/4a250021b1a1def483f7faf2b534ec4dd7defd02/editors/code[VS Code].
+Support for VS Code is maintained in-tree and in general is expected to be the most complete.
+For this reason, the following info takes a VS Code-centric point of view, but should be translatable to equivalent concepts in other editors.
+
+To add rust-analyzer to VS Code:
+
+* Remove existing rls extension, if you have one.
+* Install the https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer[rust-analyzer extension] from the marketplace.
+
+To check that everything is working open a "Hello World" Rust application.
+You should see the `Run | Debug` code lens, and editor symbols should show the main function:
+
+image::https://user-images.githubusercontent.com/1711539/80090876-7b49a500-8560-11ea-8abc-b4b5f786c026.png[]
+
+== Features
+
+Now that rust-analyzer is successfully installed, what are some of the most important features?
+
+I suggest, first and foremost, to familiarize oneself with many *navigation* capabilities, as we spend more time reading code than writing it.
+Here's an inexhaustive list of features.
+
+Definition kbd:[F12]::
+The most famous navigation shortcut.
+One rust-analyzer specific trick is that kbd:[F12] on an `mod submodule;` brings you to the `submodule.rs` file.
+This is useful in combination with:
+
+Parent module (no default keybinding)::
+This action brings to the `mod` declaration which declared the current module.
+It doesn't have a shortcut assigned by default, as there's no corresponding built-in action, but it is highly recommended to assign one.
+
+Workspace Symbol kbd:[Ctrl+T]::
+This is probably the shortcut I use most often.
+It is a fuzzy-search interface for all "symbols" (structs, enums, functions, field) in the project, its dependencies and the standard library.
+The search tries to be smart, in that, by default, it looks only for types in your project, and, failing that, for functions.
+It is possible to force search in dependencies by adding `#` to the query string, and search for all symbols by adding `*`.
+Unfortunately, this doesn't work in VS Code at the moment, as it stopped passing these symbols to the language server since the last update.
+
+video::/assets/blog/first-release/workspace-symbol.webm[options="autoplay,loop",width=100%]
+
+Document Symbol kbd:[Ctrl+Shift+O]::
+Like workspace symbol, but for things in the current file.
+The same underlying LSP request powers file outline and breadcrumbs.
+
+image::https://user-images.githubusercontent.com/1711539/80090645-1e4def00-8560-11ea-901d-d1cdc0ab8f50.png[]
+
+Implementation kbd:[Ctrl+F12]::
+This shortcut works on structs, enums and traits, and will show you the list of corresponding impls.
+
+Syntax Highlighting::
+While not exactly about navigation, semantic syntax highlighting helps with reading code.
+Rust analyzer underlines mutable variables, distinguishes between modules, traits and types and
+provides helpful type and parameter hints.
+
+image::https://user-images.githubusercontent.com/1711539/80091615-b5677680-8561-11ea-82de-e1517e4fef18.png[]
+
+Run (no default keybinding)::
+After navigation, the feature I use most is probably the **Run** button.
+This action runs the test function, test module or main function at the given cursor position.
+It is also available as a code-lens, but I personally exclusively use kbd:[ctrl+r] for it, as I need this action all the time.
+What's more, with a short cut you can re-run the last command, which is hugely useful when you are debugging a failing test.
+This action is pretty smart in that it does the following things for you:
+
+* determines the appropriate `--package` argument for `Cargo`,
+* uses the full path to the test, including the module,
+* sets the `--no-capture` argument, so that debug prints are visible,
+* sets the `RUST_BACKTRACE` environmental variable, so that you don't have to re-run on panic.
+
+Sadly, such context-dependent run configurations are not a part of the LSP protocol yet, so this feature is implemented using a custom protocol extension.
+
+video::/assets/blog/first-release/run.webm[options="autoplay,loop",width=100%]
+
+Punctuation-aware code completion::
+Naturally, rust-analyzer helps with writing code as well.
+When completing `return`, it checks if the return type is `()`.
+When completing function and method calls, `rust-analyzer` places the cursor between parentheses, unless the function has zero arguments.
+When typing `let`, rust-analyzer tries to helpfully add the semicolon.
+
+video::/assets/blog/first-release/return-completion.webm[options="autoplay,loop",width=100%]
+
+Extend selection kbd:[Shift+Alt+->]::
+
+This is again a feature which is relatively simple to implement, but a huge helper.
+It progressively selects larger and larger expressions, statements and items.
+It works exceptionally well in combination with multiple cursors.
+One hidden capability of this feature is a navigation help: if you are in a middle of a function, you can get to the beginning of it by extending seleciton several times, and then pressing kbd:[<-].
+
+video::/assets/blog/first-release/extend-selection.webm[options="autoplay,loop",width=100%]
+
+Fixit for missing module::
+
+Another disproportionally nice feature -- to create a new file, type `mod file_name;` and use kbd:[ctrl+.] to add the file itself.
+
+video::/assets/blog/first-release/new-mod.webm[options="autoplay,loop",width=100%]
+
+Assists::
+
+More generally, there are a lot of cases where the light bulb can write some boring code for you.
+Some of my favorites are impl generation:
+
+video::/assets/blog/first-release/impl-iter.webm[options="autoplay,loop",width=100%]
+
+And filling match arms:
+
+video::/assets/blog/first-release/fill-match-arms.webm[options="autoplay,loop",width=100%]
+
+== Drawbacks
+
+rust-analyzer is a young tool and comes with a lot of limitations.
+The most significant one is that we are not at the moment using `rustc` directly, so our capabilities for detecting errors are limited.
+
+In particular, to show inline errors we are doing what Emacs has been doing for ages -- running `cargo check` after the file is saved.
+If auto-save is enabled in the editor, the result is actually quite nice for small projects.
+
+For bigger projects though, I feel like `cargo check` in background gets in the way.
+So for `rust-analyzer` I have `rust-analyzer.checkOnSave.enabled = false;` in the settings.
+Instead, I use the **Run** functionality to run `check` / `test` and keyboard shortcuts to navigate between errors.
+
+Another big issue is that at the moment we, for simplicity, don't persist caches to disk.
+That means that every time you open a project with rust-analyzer, it needs to analyze, from source:
+
+* all sysroot crates (std, core, alloc, etc)
+* all crates.io dependencies
+* all crates in your workspace
+
+This takes time, tens of seconds for medium sized projects.
+
+Similarly, because we never save anything to disk, we need to keep analysis results for all crates in memory.
+At the moment, rust-analyzer process might requires gigabytes of ram for larger projects.
+
+Finally, because analysis is not complete, features are not working correctly every time.
+Sometimes there are missing completions, sometimes goto definition is wrong, we may even show false-positive errors on occasion.
+
+This is an alpha release.
+We have a long road ahead of us towards solid and reliable IDE support.
+Luckily (and this is the instance where a life of an IDE writer is simpler than that of a compiler writer) an IDE doesn't have to be 100% correct to be useful.
+
+== How can I help?
+
+If you find rust-analyzer useful and use it professionally, please consider asking your company to sponsor rust-analyzer via our https://opencollective.com/rust-analyzer/[Open Collective].
+Sponsorships from individuals are also accepted (and greatly appreciated!).
+
+For other financial support options, customization requests, or extended support, please write an email to rust-analyzer@ferrous-systems.com.
+
+
+Many people like starting contributing to the project with docs, and we certainly can use some help as well.
+For user-visible documentation, we have https://github.com/rust-analyzer/rust-analyzer/blob/7a9ba1657daa9fd90c639dcd937da11b4f526675/docs/user/readme.adoc[a manual] which is pretty bare bones at the moment.
+In particular, it doesn't talk about *features* of rust-analyzer yet.
+The primary document for developers is https://github.com/rust-analyzer/rust-analyzer/blob/7a9ba1657daa9fd90c639dcd937da11b4f526675/docs/dev/architecture.md[architecture.md].
+
+If you want to contribute code, the best way to start is the aforementioned architecture document.
+In general, rust-analyzer code base is comparatively easy to contribute to: it is a standard Rust crate, which builds with stable compiler.
+The best first issue to fix is something that you personally find lacking.
+If you are already perfectly happy with rust-analyzer, we have a https://github.com/rust-analyzer/rust-analyzer/issues[bunch of issues] others have reported :-)
