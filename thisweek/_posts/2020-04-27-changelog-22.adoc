@@ -37,7 +37,7 @@ image::https://user-images.githubusercontent.com/1711539/80368064-6e90be00-888c-
 * pr:4133[] eagerly prime caches to reduce startup latency in certain vim setups.
 * pr:4137[] prefer core/alloc paths on #![no_std].
 * pr:4136[] support `#[cfg]` on expressions.
-* pr:4154[] add `cargo test` to the lits of **Run** commands.
+* pr:4154[] add `cargo test` to the list of **Run** commands.
 
 == Fixes
 
