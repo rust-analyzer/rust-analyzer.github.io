@@ -1,0 +1,55 @@
+= Changelog #23
+:sectanchors:
+:page-layout: post
+
+Commit: commit:6a48a94d47bfd6a340cbdb3f68b5bce4167c8168[] +
+Release: release:2020-05-04[]
+
+== New Features
+
+* pr:4222[] C/C++ for Visual Studio Code extension as an alternative debug engine for Debug Code lens.
+* pr:4153[], pr:4276[], pr:4278[] add support for incremental text synchronization.
+* pr:4157[] we now use `x86_64-unknown-linux-gnu` instead of `x86_64-unknown-linux-musl` for binary releases for Linux. The main reason is that our proc-macro impl does not work under `musl`, as it lacks `dlopen`.
+* pr:4207[] add **Unwrap Block** assist:
++
+image::https://user-images.githubusercontent.com/1711539/80965443-cf7f3f80-8e12-11ea-89e3-972503f30ca7.gif[]
+* pr:4270[] add completion for derive macros:
++
+image::https://user-images.githubusercontent.com/1711539/80965765-6cda7380-8e13-11ea-9720-7f0704b8c1cc.gif[]
+* pr:4198[] complete union fields after dot.
+* pr:4199[] document how to use `ale` with vim.
+* pr:4205[] improve YouCompleteMe setup instructions for vim.
+* pr:4236[] document Gnome Builder support.
+* pr:4162[] complete associated items on type parameters.
+* pr:4178[], pr:4227[], pr:4246[] show errors for misplaced `crate`, `self` and `super` in paths.
+* pr:4210[], pr:4244[] include function and traits qualifiers in hover.
+* pr:4167[] implement `CodeActionKind` for assists.
+* pr:4258[] **Run** action now includes option for testing the current package as a whole.
+* pr:4234[] support `local_inner_macros`.
+* pr:4268[] auto-import works inside macros.
+
+== Fixes
+
+* pr:4173[] use core instead of std for builtin derive macros.
+* pr:4183[] format specifiers uses a dedicated token type, `formatSpecifier`.
+* pr:4184[] treat comments beginning with four slashes as regular line comments.
+* pr:4203[] better filtering of qualified enum variants in completion.
+* pr:4204[] if-let to match assists now uses more specific pattern instead of `_`.
+* pr:4221[], pr:4225[] better support `try!` macro on 2015 edition.
+* pr:4231[] fix a bunch of false-positives in join-lines.
+* pr:4253[] remove `workspaceLoaded` setting, it no longer makes sense after
+  we've switched to progress
+
+== Internal Improvements
+
+* pr:4148[] simplify profiler implementation.
+* pr:4196[] rebuild rust-analyzer when launching in VS Code.
+* pr:4208[] use semanic info for finding `From` trait in **Add From impl** assist.
+* pr:4119[] cache proc-macro dlls.
+* pr:4219[] avoid `rustup` invocation for non-rustup rust installation.
+* pr:4223[] allow piping and setting env var in the `not_bash` infra.
+* pr:4233[] accidentally remove "dead" code, which turned out to be very much alive.
+* pr:4254[] restore the "dead" code back.
+* pr:4220[] introduce `LowerCtx` for correctly dealing with hygiene.
+* pr:4256[] improve formatting of analyzer status text.
+* pr:4257[] refactor grammar for block-like expressions, introduce `ast::EffectExpr`.
