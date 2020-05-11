@@ -57,5 +57,5 @@ image::https://user-images.githubusercontent.com/1711539/81536600-22ee1200-936c-
 * pr:4341[] make it possible to sort assist by relevance without computing the action.
 * pr:4331[] helpfully detect errors when parsing rust-analyzer fixtures.
 * pr:4366[] unify lldb and native windows debugger handling.
-* pr:4175[], pr:4389[] introduce `HirDisplay`ko method for rendering source code & use it in **Add Function** and **Specify Type Explicitly* *assists
+* pr:4175[], pr:4389[] introduce `HirDisplay`ko method for rendering source code & use it in **Add Function** and **Specify Type Explicitly** assists
 * pr:4418[] refactor conversion between LSP and rust-analyzer native types.
