@@ -1,0 +1,61 @@
+= Changelog #24
+:sectanchors:
+:page-layout: post
+
+Commit: commit:eb892d707c379eff514df9c2a6b2203f38874b14[] +
+Release: release:2020-05-11[]
+
+== New Features
+
+* pr:4043[] **Change Return Type to Result** assist
++
+image::https://user-images.githubusercontent.com/1711539/81538330-ea9c0300-936e-11ea-90d3-23525b545cd2.gif[]
+
+* pr:4320[] **Run** action and code lens now supports doc tests on functions
++
+image::https://user-images.githubusercontent.com/1711539/81537179-18804800-936d-11ea-9e86-c7e6feaf38fd.gif[]
+
+* pr:4411[] **Unwrap Block** now works for single else:
++
+image::https://user-images.githubusercontent.com/1711539/81539698-ea046c00-9370-11ea-899f-9e38238ee25b.gif[]
+
+* pr:4166[] `rust-analyzer.cargo.target` setting for specifying target tripple rust-analyzer uses for analysis.
+* pr:4328[] `rust-analyzer.checkOnSave.allFeatures` setting (all by default) to run `cargo check` with all features enabled.
+* pr:4372[] 'rust-analyzer.inlayHints.enable' settings for conveniently disabling all inlay hints.
+* pr:4265[] **Change Visibility** assist now works for tuple struct fields.
++
+image::https://user-images.githubusercontent.com/1711539/81536600-22ee1200-936c-11ea-91be-37698d642fa7.gif[]
+
+* pr:4316[] always display full types on hover.
+* pr:4333[] add installation instructions for Arch Linux (rust-analyzer is now packaged!).
+* pr:4296[] fetch `cfg`s from `build.rs`.
+* pr:4329[] in addition to `PATH`, look for `cargo` and `rustc` in `~/.cargo/bin`.
+* pr:4414[] highlight `static mut` as mutable, highlight name of the macro defined with `macro_rules`.
+
+
+== Fixes
+
+* pr:4419[] fix panic in `AstIdMap` due to files with `\r\n`.
+* pr:4295[] specify all rust-analyzer specific tokens and modifiers in package.json.
+  You can use [these custom types](https://github.com/rust-analyzer/rust-analyzer/blob/eb892d707c379eff514df9c2a6b2203f38874b14/editors/code/package.json#L537-L587) to tweak syntax highlighting for Rust.
+* pr:4305[] correctly handle namespaces for structs in name resolution.
+* pr:4325[] fix conversion to UTF-16 indexing for supplementary plane characters.
+* pr:4347[] fix pattern exhaustiveness checks for `!` type.
+* pr:4353[], pr:4365[] work around VS Code TextMate scope bugs, kudos to  https://github.com/georgewfraser[@georgewfraser] for tracking those down!
+* pr:4359[], pr:4409[] fix panic in function signature.
+* pr:4346[] fix visibility checks in rename for enum variants.
+* pr:4362[] do not show runnables for main function outside of a binary target.
+* pr:4376[], pr:4412[], pr:4377[], pr:4379[] various type inference fixes.
+
+== Internal Improvements
+
+* pr:4300[], pr:4303[] cleanup attribute completion, making sure that each "completion contributor" is independent from the others.
+* pr:4321[] rename `ast::ImplItem -> ast::AssocItem`.
+* pr:4350[] implement new API for assists infrastructure.
+* pr:4339[] assert correct capitalization of labels in edits.
+* pr:4340[], pr:4344[] use the single `SourceChange` to describe all edits.
+* pr:4341[] make it possible to sort assist by relevance without computing the action.
+* pr:4331[] helpfully detect errors when parsing rust-analyzer fixtures.
+* pr:4366[] unify lldb and native windows debugger handling.
+* pr:4175[], pr:4389[] introduce `HirDisplay`ko method for rendering source code & use it in **Add Function** and **Specify Type Explicitly* *assists
+* pr:4418[] refactor conversion between LSP and rust-analyzer native types.
