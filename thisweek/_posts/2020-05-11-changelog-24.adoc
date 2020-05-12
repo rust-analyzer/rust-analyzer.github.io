@@ -37,7 +37,7 @@ image::https://user-images.githubusercontent.com/1711539/81536600-22ee1200-936c-
 
 * pr:4419[] fix panic in `AstIdMap` due to files with `\r\n`.
 * pr:4295[] specify all rust-analyzer specific tokens and modifiers in package.json.
-  You can use [these custom types](https://github.com/rust-analyzer/rust-analyzer/blob/eb892d707c379eff514df9c2a6b2203f38874b14/editors/code/package.json#L537-L587) to tweak syntax highlighting for Rust.
+  You can use link:https://github.com/rust-analyzer/rust-analyzer/blob/eb892d707c379eff514df9c2a6b2203f38874b14/editors/code/package.json#L537-L587[these custom types] to tweak syntax highlighting for Rust.
 * pr:4305[] correctly handle namespaces for structs in name resolution.
 * pr:4325[] fix conversion to UTF-16 indexing for supplementary plane characters.
 * pr:4347[] fix pattern exhaustiveness checks for `!` type.
