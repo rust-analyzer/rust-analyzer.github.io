@@ -157,7 +157,7 @@ In my opinion the two important characteristics that determine long-term success
 * How long does it take to build a release version of the project for testing?
 
 I am very happy with the testing speed of rust-analyzer.
-One of my mistakes in IntelliJ aws adding a lot of tests that use Rust's standard library and are slow for that reason.
+One of my mistakes in IntelliJ was adding a lot of tests that use Rust's standard library and are slow for that reason.
 In rust-analyzer, there are only three uber-integrated tests that need the real libstd, all others work from in-memory fixtures which contain only the relevant bits of std.
 
 But the build times leave a lot to be desired.
