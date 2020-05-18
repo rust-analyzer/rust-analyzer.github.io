@@ -1,0 +1,48 @@
+= Changelog #25
+:sectanchors:
+:page-layout: post
+
+Commit: commit:31611da2538e66027ea67482235f6b8659bedf09[] +
+Release: release:2020-05-18[]
+
+== New Features
+
+* pr:4397[] implement a basic TextMate grammar which plays better with our semantic highlighting.
+* pr:4358[] `ifl` postfix template for `Result` and `Option`
++
+image::todo[]
+* pr:4423[] `tmod` item-level snippet.
++
+image::todo[]
+* pr:4273[] **Add Visibility** assist now works on paths, meaning that
++
+image::todo[]
+
+* pr:4448[] **Generate Launch Configuration** command to save debug configurations for specific tests:
++
+image::todo[]
+
+* pr:4436[] use `.rust` sufix on TextMate scopes introduced by rust-analyzer for easier theming.
+* pr:4427[] use Ubuntu 16.04 to build releases, to get older glibc.
+* pr:4400[], pr:4473[] improve syntax higlighting, underline mutable bindings in all themes.
+* pr:4455[] in completion, prioritise locals with correct types.
+* pr:4288[] initial implementation of renaming of `self` parameter, for switching between associated function and a method.
+* pr:4479[], pr:4484[] support for `dyn Trait`.
+* pr:4489[] reduce allocations, improving performance for batch analysis for up to 4%.
+* pr:4496[] we now support two latest versions of VS Code.
+
+== Fixes
+
+* pr:4421[] fix visibility handling in find references.
+* pr:4403[] check client capabilities before sending progres notifications.
+* pr:4447[] make sure that play arrow in `Run` lens is not emoji-ifyied.
+* pr:4431[] don't garbage-collect results of procedural macro expansion, to combat non-deterministic proc macros.
+  Please avoid randomized hash maps when writing procedural macros :-)
+* pr:4470[] handle `Self` in values and patterns.
+* pr:4472[] fix path resolution for module and function with same name.
+
+== Internal Improvements
+
+* pr:4424[] use `RA_LOG` variable to enable rust-analyzer's logging, so as not to conflict with usual `RUST_LOG`.
+* pr:4083[] document rust-analyzer's AST.
+* pr:4405[] make some internal types public so that rust-analyzer is easier to use as a library.
