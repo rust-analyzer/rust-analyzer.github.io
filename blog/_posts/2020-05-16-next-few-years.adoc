@@ -17,20 +17,20 @@ One of the most surprising aspects of rust-analyzer for me is how useful it alre
 Today, I write Rust code enjoying fast code-completion, mostly correct go to definition and plethora of assists.
 Even syntax highlighting inside macros works!
 
-My original plan for rust-analyzer was to write a quick one-two year hack to demonstrate a proof-of-concept IDE support, something to strive for rather than a finished product.
-Obviously, we have massively overshoot this goal: people depend on rust-analyzer for productive Rust programming today.
-This creates its own opportunities and dangers, which inform this planing document.
+My original plan for rust-analyzer was to write a quick one-to-two-year hack to demonstrate a proof-of-concept IDE support, something to strive for rather than a finished product.
+Obviously, we have massively overshot this goal: people depend on rust-analyzer for productive Rust programming today.
+This creates its own opportunities and dangers, which inform this planning document.
 
 == rust-analyzer as the Official LSP Server for Rust
 
-People write a ton of Rust today, and they deserve at least a baseline IDE support.
+People write a ton of Rust today, and they deserve at least a baseline level of IDE support.
 I think our immediate goal is to make rust-analyzer easier to use in its current state, effectively implementing https://github.com/rust-lang/rfcs/pull/2912[RFC2912].
 
 The amount of programming work on rust-analyzer side is relatively small here:
 we need to fix various protocol conformance issues,
 clean up various defaults to be less experimental,
 write documentation which doesn't require a lot of enthusiasm to understand, etc.
-The amount of org stuff is much bigger -- we need to package rust-analyzer with rustup, merge RLS and rust-analyzer VS Code extension, figure out repository structure, etc.
+The amount of org stuff is much bigger -- we need to package rust-analyzer with rustup, merge the RLS and rust-analyzer VS Code extensions, figure out repository structure, etc.
 
 Separately, I want to make sure that rust-analyzer is usable inside large non-Cargo based monorepos.
 We have some initial support for this already, but there's a bunch of details we need to iron out.
@@ -39,7 +39,7 @@ We have some initial support for this already, but there's a bunch of details we
 
 The main danger I see is that rust-analyzer can ossify, as it is today.
 This would be bad, because, although current rust-analyzer architecture is right in broad strokes, a lot of important and hard-to-change details are wrong.
-After we push rust-analyzer to the general public, we should focus on boring implementation & design work, with relatively few shiny gifs and a lot of foundational work for the decade.
+After we push rust-analyzer to the general public, we should focus on boring implementation & design work, with relatively few shiny gifs and a lot of foundational work for the next decade.
 
 == Bringing Chalk to Rustc
 
@@ -56,19 +56,19 @@ At some point, I should take a break from actively hacking on rust-analyzer and 
 
 == Virtual File System
 
-The most fundamental data structure in rust-analyzer, even more fundamental than a syntax tree, is VFS.
+The most fundamental data structure in rust-analyzer, even more fundamental than a syntax tree, is the VFS, or Virtual File System.
 It serves two dual goals:
 
 * providing consistent immutable snapshots of the file system,
 * applying transactional changes to the state of the file system.
 
-This abstraction is the boundary between pure-functional universe of rust-analyzer, and the messiness of external world.
+This abstraction is the boundary between the pure-functional universe of rust-analyzer, and the messiness of the external world.
 It needs to bridge case-insensitive file systems, symlinks and cycles to a simpler model of "tree with utf8 paths" we want inside.
 Additionally it should work with non-path files: there are use-cases where we want to do analysis of Rust code, which doesn't really reside on the file system.
 
 One specific aspect I am struggling with is dynamism.
 On the one hand, it seems that a good design is to require to specify the set of files in VFS upfront, as a set of globs.
-This is important because, to properly register file watchers without loosing updates, it's important to crawl the file-system eagerly.
+This is important because, to properly register file watchers without losing updates, it's important to crawl the file-system eagerly.
 However, specifying a set of globs up-front makes changing this set later messy.
 
 I would be curious to hear about existing solutions in this area.
@@ -80,28 +80,28 @@ The current VFS is ... not great, I don't feel comfortable building rust-analyze
 
 == WASM proc macros
 
-At the moment, proc-macros are implemented as dynamic libraries, loadable into compiler process.
+At the moment, proc-macros are implemented as dynamic libraries, loadable into the compiler process.
 This works ok-enough for the compiler, but is a pretty bad fit for an IDE:
 
-* if proc-macro crashes, it brings down the whole process,
+* if a proc-macro crashes, it brings down the whole process,
 * it's hard to limit execution time of proc-macro,
 * proc-macros can be non-deterministic, which can break internal IDE invariants.
 
 At the moment, we paper over this by running proc-macros in a separate process and never invalidating proc-macro caches, but this feels like a hack and has high implementation complexity.
 it would be much better if proc-macros were deterministic and controllable by definition, and WASM can give us that.
 
-I am slightly worried that this will get push-back from folks who want to connect to database over TCP at compile time :)
+I am slightly worried that this will get push-back from folks who want to connect to databases over TCP at compile time :)
 Long term, I believe that guaranteeing deterministic compilation is hugely important, irrespective of IDE story.
 
 == Language Design for Locality
 
-There's a very important language property and IDE can leverage to massively improve performance:
+There's a very important language property that an IDE can leverage to massively improve performance:
 
 __What happens inside a function, stays inside the function__
 
-If it is possible to type-check body of a function without looking at the bodies of other functions, you can speed up IDE by drastically reducing the amount of work it needs to do.
+If it is possible to type-check the body of a function without looking at the bodies of other functions, you can speed up an IDE by drastically reducing the amount of work it needs to do.
 
-Rust mostly confirms to this property, but there are a couple of annoying violations:
+Rust mostly conforms to this property, but there are a couple of annoying violations:
 
 * local inherent impls with publicly visible methods.
 * local trait impls for non-local types.
@@ -110,15 +110,15 @@ Rust mostly confirms to this property, but there are a couple of annoying violat
 
 If we want to have fast & correct IDE support, we should phase out those from the language via edition mechanism.
 
-Note that auto-trait leakage of impl Trait is not nearly as problematic, as you only need to inspect function body if you call the function.
+Note that auto-trait leakage of impl Trait is not nearly as problematic, as you only need to inspect a function's body if you call the function.
 Of course, as an IDE author I'd love to require specifying auto-traits, but, as a language user, I much prefer the current design.
 
 == Compact Data Structures
 
 rust-analyzer uses a novel and rather high-tech query-based architecture for incremental computation.
-Today, it is clear that this general approach fits IDE use-case really well.
+Today, it is clear that this general approach fits an IDE use-case really well.
 However, I have a lot of doubts about specific details.
-I feel that today rust-analyzer lacks mechanical sympathy and leaves a tone of performance on the table.
+I feel that today rust-analyzer lacks mechanical sympathy and leaves a ton of performance on the table.
 A lot of internal data structures are heap-allocated `Arc`-droplets, we overuse hashing and underuse indexing, we don't even intern identifiers!
 
 To get a feeling of how blazingly fast compiler front-ends can be, I highly recommend checking out Sorbet, type checker for Ruby.
@@ -137,11 +137,11 @@ One of the current peculiarities of rust-analyzer is that it doesn't persist cac
 Opening project in rust-analyzer means waiting a dozen seconds while we process standard library and dependencies.
 
 I think this "limitation" is actually a very valuable asset!
-It forces us to keep non-incremental code-path reasonably fast.
+It forces us to keep the non-incremental code-path reasonably fast.
 
 I think it is plausible that we don't actually need persistent caches at all.
 rust-analyzer is basically text processing, and the size of input is in tens of megabytes (_and_ we ignore most of those megabytes anyway).
-If we just don't lose performance here and there, and throw the work onto all the cores, we should be able to load projects from scratch withing a reasonable time budget.
+If we just don't lose performance here and there, and throw the work onto all the cores, we should be able to load projects from scratch within a reasonable time budget.
 
 The first step here would be establishing the culture of continuous benchmarking and performance tuning.
 
