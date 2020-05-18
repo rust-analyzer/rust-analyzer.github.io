@@ -14,7 +14,7 @@ image::https://user-images.githubusercontent.com/1711539/82217445-b7331880-991a-
 * pr:4423[] `tmod` item-level snippet.
 +
 image::https://user-images.githubusercontent.com/1711539/82217447-b8644580-991a-11ea-87e1-a8c61d21583f.gif[]
-* pr:4273[] **Add Visibility** assist now works on paths, meaning that
+* pr:4273[] **Add Visibility** assist now works on paths, adding a visibility to an item in other module:
 +
 image::https://user-images.githubusercontent.com/1711539/82217439-b39f9180-991a-11ea-92e9-f162c41debc6.gif[]
 
