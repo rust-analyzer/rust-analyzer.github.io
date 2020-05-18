@@ -41,7 +41,7 @@ The main danger I see is that rust-analyzer can ossify, as it is today.
 This would be bad, because, although current rust-analyzer architecture is right in broad strokes, a lot of important and hard-to-change details are wrong.
 After we push rust-analyzer to the general public, we should focus on boring implementation & design work, with relatively few shiny gifs and a lot of foundational work for the decade.
 
-== Brining Chalk to Rustc
+== Bringing Chalk to Rustc
 
 rust-analyzer has been using chalk as its trait solver for a long time now.
 It would be good to finish the work, and integrate it into rustc as well, ~~and give people their GATs~~.
@@ -131,7 +131,7 @@ I am very inspired by this work, but also embarrassed by how far rust-analyzer i
 Part of that I think is essential complexity -- Rust's name resolution and macro expansion are *hard*.
 But I also wonder if we can change salsa, such that it uses `Vec`-based arenas, rather than `Arc`s in `HashMap`s.
 
-== Parallal and Fast > Persistance
+== Parallel and Fast > Persistence
 
 One of the current peculiarities of rust-analyzer is that it doesn't persist caches to disk.
 Opening project in rust-analyzer means waiting a dozen seconds while we process standard library and dependencies.
