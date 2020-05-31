@@ -260,4 +260,4 @@ Gnome Builder currently has support for RLS, and there's no way to configure the
 
 == Usage
 
-See https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/features.md[features.md].
+See https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_features.adoc[features.adoc].
