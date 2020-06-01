@@ -1,0 +1,38 @@
+= Changelog #27
+:sectanchors:
+:page-layout: post
+
+Commit: commit:7ae247f03c639d6e704159df7f0120466afc3c30[] +
+Release: release:2020-06-01[]
+
+== New Features
+
+* pr:4646[] users.rust-lang.org now includes a dedicated category for IDE-related questions: https://users.rust-lang.org/c/ide/14[IDEs and editors].
+* pr:4664[] add most of the features of rust-analyzer to the manual.
+  Each feature includes link to the source code, which implements the feature.
+  If something does not work exactly as you want it to, you know, what to do ;)
+* pr:4602[], pr:4603[] add semantic token types for boolean literals and self keyword.
+* pr:4621[], pr:4654[] highlighting for `?` operator.
+* pr:4534[] `.call` postfix completion.
+* pr:4640[] add `inRustProject` when-clause for commands in vscode.
+* pr:4648[] support the nightly raw reference operator.
+* pr:4562[] **Introduce Named Lifetime** assist.
+
+== Fixes
+
+* pr:4612[] correctly tag releases.
+* pr:4617[] fix rendering of hover.
+* pr:4629[] don't display inlay hints in diff view in VS Code.
+* pr:4596[] when completing parameter names, don't include leading underscore.
+* pr:4592[] correctly compute text edit during completion if the partially-typed identifier is a keyword.
+* pr:4651[] to improve completion, prefer first type in `if else` if there's a type mismatch.
+* pr:4653[] fix match ergonomics in closure parameters.
+* pr:4667[] infer labelled breaks correctly.
+* pr:4669[] in VS Code plugin always derive from `process.env` when spawning a child process/shell execution.
+* pr:4674[] recursively search submodules to find modules in which a definition is visible.
+
+== Internal Improvements
+
+* pr:4605[] flatten TypeScript module hierarchy.
+* pr:4607[], pr:4611[], pr:4632[] document more LSP extensions.
+* pr:4641[], pr:4652[] upgrade Chalk.
