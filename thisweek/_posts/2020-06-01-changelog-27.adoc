@@ -9,8 +9,8 @@ Release: release:2020-06-01[]
 
 * pr:4646[] users.rust-lang.org now includes a dedicated category for IDE-related questions: https://users.rust-lang.org/c/ide/14[IDEs and editors].
 * pr:4664[] add most of the features of rust-analyzer to the manual.
-  Each feature includes link to the source code, which implements the feature.
-  If something does not work exactly as you want it to, you know, what to do ;)
+  Each feature includes a link to the source code which implements the feature.
+  If something does not work exactly as you want it to, you know what to do ;)
 * pr:4602[], pr:4603[] add semantic token types for boolean literals and self keyword.
 * pr:4621[], pr:4654[] highlighting for `?` operator.
 * pr:4534[] `.call` postfix completion.
