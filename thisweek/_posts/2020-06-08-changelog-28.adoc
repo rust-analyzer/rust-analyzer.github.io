@@ -20,7 +20,6 @@ Release: release:2020-06-08[]
     }
 }
 ----
-+
 image::https://user-images.githubusercontent.com/1711539/84034187-48d1fb00-a99a-11ea-960b-e6b3f73e7db1.png[]
 * pr:4382[] allow specifying key-value cfg options in JsonProject.
 * pr:4726[] allow to override build-in project discovery with explicit list of `Cargo.toml`s to import:
