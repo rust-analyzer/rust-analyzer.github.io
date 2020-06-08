@@ -1,0 +1,66 @@
+= Changelog #28
+:sectanchors:
+:page-layout: post
+
+Commit: commit:d6967762dd1fff3cfb65d481ba5a169143205c0e[] +
+Release: release:2020-06-08[]
+
+== New Features
+
+* pr:4711[] don't pass `--all-features` by default, use Cargo's default features instead.
+* pr:4720[] highlight unsafe operations inside unsafe blocks. In VS Code, you can use `editor.semanticTokenColorCustomizations` to customize the actual coloring
++
+[source,json]
+----
+"editor.semanticTokenColorCustomizations": {
+    "[Theme Name]": {
+        "rules": {
+            "operator.unsafe": "#f00",
+            "function.unsafe": "#f00"
+        },
+    }
+}
+----
++
+image::https://user-images.githubusercontent.com/1711539/84034187-48d1fb00-a99a-11ea-960b-e6b3f73e7db1.png[]
+* pr:4382[] allow specifying key-value cfg options in JsonProject.
+* pr:4726[] allow to override build-in project discovery with explicit list of `Cargo.toml`s to import:
++
+[source,json]
+----
+{ "rust-analyzer.linkedProjects": ["/home/projects/rust-analyzer/Cargo.toml"] }
+----
+* pr:4730[] document `rust-project.json` file format, which can be used with non-Cargo based build systems.
+  Docs: https://rust-analyzer.github.io/manual.html#non-cargo-based-projects[#non-cargo-based-projects].
+* pr:4660[] enable hover and autocomplete docs on macro generated items.
+* pr:4748[] implement hover actions, as an alternative UI for code lenses.
++
+image::https://user-images.githubusercontent.com/1711539/84036613-b6cbf180-a99d-11ea-81e3-f3ecd9142937.gif[]
+* pr:4689[] implement return position impl trait.
+
+
+== Fixes
+
+* pr:4750[] fix **Introduce Named Lifetime** assist to work in more cases.
++
+image::https://user-images.githubusercontent.com/1711539/84036167-22fa2580-a99d-11ea-8fec-493520297c3d.gif[]
+* pr:4580[] invoke correct cargo for `run` action in VS Code.
+* pr:4658[] fix lexing of format strings.
+* pr:4721[] use correct modifier for unused code.
+* pr:4502[] mark fixes from diagnostics as quick fixes.
+* pr:4737[] parse default unsafe & default const.
+* pr:4765[] fix type parameter defaults.
+
+== Internal Improvements
+
+* pr:4761[] use Chalk from crates.io.
+* pr:4748[] build specialized index to improve auto-import performance.
+* pr:4717[] compute assists text edits lazily.
+* pr:4703[] document review process and contribution guidelines.
+* pr:4772[] document certain high-level internal architecture invariants.
+* pr:4688[] document initilizationOptions used by rust-analyzer.
+* pr:4710[] make LSP extension for running tests & binaries less rust-specific.
+* pr:4723[] derive local roots from workspace configuration.
+* pr:4724[] rename WorldState -> GlobalState.
+* pr:4758[] actually test `include!(concant!(env!()))` pattern.
+* pr:4760[] preliminary refactorings in preparation for new VFS.
