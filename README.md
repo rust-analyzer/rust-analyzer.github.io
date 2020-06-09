@@ -13,4 +13,4 @@ $ bundle exec jekyll serve
 
 The markup language we use (.adoc) is AsciiDoctor. It is awesome :-).
 
-(AsciiDoctor Syntax Quick Reference)[https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/].
+[AsciiDoctor Syntax Quick Reference](https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/).
