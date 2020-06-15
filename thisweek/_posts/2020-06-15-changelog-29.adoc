@@ -25,7 +25,7 @@ image::https://user-images.githubusercontent.com/1711539/84659254-6f9ead00-af17-
 == Fixes
 
 * pr:4775[] goto definition work correctly for fields of enum variants.
-* pr:4784[] correctly handle `cfg`s from `rust-project.json`.
+* pr:4784[] correctly handle ``cfg``s from `rust-project.json`.
 * pr:4803[] parse default unsafe fn.
 * pr:4811[] **Unwrap Block** works with match arms.
 * pr:4815[] correctly parse <_> paths in patterns.
