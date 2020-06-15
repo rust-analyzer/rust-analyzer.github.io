@@ -1,0 +1,47 @@
+= Changelog #29
+:sectanchors:
+:page-layout: post
+
+Commit: commit:017331a53c1eeaa1253d2829165627bfa27dc124[] +
+Release: release:2020-06-15[]
+
+== Sponsors
+
+This week, we'd like to give a shoutout to one of our oldest sponsors:
+https://embark-studios.com/[Embark Studios], a Stockholm-based game studio building a platform for the future of gamemaking and striving to support a thriving open-source ecosystem for game development in Rust.
+
+== New Features
+
+* pr:4683[] initial version of semantic syntax highlighting for code inside doc comments.
++
+image::https://user-images.githubusercontent.com/201808/83415249-1f0b5800-a41f-11ea-8fa6-c282434d6ff7.png[]
+
+* pr:4576[] **Extract Enum Variant to Struct** refactoring.
++
+image::https://user-images.githubusercontent.com/1711539/84659254-6f9ead00-af17-11ea-84ab-bea16f160ecf.gif[]
+* pr:4822[] `checkOnSave` cargo flags by default are inherited from cargo flags.
+* pr:4700[] add top level keywords completion.
+
+== Fixes
+
+* pr:4775[] goto definition work correctly for fields of enum variants.
+* pr:4784[] correctly handle `cfg`s from `rust-project.json`.
+* pr:4803[] parse default unsafe fn.
+* pr:4811[] **Unwrap Block** works with match arms.
+* pr:4815[] correctly parse <_> paths in patterns.
+* pr:4834[] in field patterns, don't highlight local binding as a field.
+* pr:4850[] indent chain `.` even if there's more stuff afterwards.
+* pr:4849[] make known paths use `core` instead of `std`.
+* pr:4833[] separating parsing of `for` in predicates and types.
+* pr:4858[] prefer shorter paths for external items in auto import.
+* pr:4857[] fix invalid shorthand initialization diagnostic for tuple structs.
+* pr:4862[] re-enable "Warning" diagnostic severity for unused variables.
+
+== Internal Improvements
+
+* pr:4805[] finish JsonProject transition to cfgs from the separate atoms and features.
+* pr:4810[] simplify unwrapping of blocks.
+* pr:4832[] reduce `OUT_DIR` special casing.
+* pr:4819[] auto import go brrr (add an FST index to `ImportMap` and use it to speed up auto import).
+* pr:4843[] don't guess macro expansion crate.
+* pr:4875[] introduce paths crate to track absolutness of path in the type system.

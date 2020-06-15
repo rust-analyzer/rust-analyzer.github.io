@@ -400,6 +400,25 @@ fn main() {
 
 
 [discrete]
+=== `extract_struct_from_enum_variant`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/extract_struct_from_enum_variant.rs#L16[extract_struct_from_enum_variant.rs]
+
+Extracts a struct from enum variant.
+
+.Before
+```rust
+enum A { ┃One(u32, u32) }
+```
+
+.After
+```rust
+struct One(pub u32, pub u32);
+
+enum A { One(One) }
+```
+
+
+[discrete]
 === `fill_match_arms`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/fill_match_arms.rs#L14[fill_match_arms.rs]
 
@@ -994,7 +1013,7 @@ use std::{collections::HashMap};
 
 [discrete]
 === `unwrap_block`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/unwrap_block.rs#L9[unwrap_block.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/unwrap_block.rs#L12[unwrap_block.rs]
 
 This assist removes if...else, for, while and loop control statements to just keep the body.
 
