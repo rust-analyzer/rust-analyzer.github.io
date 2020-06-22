@@ -1,0 +1,60 @@
+= Changelog #30
+:sectanchors:
+:page-layout: post
+
+Commit: commit:3370c81525c89c4f3229180f83520de29b7ee8a0[] +
+Release: release:2020-06-22[]
+
+== Sponsors
+
+This week, we'd like to thank another long-time sponsor:
+
+https://discord.com[Discord], a place to talk with your communities and friends, built using https://discord.gg/rust-lang[Rust] and other best-in-class tools.
+
+== New Features
+
+* pr:4839[] implement goto type definition for inlay hints
++
+image::https://user-images.githubusercontent.com/62505555/83335671-0122e380-a2b7-11ea-9922-fbdcfb11a7f3.gif[]
+* pr:4851[] add quickfix to add a struct field
++
+image::https://user-images.githubusercontent.com/1711539/85289481-d253f380-b497-11ea-8089-2f21e3fdb75e.gif[]
+* pr:4860[] accept relative paths in rust-project.json.
+  If a relative path is found as part of Crate.root_module or Root.path, interpret it as relative to the location of the rust-project.json file.
+* pr:4878[] make **Replace Qualified Name With Use** replace *all* mentions of the path.
+* pr:4919[] Structural Search Replace no longer requires to specify the type of the capture.
+* pr:4916[] add configuration options to treat certain `cargo check` warnings with hint or information severity.
++
+[source,json]
+----
+{
+    "rust-analyzer.diagnostics.warningsAsHint": [
+        "unused_variables"
+    ]
+}
+----
+* pr:4925[] highlighting escape sequences in strings.
+* pr:4903[] add `documentation` to the list of semantic tokens modifiers for code inside doc comments.
+* pr:4963[] download artifacts into tmp dir.
+  This should prevent partially downloaded files in cases when the user closes vsode before the download is complete.
+* pr:4969[] handle bindings after @ in patterns.
+
+== Fixes
+
+* pr:4877[] fix syntax highlighting of recursive macros.
+* pr:4876[] don't highlight unresolved references in doc comments.
+* pr:4915[] only highlight rust code in doc comments.
+* pr:4959[] syntax highlighting for documentation comments on macro definitions.
+* pr:4914[], pr:4930[] fix panic in match checking.
+* pr:4821[] display doctest code lens before comment.
+* pr:4950[], pr:4952[], pr:4957[] fix panics in type inference.
+* pr:4958[] fix type inference for Fn traits.
+
+== Internal Improvements
+
+* pr:4891[], pr:4948[] add API for the new Virtual File System.
+* pr:4947[] improve type checking to use up to 20% less memory.
+* pr:4934[] directly leverage salsa queries for computing symbol index.
+* pr:4937[] allow overriding rust-analyzer display version.
+* pr:4961[], pr:4964[] centralize in-flight LSP requests handling.
+* pr:4962[] expand parsing API to allow more node types for SSR.

@@ -949,7 +949,7 @@ fn compute() -> Option<i32> { None }
 
 [discrete]
 === `replace_qualified_name_with_use`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/replace_qualified_name_with_use.rs#L6[replace_qualified_name_with_use.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/replace_qualified_name_with_use.rs#L9[replace_qualified_name_with_use.rs]
 
 Adds a use statement for a given fully-qualified name.
 

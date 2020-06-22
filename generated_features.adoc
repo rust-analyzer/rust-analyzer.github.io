@@ -76,7 +76,7 @@ Navigates to the type of an identifier.
 
 
 === Hover
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/hover.rs#L106[hover.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/hover.rs#L117[hover.rs]
 
 Shows additional information, like type of an expression or documentation for definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.
@@ -238,7 +238,7 @@ rust-analyzer itself.
 
 
 === Status
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/status.rs#L27[status.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/status.rs#L28[status.rs]
 
 Shows internal statistic about memory usage of rust-analyzer.
 
@@ -254,11 +254,11 @@ Shows internal statistic about memory usage of rust-analyzer.
 
 Search and replace with named wildcards that will match any expression.
 The syntax for a structural search replace command is `<search_pattern> ==>> <replace_pattern>`.
-A `$<name>:expr` placeholder in the search pattern will match any expression and `$<name>` will reference it in the replacement.
+A `$<name>` placeholder in the search pattern will match any AST node and `$<name>` will reference it in the replacement.
 Available via the command `rust-analyzer.ssr`.
 
 ```rust
-// Using structural search replace command [foo($a:expr, $b:expr) ==>> ($a).foo($b)]
+// Using structural search replace command [foo($a, $b) ==>> ($a).foo($b)]
 
 // BEFORE
 String::from(foo(y + 5, z))
@@ -275,7 +275,7 @@ String::from((y + 5).foo(z))
 
 
 === Workspace Symbol
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide_db/src/symbol_index.rs#L122[symbol_index.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide_db/src/symbol_index.rs#L145[symbol_index.rs]
 
 Uses fuzzy-search to find types, modules and functions by name across your
 project and dependencies. This is **the** most useful feature, which improves code
