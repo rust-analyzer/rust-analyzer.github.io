@@ -42,7 +42,7 @@ image::https://user-images.githubusercontent.com/1711539/86006971-122a5600-ba17-
 * pr:5004[] fix panic in split/merge import assists.
 * pr:5023[] fix string literal inference in match.
 * pr:5015[] account for updated module ids when determining whether a resolution is changed.
-* pr:5033[] ordero of glob imports does not affect import shadowing.
+* pr:5033[] order of glob imports does not affect import shadowing.
 
 == Internal Improvements
 
