@@ -1,0 +1,58 @@
+= Changelog #31
+:sectanchors:
+:page-layout: post
+
+Commit: commit:ca31b1d63ae91a69f1ce9c0b075403834ba19f38[] +
+Release: release:2020-06-29[]
+
+== Sponsors
+
+This week, we'd like to thank another long-time sponsor:
+
+https://www.parity.io/[Parity] is building tooling and infrastructure for the decentralised, trustless Web in Rust.
+
+== New Features
+
+* pr:4990[] introduce an `ItemTree` layer to avoid reparsing files.
+  This reduces the latency of "go to definition" in a simple benchmark on rust-analyzer by around 30%.
+* pr:5017[] add custom cargo runners support. This adds an option to delegate actual cargo commands building to another extension.
+  For example, to use a different manager like https://github.com/rust-embedded/cross[cross].
+  https://github.com/vsrs/cross-rust-analyzer[cross-rust-analyzer] is an example of such extension.
+* pr:5069[] **Extract Variable** understands field init shorthand
++
+image::https://user-images.githubusercontent.com/1711539/86007529-d2b03980-ba17-11ea-998f-0e44f659041f.gif[]
+* pr:4999[] allow matching of whole macro calls in structural search replace.
+* pr:5007[] allow matching within macro calls in structural search replace.
+* pr:4997[] document GNOME Builder (Nightly) support for rust-analyzer.
+* pr:4940[] set `injected` modifier for code in doctests.
+  Theme authors can use it to dim injected code.
+* pr:5047[] matching brace works for | in lambdas
++
+image::https://user-images.githubusercontent.com/1711539/86006971-122a5600-ba17-11ea-8be7-f60b0a97eead.gif[]
+* pr:5066[] infer type for slice wildcard patterns.
+* pr:4587[] missing unsafe diagnostics.
+* pr:5100[], pr:5102[]: Add support for `include_str` and `include_bytes`.
+
+== Fixes
+
+* pr:4900[] fix name resolution for `Self` in enums.
+* pr:4988[] don't offer to add missing fields of unknown types.
+* pr:4992[] never disable error logging on the frontend.
+* pr:5002[] fix underflow panic when doctests are at top of file.
+* pr:5004[] fix panic in split/merge import assists.
+* pr:5023[] fix string literal inference in match.
+* pr:5015[] account for updated module ids when determining whether a resolution is changed.
+* pr:5033[] ordero of glob imports does not affect import shadowing.
+
+== Internal Improvements
+
+* pr:4976[] new VFS.
+* pr:5068[] prepare for dynamic project reloading.
+* Rewrite main loop in rust-analyzer.
+* pr:4982[] upgrade chalk. This, and other type system improvements, bring the proportion of of unknown types in rust-analzyer to less than 1%.
+* pr:4983[], pr:5010[] add `paths::RelPath[Buf]`.
+* pr:5013[] uniformly trim test data.
+* pr:5014[] centralize test data parsing.
+* pr:5029[] use `paths::AbsPath` in more places.
+* pr:5034[] cleanup project.json deserialization.
+* pr:5048[], pr:5056[] Canonicalize actor API.

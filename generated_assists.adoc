@@ -339,7 +339,7 @@ fn main() {
 
 [discrete]
 === `change_return_type_to_result`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/change_return_type_to_result.rs#L8[change_return_type_to_result.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/change_return_type_to_result.rs#L9[change_return_type_to_result.rs]
 
 Change the function's return type to Result.
 
@@ -356,7 +356,7 @@ fn foo() -> Result<i32, ${0:_}> { Ok(42i32) }
 
 [discrete]
 === `change_visibility`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/change_visibility.rs#L14[change_visibility.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/change_visibility.rs#L11[change_visibility.rs]
 
 Adds or changes existing visibility specifier.
 
@@ -419,6 +419,28 @@ enum A { One(One) }
 
 
 [discrete]
+=== `extract_variable`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/extract_variable.rs#L14[extract_variable.rs]
+
+Extracts subexpression into a variable.
+
+.Before
+```rust
+fn main() {
+    ┃(1 + 2)┃ * 4;
+}
+```
+
+.After
+```rust
+fn main() {
+    let $0var_name = (1 + 2);
+    var_name * 4;
+}
+```
+
+
+[discrete]
 === `fill_match_arms`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/fill_match_arms.rs#L14[fill_match_arms.rs]
 
@@ -450,7 +472,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `fix_visibility`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/fix_visibility.rs#L13[fix_visibility.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/fix_visibility.rs#L9[fix_visibility.rs]
 
 Makes inaccessible item public.
 
@@ -581,28 +603,6 @@ impl<'a> Cursor<'a> {
             Cursor::Replace(node) | Cursor::Before(node) => node,
         }
     }
-}
-```
-
-
-[discrete]
-=== `introduce_variable`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/introduce_variable.rs#L14[introduce_variable.rs]
-
-Extracts subexpression into a variable.
-
-.Before
-```rust
-fn main() {
-    ┃(1 + 2)┃ * 4;
-}
-```
-
-.After
-```rust
-fn main() {
-    let $0var_name = (1 + 2);
-    var_name * 4;
 }
 ```
 

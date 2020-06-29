@@ -163,9 +163,9 @@ mod tests {
 
 
 === Matching Brace
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/matching_brace.rs#L3[matching_brace.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/matching_brace.rs#L7[matching_brace.rs]
 
-If the cursor is on any brace (`<>(){}[]`) which is a part of a brace-pair,
+If the cursor is on any brace (`<>(){}[]||`) which is a part of a brace-pair,
 moves cursor to the matching brace. It uses the actual parser to determine
 braces, so it won't confuse generics with comparisons.
 
@@ -250,11 +250,12 @@ Shows internal statistic about memory usage of rust-analyzer.
 
 
 === Structural Seach and Replace
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/ssr.rs#L26[ssr.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/ssr.rs#L7[ssr.rs]
 
-Search and replace with named wildcards that will match any expression.
+Search and replace with named wildcards that will match any expression, type, path, pattern or item.
 The syntax for a structural search replace command is `<search_pattern> ==>> <replace_pattern>`.
 A `$<name>` placeholder in the search pattern will match any AST node and `$<name>` will reference it in the replacement.
+Within a macro call, a placeholder will match up until whatever token follows the placeholder.
 Available via the command `rust-analyzer.ssr`.
 
 ```rust
