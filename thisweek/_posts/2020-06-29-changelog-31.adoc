@@ -17,7 +17,7 @@ https://www.parity.io/[Parity] is building tooling and infrastructure for the de
   This reduces the latency of "go to definition" in a simple benchmark on rust-analyzer by around 30%.
 * pr:5017[] add custom cargo runners support. This adds an option to delegate actual cargo commands building to another extension.
   For example, to use a different manager like https://github.com/rust-embedded/cross[cross].
-  https://github.com/vsrs/cross-rust-analyzer[cross-rust-analyzer] is an example of such extension.
+  https://marketplace.visualstudio.com/items?itemName=vsrs.cross-rust-analyzer[cross-rust-analyzer] is an example of such extension.
 * pr:5069[] **Extract Variable** understands field init shorthand
 +
 image::https://user-images.githubusercontent.com/1711539/86007529-d2b03980-ba17-11ea-998f-0e44f659041f.gif[]
