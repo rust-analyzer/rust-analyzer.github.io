@@ -1,0 +1,86 @@
+= Changelog #32
+:sectanchors:
+:page-layout: post
+
+Commit: commit:8b0983e89ad9a28b142eccf3755a8c9aaeb37852[] +
+Release: release:2020-07-06[]
+
+== Sponsors
+
+This week we'd like to thank one of our individual sponsors, https://github.com/anp[@anp].
+
+@anp maintains https://moxie.rs[moxie] project: a lightweight platform-agnostic declarative UI runtime, because incremental feedback latency and quality are core to building interactive software.
+
+
+**Become a sponsor:** https://opencollective.com/rust-analyzer/[opecollective.com/rust-analyzer]
+
+== New Features
+
+* pr:5169[], pr:5188[] initial support for dynamic workspace reloading.
++
+image::https://user-images.githubusercontent.com/1711539/86605844-8335b480-bfa7-11ea-964f-72e06f535607.gif[]
+* pr:5119[] show notification while SSR is in progress.
+* pr:5120[], pr:5154[] add a simple SSR subcommand to the rust-analyzer command line binary:
+[source,bash]
+----
+rust-analyzer ssr '$a.foo($b) ==> bar($a, $b)'
+----
+* pr:5161[] add initial support for placeholder constraints in structural search replace.
+* pr:5142[] allow parallel type inference in batch mode (`rust-analyzer analysis-stats`).
+* pr:5178[] emit folding ranges for multiline calls.
+* pr:5149[] implement Chalk variable kinds, which improves type inference for primitives.
+* pr:5116[] set categories for code actions.
+* pr:5192[] take `rust-analyzer.cargo.features` into account when generating run configurations.
+* pr:5202[] allow to set default environment for run configurations:
++
+```jsonc
+"rust-analyzer.runnableEnv": [
+  {
+    // null mask means that this rule will be applied for all runnables
+    // "mask": null,
+    env: {
+      "APP_ID": "1",
+      "APP_DATA": "asdf"
+    }
+  },
+  {
+    "mask": "test_name",
+    "env": {
+      "APP_ID": "2", // overwrites only APP_ID
+    }
+  }
+]
+```
+* pr:4864[] Add optional target to crates in json project
+
+== Fixes
+
+* pr:5122[] fix "Run | Debug" lens for examples.
+* pr:5124[] partially fix handling of type params depending on type params.
+* pr:5211[] partially fix inference of indexing argument.
+* pr:5096[] fix handling of whitespace when applying SSR within macro expansions.
+* pr:5110[] fix call hierarchy.
+* pr:5179[] lower fields despite invalid type.
+* pr:5089[] disable auto-complete on comments.
+* pr:5189[] record and suggest assoc. items of traits via ImportMap.
+* pr:5212[] fix renaming of nested out of line modules `mod outer { mod inner; }`.
+
+== Internal Improvements
+
+* pr:5136[] split namespace maps in `ItemScope`, reducing memory usage of the CrateDefMap query by ~130 MB (50%) on r-a.
+* pr:5175[] more memory-efficient impl collection.
+  This saves roughly 90 MB in `ImplsFromDepsQuery`, which used to copy the list of all impls from libcore into *every* crate in the graph.
+* pr:5127[] improve test infra for type inference test.
+* pr:5126[] use `FxHash{Map,Set}` consistently.
+* pr:5101[] add expect -- a lighter-weight alternative to the `insta` snapshot testing library.
+* pr:5137[] make gotodef tests more data-driven.
+* pr:5138[] refactor runnable tests.
+* pr:5146[], pr:5151[] simplify inlay hints tests.
+* pr:5153[], pr:5156[], pr:5157[], pr:5162[] remove some generics from `ra_hir` interface.
+* pr:5158[] correctly distinguish between semantical and display crate names.
+* pr:5160[], pr:5167[] reuse caches in more cases.
+* pr:5176[] update expand macro tests.
+* pr:5193[] move `cargo metadata` off the main loop.
+* pr:5199[], pr:5200[], pr:5201[], pr:5205[], pr:5214[], pr:5215[], pr:5219[], pr:5221[], pr:5226[] refactor completion tests.
+* pr:5197[] SSR internal refactors.
+* pr:5222[] add "rehighlight after adding a new top-level function" to the set of bechmarks.

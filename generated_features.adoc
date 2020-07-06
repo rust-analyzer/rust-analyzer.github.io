@@ -1,5 +1,5 @@
 === Expand Macro Recursively
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/expand_macro.rs#L15[expand_macro.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/expand_macro.rs#L17[expand_macro.rs]
 
 Shows the full macro expansion of the macro at current cursor.
 
@@ -145,11 +145,11 @@ There are postfix completions, which can be triggered by typing something like
 There also snippet completions:
 
 .Expressions
-- `pd` -> `println!("{:?}")`
-- `ppd` -> `println!("{:#?}")`
+- `pd` -> `eprintln!(" = {:?}", );")`
+- `ppd` -> `eprintln!(" = {:#?}", );`
 
 .Items
-- `tfn` -> `#[test] fn f(){}`
+- `tfn` -> `#[test] fn feature(){}`
 - `tmod` ->
 ```rust
 #[cfg(test)]
@@ -157,7 +157,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_fn() {}
+    fn test_name() {}
 }
 ```
 
@@ -249,13 +249,25 @@ Shows internal statistic about memory usage of rust-analyzer.
 |===
 
 
-=== Structural Seach and Replace
+=== Structural Search and Replace
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/ssr.rs#L7[ssr.rs]
 
 Search and replace with named wildcards that will match any expression, type, path, pattern or item.
 The syntax for a structural search replace command is `<search_pattern> ==>> <replace_pattern>`.
 A `$<name>` placeholder in the search pattern will match any AST node and `$<name>` will reference it in the replacement.
 Within a macro call, a placeholder will match up until whatever token follows the placeholder.
+
+Placeholders may be given constraints by writing them as `${<name>:<constraint1>:<constraint2>...}`.
+
+Supported constraints:
+
+|===
+| Constraint    | Restricts placeholder
+
+| kind(literal) | Is a literal (e.g. `42` or `"forty two"`)
+| not(a)        | Negates the constraint `a`
+|===
+
 Available via the command `rust-analyzer.ssr`.
 
 ```rust

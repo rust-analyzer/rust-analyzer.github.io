@@ -22,30 +22,6 @@ impl Debug for S {
 
 
 [discrete]
-=== `add_derive`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/add_derive.rs#L9[add_derive.rs]
-
-Adds a new `#[derive()]` clause to a struct or enum.
-
-.Before
-```rust
-struct Point {
-    x: u32,
-    y: u32,┃
-}
-```
-
-.After
-```rust
-#[derive($0)]
-struct Point {
-    x: u32,
-    y: u32,
-}
-```
-
-
-[discrete]
 === `add_explicit_type`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/add_explicit_type.rs#L9[add_explicit_type.rs]
 
@@ -67,62 +43,8 @@ fn main() {
 
 
 [discrete]
-=== `add_from_impl_for_enum`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/add_from_impl_for_enum.rs#L7[add_from_impl_for_enum.rs]
-
-Adds a From impl for an enum variant with one tuple field.
-
-.Before
-```rust
-enum A { ┃One(u32) }
-```
-
-.After
-```rust
-enum A { One(u32) }
-
-impl From<u32> for A {
-    fn from(v: u32) -> Self {
-        A::One(v)
-    }
-}
-```
-
-
-[discrete]
-=== `add_function`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/add_function.rs#L19[add_function.rs]
-
-Adds a stub function with a signature matching the function under the cursor.
-
-.Before
-```rust
-struct Baz;
-fn baz() -> Baz { Baz }
-fn foo() {
-    bar┃("", baz());
-}
-
-```
-
-.After
-```rust
-struct Baz;
-fn baz() -> Baz { Baz }
-fn foo() {
-    bar("", baz());
-}
-
-fn bar(arg: &str, baz: Baz) {
-    ${0:todo!()}
-}
-
-```
-
-
-[discrete]
 === `add_hash`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/raw_string.rs#L65[raw_string.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/raw_string.rs#L78[raw_string.rs]
 
 Adds a hash to a raw string literal.
 
@@ -137,31 +59,6 @@ fn main() {
 ```rust
 fn main() {
     r##"Hello, World!"##;
-}
-```
-
-
-[discrete]
-=== `add_impl`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/add_impl.rs#L6[add_impl.rs]
-
-Adds a new inherent impl for a type.
-
-.Before
-```rust
-struct Ctx<T: Clone> {
-    data: T,┃
-}
-```
-
-.After
-```rust
-struct Ctx<T: Clone> {
-    data: T,
-}
-
-impl<T: Clone> Ctx<T> {
-    $0
 }
 ```
 
@@ -241,32 +138,6 @@ impl Trait<u32> for () {
 
 
 [discrete]
-=== `add_new`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/add_new.rs#L12[add_new.rs]
-
-Adds a new inherent impl for a type.
-
-.Before
-```rust
-struct Ctx<T: Clone> {
-     data: T,┃
-}
-```
-
-.After
-```rust
-struct Ctx<T: Clone> {
-     data: T,
-}
-
-impl<T: Clone> Ctx<T> {
-    fn $0new(data: T) -> Self { Self { data } }
-}
-
-```
-
-
-[discrete]
 === `add_turbo_fish`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/add_turbo_fish.rs#L10[add_turbo_fish.rs]
 
@@ -316,7 +187,7 @@ fn main() {
 
 [discrete]
 === `auto_import`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/auto_import.rs#L18[auto_import.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/auto_import.rs#L20[auto_import.rs]
 
 If the name is unresolved, provides all possible imports for it.
 
@@ -401,7 +272,7 @@ fn main() {
 
 [discrete]
 === `extract_struct_from_enum_variant`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/extract_struct_from_enum_variant.rs#L16[extract_struct_from_enum_variant.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/extract_struct_from_enum_variant.rs#L17[extract_struct_from_enum_variant.rs]
 
 Extracts a struct from enum variant.
 
@@ -557,6 +428,135 @@ fn foo<T: Copy + Clone>() { }
 
 
 [discrete]
+=== `generate_derive`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/generate_derive.rs#L9[generate_derive.rs]
+
+Adds a new `#[derive()]` clause to a struct or enum.
+
+.Before
+```rust
+struct Point {
+    x: u32,
+    y: u32,┃
+}
+```
+
+.After
+```rust
+#[derive($0)]
+struct Point {
+    x: u32,
+    y: u32,
+}
+```
+
+
+[discrete]
+=== `generate_from_impl_for_enum`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/generate_from_impl_for_enum.rs#L7[generate_from_impl_for_enum.rs]
+
+Adds a From impl for an enum variant with one tuple field.
+
+.Before
+```rust
+enum A { ┃One(u32) }
+```
+
+.After
+```rust
+enum A { One(u32) }
+
+impl From<u32> for A {
+    fn from(v: u32) -> Self {
+        A::One(v)
+    }
+}
+```
+
+
+[discrete]
+=== `generate_function`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/generate_function.rs#L19[generate_function.rs]
+
+Adds a stub function with a signature matching the function under the cursor.
+
+.Before
+```rust
+struct Baz;
+fn baz() -> Baz { Baz }
+fn foo() {
+    bar┃("", baz());
+}
+
+```
+
+.After
+```rust
+struct Baz;
+fn baz() -> Baz { Baz }
+fn foo() {
+    bar("", baz());
+}
+
+fn bar(arg: &str, baz: Baz) {
+    ${0:todo!()}
+}
+
+```
+
+
+[discrete]
+=== `generate_impl`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/generate_impl.rs#L6[generate_impl.rs]
+
+Adds a new inherent impl for a type.
+
+.Before
+```rust
+struct Ctx<T: Clone> {
+    data: T,┃
+}
+```
+
+.After
+```rust
+struct Ctx<T: Clone> {
+    data: T,
+}
+
+impl<T: Clone> Ctx<T> {
+    $0
+}
+```
+
+
+[discrete]
+=== `generate_new`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/generate_new.rs#L12[generate_new.rs]
+
+Adds a new inherent impl for a type.
+
+.Before
+```rust
+struct Ctx<T: Clone> {
+     data: T,┃
+}
+```
+
+.After
+```rust
+struct Ctx<T: Clone> {
+     data: T,
+}
+
+impl<T: Clone> Ctx<T> {
+    fn $0new(data: T) -> Self { Self { data } }
+}
+
+```
+
+
+[discrete]
 === `inline_local_variable`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/inline_local_variable.rs#L13[inline_local_variable.rs]
 
@@ -654,7 +654,7 @@ fn main() {
 
 [discrete]
 === `make_usual_string`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/raw_string.rs#L39[raw_string.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/raw_string.rs#L47[raw_string.rs]
 
 Turns a raw string into a plain string.
 
@@ -723,7 +723,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `move_arm_cond_to_match_guard`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/move_guard.rs#L56[move_guard.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/move_guard.rs#L61[move_guard.rs]
 
 Moves if expression from match arm body into a guard.
 
@@ -827,7 +827,7 @@ fn main() {
 
 [discrete]
 === `remove_hash`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/raw_string.rs#L89[raw_string.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/raw_string.rs#L102[raw_string.rs]
 
 Removes a hash from a raw string literal.
 
