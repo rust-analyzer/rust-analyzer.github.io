@@ -31,7 +31,7 @@ rust-analyzer ssr '$a.foo($b) ==> bar($a, $b)'
 * pr:5149[] implement Chalk variable kinds, which improves type inference for primitives.
 * pr:5116[] set categories for code actions.
 * pr:5192[] take `rust-analyzer.cargo.features` into account when generating run configurations.
-* pr:5202[] allow to set default environment for run configurations:
+* pr:5202[] allow to set default environment for run configurations (https://rust-analyzer.github.io/manual.html#setting-runnable-environment-variables[docs]):
 +
 ```jsonc
 "rust-analyzer.runnableEnv": [
