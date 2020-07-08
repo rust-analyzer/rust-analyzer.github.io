@@ -74,8 +74,26 @@ footer {
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
 }
 
+#footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 80ch;
+    padding: 1ch;
+    margin: 0 auto;
+}
+
+.footer-by {
+    margin-right: auto;
+}
+
 footer p {
     margin: 0;
+}
+
+.ferrous-logo {
+    width: 2rem;
+    height: 2rem;
 }
 
 .footer-link {
