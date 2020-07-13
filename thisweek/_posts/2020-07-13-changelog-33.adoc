@@ -47,7 +47,7 @@ image::https://user-images.githubusercontent.com/1711539/87296648-60efe980-c507-
 == Fixes
 
 * pr:5319[] upgrade Chalk, fixing a number of type inference bugs.
-* pr:5285[] correctly determine cursor position when rewrting to a raw strings:
+* pr:5285[] correctly determine cursor position when rewriting to a raw strings:
 +
 image::https://user-images.githubusercontent.com/1711539/87071611-bdf35300-c21a-11ea-93d6-c04f1b1a8ac1.gif[]
 
