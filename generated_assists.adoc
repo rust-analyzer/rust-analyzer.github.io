@@ -44,7 +44,7 @@ fn main() {
 
 [discrete]
 === `add_hash`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/raw_string.rs#L78[raw_string.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/raw_string.rs#L91[raw_string.rs]
 
 Adds a hash to a raw string literal.
 
@@ -227,7 +227,7 @@ fn foo() -> Result<i32, ${0:_}> { Ok(42i32) }
 
 [discrete]
 === `change_visibility`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/change_visibility.rs#L11[change_visibility.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/change_visibility.rs#L13[change_visibility.rs]
 
 Adds or changes existing visibility specifier.
 
@@ -633,7 +633,7 @@ fn main() {
 
 [discrete]
 === `make_raw_string`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/raw_string.rs#L10[raw_string.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/raw_string.rs#L12[raw_string.rs]
 
 Adds `r#` to a plain string literal.
 
@@ -654,7 +654,7 @@ fn main() {
 
 [discrete]
 === `make_usual_string`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/raw_string.rs#L47[raw_string.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/raw_string.rs#L52[raw_string.rs]
 
 Turns a raw string into a plain string.
 
@@ -827,7 +827,7 @@ fn main() {
 
 [discrete]
 === `remove_hash`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/raw_string.rs#L102[raw_string.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/raw_string.rs#L115[raw_string.rs]
 
 Removes a hash from a raw string literal.
 

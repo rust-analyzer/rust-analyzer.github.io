@@ -76,7 +76,7 @@ Navigates to the type of an identifier.
 
 
 === Hover
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/hover.rs#L117[hover.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/hover.rs#L73[hover.rs]
 
 Shows additional information, like type of an expression or documentation for definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.
@@ -176,6 +176,18 @@ braces, so it won't confuse generics with comparisons.
 |===
 
 
+=== Memory Usage
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide_db/src/change.rs#L166[change.rs]
+
+Clears rust-analyzer's internal database and prints memory usage statistics.
+
+|===
+| Editor  | Action Name
+
+| VS Code | **Rust Analyzer: Memory Usage (Clears Database)**
+|===
+
+
 === On Typing Assists
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/typing.rs#L37[typing.rs]
 
@@ -238,7 +250,7 @@ rust-analyzer itself.
 
 
 === Status
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/status.rs#L28[status.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/status.rs#L25[status.rs]
 
 Shows internal statistic about memory usage of rust-analyzer.
 
@@ -288,7 +300,7 @@ String::from((y + 5).foo(z))
 
 
 === Workspace Symbol
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide_db/src/symbol_index.rs#L145[symbol_index.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide_db/src/symbol_index.rs#L143[symbol_index.rs]
 
 Uses fuzzy-search to find types, modules and functions by name across your
 project and dependencies. This is **the** most useful feature, which improves code

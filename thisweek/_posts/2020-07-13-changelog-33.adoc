@@ -1,0 +1,74 @@
+= Changelog #33
+:sectanchors:
+:page-layout: post
+
+Commit: commit:5ca7cd960b908944a2f3f66a1d0ee5df98b78959[] +
+Release: release:2020-07-13[]
+
+== Sponsors
+
+https://ferrous-systems.com/[Ferrous Systems] is a Berlin based consultancy focused on the Rust Programming language.
+Ferrous Systems offers advice, training, open source development, and proprietary development services for a wide variety of applications in Rust, including embedded systems, compiler/tooling components, and web/backend technologies.
+This week, Ferrous Systems is running https://oxidizeconf.com/[Oxidize Global], an online conference for embedded systems in Rust!
+Thanks to Ferrous Systems for supporting open source projects like rust-analyzer!
+
+**Become a sponsor:** https://opencollective.com/rust-analyzer/[opecollective.com/rust-analyzer]
+
+== New Features
+
+* pr:5293[], pr:5299[] automatically reload workspace on `Cargo.toml` and similar changes.
++
+image::https://user-images.githubusercontent.com/1711539/87297466-c4c6e200-c508-11ea-9fb0-519757220b5d.gif[]
+* rust-analyzer is available via rustup:
++
+[source,bash]
+----
+$ rustup update nightly
+info: syncing channel updates ...
+$ rustup component add \
+    --toolchain nightly rust-analyzer-preview
+info: installing component ...
+$ rustup run nightly rust-analyzer --version
+rust-analyzer 8b0983e
+----
++
+At the moment, the recommended way to install rust-analyzer is still via GitHub release.
+* pr:4972[] gzip rust-analyzer releases.
+* pr:5244[] add a command to compute memory usage statistics using Archimedes' method.
+* pr:5270[] highlight error for calls with too few/too many arguments.
+* pr:5284[] add folding for record literals.
+* pr:5292[] **Goto Type Definition** works for `self`.
+* pr:5294[] complete function parameters in more cases
++
+image::https://user-images.githubusercontent.com/1711539/87296648-60efe980-c507-11ea-95d5-9b66623e2636.gif[]
+* pr:5314[] use `parameter` semantic tag for function parameters.
+* pr:5326[] add type inference support for unions.
+
+== Fixes
+
+* pr:5319[] upgrade Chalk, fixing a number of type inference bugs.
+* pr:5285[] correctly determine cursor position when rewrting to a raw strings:
++
+image::https://user-images.githubusercontent.com/1711539/87071611-bdf35300-c21a-11ea-93d6-c04f1b1a8ac1.gif[]
+
+* pr:5243[] consider EPERM error as other vscode processes using rust-analyzer.
+* pr:5252[], pr:5255[] fix a bug where workspace symbols in workspace would skip symbols
+  from top-level crate.
+* pr:5280[] re-enable completion for incomplete impl blocks.
+* pr:5288[] avoid accidentally overwriting config values.
+* pr:5286[] cap the maximal number of syntax errors.
+* pr:4996[] correctly generate new struct field in file containing struct def.
+* pr:5311[] fix goto definition for type alias type parameters.
+* pr:5324[] show implementation code lens for unions.
+* pr:5328[] **Change Visibility** assist works on statics.
+* pr:5330[] fix `ignore` attribute autocompletion.
+
+== Internal Improvements
+
+* pr:5303[] speed up code completion.
+* pr:5307[] document how to profile code completion.
+* pr:5242[] upgrade salsa to 0.15.0 which significantly improves rust-analyzer's.
+  compile times, by avoiding repeated monomorphisations.
+* pr:5245[] prepare `AssistBuilder` for assists which create new files.
+* pr:5247[] modernize completion tests.
+* pr:5312[] make a slow test parallel.
