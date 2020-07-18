@@ -1,0 +1,299 @@
+= Three Architectures for a Responsive IDE
+:sectanchors:
+:experimental:
+:page-layout: post
+
+rust-analyzer is a new "IDE backend" for the https://www.rust-lang.org/[Rust] programming language.
+Support rust-analyzer on https://opencollective.com/rust-analyzer/[Open Collective].
+
+In this post, we'll learn how to make a snappy IDE, in three different ways :-)
+It was inspired by this excellent article about using datalog for semantic analysis: https://petevilter.me/post/datalog-typechecking/
+The post describes only the highest-level architecture.
+There's **much** more to implementing a full-blown IDE.
+
+Specifically, we'll look at the backbone infrastructure of an IDE which serves two goals:
+
+* Quickly accepting new edits to source files.
+* Providing type information about currently opened files for highlighting, completion, etc.
+
+== Map Reduce
+
+The first architecture is reminiscent of map-reduce paradigm.
+The idea is to split analysis into relatively simple indexing phase, and a separate full analysis phase.
+
+The core constraint of indexing is that it runs on a per-file basis.
+The indexer takes a text of a single file, parses it, and spits out some data about the file.
+The indexer can't touch other files.
+
+Full analysis can read other files, and it leverages information from the index to save work.
+
+This all sounds way too abstract, so let's look at a specific example -- Java.
+In Java, each file starts with a package declaration.
+The indexer concatenates the name of the package with a class name to get a fully-qualified name (FQN).
+It also collects the set of method declared in the class, the list of superclasses and interfaces, etc.
+
+Per-file data is merged into an index which maps FQNs to classes.
+Note that constructing this mapping is an embarrassingly parallel task -- all files are parsed independently.
+Moreover, this map is cheap to update.
+When a file change arrives, this file's contribution from the index is removed, the text of file is changed and the indexer runs on the new text and adds new contributions.
+The amount of work to do is proportional to the number of changed files, and is independent from the total number of files.
+
+Let's see how FQN index can be used to quickly provide completion.
+
+[source,java]
+----
+// File ./mypackage/Foo.java
+package mypackage;
+
+import java.util.*;
+
+public class Foo {
+    public static Bar f() {
+        return new Bar();
+    }
+}
+
+// File ./mypackage/Bar.java
+package mypackage;
+
+public class Bar {
+    public void g() {}
+}
+
+// File ./Main.java
+import mypackage.Foo;
+
+public class Main {
+    public static void main(String[] args) {
+        Foo.f().
+    }
+}
+----
+
+The user has just typed `Foo.f().`, and we need to figure out that the type of receiver expression is `Bar`, and suggest `g` as a completion.
+
+First, as the `Main.java` file is modified, we run the indexer on this single file.
+Nothing has changed (the file still contains `Main` class with static `main` method), so we don't need to update FQN index.
+
+Next, we need to resolve `Foo` name.
+We parse the file, notice an `import` and lookup `mypackage.Foo` in the FQN index.
+In the index, we also find that `Foo` has a static method `f`, so we resolve the call as well.
+The index also stores the return type of `f`, but, and this is crucial, it stores it as a string `"Bar"`, and not as a direct reference to the class `Bar`.
+
+The reason for that is `+import java.util.*+` in `Foo.java`.
+`Bar` can refer either to `java.util.Bar` or to `mypackage.Bar`.
+The indexer doesn't know which one, because it can look *only* at the text of the `Foo.java`.
+In other words, while the index does store the return types of methods, it stores them in an unresolved form.
+
+The next step is to resolve `Bar` identifier in the context of `Foo.java` file.
+This uses FQN index, and lands into the `mypackage.Bar` class.
+There the desired `g` method is found.
+
+All together, only three files were touched during completion.
+FQN index allowed to completely ignore all the other files in the project.
+
+One problem with the approach described thus far is that resolving types from the index requires non-trivial amount of work.
+This work might be duplicated if, for example, `Foo.f` is called several times.
+The fix is to add a cache.
+Name resolution results are memoized, so that the cost is payed only once.
+The cache is blown away completely on any change -- with an index, reconstructing the cache is not that costly.
+
+To sum up, the first approach works like this:
+
+. Each file is being indexed, independently and in parallel, producing a "stub" -- a set of visible top-level declarations, with unresolved types.
+. All stubs are merged into a single index data structure.
+. Name resolution and type inference work primarily off the stubs.
+. Name resolution is lazy (we only resolved type from the stub when we need it) and memoized (each type is resolved only once).
+. The caches are completely invalidated on every change
+. The index is updated incrementally:
+  * if the edit doesn't change file's stub, no change to the index is required.
+  * otherwise, old keys are removed and new keys are added
+
+Note an interesting interplay between "dumb" indexes which can be incrementally updated, and "smart" caches, which are re-computed from scratch.
+
+This approach combines simplicity and stellar performance.
+The bulk of work is the indexing phase, and you can parallelize and even distribute it across several machine.
+The two example of this architecture are https://www.jetbrains.com/idea/[IntelliJ] and https://sorbet.org/[Sorbet].
+
+The main drawback of this approach is that it works only when it works -- not every language has a well-defined FQN concept.
+I think overall it's a good idea to design name resolution and module system (mostly boring parts of the language) such that they work well with map-reduce paradigm.
+
+* Require `package` declarations or infer them from a file-system layout
+* Forbid meta-programming facilities which add new top-level declarations, or restrict them in such way that they can be used by the indexer.
+  For example, preprocessor-like compiler plugins that access a single file at a time might be fine.
+* Make sure that each source element corresponds to a single semantic element.
+  For example, if the language supports conditional compilation, make sure that it works during name resolution (like Kotlin's https://kotlinlang.org/docs/reference/platform-specific-declarations.html[expect/actual]) and not during parsing (like conditional compilation in most other languages).
+  Otherwise, you'd have to index the same file with different conditional compilation settings, and that is messy.
+* Make sure that FQN are enough for most of the name resolution.
+
+The last point is worth elaborating. Let's look at the following Rust example:
+
+[source,rust]
+----
+// File: ./foo.rs
+trait T {
+    fn f(&self) {}
+}
+// File: ./bar.rs
+struct S;
+
+// File: ./somewhere/else.rs
+impl T for S {}
+
+// File: ./main.s
+use foo::T;
+use bar::S
+
+fn main() {
+    let s = S;
+    s.f();
+}
+----
+
+Here, we can easily find the `S` struct and the `T` trait (as they are imported directly).
+However, to make sure that `s.f` indeed refers to `f` from `T`, we also need to find the corresponding `impl`, and that can be roughly anywhere!
+
+== Leveraging Headers
+
+The second approach places even more restrictions on the language.
+It requires:
+
+* "declaration before use" rule,
+* headers or equivalent interface files.
+
+Two such languages are {cpp} and OCaml.
+
+The idea of the approach is simple -- just use traditional compiler, by snapshotting its state immediately after imports for each compilation unit.
+An example:
+
+[source,c++]
+----
+#include<iostream>
+
+void main() {
+    std::cout << "Hello, World!" << std::
+}
+----
+
+Here, the compiler fully processes `iostream` (and any further headers it includes), snapshots its state and proceeds with parsing the program itself.
+When the user types more characters, the compiler restarts from the point just after the include.
+As the size of each compilation unit itself is usually reasonable, the analysis is fast.
+
+If the user types something into the header file than the caches need to be invalidated.
+However, changes to headers are comparatively rare, most of the code lives in `.cpp` files.
+
+In a sense, headers correspond to the stubs of the first approach, with two notable differences:
+
+* It's the user who is tasked with producing a stub, not the tool.
+* Unlike stubs, headers can't be mutually recursive.
+  Stubs store unresolved types, but includes can be snapshotted after complete analysis.
+
+The two examples of this approach are https://github.com/ocaml/merlin[Merlin] of OCaml and https://clangd.llvm.org/[clangd].
+
+The huge benefit of this approach is that it allows re-use of an existing batch compiler.
+The other two typically result in compiler re-writes.
+The drawback is that almost nobody likes headers and forward declarations.
+
+
+== Intermission: Laziness vs Incrementality
+
+Note how neither of the two approaches is incremental in any interesting way.
+It is mostly "if something has changed, let's clear the caches completely".
+There's a tiny bit of incrementality in the index update in the first approach, but it is almost trivial -- remove old keys, add new keys.
+
+This is because it's not the incrementality that makes and IDE fast.
+Rather, it's laziness -- the ability to skip huge swaths of code altogether.
+
+With map-reduce, the index tells us exactly which small set of files is used from the current file and is worth looking at.
+Headers shield us from most of the implementation code.
+
+== Query-based Compiler
+
+Welcome to my world...
+
+Rust fits the described approaches like a square peg into a round hole.
+
+Here's a small example:
+
+[source,rust]
+----
+#[macro_use]
+extern crate bitflags;
+
+bitflags! {
+    struct Flags: u32 {
+        const A = 0b00000001;
+        const B = 0b00000010;
+        const C = 0b00000100;
+        const ABC = Self::A.bits | Self::B.bits | Self::C.bits;
+    }
+}
+----
+
+`bitflags` is macro which comes from another crate and defines a top-level declaration.
+We can't put the results of macro expansion into the index, because it depends on macro definition in another file.
+We can put macro call itself into an index, but that is mostly useless, as the items, declared by the macro, would miss the index.
+
+Here's another one:
+
+[source,rust]
+----
+mod foo;
+
+#[path = "foo.rs"]
+mod bar;
+----
+
+Modules `foo` and `bar` refer to the same file, `foo.rs`, which effectively means that items from `foo.rs` are duplicated.
+If `foo.rs` contains `struct S;` declaration, than `foo::S` and `bar::S` are different types.
+You also can't fit that into and index, because those `mod` declarations are in a different file.
+
+The second approach doesn't work either.
+In {cpp}, the compilation unit is a single file.
+In Rust, the compilation unit is a whole crate, which consists of many files and is typically much bigger.
+And Rust has procedural macros, which means that even surface analysis of code can take unbounded amount of time.
+And there are no header files, so IDE has to process the whole crate.
+Additionally, intra-crate name resolution is much more complicated (declaration before use vs. fixed point iteration intertwined with macro expansion).
+
+It seems that purely laziness based models do not work for Rust.
+The minimal feasible unit of laziness, a crate, is still to big.
+
+For this reason, in rust-analyzer we resort to a smart solution.
+We compensate for the deficit of laziness with incrementality.
+Specifically, we use a generic framework for incremental computation -- https://github.com/salsa-rs/salsa[salsa].
+
+The idea behind salsa is rather simple -- all function calls inside the compiler are instrumented to record which other functions were called during execution.
+The recorded traces are used to implement fine-grained incrementality.
+If after modification the results of all of the dependencies are the same, the old result is reused.
+
+
+There's also an additional, crucial, twist -- if a function is re-executed due to a change in dependency, the new result is compared with the old one.
+If despite a different input they are the same, the propagation of invalidation stops.
+
+Using this engine, we were able to implement rather fancy update strategy.
+Unlike map reduce approach, our indices can store resolved types, which are invalidated only when top-level change occurs.
+Even after a top-level change, we are able to re-use results of most macro expansions.
+And typing inside top-level macro also doesn't invalidate caches unless the expansion of the macro introduces a different set of items.
+
+The main benefit of this approach is generality and correctness.
+If you have an incremental computation engine at your disposal, it becomes relatively easy to experiment with the way you structure the computation.
+The code looks mostly like a boring imperative compiler, and you are immune from cache invalidation bugs (we had one, due to procedural macro being non-deterministic).
+
+The main drawback is extra complexity, slower performance (fine-grained tracking of dependencies takes time and memory) and a feeling that this is a somewhat uncharted territory yet :-)
+
+== Links
+
+How IntelliJ works::
+https://jetbrains.org/intellij/sdk/docs/basics/indexing_and_psi_stubs.html
+
+How Sorbet works::
+https://www.youtube.com/watch?v=Gdx6by6tcvw
+
+How clangd works::
+https://clangd.llvm.org/design/
+
+How Merlin works::
+https://arxiv.org/abs/1807.06702
+
+How rust-analyzer works::
+https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/dev
