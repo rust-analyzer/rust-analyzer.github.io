@@ -633,7 +633,7 @@ fn main() {
 
 [discrete]
 === `make_raw_string`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/raw_string.rs#L12[raw_string.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/raw_string.rs#L13[raw_string.rs]
 
 Adds `r#` to a plain string literal.
 

@@ -1,0 +1,54 @@
+= Changelog #34
+:sectanchors:
+:page-layout: post
+
+Commit: commit:c9c518e5e9761bf35d466c47c57c3a1358b56b3c[] +
+Release: release:2020-07-20[]
+
+== Sponsors
+
+**Become a sponsor:** https://opencollective.com/rust-analyzer/[opecollective.com/rust-analyzer]
+
+== New Features
+
+* pr:5378[] support vararg functions.
+* pr:5354[] add Cargo feature for enabling mimalloc allocator.
+  Call for participation: pure Rust version of mimalloc would be really handy as cross-compilable fast allocator.
+* pr:5345[] emit mutable modifier for `self` in semantic highlighting.
+* pr:5348[] highlight punctuation using `"operator"` tag in semantic highlighting.
+* pr:5350[] return only requested assists to the editor.
+* pr:5401[] leverage chalk for type checking closures.
+* pr:5418[] continue non-doc comments if there's a trailing whitespace:
++
+image::https://user-images.githubusercontent.com/1711539/87931694-7d050500-ca8a-11ea-8b3f-c958663795e6.gif[]
+* pr:5327[] mark fixes from check on save as preferred.
+* pr:5430[] **Add turbofish** assist works after `()`
++
+image::https://user-images.githubusercontent.com/1711539/87852942-8f563600-c906-11ea-808b-63e8bf3fc228.gif[]
+
+
+== Fixes
+
+* pr:4676[] upgrade procmacro ABI for the latest stable.
+* pr:5352[], pr:5361[] fix build on powerpc.
+* pr:5367[] remove associated type bounds in **Add Missing Members** assist.
+* pr:5370[] don't insert duplicate `()` when completing tuple struct pattern.
+* pr:5377[] fix goto definition for multi-segment macro paths.
+* pr:5379[], pr:5396[] guard against infinite macro expansion.
+* pr:5381[] fix macro handling in type position.
+* pr:5385[] fix off by one error when determining the active param.
+* pr:5390[] fix progress registration error for check on save.
+* pr:5394[] fix freeze when processing https://github.com/retep998/winapi-rs[a certain crate] with a lot of glob imports.
+* pr:5427[] various fixes for **Add/Remove #** assists.
+* pr:5423[] Correctly resolve associated types in path bindings.
+
+== Internal Improvements
+
+* pr:5357[] use relaxed atomic ordering for single location test marks.
+* pr:5358[], pr:5373[] cleanup hir diagnostics API.
+* pr:5355[], pr:5376[] implement license check.
+* pr:5387[] add `--memory-usage` to analysis-bench.
+* pr:5405[], pr:5415[], pr:5417[] refactor support fo callables, so that IDE features that work for functions, work for lambdas as well.
+* pr:5413[] rewrite call info to use semantic information.
+* pr:5422[] use `expect!` for snapshot testing in `ra_hir_def`.
+* pr:5433[] simplify file exclusion logic in VFS.

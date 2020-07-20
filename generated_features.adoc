@@ -24,7 +24,7 @@ Extends the current selection to the encompassing syntactic construct
 
 
 === File Structure
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/display/structure.rs#L17[structure.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/file_structure.rs#L17[file_structure.rs]
 
 Provides a tree of the symbols defined in the file. Can be used to
 
@@ -83,7 +83,7 @@ Focusing is usually hovering with a mouse, but can also be triggered with a shor
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/inlay_hints.rs#L40[inlay_hints.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/inlay_hints.rs#L42[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
@@ -145,7 +145,7 @@ There are postfix completions, which can be triggered by typing something like
 There also snippet completions:
 
 .Expressions
-- `pd` -> `eprintln!(" = {:?}", );")`
+- `pd` -> `eprintln!(" = {:?}", );`
 - `ppd` -> `eprintln!(" = {:#?}", );`
 
 .Items
@@ -188,13 +188,35 @@ Clears rust-analyzer's internal database and prints memory usage statistics.
 |===
 
 
+=== On Enter
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/typing/on_enter.rs#L15[on_enter.rs]
+
+rust-analyzer can override kbd:[Enter] key to make it smarter:
+
+- kbd:[Enter] inside triple-slash comments automatically inserts `///`
+- kbd:[Enter] in the middle or after a trailing space in `//` inserts `//`
+
+This action needs to be assigned to shortcut explicitly.
+
+VS Code::
+
+Add the following to `keybindings.json`:
+[source,json]
+----
+{
+  "key": "Enter",
+  "command": "rust-analyzer.onEnter",
+  "when": "editorTextFocus && !suggestWidgetVisible && editorLangId == rust"
+}
+----
+
+
 === On Typing Assists
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_ide/src/typing.rs#L37[typing.rs]
 
 Some features trigger on typing certain characters:
 
 - typing `let =` tries to smartly add `;` if `=` is followed by an existing expression
-- Enter inside comments automatically inserts `///`
 - typing `.` in a chain method call auto-indents
 
 
