@@ -191,7 +191,7 @@ In a sense, headers correspond to the stubs of the first approach, with two nota
 The two examples of this approach are https://github.com/ocaml/merlin[Merlin] of OCaml and https://clangd.llvm.org/[clangd].
 
 The huge benefit of this approach is that it allows re-use of an existing batch compiler.
-The other two typically result in compiler re-writes.
+Two other approaches described in the article typically result in compiler re-writes.
 The drawback is that almost nobody likes headers and forward declarations.
 
 
