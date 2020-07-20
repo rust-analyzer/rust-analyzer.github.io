@@ -168,7 +168,7 @@ An example:
 
 [source,c++]
 ----
-#include<iostream>
+#include <iostream>
 
 void main() {
     std::cout << "Hello, World!" << std::
