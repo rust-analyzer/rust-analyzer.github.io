@@ -48,7 +48,7 @@ image::https://user-images.githubusercontent.com/1711539/87852942-8f563600-c906-
 * pr:5358[], pr:5373[] cleanup hir diagnostics API.
 * pr:5355[], pr:5376[] implement license check.
 * pr:5387[] add `--memory-usage` to analysis-bench.
-* pr:5405[], pr:5415[], pr:5417[] refactor support fo callables, so that IDE features that work for functions, work for lambdas as well.
+* pr:5405[], pr:5415[], pr:5417[] refactor support for callables, so that IDE features that work for functions, work for lambdas as well.
 * pr:5413[] rewrite call info to use semantic information.
 * pr:5422[] use `expect!` for snapshot testing in `ra_hir_def`.
 * pr:5433[] simplify file exclusion logic in VFS.
