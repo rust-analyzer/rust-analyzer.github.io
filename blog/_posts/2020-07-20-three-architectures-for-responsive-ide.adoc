@@ -95,7 +95,7 @@ FQN index allowed to completely ignore all the other files in the project.
 One problem with the approach described thus far is that resolving types from the index requires non-trivial amount of work.
 This work might be duplicated if, for example, `Foo.f` is called several times.
 The fix is to add a cache.
-Name resolution results are memoized, so that the cost is payed only once.
+Name resolution results are memoized, so that the cost is paid only once.
 The cache is blown away completely on any change -- with an index, reconstructing the cache is not that costly.
 
 To sum up, the first approach works like this:
@@ -246,7 +246,7 @@ mod bar;
 
 Modules `foo` and `bar` refer to the same file, `foo.rs`, which effectively means that items from `foo.rs` are duplicated.
 If `foo.rs` contains `struct S;` declaration, than `foo::S` and `bar::S` are different types.
-You also can't fit that into and index, because those `mod` declarations are in a different file.
+You also can't fit that into an index, because those `mod` declarations are in a different file.
 
 The second approach doesn't work either.
 In {cpp}, the compilation unit is a single file.
@@ -256,7 +256,7 @@ And there are no header files, so IDE has to process the whole crate.
 Additionally, intra-crate name resolution is much more complicated (declaration before use vs. fixed point iteration intertwined with macro expansion).
 
 It seems that purely laziness based models do not work for Rust.
-The minimal feasible unit of laziness, a crate, is still to big.
+The minimal feasible unit of laziness, a crate, is still too big.
 
 For this reason, in rust-analyzer we resort to a smart solution.
 We compensate for the deficit of laziness with incrementality.
