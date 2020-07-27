@@ -291,7 +291,7 @@ enum A { One(One) }
 
 [discrete]
 === `extract_variable`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/extract_variable.rs#L14[extract_variable.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/extract_variable.rs#L13[extract_variable.rs]
 
 Extracts subexpression into a variable.
 
@@ -343,7 +343,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `fix_visibility`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/fix_visibility.rs#L9[fix_visibility.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/fix_visibility.rs#L10[fix_visibility.rs]
 
 Makes inaccessible item public.
 

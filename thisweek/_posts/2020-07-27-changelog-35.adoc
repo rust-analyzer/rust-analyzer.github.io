@@ -1,0 +1,46 @@
+= Changelog #35
+:sectanchors:
+:page-layout: post
+
+Commit: commit:8ff40af7286b66294d8b64f0c8fdb3179a84be76[] +
+Release: release:2020-07-27[]
+
+== Sponsors
+
+**Become a sponsor:** https://opencollective.com/rust-analyzer/[opencollective.com/rust-analyzer]
+
+== New Features
+
+* pr:5524[] allow opting out of experimental diagnostics like MismatchedArgCount.
+* pr:5518[] use resolved paths in SSR rules. The main user-visible changes are:
+  ** SSR now matches paths based on whether they resolve to the same thing instead of whether they're written the same.
+    *** So `foo()` won't match `foo()` if it's a different function `foo()`, but will match `bar::foo()` if it's the same `foo`.
+  ** Paths in the replacement will now be rendered with appropriate qualification for their context.
+    *** For example `foo::Bar` will render as just `Bar` inside the module `foo`, but might render as `baz::foo::Bar` from elsewhere.
+  ** This means that all paths in the search pattern and replacement template must be able to be resolved.
+  ** It now also matters where you invoke SSR from, since paths are resolved relative to wherever that is.
+  ** Search now uses find-uses on paths to locate places to try matching. This means that when a path is present in the pattern, search will generally be pretty fast.
+  ** Function calls can now match method calls again, but this time only if they resolve to the same function.
+* pr:5527[] track internal metrics: https://rust-analyzer.github.io/metrics/.
+* pr:5470[] use `cargo.target` for `checkOnSave`.
+* pr:5451[] highlight more cases punctuation characters.
+* pr:5475[] support `Trait as _` imports.
+* pr:5492[] use symbol tags.
+* pr:5500[] problem matcher auto detects relative/absolute paths and matches VSCode LSP's owner and source.
+* pr:5473[] new format of `rust-project.json` -- configuration file for non Cargo-based projects.
+
+== Fixes
+
+* pr:5467[] allow null or empty values for configuration.
+* pr:5466[] do not show default types in function and closure return values.
+* pr:5478[] replace existing visibility modifier in **Fix Visibility** assist.
+* pr:5480[] fix snippetTextEdits applying to other files.
+
+== Internal Improvements
+
+* pr:5458[], pr:5472[] fully switch from `insta` to `expect`.
+* pr:5479[] allow gathering memory stats on non-jemalloc Linux.
+* pr:5481[] track document versions in the server.
+* pr:5497[] store macro invocation parameters green trees instead of token
+  trees, which improves memory usage.
+* pr:5519[] cache macro expansion in semantics.
