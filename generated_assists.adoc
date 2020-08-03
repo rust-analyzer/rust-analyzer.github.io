@@ -227,7 +227,7 @@ fn foo() -> Result<i32, ${0:_}> { Ok(42i32) }
 
 [discrete]
 === `change_visibility`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/change_visibility.rs#L13[change_visibility.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/change_visibility.rs#L11[change_visibility.rs]
 
 Adds or changes existing visibility specifier.
 
@@ -532,7 +532,7 @@ impl<T: Clone> Ctx<T> {
 
 [discrete]
 === `generate_new`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/generate_new.rs#L12[generate_new.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/generate_new.rs#L10[generate_new.rs]
 
 Adds a new inherent impl for a type.
 

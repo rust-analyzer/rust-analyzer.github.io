@@ -1,0 +1,55 @@
+= Changelog #36
+:sectanchors:
+:page-layout: post
+
+Commit: commit:e96bfd812a0f883bc9aa6b5ebe3b0a712c860487[] +
+Release: release:2020-08-03[]
+
+== Sponsors
+
+**Become a sponsor:** https://opencollective.com/rust-analyzer/[opencollective.com/rust-analyzer]
+
+== New Features
+
+* We started the effort to share the parser between rust-analyzer and rustc.
+  This will take a while to complete, and won't give any new user-visible features until completion.
+  As the first step, rust-analyzer now uses
+  https://github.com/rust-analyzer/ungrammar/blob/da1aa8a99738c1a4fe5e321e39aae857c1eb54c8/rust.ungram[this grammar]
+  to generate syntax tree structure.
+* pr:5547[] fold multiline parameter lists.
+
+* pr:5561[]: allow running more tests at once via the module runners:
++
+image::https://user-images.githubusercontent.com/2690773/88724896-e85a7100-d133-11ea-99ee-689126679cbc.png[]
+
+* pr:5563[] Check all targets for package-level tasks.
+  When invoking "Select Runnable" with the caret on a runnable with a specific target (test, bench, binary), append the corresponding argument for the `cargo check -p` module runnable.
+
+* pr:5586[] Support new sysroot layout on nightly.
+
+== Fixes
+
+* pr:5596[] add checkOnSave.noDefaultFeatures and correct, how we handle some cargo flags.
+* pr:5565[] don't mix non-path-based rules with path-based in **S**tructural **S**earch **R**eplace.
+* pr:5554[] fix **Remove dbg** assist to not remove meaningful parenthesis and semicolons.
+* pr:5567[] wrap placeholder expansions in SSR in parenthesis when necessary.
+* pr:5513[] when generating launch.json configurations, correctly handle multi-folder workspaces.
+
+== Internal Improvements
+
+* pr:5572[] Switch to ungrammar for generating syntax trees.
+* pr:5574[] Replace rand with oorandom.
+* pr:5581[] Use perf-events to measure number of instructions in addition to wall clock time for https://rust-analyzer.github.io/metrics/[metrics] to get more stable measurements on CI. That plan was foiled by perf not working on the CI.
+* pr:5573[], pr:5578[], ... : rename various AST types
++
+|===
+| Old Name | New Name
+
+|`ast::NomialDef`| `ast::AdtDef`
+|`ast::ModuleItem` | `ast::Item`
+|`ast::Alias` | `ast::Rename`
+|`ast::TypeParamList` | `ast::GenericParamList`
+|`ast::TypeRef` | `ast::Type`
+|`ast::PlaceholderType` | `ast::InferType`
+|`ast::DotDotPat` | `ast::RestPat`
+|===
