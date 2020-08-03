@@ -45,7 +45,7 @@ image::https://user-images.githubusercontent.com/2690773/88724896-e85a7100-d133-
 |===
 | Old Name | New Name
 
-|`ast::NomialDef`| `ast::AdtDef`
+|`ast::NominalDef`| `ast::AdtDef`
 |`ast::ModuleItem` | `ast::Item`
 |`ast::Alias` | `ast::Rename`
 |`ast::TypeParamList` | `ast::GenericParamList`
