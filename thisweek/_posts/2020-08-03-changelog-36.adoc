@@ -29,7 +29,7 @@ image::https://user-images.githubusercontent.com/2690773/88724896-e85a7100-d133-
 
 == Fixes
 
-* pr:5596[] add checkOnSave.noDefaultFeatures and correct, how we handle some cargo flags.
+* pr:5596[] add checkOnSave.noDefaultFeatures and correct how we handle some cargo flags.
 * pr:5565[] don't mix non-path-based rules with path-based in **S**tructural **S**earch **R**eplace.
 * pr:5554[] fix **Remove dbg** assist to not remove meaningful parenthesis and semicolons.
 * pr:5567[] wrap placeholder expansions in SSR in parenthesis when necessary.
