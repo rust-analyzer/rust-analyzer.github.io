@@ -1,0 +1,35 @@
+= Changelog #37
+:sectanchors:
+:page-layout: post
+
+Commit: commit:7a03f05eac4ff1e9ca4ceeced54ce06892bd30b8[] +
+Release: release:2020-08-10[]
+
+== Sponsors
+
+**Become a sponsor:** https://opencollective.com/rust-analyzer/[opencollective.com/rust-analyzer]
+
+== New Features
+
+* pr:5648[]: Add expand glob import assist.
+* pr:5639[]: **S**tructural **S**earch **R**eplace: Allow `self` in patterns.
+* pr:5526[]: Handle semantic token deltas, improving efficiency of syntax highlighting.
+* pr:5678[]: Highlight static mut accesses as unsafe.
+* pr:5684[]: Semantic highlighting for unsafe union field access.
+* pr:5692[]: Add syntax highlighting, hover, and goto def support for `extern crate`.
+* pr:5698[]: Display the value of a const on hover.
+
+== Fixes
+
+* pr:5658[]: Do not add to `pub use` in assists that insert a use statement.
+* pr:5668[]: Fix relative path handling for custom rustfmt.
+* pr:5664[]: Fix renamed self module in imports.
+* pr:5679[]: Account for static mut in missing unsafe diagnostic.
+* pr:5694[]: Fix `#` lines not getting removed in hover docs.
+* pr:5414[]: Fix positioning of test code lens.
+* pr:5693[]: Fix no inlay hints / unresolved tokens until manual edit to refresh.
+
+== Internal Improvements
+
+* pr:5494[]: Use salsa's purge to account for all memory.
+* pr:5669[]: Document release process.

@@ -271,6 +271,37 @@ fn main() {
 
 
 [discrete]
+=== `expand_glob_import`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/expand_glob_import.rs#L15[expand_glob_import.rs]
+
+Expands glob imports.
+
+.Before
+```rust
+mod foo {
+    pub struct Bar;
+    pub struct Baz;
+}
+
+use foo::*┃;
+
+fn qux(bar: Bar, baz: Baz) {}
+```
+
+.After
+```rust
+mod foo {
+    pub struct Bar;
+    pub struct Baz;
+}
+
+use foo::{Baz, Bar};
+
+fn qux(bar: Bar, baz: Baz) {}
+```
+
+
+[discrete]
 === `extract_struct_from_enum_variant`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ra_assists/src/handlers/extract_struct_from_enum_variant.rs#L17[extract_struct_from_enum_variant.rs]
 
