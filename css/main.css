@@ -10,31 +10,37 @@ header {
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
 }
 
-#header-inner {
+#header-inner, #footer-inner {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: stretch;
     width: 100%;
     max-width: 80ch;
-    padding: 1ch;
+    padding: 1ch 0;
     margin: 0 auto;
+}
+
+#header-left, #header-right, #footer-links {
+    display: flex;
+    margin: 0 1ch;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    line-height: 2rem;
 }
 
 #header-logo {
     display: block;
     width: calc(17vw + 4rem);
     max-width: 200px;
-    margin-right: 0.4rem;
 }
 
 #header-logo:hover, #header-logo:focus {
     opacity: 0.8;
 }
 
-a.nav-link, a.site-title {
+a.nav-link, a.site-title, a.footer-link {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
@@ -45,7 +51,7 @@ a.nav-link {
 	font-style: normal;
 	color: rgba(0, 0, 0, .8);
     text-decoration: none;
-    border-radius: 4px;
+    padding: 0 10px;
 }
 
 a.nav-link:hover {
@@ -68,26 +74,14 @@ main {
 
 footer {
     width: 100%;
-    padding: 2ch;
-    text-align: center;
     margin-top: 1rem;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
 }
 
-#footer-inner {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    max-width: 80ch;
-    margin: 0 auto;
-}
-
 .footer-by {
-    margin-right: auto;
-}
-
-footer p {
-    margin: 0;
+    margin: 0 1ch;
+    padding: 10px 0;
+    text-align: center;
 }
 
 .ferrous-logo {
@@ -103,6 +97,7 @@ footer p {
     white-space: nowrap;
 }
 .footer-link > .fa {
+    margin-right: 0.4em;
     color: rgba(0, 0, 0, .8)
 }
 footer > p {
@@ -185,4 +180,19 @@ a.source:hover {
 
 .post-link:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    #header-inner {
+        flex-direction: column;
+        padding: 1ch 0 0 0;
+    }
+
+    a.nav-link {
+        padding: 0 5px;
+    }
+
+    #footer-inner {
+        flex-direction: column;
+    }
 }

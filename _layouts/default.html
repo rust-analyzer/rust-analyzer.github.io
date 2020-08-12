@@ -33,13 +33,17 @@
   {% if page.url != "/" %}
   <header>
     <div id="header-inner">
-      <a class="site-title" href="{{ site.baseurl }}/">
-        <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
-      </a>
-      <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
-      <a class="nav-link" href="/manual.html">Docs</a>
-      <a class="nav-link" href="/blog">Blog</a>
-      <a class="nav-link" href="/thisweek">Changelog</a>
+      <div id="header-left">
+        <a class="site-title" href="{{ site.baseurl }}/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
     </div>
   </header>
   {% endif %}
@@ -49,23 +53,26 @@
   </main>
 
   <footer>
-    <p id="footer-inner">
-      <span class="footer-by">
+    <div id="footer-inner">
+      <div class="footer-by">
         <a href="https://ferrous-systems.com/">
-          <img class="ferrous-logo" src="/assets/ferrous-logo.png">
-          Ferrous Systems
-        </a> & <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
-      </span>
-      <a href="{{ '/feed.xml' | prepend: site.baseurl }}" class="footer-link">
-        <i class="fa fa-rss"></i> rss
-      </a>
-      <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
-        <i class="fa fa-github"></i> src
-      </a>
-      <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
-        <i class="fa fa-github"></i> sponsor
-      </a>
-    </p>
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="{{ '/feed.xml' | prepend: site.baseurl }}" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
   </footer>
 </body>
 
