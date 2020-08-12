@@ -159,13 +159,13 @@ a.source:hover {
 }
 
 .post .post-link {
-    font-size: 2rem;
-    line-height: 3rem;
+    font-size: 1.7rem;
+    line-height: 2.4rem;
     font-weight: 400;
 }
 
 .all-posts-link {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
 }
 
 .post .post-link, .all-posts-link {
