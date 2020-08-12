@@ -3,13 +3,9 @@ layout: default
 ---
 <h2>This Week In rust-analyzer</h2>
 
-<ul class="post-list">
-    {% for post in site.categories.thisweek %}
-    <li>
-        <h3>
-            <span class="post-meta post-first-col">{{ post.date | date: "%b %-d, %Y" }}</span> <a class="post-link"
-                href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h3>
-    </li>
-    {% endfor %}
-</ul>
+{% for post in site.categories.thisweek %}
+<div class="post">
+    <div class="post-date">{{ post.date | date: "%b %-d, %Y" }}</div>
+    <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+</div>
+{% endfor %}

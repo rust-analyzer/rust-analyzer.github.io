@@ -27,7 +27,7 @@ layout: default
     </p>
 
     <p>Note that the project is in <strong>alpha</strong> status: it is already
-    useful in practice, but can't be considered stable.</p>
+        useful in practice, but can't be considered stable.</p>
 </section>
 
 <section class="paragraph lead">
@@ -71,44 +71,40 @@ layout: default
     <p>
         The following companies contributed significantly towards rust-analyzer development:
 
-        <div class="sponsors">
-            <ul>
-                <li><a href="https://ferrous-systems.com/">Ferrous Systems</a></li>
-                <li><a href="https://www.mozilla.org/">Mozilla</a></li>
-            </ul>
-            <ul>
-                <li><a href="https://embark-studios.com">Embark Studios</a></li>
-                <li><a href="https://www.freiheit.com/">freiheit.com</a></li>
-            </ul>
-        </div>
+    <div class="sponsors">
+        <ul>
+            <li><a href="https://ferrous-systems.com/">Ferrous Systems</a></li>
+            <li><a href="https://www.mozilla.org/">Mozilla</a></li>
+        </ul>
+        <ul>
+            <li><a href="https://embark-studios.com">Embark Studios</a></li>
+            <li><a href="https://www.freiheit.com/">freiheit.com</a></li>
+        </ul>
+    </div>
     </p>
 
 </section>
 
 <section>
-    <h2><span class="post-first-col">Latest News</span> <a class="post-link" href="/thisweek">All</a></h2>
+    <h2><span class="post-first-col">Latest News</span></h2>
 
-    <ul class="post-list">
+    <div class="post">
         {% assign post = site.categories.thisweek.first %}
-        <li>
-            <h3>
-                <span class="post-meta post-first-col">{{ post.date | date: "%b %-d, %Y" }}</span>
-                <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-            </h3>
-        </li>
-    </ul>
+        <div class="post-date">{{ post.date | date: "%b %-d, %Y" }}</div>
+        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+    </div>
+
+    <a class="all-posts-link" href="/thisweek">All news</a>
 </section>
 
 <section>
-    <h2><span class="post-first-col">Latest Post</span> <a class="post-link" href="/blog">All</a></h2>
+    <h2><span class="post-first-col">Latest Post</span></h2>
 
-    <ul class="post-list">
+    <div class="post">
         {% assign post = site.categories.blog.first %}
-        <li>
-            <h3>
-                <span class="post-meta post-first-col">{{ post.date | date: "%b %-d, %Y" }}</span>
-                <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-            </h3>
-        </li>
-    </ul>
+        <div class="post-date">{{ post.date | date: "%b %-d, %Y" }}</div>
+        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+    </div>
+
+    <a class="all-posts-link" href="/blog">All posts</a>
 </section>
