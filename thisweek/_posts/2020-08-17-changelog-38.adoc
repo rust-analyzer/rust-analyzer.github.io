@@ -1,0 +1,44 @@
+= Changelog #38
+:sectanchors:
+:page-layout: post
+
+Commit: commit:0b2b9a5508186c16a2e782f47ce7e0e1c5fb8d33[] +
+Release: release:2020-08-17[]
+
+== Sponsors
+
+**Become a sponsor:** https://opencollective.com/rust-analyzer/[opencollective.com/rust-analyzer]
+
+== New Features
+
+* pr:5705[] log the command flycheck runs to debug misconfigurations.
+* pr:5711[] display snippet in the completion label.
+* pr:4743[] add tracking of packed repr, use it to highlight unsafe refs.
+* pr:5637[] **S**tructural **S**earch **R**eplace: match trait associated constants, types and functions.
+* pr:5746[] SSR now handles UFCS calls to trait methods.
+* pr:5766[] initial support for function-line procedural macros.
+
+== Fixes
+
+* pr:5696[] respond `InvalidRequest` if `Shutdown` has been requested.
+* pr:5730[] **Merge Imports** assist handles self:
++
+image::https://user-images.githubusercontent.com/1711539/90399497-5216cc80-e09b-11ea-8fea-e03ebc2f250e.gif[]
+* pr:5732[] don't show inlay hints for complex patterns in arguments.
+* pr:5752[] correctly display `impl Trait<T> + Trait<T>`.
+* pr:5756[] vfs on windows is case-insensitive to the drive letter.
+
+== Internal Improvements
+
+* pr:5707[] address some FIXMEs for ra_assists.
+* pr:5716[] test musl build on CI.
+* pr:5553[] add fix ranges for diagnostics.
+* pr:5723[] remove cargo audit from CI.
+* pr:5724[], pr:5725[], ...: remove `ra_` prefix from crate names.
+* pr:5740[], pr:5753[], pr:5755[] make hygiene private to `hir`.
+* pr:5768[], pr:5768[] make `hir::Path` private to `hir`.
+* pr:5757[] document that CI should not depend on externalities.
+* pr:5759[] rename `hypothetical` -> `speculative` (naming inspired by Roslyn).
+* pr:5760[] document that `xtask`s should have few dependencies.
+* pr:5347[] add `rust-analyzer dump-chalk` command.
+* pr:5778[] upgrade chalk.
