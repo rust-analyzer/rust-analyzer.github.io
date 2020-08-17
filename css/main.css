@@ -147,6 +147,11 @@ a.source:hover {
     list-style: none;
 }
 
+.post-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
 
 .post {
     margin: 0 0 1.5rem 0;

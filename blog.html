@@ -3,9 +3,11 @@ layout: default
 ---
 <h2>Posts</h2>
 
-{% for post in site.categories.blog %}
-<div class="post">
-    <div class="post-date">{{ post.date | date: "%b %-d, %Y" }}</div>
-    <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-</div>
-{% endfor %}
+<ul class="post-list">
+    {% for post in site.categories.blog %}
+    <li class="post">
+        <div class="post-date">{{ post.date | date: "%b %-d, %Y" }}</div>
+        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
