@@ -16,7 +16,7 @@ Release: release:2020-08-17[]
 * pr:4743[] add tracking of packed repr, use it to highlight unsafe refs.
 * pr:5637[] **S**tructural **S**earch **R**eplace: match trait associated constants, types and functions.
 * pr:5746[] SSR now handles UFCS calls to trait methods.
-* pr:5766[] initial support for function-line procedural macros.
+* pr:5766[] initial support for function-like procedural macros.
 
 == Fixes
 
@@ -39,6 +39,6 @@ image::https://user-images.githubusercontent.com/1711539/90399497-5216cc80-e09b-
 * pr:5768[], pr:5768[] make `hir::Path` private to `hir`.
 * pr:5757[] document that CI should not depend on externalities.
 * pr:5759[] rename `hypothetical` -> `speculative` (naming inspired by Roslyn).
-* pr:5760[] document that `xtask`s should have few dependencies.
+* pr:5760[] document that ``xtask``s should have few dependencies.
 * pr:5347[] add `rust-analyzer dump-chalk` command.
 * pr:5778[] upgrade chalk.
