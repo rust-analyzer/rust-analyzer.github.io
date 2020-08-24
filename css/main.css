@@ -133,18 +133,21 @@ a.source:hover {
 
 .sponsors {
     font-size: 1.21875em;
+    margin: 0 0 1.25em;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: stretch;
+    flex-wrap: wrap;
 }
 
-.sponsors > ul {
+.sponsors li {
+    list-style-type: none;
+    white-space: nowrap;
+    margin: 0 0.75em;
+    flex-basis: 0;
     flex-grow: 1;
-    align-self: center;
-}
-
-.sponsors > ul > li {
-    list-style: none;
+    text-align: center;
 }
 
 .post-list {
