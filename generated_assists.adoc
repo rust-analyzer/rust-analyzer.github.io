@@ -1,3 +1,4 @@
+//Generated file, do not edit by hand, see `xtask/src/codegen`
 [discrete]
 === `add_custom_impl`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_custom_impl.rs#L14[add_custom_impl.rs]
@@ -65,7 +66,7 @@ fn main() {
 
 [discrete]
 === `add_impl_default_members`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_missing_impl_members.rs#L64[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_missing_impl_members.rs#L63[add_missing_impl_members.rs]
 
 Adds scaffold for overriding default impl members.
 
@@ -95,8 +96,8 @@ trait Trait {
 impl Trait for () {
     Type X = ();
     fn foo(&self) {}
-    $0fn bar(&self) {}
 
+    $0fn bar(&self) {}
 }
 ```
 
@@ -132,7 +133,6 @@ impl Trait<u32> for () {
     fn foo(&self) -> u32 {
         ${0:todo!()}
     }
-
 }
 ```
 
@@ -706,7 +706,7 @@ fn main() {
 
 [discrete]
 === `merge_imports`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/merge_imports.rs#L14[merge_imports.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/merge_imports.rs#L15[merge_imports.rs]
 
 Merges two imports with a common prefix.
 
@@ -896,6 +896,31 @@ impl Walrus {
 ```rust
 impl Walrus {
     fn feed(&self, amount: u32) {}
+}
+```
+
+
+[discrete]
+=== `remove_unused_param`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/remove_unused_param.rs#L13[remove_unused_param.rs]
+
+Removes unused function parameter.
+
+.Before
+```rust
+fn frobnicate(x: i32┃) {}
+
+fn main() {
+    frobnicate(92);
+}
+```
+
+.After
+```rust
+fn frobnicate() {}
+
+fn main() {
+    frobnicate();
 }
 ```
 

@@ -1,0 +1,44 @@
+= Changelog #39
+:sectanchors:
+:page-layout: post
+
+Commit: commit:e65d48d1fb3d4d91d9dc1148a7a836ff5c9a3c87[] +
+Release: release:2020-08-24[]
+
+== Sponsors
+
+**Become a sponsor:** https://opencollective.com/rust-analyzer/[opencollective.com/rust-analyzer]
+
+== New Features
+
+* pr:5821[] **Remove Unused Parameter** refactoring.
++
+image::https://user-images.githubusercontent.com/1711539/91040554-bfcc7680-e60e-11ea-905f-548c4308246a.gif[]
+* pr:5695[] completion for unstable features.
++
+image::https://user-images.githubusercontent.com/1711539/91040123-feadfc80-e60d-11ea-8f7c-3d0e76e59f5b.gif[]
+* pr:5643[] Add new consuming modifier to semantic syntax highlighting, apply consuming and mutable to methods.
+* pr:5758[] structural search replace now inserts *, & and &mut in the
+  replacement to match any auto[de]ref in the matched code.
+* pr:5682[] allow disabling specific rust-analyzer diagnostics.
++
+[source]
+----
+{
+  "rust-analyzer.diagnostics.disabled": ["missing-structure-fields"],
+}
+----
+
+== Fixes
+
+* pr:5782[] make status notification confirm with JSON RPC specification.
+* pr:5787[] fix missing match arm false positive.
+* pr:5687[] correctly sort `DocumentSymbols` for Sublime Text.
+
+== Internal Improvements
+
+* pr:5835[] publish snapshot-testing library, `expect-test` to crates.io: https://lib.rs/crates/expect-test.
+* pr:5776[] fix eslint errors on .eslintrc.js and rollup.config.js.
+* pr:5790[] improve CI time by cleaning `traget` dir properly.
+* pr:5813[] use lld to link rust-analyzer on Windows.
+* pr:5824[] optimize unused parameters search.
