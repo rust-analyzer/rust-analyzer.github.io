@@ -9,7 +9,7 @@ It probably is good that @matklad didn't choose accounting as a career.
 The next report should be exact though.
 
 We've got about 14000  EUR on open collective after fees.
-Of which, we distributed 12000 EUR by splitting it into two buckets:
+Of which we distributed 12000 EUR by splitting it into two buckets:
 
 * 50% for Ferrous Systems
 * 50% for contributors, not affiliated with Ferrous
@@ -17,8 +17,8 @@ Of which, we distributed 12000 EUR by splitting it into two buckets:
 We were able to pay more than our usual 20% to contributors because we managed to do some direct contracting work for rust-analyzer.
 
 Ferrous share went to paying for part of https://github.com/matklad[@matklad]'s time and for administrative tasks.
-3000 EUR were payed to https://github.com/flodiebold[@flodiebold] for chalk integration and various other type system improvements.
-3000 EUR were payed to https://github.com/edwin0cheng[@edwin0cheng] for implementing most of declarative and procedural macro support.
+3000 EUR were paid to https://github.com/flodiebold[@flodiebold] for chalk integration and various other type system improvements.
+3000 EUR were paid to https://github.com/edwin0cheng[@edwin0cheng] for implementing most of declarative and procedural macro support.
 
 Our biggest Open Collective sponsors in the first half of 2020 are:
 
@@ -31,6 +31,6 @@ Our biggest Open Collective sponsors in the first half of 2020 are:
 <3
 
 If you use rust-analyzer professionally, consider asking your company to https://opencollective.com/rust-analyzer/[sponsor] the development of this project.
-We are also planing to announce a couple of new ways to support rust-analyzer development soon, stay tuned!
+We are also planning to announce a couple of new ways to support rust-analyzer development soon, stay tuned!
 
-As a reminder, we publish https://rust-analyzer.github.io/thisweek[weekly changelog] to report the progress on rust-analyzer and explain where the money go.
+As a reminder, we publish https://rust-analyzer.github.io/thisweek[weekly changelogs] to report the progress on rust-analyzer and explain where the money goes.
