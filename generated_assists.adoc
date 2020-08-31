@@ -303,7 +303,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_struct_from_enum_variant`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_struct_from_enum_variant.rs#L16[extract_struct_from_enum_variant.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_struct_from_enum_variant.rs#L17[extract_struct_from_enum_variant.rs]
 
 Extracts a struct from enum variant.
 
