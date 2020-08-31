@@ -13,6 +13,10 @@ This week we want to thank https://www.technocreatives.com/[The Techno Creatives
 
 == New Features
 
+* https://rust-lang.github.io/compiler-team/working-groups/parselib/[wg-parselib] is formed to tackle the hard task of sharing the parser between rust-analyzer and rustc.
+  Join discussion on https://rust-lang.zulipchat.com/#narrow/stream/254930-t-compiler.2Fwg-parselib[Zulip] or look for
+  https://github.com/rust-lang/rust/issues?q=label%3AWG-parselib+[WG-parslib] tagged issues in rust-lang/rust.
+
 * pr:5859[] automatically publish rust-analyzer crates with `ra_ap` prefix: https://crates.io/search?q=ra_ap.
   You can use these crates to build your own tooling on top of rust-analyzer, which can be compile with stable `rustc`.
   Note that we provide **no** backwards compatibility guarantees.
