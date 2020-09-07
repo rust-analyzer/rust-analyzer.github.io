@@ -7,7 +7,11 @@ Release: release:2020-09-07[]
 
 == Sponsors
 
-**Become a sponsor:** https://opencollective.com/rust-analyzer/[opencollective.com/rust-analyzer]
+This week we want to thank the https://opensource.microsoft.com/ecosystem/[Microsoft FOSS Fund] for their support and commitment! Also check out their https://opensource.microsoft.com/ecosystem/[whole program]!
+
+**Become a sponsor on OpenCollective:** https://opencollective.com/rust-analyzer/[opencollective.com/rust-analyzer]
+**Become a sponsor on GitHub Sponsors:** https://github.com/sponsors/rust-analyzer[github.com/sponsors/rust-analyzer]
+
 
 == New Features
 
