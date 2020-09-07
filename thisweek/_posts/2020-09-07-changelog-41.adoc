@@ -1,0 +1,26 @@
+= Changelog #41
+:sectanchors:
+:page-layout: post
+
+Commit: commit:0275b08d1521606fa733f76fe5d5707717456fb4[] +
+Release: release:2020-09-07[]
+
+== Sponsors
+
+**Become a sponsor:** https://opencollective.com/rust-analyzer/[opencollective.com/rust-analyzer]
+
+== New Features
+
+* pr:5930[] Migrate to the latest Semantic Tokens Proposal for LSP 3.16.
+* pr:5940[] Implement "Replace `impl Trait` function argument with the named generic" assist.
+
+== Fixes
+
+* pr:5926[] Bump token expansion limit.
+* pr:5939[] Default `checkOnSave.enable` to `true` in server.
+* pr:5937[] Update chalk to 0.25.
+
+== Internal Improvements
+
+* pr:5935[] Rewrite import insertion.
+* pr:5862[] Forbid unnecessary merge commits.

@@ -187,7 +187,7 @@ fn main() {
 
 [discrete]
 === `auto_import`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/auto_import.rs#L19[auto_import.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/auto_import.rs#L22[auto_import.rs]
 
 If the name is unresolved, provides all possible imports for it.
 
@@ -272,7 +272,7 @@ fn main() {
 
 [discrete]
 === `expand_glob_import`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/expand_glob_import.rs#L14[expand_glob_import.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/expand_glob_import.rs#L18[expand_glob_import.rs]
 
 Expands glob imports.
 
@@ -303,7 +303,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_struct_from_enum_variant`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_struct_from_enum_variant.rs#L17[extract_struct_from_enum_variant.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_struct_from_enum_variant.rs#L20[extract_struct_from_enum_variant.rs]
 
 Extracts a struct from enum variant.
 
@@ -978,6 +978,23 @@ fn handle(action: Action) {
 
 
 [discrete]
+=== `replace_impl_trait_with_generic`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_impl_trait_with_generic.rs#L5[replace_impl_trait_with_generic.rs]
+
+Replaces `impl Trait` function argument with the named generic.
+
+.Before
+```rust
+fn foo(bar: ┃impl Bar) {}
+```
+
+.After
+```rust
+fn foo<B: Bar>(bar: B) {}
+```
+
+
+[discrete]
 === `replace_let_with_if_let`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_let_with_if_let.rs#L14[replace_let_with_if_let.rs]
 
@@ -1007,7 +1024,7 @@ fn compute() -> Option<i32> { None }
 
 [discrete]
 === `replace_qualified_name_with_use`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_qualified_name_with_use.rs#L9[replace_qualified_name_with_use.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_qualified_name_with_use.rs#L10[replace_qualified_name_with_use.rs]
 
 Adds a use statement for a given fully-qualified name.
 

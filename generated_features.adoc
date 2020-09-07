@@ -220,6 +220,14 @@ Some features trigger on typing certain characters:
 - typing `let =` tries to smartly add `;` if `=` is followed by an existing expression
 - typing `.` in a chain method call auto-indents
 
+VS Code::
+
+Add the following to `settings.json`:
+[source,json]
+----
+"editor.formatOnType": true,
+----
+
 
 === Parent Module
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/parent_module.rs#L12[parent_module.rs]
