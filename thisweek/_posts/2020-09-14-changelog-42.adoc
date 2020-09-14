@@ -25,7 +25,6 @@ image::https://user-images.githubusercontent.com/1786438/93090576-3fdd7d80-f69d-
 * pr:5971[] Implement async blocks.
 +
 image::https://user-images.githubusercontent.com/1786438/93090569-3b18c980-f69d-11ea-872c-c3bbf99b2438.gif[]
-* pr:5985[] Allow configuring import merge behavior.
 * pr:5976[] Complete trait impl immediately after type/const/fn.
 
 == Fixes
