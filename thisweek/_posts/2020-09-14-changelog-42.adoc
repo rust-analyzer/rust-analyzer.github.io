@@ -1,0 +1,37 @@
+= Changelog #42
+:sectanchors:
+:page-layout: post
+
+Commit: commit:0d03fe6ef57d3956e92382e0e1f1a916015191cb[] +
+Release: release:2020-09-14[]
+
+== Sponsors
+
+**Become a sponsor:** https://opencollective.com/rust-analyzer/[opencollective.com/rust-analyzer]
+
+== New Features
+
+* pr:5956[] Highlight errors in macros.
++
+image::https://user-images.githubusercontent.com/12111581/92319594-b71e6c00-f022-11ea-94c1-f412905269dd.png[]
+* pr:5957[] Add consuming modifier to lvalues that are passed by value and not `Copy`.
+* pr:5969[] Complete modules based on existing files.
++
+image::https://user-images.githubusercontent.com/1786438/93090591-466bf500-f69d-11ea-9a8c-f054a693287f.gif[]
+* pr:5990[] Implement box patterns.
++
+image::https://user-images.githubusercontent.com/1786438/93090576-3fdd7d80-f69d-11ea-95e9-8e1866f23c23.gif[]
+* pr:5971[] Implement async blocks.
++
+image::https://user-images.githubusercontent.com/1786438/93090569-3b18c980-f69d-11ea-872c-c3bbf99b2438.gif[]
+* pr:5985[] Allow configuring import merge behavior.
+* pr:5976[] Complete trait impl immediately after type/const/fn.
+
+== Fixes
+
+* pr:5970[] Use better heuristics for replacement text when removing dbg!.
+* pr:5981[] Properly preserve macro braces during dbg! removal.
+
+== Internal Improvements
+
+* pr:5968[] Improve generation of Chalk programs.
