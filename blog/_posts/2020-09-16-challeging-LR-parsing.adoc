@@ -1,0 +1,189 @@
+= Challenging LR Parsing
+:sectanchors:
+:page-layout: post
+
+This post is a direct response to https://tratt.net/laurie/blog/entries/which_parsing_approach.html[Which Parsing Approach?].
+If you haven't read that article, do it now -- it is the best short survey of the lay of the land of modern parsing techniques.
+I agree with conclusion -- LR parsing is the way to go if you want to do parsing "`properly`".
+I reasoned the same a couple of years ago: https://matklad.github.io/2018/06/06/modern-parser-generator.html#parsing-techniques[Modern Parser Generator].
+
+However, and here's the catch, rust-analyzer uses a hand-written recursive descent / https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html[Pratt parser].
+One of the reasons for that is that I find existing LR parser generators inadequate for production grade compiler/IDE.
+In this article, I want to list specific challenges for the authors of LR parser generators.
+
+== Error Resilience
+
+Consider this incomplete snippet of Rust code:
+
+[source,rust]
+----
+fn foo(
+
+struct S {
+   f: u32
+}
+----
+
+I want to see an LR parser which produces the following syntax tree
+(from https://rust-analyzer.github.io/manual.html#show-syntax-tree[**Show Syntax Tree**] rust-analyzer command, with whitespace nodes elided for clarity):
+
+[source]
+----
+SOURCE_FILE@0..32
+  FN@0..7
+    FN_KW@0..2 "fn"
+    NAME@3..6
+      IDENT@3..6 "foo"
+    PARAM_LIST@6..7
+      L_PAREN@6..7 "("
+  STRUCT@9..31
+    STRUCT_KW@9..15 "struct"
+    NAME@16..17
+      IDENT@16..17 "S"
+    RECORD_FIELD_LIST@18..31
+      L_CURLY@18..19 "{"
+      RECORD_FIELD@23..29
+        NAME@23..24
+          IDENT@23..24 "f"
+        COLON@24..25 ":"
+        PATH_TYPE@26..29
+          PATH@26..29
+            PATH_SEGMENT@26..29
+              NAME_REF@26..29
+                IDENT@26..29 "u32"
+      R_CURLY@30..31 "}"
+----
+
+The most error-resilient LR-style parser I know, https://github.com/tree-sitter/tree-sitter[tree sitter], produces this instead (tree sitter is GLR, this is *not* the style of parsing advocated by the article):
+
+[source]
+----
+source_file [0, 0] - [5, 0])
+  ERROR [0, 0] - [4, 1])
+    identifier [0, 3] - [0, 6])
+    struct_pattern [2, 0] - [4, 1])
+      type: type_identifier [2, 0] - [2, 6])
+      ERROR [2, 7] - [2, 8])
+        identifier [2, 7] - [2, 8])
+      field_pattern [3, 3] - [3, 9])
+        name: field_identifier [3, 3] - [3, 4])
+        pattern: identifier [3, 6] - [3, 9])
+----
+
+Note two things about the rust-analyzer's tree:
+
+* There's an (incomplete) "`function`" node for `fn foo(`.
+  Unclosed parenthesis doesn't preclude the parser from recognizing parameter list.
+* Incomplete function does not prevent struct definition from being recognized.
+
+These are important for IDE support.
+
+For example, suppose that the cursor is just after `(`.
+If we have rust-analyzer's syntax tree, than we can figure out that we are completing a function parameter.
+If we are to get fancy we might find the calls to the (not yet fully written) `foo`, run type inference to figure out the type of the first argument, and than suggest parameter name & type based on that (not currently implemented -- there's soooooo much yet to be done in rust-analyzer).
+And correctly recognizing `struct S` is important to not break type-inference in the code which uses `S`.
+
+There's a lot of literature about error recovery for LR parsers, how come academics haven't figured this out already?
+I have a bold claim to make: error-recovery research in academia is focusing on a problem irrelevant for IDEs.
+Specifically, the research is focused on finding "`minimal cost repair sequence`":
+
+* a set of edit operations is defined (skip, change or insert token),
+* a "`cost`" metric is defined to distinguish big and small edits,
+* an algorithm is devised to find the smallest edit which makes the current text parse.
+
+This is a very academia-friendly problem -- there's a precise mathematical formulation, there's an obvious brute force solution (try all edits), and there's ample space for finding polynomial algorithm.
+
+But IDEs don't care about actually guessing & repairing the text!
+They just need to see as much of (possibly incomplete) syntax nodes in the existing text as possible.
+When rust-analyzer's parser produces
+
+[source]
+----
+  PARAM_LIST@6..7
+    L_PAREN@6..7 "("
+STRUCT@9..31
+----
+
+it doesn't think "`Oh, I need to insert `)` here to complete the list of parameters`".
+Rather, it sees `struct` and thinks "`Oh wow, didn't expect that! I guess I'll just stop parsing parameter list right here`".
+
+So, here's
+
+.First Challenge
+[IMPORTANT]
+Design error _resilient_ (and not just error _recovering_) LR parsing algorithm.
+
+Note that error resilience is a topic orthogonal to error reporting.
+I haven't payed much attention to error reporting (in my experience, synchronous reporting of syntax errors in the editor compensates for bad syntax error messages), but it might be the case that MCRS are a good approach to there.
+
+== Expressions Grammar
+
+Next challenge concerns expressing operator precedence and associativity.
+Today, the standard solution is to write the grammar like this:
+
+[source]
+----
+%start Expr
+%%
+Expr: Expr "-" Term
+    | Term
+    ;
+Term: Term "*" Factor
+    | Factor
+    ;
+Factor: "INT"
+    ;
+----
+
+I argue that this is a nice solution for the machine, but is a terrible UX for a human.
+Rust has 13 levels of precedence -- no way I can come up with 13 different names like `Term` and `Factor`.
+A much more readable formulation here is https://doc.rust-lang.org/reference/expressions.html#expression-precedence[precedence table].
+Interestingly, this is the case where hand-written https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html[Pratt parser] is more declarative:
+
+[source,rust]
+----
+fn infix_binding_power(op: char) -> Option<(u8, u8)> {
+    let res = match op {
+        '=' => (2, 1),
+        '?' => (4, 3),
+        '+' | '-' => (5, 6),
+        '*' | '/' => (7, 8),
+        '.' => (14, 13),
+        _ => return None,
+    };
+    Some(res)
+}
+----
+
+.Second Challenge
+[IMPORTANT]
+Incorporate precedence and associativity tables into the surface syntax of the grammar.
+
+== IDE Support
+
+Finally, please provide decent IDE support ^^
+Here are the features I'd consider simple and essential:
+
+* precise https://github.com/microsoft/vscode-languageserver-node/blob/60a5a7825e6f54f57917091f394fd8db7d1724bc/protocol/src/common/protocol.semanticTokens.ts[syntax highlighting] (references colored to the same color as the corresponding declaration),
+* https://microsoft.github.io/language-server-protocol/specifications/specification-3-16/#textDocument_documentSymbol[outline] (fuzzy search by production names),
+* https://microsoft.github.io/language-server-protocol/specifications/specification-3-16/#textDocument_definition[go to definition],
+* https://microsoft.github.io/language-server-protocol/specifications/specification-3-16/#textDocument_completion[completion].
+
+A somewhat more complex, but also crucial feature is live preview.
+It should be possible to edit the grammar or the sample text, and _immediately_ see the resulting parse tree.
+Like this: https://www.youtube.com/watch?v=gb1MJnTcvds&feature=youtu.be (but, of course, the update should be instant).
+For UX, I suggest using doctest syntax:
+
+[source]
+----
+/// fn foo() { }
+Fn = 'fn' Name ParamList Block
+----
+
+Today, it takes only a day to implement a basic LSP server and get all the basic features working in most popular editors.
+Implementing live-preview would be more involved as there's no existing LSP request for this.
+But writing a custom extension isn't hard either, so add another day for live preview.
+
+.Third Challenge
+[IMPORTANT]
+Implement LSP server which provides basic IDE features, as well as live preview.
