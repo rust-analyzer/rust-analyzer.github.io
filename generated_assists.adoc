@@ -187,7 +187,7 @@ fn main() {
 
 [discrete]
 === `auto_import`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/auto_import.rs#L22[auto_import.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/auto_import.rs#L19[auto_import.rs]
 
 If the name is unresolved, provides all possible imports for it.
 
@@ -303,7 +303,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_struct_from_enum_variant`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_struct_from_enum_variant.rs#L20[extract_struct_from_enum_variant.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_struct_from_enum_variant.rs#L18[extract_struct_from_enum_variant.rs]
 
 Extracts a struct from enum variant.
 

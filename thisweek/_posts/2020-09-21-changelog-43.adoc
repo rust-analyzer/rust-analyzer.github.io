@@ -1,0 +1,33 @@
+= Changelog #43
+:sectanchors:
+:page-layout: post
+
+Commit: commit:e70cf706bb7c6c07e8c33b537ad24e5333aa5e75[] +
+Release: release:2020-09-21[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:6011[] document "consuming" semantic tokens modifier.
+* pr:6013[] add support for custom flycheck commands with JSON project
+workspaces.
+* pr:6016[] emit rust-analyzer native diagnostics for unresolved imports and extern crates.
+
+== Fixes
+
+* pr:6008[] when rendering completion item for a function, condense whitespace for readability.
+* pr:6010[] make triggers for completing associated items more precise.
+* pr:6017[] don't report changes for no-op formatting.
+
+== Internal Improvements
+
+* pr:5993[] update chalk to 0.27 and add support for extern opaque types.
+* pr:5989[] refactor infrastructure for editing `use` statements.
+* pr:6024[] simplify item tree IR for extern crate.
+* pr:6025[], pr:6035[]  better error logging.
+* pr:6032[] update signature help protocol.
+* pr:6036[] don't re-read open files from disk when reloading a workspace.
