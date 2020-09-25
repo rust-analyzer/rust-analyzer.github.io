@@ -1,4 +1,5 @@
 = Cost of rust-analyzer
+@matklad
 :sectanchors:
 :page-layout: post
 :redirect_from: /2019/10/16/finance.html
