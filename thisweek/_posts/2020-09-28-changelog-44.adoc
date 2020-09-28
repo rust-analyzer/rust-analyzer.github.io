@@ -1,0 +1,31 @@
+= Changelog #44
+:sectanchors:
+:page-layout: post
+
+Commit: commit:277488b51e22c790b51d5f739ecb33cdd20e903f[] +
+Release: release:2020-09-28[]
+
+Small release today: nightlies are blocked on fixing https://github.com/rust-analyzer/rust-analyzer/pull/6076#issuecomment-699920194[type inference bug].
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:5846[] when completing function calls, automatically insert `&`:
++
+image::https://user-images.githubusercontent.com/1711539/94450567-b7d39980-01ad-11eb-9a81-08717c9f76f6.gif[]
+* pr:6061[] allow to use a Github Auth token for fetching releases.
+  This change allows to use a authorization token provided by Github in
+  order to fetch metadata for a RA release. Using an authorization token
+  prevents to get rate-limited in environments where lots of RA users use
+  a shared client IP (e.g. behind a company NAT).
+* pr:6056[] add `dbgr` postfix completion, which expands to `dbg!(&e)`
++
+image::https://user-images.githubusercontent.com/1711539/94450989-33cde180-01ae-11eb-877a-6651124a707c.gif[]
+
+== Internal Improvements
+
+* pr:6048[] document internal scope abstraction.
