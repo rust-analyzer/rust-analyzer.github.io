@@ -45,7 +45,7 @@ I don't know which editor/IDE pioneered the light bulb UX; if you know, please l
 
 If we squint hard enough, an IDE/LSP server works a bit like a web server.
 It accepts requests like "`what is the definition of symbol on line 23?`", processes them according to the language semantics and responds back.
-Some requests also modify the data model itself ("here's the new next of foo.rs file: '...'").
+Some requests also modify the data model itself ("here's the new text of foo.rs file: '...'").
 Generally, the state of the world might change between any two requests.
 
 ****
@@ -64,7 +64,7 @@ Both request are initiated by user's actions, and arbitrary events might happen 
 Hence, assists can't assume that the state of the world is intact between `list` and `apply` actions.
 
 This leads to the following interface for assists (lightly adapted
-https://github.com/JetBrains/intellij-community/blob/680dbb522465d3fd3b599c2c582a7dec9c5ad02b/platform/analysis-api/src/com/intellij/codeInsight/intention/IntentionAction.java[`InteitionAction`]
+https://github.com/JetBrains/intellij-community/blob/680dbb522465d3fd3b599c2c582a7dec9c5ad02b/platform/analysis-api/src/com/intellij/codeInsight/intention/IntentionAction.java[`IntentionAction`]
 from IntelliJ
 )
 
