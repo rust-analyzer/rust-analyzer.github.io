@@ -1,0 +1,43 @@
+= Changelog #45
+:sectanchors:
+:page-layout: post
+
+Commit: commit:97d107e51f765dd486d527043546ca72dc6f7ad1[] +
+Release: release:2020-10-05[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:5928[] add method references CodeLens:
++
+image::https://user-images.githubusercontent.com/62505555/91858244-95fbfb00-ec71-11ea-90c7-5b3ee067e305.png[]
+* pr:5954[] allow overriding command for **Rust Analyzer: Run** action:
++
+image::https://user-images.githubusercontent.com/12111581/92306622-2f404f80-ef99-11ea-9bb7-6c6192a2c54a.gif[]
+* pr: postfix completions for fmt-like string literals:
++
+image::https://user-images.githubusercontent.com/12111581/92998650-a048af80-f523-11ea-8fd8-410146de8caa.gif[]
+* pr:6080[] add `linksInHover` config option to remove links from markdown for clients which don't support them.
+* pr:6096[] **Rust Analyzer: Status** command now displays dependencies of the current file.
+  This is helps with trouble shooting project structure issues.
+* pr:5997[] better inlay hints in `for` loops:
++
+image::https://user-images.githubusercontent.com/12111581/93024580-41a53380-f600-11ea-9bb1-1f8ac141be95.png[]
+
+== Fixes
+
+* pr:6088[] Update chalk, fixing panics in type inference.
+* pr:6102[] fix `"rust-analyzer.assist.importMergeBehaviour": "last"`.
+
+== Internal Improvements
+
+* pr:6093[] print current LSP request on panic.
+* pr:6019[] remove `make::path_from_text` to keep editing API more structured.
+* pr:6116[] update lexer.
+* pr:6090[], pr:6114[] additions to the style guide.
+* pr:6118[] document internal policy about clippy.
+* pr:6123[] unfork testing infarastructure.
