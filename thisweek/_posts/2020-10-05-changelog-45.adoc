@@ -18,7 +18,7 @@ image::https://user-images.githubusercontent.com/62505555/91858244-95fbfb00-ec71
 * pr:5954[] allow overriding command for **Rust Analyzer: Run** action:
 +
 image::https://user-images.githubusercontent.com/12111581/92306622-2f404f80-ef99-11ea-9bb7-6c6192a2c54a.gif[]
-* pr: postfix completions for fmt-like string literals:
+* pr:5988[] postfix completions for fmt-like string literals:
 +
 image::https://user-images.githubusercontent.com/12111581/92998650-a048af80-f523-11ea-8fd8-410146de8caa.gif[]
 * pr:6080[] add `linksInHover` config option to remove links from markdown for clients which don't support them.
