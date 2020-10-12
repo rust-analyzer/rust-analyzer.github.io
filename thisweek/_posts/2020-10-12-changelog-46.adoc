@@ -1,0 +1,47 @@
+= Changelog #46
+:sectanchors:
+:page-layout: post
+
+Commit: commit:b7596d248382aa88b81da4dd6c7598993bc4b787[] +
+Release: release:2020-10-12[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:6154[] shorten type hints for `std::iter` iterators.
++
+image::https://user-images.githubusercontent.com/1711539/95746625-63ddb000-0c97-11eb-83d1-5f3e2fb997f6.png[]
+* pr:6111[] add assist for converting the base of integer literals.
++
+image::https://i.imgur.com/MBhdPFH.gif[]
+* pr:6139[] add `rust-analyzer.assist.importPrefix` configuration open to configure style of auto-import.
+* pr:6140[] honor `hover.contentFormat` client capability and strip markdown markup for clients which don't support it.
+* pr:6160[] add validation check for ambiguous trait objects.
+* pr:5651[] fix proc macros support for Rust 1.47.
+* pr:6176[] support `eprintln!` postfix completion.
+* pr:5858[] show reasons for failed renames.
+
+== Fixes
+
+* pr:6127[] correctly complete items with leading underscore.
+* pr:6143[] fix name resolution for proc-macros.
+* pr:6147[] tweak **Remove dbg** assist to remove useless parenthesis in more cases.
+* pr:6124[] normalize `-` in crate names for display purposes.
+* pr:6148[] fix trait object hir formatting behind pointer and references.
+* pr:6128[] trim all trailing whitespace in onEnter.
+* pr:6158[] fix negative literals in procedural macros.
+* pr:6181[], pr:6188[], pr:6189[] fix resolve for enum variant fields.
+* pr:6185[] better diagnostics for invalid `RUST_SRC_PATH`.
+
+== Internal Improvements
+
+* pr:6133[] add some notes related to privacy and network access.
+* pr:6149[] smoke test documentation generation.
+* pr:6150[], pr:6151[] cleanup path handling in the IDE layer.
+* pr:6159[] document "*.mutable" semantic token modifier in the manual.
+* pr:6161[] upgrade chalk.
+* pr:6187[] leverage new cargo defaults for profile for build dependencies.
