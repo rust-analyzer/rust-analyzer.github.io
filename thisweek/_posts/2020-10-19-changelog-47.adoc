@@ -17,7 +17,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 * pr:6137[], pr:6248[], pr:6275[] add a new TextMate grammar.
 * pr:6130[] quick fix to change casing of names.
 * pr:6230[] improve logging during sysroot discovery. Use `RA_LOG=project_model=debug` to see those logs.
-* pr:6240[] document auto-import.
+* pr:6240[] document auto-import: https://rust-analyzer.github.io/manual.html#import-insertion[manual.html#import-insertion].
 * pr:6242[] suggest field shorthand in patterns.
 * pr:6220[] implement binary operator overloading type inference.
 * pr:6246[] follow symlinks when crawling the project tree.
