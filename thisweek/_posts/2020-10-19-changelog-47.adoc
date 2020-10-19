@@ -1,0 +1,53 @@
+= Changelog #47
+:sectanchors:
+:page-layout: post
+
+Commit: commit:3ca97b0e885e169227dde56160ac71dbf2d27448[] +
+Release: release:2020-10-19[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:6153[] aggressively pre-warm caches on startup.
+  This should reduce latency in some cases, and give bette indication about when rust-analyzer is fully ready.
+* pr:6137[], pr:6248[], pr:6275[] add a new TextMate grammar.
+* pr:6130[] quick fix to change casing of names.
+* pr:6230[] improve logging during sysroot discovery. Use `RA_LOG=project_model=debug` to see those logs.
+* pr:6240[] document auto-import.
+* pr:6242[] suggest field shorthand in patterns.
+* pr:6220[] implement binary operator overloading type inference.
+* pr:6246[] follow symlinks when crawling the project tree.
+  This doesn't implement full support for symlinks, but fixes some of the cases.
+
+== Fixes
+
+* pr:6277[] **Change Visibility** assist works for type aliases.
++
+image::https://user-images.githubusercontent.com/1711539/96458761-9a7c7300-1221-11eb-8243-1c722cc8b614.gif[]
+* pr:6199[] fix semantic highlighting for `mut self`.
+* pr:6198[] improve semantic highlighting of macro rules.
+* pr:6195[] when shortening iterator hints, recursively shorten associated types.
+* pr:6213[] fix "Invalid request: experimental/resolveCodeAction" panic.
+* pr:6209[] fix auto-import merge behavior for full/last options.
+* pr:6222[] fix stackoverflow in `insert_use::recursive_merge`.
+* pr:6236[] prevent editors from forming ligatures with inlay hints.
+* pr:6234[] fix hover over field pattern shorthand.
+* pr:6262[] remove some incorrect completions.
+* pr:6271[] complete method calls when receiver is a macro.
+
+
+== Internal Improvements
+
+* pr:6260[] switch build automation to use https://github.com/matklad/xshell[xshell]
+* pr:6208[] debug a befuddling failure on CI.
+  Turns out, macOS tar is broken, and can corrupt cargo's caches, which would result in "`crate not found`" compilation errors.
+* pr:6207[] make auto-import infrastructure more reusable.
+* pr:6226[] test that all rust-analyzer's protocol extensions are documented.
+* pr:6228[] add https://github.com/rust-analyzer/rust-analyzer/issues?q=is%3Aissue+is%3Aopen+label%3AS-actionable[S-actionable] and https://github.com/rust-analyzer/rust-analyzer/issues/6279[S-unactionable] issue labels.
+* pr:6231[] split syntax highlighting into more modules.
+* pr:6233[], pr:6239[], pr:6250[] additions to style guide.
+* pr:6276[] move completion into a separate crate.
