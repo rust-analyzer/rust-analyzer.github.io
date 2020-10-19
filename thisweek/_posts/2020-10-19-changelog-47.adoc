@@ -47,7 +47,7 @@ image::https://user-images.githubusercontent.com/1711539/96458761-9a7c7300-1221-
   Turns out, macOS tar is broken, and can corrupt cargo's caches, which would result in "`crate not found`" compilation errors.
 * pr:6207[] make auto-import infrastructure more reusable.
 * pr:6226[] test that all rust-analyzer's protocol extensions are documented.
-* pr:6228[] add https://github.com/rust-analyzer/rust-analyzer/issues?q=is%3Aissue+is%3Aopen+label%3AS-actionable[S-actionable] and https://github.com/rust-analyzer/rust-analyzer/issues/6279[S-unactionable] issue labels.
+* pr:6228[] add https://github.com/rust-analyzer/rust-analyzer/issues?q=is%3Aissue+is%3Aopen+label%3AS-actionable[S-actionable] and https://github.com/rust-analyzer/rust-analyzer/issues?q=is%3Aissue+is%3Aopen+label%3AS-unactionable[S-unactionable] issue labels.
 * pr:6231[] split syntax highlighting into more modules.
 * pr:6233[], pr:6239[], pr:6250[] additions to style guide.
 * pr:6276[] move completion into a separate crate.
