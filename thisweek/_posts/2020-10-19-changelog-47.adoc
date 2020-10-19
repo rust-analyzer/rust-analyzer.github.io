@@ -12,6 +12,9 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 
 == New Features
 
+* pr:5917[] add `rust-analyzer.openDocs` command to open documentation of symbol under cursor:
++
+image::https://i.imgur.com/DeVAfV4.gif[]
 * pr:6153[] aggressively pre-warm caches on startup.
   This should reduce latency in some cases, and give better indication about when rust-analyzer is fully ready.
 * pr:6137[], pr:6248[], pr:6275[] add a new TextMate grammar.
