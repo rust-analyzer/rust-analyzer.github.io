@@ -13,7 +13,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 == New Features
 
 * pr:6153[] aggressively pre-warm caches on startup.
-  This should reduce latency in some cases, and give bette indication about when rust-analyzer is fully ready.
+  This should reduce latency in some cases, and give better indication about when rust-analyzer is fully ready.
 * pr:6137[], pr:6248[], pr:6275[] add a new TextMate grammar.
 * pr:6130[] quick fix to change casing of names.
 * pr:6230[] improve logging during sysroot discovery. Use `RA_LOG=project_model=debug` to see those logs.
