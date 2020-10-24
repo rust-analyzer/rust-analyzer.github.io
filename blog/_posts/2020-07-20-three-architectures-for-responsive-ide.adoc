@@ -4,8 +4,10 @@
 :experimental:
 :page-layout: post
 
+****
 rust-analyzer is a new "IDE backend" for the https://www.rust-lang.org/[Rust] programming language.
 Support rust-analyzer on https://opencollective.com/rust-analyzer/[Open Collective].
+****
 
 In this post, we'll learn how to make a snappy IDE, in three different ways :-)
 It was inspired by this excellent article about using datalog for semantic analysis: https://petevilter.me/post/datalog-typechecking/

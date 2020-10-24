@@ -4,8 +4,10 @@
 :experimental:
 :page-layout: post
 
+****
 rust-analyzer is a new "IDE backend" for the https://www.rust-lang.org/[Rust] programming language.
 Support rust-analyzer on https://opencollective.com/rust-analyzer/[Open Collective] or https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+****
 
 My favorite IDE feature is a light bulb -- a little 💡 icon that appears next to a cursor which you can click on to apply a local refactoring.
 In the first part of this post, I'll talk about why this little bulb is so dear to my heart, and in the second part I'll go into some implementation tips and tricks.
