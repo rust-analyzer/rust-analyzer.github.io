@@ -10,7 +10,7 @@ Support rust-analyzer on https://opencollective.com/rust-analyzer/[Open Collecti
 ****
 
 This post introduces ungrammars: a new formalism for describing concrete syntax trees.
-The ideas behind ungrammar are simple, and are move valuable than a specific implementation.
+The ideas behind ungrammar are simple, and are more valuable than a specific implementation.
 Nonetheless, an implementation is available here:
 
 [.text-center]
