@@ -116,6 +116,7 @@ Here are some useful self-diagnostic commands:
 * **Rust Analyzer: Show RA Version** shows the version of `rust-analyzer` binary.
 * **Rust Analyzer: Status** prints some statistics about the server, and dependency information for the current file.
 * To enable server-side logging, run with `env RA_LOG=info` and see `Output > Rust Analyzer Language Server` in VS Code's panel.
+* To log project loading (sysroot & `cargo metadata`), set `RA_LOG=project_model=debug`.
 * To log all LSP requests, add `"rust-analyzer.trace.server": "verbose"` to the settings and look for `Rust Analyzer Language Server Trace` in the panel.
 * To enable client-side logging, add `"rust-analyzer.trace.extension": true` to the settings and open `Output > Rust Analyzer Client` in the panel.
 
@@ -286,6 +287,9 @@ interface JsonProject {
 }
 
 interface Crate {
+    /// Optional crate name used for display purposes, without affecting semantics.
+    /// See the `deps` key for semantically-significant crate names.
+    display_name?: string;
     /// Path to the root module of the crate.
     root_module: string;
     /// Edition of the crate.
@@ -361,6 +365,13 @@ They are usually triggered by a shortcut or by clicking a light bulb icon in the
 Cursor position or selection is signified by `┃` character.
 
 include::./generated_assists.adoc[]
+
+== Diagnostics
+
+While most errors and warnings provided by rust-analyzer come from the `cargo check` integration, there's a growing number of diagnostics implemented using rust-analyzer's own analysis.
+These diagnostics don't respect `#[allow]` or `#[deny]` attributes yet, but can be turned off using the `rust-analyzer.diagnostics.enable`, `rust-analyzer.diagnostics.enableExperimental` or `rust-analyzer.diagnostics.disabled` settings.
+
+include::./generated_diagnostic.adoc[]
 
 == Editor Features
 === VS Code

@@ -66,7 +66,7 @@ fn main() {
 
 [discrete]
 === `add_impl_default_members`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_missing_impl_members.rs#L63[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_missing_impl_members.rs#L64[add_missing_impl_members.rs]
 
 Adds scaffold for overriding default impl members.
 
@@ -104,7 +104,7 @@ impl Trait for () {
 
 [discrete]
 === `add_impl_missing_members`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_missing_impl_members.rs#L24[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_missing_impl_members.rs#L25[add_missing_impl_members.rs]
 
 Adds scaffold for required impl members.
 
@@ -855,6 +855,27 @@ fn handle(action: Action) {
 
 
 [discrete]
+=== `qualify_path`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/qualify_path.rs#L19[qualify_path.rs]
+
+If the name is unresolved, provides all possible qualified paths for it.
+
+.Before
+```rust
+fn main() {
+    let map = HashMap┃::new();
+}
+```
+
+.After
+```rust
+fn main() {
+    let map = std::collections::HashMap::new();
+}
+```
+
+
+[discrete]
 === `remove_dbg`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/remove_dbg.rs#L8[remove_dbg.rs]
 
@@ -964,7 +985,7 @@ const test: Foo = Foo {foo: 1, bar: 0}
 
 [discrete]
 === `replace_if_let_with_match`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_if_let_with_match.rs#L15[replace_if_let_with_match.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_if_let_with_match.rs#L13[replace_if_let_with_match.rs]
 
 Replaces `if let` with an else branch with a `match` expression.
 
@@ -1013,7 +1034,7 @@ fn foo<B: Bar>(bar: B) {}
 
 [discrete]
 === `replace_let_with_if_let`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_let_with_if_let.rs#L14[replace_let_with_if_let.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_let_with_if_let.rs#L15[replace_let_with_if_let.rs]
 
 Replaces `let` with an `if-let`.
 
@@ -1059,8 +1080,29 @@ fn process(map: HashMap<String, String>) {}
 
 
 [discrete]
+=== `replace_string_with_char`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_string_with_char.rs#L9[replace_string_with_char.rs]
+
+Replace string with char.
+
+.Before
+```rust
+fn main() {
+    find("{┃");
+}
+```
+
+.After
+```rust
+fn main() {
+    find('{');
+}
+```
+
+
+[discrete]
 === `replace_unwrap_with_match`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_unwrap_with_match.rs#L17[replace_unwrap_with_match.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_unwrap_with_match.rs#L18[replace_unwrap_with_match.rs]
 
 Replaces `unwrap` a `match` expression. Works for Result and Option.
 
