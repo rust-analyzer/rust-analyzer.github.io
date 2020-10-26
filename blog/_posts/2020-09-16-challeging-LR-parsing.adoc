@@ -188,3 +188,14 @@ But writing a custom extension isn't hard either, so add another day for live pr
 .Third Challenge
 [IMPORTANT]
 Implement LSP server which provides basic IDE features, as well as live preview.
+
+== Challenge Responses
+
+Folks fom https://galois.com/[Galois] develop a classy-named https://github.com/GaloisInc/daedalus[DaeDaLus] -- a flexible data description language for generating parsers with data dependencies.
+DaeDaLus makes an impressive attempt at solving the second challenge.
+The language is powerful enough to just
+https://github.com/GaloisInc/daedalus/blob/fe088fefc553e37974b47345a1da4b49a10da7f7/bin-exp/pratt-bin-expr.ddl#L53-L69[directly encode]
+Pratt-style precedence table.
+Even a
+https://github.com/GaloisInc/daedalus/blob/fe088fefc553e37974b47345a1da4b49a10da7f7/bin-exp/left-rec-bin-expr.ddl#L62-L73[more declarative]
+encoding might be possible, although it doesn't fully work at the time of writing.
