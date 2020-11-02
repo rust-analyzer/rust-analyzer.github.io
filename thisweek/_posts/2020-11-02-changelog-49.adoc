@@ -1,0 +1,36 @@
+= Changelog #49
+:sectanchors:
+:page-layout: post
+
+Commit: commit:86d3b784075966028c84e24ff4327a26fe7fbacb[] +
+Release: release:2020-11-02[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:6394[] use smaller font-size for inlay hints in VS Code.
+* pr:6416[] respond with JSON-RPC error message for invalid requests, instead of hard-crashing. 
+
+== Fixes
+
+* pr:6361[] fixes to TextMate grammar.
+* pr:6360[] fix unary minus highlighting.
+* pr:6350[] fix false positive for case checking diagnostics.
+* pr:6333[] fix parsing of `pub(in path)` visibility.
+* pr:6367[] correctly handle `#![cfg]` at the crate root.
+* pr:6257[] don't suggest extracting enum variant into a struct if it's already extracted.
+* pr:6376[] add a quick hack to fix type inference around `Fn` traits.
+* pr:6382[], pr:6392[] improve inlay hints presentation.
+* pr:6384[] allow running struct's doctests.
+* pr:6387[], pr:6396[] fix inlay hints for associated types.
+
+== Internal Improvements
+
+* pr:6347[] support insertion in SyntaxRewriter.
+* pr:6313[] update LSP version.
+* pr:6351[] rearrange code completion code.
+* pr:6415[] upgrade chalk.

@@ -98,7 +98,7 @@ Provides a tree of the symbols defined in the file. Can be used to
 
 
 === Format String Completion.
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/completion/src/complete_postfix/format_like.rs#L0[format_like.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/completion/src/completions/postfix/format_like.rs#L0[format_like.rs]
 
 `"Result {result} is {2 + 2}"` is expanded to the `"Result {} is {}", result, 2 + 2`.
 
@@ -194,7 +194,7 @@ Join selected lines into one, smartly fixing up whitespace, trailing commas, and
 
 
 === Magic Completions
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/completion/src/lib.rs#L41[lib.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/completion/src/lib.rs#L25[lib.rs]
 
 In addition to usual reference completion, rust-analyzer provides some ✨magic✨
 completions as well:
