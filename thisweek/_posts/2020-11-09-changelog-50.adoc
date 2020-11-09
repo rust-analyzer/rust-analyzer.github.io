@@ -1,0 +1,51 @@
+= Changelog #50
+:sectanchors:
+:page-layout: post
+
+Commit: commit:945900bdbf5423fdfb8542901dfb813c2ec32e09[] +
+Release: release:2020-11-09[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:6477[] **Infer Function Return Type** assist.
++
+image::https://user-images.githubusercontent.com/1711539/98535642-bf935d00-2286-11eb-98c4-8bdf2c5aa93a.gif[]
+* pr:6458[], pr:6476[] **Add Custom Impl** automatically fills-in required methods
++
+image::https://user-images.githubusercontent.com/1711539/98534279-84902a00-2284-11eb-8f65-b63c6e27c268.gif[]
+* pr:6456[] **Extract Enum Variant** supports records
++
+image::https://user-images.githubusercontent.com/1711539/98535147-e7ce8c00-2285-11eb-8b12-802ceb249389.gif[]
+* pr:6480[] **Change Return Type to Result** works for closures.
++
+image::https://user-images.githubusercontent.com/1711539/98535478-793dfe00-2286-11eb-9e3e-91724a1b93e1.gif[]
+* pr:6393[] hide more trivial inlay hints.
+* pr:6421[] take some of the `allow(...)` attributes into account when producing rust-analyzer diagnostics.
+* pr:6479[] ignore `RUST_SRC_PATH` if it is set to invalid location.
+
+== Fixes
+
+* pr:6436[], pr:6447[], pr:6450[], pr:6488[], pr:6489[], pr:6491[], pr:6497[] fixes to TextMate grammar.
+* pr:6441[] don't overload the client with too many progress notifications.
+* pr:6399[] keep existing type arguments in the **Qualify Path** assist.
+* pr:6401[] fix inlay hints for `self` parameter.
+* pr:6287[] auto-import preserves cursor position.
+* pr:6454[] fix panic in **Convert Integer Literal** assist.
+* pr:6467[] fix stack overflow when module includes itself.
+* pr:6470[] fix syntax highlighting flicker.
+
+== Internal Improvements
+
+* pr:6438[] use `-Dunreachable_pub` on CI.
+* pr:6490[] minimize **Convert Integer Literal** tests.o
+* pr:6437[], pr:6483[] amend code style.
+* pr:6442[] upgrade chalk.
+* pr:6365[] improve tree diffing algorithm.
+* pr:6430[] refactor completion rendering.
+* pr:6468[] add issue template.
+* pr:6485[] use the same type to represent both `"hello"` and `r#"hello"#` string literals.

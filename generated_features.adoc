@@ -194,7 +194,7 @@ Join selected lines into one, smartly fixing up whitespace, trailing commas, and
 
 
 === Magic Completions
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/completion/src/lib.rs#L25[lib.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/completion/src/lib.rs#L26[lib.rs]
 
 In addition to usual reference completion, rust-analyzer provides some ✨magic✨
 completions as well:
@@ -333,7 +333,7 @@ to a shortcut!
 
 
 === Semantic Syntax Highlighting
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/syntax_highlighting.rs#L37[syntax_highlighting.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/syntax_highlighting.rs#L38[syntax_highlighting.rs]
 
 rust-analyzer highlights the code semantically.
 For example, `bar` in `foo::Bar` might be colored differently depending on whether `Bar` is an enum or a trait.
@@ -345,7 +345,7 @@ We also give special modifier for `mut` and `&mut` local variables.
 
 
 === Show Syntax Tree
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/syntax_tree.rs#L9[syntax_tree.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/syntax_tree.rs#L7[syntax_tree.rs]
 
 Shows the parse tree of the current file. It exists mostly for debugging
 rust-analyzer itself.

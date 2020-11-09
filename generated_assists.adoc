@@ -1,7 +1,7 @@
 //Generated file, do not edit by hand, see `xtask/src/codegen`
 [discrete]
 === `add_custom_impl`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_custom_impl.rs#L14[add_custom_impl.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_custom_impl.rs#L19[add_custom_impl.rs]
 
 Adds impl block for derived trait.
 
@@ -45,7 +45,7 @@ fn main() {
 
 [discrete]
 === `add_hash`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/raw_string.rs#L91[raw_string.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/raw_string.rs#L92[raw_string.rs]
 
 Adds a hash to a raw string literal.
 
@@ -66,7 +66,7 @@ fn main() {
 
 [discrete]
 === `add_impl_default_members`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_missing_impl_members.rs#L64[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_missing_impl_members.rs#L51[add_missing_impl_members.rs]
 
 Adds scaffold for overriding default impl members.
 
@@ -104,7 +104,7 @@ impl Trait for () {
 
 [discrete]
 === `add_impl_missing_members`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_missing_impl_members.rs#L25[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_missing_impl_members.rs#L12[add_missing_impl_members.rs]
 
 Adds scaffold for required impl members.
 
@@ -320,7 +320,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_struct_from_enum_variant`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_struct_from_enum_variant.rs#L18[extract_struct_from_enum_variant.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_struct_from_enum_variant.rs#L19[extract_struct_from_enum_variant.rs]
 
 Extracts a struct from enum variant.
 
@@ -605,6 +605,24 @@ impl<T: Clone> Ctx<T> {
 
 
 [discrete]
+=== `infer_function_return_type`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/infer_function_return_type.rs#L7[infer_function_return_type.rs]
+
+Adds the return type to a function or closure inferred from its tail expression if it doesn't have a return
+type specified. This assists is useable in a functions or closures tail expression or return type position.
+
+.Before
+```rust
+fn foo() { 4┃2i32 }
+```
+
+.After
+```rust
+fn foo() -> i32 { 42i32 }
+```
+
+
+[discrete]
 === `inline_local_variable`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/inline_local_variable.rs#L13[inline_local_variable.rs]
 
@@ -681,7 +699,7 @@ fn main() {
 
 [discrete]
 === `make_raw_string`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/raw_string.rs#L13[raw_string.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/raw_string.rs#L8[raw_string.rs]
 
 Adds `r#` to a plain string literal.
 
@@ -702,7 +720,7 @@ fn main() {
 
 [discrete]
 === `make_usual_string`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/raw_string.rs#L52[raw_string.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/raw_string.rs#L50[raw_string.rs]
 
 Turns a raw string into a plain string.
 
@@ -898,7 +916,7 @@ fn main() {
 
 [discrete]
 === `remove_hash`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/raw_string.rs#L115[raw_string.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/raw_string.rs#L120[raw_string.rs]
 
 Removes a hash from a raw string literal.
 
@@ -1081,7 +1099,7 @@ fn process(map: HashMap<String, String>) {}
 
 [discrete]
 === `replace_string_with_char`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_string_with_char.rs#L9[replace_string_with_char.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_string_with_char.rs#L5[replace_string_with_char.rs]
 
 Replace string with char.
 
