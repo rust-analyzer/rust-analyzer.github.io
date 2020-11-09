@@ -42,7 +42,7 @@ image::https://user-images.githubusercontent.com/1711539/98535478-793dfe00-2286-
 == Internal Improvements
 
 * pr:6438[] use `-Dunreachable_pub` on CI.
-* pr:6490[] minimize **Convert Integer Literal** tests.o
+* pr:6490[] minimize **Convert Integer Literal** tests.
 * pr:6437[], pr:6483[] amend code style.
 * pr:6442[] upgrade chalk.
 * pr:6365[] improve tree diffing algorithm.
