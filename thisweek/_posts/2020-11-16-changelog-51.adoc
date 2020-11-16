@@ -1,0 +1,43 @@
+= Changelog #51
+:sectanchors:
+:page-layout: post
+
+Commit: commit:e8c803937ce23a6cf74583ad03f9868869c7eea1[] +
+Release: release:2020-11-16[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:6524[] add support for `#![feature(rustc_private)]`.
+  Set `rust-analyzer.rustcSource` to point to a directory with compiler's sources if you develop tooling which uses compiler directly (clippy, rustfmt, etc).
+
+* pr:6500[] add `.some` postfix template.
++
+image::https://user-images.githubusercontent.com/1711539/99246914-612a2980-2806-11eb-9f54-1111cdfe08c6.gif[]
+* pr:6544[] add `.. Default::default()` completion.
++
+image::https://user-images.githubusercontent.com/1711539/99248146-4e185900-2808-11eb-9cca-c85180ddb217.gif[]
+* pr:6472[] add `static` semantic tokens modifier to associated functions.
+* pr:6519[] **Open Cargo.toml** action opens a `Cargo.toml` file, relevant for the current `.rs` file.
+
+== Fixes
+
+* pr:6510[] fix panic in **Extract Struct From Enum Variant**.
+* pr:6514[] **Extract Struct From Enum Variant** updates references when extracting a record.
+* pr:6511[] highlight `.` as an operator.
+* pr:6516[] fixes to TextMate grammar.
+* pr:6534[] fix attachment of inner doc comments.
+* pr:6529[] do not insert imports before inner comments
+* pr:6513[] support qualified function calls in **Remove Unused Parameter** assist.
+
+== Internal Improvements
+
+* pr:6501[] make assists API more orthogonal.
+* pr:6465[] support multiple file edits in assists.
+* pr:6509[] support multiple file tests in assists.
+* pr:6521[] switch to upstream protocol for resolving code actions.
+* pr:6545[] simplify project loading.

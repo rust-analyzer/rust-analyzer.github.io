@@ -1,28 +1,5 @@
 //Generated file, do not edit by hand, see `xtask/src/codegen`
 [discrete]
-=== `add_custom_impl`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_custom_impl.rs#L19[add_custom_impl.rs]
-
-Adds impl block for derived trait.
-
-.Before
-```rust
-#[derive(Deb┃ug, Display)]
-struct S;
-```
-
-.After
-```rust
-#[derive(Display)]
-struct S;
-
-impl Debug for S {
-    $0
-}
-```
-
-
-[discrete]
 === `add_explicit_type`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_explicit_type.rs#L9[add_explicit_type.rs]
 
@@ -209,23 +186,6 @@ fn main() {
 
 
 [discrete]
-=== `change_return_type_to_result`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/change_return_type_to_result.rs#L11[change_return_type_to_result.rs]
-
-Change the function's return type to Result.
-
-.Before
-```rust
-fn foo() -> i32┃ { 42i32 }
-```
-
-.After
-```rust
-fn foo() -> Result<i32, ${0:_}> { Ok(42i32) }
-```
-
-
-[discrete]
 === `change_visibility`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/change_visibility.rs#L11[change_visibility.rs]
 
@@ -320,7 +280,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_struct_from_enum_variant`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_struct_from_enum_variant.rs#L19[extract_struct_from_enum_variant.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_struct_from_enum_variant.rs#L18[extract_struct_from_enum_variant.rs]
 
 Extracts a struct from enum variant.
 
@@ -1002,6 +962,31 @@ const test: Foo = Foo {foo: 1, bar: 0}
 
 
 [discrete]
+=== `replace_derive_with_manual_impl`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_derive_with_manual_impl.rs#L19[replace_derive_with_manual_impl.rs]
+
+Converts a `derive` impl into a manual one.
+
+.Before
+```rust
+#[derive(Deb┃ug, Display)]
+struct S;
+```
+
+.After
+```rust
+#[derive(Display)]
+struct S;
+
+impl Debug for S {
+    fn fmt(&self, f: &mut Formatter) -> Result<()> {
+        ${0:todo!()}
+    }
+}
+```
+
+
+[discrete]
 === `replace_if_let_with_match`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_if_let_with_match.rs#L13[replace_if_let_with_match.rs]
 
@@ -1183,4 +1168,21 @@ fn foo() {
 fn foo() {
     println!("foo");
 }
+```
+
+
+[discrete]
+=== `wrap_return_type_in_result`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/wrap_return_type_in_result.rs#L11[wrap_return_type_in_result.rs]
+
+Wrap the function's return type into Result.
+
+.Before
+```rust
+fn foo() -> i32┃ { 42i32 }
+```
+
+.After
+```rust
+fn foo() -> Result<i32, ${0:_}> { Ok(42i32) }
 ```
