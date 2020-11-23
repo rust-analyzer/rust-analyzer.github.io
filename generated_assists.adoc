@@ -565,6 +565,30 @@ impl<T: Clone> Ctx<T> {
 
 
 [discrete]
+=== `ignore_test`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/ignore_test.rs#L5[ignore_test.rs]
+
+Adds `#[ignore]` attribute to the test.
+
+.Before
+```rust
+┃#[test]
+fn arithmetics {
+    assert_eq!(2 + 2, 5);
+}
+```
+
+.After
+```rust
+#[test]
+#[ignore]
+fn arithmetics {
+    assert_eq!(2 + 2, 5);
+}
+```
+
+
+[discrete]
 === `infer_function_return_type`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/infer_function_return_type.rs#L7[infer_function_return_type.rs]
 

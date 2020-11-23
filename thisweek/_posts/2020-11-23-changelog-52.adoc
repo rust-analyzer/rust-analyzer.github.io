@@ -1,0 +1,45 @@
+= Changelog #52
+:sectanchors:
+:page-layout: post
+
+Commit: commit:cadf0e9fb630d04367ef2611383865963d84ab54[] +
+Release: release:2020-11-23[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:6553[] auto imports in completion:
++
+image::https://user-images.githubusercontent.com/2690773/99155339-ae4fb380-26bf-11eb-805a-655b1706ce70.gif[]
+
+* pr:6585[] link error explanations via clickable codes in diagnostics:
++
+image::https://user-images.githubusercontent.com/3757771/99459468-6d110b00-292e-11eb-9cde-d43ec9cebc09.png[]
+
+* pr:6573[] **Ignore Test** assist:
++
+image::https://user-images.githubusercontent.com/1711539/99943965-6a6d4600-2d72-11eb-9833-5d89c42fade1.gif[]
+* pr:6582[] fill the diagnostic code field in publish_diagnostics.
+
+== Fixes
+
+* pr:6552[] properly handle shorthands in destructure patterns when renaming:
++
+image::https://user-images.githubusercontent.com/1711539/99943469-a5bb4500-2d71-11eb-89dd-ff76a00ee6f0.gif[]
+* pr:6574[] **Unwrap Block** supports stand-alone blocks:
++
+image::https://user-images.githubusercontent.com/1711539/99945932-ceddd480-2d75-11eb-8e39-f5bae09ff8e4.gif[]
+
+* pr:6558[] format string highlighting: handle hex + debug type.
+* pr:6563[] don't complete keywords in struct initializers.
+* pr:6598[] ensure word boundary after `true` in TextMate grammar.
+
+== Internal Improvements
+
+* pr:6566[] update LSP to 3.16.
+* pr:6581[] update vscode-languageclient.
+* pr:6578[] simplify project_model.
