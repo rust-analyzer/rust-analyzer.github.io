@@ -1,6 +1,6 @@
 //Generated file, do not edit by hand, see `xtask/src/codegen`
 === Auto Import
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/auto_import.rs#L9[auto_import.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/auto_import.rs#L12[auto_import.rs]
 
 Using the `auto-import` assist it is possible to insert missing imports for unresolved items.
 When inserting an import it will do so in a structured manner by keeping imports grouped,
@@ -116,7 +116,7 @@ The following postfix snippets are available:
 
 
 === Go to Definition
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L18[goto_definition.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L14[goto_definition.rs]
 
 Navigates to the definition of an identifier.
 
@@ -215,6 +215,8 @@ There are postfix completions, which can be triggered by typing something like
 - `expr.while` -> `while expr {}` or `while let ... {}` for `Option` or `Result`
 - `expr.ref` -> `&expr`
 - `expr.refm` -> `&mut expr`
+- `expr.let` -> `let <|> = expr;`
+- `expr.letm` -> `let mut <|> = expr;`
 - `expr.not` -> `!expr`
 - `expr.dbg` -> `dbg!(expr)`
 - `expr.dbgr` -> `dbg!(&expr)`
@@ -238,6 +240,13 @@ mod tests {
     fn test_name() {}
 }
 ```
+
+And experimental completions, enabled with the `rust-analyzer.completion.enableExperimental` setting.
+This flag enables or disables:
+
+- Auto import: additional completion options with automatic `use` import and options from all project importable items, matched for the input
+
+Experimental completions might cause issues with performance and completion list look.
 
 
 === Matching Brace

@@ -164,7 +164,7 @@ fn main() {
 
 [discrete]
 === `auto_import`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/auto_import.rs#L64[auto_import.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/auto_import.rs#L67[auto_import.rs]
 
 If the name is unresolved, provides all possible imports for it.
 
@@ -280,7 +280,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_struct_from_enum_variant`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_struct_from_enum_variant.rs#L18[extract_struct_from_enum_variant.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_struct_from_enum_variant.rs#L19[extract_struct_from_enum_variant.rs]
 
 Extracts a struct from enum variant.
 
@@ -321,7 +321,7 @@ fn main() {
 
 [discrete]
 === `fill_match_arms`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/fill_match_arms.rs#L14[fill_match_arms.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/fill_match_arms.rs#L15[fill_match_arms.rs]
 
 Adds missing clauses to a `match` expression.
 
@@ -461,7 +461,7 @@ struct Point {
 
 [discrete]
 === `generate_from_impl_for_enum`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_from_impl_for_enum.rs#L7[generate_from_impl_for_enum.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_from_impl_for_enum.rs#L8[generate_from_impl_for_enum.rs]
 
 Adds a From impl for an enum variant with one tuple field.
 
@@ -566,7 +566,7 @@ impl<T: Clone> Ctx<T> {
 
 [discrete]
 === `ignore_test`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/ignore_test.rs#L5[ignore_test.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/ignore_test.rs#L8[ignore_test.rs]
 
 Adds `#[ignore]` attribute to the test.
 
@@ -725,7 +725,7 @@ fn main() {
 
 [discrete]
 === `merge_imports`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/merge_imports.rs#L15[merge_imports.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/merge_imports.rs#L13[merge_imports.rs]
 
 Merges two imports with a common prefix.
 
@@ -1089,7 +1089,7 @@ fn compute() -> Option<i32> { None }
 
 [discrete]
 === `replace_qualified_name_with_use`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_qualified_name_with_use.rs#L9[replace_qualified_name_with_use.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_qualified_name_with_use.rs#L7[replace_qualified_name_with_use.rs]
 
 Adds a use statement for a given fully-qualified name.
 

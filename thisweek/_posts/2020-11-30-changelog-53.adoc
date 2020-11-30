@@ -1,0 +1,48 @@
+= Changelog #53
+:sectanchors:
+:page-layout: post
+
+Commit: commit:ac30710ada112984c9cf79c4af39ad666d000171[] +
+Release: release:2020-11-30[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:6645[] add diagnostics for unexpandable macros.
++
+image::https://user-images.githubusercontent.com/1786438/100385784-f954b980-3023-11eb-9617-ac2eb0a0a9dc.png[]
+* pr:6666[] support "go to definition" for `self` parameter.
++
+image::https://user-images.githubusercontent.com/1711539/100603959-2b0c9f80-3306-11eb-94fa-a7285ed17cf6.gif[]
+* pr:6664[] show type of `self` on hover.
+* pr:6606[] support `unsafe` extern block syntax.
+* pr:6618[], pr:6621[] type inference for tuple patterns with ellipsis.
+* pr:6624[] check structs for match exhaustiveness.
+* pr:6631[] gate autoimports behind experimental completions.
+* pr:6599[] add attribute highlight modifier to all tokens inside attributes.
+
+== Fixes
+
+* pr:6670[] allow renaming between self and first param with owned parameters.
++
+image::https://user-images.githubusercontent.com/1711539/100604888-6f4c6f80-3307-11eb-85ac-773bda464ad5.gif[]
+* pr:6610[] **Ignore Test** assist now.
+* pr:6614[] improve performance of auto-import.
+* pr:6641[] `#[cfg]` diagnostics are more robust to code changes.
+* pr:6635[] complete struct in irrefutable let.
+* pr:6586[] better label for **Infer Function Return Type** assist.
+* pr:6669[] use the same default importing behavior in all editors.
+
+== Internal Improvements
+
+* pr:6613[] don't crash on invalid `DidChangeTextDocument` notifications.
+* pr:6637[] publish diagnostics on file open.
+* pr:6638[], pr:6639[], pr:6640[] cleanup macro expansion.
+* pr:6651[] add more profiling calls to completions.
+* pr:6652[] add more profiling calls to macro expansion.
+* pr:6656[] coalesce flycheck events.
+* pr:6650[] make completion and assists crates independent.
