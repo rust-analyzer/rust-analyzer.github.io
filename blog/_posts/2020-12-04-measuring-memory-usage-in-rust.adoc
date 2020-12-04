@@ -26,8 +26,8 @@ _The second approach_ is based on instrumenting the calls to allocation and deal
 The profiler captures backtraces when the program calls `malloc` and `free` and constructs a flamegraph displaying "`hot`" functions which allocate a lot.
 This is how, for example, https://github.com/KDE/heaptrack[heaptrack] works (see also https://github.com/cuviper/alloc_geiger[alloc geiger]).
 
-The two approaches are complimentary.
-If the problem is that the application does to many short-lived allocations (instead of re-using the buffers), it would be invisible for the first approach, but very clear in the second one.
+The two approaches are complementary.
+If the problem is that the application does too many short-lived allocations (instead of re-using the buffers), it would be invisible for the first approach, but very clear in the second one.
 If the problem is that, in a steady state, the application uses to much memory, the first approach would work better for pointing out which data structures need most attention.
 
 In rust-analyzer, we are generally interested in keeping the overall memory usage small, and can make better use of heap parsing approach.
@@ -40,7 +40,7 @@ There is Servo's https://github.com/servo/servo/tree/2d3811c21bf1c02911d5002f967
 
 Another alternative is running the program under valgrind to gain runtime introspectability.
 https://www.valgrind.org/docs/manual/ms-manual.html[Massif] and and https://www.valgrind.org/docs/manual/dh-manual.html[DHAT] work that way.
-Running with valgrind is pretty slow, and still doesn't give the Java-level fidelity.
+Running with valgrind is pretty slow, and still doesn't give Java-level fidelity.
 
 Instead, rust-analyzer mainly relies on a much simpler approach for figuring out which things are heavy.
 This is the first trick of this article:
@@ -53,11 +53,11 @@ It's even possible to implement a https://doc.rust-lang.org/stable/std/alloc/tra
 
 And, if you can measure total memory usage, you can measure memory usage of any specific data structure by:
 
-. noting the current memory usage
+. measuring the current memory usage
 . dropping the data structure
-. noting the current memory usage again
+. measuring the current memory usage again
 
-The difference between the two measurements is the size of the data structure.
+The difference between the two values is the size of the data structure.
 And this is exactly what rust-analyzer does to find the largest caches: https://github.com/rust-analyzer/rust-analyzer/blob/b988c6f84e06bdc5562c70f28586b9eeaae3a39c/crates/ide_db/src/apply_change.rs#L104-L238[source].
 
 Two small notes about this method:
@@ -97,7 +97,7 @@ However, just trying out this optimization is not easy, as an interner is a thor
 Is it worth it?
 
 If we look at the `Name` itself, it's pretty clear that the optimization is valuable: it reduces memory usage by 6x!
-But how much is it important in the grand scheme of things?
+But how important is it in the grand scheme of things?
 How to measure the impact of ``Name``s on overall memory usage?
 
 One approach is to just apply the optimization and measure the improvement after the fact.
@@ -115,4 +115,4 @@ struct Name {
 
 Now, if the new `Name` increases the overall memory consumption by `N`, we can estimate the total size of old ``Name``s as `N` as well, as they are twice as small.
 
-Sometimes, quick and simple hacks works better than the finest instruments :)
+Sometimes, quick and simple hacks works better than the finest instruments :).
