@@ -33,7 +33,7 @@ If the problem is that, in a steady state, the application uses to much memory, 
 In rust-analyzer, we are generally interested in keeping the overall memory usage small, and can make better use of heap parsing approach.
 Specifically, most of the rust-analyzer's data is stored in the incremental computation tables, and we want to know which table is the heaviest.
 
-Unfortunately, Rust use garbage collection, so just parsing the heap bytes at runtime is impossible.
+Unfortunately, Rust does not use garbage collection, so just parsing the heap bytes at runtime is impossible.
 The best available alternative is instrumenting data structures for the purposes of measuring memory size.
 That is, writing a proc-macro which adds `fn total_size(&self) -> usize` method to annotated types, and calling that manually from the root of the data.
 There is Servo's https://github.com/servo/servo/tree/2d3811c21bf1c02911d5002f9670349c5cf4f500/components/malloc_size_of[`malloc_size_of`] crate for doing that, but it is not published to crates.io.
