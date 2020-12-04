@@ -97,7 +97,7 @@ However, just trying out this optimization is not easy, as an interner is a thor
 Is it worth it?
 
 If we look at the `Name` itself, it's pretty clear that the optimization is valuable: it reduces memory usage by 6x!
-But how much is it important in the grand scheme of things?
+But how important is it in the grand scheme of things?
 How to measure the impact of ``Name``s on overall memory usage?
 
 One approach is to just apply the optimization and measure the improvement after the fact.
