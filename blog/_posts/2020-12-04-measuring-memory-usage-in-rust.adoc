@@ -28,7 +28,7 @@ This is how, for example, https://github.com/KDE/heaptrack[heaptrack] works (see
 
 The two approaches are complementary.
 If the problem is that the application does too many short-lived allocations (instead of re-using the buffers), it would be invisible for the first approach, but very clear in the second one.
-If the problem is that, in a steady state, the application uses to much memory, the first approach would work better for pointing out which data structures need most attention.
+If the problem is that, in a steady state, the application uses too much memory, the first approach would work better for pointing out which data structures need most attention.
 
 In rust-analyzer, we are generally interested in keeping the overall memory usage small, and can make better use of heap parsing approach.
 Specifically, most of the rust-analyzer's data is stored in the incremental computation tables, and we want to know which table is the heaviest.
