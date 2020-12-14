@@ -1,0 +1,72 @@
+= Changelog #55
+:sectanchors:
+:page-layout: post
+
+Commit: commit:dbd0cfba531c21de01af7b1a12ce9eb6b1271a5d[] +
+Release: release:2020-12-14[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:6761[], pr:6776[] editor-independent description of configuration format.
+  All server configs are now documented in the manual:
+  if you are seeing this, I have not yet placed the link here :)
+* pr:6769[], pr:6841[] **Remove this semicolon** fix:
++
+image::https://user-images.githubusercontent.com/14003886/101530533-b76c3180-399a-11eb-9d18-5c8457721655.gif[]
+
+* pr:6731[] **Replace `match` With `if let`** assist:
++
+image::https://user-images.githubusercontent.com/1711539/102076127-88751600-3e07-11eb-8333-ef5a83459cf2.gif[]
+
+* pr:6706[] lazily compute text edits for completion. This significantly speeds up completion in certain cases.
+
+* pr:6754[], pr:6752[], pr:6807[] handle cross-compilation and cfg attributes from build scripts.
+* pr:6760[] **Open Cargo.toml** now opens Cargo.toml for current package of the workspace.
++
+image::https://user-images.githubusercontent.com/1711539/102076855-aee78100-3e08-11eb-8e98-777e712e67c4.gif[]
+* pr:6771[] handle inner attributes.
+* pr:6790[] ask the editor to refresh code lenses when the project structure changes.
+* pr:6795[] support `key=value` pairs in `format!`-like macros.
+* pr:6819[] support built-in attributes in name resolution.
+* pr:6839[] type inference for labeled blocks.
+* pr:6840[] add VS Code level language configuration (indent, matching parenthesis, etc).
+
+== Fixes
+
+* pr:6805[] fix accidentally quadratic tree modification code.
+  This speeds up new auto-import completions a lot.
+  See https://rust-lang.zulipchat.com#narrow/stream/185405-t-compiler.2Fwg-rls-2.2E0/topic/SyntaxRewriter.20is.20accidentally.20linear[this stream] for an interesting discussion about tree editing API.
+* pr:6813[] fix negative literals handling in declarative macros.
+* pr:6743[] fix desugaring of doc attributes.
+* pr:6751[] fix name resolution for builtin macros.
+* pr:6719[] fix attachment of doc comments for modules and use items.
+* pr:6759[] fix rollup build.
+* pr:6765[] fix misplaced diagnostics in macros.
+* pr:6768[] fix `concat!` with integer literals.
+* pr:6774[] don't bail to early when expanding erroneous macros.
+* pr:6796[] fix `FileId` calculation in incorrect case diagnostics.
+* pr:6798[] ignore extern items in incorrect-case check.
+* pr:6804[] raise the size limit for macro-generated files.
+* pr:6816[] complete `PartialEq, Eq` rather than `Eq, PartialEq`.
+* pr:6824[] don't highlight parent nodes of comments on hover.
+* pr:6845[] fix source code generation with only partially substituted generics.
+
+
+== Internal Improvements
+
+* pr:6806[] improve docs for building from source.
+* pr:6597[] upgrade chalk and make `CHALK_OVERFLOW_DEPTH` and
+  `CHALK_SOLVER_MAX_SIZE` configurable via corresponding env variables.
+* pr:6745[] proc macro cleanups.
+* pr:6750[], pr:6834[], pr:6836[] completely move doc comments handling to attributes.
+* pr:6767[] better handling of panicking proc macros.
+* pr:6766[] install from source now supports `code-exploration`.
+* pr:6784[] add `AnchoredPath` abstraction to describe file-system paths in Rust files.
+* pr:6797[] document preference for american spelling for code.
+* pr:6825[], pr:6827[], pr:6828[], pr:6829[], pr:6830[] try hard to fix perf collection.
+* pr:6818[] plumbing to support lifetimes in `hir`.

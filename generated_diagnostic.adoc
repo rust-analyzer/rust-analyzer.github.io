@@ -1,6 +1,6 @@
 //Generated file, do not edit by hand, see `xtask/src/codegen`
 === break-outside-of-loop
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L219[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L243[diagnostics.rs]
 
 This diagnostic is triggered if `break` keyword is used outside of a loop.
 
@@ -12,7 +12,7 @@ This diagnostic is shown for code with inactive `#[cfg]` attributes.
 
 
 === incorrect-ident-case
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L319[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L343[diagnostics.rs]
 
 This diagnostic is triggered if item name doesn't follow https://doc.rust-lang.org/1.0.0/style/style/naming/README.html[Rust naming convention].
 
@@ -24,7 +24,7 @@ This diagnostic is shown for macro expansion errors.
 
 
 === mismatched-arg-count
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L267[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L291[diagnostics.rs]
 
 This diagnostic is triggered if function is invoked with an incorrect amount of arguments.
 
@@ -82,7 +82,7 @@ let a = A { a: 10 };
 
 
 === missing-unsafe
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L243[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L267[diagnostics.rs]
 
 This diagnostic is triggered if operation marked as `unsafe` is used outside of `unsafe` function or block.
 

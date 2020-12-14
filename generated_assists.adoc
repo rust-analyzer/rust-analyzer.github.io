@@ -749,7 +749,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `move_arm_cond_to_match_guard`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/move_guard.rs#L67[move_guard.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/move_guard.rs#L68[move_guard.rs]
 
 Moves if expression from match arm body into a guard.
 
@@ -988,7 +988,7 @@ impl Debug for S {
 
 [discrete]
 === `replace_if_let_with_match`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_if_let_with_match.rs#L13[replace_if_let_with_match.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_if_let_with_match.rs#L15[replace_if_let_with_match.rs]
 
 Replaces `if let` with an else branch with a `match` expression.
 
@@ -1060,6 +1060,38 @@ fn main(action: Action) {
 }
 
 fn compute() -> Option<i32> { None }
+```
+
+
+[discrete]
+=== `replace_match_with_if_let`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_if_let_with_match.rs#L84[replace_if_let_with_match.rs]
+
+Replaces a binary `match` with a wildcard pattern and no guards with an `if let` expression.
+
+.Before
+```rust
+enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    ┃match action {
+        Action::Move { distance } => foo(distance),
+        _ => bar(),
+    }
+}
+```
+
+.After
+```rust
+enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    if let Action::Move { distance } = action {
+        foo(distance)
+    } else {
+        bar()
+    }
+}
 ```
 
 

@@ -115,6 +115,54 @@ The following postfix snippets are available:
   + `loge` -> `log::error!(...)`
 
 
+=== Fuzzy Completion and Autoimports
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/completion/src/completions/unqualified_path.rs#L76[unqualified_path.rs]
+
+When completing names in the current scope, proposes additional imports from other modules or crates,
+if they can be qualified in the scope and their name contains all symbols from the completion input
+(case-insensitive, in any order or places).
+
+```
+fn main() {
+    pda<|>
+}
+# pub mod std { pub mod marker { pub struct PhantomData { } } }
+```
+->
+```
+use std::marker::PhantomData;
+
+fn main() {
+    PhantomData
+}
+# pub mod std { pub mod marker { pub struct PhantomData { } } }
+```
+
+.Fuzzy search details
+
+To avoid an excessive amount of the results returned, completion input is checked for inclusion in the identifiers only
+(i.e. in `HashMap` in the `std::collections::HashMap` path), also not in the module indentifiers.
+
+.Merge Behavior
+
+It is possible to configure how use-trees are merged with the `importMergeBehavior` setting.
+Mimics the corresponding behavior of the `Auto Import` feature.
+
+.LSP and performance implications
+
+The feature is enabled only if the LSP client supports LSP protocol version 3.16+ and reports the `additionalTextEdits`
+(case sensitive) resolve client capability in its client capabilities.
+This way the server is able to defer the costly computations, doing them for a selected completion item only.
+For clients with no such support, all edits have to be calculated on the completion request, including the fuzzy search completion ones,
+which might be slow ergo the feature is automatically disabled.
+
+.Feature toggle
+
+The feature can be forcefully turned off in the settings with the `rust-analyzer.completion.enableAutoimportCompletions` flag.
+Note that having this flag set to `true` does not guarantee that the feature is enabled: your client needs to have the corredponding
+capability enabled.
+
+
 === Go to Definition
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L14[goto_definition.rs]
 
@@ -194,7 +242,7 @@ Join selected lines into one, smartly fixing up whitespace, trailing commas, and
 
 
 === Magic Completions
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/completion/src/lib.rs#L26[lib.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/completion/src/lib.rs#L29[lib.rs]
 
 In addition to usual reference completion, rust-analyzer provides some ✨magic✨
 completions as well:
@@ -241,12 +289,9 @@ mod tests {
 }
 ```
 
-And experimental completions, enabled with the `rust-analyzer.completion.enableExperimental` setting.
-This flag enables or disables:
-
-- Auto import: additional completion options with automatic `use` import and options from all project importable items, matched for the input
-
-Experimental completions might cause issues with performance and completion list look.
+And the auto import completions, enabled with the `rust-analyzer.completion.autoimport.enable` setting and the corresponding LSP client capabilities.
+Those are the additional completion options with automatic `use` import and options from all project importable items,
+fuzzy matched agains the completion imput.
 
 
 === Matching Brace
