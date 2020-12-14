@@ -14,7 +14,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 
 * pr:6761[], pr:6776[] editor-independent description of configuration format.
   All server configs are now documented in the manual:
-  if you are seeing this, I have not yet placed the link here :)
+  https://rust-analyzer.github.io/manual.html#configuration
 * pr:6769[], pr:6841[] **Remove this semicolon** fix:
 +
 image::https://user-images.githubusercontent.com/14003886/101530533-b76c3180-399a-11eb-9d18-5c8457721655.gif[]
