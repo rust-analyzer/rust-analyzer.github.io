@@ -1,0 +1,49 @@
+= Changelog #56
+:sectanchors:
+:page-layout: post
+
+Commit: commit:5e2935e0b3bdcfaf95b4b5f86d4a0c4aec7588f5[] +
+Release: release:2020-12-21[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:6779[] upgrade to LSP 3.16. Note, this is sadly not as backwards compatible as we would like, if you see errors during project loading, please stick to the previous version of rust-analyzer until the next release.
+* pr:6907[] support goto definition, reference search and rename for lifetimes.
++
+video::https://user-images.githubusercontent.com/1711539/102792640-13768300-43a9-11eb-8f07-d5cee8204e65.mp4[options="autoplay,loop"]
+* pr:6934[] support `cfg_attr`.
+* pr:6874[] support `module_path!()` built-in macro.
+* pr:6861[] generate `Default` for `enum`.
++
+video::https://user-images.githubusercontent.com/1711539/102791001-a19d3a00-43a6-11eb-9c43-a31930ca63d8.mp4[options="autoplay,loop"]
+* pr:6897[] basic support for macros 2.0.
+* pr:6922[], pr:6946[] better ordering of auto-importing completions.
+* pr:6932[] detect when both `rust-lang.rust` and `matklad.rust-analyzer` extensions are active and suggest to disable one.
+
+== Fixes
+
+* pr:6885[] actually ship language configuration with VS Code extension.
+* pr:6889[] fix false positive macro diagnostic on `asm!` and `llvm_asm!` macros.
+* pr:6886[] expand statements for macros in lowering.
+* pr:6894[] parenthesize composite if condition before inverting in invert-if assist.
+* pr:6909[] avoid querying attributes in item tree lowering.
+* pr:6912[] default to host platform for cargo metadata.
+* pr:6901[] fix a couple of proc-macro related panics.
+* pr:6929[] handle `$_` in declarative macros.
+
+== Internal Improvements
+
+* pr:6817[] replace `goblin` crate with `object`.
+* pr:6862[] add lifetimes to the the internal code representations.
+* pr:6893[] treat `macro_rules!` as a special syntax and not as a macro call.
+* pr:6879[] make `HasChildSource` generic over the type of child.
+* pr:6906[] document GitHub organization permissions and privileges.
+* pr:6896[] node-ify lifetimes.
+* pr:6911[] don't pass `db` around so often.
+* pr:6916[], pr:6930[] privatize hir-level API.
+* pr:6919[] rewrite "run this doctest" functionality.

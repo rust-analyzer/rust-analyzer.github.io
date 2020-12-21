@@ -436,6 +436,37 @@ fn foo<T: Copy + Clone>() { }
 
 
 [discrete]
+=== `generate_default_from_enum_variant`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_default_from_enum_variant.rs#L8[generate_default_from_enum_variant.rs]
+
+Adds a Default impl for an enum using a variant.
+
+.Before
+```rust
+enum Version {
+ Undefined,
+ Minor┃,
+ Major,
+}
+```
+
+.After
+```rust
+enum Version {
+ Undefined,
+ Minor,
+ Major,
+}
+
+impl Default for Version {
+    fn default() -> Self {
+        Self::Minor
+    }
+}
+```
+
+
+[discrete]
 === `generate_derive`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_derive.rs#L9[generate_derive.rs]
 
@@ -943,7 +974,7 @@ fn main() {
 
 [discrete]
 === `reorder_fields`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/reorder_fields.rs#L10[reorder_fields.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/reorder_fields.rs#L11[reorder_fields.rs]
 
 Reorder the fields of record literals and record patterns in the same order as in
 the definition.
