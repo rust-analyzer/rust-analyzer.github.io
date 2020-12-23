@@ -184,6 +184,11 @@ a.source:hover {
     text-decoration: underline;
 }
 
+video {
+    display: block;
+    max-width: 100%;
+}
+
 @media (max-width: 600px) {
     #header-inner {
         flex-direction: column;
