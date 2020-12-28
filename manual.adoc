@@ -218,7 +218,7 @@ The are several LSP client implementations for vim or neovim:
    * automatically install and upgrade stable/nightly releases
    * same configurations as VSCode extension, `rust-analyzer.serverPath`, `rust-analyzer.cargo.features` etc.
    * same commands too, `rust-analyzer.analyzerStatus`, `rust-analyzer.ssr` etc.
-   * inlay hints for method chaining support, _Neovim Only_
+   * inlay hints for variables and method chaining, _Neovim Only_
    * semantic highlighting is not implemented yet
 
 ==== LanguageClient-neovim
@@ -301,6 +301,9 @@ If the LSP binary is not available, GNOME Builder can install it when opening a 
 
 rust-analyzer is configured via LSP messages, which means that it's up to the editor to decide on the exact format and location of configuration files.
 Please consult your editor's documentation to learn how to configure LSP servers.
+
+To verify which configuration is actually used by rust-analyzer, set `RA_LOG` environment variable to `rust_analyzer=info` and look for config-related messages.
+Logs should show both the JSON that rust-analyzer sees as well as the updated config.
 
 This is the list of config options rust-analyzer supports:
 

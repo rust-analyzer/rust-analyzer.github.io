@@ -1,0 +1,52 @@
+= Changelog #57
+:sectanchors:
+:page-layout: post
+
+Commit: commit:1d530756ed7ba175ec32ff71247072798dc9a748[] +
+Release: release:2020-12-28[]
+
+Last release for 2020!
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:6990[], pr:6991[], pr:6989[], pr:6999[], pr:7001[] produce `rust-analyzer-aarch64-apple-darwin` builds.
+* pr:6964[] add full pattern completions
++
+image::https://user-images.githubusercontent.com/3757771/102785796-d1e0da80-439e-11eb-934b-218ada31b51c.gif[]
+* pr:6984[] remove TextMate grammar -- it is now included with VS Code.
+* pr:6746[] **Extract Module to File** assist.
++
+image::https://user-images.githubusercontent.com/13580199/102748269-33a44300-43a5-11eb-9e37-f5fcb8e62f73.gif[]
+* pr:7009[] rename module when renaming file.
++
+image::https://user-images.githubusercontent.com/4325700/102942807-59ece000-4484-11eb-970b-61b3372534f1.gif[]
+* pr:6993[] clean up descriptions for settings.
+* pr:6960[] show enum variant on Self qualified.
+* pr:7019[] more helpful serde errors.
+* pr:7020[], pr:7010[] support for const blocks.
+* pr:7026[] coc-rust-analyzer supports inlay hints for variables and chaining.
+* pr:7021[], pr:7030[] support goto def, search and rename for lables.
+
+== Fixes
+
+* pr:6967[] correctly parse legacy trait objects with leading ForType.
+* pr:6965[] properly attach attributes to function parameters.
+* pr:6978[] filter out empty rustc spans.
+* pr:6981[] rename works from macro.
+* pr:6982[] remove parentheses when inverting `!(cond)`.
+* pr:6987[] delete related whitespace when removing unused param.
+* pr:7013[] don't think that /submod.rs is /mod.rs.
+* pr:7022[] prevent multiple incorrect case diagnostics in functions.
+* pr:7027[] fix macro_rules not accepting brackets or parentheses.
+* pr:7047[], pr:7047[] fix proc-macro related panics.
+* pr:7050[] fix composite tokens in declarative macros.
+
+== Internal Improvements
+
+* pr:7017[] document `make` module design.
+* pr:7043[] simplify assists resolution API.
