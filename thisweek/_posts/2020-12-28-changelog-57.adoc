@@ -14,7 +14,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 
 == New Features
 
-* pr:6990[], pr:6991[], pr:6989[], pr:7001[] produce `rust-analyzer-aarch64-apple-darwin` builds.
+* pr:6990[], pr:6991[], pr:6989[], pr:7001[] produce `aarch64-apple-darwin` builds.
 * pr:6964[] add full pattern completions
 +
 image::https://user-images.githubusercontent.com/3757771/102785796-d1e0da80-439e-11eb-934b-218ada31b51c.gif[]
