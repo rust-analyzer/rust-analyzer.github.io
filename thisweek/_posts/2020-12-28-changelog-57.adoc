@@ -14,7 +14,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 
 == New Features
 
-* pr:6990[], pr:6991[], pr:6989[], pr:6999[], pr:7001[] produce `rust-analyzer-aarch64-apple-darwin` builds.
+* pr:6990[], pr:6991[], pr:6989[], pr:7001[] produce `aarch64-apple-darwin` builds.
 * pr:6964[] add full pattern completions
 +
 image::https://user-images.githubusercontent.com/3757771/102785796-d1e0da80-439e-11eb-934b-218ada31b51c.gif[]
@@ -43,7 +43,7 @@ image::https://user-images.githubusercontent.com/4325700/102942807-59ece000-4484
 * pr:7013[] don't think that /submod.rs is /mod.rs.
 * pr:7022[] prevent multiple incorrect case diagnostics in functions.
 * pr:7027[] fix macro_rules not accepting brackets or parentheses.
-* pr:7047[], pr:7047[] fix proc-macro related panics.
+* pr:7047[] fix proc-macro related panics.
 * pr:7050[] fix composite tokens in declarative macros.
 
 == Internal Improvements
