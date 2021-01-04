@@ -281,6 +281,39 @@ fn qux(bar: Bar, baz: Baz) {}
 
 
 [discrete]
+=== `extract_assignment`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_assignment.rs#L12[extract_assignment.rs]
+
+Extracts variable assigment to outside an if or match statement.
+
+.Before
+```rust
+fn main() {
+    let mut foo = 6;
+
+    if true {
+        ┃foo = 5;
+    } else {
+        foo = 4;
+    }
+}
+```
+
+.After
+```rust
+fn main() {
+    let mut foo = 6;
+
+    foo = if true {
+        5
+    } else {
+        4
+    };
+}
+```
+
+
+[discrete]
 === `extract_module_to_file`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_module_to_file.rs#L10[extract_module_to_file.rs]
 

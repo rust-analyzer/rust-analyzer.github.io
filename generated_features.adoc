@@ -140,8 +140,9 @@ fn main() {
 
 .Fuzzy search details
 
-To avoid an excessive amount of the results returned, completion input is checked for inclusion in the identifiers only
-(i.e. in `HashMap` in the `std::collections::HashMap` path), also not in the module indentifiers.
+To avoid an excessive amount of the results returned, completion input is checked for inclusion in the names only
+(i.e. in `HashMap` in the `std::collections::HashMap` path).
+For the same reasons, avoids searching for any imports for inputs with their length less that 2 symbols.
 
 .Merge Behavior
 
@@ -477,6 +478,16 @@ String::from((y + 5).foo(z))
 | Editor  | Action Name
 
 | VS Code | **Rust Analyzer: Structural Search Replace**
+|===
+
+
+=== View Hir
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/view_hir.rs#L6[view_hir.rs]
+
+|===
+| Editor  | Action Name
+
+| VS Code | **Rust Analyzer: View Hir**
 |===
 
 

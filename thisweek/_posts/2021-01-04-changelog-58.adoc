@@ -1,0 +1,47 @@
+= Changelog #58
+:sectanchors:
+:page-layout: post
+
+Commit: commit:5b86ff3e91838e58397ec39502d85056e46fcfcb[] +
+Release: release:2021-01-04[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:7130[] add extract-assignment assist.
++
+image::https://user-images.githubusercontent.com/1711539/103537043-b13b7900-4ea4-11eb-84b3-e570d7b92d98.gif[]
+* pr:7091[] `rust-analyzer.server.extraEnv` config to specify environment variables for `rust-analyzer` process.
+* pr:7107[] add working dir to cargo metadata fail messages.
+* pr:7106[] produce fine-grained diffs when formatting files.
+* pr:7071[] pass `--all-targets` to `cargo check` when discovering project structure.
+* pr:7080[] initial support for const type parameters.
+* pr:7121[] show lifetimes and labels on hover.
+* pr:7123[] basic support for 2021 edition.
+
+== Fixes
+
+* pr:7070[] fix `$0` inserted during edits.
+* pr:7088[] fix false positive "unnecessary braces" diagnostic.
+* pr:7064[] improve auto-importing completion speed and accuracy.
+* pr:7059[] fix handling of `$_` in macros.
+* pr:7075[] use `.format` to trigger postfix format completion.
+* pr:7101[] fix spacing bug in proc-macro.
+* pr:7055[] don't swallow the "rustfmt not installed error".
+* pr:7102[] fix completion of Default struct update syntax.
+* pr:7116[] fix proc-macros for deep trees.
+* pr:7125[] don't emit arg count diagnostics for method calls with unknown receiver.
+* pr:7134[] fix type-inference for macro generated arrays.
+* pr:7136[] fixed nested eager macros.
+
+== Internal Improvements
+
+* pr:7068[] add VSCode command to view the rust-analyzer's hir of a function body.
+* pr:7077[], pr:7104[] avoid allocations.
+* pr:7113[] manual updates.
+* pr:7115[] migrate HasSource::source to return an `Option`.
+* pr:7083[] refactor mbe parsing code.
