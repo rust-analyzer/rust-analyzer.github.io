@@ -74,7 +74,7 @@ impl Trait for () {
     type X = ();
     fn foo(&self) {}
 
-    $0fn bar(&self) {}
+    ┃fn bar(&self) {}
 }
 ```
 
@@ -107,7 +107,7 @@ trait Trait<T> {
 }
 
 impl Trait<u32> for () {
-    $0type X;
+    ┃type X;
 
     fn foo(&self) -> u32 {
         todo!()
@@ -281,58 +281,6 @@ fn qux(bar: Bar, baz: Baz) {}
 
 
 [discrete]
-=== `extract_assignment`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_assignment.rs#L12[extract_assignment.rs]
-
-Extracts variable assigment to outside an if or match statement.
-
-.Before
-```rust
-fn main() {
-    let mut foo = 6;
-
-    if true {
-        ┃foo = 5;
-    } else {
-        foo = 4;
-    }
-}
-```
-
-.After
-```rust
-fn main() {
-    let mut foo = 6;
-
-    foo = if true {
-        5
-    } else {
-        4
-    };
-}
-```
-
-
-[discrete]
-=== `extract_module_to_file`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_module_to_file.rs#L10[extract_module_to_file.rs]
-
-This assist extract module to file.
-
-.Before
-```rust
-mod foo {┃
-    fn t() {}
-}
-```
-
-.After
-```rust
-mod foo;
-```
-
-
-[discrete]
 === `extract_struct_from_enum_variant`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_struct_from_enum_variant.rs#L19[extract_struct_from_enum_variant.rs]
 
@@ -367,7 +315,7 @@ fn main() {
 .After
 ```rust
 fn main() {
-    let $0var_name = (1 + 2);
+    let ┃var_name = (1 + 2);
     var_name * 4;
 }
 ```
@@ -396,7 +344,7 @@ enum Action { Move { distance: u32 }, Stop }
 
 fn handle(action: Action) {
     match action {
-        $0Action::Move { distance } => {}
+        ┃Action::Move { distance } => {}
         Action::Stop => {}
     }
 }
@@ -422,7 +370,7 @@ fn main() {
 .After
 ```rust
 mod m {
-    $0pub(crate) fn frobnicate() {}
+    ┃pub(crate) fn frobnicate() {}
 }
 fn main() {
     m::frobnicate() {}
@@ -536,7 +484,7 @@ struct Point {
 
 .After
 ```rust
-#[derive($0)]
+#[derive(┃)]
 struct Point {
     x: u32,
     y: u32,
@@ -569,7 +517,7 @@ impl From<u32> for A {
 
 [discrete]
 === `generate_function`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_function.rs#L19[generate_function.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_function.rs#L18[generate_function.rs]
 
 Adds a stub function with a signature matching the function under the cursor.
 
@@ -618,7 +566,7 @@ struct Ctx<T: Clone> {
 }
 
 impl<T: Clone> Ctx<T> {
-    $0
+    ┃
 }
 ```
 
@@ -643,7 +591,7 @@ struct Ctx<T: Clone> {
 }
 
 impl<T: Clone> Ctx<T> {
-    fn $0new(data: T) -> Self { Self { data } }
+    fn ┃new(data: T) -> Self { Self { data } }
 }
 
 ```
@@ -664,6 +612,33 @@ fn foo() { 4┃2i32 }
 .After
 ```rust
 fn foo() -> i32 { 42i32 }
+```
+
+
+[discrete]
+=== `inline_function`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/inline_function.rs#L14[inline_function.rs]
+
+Inlines a function body.
+
+.Before
+```rust
+fn add(a: u32, b: u32) -> u32 { a + b }
+fn main() {
+    let x = add┃(1, 2);
+}
+```
+
+.After
+```rust
+fn add(a: u32, b: u32) -> u32 { a + b }
+fn main() {
+    let x = {
+        let a = 1;
+        let b = 2;
+        a + b
+    };
+}
 ```
 
 
@@ -913,6 +888,58 @@ fn handle(action: Action) {
         },
         _ => (),
     }
+}
+```
+
+
+[discrete]
+=== `move_module_to_file`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/move_module_to_file.rs#L11[move_module_to_file.rs]
+
+Moves inline module's contents to a separate file.
+
+.Before
+```rust
+mod ┃foo {
+    fn t() {}
+}
+```
+
+.After
+```rust
+mod foo;
+```
+
+
+[discrete]
+=== `pull_assignment_up`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/pull_assignment_up.rs#L12[pull_assignment_up.rs]
+
+Extracts variable assignment to outside an if or match statement.
+
+.Before
+```rust
+fn main() {
+    let mut foo = 6;
+
+    if true {
+        ┃foo = 5;
+    } else {
+        foo = 4;
+    }
+}
+```
+
+.After
+```rust
+fn main() {
+    let mut foo = 6;
+
+    foo = if true {
+        5
+    } else {
+        4
+    };
 }
 ```
 
@@ -1242,7 +1269,7 @@ fn main() {
     let x: Result<i32, i32> = Result::Ok(92);
     let y = match x {
         Ok(a) => a,
-        $0_ => unreachable!(),
+        ┃_ => unreachable!(),
     };
 }
 ```

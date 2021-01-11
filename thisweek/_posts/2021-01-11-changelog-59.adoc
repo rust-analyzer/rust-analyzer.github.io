@@ -1,0 +1,68 @@
+= Changelog #59
+:sectanchors:
+:page-layout: post
+
+Commit: commit:60c501fa19dc446ca8122db17bca9e0dcd5233a2[] +
+Release: release:2021-01-11[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+
+* pr:7131[] **Inline Function** assist for inlining a function's body into its caller:
++
+image::https://user-images.githubusercontent.com/1711539/104171256-69bc6c00-5413-11eb-980f-e34d259d529e.gif[]
+
+* pr:7193[] show progress for fetching workspace:
++
+image::https://user-images.githubusercontent.com/11014119/103902132-0db4c780-5135-11eb-94d3-32429445be87.gif[]
+
+* pr:7149[], pr:7152[], pr:7154[] implement hovering for TypeParams.
++
+image::https://user-images.githubusercontent.com/3757771/103547890-42aaeb00-4ea5-11eb-8ac7-f166869af5f8.png[]
+
+* pr:6980[] goto definition for intra-doc links:
++
+image::https://user-images.githubusercontent.com/1711539/104176594-90c96c80-5418-11eb-8fe2-0962d228f443.gif[]
+
+* pr:6587[], pr:7147[] Structural Search Replace (SSR) supports statement matching and replacing.
+* pr:7148[], pr:7151[] build aarch64-pc-windows-msvc releases.
+* pr:7171[] emit diagnostics for unresolved item-level macros.
+* pr:7097[] add fix to wrap return expression in `Some`.
+
+== Fixes
+
+* pr:7156[] rename config options:
++
+```
+rust-analyzer.serverPath    -> rust-analyzer.server.path
+assist_importMergeBehaviour -> assist.importMergeBehavior
+```
+* pr:7162[] introduce queries to avoid O(N^2) lookup when performing completion
+  for enums with many variants.
+* pr:7174[] normalize line endings when formatting.
+* pr:7176[] don't complete optional arguments when completing attributes.
+* pr:7205[] fix bug for $crate in LHS of mbe.
+* pr:7234[] allow `true` and `false` keywords in const generics.
+* pr:7241[] Honor client's dynamic registration capabilities.
+
+== Internal Improvements
+
+* pr:7145[] add hygiene info to macro expansions.
+* pr:7198[] add motivations to all styleguide rules.
+* pr:7184[] changes cursor marker from `<|>` to `$0`.
+* pr:7196[] improve fixture syntax highlighting.
+* pr:7159[] refactor mbe to reduce clone and copying.
+* pr:7160[] API to get `hir::Function` return type.
+* pr:7140[] store trait associated items in fuzzy search index.
+* pr:7168[] rename BlockExpr::expr -> tail_expr.
+* pr:7170[], pr:7172[] refactor config handling.
+* pr:7181[], pr:7191[] improve internal docs.
+* pr:7182[] switch from difference to dissimilar.
+* pr:7189[] extend git evacuation procedure.
+* pr:7212[], pr:7216[], pr:7223[], pr:7226[] refactor syntax highlighting
+* pr:7206[] use hir::GenericParam in ide_db::Definition instead of relisting all 3.

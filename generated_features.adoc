@@ -124,7 +124,7 @@ if they can be qualified in the scope and their name contains all symbols from t
 
 ```
 fn main() {
-    pda<|>
+    pda$0
 }
 # pub mod std { pub mod marker { pub struct PhantomData { } } }
 ```
@@ -165,7 +165,7 @@ capability enabled.
 
 
 === Go to Definition
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L15[goto_definition.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L21[goto_definition.rs]
 
 Navigates to the definition of an identifier.
 
@@ -201,14 +201,14 @@ Navigates to the type of an identifier.
 
 
 === Hover
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/hover.rs#L90[hover.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/hover.rs#L77[hover.rs]
 
 Shows additional information, like type of an expression or documentation for definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L41[inlay_hints.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L35[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
@@ -264,8 +264,8 @@ There are postfix completions, which can be triggered by typing something like
 - `expr.while` -> `while expr {}` or `while let ... {}` for `Option` or `Result`
 - `expr.ref` -> `&expr`
 - `expr.refm` -> `&mut expr`
-- `expr.let` -> `let <|> = expr;`
-- `expr.letm` -> `let mut <|> = expr;`
+- `expr.let` -> `let $0 = expr;`
+- `expr.letm` -> `let mut $0 = expr;`
 - `expr.not` -> `!expr`
 - `expr.dbg` -> `dbg!(expr)`
 - `expr.dbgr` -> `dbg!(&expr)`
@@ -388,7 +388,7 @@ to a shortcut!
 
 
 === Semantic Syntax Highlighting
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/syntax_highlighting.rs#L38[syntax_highlighting.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/syntax_highlighting.rs#L42[syntax_highlighting.rs]
 
 rust-analyzer highlights the code semantically.
 For example, `bar` in `foo::Bar` might be colored differently depending on whether `Bar` is an enum or a trait.
