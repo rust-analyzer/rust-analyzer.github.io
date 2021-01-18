@@ -1,0 +1,51 @@
+= Changelog #60
+:sectanchors:
+:page-layout: post
+
+Commit: commit:fde4a860aea903a0455a05c1def1d07a6573639b[] +
+Release: release:2021-01-18[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:7220[] same level folder rename renames module.
+* pr:6809[] add quick fix to sort impl methods by trait definition:
++
+image::https://user-images.githubusercontent.com/1711539/104917483-83762a00-59a4-11eb-9797-34aaee609497.gif[]
+* pr:7289[] add **Unmerge Use** assist:
++
+image::https://user-images.githubusercontent.com/1711539/104919876-02b92d00-59a8-11eb-9403-cf5ec30c4592.gif[]
+* pr:7260[] render Fn* trait objects and impl types as rust does.
+* pr:7209: support yield keyword syntax.
+* pr:7271[], pr:7274[] publish the arena library used in rust-analyzer to crates.io: https://crates.io/crates/la-arena.r
+* pr:7296[], pr:7300[], pr:7314[] improve performance of the syntax tree library.
+* pr:7311[] build dist-aarch64-unknown-linux-gnu releases.
+
+== Fixes
+
+* pr:7110[] deduplicate macros when offering completion.
+* pr:7235[] `ifl` postfix completion works with `&Option<T>`.
+* pr:7251[], pr:7272[] improve LSP conformance, don't split single file edits.
+* pr:7262[] don't treat rename errors as server crashes.
+* pr:7264[] fix build.rs support in workspaces.
+* pr:7285[] don't duplicate rustc diagnostics fixes.
+* pr:7287[] make SyntaxPtr lookup logarithmic, resolving some accidentally quadratic issues.
+
+== Internal Improvements
+
+* Establish a steering meeting to discuss overall direction of the project.
+  The meeting is held every sixth Monday at 15:00 UTC in the project's Zulip.
+  The first meeting is today. 
+
+* pr:7270[] introduce new assertion mechanism: `assert_always` and `assert_never` macros.
+  Inspired by  https://www.sqlite.org/assert.html.
+* pr:7051[] check for stray `dbg!` macros.
+* pr:7219[] refactor rename name checking.
+* pr:7249[] add `cargo xtask bb` to conveniently build rust-analyzer for benchmarking.
+* pr:7257[] vfs documentation.
+* pr:7288[] treat `self`, `super` and `crate` as names.
+* pr:7295[] share import_assets and related entities.

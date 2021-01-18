@@ -166,7 +166,7 @@ fn main() {
 
 [discrete]
 === `auto_import`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/auto_import.rs#L67[auto_import.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/auto_import.rs#L65[auto_import.rs]
 
 If the name is unresolved, provides all possible imports for it.
 
@@ -282,7 +282,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_struct_from_enum_variant`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_struct_from_enum_variant.rs#L19[extract_struct_from_enum_variant.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_struct_from_enum_variant.rs#L23[extract_struct_from_enum_variant.rs]
 
 Extracts a struct from enum variant.
 
@@ -644,7 +644,7 @@ fn main() {
 
 [discrete]
 === `inline_local_variable`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/inline_local_variable.rs#L13[inline_local_variable.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/inline_local_variable.rs#L16[inline_local_variable.rs]
 
 Inlines local variable.
 
@@ -946,7 +946,7 @@ fn main() {
 
 [discrete]
 === `qualify_path`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/qualify_path.rs#L19[qualify_path.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/qualify_path.rs#L21[qualify_path.rs]
 
 If the name is unresolved, provides all possible qualified paths for it.
 
@@ -1070,6 +1070,46 @@ const test: Foo = ┃Foo {bar: 0, foo: 1}
 ```rust
 struct Foo {foo: i32, bar: i32};
 const test: Foo = Foo {foo: 1, bar: 0}
+```
+
+
+[discrete]
+=== `reorder_impl`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/reorder_impl.rs#L15[reorder_impl.rs]
+
+Reorder the methods of an `impl Trait`. The methods will be ordered
+in the same order as in the trait definition.
+
+.Before
+```rust
+trait Foo {
+    fn a() {}
+    fn b() {}
+    fn c() {}
+}
+
+struct Bar;
+┃impl Foo for Bar {
+    fn b() {}
+    fn c() {}
+    fn a() {}
+}
+```
+
+.After
+```rust
+trait Foo {
+    fn a() {}
+    fn b() {}
+    fn c() {}
+}
+
+struct Bar;
+impl Foo for Bar {
+    fn a() {}
+    fn b() {}
+    fn c() {}
+}
 ```
 
 
@@ -1313,6 +1353,24 @@ fn arithmetics {
 fn arithmetics {
     assert_eq!(2 + 2, 5);
 }
+```
+
+
+[discrete]
+=== `unmerge_use`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/unmerge_use.rs#L13[unmerge_use.rs]
+
+Extracts single use item from use list.
+
+.Before
+```rust
+use std::fmt::{Debug, Display┃};
+```
+
+.After
+```rust
+use std::fmt::{Debug};
+use std::fmt::Display;
 ```
 
 
