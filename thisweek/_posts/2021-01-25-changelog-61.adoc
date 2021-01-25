@@ -45,7 +45,7 @@ image::https://user-images.githubusercontent.com/1711539/105710800-a8c8e200-5f28
 
 * pr:7319[] avoid blocking the main loop when editing Cargo.toml.
 * pr:7371[] respect `rustfmt.toml` in subdirectories.
-* pr:7389[] remove support for heuristic-based goto def.
+* pr:7389[] remove support for heuristic-based goto def.
 * pr:7386[] handle box with allocator.
 * pr:7398[] stave off zombies.
 * pr:7391[] fix error when using "extern crate self as".
@@ -57,7 +57,7 @@ image::https://user-images.githubusercontent.com/1711539/105710800-a8c8e200-5f28
 * pr:7324[] adds syntax-level support for macros in type position.
 * pr:7334[] add back jemalloc support.
 * pr:7332[] rename reference search uses ide_db::search directly.
-* pr:7336[], pr:7359[], pr:7366[], pr:7375[] groundwork for the item-local import resolution.
+* pr:7336[], pr:7359[], pr:7366[], pr:7375[] groundwork for the item-local import resolution.
 * pr:7347[], pr:7331[] reduce hygiene info size.
 * pr:7365[], pr:7367[] update chalk.
 * pr:7370[] fix mega bug.
