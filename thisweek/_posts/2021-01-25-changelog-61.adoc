@@ -1,0 +1,65 @@
+= Changelog #61
+:sectanchors:
+:page-layout: post
+
+Commit: commit:3ab8d7a9ae1b8c5e421a4666f6693ae7278a7a3c[] +
+Release: release:2021-01-25[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* https://github.com/rust-analyzer/rust-analyzer/issues/7325[`#7325`] steering issue which guides the development for the next six weeks. 
+
+* pr:7297[] propose trait associated items and autoimport traits on completion:
++
+image::https://user-images.githubusercontent.com/2690773/104819998-6faeb480-583a-11eb-8b45-b7351b51b90e.gif[]
+
+* pr:7342[] show deprecated completions for deprecated traits:
++
+image::https://user-images.githubusercontent.com/2690773/104970200-569d3380-59f3-11eb-9ee3-627b3c8a5c9d.png[]
+
+* pr:7321[] support runnables in macros:
++
+image::https://user-images.githubusercontent.com/1711539/105707371-e24b1e80-5f23-11eb-94ed-16f88758e607.png[]
+
+* pr:7351[] show const params in completions:
++
+image::https://user-images.githubusercontent.com/3757771/105080872-bba76680-5a91-11eb-91cd-0910da4c8312.png[]
+
+* pr:7310[] **Add Lifetime to Type** assist:
++
+image::https://user-images.githubusercontent.com/1711539/105710185-ce092080-5f27-11eb-9dba-f39db0ab3e49.gif[]
+
+* pr:7062[] add diagnostic for filter_map followed by next:
++
+image::https://user-images.githubusercontent.com/1711539/105710800-a8c8e200-5f28-11eb-8c9d-707929087cd1.gif[]
+
+* pr:7413[] handle unions in symbol search.
+* pr:7414[] add validation for mutable const items.
+
+== Fixes
+
+* pr:7319[] avoid blocking the main loop when editing Cargo.toml.
+* pr:7371[] respect `rustfmt.toml` in subdirectories.
+* pr:7389[] remove support for heuristic-based goto def.
+* pr:7386[] handle box with allocator.
+* pr:7398[] stave off zombies.
+* pr:7391[] fix error when using "extern crate self as".
+
+
+== Internal Improvements
+
+* pr:7291[] wrap remaining self/super/crate in `ast::Name`.
+* pr:7324[] adds syntax-level support for macros in type position.
+* pr:7334[] add back jemalloc support.
+* pr:7332[] rename reference search uses ide_db::search directly.
+* pr:7336[], pr:7359[], pr:7366[], pr:7375[] groundwork for the item-local import resolution.
+* pr:7347[], pr:7331[] reduce hygiene info size.
+* pr:7365[], pr:7367[] update chalk.
+* pr:7370[] fix mega bug.
+* pr:7378[] include `countme` crate to count important data structures.
+* pr:7374[] add step to run analysis-stats on std.

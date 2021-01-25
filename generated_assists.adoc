@@ -117,6 +117,29 @@ impl Trait<u32> for () {
 
 
 [discrete]
+=== `add_lifetime_to_type`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_lifetime_to_type.rs#L6[add_lifetime_to_type.rs]
+
+Adds a new lifetime to a struct, enum or union.
+
+.Before
+```rust
+struct Point {
+    x: &┃u32,
+    y: u32,
+}
+```
+
+.After
+```rust
+struct Point<'a> {
+    x: &'a u32,
+    y: u32,
+}
+```
+
+
+[discrete]
 === `add_turbo_fish`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/add_turbo_fish.rs#L10[add_turbo_fish.rs]
 
@@ -548,7 +571,7 @@ fn bar(arg: &str, baz: Baz) ${0:-> ()} {
 
 [discrete]
 === `generate_impl`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_impl.rs#L7[generate_impl.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_impl.rs#L10[generate_impl.rs]
 
 Adds a new inherent impl for a type.
 
@@ -946,7 +969,7 @@ fn main() {
 
 [discrete]
 === `qualify_path`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/qualify_path.rs#L21[qualify_path.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/qualify_path.rs#L20[qualify_path.rs]
 
 If the name is unresolved, provides all possible qualified paths for it.
 
