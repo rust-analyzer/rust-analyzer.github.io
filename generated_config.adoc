@@ -7,7 +7,7 @@
 [[rust-analyzer.cargo.autoreload]]rust-analyzer.cargo.autoreload (default: `true`)::
  Automatically refresh project info via `cargo metadata` on  `Cargo.toml` changes.
 [[rust-analyzer.cargo.allFeatures]]rust-analyzer.cargo.allFeatures (default: `false`)::
- Activate all available features.
+ Activate all available features (`--all-features`).
 [[rust-analyzer.cargo.features]]rust-analyzer.cargo.features (default: `[]`)::
  List of features to activate.
 [[rust-analyzer.cargo.loadOutDirsFromCheck]]rust-analyzer.cargo.loadOutDirsFromCheck (default: `false`)::
@@ -21,9 +21,9 @@
 [[rust-analyzer.checkOnSave.enable]]rust-analyzer.checkOnSave.enable (default: `true`)::
  Run specified `cargo check` command for diagnostics on save.
 [[rust-analyzer.checkOnSave.allFeatures]]rust-analyzer.checkOnSave.allFeatures (default: `null`)::
- Check with all features (will be passed as `--all-features`).  Defaults to `#rust-analyzer.cargo.allFeatures#`.
+ Check with all features (`--all-features`).  Defaults to `#rust-analyzer.cargo.allFeatures#`.
 [[rust-analyzer.checkOnSave.allTargets]]rust-analyzer.checkOnSave.allTargets (default: `true`)::
- Check all targets and tests (will be passed as `--all-targets`).
+ Check all targets and tests (`--all-targets`).
 [[rust-analyzer.checkOnSave.command]]rust-analyzer.checkOnSave.command (default: `"check"`)::
  Cargo command to use for `cargo check`.
 [[rust-analyzer.checkOnSave.noDefaultFeatures]]rust-analyzer.checkOnSave.noDefaultFeatures (default: `null`)::
@@ -56,6 +56,8 @@
  List of warnings that should be displayed with hint severity.\n\nThe  warnings will be indicated by faded text or three dots in code and  will not show up in the `Problems Panel`.
 [[rust-analyzer.files.watcher]]rust-analyzer.files.watcher (default: `"client"`)::
  Controls file watching implementation.
+[[rust-analyzer.files.excludeDirs]]rust-analyzer.files.excludeDirs (default: `[]`)::
+ These directories will be ignored by rust-analyzer.
 [[rust-analyzer.hoverActions.debug]]rust-analyzer.hoverActions.debug (default: `true`)::
  Whether to show `Debug` action. Only applies when  `#rust-analyzer.hoverActions.enable#` is set.
 [[rust-analyzer.hoverActions.enable]]rust-analyzer.hoverActions.enable (default: `true`)::
@@ -86,10 +88,12 @@
  Whether to show `Run` lens. Only applies when  `#rust-analyzer.lens.enable#` is set.
 [[rust-analyzer.lens.methodReferences]]rust-analyzer.lens.methodReferences (default: `false`)::
  Whether to show `Method References` lens. Only applies when  `#rust-analyzer.lens.enable#` is set.
+[[rust-analyzer.lens.references]]rust-analyzer.lens.references (default: `false`)::
+ Whether to show `References` lens. Only applies when  `#rust-analyzer.lens.enable#` is set.
 [[rust-analyzer.linkedProjects]]rust-analyzer.linkedProjects (default: `[]`)::
  Disable project auto-discovery in favor of explicitly specified set  of projects.\n\nElements must be paths pointing to `Cargo.toml`,  `rust-project.json`, or JSON objects in `rust-project.json` format.
 [[rust-analyzer.lruCapacity]]rust-analyzer.lruCapacity (default: `null`)::
- Number of syntax trees rust-analyzer keeps in memory.  Defaults to 128.
+ Number of syntax trees rust-analyzer keeps in memory. Defaults to 128.
 [[rust-analyzer.notifications.cargoTomlNotFound]]rust-analyzer.notifications.cargoTomlNotFound (default: `true`)::
  Whether to show `can't find Cargo.toml` error message.
 [[rust-analyzer.procMacro.enable]]rust-analyzer.procMacro.enable (default: `false`)::

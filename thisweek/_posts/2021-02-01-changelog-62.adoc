@@ -1,0 +1,53 @@
+= Changelog #62
+:sectanchors:
+:page-layout: post
+
+Commit: commit:1a59f75cdaa730c16a694a4294eccf6dfe6fe0ad[] +
+Release: release:2021-02-01[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:7409[] add References code lens, gated by `rust-analyzer.lens.references`:
++
+image::https://user-images.githubusercontent.com/308347/106449060-3f972080-648c-11eb-8105-72725fa33d17.gif[]
+
+* pr:7412[] make `OUT_DIR`s and proc macro loading asynchronous:
++
+image::https://user-images.githubusercontent.com/11014119/105610083-8f208100-5de8-11eb-8e96-c2d4e349b352.gif[]
+
+* pr:7468[] make Fill Match Arms assist work in macros.
+* pr:7451[] add `rust-analyzer.files.excludeDirs` config.
+
+== Fixes
+
+* pr:7415[] Code: emit fewer download progress notifications.
+* pr:7419[], pr:7422[] unquote strings when expanding `concat!`.
+* pr:7438[] shorten `hir::TypeParam` ranges for traits in `NavigationTarget`.
+* pr:7406[] don't assume happy path in `if_let_match`.
+* pr:7464[] export `CARGO` for proc. macros.
+* pr:7465[] only hide parameter hints for path, field and methodcall expressions.
+* pr:7487[] forbid flyimport completions in use statements.
+* pr:7493[] add missing `--print-config-schema` to help.
+* pr:7483[] classify function calls as functions when shadowed by types.
+* pr:7500[] fix `ast::String::value` not properly escaping in some cases.
+* pr:7502[] honor `#![macro_use]` in module source files.
+* pr:7503[] return inner attributes of outline module declarations in `attrs_query`.
+
+== Internal Improvements
+
+* pr:7426[], pr:7431[], pr:7466[], pr:7480[], pr:7481[], pr:7482[], pr:7485[] more work on local item resolution.
+* pr:7393[] document `paths` items.
+* pr:7433[] initial Macros 2.0 in MBE.
+* pr:7450[] remove the need to manually sync config in `package.json`.
+* pr:7455[] make `always-assert` crate reusable.
+* pr:7457[] add no-buffering file logging and wait for debugger options.
+* pr:7460[] count instances of more data structures.
+* pr:7471[] force Xcode version on CI.
+* pr:7472[] easier to debug timeouts in tests.
+* pr:7491[] handle MBE parse errors during parsing, not matching.
+* pr:7494[] simpilfy mbe parsing.

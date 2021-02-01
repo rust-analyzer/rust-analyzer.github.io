@@ -1163,7 +1163,7 @@ impl Debug for S {
 
 [discrete]
 === `replace_if_let_with_match`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_if_let_with_match.rs#L15[replace_if_let_with_match.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_if_let_with_match.rs#L18[replace_if_let_with_match.rs]
 
 Replaces `if let` with an else branch with a `match` expression.
 
@@ -1240,7 +1240,7 @@ fn compute() -> Option<i32> { None }
 
 [discrete]
 === `replace_match_with_if_let`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_if_let_with_match.rs#L84[replace_if_let_with_match.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/replace_if_let_with_match.rs#L93[replace_if_let_with_match.rs]
 
 Replaces a binary `match` with a wildcard pattern and no guards with an `if let` expression.
 
