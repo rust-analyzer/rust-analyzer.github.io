@@ -304,6 +304,37 @@ fn qux(bar: Bar, baz: Baz) {}
 
 
 [discrete]
+=== `extract_function`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_function.rs#L27[extract_function.rs]
+
+Extracts selected statements into new function.
+
+.Before
+```rust
+fn main() {
+    let n = 1;
+    ┃let m = n + 2;
+    let k = m + n;┃
+    let g = 3;
+}
+```
+
+.After
+```rust
+fn main() {
+    let n = 1;
+    fun_name(n);
+    let g = 3;
+}
+
+fn ┃fun_name(n: i32) {
+    let m = n + 2;
+    let k = m + n;
+}
+```
+
+
+[discrete]
 === `extract_struct_from_enum_variant`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_struct_from_enum_variant.rs#L23[extract_struct_from_enum_variant.rs]
 
@@ -516,6 +547,38 @@ struct Point {
 
 
 [discrete]
+=== `generate_enum_match_method`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_enum_match_method.rs#L11[generate_enum_match_method.rs]
+
+Generate an `is_` method for an enum variant.
+
+.Before
+```rust
+enum Version {
+ Undefined,
+ Minor┃,
+ Major,
+}
+```
+
+.After
+```rust
+enum Version {
+ Undefined,
+ Minor,
+ Major,
+}
+
+impl Version {
+    /// Returns `true` if the version is [`Minor`].
+    fn is_minor(&self) -> bool {
+        matches!(self, Self::Minor)
+    }
+}
+```
+
+
+[discrete]
 === `generate_from_impl_for_enum`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_from_impl_for_enum.rs#L8[generate_from_impl_for_enum.rs]
 
@@ -596,7 +659,7 @@ impl<T: Clone> Ctx<T> {
 
 [discrete]
 === `generate_new`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_new.rs#L11[generate_new.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_new.rs#L13[generate_new.rs]
 
 Adds a new inherent impl for a type.
 

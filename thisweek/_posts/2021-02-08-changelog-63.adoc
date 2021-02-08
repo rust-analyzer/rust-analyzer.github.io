@@ -1,0 +1,58 @@
+= Changelog #63
+:sectanchors:
+:page-layout: post
+
+Commit: commit:336909b63a14b801520c6627d90d750babcfe280[] +
+Release: release:2021-02-08[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:7535[] extract function assist:
++
+image::https://user-images.githubusercontent.com/4218373/106980190-c9870800-6770-11eb-83d9-3d36b2550ff6.gif[]
++
+image::https://user-images.githubusercontent.com/4218373/106980197-cbe96200-6770-11eb-96b0-14c27894fac0.gif[]
++
+image::https://user-images.githubusercontent.com/4218373/106980201-cdb32580-6770-11eb-9e6e-6ac8155d65ac.gif[]
++
+image::https://user-images.githubusercontent.com/4218373/106980205-cf7ce900-6770-11eb-8516-653c8fcca807.gif[]
+
+* pr:7562[] generate enum match method assist:
++
+image::https://user-images.githubusercontent.com/308347/107213058-8945b500-6a10-11eb-95ea-2aa862334609.gif[]
+
+* pr:7520[] show underlying type of type aliases.
+* pr:7578[] add a semantic token type for char literals.
+
+== Fixes
+
+* pr:7508[] show code suggestions regardless of applicability.
+* pr:7509[] improve nvim-lsp setup instructions.
+* pr:7512[] reap proc macro server instances.
+* pr:7514[] only allow one proc-macro process.
+* pr:7567[] remove unnecessary allocs in case_conv.
+* pr:7574[] remove various redundant clones.
+* pr:7576[] fix resolveCodeAction trying to edit files before creating them.
+* pr:7505[] widen highlight root range to covering element.
+* pr:7573[] do not overwrite npm lock file on install.
+
+== Internal Improvements
+
+* pr:7518[], pr:7525[], pr:7541[], pr:7544[], pr:7554[], pr:7555[], pr:7557[], pr:7559[], pr:7561[], pr:7568[], pr:7575[] even more work on local item resolution.
+* pr:7571[] clean up `decl_check`.
+* pr:7538[], pr:7539[]: version local dependencies to fix auto-publishing.
+* pr:7572[] add `find_or_create_impl_block` to assist utils.
+* pr:7587[] rename `AdtDef` to `Adt`.
+* pr:7536[], pr:7553[], pr:7583[], pr:7584[], pr:7585[], pr:7586[] expand architecture docs.
+* pr:7569[] add some "how to do X" PR examples.
+* pr:7519[] add useless types to the styleguide.
+* pr:7507[] explain what to do if a release fails.
+* pr:7522[] use non-deprecated `memmap2` crate.
+* pr:7523[] bump `chalk` and `rustc_lexer`.
+* pr:7528[] update `mimalloc`.
+* pr:7558[] update `thread_local`.
