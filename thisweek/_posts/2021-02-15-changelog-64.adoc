@@ -1,0 +1,75 @@
+= Changelog #66
+:sectanchors:
+:page-layout: post
+
+Commit: commit:7435b9e98c9280043605748c11a1f450669e04d6[] +
+Release: release:2021-02-15[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:7614[], pr:7627[] unleash inner item resolution to users:
++
+image::https://user-images.githubusercontent.com/1786438/107394800-8627f300-6afc-11eb-8662-ed07226bc58f.gif[]
+
+* pr:7617[] add generate getter/setter assists:
++
+image::https://user-images.githubusercontent.com/3757771/107858728-0b314600-6e36-11eb-9603-8a59f23808e4.gif[]
+
+* pr:7616[] show `Self` pattern and `Self`-prefixed enum variant completions:
++
+image::https://user-images.githubusercontent.com/3757771/107413514-1ff99b00-6b11-11eb-88b3-126cd106b514.gif[]
++
+image::https://user-images.githubusercontent.com/3757771/107413519-212ac800-6b11-11eb-8282-51115468dccc.gif[]
+
+* pr:7618[] show qualified enum variant pattern completions:
++
+image::https://user-images.githubusercontent.com/3757771/107425157-e9c31800-6b1e-11eb-8963-96653115f8e0.gif[]
+
+* pr:7656[] implement constructor usage search for almost all items:
++
+image::https://user-images.githubusercontent.com/308347/107944340-9f1a2380-6f96-11eb-8dd9-811d2c7a2d95.gif[]
+
+* pr:7625[] add **Copy Run Command Line** command for Code.
+* pr:7644[] implement completion for primitive types.
+* pr:7658[] release `x86_64-unknown-linux-musl` binaries.
+* pr:7643[] automatically detect `rustc-src` crates.
+
+
+== Fixes
+
+* pr:7593[] include `for` keyword in completion.
+* pr:7602[] check for `dyn` impls in method resolution.
+* pr:7591[] fix floating promises in the Code extension.
+* pr:7622[] resolve `TupleStructPat` in `SourceAnalyzer::resolve_path`.
+* pr:7652[] fix "slow" tests sometimes failing.
+* pr:7659[] improve "Generate From impl" assist.
+* pr:7665[] fix attribute macro classification.
+* pr:7667[] strip type parameter defaults when generating impl generics.
+* pr:7663[] tolerate spaces when patching the server binary on NixOS.
+
+== Internal Improvements
+
+* pr:7549[] explain how initial configuration is sent over LSP and document `vim-lsp`.
+* pr:7592[] add note about Eclipse IDE support.
+* pr:7595[] add `config: &CargoConfig` parameter to `fn load_cargo(…)`.
+* pr:7599[] add emacs guide.
+* pr:7597[] set remote branch on `xtask promote`.
+* pr:7613[], pr:7615[] add initial benchmarking infrastructure.
+* pr:7619[], pr:7621[] use `#[track_caller]` in assist tests.
+* pr:7648[] fix `legacy_derive_helpers` warning on nightly.
+* pr:7653[] document "config" pattern.
+* pr:7639[] bump Rust to `1.50`.
+* pr:7650[] add `find_impl_block_end` assist helper.
+* pr:7358[] refactor reference searching to work with on the `ast`.
+* pr:7596[] move `code_lens` to the `ide` crate.
+* pr:7655[] include a commit log summary in the changelog.
+* pr:7664[] refactor impl generation in assists.
+* pr:7668[] finalize rename infra rewrite.
+* pr:7678[] simplify `find_crlf`.
+* pr:7661[] start LSP 3.17 support.
+* pr:7676[] make it clear which client-side commands we use.

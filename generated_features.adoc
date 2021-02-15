@@ -1,4 +1,11 @@
 //Generated file, do not edit by hand, see `xtask/src/codegen`
+=== Annotations
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/annotations.rs#L17[annotations.rs]
+
+Provides user with annotations above items for looking up references or impl blocks
+and running/debugging binaries.
+
+
 === Auto Import
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/auto_import.rs#L10[auto_import.rs]
 
