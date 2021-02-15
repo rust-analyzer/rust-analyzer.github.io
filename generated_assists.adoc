@@ -595,7 +595,7 @@ enum A { One(u32) }
 
 impl From<u32> for A {
     fn from(v: u32) -> Self {
-        A::One(v)
+        Self::One(v)
     }
 }
 ```
@@ -633,8 +633,64 @@ fn bar(arg: &str, baz: Baz) ${0:-> ()} {
 
 
 [discrete]
+=== `generate_getter`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_getter.rs#L9[generate_getter.rs]
+
+Generate a getter method.
+
+.Before
+```rust
+struct Person {
+    nam┃e: String,
+}
+```
+
+.After
+```rust
+struct Person {
+    name: String,
+}
+
+impl Person {
+    /// Get a reference to the person's name.
+    fn name(&self) -> &String {
+        &self.name
+    }
+}
+```
+
+
+[discrete]
+=== `generate_getter_mut`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_getter_mut.rs#L9[generate_getter_mut.rs]
+
+Generate a mut getter method.
+
+.Before
+```rust
+struct Person {
+    nam┃e: String,
+}
+```
+
+.After
+```rust
+struct Person {
+    name: String,
+}
+
+impl Person {
+    /// Get a mutable reference to the person's name.
+    fn name_mut(&mut self) -> &mut String {
+        &mut self.name
+    }
+}
+```
+
+
+[discrete]
 === `generate_impl`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_impl.rs#L10[generate_impl.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_impl.rs#L5[generate_impl.rs]
 
 Adds a new inherent impl for a type.
 
@@ -659,7 +715,7 @@ impl<T: Clone> Ctx<T> {
 
 [discrete]
 === `generate_new`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_new.rs#L13[generate_new.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_new.rs#L11[generate_new.rs]
 
 Adds a new inherent impl for a type.
 
@@ -679,7 +735,34 @@ struct Ctx<T: Clone> {
 impl<T: Clone> Ctx<T> {
     fn ┃new(data: T) -> Self { Self { data } }
 }
+```
 
+
+[discrete]
+=== `generate_setter`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/generate_setter.rs#L9[generate_setter.rs]
+
+Generate a setter method.
+
+.Before
+```rust
+struct Person {
+    nam┃e: String,
+}
+```
+
+.After
+```rust
+struct Person {
+    name: String,
+}
+
+impl Person {
+    /// Set the person's name.
+    fn set_name(&mut self, name: String) {
+        self.name = name;
+    }
+}
 ```
 
 
@@ -730,7 +813,7 @@ fn main() {
 
 [discrete]
 === `inline_local_variable`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/inline_local_variable.rs#L16[inline_local_variable.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/inline_local_variable.rs#L14[inline_local_variable.rs]
 
 Inlines local variable.
 
