@@ -75,16 +75,18 @@ Shows the full macro expansion of the macro at current cursor.
 |===
 
 
-=== Extend Selection
+=== Expand and Shrink Selection
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/extend_selection.rs#L15[extend_selection.rs]
 
-Extends the current selection to the encompassing syntactic construct
+Extends or shrinks the current selection to the encompassing syntactic construct
 (expression, statement, item, module, etc). It works with multiple cursors.
+
+This is a standard LSP feature and not a protocol extension.
 
 |===
 | Editor  | Shortcut
 
-| VS Code | kbd:[Ctrl+Shift+→]
+| VS Code | kbd:[Alt+Shift+→], kbd:[Alt+Shift+←]
 |===
 
 
@@ -105,7 +107,7 @@ Provides a tree of the symbols defined in the file. Can be used to
 
 
 === Format String Completion.
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/completion/src/completions/postfix/format_like.rs#L0[format_like.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_completion/src/completions/postfix/format_like.rs#L0[format_like.rs]
 
 `"Result {result} is {2 + 2}"` is expanded to the `"Result {} is {}", result, 2 + 2`.
 
@@ -201,7 +203,7 @@ Join selected lines into one, smartly fixing up whitespace, trailing commas, and
 
 
 === Magic Completions
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/completion/src/lib.rs#L29[lib.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_completion/src/lib.rs#L29[lib.rs]
 
 In addition to usual reference completion, rust-analyzer provides some ✨magic✨
 completions as well:

@@ -305,7 +305,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_function`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_function.rs#L27[extract_function.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/extract_function.rs#L30[extract_function.rs]
 
 Extracts selected statements into new function.
 
@@ -1063,7 +1063,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `move_module_to_file`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/move_module_to_file.rs#L11[move_module_to_file.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/move_module_to_file.rs#L12[move_module_to_file.rs]
 
 Moves inline module's contents to a separate file.
 
