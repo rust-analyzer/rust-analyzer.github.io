@@ -1,0 +1,47 @@
+= Changelog #65
+:sectanchors:
+:page-layout: post
+
+Commit: commit:14de9e54a6d9ef070399b34a11634294a8cc3ca5[] +
+Release: release:2021-02-22[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:7620[] support control flow in `extract_function` assist:
++
+image::https://user-images.githubusercontent.com/4218373/107544222-0fadf280-6bdb-11eb-9625-ed6194ba92c0.gif[]
+
+* pr:7657[] implement UTF-8 offsets protocol extension from `clangd`.
+
+* pr:7729[] detect musl distros in the Code extension.
+
+
+== Fixes
+* pr:7684[] fix runnable link order.
+* pr:7687[] parse `default` in traits impls.
+* pr:7703[] allow comments between newlines in chaining hints.
+* pr:7704[] avoid transmitting unchanged diagnostics.
+* pr:7705[] show hover info of the definition of ConstReference patterns instead of its type.
+* pr:7722[] fix incorrect missing field diagnostic with box patterns.
+* pr:7724[] consider import prefix settings in flyimport.
+* pr:7725[] include where predicates when generating an impl.
+* pr:7726[] add `#[doc(hidden)]` completion.
+* pr:7730[] retain visibility when extracting inline module to file.
+* pr:7732[] fix completions in impl blocks on dyn traits with lifetimes.
+* pr:7739[] bump `chalk` fixing `impl Trait` resolution in returned types.
+
+== Internal Improvements
+* pr:7690[] extract `fn load_workspace(…)` from `fn load_cargo(…)`.
+* pr:7700[] use `npm 7.x` `package-lock.json`.
+* pr:7702[] remove use of deprecated `std::collections::Bound`.
+* pr:7701[] remove semantic tokens workaround.
+* pr:7699[] implement `ast::AstNode` for `NameLike` and move it to `node_ext`.
+* pr:7707[] rename `completion` to `ide_completion`
+* pr:7723[] fix some typos in the docs
+* pr:7727[] fix obsolete "Extend Selection" docs
+* pr:7735[] stop mixing `Result` and `Option` with `?` in `inline_local_variable`
