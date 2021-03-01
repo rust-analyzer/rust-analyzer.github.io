@@ -7,7 +7,7 @@ and running/debugging binaries.
 
 
 === Auto Import
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/assists/src/handlers/auto_import.rs#L10[auto_import.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/auto_import.rs#L10[auto_import.rs]
 
 Using the `auto-import` assist it is possible to insert missing imports for unresolved items.
 When inserting an import it will do so in a structured manner by keeping imports grouped,
@@ -33,9 +33,9 @@ use self::auto_import;
 use super::AssistContext;
 ```
 
-.Merge Behaviour
+.Merge Behavior
 
-It is possible to configure how use-trees are merged with the `importMergeBehaviour` setting.
+It is possible to configure how use-trees are merged with the `importMergeBehavior` setting.
 It has the following configurations:
 
 - `full`: This setting will cause auto-import to always completely merge use-trees that share the
@@ -46,7 +46,7 @@ It has the following configurations:
 - `none`: This setting will cause auto-import to never merge use-trees keeping them as simple
  paths.
 
-In `VS Code` the configuration for this is `rust-analyzer.assist.importMergeBehaviour`.
+In `VS Code` the configuration for this is `rust-analyzer.assist.importMergeBehavior`.
 
 .Import Prefix
 
@@ -385,7 +385,7 @@ Shows internal statistic about memory usage of rust-analyzer.
 
 
 === Structural Search and Replace
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ssr/src/lib.rs#L6[lib.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_ssr/src/lib.rs#L6[lib.rs]
 
 Search and replace with named wildcards that will match any expression, type, path, pattern or item.
 The syntax for a structural search replace command is `<search_pattern> ==>> <replace_pattern>`.

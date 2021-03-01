@@ -1,0 +1,59 @@
+= Changelog #66
+:sectanchors:
+:page-layout: post
+
+Commit: commit:5df3ee8274fdb7cdeb2b0871b4efea8cbf4724a1[] +
+Release: release:2021-03-01[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:7677[] generate more enum matching methods:
++
+image::https://user-images.githubusercontent.com/308347/109462415-1c03cd80-7a6c-11eb-8ed8-9fed51c0acb5.gif[]
+
+* pr:7741[] add "convert for loop into iterator" assist:
++
+image::https://user-images.githubusercontent.com/3757771/109151603-adbcc380-776a-11eb-92ab-5774a949c009.gif[]
+
+* pr:7719[] (first contribution) correctly parenthesize binary expression in the "apply De Morgan's law" assist:
++
+image::https://user-images.githubusercontent.com/3757771/109150372-1440e200-7769-11eb-8e13-afa4ac5b89ac.gif[]
+
+== Fixes
+
+* pr:7749[] make common assists easier to use.
+* pr:7753[] (first contribution) add `isize` to the list of suffixed integers in `typed_integer`.
+* pr:7768[] fix visibility computation inside block expressions.
+* pr:7772[] pick up `ConstReference` patterns in `FindUsages`.
+* pr:7775[] (first contribution) fix typo in manual.
+* pr:7792[] (first contribution) change remaining occurrences of `importMergeBehaviour` to `importMergeBehavior`.
+* pr:7794[] (first contribution) disable "Flip comma" assist inside macro calls.
+* pr:7801[] restrict visibilities to the containing `DefMap`.
+* pr:7802[], pr:7808[] fix builtin macros splitting expression on commas.
+* pr:7803[] fix non-Latin characters in MBE doc comment expansion:
++
+image::https://user-images.githubusercontent.com/11014119/109409237-f58e5580-79cb-11eb-92ed-a6700bbe39b5.gif[]
+
+* pr:7805[] highlight only the last segment of unresolved macros.
+* pr:7809[] (first contribution) delete old issues from GitHub's bug report template.
+* pr:7815[] fix default allocator type in the inference of `box` expressions.
+
+== Internal Improvements
+
+* pr:7759[] (first contribution) rename `assists` and `ssr`.
+* pr:7766[] update Code npm dependencies.
+* pr:7770[] make memory usage reporting during benchmarking more reliable.
+* pr:7566[] add benchmark tests for MBE.
+* pr:7797[] format generated lints and features manually to avoid long lines.
+* pr:7806[] update remaining references to `AnalysisChange`.
+* pr:7807[] directly link the changelog from the `README`.
+* pr:7804[] introduce `TypeCtor::Scalar`.
+* pr:7812[] use consistent naming for assist.
+* pr:7813[] inline `TypeCtor` into `Ty`.
+* pr:7814[] turn `Ty::Tuple` variant into a tuple-variant.
+* pr:7816[] lift `Ty::Fn` into a struct.
