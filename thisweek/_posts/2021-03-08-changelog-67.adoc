@@ -1,0 +1,81 @@
+= Changelog #67
+:sectanchors:
+:page-layout: post
+
+Commit: commit:d54e1157b66017e4aae38328cd213286e39ca130[] +
+Release: release:2021-03-08[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:7777[] add line to block and back comment conversion assist:
++
+image::https://user-images.githubusercontent.com/308347/110304890-c8155d80-8004-11eb-8a4a-89a90e059d92.gif[]
+
+* pr:7335[] (first contribution) add region folding support:
++
+image::https://user-images.githubusercontent.com/308347/110306982-19bee780-8007-11eb-8b8c-be5e46330586.gif[]
+
+* pr:7691[] suggest name in "extract variable" assist:
++
+image::https://user-images.githubusercontent.com/4218373/108013304-72105400-701c-11eb-9f13-eec52e74d0cc.gif[]
++
+image::https://user-images.githubusercontent.com/4218373/108013305-72a8ea80-701c-11eb-957e-2214f7f005de.gif[]
+
+* pr:7795[] show docs on hover for keywords and primitives:
++
+image::https://user-images.githubusercontent.com/3757771/109369534-eeb4f500-789c-11eb-8f2b-2f9c4e129de3.gif[]
+
+* pr:7824[] (first contribution) "add type ascription" assist:
++
+image::https://user-images.githubusercontent.com/308347/110307658-d7e27100-8007-11eb-965b-2e9a294e7d22.gif[]
+
+* pr:7894[] generate_function assist: convert arg names to lower snake case:
++
+image::https://user-images.githubusercontent.com/308347/110308337-a9b16100-8008-11eb-8aa7-bf58be48d089.gif[]
+
+* pr:7800[] add "generate `default()`" assist:
++
+image::https://user-images.githubusercontent.com/308347/110308811-3f4cf080-8009-11eb-9e0f-a87c36aaec09.gif[]
+
+* pr:7866[] add `while let` completion.
+* pr:7889[] make imports grouping configurable via `rust-analyzer.assist.importGroup`.
+* pr:7868[] rename `rust-analyzer.cargo.loadOutDirsFromCheck` to `rust-analyzer.cargo.runBuildScripts`.
+
+== Fixes
+
+* pr:7778[] fix lowering trailing `self` paths in `UseTree`s
+* pr:7834[] fix `find_path` when inner items are present.
+* pr:7827[] (first contribution) fix proc macro `TokenStream::from_str` token ids.
+* pr:7844[] fix `ProcMacroClient` being dropped too early in CLI.
+* pr:7513[] implement an NFA parser for macro-by-example.
+* pr:7884[] simplify `TokenStream::from_str`.
+* pr:7850[] don't add space when joining line to opening quote.
+* pr:7861[] special-case parenthesized and negated expressions in De Morgan's Law assist.
+* pr:7863[] prevent renaming `SelfType` and `BuiltinType`.
+* pr:7880[] honor snippet capability in the "extract function" assist.
+* pr:7869[] add support for deref assignments to "pull assignment up" assist.
+* pr:7887[] fix path parsing when using `meta` in MBE.
+* pr:7888[] add a note about code action commands to the `coc.nvim` section of the docs.
+* pr:7865[] preserve escape sequences when replacing string with char.
+* pr:7896[] fix raw string handling in "replace string with char" assist.
+* pr:7892[] fix `TokenStream::from_str` for input consisting of a single group with delimiter.
+
+== Internal Improvements
+
+* pr:7819[] speed up heavy tests.
+* pr:7820[], pr:7837[] Improve VS Code extension README.
+* pr:7823[] bring `Ty::InferenceVar` closer to `chalk` equivalent.
+* pr:7826[] introduce `Ty::Alias`.
+* pr:7833[] use `chalk_ir::Mutability`.
+* pr:7870[] use `chalk_ir::AdtId`.
+* pr:7828[], pr:7836[] lint against versioned dev dependencies to fix automatic publishing.
+* pr:7832[] drop pre-commit `git` hook.
+* pr:7835[], pr:7847[], pr:7876[], pr:7881[], pr:7849[] migrate to a CLI parser with auto-generated help.
+* pr:7899[] rename a few `crate_def_map`s to `def_map`.
+* pr:7851[] compress tests.
+* pr:7858[] clarify comparison rule in the style docs.
