@@ -164,7 +164,7 @@ fn main() {
 
 [discrete]
 === `apply_demorgan`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/apply_demorgan.rs#L5[apply_demorgan.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/apply_demorgan.rs#L6[apply_demorgan.rs]
 
 Apply https://en.wikipedia.org/wiki/De_Morgan%27s_laws[De Morgan's law].
 This transforms expressions of the form `!l || !r` into `!(l && r)`.
@@ -522,6 +522,41 @@ impl Default for Version {
 
 
 [discrete]
+=== `generate_default_from_new`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_default_from_new.rs#L12[generate_default_from_new.rs]
+
+Generates default implementation from new method.
+
+.Before
+```rust
+struct Example { _inner: () }
+
+impl Example {
+    pub fn n┃ew() -> Self {
+        Self { _inner: () }
+    }
+}
+```
+
+.After
+```rust
+struct Example { _inner: () }
+
+impl Example {
+    pub fn new() -> Self {
+        Self { _inner: () }
+    }
+}
+
+impl Default for Example {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+```
+
+
+[discrete]
 === `generate_derive`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_derive.rs#L9[generate_derive.rs]
 
@@ -668,7 +703,7 @@ impl From<u32> for A {
 
 [discrete]
 === `generate_function`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_function.rs#L18[generate_function.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_function.rs#L19[generate_function.rs]
 
 Adds a stub function with a signature matching the function under the cursor.
 

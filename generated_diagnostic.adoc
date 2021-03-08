@@ -6,7 +6,7 @@ This diagnostic is triggered if the `break` keyword is used outside of a loop.
 
 
 === inactive-code
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_def/src/diagnostics.rs#L98[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_def/src/diagnostics.rs#L126[diagnostics.rs]
 
 This diagnostic is shown for code with inactive `#[cfg]` attributes.
 
@@ -18,7 +18,7 @@ This diagnostic is triggered if an item name doesn't follow https://doc.rust-lan
 
 
 === macro-error
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_def/src/diagnostics.rs#L171[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_def/src/diagnostics.rs#L199[diagnostics.rs]
 
 This diagnostic is shown for macro expansion errors.
 
@@ -112,6 +112,13 @@ This diagnostic is triggered if rust-analyzer is unable to discover referred ext
 This diagnostic is triggered if rust-analyzer is unable to discover imported module.
 
 
+=== unresolved-macro-call
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_def/src/diagnostics.rs#L98[diagnostics.rs]
+
+This diagnostic is triggered if rust-analyzer is unable to resolove path to a
+macro in a macro invocation.
+
+
 === unresolved-module
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_def/src/diagnostics.rs#L18[diagnostics.rs]
 
@@ -119,7 +126,7 @@ This diagnostic is triggered if rust-analyzer is unable to discover referred mod
 
 
 === unresolved-proc-macro
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_def/src/diagnostics.rs#L131[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_def/src/diagnostics.rs#L159[diagnostics.rs]
 
 This diagnostic is shown when a procedural macro can not be found. This usually means that
 procedural macro support is simply disabled (and hence is only a weak hint instead of an error),
