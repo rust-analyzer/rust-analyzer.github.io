@@ -40,7 +40,7 @@ image::https://user-images.githubusercontent.com/22216761/110249883-4e5e7080-7f2
 +
 image::https://user-images.githubusercontent.com/308347/111139619-03c2a100-858a-11eb-9cfd-43f7ad83b470.gif[]
 
-* pr:7914[] enable build scripts execution by default.
+* pr:7914[] enable build scripts execution by default (disable using `rust-analyzer.cargo.runBuildScripts`).
 * pr:7928[] (first contribution) add `x.err` postfix completion.
 * pr:7964[] implement builtin `cfg!` macro.
 * pr:7942[] show whether a binding is mutable or not on hover.
