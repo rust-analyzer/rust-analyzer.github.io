@@ -215,7 +215,7 @@ Join selected lines into one, smartly fixing up whitespace, trailing commas, and
 
 
 === Magic Completions
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_completion/src/lib.rs#L29[lib.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_completion/src/lib.rs#L31[lib.rs]
 
 In addition to usual reference completion, rust-analyzer provides some ✨magic✨
 completions as well:
@@ -268,7 +268,7 @@ fuzzy matched agains the completion imput.
 
 
 === Matching Brace
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/matching_brace.rs#L7[matching_brace.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/matching_brace.rs#L6[matching_brace.rs]
 
 If the cursor is on any brace (`<>(){}[]||`) which is a part of a brace-pair,
 moves cursor to the matching brace. It uses the actual parser to determine
@@ -334,7 +334,7 @@ Add the following to `settings.json`:
 
 
 === Parent Module
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/parent_module.rs#L12[parent_module.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/parent_module.rs#L11[parent_module.rs]
 
 Navigates to the parent module of the current module.
 
@@ -345,8 +345,24 @@ Navigates to the parent module of the current module.
 |===
 
 
+=== Related Tests
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L115[runnables.rs]
+
+Provides a sneak peek of all tests where the current item is used.
+
+The simplest way to use this feature is via the context menu:
+ - Right-click on the selected item. The context menu opens.
+ - Select **Peek related tests**
+
+|===
+| Editor  | Action Name
+
+| VS Code | **Rust Analyzer: Peek related tests**
+|===
+
+
 === Rename
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/references/rename.rs#L62[rename.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/references/rename.rs#L61[rename.rs]
 
 Renames the item below the cursor and all of its references
 
@@ -358,7 +374,7 @@ Renames the item below the cursor and all of its references
 
 
 === Run
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L86[runnables.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L92[runnables.rs]
 
 Shows a popup suggesting to run a test/benchmark/binary **at the current cursor
 location**. Super useful for repeatedly running just a single test. Do bind this
@@ -463,6 +479,15 @@ String::from((y + 5).foo(z))
 
 | VS Code | **Rust Analyzer: Structural Search Replace**
 |===
+
+Also available as an assist, by writing a comment containing the structural
+search and replace rule. You will only see the assist if the comment can
+be parsed as a valid structural search and replace rule.
+
+```rust
+// Place the cursor on the line below to see the assist 💡.
+// foo($a, $b) ==>> ($a).foo($b)
+```
 
 
 === View Hir

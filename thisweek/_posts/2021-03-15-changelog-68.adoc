@@ -1,0 +1,96 @@
+= Changelog #68
+:sectanchors:
+:page-layout: post
+
+Commit: commit:5ba7852cf153688d5b5035a9a2a2145aa7334d79[] +
+Release: release:2021-03-15[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:7799[] add "peek related tests" command (LSP extension):
++
+image::https://user-images.githubusercontent.com/62505555/109397453-a9013680-7947-11eb-8b11-ac03079f7645.gif[]
+
+* pr:7956[] (first contribution) add "convert for_each into for loop" assist:
++
+image::https://user-images.githubusercontent.com/308347/111136030-f6a3b300-8585-11eb-9e7a-c4716072b55c.gif[]
+
+* pr:7898[] infer return type in "generate function" assist:
++
+image::https://user-images.githubusercontent.com/308347/111136944-ec35e900-8586-11eb-9957-1bbb478668a7.gif[]
+
+* pr:7873[] consider unresolved qualifiers during flyimport:
++
+image::https://user-images.githubusercontent.com/2690773/110040808-0af8dc00-7d4c-11eb-83db-65af94e843bb.gif[]
+
+* pr:7874[], pr:7961[] add "apply Structural Search and Replace" assist:
++
+image::https://user-images.githubusercontent.com/308347/111138847-1688a600-8589-11eb-8098-0bce2360eee9.gif[]
+
+* pr:7904[], pr:8014[] improve completion sorting:
++
+image::https://user-images.githubusercontent.com/22216761/110249883-4e5e7080-7f2d-11eb-9269-a3bc133fdee7.png[]
+
+* pr:7981[] (first contribution) support multiple terms in De Morgan's Law assist:
++
+image::https://user-images.githubusercontent.com/308347/111139619-03c2a100-858a-11eb-9cfd-43f7ad83b470.gif[]
+
+* pr:7914[] enable build scripts execution by default.
+* pr:7928[] (first contribution) add `x.err` postfix completion.
+* pr:7964[] implement builtin `cfg!` macro.
+* pr:7942[] show whether a binding is mutable or not on hover.
+* pr:7993[] use auto-deref in completion scoring.
+* pr:7891[], pr:7927[] improve handling of `rustc_private`.
+
+== Fixes
+
+* pr:7901[] (first contribution) respect HTTP proxy settings in the Code extension.
+* pr:7912[] de-duplicate import map results.
+* pr:7941[] fix highlighting of unused definitions.
+* pr:7944[] selecting `&mut foo` completion now actually inserts `&mut`.
+* pr:7957[] fix labels for single import assists.
+* pr:7958[] avoid double text edits when renaming mod declaration.
+* pr:7959[] prefer names from outer `DefMap` over extern prelude.
+* pr:7969[] return original text range in `PrepareRename` responses when inside macro.
+* pr:7972[] add semicolon after type ascription.
+* pr:7994[] speed up MBE matching for recursive macros.
+* pr:7984[] improve version string display.
+* pr:7997[] fix folding range kind.
+* pr:7999[] handle `cfg_attr` gating multiple attributes.
+* pr:8005[] handle ill-formed macros propely.
+* pr:8010[] attach trivia to `ast::Union` nodes.
+* pr:8017[] keep type params in doc-test paths.
+
+== Internal Improvements
+
+* pr:6822[] (first contribution) read version of `rustc` that compiled proc macros.
+* pr:7921[] avoid some `serde-json` dependencies.
+* pr:7918[], pr:7980[] generalize file ensuring infrastructure, drop `xtask codegen`.
+* pr:7923[] remove useless `code_model` indirection.
+* pr:7924[] use upstream `cov-mark` implementation.
+* pr:7930[] clarify that all protocol extensions are experimental.
+* pr:7931[] use `Type::new_with_resolver_inner` more.
+* pr:7932[] improve settings descriptions.
+* pr:7933[], pr:7949[] slightly improve compilation speed.
+* pr:7945[] future-proof completion scores.
+* pr:7878[] remove `item_scope` field from `Body`.
+* pr:7948[] delete `ContainerId`.
+* pr:7955[] stop fetching ItemTrees for no reason.
+* pr:7967[] use `expect-test` for builtin macro/derive tests.
+* pr:7974[], pr:7978[] (first contribution) use references in `CompletionItem` builder.
+* pr:7985[] use Chalk `Environment` more directly.
+* pr:7989[] remove `ItemTree::source`.
+* pr:7991[] simplify `hir_def::TestDB`.
+* pr:7996[] separate `Ty` and `TyKind` like in Chalk.
+* pr:7998[], pr:8001[] use more Chalk IDs.
+* pr:8002[] create `TraitEnvironment` through a query.
+* pr:8003[] move type lowering methods to `TyLoweringContext`.
+* pr:8006[] simpify MBE bindings builder.
+* pr:8011[] add `--no-sysroot` flag for `analysis-stats`.
+* pr:8012[], pr:8013[] replace `xtask lint` with `cargo` alias.
+* pr:8016[] more Chalk adaptations.
