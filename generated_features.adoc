@@ -1,6 +1,6 @@
 //Generated file, do not edit by hand, see `xtask/src/codegen`
 === Annotations
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/annotations.rs#L17[annotations.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/annotations.rs#L18[annotations.rs]
 
 Provides user with annotations above items for looking up references or impl blocks
 and running/debugging binaries.
@@ -91,7 +91,7 @@ This is a standard LSP feature and not a protocol extension.
 
 
 === File Structure
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/file_structure.rs#L18[file_structure.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/file_structure.rs#L25[file_structure.rs]
 
 Provides a tree of the symbols defined in the file. Can be used to
 
@@ -137,7 +137,7 @@ The following postfix snippets are available:
 
 
 === Go to Definition
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L16[goto_definition.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L19[goto_definition.rs]
 
 Navigates to the definition of an identifier.
 
@@ -149,7 +149,7 @@ Navigates to the definition of an identifier.
 
 
 === Go to Implementation
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_implementation.rs#L7[goto_implementation.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_implementation.rs#L10[goto_implementation.rs]
 
 Navigates to the impl block of structs, enums or traits. Also implemented as a code lens.
 
@@ -215,7 +215,7 @@ Join selected lines into one, smartly fixing up whitespace, trailing commas, and
 
 
 === Magic Completions
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_completion/src/lib.rs#L31[lib.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_completion/src/lib.rs#L34[lib.rs]
 
 In addition to usual reference completion, rust-analyzer provides some ✨magic✨
 completions as well:
@@ -334,7 +334,7 @@ Add the following to `settings.json`:
 
 
 === Parent Module
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/parent_module.rs#L11[parent_module.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/parent_module.rs#L12[parent_module.rs]
 
 Navigates to the parent module of the current module.
 
@@ -346,7 +346,7 @@ Navigates to the parent module of the current module.
 
 
 === Related Tests
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L115[runnables.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L131[runnables.rs]
 
 Provides a sneak peek of all tests where the current item is used.
 
@@ -374,7 +374,7 @@ Renames the item below the cursor and all of its references
 
 
 === Run
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L92[runnables.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L94[runnables.rs]
 
 Shows a popup suggesting to run a test/benchmark/binary **at the current cursor
 location**. Super useful for repeatedly running just a single test. Do bind this
@@ -501,7 +501,7 @@ be parsed as a valid structural search and replace rule.
 
 
 === Workspace Symbol
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_db/src/symbol_index.rs#L142[symbol_index.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_db/src/symbol_index.rs#L148[symbol_index.rs]
 
 Uses fuzzy-search to find types, modules and functions by name across your
 project and dependencies. This is **the** most useful feature, which improves code
