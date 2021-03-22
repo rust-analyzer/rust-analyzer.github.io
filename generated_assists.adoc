@@ -331,7 +331,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_function`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_function.rs#L29[extract_function.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_function.rs#L28[extract_function.rs]
 
 Extracts selected statements into new function.
 
@@ -841,6 +841,39 @@ impl<T: Clone> Ctx<T> {
 
 
 [discrete]
+=== `generate_is_empty_from_len`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_is_empty_from_len.rs#L12[generate_is_empty_from_len.rs]
+
+Generates is_empty implementation from the len method.
+
+.Before
+```rust
+struct MyStruct { data: Vec<String> }
+
+impl MyStruct {
+    p┃ub fn len(&self) -> usize {
+        self.data.len()
+    }
+}
+```
+
+.After
+```rust
+struct MyStruct { data: Vec<String> }
+
+impl MyStruct {
+    pub fn len(&self) -> usize {
+        self.data.len()
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
+}
+```
+
+
+[discrete]
 === `generate_new`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_new.rs#L11[generate_new.rs]
 
@@ -1136,7 +1169,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `move_bounds_to_where_clause`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_bounds.rs#L10[move_bounds.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_bounds.rs#L8[move_bounds.rs]
 
 Moves inline type bounds to a where clause.
 
@@ -1242,7 +1275,7 @@ fn main() {
 
 [discrete]
 === `qualify_path`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/qualify_path.rs#L22[qualify_path.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/qualify_path.rs#L21[qualify_path.rs]
 
 If the name is unresolved, provides all possible qualified paths for it.
 

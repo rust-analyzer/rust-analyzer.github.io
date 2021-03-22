@@ -1,0 +1,113 @@
+= Changelog #69
+:sectanchors:
+:page-layout: post
+
+Commit: commit:858ad554374a8b1ad67692558a0878391abfdd86[] +
+Release: release:2021-03-22[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:8000[] add HIR formatter infra and use it for hover text:
++
+image::https://user-images.githubusercontent.com/308347/111968849-49d7b180-8b02-11eb-8f0d-4b7bc38d5247.png[]
+
+* pr:8032[] enable proc macros by default (use `rust-analyzer.procMacro.enable` to disable them).
+* pr:7966[] add diagnostic for files missing from the module tree.
+* pr:7975[] include regions in file structure:
++
+image::https://user-images.githubusercontent.com/308347/111967940-4bed4080-8b01-11eb-940a-fc8f81d5673b.gif[]
+
+* pr:8021[] enable reference searching for built-in types:
++
+image::https://user-images.githubusercontent.com/3757771/111132711-f69db600-8579-11eb-8c90-22fd6862d11f.png[]
+
+* pr:8020[] power up "Go to implementation":
++
+image::https://user-images.githubusercontent.com/3757771/111144403-52bb0700-8587-11eb-9205-7a2a5b8b75a3.png[]
+
+* pr:7992[], pr:8036[] improve completions and completion sorting:
++
+image::https://user-images.githubusercontent.com/22216761/111018680-0e551e80-836f-11eb-94b1-c88336ecbc6e.png[]
++
+image::https://user-images.githubusercontent.com/22216761/111189395-45941d00-8573-11eb-871b-09186b35cbb9.png[]
+
+* pr:8037[], pr:8040[] add "Generate `is_empty` method from `len` method" assist.
+* pr:7900[] show function parameters in completion detail.
+* pr:8060[] improve "Move bounds" assist.
+* pr:8071[], pr:8086[] highlight intra-doc links in doc comments:
++
+image::https://user-images.githubusercontent.com/308347/111969661-27926380-8b03-11eb-8e78-70dc95e137fd.png[]
+
+* pr:8124[] add lifetime completion:
++
+image::https://user-images.githubusercontent.com/3757771/111886437-c9b02f80-89cd-11eb-9bee-340f1536b0de.gif[]
+
+* pr:8127[] add label completion:
++
+image::https://user-images.githubusercontent.com/3757771/111900839-07946e80-8a35-11eb-90f6-a47943e7501d.gif[]
+
+* pr:8131[] add smart case lookup into flyimport completion:
++
+image::https://user-images.githubusercontent.com/308347/111970038-8821a080-8b03-11eb-9bca-b4e06aac565b.png[]
+
++
+image::https://user-images.githubusercontent.com/308347/111970065-8e178180-8b03-11eb-8a33-8aa245401e8a.png[]
+
+== Fixes
+
+* pr:8025[] fix resolution of incomplete fields.
+* pr:8015[] make runnable detection more resilient to out-of-tree modules.
+* pr:7970[] fix incorrect diagnostics for failing built in macros.
+* pr:8044[] fix macro expansion for statements without semicolon.
+* pr:8048[] fix missing unresolved macro diagnostic in function body.
+* pr:8066[] handle `#[cfg]` on call arguments.
+* pr:8068[] handle `#[cfg]` on function parameters.
+* pr:8067[] check whether cursor is on and not between intra-doc links in `goto_definition`.
+* pr:8073[] improve diagnostic when including nonexistent file.
+* pr:8075[] fix `use crate as <name>;` imports.
+* pr:8078[] support `#[cfg]` on all associated items.
+* pr:8082[] properly handle inner recursive `macro_rules!`.
+* pr:8088[] fix "Go to definition" and highlighting for function-like proc macros.
+* pr:8089[] update info about Eclipse Corrosion.
+* pr:8094[] fix infinite recursion when computing diagnostics for inner items.
+* pr:8083[] track source file IDs in source mapping of `Attrs`.
+* pr:8108[] fix handling of `#![cfg]` in outline module files.
+* pr:8122[] make bare underscore token an `Ident` rather than `Punct` in proc-macro.
+* pr:8123[] do not display unqualified associated item completions.
+* pr:8128[] expand legacy-scoped macro during collection.
+* pr:8133[] fix `salsa` panic.
+* pr:8134[] (first contribution) fix module resolution in `include!`ed files.
+* pr:8137[] fix box pattern inference panic.
+
+
+== Internal Improvements
+
+* pr:7498[] switch to a mutable syntax tree implementation.
+* pr:8023[] move `StructureNodeKind` from `ide_db` to `ide`.
+* pr:8022[] fix some `clippy` performance warnings.
+* pr:8026[] simplify source maps for fields.
+* pr:8018[], pr:8038[] make `Ty` wrap `TyKind` in an `Arc`.
+* pr:8008[] clean up `CompletionContext::expected_type`.
+* pr:8030[] add `diesel` to the benchmark suite.
+* pr:8029[] enable thread-local coverage mark support.
+* pr:8035[] `unqualfied_path` completions aren't responsible for variant pattern completions.
+* pr:8028[] prepare for returning parents in the "Locate parent module" command.
+* pr:8039[] use `SmallVec` for `Substs`.
+* pr:8046[] add `match` vs. `if let ... else` entry to the style guide.
+* pr:8034[] implement `Crate::transitive_reverse_dependencies`.
+* pr:8042[] (first contribution) add `rustc-perf` version to the metrics JSON.
+* pr:8061[] structural editing API can automatically insert whitespace in simple cases.
+* pr:8059[] support `cfg_attr` in doc-comment syntax highlighting.
+* pr:8065[] handle block doc comments better.
+* pr:8069[] support highlight injection in block doc comments.
+* pr:8080[] change `ItemTree` API to accomodate creating an `ItemTree` per block expression.
+* pr:8087[] make MacroDefId's `AstId` mandatory when possible.
+* pr:8093[] record custom derive helpers in `DefMap`.
+* pr:8097[] parse `extended_key_value_attributes`.
+* pr:8112[] revamp `hir_def` attribute API.
+* pr:8125[] don't use an untyped `String` for ActiveParam tracking.
