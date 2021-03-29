@@ -118,7 +118,7 @@ impl Trait<u32> for () {
 
 [discrete]
 === `add_lifetime_to_type`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_lifetime_to_type.rs#L6[add_lifetime_to_type.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_lifetime_to_type.rs#L5[add_lifetime_to_type.rs]
 
 Adds a new lifetime to a struct, enum or union.
 
@@ -1090,7 +1090,7 @@ fn main() {
 
 [discrete]
 === `merge_imports`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/merge_imports.rs#L13[merge_imports.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/merge_imports.rs#L10[merge_imports.rs]
 
 Merges two imports with a common prefix.
 
@@ -1384,7 +1384,7 @@ fn main() {
 
 [discrete]
 === `reorder_fields`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/reorder_fields.rs#L10[reorder_fields.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/reorder_fields.rs#L7[reorder_fields.rs]
 
 Reorder the fields of record literals and record patterns in the same order as in
 the definition.

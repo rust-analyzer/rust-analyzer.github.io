@@ -178,6 +178,15 @@ $ cargo xtask install --server
 If your editor can't find the binary even though the binary is on your `$PATH`, the likely explanation is that it doesn't see the same `$PATH` as the shell, see https://github.com/rust-analyzer/rust-analyzer/issues/1811[this issue].
 On Unix, running the editor from a shell or changing the `.desktop` file to set the environment should help.
 
+==== `rustup`
+
+`rust-analyzer` is available in `rustup`, but only in the nightly toolchain:
+
+[source,bash]
+---
+$ rustup +nightly component add rust-analyzer-preview
+---
+
 ==== Arch Linux
 
 The `rust-analyzer` binary can be installed from the repos or AUR (Arch User Repository):
@@ -480,7 +489,7 @@ interface Crate {
         include_dirs: string[],
         exclude_dirs: string[],
     },
-    /// The set of cfgs activated for a given crate, like `["unix", "feature=foo", "feature=bar"]`.
+    /// The set of cfgs activated for a given crate, like `["unix", "feature=\"foo\"", "feature=\"bar\""]`.
     cfg: string[];
     /// Target triple for this Crate.
     ///
@@ -515,6 +524,20 @@ Relative paths are interpreted relative to `rust-project.json` file location or 
 See https://github.com/rust-analyzer/rust-project.json-example for a small example.
 
 You can set `RA_LOG` environmental variable to `rust_analyzer=info` to inspect how rust-analyzer handles config and project loading.
+
+== Security
+
+At the moment, rust-analyzer assumes that all code is trusted.
+Here is a **non-exhaustive** list of ways to make rust-analyzer execute arbitrary code:
+
+* proc macros and build scripts are executed by default
+* `.cargo/config` can override `rustc` with an arbitrary executable
+* VS Code plugin reads configuration from project directory, and that can be used to override paths to various executables, like `rustfmt` or `rust-analyzer` itself.
+* rust-analyzer's syntax trees library uses a lot of `unsafe` and hasn't been properly audited for memory safety.
+
+rust-analyzer itself doesn't access the network.
+The VS Code plugin doesn't access the network unless the nightly channel is selected in the settings.
+In that case, the plugin uses the GitHub API to check for and download updates.
 
 == Features
 
