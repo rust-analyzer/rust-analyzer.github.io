@@ -1,0 +1,70 @@
+= Changelog #70
+:sectanchors:
+:page-layout: post
+
+Commit: commit:01dc53a31c39fe754c7228646c456325e49e8d09[] +
+Release: release:2021-03-29[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:8054[] add Move item commands (LSP extension):
++
+image::https://user-images.githubusercontent.com/308347/112793739-7e052200-906e-11eb-9ed4-1b396ef7d6dc.gif[]
+
++
+image::https://user-images.githubusercontent.com/308347/112793747-83626c80-906e-11eb-9a96-a075e8d38d6e.gif[]
+
+* pr:8178[] show item info when hovering intra-doc links:
++
+image::https://user-images.githubusercontent.com/3757771/112197618-91e2fb00-8c0c-11eb-9edc-a7923214d2b6.gif[]
+
+* pr:8056[] on completion, take into account whether types unify:
++
+image::https://user-images.githubusercontent.com/22216761/111338556-46d94e80-8634-11eb-9936-2b20eb9e6756.png[]
+
++
+image::https://user-images.githubusercontent.com/22216761/111338598-4e005c80-8634-11eb-92e0-69c2c1cda6fc.png[]
+
+* pr:8212[] implement basic macros 2.0 support:
++
+image::https://user-images.githubusercontent.com/11014119/112712565-6eb99380-8f0b-11eb-88de-5d7f974dfe6d.png[]
+
+== Fixes
+
+* pr:8156[] correctly lower `TraitRef`s with default params.
+* pr:8144[] (first contribution) fix crash when trying to display closure types.
+* pr:8142[] hide incorrect ref match completions for struct fields/methods.
+* pr:8138[] set up a search scope when searching for MBE macro references.
+* pr:8159[] try to ignore proc-macro stdout to prevent IPC crashes.
+* pr:8182[] trim down IPC JSON size.
+* pr:8177[] limit hints size by default.
+* pr:8183[] fix spurious "Missing command" lenses on macros.
+* pr:8168[] fix "Convert to guarded return" for mutable bindings.
+* pr:8189[] document `unlinked-file` diagnostic.
+* pr:7907[] take visibility into account for autoderef.
+* pr:8194[] finally fix version string display in release binaries.
+* pr:8206[] ignore main functions outside of the root module.
+* pr:8201[] fix recursive macro statements expansion.
+* pr:8213[] include const generic in `impl` generation.
+* pr:8214[] mention the `rustup` component in the installation instructions.
+* pr:8221[] prefer adding `mod` declaration to `lib.rs` over `file.rs` in `unlinked-file` fix.
+* pr:8141[] don't suggest long looping paths for imports.
+* pr:8155[] fix confusion between functions and parameters.
+* pr:8191[], pr:8209[] fix slight memory leak in syntax.
+
+== Internal Improvements
+
+* pr:8136[], pr:8190[] introduce `QuantifiedWhereClause` and `DynTy` analogous to Chalk.
+* pr:8139[] align `Canonical` and `InEnvironment` with the Chalk versions.
+* pr:8154[] rewrite "Merge use trees" assist using mutable syntax trees.
+* pr:8165[] tweak assist API to fit mutable syntax trees.
+* pr:8169[] make more use of the HIR in `rename::rename_to_self`.
+* pr:8170[] merge bang-macros and derives in name resolution.
+* pr:8187[] sweep the new `TraitEnvironmentQuery`.
+* pr:8145[] document our security stance.
+* pr:8146[] document patch policy.
