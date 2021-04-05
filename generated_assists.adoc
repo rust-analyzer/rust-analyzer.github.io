@@ -188,7 +188,7 @@ fn main() {
 
 [discrete]
 === `auto_import`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/auto_import.rs#L65[auto_import.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/auto_import.rs#L67[auto_import.rs]
 
 If the name is unresolved, provides all possible imports for it.
 
@@ -240,6 +240,37 @@ const _: i32 = 10┃;
 .After
 ```rust
 const _: i32 = 0b1010;
+```
+
+
+[discrete]
+=== `convert_into_to_from`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_into_to_from.rs#L9[convert_into_to_from.rs]
+
+Converts an Into impl to an equivalent From impl.
+
+.Before
+```rust
+impl ┃Into<Thing> for usize {
+    fn into(self) -> Thing {
+        Thing {
+            b: self.to_string(),
+            a: self
+        }
+    }
+}
+```
+
+.After
+```rust
+impl From<usize> for Thing {
+    fn from(val: usize) -> Self {
+        Thing {
+            b: val.to_string(),
+            a: val
+        }
+    }
+}
 ```
 
 
@@ -376,6 +407,29 @@ enum A { ┃One(u32, u32) }
 struct One(pub u32, pub u32);
 
 enum A { One(One) }
+```
+
+
+[discrete]
+=== `extract_type_alias`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_type_alias.rs#L5[extract_type_alias.rs]
+
+Extracts the selected type as a type alias.
+
+.Before
+```rust
+struct S {
+    field: ┃(u8, u8, u8)┃,
+}
+```
+
+.After
+```rust
+type ┃Type = (u8, u8, u8);
+
+struct S {
+    field: Type,
+}
 ```
 
 

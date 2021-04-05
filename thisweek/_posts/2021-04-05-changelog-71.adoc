@@ -1,0 +1,71 @@
+= Changelog #71
+:sectanchors:
+:page-layout: post
+
+Commit: commit:19e09a4a54c75312aeaac04577f2d0e067463ab6[] +
+Release: release:2021-04-05[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:8231[] (first contribution) fold consecutive consts and statics:
++
+image::https://user-images.githubusercontent.com/48062697/112835083-b584c600-9090-11eb-968a-a95f4e9c1f6c.gif[]
+* pr:8295[] (first contribution) add Convert `Into` to `From` assist:
++
+image::https://user-images.githubusercontent.com/556490/113420108-9ce21c00-93c0-11eb-8c49-80b5fb189284.gif[]
+* pr:8210[] add "Extract type alias" assist:
++
+image::https://user-images.githubusercontent.com/308347/113543910-0005c580-95f0-11eb-8992-d6dffc846c2d.gif[]
+* pr:8267[], pr:8274[] add GIFs of most features to the manual.
+* pr:8240[] add semantic highlighting modifier for trait items and trait method calls.
+
+== Fixes
+
+* pr:8222[] don't mark unlinked file diagnostic as unused.
+* pr:8246[] (first contribution) update VIM YCM installation instructions.
+* pr:8250[] classify associated types in paths more accurately.
+* pr:8256[] make "Move item" commands work in more cases.
+* pr:8261[] fix expansion of OR-patterns in match check.
+* pr:8266[] fix generic argument lowering in qualified trait casts (helps with `.await`).
+* pr:8271[] fix error parsing `u128`s in proc macro output.
+* pr:8276[] lower inner items defined in macros.
+* pr:8283[] resolve associated types at the IDE layer.
+* pr:8265[] improve rustc diagnostic mapping.
+* pr:8285[] improve typechecking performance by avoiding re-checking unchanged obligations in an accidentally quadratic way.
+* pr:8284[] reduce memory usage by using global `Arc`-based interning.
+* pr:8297[] only populate prelude for crate-level `DefMap`s.
+* pr:8304[] support the new `panic!()` macro.
+* pr:8305[] fix "Join lines" panic when triggered on an empty last line.
+* pr:8307[] make `include!` work for empty files.
+* pr:8318[] use `shrink_to_fit` to reduce `DefMap` sizes.
+* pr:8324[] add `Body::shrink_to_fit`.
+* pr:8329[] (first contribution) fix `moveItem` method name in the docs.
+* pr:8332[] show error when `rustfmt` component is unavailable.
+
+
+== Internal Improvements
+
+* pr:8235[] make `--log-file` more discoverable.
+* pr:8241[] clean up `hprof`.
+* pr:8244[] track missing `.check_cancelled`.
+* pr:8247[] ensure that runaway type-inference doesn't block the main loop.
+* pr:8254[] switch from CLI to internal benchmarking.
+* pr:8255[] touch up dev readme.
+* pr:8262[] revive `google_cpu_profile` infra.
+* pr:8186[] lower traits to `TraitRef` instead of `TypeRef`.
+* pr:8269[] document semantics of missing names.
+* pr:8286[] include remaining memory in memory usage stats.
+* pr:8292[] document `Cargo.lock` maintenance process.
+* pr:8293[] document style for helper functions and variables.
+* pr:8303[] allow interning strings.
+* pr:8309[] introduce `GenericArg` like in `chalk`.
+* pr:8315[] try to further reduce `ItemTree` size.
+* pr:8323[] only remember blocks that have a DefMap.
+* pr:8327[] move `Ty` creation methods out of `Ty` (`chalk` move preparation).
+* pr:8328[] move things in `hir_ty` into submodules.
+* pr:8333[] allow skipping type inference in `analysis-stats`.
