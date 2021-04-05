@@ -5,6 +5,8 @@
 Provides user with annotations above items for looking up references or impl blocks
 and running/debugging binaries.
 
+image::https://user-images.githubusercontent.com/48062697/113020672-b7c34f00-917a-11eb-8f6e-858735660a0e.png[]
+
 
 === Auto Import
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/auto_import.rs#L10[auto_import.rs]
@@ -62,6 +64,8 @@ It has the following configurations:
 
 In `VS Code` the configuration for this is `rust-analyzer.assist.importPrefix`.
 
+image::https://user-images.githubusercontent.com/48062697/113020673-b85be580-917a-11eb-9022-59585f35d4f8.gif[]
+
 
 === Expand Macro Recursively
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/expand_macro.rs#L17[expand_macro.rs]
@@ -73,6 +77,8 @@ Shows the full macro expansion of the macro at current cursor.
 
 | VS Code | **Rust Analyzer: Expand macro recursively**
 |===
+
+image::https://user-images.githubusercontent.com/48062697/113020648-b3973180-917a-11eb-84a9-ecb921293dc5.gif[]
 
 
 === Expand and Shrink Selection
@@ -88,6 +94,8 @@ This is a standard LSP feature and not a protocol extension.
 
 | VS Code | kbd:[Alt+Shift+→], kbd:[Alt+Shift+←]
 |===
+
+image::https://user-images.githubusercontent.com/48062697/113020651-b42fc800-917a-11eb-8a4f-cf1a07859fac.gif[]
 
 
 === File Structure
@@ -105,6 +113,8 @@ Provides a tree of the symbols defined in the file. Can be used to
 | VS Code | kbd:[Ctrl+Shift+O]
 |===
 
+image::https://user-images.githubusercontent.com/48062697/113020654-b42fc800-917a-11eb-8388-e7dc4d92b02e.gif[]
+
 
 === Find All References
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/references.rs#L42[references.rs]
@@ -116,6 +126,8 @@ Shows all references of the item at the cursor location
 
 | VS Code | kbd:[Shift+Alt+F12]
 |===
+
+image::https://user-images.githubusercontent.com/48062697/113020670-b7c34f00-917a-11eb-8003-370ac5f2b3cb.gif[]
 
 
 === Format String Completion.
@@ -135,6 +147,8 @@ The following postfix snippets are available:
   + `logw` -> `log::warn!(...)`
   + `loge` -> `log::error!(...)`
 
+image::https://user-images.githubusercontent.com/48062697/113020656-b560f500-917a-11eb-87de-02991f61beb8.gif[]
+
 
 === Go to Definition
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L15[goto_definition.rs]
@@ -146,6 +160,8 @@ Navigates to the definition of an identifier.
 
 | VS Code | kbd:[F12]
 |===
+
+image::https://user-images.githubusercontent.com/48062697/113065563-025fbe00-91b1-11eb-83e4-a5a703610b23.gif[]
 
 
 === Go to Implementation
@@ -159,6 +175,8 @@ Navigates to the impl block of structs, enums or traits. Also implemented as a c
 | VS Code | kbd:[Ctrl+F12]
 |===
 
+image::https://user-images.githubusercontent.com/48062697/113065566-02f85480-91b1-11eb-9288-aaad8abd8841.gif[]
+
 
 === Go to Type Definition
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_type_definition.rs#L6[goto_type_definition.rs]
@@ -171,12 +189,16 @@ Navigates to the type of an identifier.
 | VS Code | **Go to Type Definition*
 |===
 
+image::https://user-images.githubusercontent.com/48062697/113020657-b560f500-917a-11eb-9007-0f809733a338.gif[]
+
 
 === Hover
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/hover.rs#L81[hover.rs]
 
 Shows additional information, like type of an expression or documentation for definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.
+
+image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917a-11eb-9f88-3dbc27320c95.gif[]
 
 
 === Inlay Hints
@@ -201,6 +223,8 @@ https://github.com/rust-analyzer/rust-analyzer/issues/1623[1], https://github.co
 | VS Code | **Rust Analyzer: Toggle inlay hints*
 |===
 
+image::https://user-images.githubusercontent.com/48062697/113020660-b5f98b80-917a-11eb-8d70-3be3fd558cdd.png[]
+
 
 === Join Lines
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/join_lines.rs#L13[join_lines.rs]
@@ -212,6 +236,8 @@ Join selected lines into one, smartly fixing up whitespace, trailing commas, and
 
 | VS Code | **Rust Analyzer: Join lines**
 |===
+
+image::https://user-images.githubusercontent.com/48062697/113020661-b6922200-917a-11eb-87c4-b75acc028f11.gif[]
 
 
 === Magic Completions
@@ -266,6 +292,8 @@ And the auto import completions, enabled with the `rust-analyzer.completion.auto
 Those are the additional completion options with automatic `use` import and options from all project importable items,
 fuzzy matched agains the completion imput.
 
+image::https://user-images.githubusercontent.com/48062697/113020667-b72ab880-917a-11eb-8778-716cf26a0eb3.gif[]
+
 
 === Matching Brace
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/matching_brace.rs#L6[matching_brace.rs]
@@ -280,6 +308,8 @@ braces, so it won't confuse generics with comparisons.
 | VS Code | **Rust Analyzer: Find matching brace**
 |===
 
+image::https://user-images.githubusercontent.com/48062697/113065573-04298180-91b1-11eb-8dec-d4e2a202f304.gif[]
+
 
 === Memory Usage
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_db/src/apply_change.rs#L95[apply_change.rs]
@@ -291,10 +321,11 @@ Clears rust-analyzer's internal database and prints memory usage statistics.
 
 | VS Code | **Rust Analyzer: Memory Usage (Clears Database)**
 |===
+image::https://user-images.githubusercontent.com/48062697/113065592-08559f00-91b1-11eb-8c96-64b88068ec02.gif[]
 
 
 === Move Item
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/move_item.rs#L16[move_item.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/move_item.rs#L18[move_item.rs]
 
 Move item under cursor or selection up and down.
 
@@ -304,6 +335,8 @@ Move item under cursor or selection up and down.
 | VS Code | **Rust Analyzer: Move item up**
 | VS Code | **Rust Analyzer: Move item down**
 |===
+
+image::https://user-images.githubusercontent.com/48062697/113065576-04298180-91b1-11eb-91ce-4505e99ed598.gif[]
 
 
 === On Enter
@@ -328,6 +361,8 @@ Add the following to `keybindings.json`:
 }
 ----
 
+image::https://user-images.githubusercontent.com/48062697/113065578-04c21800-91b1-11eb-82b8-22b8c481e645.gif[]
+
 
 === On Typing Assists
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/typing.rs#L38[typing.rs]
@@ -345,6 +380,9 @@ Add the following to `settings.json`:
 "editor.formatOnType": true,
 ----
 
+image::https://user-images.githubusercontent.com/48062697/113166163-69758500-923a-11eb-81ee-eb33ec380399.gif[]
+image::https://user-images.githubusercontent.com/48062697/113171066-105c2000-923f-11eb-87ab-f4a263346567.gif[]
+
 
 === Parent Module
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/parent_module.rs#L12[parent_module.rs]
@@ -357,9 +395,11 @@ Navigates to the parent module of the current module.
 | VS Code | **Rust Analyzer: Locate parent module**
 |===
 
+image::https://user-images.githubusercontent.com/48062697/113065580-04c21800-91b1-11eb-9a32-00086161c0bd.gif[]
+
 
 === Related Tests
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L127[runnables.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L128[runnables.rs]
 
 Provides a sneak peek of all tests where the current item is used.
 
@@ -385,6 +425,8 @@ Renames the item below the cursor and all of its references
 | VS Code | kbd:[F2]
 |===
 
+image::https://user-images.githubusercontent.com/48062697/113065582-055aae80-91b1-11eb-8ade-2b58e6d81883.gif[]
+
 
 === Run
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L90[runnables.rs]
@@ -398,6 +440,7 @@ to a shortcut!
 
 | VS Code | **Rust Analyzer: Run**
 |===
+image::https://user-images.githubusercontent.com/48062697/113065583-055aae80-91b1-11eb-958f-d67efcaf6a2f.gif[]
 
 
 === Semantic Syntax Highlighting
@@ -411,6 +454,9 @@ It's up to the client to map those to specific colors.
 The general rule is that a reference to an entity gets colored the same way as the entity itself.
 We also give special modifier for `mut` and `&mut` local variables.
 
+image::https://user-images.githubusercontent.com/48062697/113164457-06cfb980-9239-11eb-819b-0f93e646acf8.png[]
+image::https://user-images.githubusercontent.com/48062697/113187625-f7f50100-9250-11eb-825e-91c58f236071.png[]
+
 
 === Show Syntax Tree
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/syntax_tree.rs#L7[syntax_tree.rs]
@@ -423,6 +469,7 @@ rust-analyzer itself.
 
 | VS Code | **Rust Analyzer: Show Syntax Tree**
 |===
+image::https://user-images.githubusercontent.com/48062697/113065586-068bdb80-91b1-11eb-9507-fee67f9f45a0.gif[]
 
 
 === Status
@@ -435,6 +482,7 @@ Shows internal statistic about memory usage of rust-analyzer.
 
 | VS Code | **Rust Analyzer: Status**
 |===
+image::https://user-images.githubusercontent.com/48062697/113065584-05f34500-91b1-11eb-98cc-5c196f76be7f.gif[]
 
 
 === Structural Search and Replace
@@ -511,6 +559,7 @@ be parsed as a valid structural search and replace rule.
 
 | VS Code | **Rust Analyzer: View Hir**
 |===
+image::https://user-images.githubusercontent.com/48062697/113065588-068bdb80-91b1-11eb-9a78-0b4ef1e972fb.gif[]
 
 
 === Workspace Symbol
