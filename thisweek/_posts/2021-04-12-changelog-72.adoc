@@ -1,0 +1,68 @@
+= Changelog #72
+:sectanchors:
+:page-layout: post
+
+Commit: commit:7be06139b632ee615fc18af04dd67947e2c794b2[] +
+Release: release:2021-04-12[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:8388[] auto-close blocks when typing `{`:
++
+image::https://user-images.githubusercontent.com/1786438/114024061-e8d70a00-9873-11eb-89d6-c50296cbf495.gif[]
+* pr:8375[] show errors from `cargo metadata` and initial `cargo check` in the status bar.
+* pr:8410[] support `InsertReplaceSupport` capability
+
+
+== Fixes
+
+* pr:8433[] intern lots of things (great for memory usage):
++
+image::https://user-images.githubusercontent.com/308347/114185930-f1504300-994e-11eb-8e99-7925c54ab3c3.png[]
+* pr:8406[] improve indexing of impls (great for analysis speed):
++
+image::https://user-images.githubusercontent.com/308347/114210350-595f5300-9968-11eb-87aa-b7835faafdb8.png[]
+* pr:8355[] do not drop errors from `cargo metadata` and `cargo check`.
+* pr:8339[] fix "Extract variable" assist in guards.
+* pr:8245[] properly resolve intra-doc links in hover and goto_definition.
+* pr:8371[] don't use `HirDisplayWrapper` when displaying `SourceCode`.
+* pr:8381[] lower attributes on tuple fields.
+* pr:8386[] avoid O(n²) when constructing `AttrSourceMap`.
+* pr:8389[] do not import on the fly inside record literal fields.
+* pr:8390[] support trait impls in unnamed consts.
+* pr:8392[] (first contribution) add space after lifetime in "Expand macro" output.
+* pr:8394[] infer variants through type aliased enums.
+* pr:8397[] (first contribution) improve "still loading" error message.
+* pr:8412[] emit folding ranges for multiline array literals.
+* pr:8207[] offer "Remove `dbg!`" assist on empty calls.
+* pr:8421[] reduce allocations in "Expand macro" formatter.
+* pr:8426[] track recursion limit when expanding custom derive.
+* pr:8431[] add trait member token modifier to associated types.
+* pr:8440[] fix crash on `syn` involving lifetimes returned by Chalk.
+* pr:8444[] shrink `unlinked-file` diagnostic to 3 characters.
+* pr:8447[] resolve prelude and crate root names in the root `DefMap`.
+* pr:8450[] don't ignore unnamed consts when looking for definitions.
+* pr:8457[] don't assume wrong binary operator return type when primitives are involved.
+* pr:8436[] fix "Extract function"'s mutability of variables outliving the body.
+* pr:8463[] support macros in pattern position.
+
+
+== Internal Improvements
+
+* pr:8334[] intern and shrink more data to reduce memory usage.
+* pr:8337[] explain "extract if condition" refactoring.
+* pr:8326[] rewrite "Reorder fields" assist to use mutable syntax trees.
+* pr:8343[] document hypothetical completion problem.
+* pr:8348[], pr:8353[], pr:8359[], pr:8366[], pr:8419[] type inference now uses Chalk's types everywhere.
+* pr:8350[] prepare to store `OpQueue` results in the queue itself.
+* pr:8364[] (first contribution) slightly reduce the memory usage of some `enum`s
+* pr:8374[] intern ``TypeRef``s stored in `Body`.
+* pr:8376[], pr:8380[] infer: remove redundant `record_field_resolutions` and `record_pat_field_resolutions` fields.
+* pr:8379[] document broken windows.
+* pr:8429[] add documentation and test for `//!` doc comment continuation on Enter.
+* pr:8384[] use linear regression to catch accidentally super-linear performance regressions.

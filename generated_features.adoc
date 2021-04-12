@@ -68,7 +68,7 @@ image::https://user-images.githubusercontent.com/48062697/113020673-b85be580-917
 
 
 === Expand Macro Recursively
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/expand_macro.rs#L17[expand_macro.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/expand_macro.rs#L19[expand_macro.rs]
 
 Shows the full macro expansion of the macro at current cursor.
 
@@ -346,6 +346,7 @@ rust-analyzer can override kbd:[Enter] key to make it smarter:
 
 - kbd:[Enter] inside triple-slash comments automatically inserts `///`
 - kbd:[Enter] in the middle or after a trailing space in `//` inserts `//`
+- kbd:[Enter] inside `//!` doc comments automatically inserts `//!`
 
 This action needs to be assigned to shortcut explicitly.
 
@@ -365,12 +366,13 @@ image::https://user-images.githubusercontent.com/48062697/113065578-04c21800-91b
 
 
 === On Typing Assists
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/typing.rs#L38[typing.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/typing.rs#L39[typing.rs]
 
 Some features trigger on typing certain characters:
 
 - typing `let =` tries to smartly add `;` if `=` is followed by an existing expression
 - typing `.` in a chain method call auto-indents
+- typing `{` in front of an expression inserts a closing `}` after the expression
 
 VS Code::
 

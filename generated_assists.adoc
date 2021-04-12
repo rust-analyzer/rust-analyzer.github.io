@@ -435,7 +435,7 @@ struct S {
 
 [discrete]
 === `extract_variable`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_variable.rs#L12[extract_variable.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_variable.rs#L13[extract_variable.rs]
 
 Extracts subexpression into a variable.
 
@@ -1438,7 +1438,7 @@ fn main() {
 
 [discrete]
 === `reorder_fields`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/reorder_fields.rs#L7[reorder_fields.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/reorder_fields.rs#L9[reorder_fields.rs]
 
 Reorder the fields of record literals and record patterns in the same order as in
 the definition.
