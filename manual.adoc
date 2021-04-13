@@ -265,7 +265,7 @@ To use the LSP server in https://github.com/dense-analysis/ale[ale]:
 
 [source,vim]
 ----
-let g:ale_linters = {'rust': ['analyzer']}
+let g:ale_linters = {'rust': ['rust-analyzer']}
 ----
 
 ==== nvim-lsp
