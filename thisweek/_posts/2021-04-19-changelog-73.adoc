@@ -1,0 +1,52 @@
+= Changelog #73
+:sectanchors:
+:page-layout: post
+
+Commit: commit:4f94bcd611bd3eb7d845ec1d3909f69ed065699c[] +
+Release: release:2021-04-19[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:8467[] (first contribution) add "generate `Deref` impl" assist:
++
+image::https://user-images.githubusercontent.com/5489149/115183917-9971b480-a091-11eb-98b0-d847543cde01.gif[]
+* pr:8476[] avoid checking the whole project during initial loading.
+* pr:8481[], pr:8494[], pr:8498[] improve performance by delaying computation of fixes for diagnostics.
+* pr:8354[] distinguish between different operators in semantic highlighting.
+
+== Fixes
+
+* pr:8478[] don't spam repeated error messages when `cargo check` fails.
+* pr:8496[] exclude `nightly` tag from `git describe` to really fix version string.
+* pr:8489[] indent block expressions on enter:
++
+image::https://user-images.githubusercontent.com/1786438/114444123-cb38d600-9bce-11eb-8af2-8e8d1c0f9908.gif[]
+* pr:8415[] fix faulty assertion when extracting function with macro call.
+* pr:8432[] consider outer scopes' ``#[allow]``s in `decl_check`.
+* pr:8526[] do not show flyimports in trait or impl declarations.
+* pr:8510[] move cursor position when using item movers.
+* pr:8536[] (first contribution) slightly improve status messages.
+* pr:8543[] (first contribution) fix "Fill match arms" issue with single-element tuples.
+* pr:8545[] fix primitive shadowing with inner items.
+* pr:8539[] do not propose inherent traits in flyimports and import assists.
+* pr:8546[] return `CallInfo` for unclosed call expressions.
+* pr:8550[] handle extended key-value attributes in MBE.
+* pr:8560[] (first contribution) correctly escape characters in doc comments when passed through macros.
+* pr:8561[] accept `E<error_number>` notation in doctests.
+* pr:8564[] expand `global_asm!` to nothing.
+* pr:8569[] support inherent impls in unnamed consts.
+
+== Internal Improvements
+
+* pr:8483[] clarify who rls-2.0 wg really is.
+* pr:8499[] don't use `#[should_panic]` for tests.
+* pr:8500[] fix flakiness of "accidentally quadratic?" test.
+* pr:8507[] follow test style guide in `typing.rs`.
+* pr:8514[], pr:8515[] add more profiling spans to type inference.
+* pr:8549[] fix `TestDB::module_at_position` with submodules.
+* pr:8551[] (first contribution) nail down `rowan` version.

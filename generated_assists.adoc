@@ -638,6 +638,37 @@ impl Default for Example {
 
 
 [discrete]
+=== `generate_deref`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_deref.rs#L15[generate_deref.rs]
+
+Generate `Deref` impl using the given struct field.
+
+.Before
+```rust
+struct A;
+struct B {
+   ┃a: A
+}
+```
+
+.After
+```rust
+struct A;
+struct B {
+   a: A
+}
+
+impl std::ops::Deref for B {
+    type Target = A;
+
+    fn deref(&self) -> &Self::Target {
+        &self.a
+    }
+}
+```
+
+
+[discrete]
 === `generate_derive`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_derive.rs#L9[generate_derive.rs]
 
