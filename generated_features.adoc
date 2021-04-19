@@ -340,13 +340,14 @@ image::https://user-images.githubusercontent.com/48062697/113065576-04298180-91b
 
 
 === On Enter
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/typing/on_enter.rs#L15[on_enter.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/typing/on_enter.rs#L16[on_enter.rs]
 
 rust-analyzer can override kbd:[Enter] key to make it smarter:
 
 - kbd:[Enter] inside triple-slash comments automatically inserts `///`
 - kbd:[Enter] in the middle or after a trailing space in `//` inserts `//`
 - kbd:[Enter] inside `//!` doc comments automatically inserts `//!`
+- kbd:[Enter] after `{` indents contents and closing `}` of single-line block
 
 This action needs to be assigned to shortcut explicitly.
 
