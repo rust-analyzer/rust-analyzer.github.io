@@ -1,0 +1,45 @@
+= Changelog #74
+:sectanchors:
+:page-layout: post
+
+Commit: commit:d906b7ad889209bd09a6cc3af752fea06e4d953d[] +
+Release: release:2021-04-20[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== Announcement
+
+This is an out-of-band release that fixes a recent regression which caused project loading hangs.
+It should also include the recent "Implement `Deref` assist" which didn't make the cut for the last release.
+
+== New Features
+
+* pr:8462[] expand macros in type positions.
+
+== Fixes
+
+* pr:8600[] fix project loading hang.
+* pr:8524[] fix "Extract function" assist with partial block selection.
+* pr:8565[] "Fill match arms" assist: add remaining arms for enum tuples.
+* pr:8574[] check for rust doc code attributes like rustdoc does.
+* pr:8540[] prevent renaming items that are not part of the workspace (LSP extension).
+* pr:8578[] fix inner attributes false positives in docs.
+* pr:8582[] (first contribution) fix typo in `comparison` semantic token type.
+* pr:8601[] trigger "Inline variable" assist on variable uses.
+* pr:8467[] actually add "Implement `Deref`" assist (it was included in last changelog by mistake).
+* pr:8577[] support crates/module roots in `external_docs`.
+* pr:8587[] fix some `find_path` bugs around inner items (fixes auto-imports with macro calls).
+* pr:8602[] fix panic in "Replace derive with manual implementation".
+
+== Internal Improvements
+
+* pr:8502[] document review requesting etiquette.
+* pr:8527[] rewrite "Introduce named lifetime" assist to use mutable syntax trees.
+* pr:8584[] fix slightly broken test.
+* pr:8588[] add guidelines for release notes PR descriptions.
+* pr:8579[] fix "Server status" capability name in docs.
+* pr:8580[] remove confusion around `serverStatusNotification`.
+* pr:8586[] replace `SyntaxRewriter` usage with `ted` in `eager::eager_macro_recur`.

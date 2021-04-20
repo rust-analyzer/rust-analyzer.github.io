@@ -68,7 +68,7 @@ image::https://user-images.githubusercontent.com/48062697/113020673-b85be580-917
 
 
 === Expand Macro Recursively
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/expand_macro.rs#L19[expand_macro.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/expand_macro.rs#L17[expand_macro.rs]
 
 Shows the full macro expansion of the macro at current cursor.
 

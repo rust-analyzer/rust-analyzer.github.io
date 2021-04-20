@@ -457,7 +457,7 @@ fn main() {
 
 [discrete]
 === `fill_match_arms`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/fill_match_arms.rs#L14[fill_match_arms.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/fill_match_arms.rs#L15[fill_match_arms.rs]
 
 Adds missing clauses to a `match` expression.
 
@@ -1058,7 +1058,7 @@ fn main() {
 
 [discrete]
 === `inline_local_variable`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_local_variable.rs#L13[inline_local_variable.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_local_variable.rs#L15[inline_local_variable.rs]
 
 Inlines local variable.
 
@@ -1080,7 +1080,7 @@ fn main() {
 
 [discrete]
 === `introduce_named_lifetime`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/introduce_named_lifetime.rs#L12[introduce_named_lifetime.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/introduce_named_lifetime.rs#L13[introduce_named_lifetime.rs]
 
 Change an anonymous lifetime to a named lifetime.
 
@@ -1529,7 +1529,7 @@ impl Foo for Bar {
 
 [discrete]
 === `replace_derive_with_manual_impl`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_derive_with_manual_impl.rs#L20[replace_derive_with_manual_impl.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_derive_with_manual_impl.rs#L19[replace_derive_with_manual_impl.rs]
 
 Converts a `derive` impl into a manual one.
 
