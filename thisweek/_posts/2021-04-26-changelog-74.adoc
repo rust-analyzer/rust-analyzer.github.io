@@ -1,0 +1,61 @@
+= Changelog #74
+:sectanchors:
+:page-layout: post
+
+Commit: commit:617535393bb5ccc7adf0bac8a3b9a9c306454e79[] +
+Release: release:2021-04-26[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:8467[] (first contribution) add "generate `Deref` impl" assist:
++
+image::https://user-images.githubusercontent.com/5489149/115183917-9971b480-a091-11eb-98b0-d847543cde01.gif[]
++
+This feature was included in the last week's changelog by mistake.
+* pr:8317[] add "Convert tuple to named struct" assist:
++
+image::https://user-images.githubusercontent.com/308347/116033884-ebef3a00-a66a-11eb-8e34-f95afe788a30.gif[]
+* pr:8462[] expand macros in type positions.
+* pr:8621[] make sure nightly regressions don't break users.
+* pr:8570[] parse `rustc` error messages in flycheck for non-Cargo build systems.
+* pr:8595[] add support for remapping diagnostic paths.
+
+
+== Fixes
+
+* pr:8611[] (first contribution) add support for boolean values to "Fill match arms".
+* pr:8658[] (first contribution) check more carefully for cases when a rename can't be done.
+* pr:8582[] (first contribution) fix typo in `comparison` semantic token type.
+* pr:8600[] fix project loading hang.
+* pr:8606[] fix "Registering progress handler" error.
+* pr:8639[] fix `configuration.property` startup error in VS Code.
+* pr:8643[] change version string to contain hash, build date and channel.
+* pr:8524[] fix "Extract function" with partial block selection.
+* pr:8540[] prevent renaming items that are not part of the workspace (LSP extension).
+* pr:8565[] "Fill match arms" assist: add remaining arms for enum tuples.
+* pr:8577[] support crates/module roots in `external_docs`.
+* pr:8578[] fix inner attributes false positives in docs.
+* pr:8587[] fix some `find_path` bugs around inner items (fixes auto-imports with macro calls).
+* pr:8601[] trigger "Inline variable" assist on variable usages.
+* pr:8609[] parse outer attributes for `RecordPatField`.
+* pr:8620[] avoid unnecessary braces in "Extract function".
+* pr:8602[] fix panic in "Replace derive with manual implementation".
+
+== Internal Improvements
+
+* pr:8502[] document review requesting etiquette.
+* pr:8527[] rewrite "Introduce named lifetime" assist to use mutable syntax trees.
+* pr:8579[] fix "Server status" capability name in docs.
+* pr:8580[] remove confusion around `serverStatusNotification`.
+* pr:8584[] fix slightly broken test.
+* pr:8586[] replace `SyntaxRewriter` usage with `ted` in `eager::eager_macro_recur`.
+* pr:8588[] add guidelines for release notes PR descriptions.
+* pr:8605[] automatically categorize the changelog entries.
+* pr:8591[] remove `SyntaxRewriter` usage in `insert_use` in favor of mutable syntax trees.
+* pr:8638[] remove `SyntaxRewriter::from_fn`.
+* pr:8647[] split out `merge_imports` module from `helpers::insert_use`.
