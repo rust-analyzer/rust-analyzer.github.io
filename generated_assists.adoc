@@ -330,6 +330,51 @@ fn main() {
 
 
 [discrete]
+=== `convert_tuple_struct_to_named_struct`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_tuple_struct_to_named_struct.rs#L9[convert_tuple_struct_to_named_struct.rs]
+
+Converts tuple struct to struct with named fields.
+
+.Before
+```rust
+struct Point┃(f32, f32);
+
+impl Point {
+    pub fn new(x: f32, y: f32) -> Self {
+        Point(x, y)
+    }
+
+    pub fn x(&self) -> f32 {
+        self.0
+    }
+
+    pub fn y(&self) -> f32 {
+        self.1
+    }
+}
+```
+
+.After
+```rust
+struct Point { field1: f32, field2: f32 }
+
+impl Point {
+    pub fn new(x: f32, y: f32) -> Self {
+        Point { field1: x, field2: y }
+    }
+
+    pub fn x(&self) -> f32 {
+        self.field1
+    }
+
+    pub fn y(&self) -> f32 {
+        self.field2
+    }
+}
+```
+
+
+[discrete]
 === `expand_glob_import`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/expand_glob_import.rs#L18[expand_glob_import.rs]
 
@@ -457,7 +502,7 @@ fn main() {
 
 [discrete]
 === `fill_match_arms`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/fill_match_arms.rs#L14[fill_match_arms.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/fill_match_arms.rs#L15[fill_match_arms.rs]
 
 Adds missing clauses to a `match` expression.
 
@@ -1058,7 +1103,7 @@ fn main() {
 
 [discrete]
 === `inline_local_variable`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_local_variable.rs#L13[inline_local_variable.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_local_variable.rs#L15[inline_local_variable.rs]
 
 Inlines local variable.
 
@@ -1080,7 +1125,7 @@ fn main() {
 
 [discrete]
 === `introduce_named_lifetime`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/introduce_named_lifetime.rs#L12[introduce_named_lifetime.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/introduce_named_lifetime.rs#L13[introduce_named_lifetime.rs]
 
 Change an anonymous lifetime to a named lifetime.
 
@@ -1489,7 +1534,7 @@ const test: Foo = Foo {foo: 1, bar: 0}
 
 [discrete]
 === `reorder_impl`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/reorder_impl.rs#L14[reorder_impl.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/reorder_impl.rs#L13[reorder_impl.rs]
 
 Reorder the methods of an `impl Trait`. The methods will be ordered
 in the same order as in the trait definition.
@@ -1529,7 +1574,7 @@ impl Foo for Bar {
 
 [discrete]
 === `replace_derive_with_manual_impl`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_derive_with_manual_impl.rs#L20[replace_derive_with_manual_impl.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_derive_with_manual_impl.rs#L19[replace_derive_with_manual_impl.rs]
 
 Converts a `derive` impl into a manual one.
 
