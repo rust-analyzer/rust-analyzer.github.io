@@ -31,7 +31,7 @@ image::https://user-images.githubusercontent.com/10530973/115778847-3c257e00-a38
 * pr:8687[] improve unification of non-capturing closures.
 * pr:8692[] fix panic caused by new `Try` trait definition on nightly toolchains.
 * pr:8698[] search only crate-level prelude when looking for an item.
-* pr:8708[] don't duplicate `Progress::Finised` for cache priming.
+* pr:8708[] don't duplicate `Progress::Finished` for cache priming.
 
 == Internal Improvements
 
