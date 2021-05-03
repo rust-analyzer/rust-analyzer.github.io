@@ -35,7 +35,7 @@ image::https://user-images.githubusercontent.com/10530973/115778847-3c257e00-a38
 
 == Internal Improvements
 
-* pr:8661[] make normal release after a poin release less annoying.
+* pr:8661[] make normal release after a point release less annoying.
 * pr:8668[] use more cross-platform utc `date` argument.
 * pr:8683[] ensure that client and server-side configs are not mixed up.
 * pr:8695[] fix naming polarity.
