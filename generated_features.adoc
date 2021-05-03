@@ -130,7 +130,7 @@ Shows all references of the item at the cursor location
 image::https://user-images.githubusercontent.com/48062697/113020670-b7c34f00-917a-11eb-8003-370ac5f2b3cb.gif[]
 
 
-=== Format String Completion.
+=== Format String Completion
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_completion/src/completions/postfix/format_like.rs#L0[format_like.rs]
 
 `"Result {result} is {2 + 2}"` is expanded to the `"Result {} is {}", result, 2 + 2`.

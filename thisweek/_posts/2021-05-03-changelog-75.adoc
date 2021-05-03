@@ -1,0 +1,41 @@
+= Changelog #75
+:sectanchors:
+:page-layout: post
+
+Commit: commit:eb741e895f1a73420a401f2495c711afe37d9d19[] +
+Release: release:2021-05-03[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:8629[] (first contribution) allow pressing `|` to surround closure arguments in VS Code:
++
+image::https://user-images.githubusercontent.com/10530973/115778847-3c257e00-a385-11eb-8c80-e0db970747db.gif[]
+* pr:8617[] (first contribution) add option to opt out of smaller font size for inlay hints in VS Code.
+* pr:8660[] (first contribution) add `mutable` semantic token modifier for `&mut self` methods.
+* pr:8624[] automatically detect rust library source file map.
+* pr:8685[] parse const param defaults.
+
+== Fixes
+
+* pr:8693[] (first contribution) ensure that only one cache priming task can run at a time.
+* pr:8666[] report correct version string on Windows and Mac.
+* pr:8670[] make error message in the status bar more useful.
+* pr:8677[] return `ServerNotInitialized` according to the spec.
+* pr:8679[] don't show error message for a valid notification.
+* pr:8684[] correctly parse negated literals as const args.
+* pr:8687[] improve unification of non-capturing closures.
+* pr:8692[] fix panic caused by new `Try` trait definition on nightly toolchains.
+* pr:8698[] search only crate-level prelude when looking for an item.
+* pr:8708[] don't duplicate `Progerss::Finised` for cache priming.
+
+== Internal Improvements
+
+* pr:8661[] make normal release after a poin release less annoying.
+* pr:8668[] use more cross-platform utc `date` argument.
+* pr:8683[] ensure that client and server-side configs are not mixed up.
+* pr:8695[] fix naming polarity.
