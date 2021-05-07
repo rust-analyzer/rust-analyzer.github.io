@@ -385,7 +385,7 @@ If available in PATH or in some standard location, `rust-analyzer` is detected a
 If `rust-analyzer` is not detected, Corrosion will prompt you for configuration of your Rust toolchain and language server with a link to the __Window > Preferences > Rust__ preference page; from here a button allows to download and configure `rust-analyzer`, but you can also reference another installation.
 You'll need to close and reopen all .rs and Cargo files, or to restart the IDE, for this change to take effect.
 
-=== Kate Text Editor ===
+=== Kate Text Editor
 
 Support for language server protocol is built into included by default Kate plugin Lsp.
 It is preconfigurde to use Rls for rust sources by a simple settings change allows to use rust-analyzer instead.
