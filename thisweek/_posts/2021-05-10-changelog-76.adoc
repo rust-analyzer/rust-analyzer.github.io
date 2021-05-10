@@ -1,0 +1,59 @@
+= Changelog #76
+:sectanchors:
+:page-layout: post
+
+Commit: commit:fd109fb587904cfecc1149e068814bfd38feb83c[] +
+Release: release:2021-05-10[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:8482[] (first contribution) explain how to customize `unsafe` highlighting.
+* pr:8674[] (first contribution) add folding of multi-line `where` clauses.
+* pr:8759[] (first contribution) add Kate installation steps to the user manual.
+* pr:8774[] respect `.cargo/config.toml`.
++
+image::https://user-images.githubusercontent.com/3757771/117545448-1dcaae00-b026-11eb-977a-0f35a5e3f2e0.gif[]
+* pr:8784[] auto-insert `}` when typing `{` in use item.
++
+image::https://user-images.githubusercontent.com/1786438/117585742-45983f80-b114-11eb-80fc-d44f480fd012.gif[]
+* pr:8710[] build releases with LTO (link-time optimization).
+* pr:8761[], pr:8763[] improve troubleshooting guide.
+
+== Fixes
+
+* pr:8712[] fix panic in the "Sort methods" assist.
+* pr:8715[] make `CompletionContext::expected_type` smarter.
+* pr:8711[] only resolve the selected assist.
+* pr:8719[] fix block comment intra-doc link injection ranges.
+* pr:8731[] complete enum variants through type aliases.
+* pr:8742[] do not overwrite comments and attrs in trait impl completion.
+* pr:8745[] support "Go to type definition" on types.
+* pr:8748[] fix "Add missing fields" panic on raw identifiers.
+* pr:8755[] direct people to the right repository for the user manual.
+* pr:8773[] support `SelfType` when searching for usages.
+* pr:8777[] correctly escape characters in built-in macros.
+* pr:8779[] don't add space before quote in "Join lines".
+* pr:8776[] fix unnecessary recomputations due to macros.
+
+== Internal Improvements
+
+* pr:8427[] (first contribution) move CI to the `rust-cache` action.
+* pr:8714[], pr:8765[], pr:8768[], pr:8769[] remove more `SyntaxRewriter` usages and code.
+* pr:8716[] replace `memmap` with `memmap2` in `proc_macro_api`.
+* pr:8720[], pr:8725[] add integrated completion benchmark.
+* pr:8732[] refactor expansion queries.
+* pr:8743[] explain why docs should use have one sentence per line.
+* pr:8746[] don't store call-site text offsets in hygiene info.
+* pr:8280[] borrow text of immutable syntax nodes.
+* pr:8718[] upgrade to Rust 1.52.
+* pr:8753[] expose cfg attrs from `hir::Crate`.
+* pr:8762[] disable broken incremental builds 😿.
+* pr:8764[] add rust-analyzer version to panic context.
+* pr:8770[] add failing test for the "Pull assignment up" assist.
+* pr:8781[] rewrite **Replace impl Trait** assist to use mutable syntax trees.
+* pr:8782[], pr:8783[] improve the `make` API.
