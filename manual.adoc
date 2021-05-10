@@ -6,8 +6,6 @@
 :source-highlighter: rouge
 :experimental:
 
-// Master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
-
 At its core, rust-analyzer is a *library* for semantic analysis of Rust code as it changes over time.
 This manual focuses on a specific usage of the library -- running it as part of a server that implements the
 https://microsoft.github.io/language-server-protocol/[Language Server Protocol] (LSP).
@@ -21,7 +19,9 @@ https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/manual.adoc
 
 The manual is written in https://asciidoc.org[AsciiDoc] and includes some extra files which are generated from the source code. Run `cargo test` and `cargo test -p xtask` to create these and then `asciidoctor manual.adoc` to create an HTML copy.
 
-====
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+===
 
 If you have questions about using rust-analyzer, please ask them in the https://users.rust-lang.org/c/ide/14["`IDEs and Editors`"] topic of Rust users forum.
 
@@ -39,7 +39,9 @@ To add the sources manually, run the following command:
 $ rustup component add rust-src
 ```
 
-=== VS Code
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== VS Code
 
 This is the best supported editor at the moment.
 The rust-analyzer plugin for VS Code is maintained
@@ -75,12 +77,16 @@ The server binary is stored in:
 
 Note that we only support two most recent versions of VS Code.
 
-==== Updates
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+=== Updates
 
 The extension will be updated automatically as new versions become available.
 It will ask your permission to download the matching language server version binary if needed.
 
-===== Nightly
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+==== Nightly
 
 We ship nightly releases for VS Code.
 To help us out with testing the newest code and follow the bleeding edge of our `master`, please use the following config:
@@ -101,7 +107,9 @@ If you don't want to be asked for `Download now` every day when the new nightly 
 
 NOTE: Nightly extension should **only** be installed via the `Download now` action from VS Code.
 
-==== Manual installation
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+=== Manual installation
 
 Alternatively, procure both `rust-analyzer.vsix` and your platform's matching `rust-analyzer-{platform}`, for example from the
 https://github.com/rust-analyzer/rust-analyzer/releases[releases] page.
@@ -118,7 +126,9 @@ Copy the `rust-analyzer-{platform}` binary anywhere, then add the path to your s
 { "rust-analyzer.server.path": "~/.local/bin/rust-analyzer-linux" }
 ----
 
-==== Building From Source
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+=== Building From Source
 
 Alternatively, both the server and the Code plugin can be installed from source:
 
@@ -139,18 +149,9 @@ If you're not using Code, you can compile and install only the LSP server:
 $ cargo xtask install --server
 ----
 
-==== Troubleshooting
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
-Here are some useful self-diagnostic commands:
-
-* **Rust Analyzer: Show RA Version** shows the version of `rust-analyzer` binary.
-* **Rust Analyzer: Status** prints some statistics about the server, and dependency information for the current file.
-* To enable server-side logging, run with `env RA_LOG=info` and see `Output > Rust Analyzer Language Server` in VS Code's panel.
-* To log project loading (sysroot & `cargo metadata`), set `RA_LOG=project_model=debug`.
-* To log all LSP requests, add `"rust-analyzer.trace.server": "verbose"` to the settings and look for `Rust Analyzer Language Server Trace` in the panel.
-* To enable client-side logging, add `"rust-analyzer.trace.extension": true` to the settings and open `Output > Rust Analyzer Client` in the panel.
-
-=== rust-analyzer Language Server Binary
+== rust-analyzer Language Server Binary
 
 Other editors generally require the `rust-analyzer` binary to be in `$PATH`.
 You can download the pre-built binary from the https://github.com/rust-analyzer/rust-analyzer/releases[releases] page.
@@ -178,7 +179,9 @@ $ cargo xtask install --server
 If your editor can't find the binary even though the binary is on your `$PATH`, the likely explanation is that it doesn't see the same `$PATH` as the shell, see https://github.com/rust-analyzer/rust-analyzer/issues/1811[this issue].
 On Unix, running the editor from a shell or changing the `.desktop` file to set the environment should help.
 
-==== `rustup`
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+=== `rustup`
 
 `rust-analyzer` is available in `rustup`, but only in the nightly toolchain:
 
@@ -187,7 +190,9 @@ On Unix, running the editor from a shell or changing the `.desktop` file to set 
 $ rustup +nightly component add rust-analyzer-preview
 ---
 
-==== Arch Linux
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+=== Arch Linux
 
 The `rust-analyzer` binary can be installed from the repos or AUR (Arch User Repository):
 
@@ -201,7 +206,9 @@ Install it with pacman, for example:
 $ pacman -S rust-analyzer
 ----
 
-=== Emacs
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== Emacs
 
 Note this excellent https://robert.kra.hn/posts/2021-02-07_rust-with-emacs/[guide] from https://github.com/rksm[@rksm].
 
@@ -214,14 +221,18 @@ Emacs support is maintained as part of the https://github.com/emacs-lsp/lsp-mode
 3. Run `lsp` in a Rust buffer.
 4. (Optionally) bind commands like `lsp-rust-analyzer-join-lines`, `lsp-extend-selection` and `lsp-rust-analyzer-expand-macro` to keys.
 
-=== Vim/NeoVim
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== Vim/NeoVim
 
 Prerequisites: You have installed the <<rust-analyzer-language-server-binary,`rust-analyzer` binary>>.
 Not needed if the extension can install/update it on its own, coc-rust-analyzer is one example.
 
 The are several LSP client implementations for vim or neovim:
 
-==== coc-rust-analyzer
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+=== coc-rust-analyzer
 
 1. Install coc.nvim by following the instructions at
    https://github.com/neoclide/coc.nvim[coc.nvim]
@@ -237,7 +248,9 @@ The are several LSP client implementations for vim or neovim:
 
 Note: for code actions, use `coc-codeaction-cursor` and `coc-codeaction-selected`; `coc-codeaction` and `coc-codeaction-line` are unlikely to be useful.
 
-==== LanguageClient-neovim
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+=== LanguageClient-neovim
 
 1. Install LanguageClient-neovim by following the instructions
    https://github.com/autozimu/LanguageClient-neovim[here]
@@ -252,14 +265,18 @@ let g:LanguageClient_serverCommands = {
 \ }
 ----
 
-==== YouCompleteMe
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+=== YouCompleteMe
 
 Install YouCompleteMe by following the instructions
   https://github.com/ycm-core/YouCompleteMe#installation[here].
 
 rust-analyzer is the default in ycm, it should work out of the box.
 
-==== ALE
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+=== ALE
 
 To use the LSP server in https://github.com/dense-analysis/ale[ale]:
 
@@ -268,7 +285,9 @@ To use the LSP server in https://github.com/dense-analysis/ale[ale]:
 let g:ale_linters = {'rust': ['analyzer']}
 ----
 
-==== nvim-lsp
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+=== nvim-lsp
 
 NeoVim 0.5 (not yet released) has built-in language server support.
 For a quick start configuration of rust-analyzer, use https://github.com/neovim/nvim-lspconfig#rust_analyzer[neovim/nvim-lspconfig].
@@ -307,7 +326,9 @@ EOF
 
 See https://sharksforarms.dev/posts/neovim-rust/ for more tips on getting started.
 
-==== vim-lsp
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+=== vim-lsp
 
 vim-lsp is installed by following https://github.com/prabirshrestha/vim-lsp[the plugin instructions].
 It can be as simple as adding this line to your `.vimrc`:
@@ -353,7 +374,9 @@ if executable('rust-analyzer')
 endif
 ----
 
-=== Sublime Text 3
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== Sublime Text 3
 
 Prerequisites: You have installed the <<rust-analyzer-language-server-binary,`rust-analyzer` binary>>.
 
@@ -372,18 +395,86 @@ If it worked, you should see "rust-analyzer, Line X, Column Y" on the left side 
 
 If you get an error saying `No such file or directory: 'rust-analyzer'`, see the <<rust-analyzer-language-server-binary,`rust-analyzer` binary>> section on installing the language server binary.
 
-=== GNOME Builder
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== GNOME Builder
 
 GNOME Builder 3.37.1 and newer has native `rust-analyzer` support.
 If the LSP binary is not available, GNOME Builder can install it when opening a Rust file.
 
 
-=== Eclipse IDE
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== Eclipse IDE
 
 Support for Rust development in the Eclipse IDE is provided by link:https://github.com/eclipse/corrosion[Eclipse Corrosion].
 If available in PATH or in some standard location, `rust-analyzer` is detected and powers editing of Rust files without further configuration.
 If `rust-analyzer` is not detected, Corrosion will prompt you for configuration of your Rust toolchain and language server with a link to the __Window > Preferences > Rust__ preference page; from here a button allows to download and configure `rust-analyzer`, but you can also reference another installation.
 You'll need to close and reopen all .rs and Cargo files, or to restart the IDE, for this change to take effect.
+
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== Kate Text Editor
+
+Support for the language server protocol is built into Kate through the LSP plugin, which is included by default.
+It is preconfigured to use Rls for rust sources, but allows you to use rust-analyzer through a simple settings change.
+In the LSP Client settings of Kate, copy the content of the third tab "default parameters" to the second tab "server configuration".
+Then in the configuration replace:
+[source,json]
+----
+        "rust": {
+            "command": ["rls"],
+            "rootIndicationFileNames": ["Cargo.lock", "Cargo.toml"],
+            "url": "https://github.com/rust-lang/rls",
+            "highlightingModeRegex": "^Rust$"
+        },
+----
+With
+[source,json]
+----
+        "rust": {
+            "command": ["rust-analyzer"],
+            "rootIndicationFileNames": ["Cargo.lock", "Cargo.toml"],
+            "url": "https://github.com/rust-analyzer/rust-analyzer",
+            "highlightingModeRegex": "^Rust$"
+        },
+----
+Then click on apply, and restart the LSP server for your rust project.
+
+== Troubleshooting
+
+Start with looking at the rust-analyzer version.
+Try **Rust Analyzer: Show RA Version** in VS Code and `rust-analyzer --version` in the command line.
+If the date is more than a week ago, it's better to update rust-analyzer version.
+
+The next thing to check would be panic messages in rust-analyzer's log.
+Log messages are printed to stderr, in VS Code you can see then in the `Output > Rust Analyzer Language Server` tab of the panel.
+To see more logs, set `RA_LOG=info` environmental variable.
+
+To fully capture LSP messages between the editor and the server, set `"rust-analyzer.trace.server": "verbose"` config and check
+`Output > Rust Analyzer Language Server Trace`.
+
+The root cause for many "`nothing works`" problems is that rust-analyzer fails to understand the project structure.
+To debug that, first note the `rust-analyzer` section in the status bar.
+If it has an error icon and red, that's the problem (hover will have somewhat helpful error message).
+**Rust Analyzer: Status** prints dependency information for the current file.
+Finally, `RA_LOG=project_model=debug` enables verbose logs during project loading.
+
+If rust-analyzer outright crashes, try running `rust-analyzer analysis-stats /path/to/project/directory/` on the command line.
+This command type checks the whole project in batch mode bypassing LSP machinery.
+
+When filing issues, it is useful (but not necessary) to try to minimize examples.
+An ideal bug reproduction looks like this:
+
+```bash
+$ git clone https://github.com/username/repo.git && cd repo && git switch --detach commit-hash
+$ rust-analyzer --version
+rust-analyzer dd12184e4 2021-05-08 dev
+$ rust-analyzer analysis-stats .
+💀 💀 💀
+```
+
+It is especially useful when the `repo` doesn't use external crates or the standard library.
 
 == Configuration
 
@@ -570,7 +661,9 @@ include::./generated_diagnostic.adoc[]
 == Editor Features
 === VS Code
 
-==== Color configurations
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+=== Color configurations
 
 It is possible to change the foreground/background color of inlay hints.
 Just add this to your `settings.json`:
@@ -593,7 +686,9 @@ Just add this to your `settings.json`:
 }
 ----
 
-==== Semantic style customizations
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+=== Semantic style customizations
 
 You can customize the look of different semantic elements in the source code.
 For example, mutable bindings are underlined by default and you can override this behavior by adding the following section to your `settings.json`:
@@ -611,7 +706,44 @@ For example, mutable bindings are underlined by default and you can override thi
 }
 ----
 
-==== Special `when` clause context for keybindings.
+Most themes doesn't support styling unsafe operations differently yet. You can fix this by adding overrides for the rules `operator.unsafe`, `function.unsafe`, and `method.unsafe`:
+
+[source,jsonc]
+----
+{
+   "editor.semanticTokenColorCustomizations": {
+         "rules": {
+             "operator.unsafe": "#ff6600",
+             "function.unsafe": "#ff6600"
+             "method.unsafe": "#ff6600"
+         }
+    },
+}
+----
+
+In addition to the top-level rules you can specify overrides for specific themes. For example, if you wanted to use a darker text color on a specific light theme, you might write:
+
+[source,jsonc]
+----
+{
+   "editor.semanticTokenColorCustomizations": {
+         "rules": {
+             "operator.unsafe": "#ff6600"
+         },
+         "[Ayu Light]": {
+            "rules": {
+               "operator.unsafe": "#572300"
+            }
+         }
+    },
+}
+----
+
+Make sure you include the brackets around the theme name. For example, use `"[Ayu Light]"` to customize the theme Ayu Light.
+
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+=== Special `when` clause context for keybindings.
 You may use `inRustProject` context to configure keybindings for rust projects only.
 For example:
 
@@ -625,7 +757,9 @@ For example:
 ----
 More about `when` clause contexts https://code.visualstudio.com/docs/getstarted/keybindings#_when-clause-contexts[here].
 
-==== Setting runnable environment variables
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+=== Setting runnable environment variables
 You can use "rust-analyzer.runnableEnv" setting to define runnable environment-specific substitution variables.
 The simplest way for all runnables in a bunch:
 ```jsonc
@@ -656,7 +790,9 @@ Or it is possible to specify vars more granularly:
 You can use any valid regular expression as a mask.
 Also note that a full runnable name is something like *run bin_or_example_name*, *test some::mod::test_name* or *test-mod some::mod*, so it is possible to distinguish binaries, single tests, and test modules with this masks: `"^run"`, `"^test "` (the trailing space matters!), and `"^test-mod"` respectively.
 
-==== Compiler feedback from external commands
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+=== Compiler feedback from external commands
 
 Instead of relying on the built-in `cargo check`, you can configure Code to run a command in the background and use the `$rustc-watch` problem matcher to generate inline error markers from its output.
 

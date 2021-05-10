@@ -5,37 +5,49 @@
 This diagnostic is triggered if the `break` keyword is used outside of a loop.
 
 
-=== inactive-code
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== inactive-code
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_def/src/diagnostics.rs#L127[diagnostics.rs]
 
 This diagnostic is shown for code with inactive `#[cfg]` attributes.
 
 
-=== incorrect-ident-case
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== incorrect-ident-case
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L379[diagnostics.rs]
 
 This diagnostic is triggered if an item name doesn't follow https://doc.rust-lang.org/1.0.0/style/style/naming/README.html[Rust naming convention].
 
 
-=== macro-error
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== macro-error
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_def/src/diagnostics.rs#L200[diagnostics.rs]
 
 This diagnostic is shown for macro expansion errors.
 
 
-=== mismatched-arg-count
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== mismatched-arg-count
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L296[diagnostics.rs]
 
 This diagnostic is triggered if a function is invoked with an incorrect amount of arguments.
 
 
-=== missing-match-arm
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== missing-match-arm
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L164[diagnostics.rs]
 
 This diagnostic is triggered if `match` block is missing one or more match arms.
 
 
-=== missing-ok-or-some-in-tail-expr
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== missing-ok-or-some-in-tail-expr
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L189[diagnostics.rs]
 
 This diagnostic is triggered if a block that should return `Result` returns a value not wrapped in `Ok`,
@@ -50,7 +62,9 @@ fn foo() -> Result<u8, ()> {
 ```
 
 
-=== missing-pat-fields
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== missing-pat-fields
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L115[diagnostics.rs]
 
 This diagnostic is triggered if pattern lacks some fields that exist in the corresponding structure.
@@ -68,7 +82,9 @@ if let A { a } = a {
 ```
 
 
-=== missing-structure-fields
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== missing-structure-fields
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L68[diagnostics.rs]
 
 This diagnostic is triggered if record lacks some fields that exist in the corresponding structure.
@@ -82,57 +98,75 @@ let a = A { a: 10 };
 ```
 
 
-=== missing-unsafe
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== missing-unsafe
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L272[diagnostics.rs]
 
 This diagnostic is triggered if an operation marked as `unsafe` is used outside of an `unsafe` function or block.
 
 
-=== no-such-field
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== no-such-field
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L41[diagnostics.rs]
 
 This diagnostic is triggered if created structure does not have field provided in record.
 
 
-=== replace-filter-map-next-with-find-map
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== replace-filter-map-next-with-find-map
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L420[diagnostics.rs]
 
 This diagnostic is triggered when `.filter_map(..).next()` is used, rather than the more concise `.find_map(..)`.
 
 
-=== unlinked-file
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/unlinked_file.rs#L24[unlinked_file.rs]
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== unlinked-file
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/unlinked_file.rs#L25[unlinked_file.rs]
 
 This diagnostic is shown for files that are not included in any crate, or files that are part of
 crates rust-analyzer failed to discover. The file will not have IDE features available.
 
 
-=== unresolved-extern-crate
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== unresolved-extern-crate
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_def/src/diagnostics.rs#L43[diagnostics.rs]
 
 This diagnostic is triggered if rust-analyzer is unable to discover referred extern crate.
 
 
-=== unresolved-import
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== unresolved-import
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_def/src/diagnostics.rs#L67[diagnostics.rs]
 
 This diagnostic is triggered if rust-analyzer is unable to discover imported module.
 
 
-=== unresolved-macro-call
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== unresolved-macro-call
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_def/src/diagnostics.rs#L98[diagnostics.rs]
 
 This diagnostic is triggered if rust-analyzer is unable to resolve the path to a
 macro in a macro invocation.
 
 
-=== unresolved-module
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== unresolved-module
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_def/src/diagnostics.rs#L18[diagnostics.rs]
 
 This diagnostic is triggered if rust-analyzer is unable to discover referred module.
 
 
-=== unresolved-proc-macro
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== unresolved-proc-macro
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_def/src/diagnostics.rs#L160[diagnostics.rs]
 
 This diagnostic is shown when a procedural macro can not be found. This usually means that

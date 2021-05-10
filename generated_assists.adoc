@@ -1658,7 +1658,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `replace_impl_trait_with_generic`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_impl_trait_with_generic.rs#L5[replace_impl_trait_with_generic.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_impl_trait_with_generic.rs#L8[replace_impl_trait_with_generic.rs]
 
 Replaces `impl Trait` function argument with the named generic.
 
@@ -1794,7 +1794,7 @@ enum Result<T, E> { Ok(T), Err(E) }
 fn main() {
     let x: Result<i32, i32> = Result::Ok(92);
     let y = match x {
-        Ok(a) => a,
+        Ok(it) => it,
         ┃_ => unreachable!(),
     };
 }
