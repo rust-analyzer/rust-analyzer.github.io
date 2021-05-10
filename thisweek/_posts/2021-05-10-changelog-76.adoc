@@ -15,10 +15,10 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 * pr:8482[] (first contribution) explain how to customize `unsafe` highlighting.
 * pr:8674[] (first contribution) add folding of multi-line `where` clauses.
 * pr:8759[] (first contribution) add Kate installation steps to the user manual.
-* pr:8774[] respect `.cargo/config.toml`.
+* pr:8774[] respect `.cargo/config.toml`:
 +
 image::https://user-images.githubusercontent.com/3757771/117545448-1dcaae00-b026-11eb-977a-0f35a5e3f2e0.gif[]
-* pr:8784[] auto-insert `}` when typing `{` in use item.
+* pr:8784[] auto-insert `}` when typing `{` in use item:
 +
 image::https://user-images.githubusercontent.com/1786438/117585742-45983f80-b114-11eb-80fc-d44f480fd012.gif[]
 * pr:8710[] build releases with LTO (link-time optimization).
