@@ -58,7 +58,6 @@ trait Trait {
 impl Trait for () {
     type X = ();
     fn foo(&self) {}┃
-
 }
 ```
 
@@ -649,7 +648,7 @@ impl Default for Version {
 
 [discrete]
 === `generate_default_from_new`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_default_from_new.rs#L11[generate_default_from_new.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_default_from_new.rs#L13[generate_default_from_new.rs]
 
 Generates default implementation from new method.
 
@@ -1005,7 +1004,7 @@ impl MyStruct {
 
 [discrete]
 === `generate_new`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_new.rs#L11[generate_new.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_new.rs#L10[generate_new.rs]
 
 Adds a new inherent impl for a type.
 
@@ -1777,7 +1776,7 @@ fn main() {
 === `replace_unwrap_with_match`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_unwrap_with_match.rs#L18[replace_unwrap_with_match.rs]
 
-Replaces `unwrap` a `match` expression. Works for Result and Option.
+Replaces `unwrap` with a `match` expression. Works for Result and Option.
 
 .Before
 ```rust
