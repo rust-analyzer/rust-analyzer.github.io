@@ -316,7 +316,7 @@ mod tests {
 
 And the auto import completions, enabled with the `rust-analyzer.completion.autoimport.enable` setting and the corresponding LSP client capabilities.
 Those are the additional completion options with automatic `use` import and options from all project importable items,
-fuzzy matched agains the completion imput.
+fuzzy matched against the completion input.
 
 image::https://user-images.githubusercontent.com/48062697/113020667-b72ab880-917a-11eb-8778-716cf26a0eb3.gif[]
 
@@ -426,7 +426,7 @@ image::https://user-images.githubusercontent.com/48062697/113171066-105c2000-923
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Parent Module
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/parent_module.rs#L12[parent_module.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/parent_module.rs#L14[parent_module.rs]
 
 Navigates to the parent module of the current module.
 
@@ -604,6 +604,23 @@ be parsed as a valid structural search and replace rule.
 // Place the cursor on the line below to see the assist 💡.
 // foo($a, $b) ==>> ($a).foo($b)
 ```
+
+
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== View Crate Graph
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/view_crate_graph.rs#L10[view_crate_graph.rs]
+
+Renders the currently loaded crate graph as an SVG graphic. Requires the `dot` tool, which
+is part of graphviz, to be installed.
+
+Only workspace crates are included, no crates.io dependencies or sysroot crates.
+
+|===
+| Editor  | Action Name
+
+| VS Code | **Rust Analyzer: View Crate Graph**
+|===
 
 
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository

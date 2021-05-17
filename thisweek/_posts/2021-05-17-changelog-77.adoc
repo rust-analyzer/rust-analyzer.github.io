@@ -1,0 +1,47 @@
+= Changelog #77
+:sectanchors:
+:page-layout: post
+
+Commit: commit:b82458818d44dfe5b4b5db38d8113e3f3194506e[] +
+Release: release:2021-05-17[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:8791[] auto-indent use tree lists:
++
+image::https://user-images.githubusercontent.com/1786438/117665627-53e16c80-b1a3-11eb-8906-1b88b394367b.gif[]
+* pr:8801[], pr:8807[] allow viewing the crate graph in a webview:
++
+image::https://user-images.githubusercontent.com/1786438/117831361-c4a48980-b274-11eb-9276-240cdf6919aa.png[]
+* pr:8799[], pr:8813[] add support for array lengths in types.
+
+== Fixes
+
+* pr:8802[] (first contribution) keep comments and attributes when extracting struct from enum variant.
+* pr:8819[] (first contribution) use package root as `cargo check` working directory.
+* pr:8398[] fix inference with conditionally compiled tails.
+* pr:8800[] make "Pull assignment up" assist work in more cases.
+* pr:8805[] use Cargo target name as crate name.
+* pr:8806[], pr:8808[] strip delimiters from function-like macro invocations.
+* pr:8812[] fix dependencies of build scripts.
+* pr:8820[] return absolute paths in `find_path` if crate start is ambiguous.
+* pr:8823[] enable task lists in `pulldown_cmark`.
+* pr:8814[] keep doc comments and outer attributes in "Move module to file" assist.
+* pr:8830[] implement bulit-in `concat_idents!` macro.
+* pr:8831[] apply `async` semantic token modifier to the `async`/`await` keywords.
+* pr:8840[] fix false positive "Missing match arm" when a tuple pattern is shorter than scrutinee type.
+* pr:8845[] add default type parameters on "Generate `Default` from `new` function".
+* pr:8848[] attach comments to `ast::Impl`.
+* pr:8853[] tag `Self` in impls as a type alias.
+
+== Internal Improvements
+
+* pr:8793[], pr:8825[] (first contributions) fix a couple of typos.
+* pr:8798[] use modern dependency resolver.
+* pr:8796[] rewrite `#[derive]` removal to be based on AST (take 2).
+* pr:8837[], pr:8838[], pr:8854[] use mutable syntax trees in more places.
