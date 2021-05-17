@@ -15,7 +15,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 * pr:8791[] auto-indent use tree lists:
 +
 image::https://user-images.githubusercontent.com/1786438/117665627-53e16c80-b1a3-11eb-8906-1b88b394367b.gif[]
-* pr:8801[], pr:8807[] allow viewing the crate graph in a webview:
+* pr:8801[], pr:8807[] allow viewing the crate graph in a webview (VS Code only):
 +
 image::https://user-images.githubusercontent.com/1786438/117831361-c4a48980-b274-11eb-9276-240cdf6919aa.png[]
 * pr:8799[], pr:8813[] add support for array lengths in types.
