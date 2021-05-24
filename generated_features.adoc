@@ -37,20 +37,19 @@ use self::auto_import;
 use super::AssistContext;
 ```
 
-.Merge Behavior
+.Import Granularity
 
-It is possible to configure how use-trees are merged with the `importMergeBehavior` setting.
+It is possible to configure how use-trees are merged with the `importGranularity` setting.
 It has the following configurations:
 
-- `full`: This setting will cause auto-import to always completely merge use-trees that share the
- same path prefix while also merging inner trees that share the same path-prefix. This kind of
+- `crate`: Merge imports from the same crate into a single use statement. This kind of
  nesting is only supported in Rust versions later than 1.24.
-- `last`: This setting will cause auto-import to merge use-trees as long as the resulting tree
- will only contain a nesting of single segment paths at the very end.
-- `none`: This setting will cause auto-import to never merge use-trees keeping them as simple
- paths.
+- `module`: Merge imports from the same module into a single use statement.
+- `item`: Don't merge imports at all, creating one import per item.
+- `preserve`: Do not change the granularity of any imports. For auto-import this has the same
+ effect as `item`.
 
-In `VS Code` the configuration for this is `rust-analyzer.assist.importMergeBehavior`.
+In `VS Code` the configuration for this is `rust-analyzer.assist.importGranularity`.
 
 .Import Prefix
 
@@ -67,6 +66,20 @@ It has the following configurations:
 In `VS Code` the configuration for this is `rust-analyzer.assist.importPrefix`.
 
 image::https://user-images.githubusercontent.com/48062697/113020673-b85be580-917a-11eb-9022-59585f35d4f8.gif[]
+
+
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== Debug ItemTree
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/view_item_tree.rs#L5[view_item_tree.rs]
+
+Displays the ItemTree of the currently open file, for debugging.
+
+|===
+| Editor  | Action Name
+
+| VS Code | **Rust Analyzer: Debug ItemTree**
+|===
 
 
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
@@ -138,6 +151,15 @@ Shows all references of the item at the cursor location
 |===
 
 image::https://user-images.githubusercontent.com/48062697/113020670-b7c34f00-917a-11eb-8003-370ac5f2b3cb.gif[]
+
+
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== Folding
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/folding_ranges.rs#L30[folding_ranges.rs]
+
+Defines folding regions for curly braced blocks, runs of consecutive import
+statements, and `region` / `endregion` comment markers.
 
 
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
@@ -460,7 +482,7 @@ The simplest way to use this feature is via the context menu:
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Rename
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/references/rename.rs#L75[rename.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/references/rename.rs#L77[rename.rs]
 
 Renames the item below the cursor and all of its references
 
@@ -654,6 +676,11 @@ search. Specifically,
 
 That is, `#` switches from "types" to all symbols, `*` switches from the current
 workspace to dependencies.
+
+Note that filtering does not currently work in VSCode due to the editor never
+sending the special symbols to the language server. Instead, you can configure
+the filtering via the `rust-analyzer.workspace.symbol.search.scope` and
+`rust-analyzer.workspace.symbol.search.kind` settings.
 
 |===
 | Editor  | Shortcut

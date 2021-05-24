@@ -1,0 +1,60 @@
+= Changelog #78
+:sectanchors:
+:page-layout: post
+
+Commit: commit:495c9586ec51e0cf9b06397d99ec4f65c55e7a28[] +
+Release: release:2021-05-24[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:7698[], pr:8877[] (first contribution) add new LSP extension for workspace symbol lookup.
+* pr:8873[] implement import granularity guessing.
+* pr:8948[] "Generate getter" assist places the cursor at the generated function.
+* pr:8953[] "Generate getter" avoids generating types like `&Vec<T>`.
+
+== Fixes
+
+* pr:8345[] (first contribution) add `pub mod` option to the "Unlinked file" diagnostic fix.
+* pr:8766[] (first contribution) add `async` if required in "Extract function" assist.
+* pr:8945[] make expected type work in more situations:
++
+image::https://user-images.githubusercontent.com/906069/119269023-dd5a5b00-bbf5-11eb-993a-b6e122c3b9a6.png[]
++
+image::https://user-images.githubusercontent.com/906069/119269025-dfbcb500-bbf5-11eb-983c-fc415b8428e0.png[]
+* pr:8795[] allow semantic tokens for strings to be disabled.
+* pr:8858[] ignore macro imports from `extern crate self`.
+* pr:8863[] don't add extra whitespace around fields.
+* pr:8880[] fix module renaming.
+* pr:8875[] avoid false positive "Missing match arm" when an or-pattern has mismatched types.
+* pr:8884[] fix "Add explicit type" producing invalid code on `@` patterns.
+* pr:8893[] update outdated auto-import documentation.
+* pr:8902[] fix code completion not inserting borrow text when client supports `InsertAndReplace`.
+* pr:8910[] don't hang on unresolved attribute on extern block and its children.
+* pr:8918[] fix hang caused by non-unique attribute IDs.
+* pr:8901[] speed up `fill_match_arms` on tuples of large enums.
+* pr:8935[] mention `rust-tools.nvim` for `nvim-lsp` in the manual.
+* pr:8936[] improve nightly downloads with better local state management.
+* pr:8940[] give `unsafe` semantic token modifier to unsafe traits.
+* pr:8947[] correctly resolve crate name in use paths when import shadows it.
+
+== Internal Improvements
+
+* pr:8856[], pr:8921[], pr:8938[] use Chalk for unification.
+* pr:8862[] reorganize module structure of fixits.
+* pr:8871[] simplify `DefCollector::resolve_macros`.
+* pr:8882[], pr:8887[], pr:8888[] resolve attributes in name resolution (minimal version).
+* pr:8885[] greatly simplify eager macro representation.
+* pr:8889[] track in-scope derive helpers during name resolution.
+* pr:8898[] resolve derive helpers.
+* pr:8900[] support `#[register_attr]` and `#[register_tool]`.
+* pr:8914[] remove `StructDefKind`.
+* pr:8916[], pr:8932[] implement `ItemTree` pretty-printing.
+* pr:8868[] replace `AstTransformer` with mutable syntax trees.
+* pr:8922[], pr:8923[], pr:8924[] add more docs.
+* pr:8926[] drop uncompressed release artifacts and those following the old naming convention.
+* pr:8954[] document `ItemTree` design.

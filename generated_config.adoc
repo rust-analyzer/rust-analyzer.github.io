@@ -1,7 +1,12 @@
-[[rust-analyzer.assist.importMergeBehavior]]rust-analyzer.assist.importMergeBehavior (default: `"crate"`)::
+[[rust-analyzer.assist.importGranularity]]rust-analyzer.assist.importGranularity (default: `"crate"`)::
 +
 --
-The strategy to use when inserting new imports or merging imports.
+How imports should be grouped into use statements.
+--
+[[rust-analyzer.assist.importEnforceGranularity]]rust-analyzer.assist.importEnforceGranularity (default: `false`)::
++
+--
+Whether to enforce the import granularity setting for all files. If set to false rust-analyzer will try to keep import styles consistent per file.
 --
 [[rust-analyzer.assist.importPrefix]]rust-analyzer.assist.importPrefix (default: `"plain"`)::
 +
@@ -179,6 +184,15 @@ Controls file watching implementation.
 --
 These directories will be ignored by rust-analyzer.
 --
+[[rust-analyzer.highlighting.strings]]rust-analyzer.highlighting.strings (default: `true`)::
++
+--
+Use semantic tokens for strings.
+
+In some editors (e.g. vscode) semantic tokens override other highlighting grammars.
+By disabling semantic tokens for strings, other grammars can be used to highlight
+their contents.
+--
 [[rust-analyzer.hoverActions.debug]]rust-analyzer.hoverActions.debug (default: `true`)::
 +
 --
@@ -331,4 +345,14 @@ Additional arguments to `rustfmt`.
 --
 Advanced option, fully override the command rust-analyzer uses for
 formatting.
+--
+[[rust-analyzer.workspace.symbol.search.scope]]rust-analyzer.workspace.symbol.search.scope (default: `"workspace"`)::
++
+--
+Workspace symbol search scope.
+--
+[[rust-analyzer.workspace.symbol.search.kind]]rust-analyzer.workspace.symbol.search.kind (default: `"only_types"`)::
++
+--
+Workspace symbol search kind.
 --
