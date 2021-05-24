@@ -187,7 +187,7 @@ fn main() {
 
 [discrete]
 === `auto_import`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/auto_import.rs#L67[auto_import.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/auto_import.rs#L66[auto_import.rs]
 
 If the name is unresolved, provides all possible imports for it.
 
@@ -909,8 +909,8 @@ struct Person {
 
 impl Person {
     /// Get a reference to the person's name.
-    fn name(&self) -> &String {
-        &self.name
+    fn ┃name(&self) -> &str {
+        self.name.as_str()
     }
 }
 ```
@@ -918,7 +918,7 @@ impl Person {
 
 [discrete]
 === `generate_getter_mut`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_getter_mut.rs#L9[generate_getter_mut.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_getter.rs#L35[generate_getter.rs]
 
 Generate a mut getter method.
 
@@ -937,7 +937,7 @@ struct Person {
 
 impl Person {
     /// Get a mutable reference to the person's name.
-    fn name_mut(&mut self) -> &mut String {
+    fn ┃name_mut(&mut self) -> &mut String {
         &mut self.name
     }
 }
