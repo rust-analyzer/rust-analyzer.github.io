@@ -51,7 +51,7 @@ image::https://user-images.githubusercontent.com/906069/119269025-dfbcb500-bbf5-
 * pr:8885[] greatly simplify eager macro representation.
 * pr:8889[] track in-scope derive helpers during name resolution.
 * pr:8898[] resolve derive helpers.
-* pr:8900[] support `#[register_attr]` and `#[register_tool]`.
+* pr:8900[] support `+#[register_attr]+` and `+#[register_tool]+`.
 * pr:8914[] remove `StructDefKind`.
 * pr:8916[], pr:8932[] implement `ItemTree` pretty-printing.
 * pr:8868[] replace `AstTransformer` with mutable syntax trees.
