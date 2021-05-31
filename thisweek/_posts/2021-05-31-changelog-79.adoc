@@ -1,0 +1,80 @@
+= Changelog #79
+:sectanchors:
+:page-layout: post
+
+Commit: commit:f4383981249d3f2964f2c667f3349f8ff15b77c4[] +
+Release: release:2021-05-31[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:8955[] add support for standalone Rust files:
++
+image::https://user-images.githubusercontent.com/2690773/119277037-0b579380-bc26-11eb-8d77-20d46ab4916a.gif[]
+* pr:8988[], pr:8990[] support "Go to implementations" on trait functions and associated constants:
++
+image::https://user-images.githubusercontent.com/6652840/119501981-45a45c00-bd1e-11eb-8336-9145f2888643.gif[]
+* pr:8942[], pr:8996[] add `library` semantic token modifier to items from other crates.
+* pr:8767[], pr:9028[] implement range formatting (requires nightly `rustfmt`).
+* pr:9012[] add tab stops for keyword completions.
+* pr:9027[] make attribute completion is context aware.
+
+== Fixes
+
+* pr:8995[] create tasks for all workspaces (VS Code only):
++
+image::https://user-images.githubusercontent.com/2690773/119575273-74264380-bdbf-11eb-8283-a78bbcb7346e.png[]
+* pr:9038[] add folding range for return types:
++
+image::https://user-images.githubusercontent.com/48062697/119979082-5c62e100-bfb2-11eb-9729-1dea1ce74de1.gif[]
+* pr:8968[] (first contribution) fix binary installation instructions.
+* pr:8967[] (first contribution) fix cursor position after move item command.
+* pr:8994[] (first contribution) check for subdirectories in VFS loader exclusions.
+* pr:9051[] (first contribution) fix swapped config descriptions.
+* pr:8959[] fix downloading the server binary on Windows again.
+* pr:9046[] make `include!` and other eager macros work in expression position.
+* pr:8970[] duplicate dependencies that have multiple `DepKinds`.
+* pr:8975[] use `todo!()` as placeholder body for generated match arms.
+* pr:8983[] fix type mismatch caused by macros.
+* pr:8986[] add "Go to type definition" for struct fields within struct.
+* pr:8989[] try to fix type inference for the new `Try` trait.
+* pr:8987[] fix lowering of `FnOnce()` without return type.
+* pr:8991[] consider trait to be in scope for trait impls.
+* pr:8993[] don't show `pd`/`ppd` completions where they shouldn't be.
+* pr:9008[] remove undesired completions from trait/impl blocks.
+* pr:9026[] complete modules in associated item lists.
+* pr:9033[] complete keywords in `(Assoc)ItemList` with leading attribute.
+* pr:9059[] only complete derive proc macros in `#[derive]`.
+* pr:9064[] fix incorrect `prefer_inner` calls on some attribute completions.
+* pr:9020[] don't complete non-macro item paths in impls and modules.
+* pr:9032[] only complete modules in empty use-statements.
+* pr:9002[], pr:9037[] move annotations below item attributes.
+* pr:9054[] fix `matches!` macro on nightly toolchains.
+* pr:9050[] `hir_ty`: use async ret type for inference inside async bodies.
+* pr:9065[] `hir_ty`: don't pass where clauses of associated types down to `chalk`.
+
+== Internal Improvements
+
+* pr:8973[] move diagnostics to `hir`.
+* pr:8965[] intern `TypeBound` and `GenericArgs`.
+* pr:8978[] intern `AttrInput`.
+* pr:9017[] reduce the number of traits passed through `chalk` during applicable trait lookup.
+* pr:8976[] rename `hypothetical` to `speculative`.
+* pr:8977[] minor `TokenMap` cleanups.
+* pr:9005[], pr:9003[] document semantic token types and modifiers.
+* pr:9007[] fix some `clippy::redundant_clone` warnings.
+* pr:9014[], pr:9018[], pr:9019[] simplify `CompletionContext`.
+* pr:9068[] move more `CompletionContext` fields to `ImmediateLocation`
+* pr:9015[] merge pattern completion related bools into an enum.
+* pr:9016[] set `record_pat_syntax` more precisely in `CompletionContext`.
+* pr:9041[] implement previous sibling determination for `CompletionContext`.
+* pr:9021[] explain the motivation behind early configuration.
+* pr:8997[] stop expanding `UseTrees` during `ItemTree` lowering.
+* pr:9024[] don't store supertraits in `ItemTree`.
+* pr:9036[] remove undocumented `TextDocumentSyncKind::Full` support.
+* pr:9048[] add some lint completion tests.
+* pr:9057[] thread proc macro types through the HIR.
