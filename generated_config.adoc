@@ -119,6 +119,7 @@ similar option.
 +
 --
 Whether to add argument snippets when completing functions.
+Only applies when `#rust-analyzer.completion.addCallParenthesis#` is set.
 --
 [[rust-analyzer.completion.addCallParenthesis]]rust-analyzer.completion.addCallParenthesis (default: `true`)::
 +
@@ -135,6 +136,12 @@ Whether to show postfix snippets like `dbg`, `if`, `not`, etc.
 --
 Toggles the additional completions that automatically add imports when completed.
 Note that your client must specify the `additionalTextEdits` LSP client capability to truly have this feature enabled.
+--
+[[rust-analyzer.completion.autoself.enable]]rust-analyzer.completion.autoself.enable (default: `true`)::
++
+--
+Toggles the additional completions that automatically show method calls and field accesses
+with `self` prefixed to them when inside a method.
 --
 [[rust-analyzer.diagnostics.enable]]rust-analyzer.diagnostics.enable (default: `true`)::
 +
@@ -173,6 +180,11 @@ List of warnings that should be displayed with info severity.
 
 The warnings will be indicated by a blue squiggly underline in code
 and a blue icon in the `Problems Panel`.
+--
+[[rust-analyzer.experimental.procAttrMacros]]rust-analyzer.experimental.procAttrMacros (default: `false`)::
++
+--
+Expand attribute macros.
 --
 [[rust-analyzer.files.watcher]]rust-analyzer.files.watcher (default: `"client"`)::
 +
@@ -214,6 +226,12 @@ Whether to show `Go to Type Definition` action. Only applies when
 +
 --
 Whether to show `Implementations` action. Only applies when
+`#rust-analyzer.hoverActions.enable#` is set.
+--
+[[rust-analyzer.hoverActions.references]]rust-analyzer.hoverActions.references (default: `false`)::
++
+--
+Whether to show `References` action. Only applies when
 `#rust-analyzer.hoverActions.enable#` is set.
 --
 [[rust-analyzer.hoverActions.run]]rust-analyzer.hoverActions.run (default: `true`)::

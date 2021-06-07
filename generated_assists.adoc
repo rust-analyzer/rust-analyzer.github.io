@@ -437,7 +437,7 @@ fn ┃fun_name(n: i32) {
 
 [discrete]
 === `extract_struct_from_enum_variant`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_struct_from_enum_variant.rs#L23[extract_struct_from_enum_variant.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_struct_from_enum_variant.rs#L28[extract_struct_from_enum_variant.rs]
 
 Extracts a struct from enum variant.
 
@@ -456,7 +456,7 @@ enum A { One(One) }
 
 [discrete]
 === `extract_type_alias`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_type_alias.rs#L5[extract_type_alias.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_type_alias.rs#L8[extract_type_alias.rs]
 
 Extracts the selected type as a type alias.
 
