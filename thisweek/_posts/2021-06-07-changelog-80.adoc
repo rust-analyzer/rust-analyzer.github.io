@@ -1,0 +1,69 @@
+= Changelog #80
+:sectanchors:
+:page-layout: post
+
+Commit: commit:13da28cc2bc1b59f7af817eca36927a71edb023c[] +
+Release: release:2021-06-07[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:9039[] complete fields and methods with `self.` prefixed when inside methods:
++
+image::https://user-images.githubusercontent.com/3757771/119984385-a0111700-bfc1-11eb-9dbf-52fdaa4d72b5.gif[]
+* pr:9136[] add function references hover action (disabled by default):
++
+image::https://user-images.githubusercontent.com/3757771/120811670-8422ed80-c54c-11eb-87f5-dd65c1f8ef7d.png[]
+* pr:9138[] implement hover for lints:
++
+image::https://user-images.githubusercontent.com/3757771/120847184-6ae16780-c573-11eb-8a55-d31e2736a234.gif[]
+* pr:9140[] render documentation for derive completion:
++
+image::https://user-images.githubusercontent.com/3757771/120847308-9c5a3300-c573-11eb-958d-e0f22f4757ed.gif[]
+* pr:9149[] support "Go to definition" for `include!` arguments:
++
+image::https://user-images.githubusercontent.com/3757771/120891155-3fa85800-c607-11eb-9b20-7ac330dceb4b.gif[]
+* pr:9128[] expand procedural attribute macros (disabled by default).
+* pr:9097[] implement per-edition preludes.
+* pr:9104[] implement `#[rustc_skip_array_during_method_dispatch]`.
+* pr:9060[] diagnose unimplemented built-in macros.
+
+
+== Fixes
+
+* pr:9123[] (first contribution) add Gentoo installation instructions.
+* pr:9091[] fix opening single files.
+* pr:8717[], pr:9105[] update match checking algorithm.
+* pr:9090[] fix type inference with arbitrary self types.
+* pr:9130[] make prefix/suffix parameter inlay hint hiding heuristic is more strict.
+* pr:9079[] don't take the parent kind of trailing attributes in attribute completion.
+* pr:8952[] support doctest runnables in `impl` blocks.
+* pr:9084[] avoid panics in the name case diagnostic.
+* pr:9087[] fix shell injection in task spawning.
+* pr:9111[] make "Extract type alias" place extracted alias outside `impl` block.
+* pr:9119[] some minor "Extract type alias" fixes.
+* pr:9108[] don't show the "Extract into variable" assist for unit expressions.
+* pr:9112[] fix some bugs in the "Extract struct from enum variant" assist.
+* pr:9114[] fix bind patterns always being treated as ref taking patterns.
+* pr:9117[] allow "Expand macro" to be invoked anywhere inside a macro call.
+* pr:9137[] fix incorrect unresolved import error when using derive helpers.
+* pr:9141[] don't inline mutable locals in the "Inline local variable" assist.
+
+
+== Internal Improvements
+
+* pr:8866[] update `salsa` to pick upstream cancellation support.
+* pr:9077[] use `Name` instead of `String` in the completion rendering API.
+* pr:9127[] make variant fields inherit the enum's visibility in the item tree.
+* pr:9155[] replace attribute with equivalent whitespace.
+* pr:9025[] display unknown types in `analysis-stats`.
+* pr:9145[] enable attribute macro expansion in `analysis-stats`.
+* pr:9147[] enable proc macros and build scripts by default in `analysis-stats`.
+* pr:9083[] simplify `proc_macro_srv` tests.
+* pr:9110[] simplify completion code.
+* pr:9124[] apply a few `clippy` suggestions.
+* pr:9135[] reorganize `inlay_hints` tests.
