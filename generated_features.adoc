@@ -171,15 +171,15 @@ statements, and `region` / `endregion` comment markers.
 
 The following postfix snippets are available:
 
-- `format` -> `format!(...)`
-- `panic` -> `panic!(...)`
-- `println` -> `println!(...)`
-- `log`:
-  + `logd` -> `log::debug!(...)`
-  + `logt` -> `log::trace!(...)`
-  + `logi` -> `log::info!(...)`
-  + `logw` -> `log::warn!(...)`
-  + `loge` -> `log::error!(...)`
+* `format` -> `format!(...)`
+* `panic` -> `panic!(...)`
+* `println` -> `println!(...)`
+* `log`:
+** `logd` -> `log::debug!(...)`
+** `logt` -> `log::trace!(...)`
+** `logi` -> `log::info!(...)`
+** `logw` -> `log::warn!(...)`
+** `loge` -> `log::error!(...)`
 
 image::https://user-images.githubusercontent.com/48062697/113020656-b560f500-917a-11eb-87de-02991f61beb8.gif[]
 
@@ -187,7 +187,7 @@ image::https://user-images.githubusercontent.com/48062697/113020656-b560f500-917
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Go to Definition
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L15[goto_definition.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L20[goto_definition.rs]
 
 Navigates to the definition of an identifier.
 
@@ -235,7 +235,7 @@ image::https://user-images.githubusercontent.com/48062697/113020657-b560f500-917
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Hover
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/hover.rs#L81[hover.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/hover.rs#L90[hover.rs]
 
 Shows additional information, like type of an expression or documentation for definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.
@@ -289,7 +289,7 @@ image::https://user-images.githubusercontent.com/48062697/113020661-b6922200-917
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Magic Completions
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_completion/src/lib.rs#L34[lib.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_completion/src/lib.rs#L33[lib.rs]
 
 In addition to usual reference completion, rust-analyzer provides some ✨magic✨
 completions as well:
@@ -464,7 +464,7 @@ image::https://user-images.githubusercontent.com/48062697/113065580-04c21800-91b
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Related Tests
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L128[runnables.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L129[runnables.rs]
 
 Provides a sneak peek of all tests where the current item is used.
 
