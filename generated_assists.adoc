@@ -210,7 +210,7 @@ fn main() {
 
 [discrete]
 === `change_visibility`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/change_visibility.rs#L10[change_visibility.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/change_visibility.rs#L12[change_visibility.rs]
 
 Adds or changes existing visibility specifier.
 
@@ -330,9 +330,9 @@ fn main() {
 
 [discrete]
 === `convert_tuple_struct_to_named_struct`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_tuple_struct_to_named_struct.rs#L9[convert_tuple_struct_to_named_struct.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_tuple_struct_to_named_struct.rs#L10[convert_tuple_struct_to_named_struct.rs]
 
-Converts tuple struct to struct with named fields.
+Converts tuple struct to struct with named fields, and analogously for tuple enum variants.
 
 .Before
 ```rust

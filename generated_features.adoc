@@ -85,7 +85,7 @@ Displays the ItemTree of the currently open file, for debugging.
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Expand Macro Recursively
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/expand_macro.rs#L17[expand_macro.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/expand_macro.rs#L14[expand_macro.rs]
 
 Shows the full macro expansion of the macro at current cursor.
 
