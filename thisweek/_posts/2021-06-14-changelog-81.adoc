@@ -1,0 +1,52 @@
+= Changelog #81
+:sectanchors:
+:page-layout: post
+
+Commit: commit:f0618a8f06a464840079f30b3e25bcdcca3922a3[] +
+Release: release:2021-06-14[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:9144[] (first contribution) extend "Convert tuple to named struct" assist to work for enum variants.
+* pr:9106[] "Go to definition" on an `impl` function goes to the corresponding function in the trait.
++
+image::https://user-images.githubusercontent.com/6652840/120403989-39aa3280-c2fa-11eb-9359-639346878acd.gif[]
+* pr:9223[] complete associated types in `dyn` and `impl trait`.
+* pr:9202[] make "Memory usage" work on Windows.
+* pr:9204[] improve memory usage info accuracy on `glibc` Linux.
+* pr:9244[] make block-local trait impls work.
+* pr:9153[] show server status when click on the VS Code status bar entry to show the server status.
+
+== Fixes
+
+* pr:9180[] fix some IDE functionality inside attribute macros.
+* pr:9239[] fix coercion in match with expected type.
+* pr:9182[] don't complete derive macros as function-like macros.
+* pr:9187[] fix edge case in import granularity guessing.
+* pr:9186[] prefer attr macros in "Expand macro recursively".
+* pr:9191[] don't descend into `MacroCall` `TokenTree` delimiters.
+* pr:9196[] don't classify attributes on macro-calls as the macro itself.
+* pr:9209[] don't suggest "Remove unused param" in trait impls.
+* pr:9215[] enable "Change visibility" assist for `use` and `macro` items.
+* pr:9216[] don't allow lookup by `self` for unprefixed completions.
+* pr:9218[] make item search respect trait impl items.
+* pr:9221[] correctly highlight tuple field accesses.
+* pr:9161[] fix incorrect config usage in hover references.
+
+== Internal Improvements
+
+* pr:9240[] (first contribution) fix a small typo.
+* pr:9169[] steps towards attribute macro token mapping.
+* pr:9217[] don't stringify and reparse `cfg_attr`-gated attributes.
+* pr:9192[] build test-macros in a build script.
+* pr:9238[] upgrade `cov-mark` for cross-crate usage.
+* pr:9243[] check that coverage marks are always paired.
+* pr:9164[], pr:9170[], pr:9171[] simplify completions some more.
+* pr:9242[] fix some `clippy` warnings.
+* pr:9166[] clarify issue label documentation.
+* pr:9230[], pr:9237[], pr:9233[], pr:9245[], pr:9246[], pr:9247[], pr:9248[], pr:9249[], pr:9250[], pr:9252[], pr:9253[], pr:9255[], pr:9256[], pr:9257[] move diagnostics to a `hir`-based API.

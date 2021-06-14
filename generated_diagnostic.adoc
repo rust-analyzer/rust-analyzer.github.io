@@ -1,6 +1,6 @@
 //Generated file, do not edit by hand, see `xtask/src/codegen`
 === break-outside-of-loop
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L250[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/break_outside_of_loop.rs#L3[break_outside_of_loop.rs]
 
 This diagnostic is triggered if the `break` keyword is used outside of a loop.
 
@@ -8,7 +8,7 @@ This diagnostic is triggered if the `break` keyword is used outside of a loop.
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == inactive-code
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir/src/diagnostics.rs#L129[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/inactive_code.rs#L9[inactive_code.rs]
 
 This diagnostic is shown for code with inactive `#[cfg]` attributes.
 
@@ -16,7 +16,7 @@ This diagnostic is shown for code with inactive `#[cfg]` attributes.
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == incorrect-ident-case
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L381[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/incorrect_case.rs#L12[incorrect_case.rs]
 
 This diagnostic is triggered if an item name doesn't follow https://doc.rust-lang.org/1.0.0/style/style/naming/README.html[Rust naming convention].
 
@@ -24,7 +24,7 @@ This diagnostic is triggered if an item name doesn't follow https://doc.rust-lan
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == macro-error
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir/src/diagnostics.rs#L202[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/macro_error.rs#L3[macro_error.rs]
 
 This diagnostic is shown for macro expansion errors.
 
@@ -32,15 +32,31 @@ This diagnostic is shown for macro expansion errors.
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == mismatched-arg-count
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L298[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/mismatched_arg_count.rs#L3[mismatched_arg_count.rs]
 
 This diagnostic is triggered if a function is invoked with an incorrect amount of arguments.
 
 
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
+== missing-fields
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/missing_fields.rs#L11[missing_fields.rs]
+
+This diagnostic is triggered if record lacks some fields that exist in the corresponding structure.
+
+Example:
+
+```rust
+struct A { a: u8, b: u8 }
+
+let a = A { a: 10 };
+```
+
+
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
 == missing-match-arm
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L166[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/missing_match_arms.rs#L5[missing_match_arms.rs]
 
 This diagnostic is triggered if `match` block is missing one or more match arms.
 
@@ -48,7 +64,7 @@ This diagnostic is triggered if `match` block is missing one or more match arms.
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == missing-ok-or-some-in-tail-expr
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L191[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/missing_ok_or_some_in_tail_expr.rs#L9[missing_ok_or_some_in_tail_expr.rs]
 
 This diagnostic is triggered if a block that should return `Result` returns a value not wrapped in `Ok`,
 or if a block that should return `Option` returns a value not wrapped in `Some`.
@@ -64,44 +80,8 @@ fn foo() -> Result<u8, ()> {
 
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
-== missing-pat-fields
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L117[diagnostics.rs]
-
-This diagnostic is triggered if pattern lacks some fields that exist in the corresponding structure.
-
-Example:
-
-```rust
-struct A { a: u8, b: u8 }
-
-let a = A { a: 10, b: 20 };
-
-if let A { a } = a {
-    // ...
-}
-```
-
-
-// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
-
-== missing-structure-fields
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L70[diagnostics.rs]
-
-This diagnostic is triggered if record lacks some fields that exist in the corresponding structure.
-
-Example:
-
-```rust
-struct A { a: u8, b: u8 }
-
-let a = A { a: 10 };
-```
-
-
-// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
-
 == missing-unsafe
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L274[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/missing_unsafe.rs#L3[missing_unsafe.rs]
 
 This diagnostic is triggered if an operation marked as `unsafe` is used outside of an `unsafe` function or block.
 
@@ -109,17 +89,33 @@ This diagnostic is triggered if an operation marked as `unsafe` is used outside 
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == no-such-field
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L43[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/no_such_field.rs#L14[no_such_field.rs]
 
 This diagnostic is triggered if created structure does not have field provided in record.
 
 
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
+== remove-this-semicolon
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/remove_this_semicolon.rs#L11[remove_this_semicolon.rs]
+
+This diagnostic is triggered when there's an erroneous `;` at the end of the block.
+
+
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
 == replace-filter-map-next-with-find-map
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir_ty/src/diagnostics.rs#L422[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/replace_filter_map_next_with_find_map.rs#L14[replace_filter_map_next_with_find_map.rs]
 
 This diagnostic is triggered when `.filter_map(..).next()` is used, rather than the more concise `.find_map(..)`.
+
+
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== unimplemented-builtin-macro
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/unimplemented_builtin_macro.rs#L6[unimplemented_builtin_macro.rs]
+
+This diagnostic is shown for builtin macros which are not yet implemented by rust-analyzer
 
 
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
@@ -134,24 +130,33 @@ crates rust-analyzer failed to discover. The file will not have IDE features ava
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == unresolved-extern-crate
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir/src/diagnostics.rs#L48[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/unresolved_extern_crate.rs#L3[unresolved_extern_crate.rs]
 
 This diagnostic is triggered if rust-analyzer is unable to discover referred extern crate.
 
 
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
-== unresolved-macro-call
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir/src/diagnostics.rs#L100[diagnostics.rs]
+== unresolved-import
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/unresolved_import.rs#L3[unresolved_import.rs]
 
-This diagnostic is triggered if rust-analyzer is unable to resolve the path to a
-macro in a macro invocation.
+This diagnostic is triggered if rust-analyzer is unable to resolve a path in
+a `use` declaration.
+
+
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
+== unresolved-macro-call
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/unresolved_macro_call.rs#L6[unresolved_macro_call.rs]
+
+This diagnostic is triggered if rust-analyzer is unable to resolve the path
+to a macro in a macro invocation.
 
 
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == unresolved-module
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir/src/diagnostics.rs#L23[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/unresolved_module.rs#L8[unresolved_module.rs]
 
 This diagnostic is triggered if rust-analyzer is unable to discover referred module.
 
@@ -159,7 +164,7 @@ This diagnostic is triggered if rust-analyzer is unable to discover referred mod
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == unresolved-proc-macro
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/hir/src/diagnostics.rs#L162[diagnostics.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/diagnostics/unresolved_proc_macro.rs#L6[unresolved_proc_macro.rs]
 
 This diagnostic is shown when a procedural macro can not be found. This usually means that
 procedural macro support is simply disabled (and hence is only a weak hint instead of an error),
