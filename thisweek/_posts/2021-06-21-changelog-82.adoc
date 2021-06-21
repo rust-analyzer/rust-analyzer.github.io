@@ -35,8 +35,8 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 * pr:9294[] (and a whole bunch of related PRs) introduce minicore -- a subset of libcore for testing.
 * pr:9320[] retire famous_defs_fixture.
 * pr:9346[] refactor / clean up hir_ty tests.
-* pr:9278[] document that we don't `#[ignore]` tests.
-* pr:9290[] enforce no `#[ignore]` and no `#[should_panic]`.
+* pr:9278[] document that we don't `++#[ignore]++` tests.
+* pr:9290[] enforce no `++#[ignore]++` and no `++#[should_panic]++`.
 * pr:8951[], pr:9281[], pr:9292[] migrate VS Code plugin to use `vscode.FileSystem` proxy API rather than directly calling into node.
 * pr:9260[] add `<>` to URLs in internal doc comments to make them clickable.
 * pr:9263[] don't use heuristics in `rename` (pr:9344[] fixes regression introduced by that PR).
