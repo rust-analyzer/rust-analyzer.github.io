@@ -1,0 +1,47 @@
+= Changelog #82
+:sectanchors:
+:page-layout: post
+
+Commit: commit:3898387f3bd579c0c5415ecb7c7b3d3923947f2f[] +
+Release: release:2021-06-21[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:9267[] in VS Code extension update the LSP server without asking.
+* pr:9275[] support goto type for field expressions and patterns.
+* pr:9279[] document installation via Homebrew.
+* pr:9258[] rename `assits.importPrefix` config variants.
+* pr:9301[], pr:9310[], pr:9313[] better filter out irrelevant completions.
+* pr:9318[] complete `repr` attribute parameters.
+* pr:9321[] substitute generic parameters during auto-complete.
+* pr:9334[] don't split glob imports during auto imports (on by default, can be disabled).
+* pr:9335[] auto-import in `#[cfg]`-ed blocks adds imports locally.
+
+== Fixes
+
+* pr:9262[] don't keep a trailing `self` token in import paths after `unmerge_use`.
+* pr:9295[] highlight unsafe trait refs as unsafe only in impl blocks and definitions.
+* pr:9293[] show diagnostic fixes before assists.
+* pr:9308[] create modules in correct directory for nested modules.
+* pr:9345[] don't add duplicate `&` during completion.
+
+== Internal Improvements
+
+* pr:9294[] (and a whole bunch of related PRs) introduce minicore -- a subset of libcore for testing.
+* pr:9320[] retire famous_defs_fixture.
+* pr:9346[] refactor / clean up hir_ty tests.
+* pr:9278[] document that we don't `#[ignore]` tests.
+* pr:9290[] enforce no `#[ignore]` and no `#[should_panic]`.
+* pr:8951[], pr:9281[], pr:9292[] migrate VS Code plugin to use `vscode.FileSystem` proxy API rather than directly calling into node.
+* pr:9260[] add `<>` to URLs in internal doc comments to make them clickable.
+* pr:9263[] don't use heuristics in `rename` (pr:9344[] fixes regression introduced by that PR).
+* pr:9265[] move rename infrastructure to core IDE services.
+* pr:9272[], pr:9276[] move diagnostics to a dedicated crate.
+* pr:9273[] don't pull tracing via chalk.
+* pr:9282[] fix package.json error when debugging VS Code extension locally.
+* pr:9315[] nest all the or-patterns!
