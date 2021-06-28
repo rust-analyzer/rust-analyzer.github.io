@@ -244,7 +244,7 @@ const _: i32 = 0b1010;
 
 [discrete]
 === `convert_into_to_from`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_into_to_from.rs#L9[convert_into_to_from.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_into_to_from.rs#L11[convert_into_to_from.rs]
 
 Converts an Into impl to an equivalent From impl.
 
@@ -282,7 +282,7 @@ Converts an Iterator::for_each function into a for loop.
 .Before
 ```rust
 fn main() {
-    let iter = SomeIter;
+    let iter = iter::repeat((9, 2));
     iter.for_each┃(|(x, y)| {
         println!("x: {}, y: {}", x, y);
     });
@@ -292,7 +292,7 @@ fn main() {
 .After
 ```rust
 fn main() {
-    let iter = SomeIter;
+    let iter = iter::repeat((9, 2));
     for (x, y) in iter {
         println!("x: {}, y: {}", x, y);
     }
@@ -617,7 +617,7 @@ fn foo<T: Copy + Clone>() { }
 
 [discrete]
 === `generate_default_from_enum_variant`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_default_from_enum_variant.rs#L7[generate_default_from_enum_variant.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_default_from_enum_variant.rs#L6[generate_default_from_enum_variant.rs]
 
 Adds a Default impl for an enum using a variant.
 
@@ -648,7 +648,7 @@ impl Default for Version {
 
 [discrete]
 === `generate_default_from_new`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_default_from_new.rs#L13[generate_default_from_new.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_default_from_new.rs#L14[generate_default_from_new.rs]
 
 Generates default implementation from new method.
 
@@ -1352,7 +1352,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `move_module_to_file`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_module_to_file.rs#L11[move_module_to_file.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_module_to_file.rs#L14[move_module_to_file.rs]
 
 Moves inline module's contents to a separate file.
 
@@ -1780,18 +1780,16 @@ Replaces `unwrap` with a `match` expression. Works for Result and Option.
 
 .Before
 ```rust
-enum Result<T, E> { Ok(T), Err(E) }
 fn main() {
-    let x: Result<i32, i32> = Result::Ok(92);
+    let x: Result<i32, i32> = Ok(92);
     let y = x.┃unwrap();
 }
 ```
 
 .After
 ```rust
-enum Result<T, E> { Ok(T), Err(E) }
 fn main() {
-    let x: Result<i32, i32> = Result::Ok(92);
+    let x: Result<i32, i32> = Ok(92);
     let y = match x {
         Ok(it) => it,
         ┃_ => unreachable!(),
@@ -1884,7 +1882,7 @@ fn foo() {
 
 [discrete]
 === `wrap_return_type_in_result`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/wrap_return_type_in_result.rs#L10[wrap_return_type_in_result.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/wrap_return_type_in_result.rs#L11[wrap_return_type_in_result.rs]
 
 Wrap the function's return type into Result.
 

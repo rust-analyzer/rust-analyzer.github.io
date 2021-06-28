@@ -1,0 +1,55 @@
+= Changelog #83
+:sectanchors:
+:page-layout: post
+
+Commit: commit:1fa82adfdca502a13f4dd952f9a50574870f5b7b[] +
+Release: release:2021-06-28[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:9375[] highlight exit and yield points:
++
+image::https://user-images.githubusercontent.com/3757771/123292155-0f235200-d513-11eb-92e0-bef9aaea76a1.gif[]
++
+image::https://user-images.githubusercontent.com/3757771/123128988-e1bfa100-d44b-11eb-9c81-6a6031aad740.png[]
+* pr:9396[], pr:9397[] highlight loop exit points:
++
+image::https://user-images.githubusercontent.com/3757771/123318732-d47be280-d52f-11eb-8a9a-cb3f591d4195.png[]
+* pr:9362[] massively improve performance for large files.
+* pr:9264[] make documentation on hover configurable.
+* pr:9080[] improve completion of cfg attributes.
+* pr:9031[] add `public` semantic token modifier for public items.
+* pr:9380[] add "Go to declaration" support.
+* pr:9227[] add config setting to disable the `cfg(test)` cfg in specific crates.
+* pr:9348[] output to a log file if `RA_LOG_FILE` is defined in environment.
+
+== Fixes
+
+* pr:9353[] (first contribution) include extra targets when the `pkg_root` is not the same as the target root.
+* pr:9314[] add `.await` when extracting an async function.
+* pr:9355[] don't insert `}` when typing `{` in a string.
+* pr:9357[] update sysroot crates.
+* pr:9363[] set target directory explicitly to avoid deadlock running `cargo`.
+* pr:9368[] prefer identifier tokens in "Expand macro".
+* pr:9390[] improve type bound completions.
+* pr:9400[] fix renaming associated trait items with colliding names.
+* pr:9347[] add note about `cfg(debug_assertions)`.
+
+== Internal Improvements
+
+* pr:9379[] remove one more accidentally quadratic code path.
+* pr:9373[] factor out `pick_best_token` ide pattern into `ide_db`.
+* pr:9356[] refactor completion tests.
+* pr:9383[] rewrite token tree lowering to use an explicit stack.
+* pr:9413[] deduplicate expression AST visiting logic.
+* pr:9364[] split hover actions config into its own config struct.
+* pr:9367[] document perf characteristics of `SyntaxNodePtr::to_node`.
+* pr:9369[] document `source_to_def` and its connection to Kotlin and Roslyn.
+* pr:9377[] count ``ItemScope``s.
+* pr:9381[] fix compilation on `wasm32-unknown-unknown`.
+* pr:9165[] apply some clippy suggestions.
