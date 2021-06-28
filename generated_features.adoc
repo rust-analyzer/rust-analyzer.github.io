@@ -140,7 +140,7 @@ image::https://user-images.githubusercontent.com/48062697/113020654-b42fc800-917
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Find All References
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/references.rs#L42[references.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/references.rs#L40[references.rs]
 
 Shows all references of the item at the cursor location
 
@@ -186,8 +186,16 @@ image::https://user-images.githubusercontent.com/48062697/113020656-b560f500-917
 
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
+== Go to Declaration
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_declaration.rs#L10[goto_declaration.rs]
+
+Navigates to the declaration of an identifier.
+
+
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
 == Go to Definition
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L20[goto_definition.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L19[goto_definition.rs]
 
 Navigates to the definition of an identifier.
 
@@ -219,7 +227,7 @@ image::https://user-images.githubusercontent.com/48062697/113065566-02f85480-91b
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Go to Type Definition
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_type_definition.rs#L7[goto_type_definition.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_type_definition.rs#L8[goto_type_definition.rs]
 
 Navigates to the type of an identifier.
 
@@ -234,8 +242,20 @@ image::https://user-images.githubusercontent.com/48062697/113020657-b560f500-917
 
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
+== Highlight Related
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L21[highlight_related.rs]
+
+Highlights constructs related to the thing under the cursor:
+- if on an identifier, highlights all references to that identifier in the current file
+- if on an `async` or `await token, highlights all yield points for that async context
+- if on a `return` token, `?` character or `->` return type arrow, highlights all exit points for that context
+- if on a `break`, `loop`, `while` or `for` token, highlights all break points for that loop or block context
+
+
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
 == Hover
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/hover.rs#L90[hover.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/hover.rs#L67[hover.rs]
 
 Shows additional information, like type of an expression or documentation for definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.
@@ -379,7 +399,7 @@ image::https://user-images.githubusercontent.com/48062697/113065592-08559f00-91b
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Move Item
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/move_item.rs#L18[move_item.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/move_item.rs#L15[move_item.rs]
 
 Move item under cursor or selection up and down.
 
@@ -482,7 +502,7 @@ The simplest way to use this feature is via the context menu:
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Rename
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/references/rename.rs#L77[rename.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/rename.rs#L44[rename.rs]
 
 Renames the item below the cursor and all of its references
 
@@ -613,6 +633,7 @@ documentation:: Emitted for documentation comments.
 injected:: Emitted for doc-string injected highlighting like rust source blocks in documentation.
 intraDocLink:: Emitted for intra doc links in doc-strings.
 library:: Emitted for items that are defined outside of the current crate.
+public:: Emitted for items that are from the current crate and are `pub`.
 mutable:: Emitted for mutable locals and statics.
 static:: Emitted for "static" functions, also known as functions that do not take a `self` param, as well as statics and consts.
 trait:: Emitted for associated trait items.

@@ -18,6 +18,11 @@ The path structure for newly inserted paths to use.
 --
 Group inserted imports by the [following order](https://rust-analyzer.github.io/manual.html#auto-import). Groups are separated by newlines.
 --
+[[rust-analyzer.assist.allowMergingIntoGlobImports]]rust-analyzer.assist.allowMergingIntoGlobImports (default: `true`)::
++
+--
+Whether to allow import insertion to merge new imports into single path glob imports like `use std::fmt::*;`.
+--
 [[rust-analyzer.callInfo.full]]rust-analyzer.callInfo.full (default: `true`)::
 +
 --
@@ -33,6 +38,11 @@ Automatically refresh project info via `cargo metadata` on
 +
 --
 Activate all available features (`--all-features`).
+--
+[[rust-analyzer.cargo.unsetTest]]rust-analyzer.cargo.unsetTest (default: `["core"]`)::
++
+--
+Unsets `#[cfg(test)]` for the specified crates.
 --
 [[rust-analyzer.cargo.features]]rust-analyzer.cargo.features (default: `[]`)::
 +
@@ -205,6 +215,16 @@ In some editors (e.g. vscode) semantic tokens override other highlighting gramma
 By disabling semantic tokens for strings, other grammars can be used to highlight
 their contents.
 --
+[[rust-analyzer.hover.documentation]]rust-analyzer.hover.documentation (default: `true`)::
++
+--
+Whether to show documentation on hover.
+--
+[[rust-analyzer.hover.linksInHover]]rust-analyzer.hover.linksInHover (default: `true`)::
++
+--
+Use markdown syntax for links in hover.
+--
 [[rust-analyzer.hoverActions.debug]]rust-analyzer.hoverActions.debug (default: `true`)::
 +
 --
@@ -239,11 +259,6 @@ Whether to show `References` action. Only applies when
 --
 Whether to show `Run` action. Only applies when
 `#rust-analyzer.hoverActions.enable#` is set.
---
-[[rust-analyzer.hoverActions.linksInHover]]rust-analyzer.hoverActions.linksInHover (default: `true`)::
-+
---
-Use markdown syntax for links in hover.
 --
 [[rust-analyzer.inlayHints.chainingHints]]rust-analyzer.inlayHints.chainingHints (default: `true`)::
 +
