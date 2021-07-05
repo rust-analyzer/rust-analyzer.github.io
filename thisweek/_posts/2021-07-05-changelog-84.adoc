@@ -1,0 +1,54 @@
+= Changelog #84
+:sectanchors:
+:page-layout: post
+
+Commit: commit:e5c1c8cf2fcfae3e15c8bcf5256e84cad3bd3436[] +
+Release: release:2021-07-05[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:9452[] add "View Crate Graph (Full)" command, which includes external dependencies.
++
+image::https://user-images.githubusercontent.com/308347/124423305-85268500-dd6d-11eb-816c-fa28293bed57.png[]
+* pr:9454[], pr:9455[], pr:9465[] make "Replace `if let` with ``match``" work with chained `if let ... {} else if let ...` expressions and guards:
++
+image::https://user-images.githubusercontent.com/308347/124424266-6e812d80-dd6f-11eb-9ea1-95d73d0f3d2f.gif[]
+* pr:9473[] "Join lines" joins two ``if``s into `else if`:
++
+image::https://user-images.githubusercontent.com/1711539/124359561-3d4d1400-dc2e-11eb-9b54-046f361b0679.gif[]
+* pr:9468[] make "Inline call" work on methods.
+* pr:9489[] always prefer postfix snippets on exact match.
+
+
+== Fixes
+
+* pr:9428[] fix deduction of `dyn Fn` closure parameter types.
+* pr:9420[] make hover on attribute paths work again.
+* pr:9422[] handle `::{self}` imports.
+* pr:9423[] resolve paths in attribute highlighting.
+* pr:9426[] watch for `Cargo.toml` and `Cargo.lock` changes.
+* pr:9269[] redesign status page.
+* pr:9435[], pr:9464[] don't add test runnables to the wrong file.
+* pr:9437[] don't classify paths inside attribute `TokenTrees`.
+* pr:9445[] fix inner items defined in nested macros.
+* pr:9447[] make the "unlinked file" diagnostic a hint again.
+* pr:9450[] add `ModuleOrItem` to import granularity guessing.
+* pr:9456[], pr:9463[] add `proc_macro` -> `std` dependency edge.
+* pr:9477[] merge results from different namespaces in `auto_import`.
+* pr:9479[] insert fully qualified paths in "Replace qualified name with ``use``".
+
+
+== Internal Improvements
+
+* pr:9418[] include `self` in usage search results inside their own definition.
+* pr:9431[] implement `TypeRef::ForLifetime`.
+* pr:9467[] update "Wrap return type in ``Result``" to work on the HIR.
+* pr:9476[] overhaul codegen.
+* pr:9484[] make `xtask` lighter.
+* pr:9487[] refactor `to_proto::completion`.
+* pr:9488[] make `CompletionItem` and `SourceChange` consistent.
