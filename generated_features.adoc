@@ -1,4 +1,5 @@
-//Generated file, do not edit by hand, see `xtask/src/codegen`
+
+// Generated file, do not edit by hand, see `sourcegen_feature_docs`.
 === Annotations
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/annotations.rs#L18[annotations.rs]
 
@@ -255,7 +256,7 @@ Highlights constructs related to the thing under the cursor:
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Hover
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/hover.rs#L67[hover.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/hover.rs#L70[hover.rs]
 
 Shows additional information, like type of an expression or documentation for definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.
@@ -484,7 +485,7 @@ image::https://user-images.githubusercontent.com/48062697/113065580-04c21800-91b
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Related Tests
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L129[runnables.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L146[runnables.rs]
 
 Provides a sneak peek of all tests where the current item is used.
 
@@ -518,7 +519,7 @@ image::https://user-images.githubusercontent.com/48062697/113065582-055aae80-91b
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Run
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L90[runnables.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L91[runnables.rs]
 
 Shows a popup suggesting to run a test/benchmark/binary **at the current cursor
 location**. Super useful for repeatedly running just a single test. Do bind this
@@ -598,7 +599,8 @@ Semi:: Emitted for the `;` token.
 //-
 
 [horizontal]
-attribute:: Emitted for attributes.
+attribute:: Emitted for the `#[` `]` tokens.
+builtinAttribute:: Emitted for names to builtin attributes in attribute path, the `repr` in `#[repr(u8)]` for example.
 builtinType:: Emitted for builtin types like `u32`, `str` and `f32`.
 comment:: Emitted for comments.
 constParameter:: Emitted for const parameters.
@@ -663,7 +665,7 @@ image::https://user-images.githubusercontent.com/48062697/113065586-068bdb80-91b
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Status
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/status.rs#L25[status.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/status.rs#L26[status.rs]
 
 Shows internal statistic about memory usage of rust-analyzer.
 
