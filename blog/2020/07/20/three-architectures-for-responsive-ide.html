@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Three Architectures for a Responsive IDE</title>
+  <meta name="description"
+    content="rust-analyzer is a new "IDE backend" for the Rust programming language.Support rust-analyzer on Open Collective.">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//blog/2020/07/20/three-architectures-for-responsive-ide.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Three Architectures for a Responsive IDE</h1>
+<div class="post-meta sect1">
+  @matklad, Jul 20, 2020
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>rust-analyzer is a new "IDE backend" for the <a href="https://www.rust-lang.org/">Rust</a> programming language.
+Support rust-analyzer on <a href="https://opencollective.com/rust-analyzer/">Open Collective</a>.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>In this post, we&#8217;ll learn how to make a snappy IDE, in three different ways :-)
+It was inspired by this excellent article about using datalog for semantic analysis: <a href="https://petevilter.me/post/datalog-typechecking/" class="bare">https://petevilter.me/post/datalog-typechecking/</a>
+The post describes only the highest-level architecture.
+There&#8217;s <strong>much</strong> more to implementing a full-blown IDE.</p>
+</div>
+<div class="paragraph">
+<p>Specifically, we&#8217;ll look at the backbone infrastructure of an IDE which serves two goals:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Quickly accepting new edits to source files.</p>
+</li>
+<li>
+<p>Providing type information about currently opened files for highlighting, completion, etc.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="map-reduce"><a class="anchor" href="#map-reduce"></a>Map Reduce</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The first architecture is reminiscent of the map-reduce paradigm.
+The idea is to split analysis into relatively simple indexing phase, and a separate full analysis phase.</p>
+</div>
+<div class="paragraph">
+<p>The core constraint of indexing is that it runs on a per-file basis.
+The indexer takes the text of a single file, parses it, and spits out some data about the file.
+The indexer can&#8217;t touch other files.</p>
+</div>
+<div class="paragraph">
+<p>Full analysis can read other files, and it leverages information from the index to save work.</p>
+</div>
+<div class="paragraph">
+<p>This all sounds way too abstract, so let&#8217;s look at a specific example&#8201;&#8212;&#8201;Java.
+In Java, each file starts with a package declaration.
+The indexer concatenates the name of the package with a class name to get a fully-qualified name (FQN).
+It also collects the set of methods declared in the class, the list of superclasses and interfaces, etc.</p>
+</div>
+<div class="paragraph">
+<p>Per-file data is merged into an index which maps FQNs to classes.
+Note that constructing this mapping is an embarrassingly parallel task&#8201;&#8212;&#8201;all files are parsed independently.
+Moreover, this map is cheap to update.
+When a file change arrives, this file&#8217;s contribution from the index is removed, the text of the file is changed and the indexer runs on the new text and adds the new contributions.
+The amount of work to do is proportional to the number of changed files, and is independent from the total number of files.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s see how FQN index can be used to quickly provide completion.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="java"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td><td class="code"><pre><span class="c1">// File ./mypackage/Foo.java</span>
+<span class="kn">package</span> <span class="nn">mypackage</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">Bar</span> <span class="nf">f</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">Bar</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">// File ./mypackage/Bar.java</span>
+<span class="kn">package</span> <span class="nn">mypackage</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Bar</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">g</span><span class="o">()</span> <span class="o">{}</span>
+<span class="o">}</span>
+
+<span class="c1">// File ./Main.java</span>
+<span class="kn">import</span> <span class="nn">mypackage.Foo</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Foo</span><span class="o">.</span><span class="na">f</span><span class="o">().</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The user has just typed <code>Foo.f().</code>, and we need to figure out that the type of receiver expression is <code>Bar</code>, and suggest <code>g</code> as a completion.</p>
+</div>
+<div class="paragraph">
+<p>First, as the file <code>Main.java</code> is modified, we run the indexer on this single file.
+Nothing has changed (the file still contains the class <code>Main</code> with a static <code>main</code> method), so we don&#8217;t need to update the FQN index.</p>
+</div>
+<div class="paragraph">
+<p>Next, we need to resolve the name <code>Foo</code>.
+We parse the file, notice an <code>import</code> and look up <code>mypackage.Foo</code> in the FQN index.
+In the index, we also find that <code>Foo</code> has a static method <code>f</code>, so we resolve the call as well.
+The index also stores the return type of <code>f</code>, but, and this is crucial, it stores it as a string <code>"Bar"</code>, and not as a direct reference to the class <code>Bar</code>.</p>
+</div>
+<div class="paragraph">
+<p>The reason for that is <code>import java.util.*</code> in <code>Foo.java</code>.
+<code>Bar</code> can refer either to <code>java.util.Bar</code> or to <code>mypackage.Bar</code>.
+The indexer doesn&#8217;t know which one, because it can look <strong>only</strong> at the text of <code>Foo.java</code>.
+In other words, while the index does store the return types of methods, it stores them in an unresolved form.</p>
+</div>
+<div class="paragraph">
+<p>The next step is to resolve the identifier <code>Bar</code> in the context of <code>Foo.java</code>.
+This uses the FQN index, and lands in the class <code>mypackage.Bar</code>.
+There the desired method <code>g</code> is found.</p>
+</div>
+<div class="paragraph">
+<p>Altogether, only three files were touched during completion.
+The FQN index allowed us to completely ignore all the other files in the project.</p>
+</div>
+<div class="paragraph">
+<p>One problem with the approach described thus far is that resolving types from the index requires a non-trivial amount of work.
+This work might be duplicated if, for example, <code>Foo.f</code> is called several times.
+The fix is to add a cache.
+Name resolution results are memoized, so that the cost is paid only once.
+The cache is blown away completely on any change&#8201;&#8212;&#8201;with an index, reconstructing the cache is not that costly.</p>
+</div>
+<div class="paragraph">
+<p>To sum up, the first approach works like this:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Each file is being indexed, independently and in parallel, producing a "stub"&#8201;&#8212;&#8201;a set of visible top-level declarations, with unresolved types.</p>
+</li>
+<li>
+<p>All stubs are merged into a single index data structure.</p>
+</li>
+<li>
+<p>Name resolution and type inference work primarily off the stubs.</p>
+</li>
+<li>
+<p>Name resolution is lazy (we only resolve a type from the stub when we need it) and memoized (each type is resolved only once).</p>
+</li>
+<li>
+<p>The caches are completely invalidated on every change</p>
+</li>
+<li>
+<p>The index is updated incrementally:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>if the edit doesn&#8217;t change the file&#8217;s stub, no change to the index is required.</p>
+</li>
+<li>
+<p>otherwise, old keys are removed and new keys are added</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Note an interesting interplay between "dumb" indexes which can be updated incrementally, and "smart" caches, which are re-computed from scratch.</p>
+</div>
+<div class="paragraph">
+<p>This approach combines simplicity and stellar performance.
+The bulk of work is the indexing phase, and you can parallelize and even distribute it across several machine.
+Two examples of this architecture are <a href="https://www.jetbrains.com/idea/">IntelliJ</a> and <a href="https://sorbet.org/">Sorbet</a>.</p>
+</div>
+<div class="paragraph">
+<p>The main drawback of this approach is that it works only when it works&#8201;&#8212;&#8201;not every language has a well-defined FQN concept.
+I think overall it&#8217;s a good idea to design name resolution and module systems (mostly boring parts of a language) such that they work well with the map-reduce paradigm.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Require <code>package</code> declarations or infer them from the file-system layout</p>
+</li>
+<li>
+<p>Forbid meta-programming facilities which add new top-level declarations, or restrict them in such way that they can be used by the indexer.
+For example, preprocessor-like compiler plugins that access a single file at a time might be fine.</p>
+</li>
+<li>
+<p>Make sure that each source element corresponds to a single semantic element.
+For example, if the language supports conditional compilation, make sure that it works during name resolution (like Kotlin&#8217;s <a href="https://kotlinlang.org/docs/reference/platform-specific-declarations.html">expect/actual</a>) and not during parsing (like conditional compilation in most other languages).
+Otherwise, you&#8217;d have to index the same file with different conditional compilation settings, and that is messy.</p>
+</li>
+<li>
+<p>Make sure that FQNs are enough for most of the name resolution.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The last point is worth elaborating. Let&#8217;s look at the following Rust example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="code"><pre><span class="c">// File: ./foo.rs</span>
+<span class="k">trait</span> <span class="n">T</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">f</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">}</span>
+<span class="c">// File: ./bar.rs</span>
+<span class="k">struct</span> <span class="n">S</span><span class="p">;</span>
+
+<span class="c">// File: ./somewhere/else.rs</span>
+<span class="k">impl</span> <span class="n">T</span> <span class="k">for</span> <span class="n">S</span> <span class="p">{}</span>
+
+<span class="c">// File: ./main.s</span>
+<span class="k">use</span> <span class="nn">foo</span><span class="p">::</span><span class="n">T</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">bar</span><span class="p">::</span><span class="n">S</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">s</span> <span class="o">=</span> <span class="n">S</span><span class="p">;</span>
+    <span class="n">s</span><span class="nf">.f</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, we can easily find the <code>S</code> struct and the <code>T</code> trait (as they are imported directly).
+However, to make sure that <code>s.f</code> indeed refers to <code>f</code> from <code>T</code>, we also need to find the corresponding <code>impl</code>, and that can be roughly anywhere!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="leveraging-headers"><a class="anchor" href="#leveraging-headers"></a>Leveraging Headers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The second approach places even more restrictions on the language.
+It requires:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a "declaration before use" rule,</p>
+</li>
+<li>
+<p>headers or equivalent interface files.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Two such languages are C&#43;&#43; and OCaml.</p>
+</div>
+<div class="paragraph">
+<p>The idea of the approach is simple&#8201;&#8212;&#8201;just use a traditional compiler and snapshot its state immediately after imports for each compilation unit.
+An example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c++"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="cp">#include &lt;iostream&gt;
+</span>
+<span class="kt">void</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello, World!"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, the compiler fully processes <code>iostream</code> (and any further headers included), snapshots its state and proceeds with parsing the program itself.
+When the user types more characters, the compiler restarts from the point just after the include.
+As the size of each compilation unit itself is usually reasonable, the analysis is fast.</p>
+</div>
+<div class="paragraph">
+<p>If the user types something into the header file, then the caches need to be invalidated.
+However, changes to headers are comparatively rare, most of the code lives in <code>.cpp</code> files.</p>
+</div>
+<div class="paragraph">
+<p>In a sense, headers correspond to the stubs of the first approach, with two notable differences:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>It&#8217;s the user who is tasked with producing a stub, not the tool.</p>
+</li>
+<li>
+<p>Unlike stubs, headers can&#8217;t be mutually recursive.
+Stubs store unresolved types, but includes can be snapshotted after complete analysis.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The two examples of this approach are <a href="https://github.com/ocaml/merlin">Merlin</a> of OCaml and <a href="https://clangd.llvm.org/">clangd</a>.</p>
+</div>
+<div class="paragraph">
+<p>The huge benefit of this approach is that it allows re-use of an existing batch compiler.
+The two other approaches described in this article typically result in compiler re-writes.
+The drawback is that almost nobody likes headers and forward declarations.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="intermission-laziness-vs-incrementality"><a class="anchor" href="#intermission-laziness-vs-incrementality"></a>Intermission: Laziness vs Incrementality</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Note how neither of the two approaches is incremental in any interesting way.
+It is mostly "if something has changed, let&#8217;s clear the caches completely".
+There&#8217;s a tiny bit of incrementality in the index update in the first approach, but it is almost trivial&#8201;&#8212;&#8201;remove old keys, add new keys.</p>
+</div>
+<div class="paragraph">
+<p>This is because it&#8217;s not the incrementality that makes and IDE fast.
+Rather, it&#8217;s laziness&#8201;&#8212;&#8201;the ability to skip huge swaths of code altogether.</p>
+</div>
+<div class="paragraph">
+<p>With map-reduce, the index tells us exactly which small set of files is used from the current file and is worth looking at.
+Headers shield us from most of the implementation code.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="query-based-compiler"><a class="anchor" href="#query-based-compiler"></a>Query-based Compiler</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Welcome to my world&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>Rust fits the described approaches like a square peg into a round hole.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s a small example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+</pre></td><td class="code"><pre><span class="nd">#[macro_use]</span>
+<span class="k">extern</span> <span class="n">crate</span> <span class="n">bitflags</span><span class="p">;</span>
+
+<span class="nd">bitflags!</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">Flags</span><span class="p">:</span> <span class="nb">u32</span> <span class="p">{</span>
+        <span class="k">const</span> <span class="n">A</span> <span class="o">=</span> <span class="mi">0b00000001</span><span class="p">;</span>
+        <span class="k">const</span> <span class="n">B</span> <span class="o">=</span> <span class="mi">0b00000010</span><span class="p">;</span>
+        <span class="k">const</span> <span class="n">C</span> <span class="o">=</span> <span class="mi">0b00000100</span><span class="p">;</span>
+        <span class="k">const</span> <span class="n">ABC</span> <span class="o">=</span> <span class="nn">Self</span><span class="p">::</span><span class="n">A</span><span class="py">.bits</span> <span class="p">|</span> <span class="nn">Self</span><span class="p">::</span><span class="n">B</span><span class="py">.bits</span> <span class="p">|</span> <span class="nn">Self</span><span class="p">::</span><span class="n">C</span><span class="py">.bits</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>bitflags</code> is macro which comes from another crate and defines a top-level declaration.
+We can&#8217;t put the results of macro expansion into the index, because it depends on a macro definition in another file.
+We can put the macro call itself into an index, but that is mostly useless, as the items, declared by the macro, would miss the index.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s another one:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="k">mod</span> <span class="n">foo</span><span class="p">;</span>
+
+<span class="nd">#[path</span> <span class="nd">=</span> <span class="s">"foo.rs"</span><span class="nd">]</span>
+<span class="k">mod</span> <span class="n">bar</span><span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Modules <code>foo</code> and <code>bar</code> refer to the same file, <code>foo.rs</code>, which effectively means that items from <code>foo.rs</code> are duplicated.
+If <code>foo.rs</code> contains the declaration <code>struct S;</code>, then <code>foo::S</code> and <code>bar::S</code> are different types.
+You also can&#8217;t fit that into an index, because those <code>mod</code> declarations are in a different file.</p>
+</div>
+<div class="paragraph">
+<p>The second approach doesn&#8217;t work either.
+In C&#43;&#43;, the compilation unit is a single file.
+In Rust, the compilation unit is a whole crate, which consists of many files and is typically much bigger.
+And Rust has procedural macros, which means that even surface analysis of code can take an unbounded amount of time.
+And there are no header files, so the IDE has to process the whole crate.
+Additionally, intra-crate name resolution is much more complicated (declaration before use vs. fixed point iteration intertwined with macro expansion).</p>
+</div>
+<div class="paragraph">
+<p>It seems that purely laziness based models do not work for Rust.
+The minimal feasible unit of laziness, a crate, is still too big.</p>
+</div>
+<div class="paragraph">
+<p>For this reason, in rust-analyzer we resort to a smart solution.
+We compensate for the deficit of laziness with incrementality.
+Specifically, we use a generic framework for incremental computation&#8201;&#8212;&#8201;<a href="https://github.com/salsa-rs/salsa">salsa</a>.</p>
+</div>
+<div class="paragraph">
+<p>The idea behind salsa is rather simple&#8201;&#8212;&#8201;all function calls inside the compiler are instrumented to record which other functions were called during their execution.
+The recorded traces are used to implement fine-grained incrementality.
+If after modification the results of all of the dependencies are the same, the old result is reused.</p>
+</div>
+<div class="paragraph">
+<p>There&#8217;s also an additional, crucial, twist&#8201;&#8212;&#8201;if a function is re-executed due to a change in dependency, the new result is compared with the old one.
+If despite a different input they are the same, the propagation of invalidation stops.</p>
+</div>
+<div class="paragraph">
+<p>Using this engine, we were able to implement a rather fancy update strategy.
+Unlike the map reduce approach, our indices can store resolved types, which are invalidated only when a top-level change occurs.
+Even after a top-level change, we are able to re-use results of most macro expansions.
+And typing inside of a top-level macro also doesn&#8217;t invalidate caches unless the expansion of the macro introduces a different set of items.</p>
+</div>
+<div class="paragraph">
+<p>The main benefit of this approach is generality and correctness.
+If you have an incremental computation engine at your disposal, it becomes relatively easy to experiment with the way you structure the computation.
+The code looks mostly like a boring imperative compiler, and you are immune to cache invalidation bugs (we had one, due to procedural macros being non-deterministic).</p>
+</div>
+<div class="paragraph">
+<p>The main drawback is extra complexity, slower performance (fine-grained tracking of dependencies takes time and memory) and a feeling that this is a somewhat uncharted territory yet :-)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="links"><a class="anchor" href="#links"></a>Links</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">How IntelliJ works</dt>
+<dd>
+<p><a href="https://jetbrains.org/intellij/sdk/docs/basics/indexing_and_psi_stubs.html" class="bare">https://jetbrains.org/intellij/sdk/docs/basics/indexing_and_psi_stubs.html</a></p>
+</dd>
+<dt class="hdlist1">How Sorbet works</dt>
+<dd>
+<p><a href="https://www.youtube.com/watch?v=Gdx6by6tcvw" class="bare">https://www.youtube.com/watch?v=Gdx6by6tcvw</a></p>
+</dd>
+<dt class="hdlist1">How clangd works</dt>
+<dd>
+<p><a href="https://clangd.llvm.org/design/" class="bare">https://clangd.llvm.org/design/</a></p>
+</dd>
+<dt class="hdlist1">How Merlin works</dt>
+<dd>
+<p><a href="https://arxiv.org/abs/1807.06702" class="bare">https://arxiv.org/abs/1807.06702</a></p>
+</dd>
+<dt class="hdlist1">How rust-analyzer works</dt>
+<dd>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/dev" class="bare">https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/dev</a></p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

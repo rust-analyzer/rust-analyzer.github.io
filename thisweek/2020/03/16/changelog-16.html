@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #16</title>
+  <meta name="description"
+    content="Commit: ebab250Release: 2020-03-16">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2020/03/16/changelog-16.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #16</h1>
+<div class="post-meta sect1">
+  Mar 16, 2020
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/ebab250b6bffaafb347ce431d5f4c9eeab4aa7e3"><code>ebab250</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2020-03-16"><code>2020-03-16</code></a></p>
+</div>
+<div class="paragraph">
+<p>Note that the minimal required version of VS Code is 1.43.0 now.
+In general, we only support the latest release of VS Code.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3534"><code>#3534</code></a> Implement nightly channel for VS Code.
+You can enabled nightly channel by setting</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+</pre></td><td class="code"><pre>"rust-analyzer.updates.channel": "nightly"
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>option.</p>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3561"><code>#3561</code></a> add <code>Debug</code> code lens. It requires <code>vscode-lldb</code> extension to work.</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/76760335-bf8d9c80-678d-11ea-80c3-8e8b12a36690.gif" alt="76760335 bf8d9c80 678d 11ea 80c3 8e8b12a36690">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3506"><code>#3506</code></a> Trigger associated item completion when typing a name of the item.</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/76758522-1ee9ad80-678a-11ea-84cd-111739ecd379.gif" alt="76758522 1ee9ad80 678a 11ea 84cd 111739ecd379">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3549"><code>#3549</code></a> initial support for the <code>env!</code> macro. This unlocks preliminary support for <code>include!(concat!(env!("OUT_DIR"), "/foo.rs"))</code> pattern.
+At the moment, value for <code>OUT_DIR</code> should be specified in the settings, using <code>rust-analyzer.additionalOutDirs</code> key.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3543"><code>#3543</code></a> separate options for controlling type and parameter inlay hints:
+<code>rust-analyzer.inlayHints.typeHints</code> and <code>rust-analyzer.inlayHints.parameterHints</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3591"><code>#3591</code></a> initial support for local <code>macro_rules</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3587"><code>#3587</code></a> replace "workspace loaded" notification with a progress bar.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3552"><code>#3552</code></a> fix completion for partially unknown types.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3542"><code>#3542</code></a> rename works correctly for field init shortcut.</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/76759028-28bfe080-678b-11ea-9fb5-5ab6e6476814.gif" alt="76759028 28bfe080 678b 11ea 9fb5 5ab6e6476814">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3557"><code>#3557</code></a> on kbd:[Enter], continue multiline non-doc comments.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3558"><code>#3558</code></a> fix parsing of binary expressions where rhs is a block.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3564"><code>#3564</code></a> correctly handle multi-spand diagnostics/fixits from rustc/clippy.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3553"><code>#3553</code></a> show completion for all namespaces.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3574"><code>#3574</code></a> fix completion for <code>HashMap::new</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3576"><code>#3576</code></a> correctly parse variadic <code>extern "C"</code> functions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3595"><code>#3595</code></a> fix completion of trait items.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3573"><code>#3573</code></a> by default, run <code>cargo check</code> for all crates in workspace.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3551"><code>#3551</code></a> slightly refactor feature flags.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3562"><code>#3562</code></a> implement <code>fmt::Display</code> for all AST nodes.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3577"><code>#3577</code></a> protect against diverging macro expansion.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3540"><code>#3540</code></a> split <strong>Structural Search Replace</strong> into query validation and execution.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

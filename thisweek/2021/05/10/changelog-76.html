@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #76</title>
+  <meta name="description"
+    content="Commit: fd109fbRelease: 2021-05-10">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2021/05/10/changelog-76.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #76</h1>
+<div class="post-meta sect1">
+  May 10, 2021
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/fd109fb587904cfecc1149e068814bfd38feb83c"><code>fd109fb</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2021-05-10"><code>2021-05-10</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sponsors"><a class="anchor" href="#sponsors"></a>Sponsors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Become a sponsor:</strong> On <a href="https://opencollective.com/rust-analyzer/">OpenCollective</a> or
+<a href="https://github.com/sponsors/rust-analyzer">GitHub Sponsors</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8482"><code>#8482</code></a> (first contribution) explain how to customize <code>unsafe</code> highlighting.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8674"><code>#8674</code></a> (first contribution) add folding of multi-line <code>where</code> clauses.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8759"><code>#8759</code></a> (first contribution) add Kate installation steps to the user manual.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8774"><code>#8774</code></a> respect <code>.cargo/config.toml</code>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/117545448-1dcaae00-b026-11eb-977a-0f35a5e3f2e0.gif" alt="117545448 1dcaae00 b026 11eb 977a 0f35a5e3f2e0">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8784"><code>#8784</code></a> auto-insert <code>}</code> when typing <code>{</code> in use item:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1786438/117585742-45983f80-b114-11eb-80fc-d44f480fd012.gif" alt="117585742 45983f80 b114 11eb 80fc d44f480fd012">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8710"><code>#8710</code></a> build releases with LTO (link-time optimization).</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8761"><code>#8761</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8763"><code>#8763</code></a> improve troubleshooting guide.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8712"><code>#8712</code></a> fix panic in the "Sort methods" assist.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8715"><code>#8715</code></a> make <code>CompletionContext::expected_type</code> smarter.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8711"><code>#8711</code></a> only resolve the selected assist.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8719"><code>#8719</code></a> fix block comment intra-doc link injection ranges.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8731"><code>#8731</code></a> complete enum variants through type aliases.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8742"><code>#8742</code></a> do not overwrite comments and attrs in trait impl completion.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8745"><code>#8745</code></a> support "Go to type definition" on types.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8748"><code>#8748</code></a> fix "Add missing fields" panic on raw identifiers.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8755"><code>#8755</code></a> direct people to the right repository for the user manual.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8773"><code>#8773</code></a> support <code>SelfType</code> when searching for usages.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8777"><code>#8777</code></a> correctly escape characters in built-in macros.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8779"><code>#8779</code></a> don&#8217;t add space before quote in "Join lines".</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8776"><code>#8776</code></a> fix unnecessary recomputations due to macros.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8427"><code>#8427</code></a> (first contribution) move CI to the <code>rust-cache</code> action.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8714"><code>#8714</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8765"><code>#8765</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8768"><code>#8768</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8769"><code>#8769</code></a> remove more <code>SyntaxRewriter</code> usages and code.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8716"><code>#8716</code></a> replace <code>memmap</code> with <code>memmap2</code> in <code>proc_macro_api</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8720"><code>#8720</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8725"><code>#8725</code></a> add integrated completion benchmark.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8732"><code>#8732</code></a> refactor expansion queries.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8743"><code>#8743</code></a> explain why docs should use have one sentence per line.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8746"><code>#8746</code></a> don&#8217;t store call-site text offsets in hygiene info.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8280"><code>#8280</code></a> borrow text of immutable syntax nodes.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8718"><code>#8718</code></a> upgrade to Rust 1.52.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8753"><code>#8753</code></a> expose cfg attrs from <code>hir::Crate</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8762"><code>#8762</code></a> disable broken incremental builds 😿.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8764"><code>#8764</code></a> add rust-analyzer version to panic context.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8770"><code>#8770</code></a> add failing test for the "Pull assignment up" assist.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8781"><code>#8781</code></a> rewrite <strong>Replace impl Trait</strong> assist to use mutable syntax trees.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8782"><code>#8782</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8783"><code>#8783</code></a> improve the <code>make</code> API.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

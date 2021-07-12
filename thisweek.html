@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>rust-analyzer</title>
+  <meta name="description"
+    content="rust-analyzer: building a better Rust IDE">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <h2>This Week In rust-analyzer</h2>
+
+<ul class="post-list">
+    
+    <li class="post">
+        <div class="post-date">Jul 12, 2021</div>
+        <a class="post-link" href="/thisweek/2021/07/12/changelog-85.html">Changelog #85</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jul 5, 2021</div>
+        <a class="post-link" href="/thisweek/2021/07/05/changelog-84.html">Changelog #84</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jun 28, 2021</div>
+        <a class="post-link" href="/thisweek/2021/06/28/changelog-83.html">Changelog #83</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jun 21, 2021</div>
+        <a class="post-link" href="/thisweek/2021/06/21/changelog-82.html">Changelog #82</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jun 14, 2021</div>
+        <a class="post-link" href="/thisweek/2021/06/14/changelog-81.html">Changelog #81</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jun 7, 2021</div>
+        <a class="post-link" href="/thisweek/2021/06/07/changelog-80.html">Changelog #80</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">May 31, 2021</div>
+        <a class="post-link" href="/thisweek/2021/05/31/changelog-79.html">Changelog #79</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">May 24, 2021</div>
+        <a class="post-link" href="/thisweek/2021/05/24/changelog-78.html">Changelog #78</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">May 17, 2021</div>
+        <a class="post-link" href="/thisweek/2021/05/17/changelog-77.html">Changelog #77</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">May 10, 2021</div>
+        <a class="post-link" href="/thisweek/2021/05/10/changelog-76.html">Changelog #76</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">May 3, 2021</div>
+        <a class="post-link" href="/thisweek/2021/05/03/changelog-75.html">Changelog #75</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Apr 26, 2021</div>
+        <a class="post-link" href="/thisweek/2021/04/26/changelog-74.html">Changelog #74</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Apr 19, 2021</div>
+        <a class="post-link" href="/thisweek/2021/04/19/changelog-73.html">Changelog #73</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Apr 12, 2021</div>
+        <a class="post-link" href="/thisweek/2021/04/12/changelog-72.html">Changelog #72</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Apr 5, 2021</div>
+        <a class="post-link" href="/thisweek/2021/04/05/changelog-71.html">Changelog #71</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Mar 29, 2021</div>
+        <a class="post-link" href="/thisweek/2021/03/29/changelog-70.html">Changelog #70</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Mar 22, 2021</div>
+        <a class="post-link" href="/thisweek/2021/03/22/changelog-69.html">Changelog #69</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Mar 15, 2021</div>
+        <a class="post-link" href="/thisweek/2021/03/15/changelog-68.html">Changelog #68</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Mar 8, 2021</div>
+        <a class="post-link" href="/thisweek/2021/03/08/changelog-67.html">Changelog #67</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Mar 1, 2021</div>
+        <a class="post-link" href="/thisweek/2021/03/01/changelog-66.html">Changelog #66</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Feb 22, 2021</div>
+        <a class="post-link" href="/thisweek/2021/02/22/changelog-65.html">Changelog #65</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Feb 15, 2021</div>
+        <a class="post-link" href="/thisweek/2021/02/15/changelog-64.html">Changelog #64</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Feb 8, 2021</div>
+        <a class="post-link" href="/thisweek/2021/02/08/changelog-63.html">Changelog #63</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Feb 1, 2021</div>
+        <a class="post-link" href="/thisweek/2021/02/01/changelog-62.html">Changelog #62</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jan 25, 2021</div>
+        <a class="post-link" href="/thisweek/2021/01/25/changelog-61.html">Changelog #61</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jan 18, 2021</div>
+        <a class="post-link" href="/thisweek/2021/01/18/changelog-60.html">Changelog #60</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jan 11, 2021</div>
+        <a class="post-link" href="/thisweek/2021/01/11/changelog-59.html">Changelog #59</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jan 4, 2021</div>
+        <a class="post-link" href="/thisweek/2021/01/04/changelog-58.html">Changelog #58</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Dec 28, 2020</div>
+        <a class="post-link" href="/thisweek/2020/12/28/changelog-57.html">Changelog #57</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Dec 21, 2020</div>
+        <a class="post-link" href="/thisweek/2020/12/21/changelog-56.html">Changelog #56</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Dec 14, 2020</div>
+        <a class="post-link" href="/thisweek/2020/12/14/changelog-55.html">Changelog #55</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Dec 7, 2020</div>
+        <a class="post-link" href="/thisweek/2020/12/07/changelog-54.html">Changelog #54</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Nov 30, 2020</div>
+        <a class="post-link" href="/thisweek/2020/11/30/changelog-53.html">Changelog #53</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Nov 23, 2020</div>
+        <a class="post-link" href="/thisweek/2020/11/23/changelog-52.html">Changelog #52</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Nov 16, 2020</div>
+        <a class="post-link" href="/thisweek/2020/11/16/changelog-51.html">Changelog #51</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Nov 9, 2020</div>
+        <a class="post-link" href="/thisweek/2020/11/09/changelog-50.html">Changelog #50</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Nov 2, 2020</div>
+        <a class="post-link" href="/thisweek/2020/11/02/changelog-49.html">Changelog #49</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Oct 26, 2020</div>
+        <a class="post-link" href="/thisweek/2020/10/26/changelog-48.html">Changelog #48</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Oct 19, 2020</div>
+        <a class="post-link" href="/thisweek/2020/10/19/changelog-47.html">Changelog #47</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Oct 12, 2020</div>
+        <a class="post-link" href="/thisweek/2020/10/12/changelog-46.html">Changelog #46</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Oct 5, 2020</div>
+        <a class="post-link" href="/thisweek/2020/10/05/changelog-45.html">Changelog #45</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Sep 28, 2020</div>
+        <a class="post-link" href="/thisweek/2020/09/28/changelog-44.html">Changelog #44</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Sep 21, 2020</div>
+        <a class="post-link" href="/thisweek/2020/09/21/changelog-43.html">Changelog #43</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Sep 14, 2020</div>
+        <a class="post-link" href="/thisweek/2020/09/14/changelog-42.html">Changelog #42</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Sep 7, 2020</div>
+        <a class="post-link" href="/thisweek/2020/09/07/changelog-41.html">Changelog #41</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Aug 31, 2020</div>
+        <a class="post-link" href="/thisweek/2020/08/31/changelog-40.html">Changelog #40</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Aug 24, 2020</div>
+        <a class="post-link" href="/thisweek/2020/08/24/changelog-39.html">Changelog #39</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Aug 17, 2020</div>
+        <a class="post-link" href="/thisweek/2020/08/17/changelog-38.html">Changelog #38</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Aug 10, 2020</div>
+        <a class="post-link" href="/thisweek/2020/08/10/changelog-37.html">Changelog #37</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Aug 3, 2020</div>
+        <a class="post-link" href="/thisweek/2020/08/03/changelog-36.html">Changelog #36</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jul 27, 2020</div>
+        <a class="post-link" href="/thisweek/2020/07/27/changelog-35.html">Changelog #35</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jul 20, 2020</div>
+        <a class="post-link" href="/thisweek/2020/07/20/changelog-34.html">Changelog #34</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jul 13, 2020</div>
+        <a class="post-link" href="/thisweek/2020/07/13/changelog-33.html">Changelog #33</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jul 6, 2020</div>
+        <a class="post-link" href="/thisweek/2020/07/06/changelog-32.html">Changelog #32</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jun 29, 2020</div>
+        <a class="post-link" href="/thisweek/2020/06/29/changelog-31.html">Changelog #31</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jun 22, 2020</div>
+        <a class="post-link" href="/thisweek/2020/06/22/changelog-30.html">Changelog #30</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jun 15, 2020</div>
+        <a class="post-link" href="/thisweek/2020/06/15/changelog-29.html">Changelog #29</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jun 8, 2020</div>
+        <a class="post-link" href="/thisweek/2020/06/08/changelog-28.html">Changelog #28</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jun 1, 2020</div>
+        <a class="post-link" href="/thisweek/2020/06/01/changelog-27.html">Changelog #27</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">May 25, 2020</div>
+        <a class="post-link" href="/thisweek/2020/05/25/changelog-26.html">Changelog #26</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">May 18, 2020</div>
+        <a class="post-link" href="/thisweek/2020/05/18/changelog-25.html">Changelog #25</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">May 11, 2020</div>
+        <a class="post-link" href="/thisweek/2020/05/11/changelog-24.html">Changelog #24</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">May 4, 2020</div>
+        <a class="post-link" href="/thisweek/2020/05/04/changelog-23.html">Changelog #23</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Apr 27, 2020</div>
+        <a class="post-link" href="/thisweek/2020/04/27/changelog-22.html">Changelog #22</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Apr 20, 2020</div>
+        <a class="post-link" href="/thisweek/2020/04/20/changelog-21.html">Changelog #21</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Apr 13, 2020</div>
+        <a class="post-link" href="/thisweek/2020/04/13/changelog-20.html">Changelog #20</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Apr 6, 2020</div>
+        <a class="post-link" href="/thisweek/2020/04/06/changelog-19.html">Changelog #19</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Mar 30, 2020</div>
+        <a class="post-link" href="/thisweek/2020/03/30/changelog-18.html">Changelog #18</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Mar 23, 2020</div>
+        <a class="post-link" href="/thisweek/2020/03/23/changelog-17.html">Changelog #17</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Mar 16, 2020</div>
+        <a class="post-link" href="/thisweek/2020/03/16/changelog-16.html">Changelog #16</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Mar 9, 2020</div>
+        <a class="post-link" href="/thisweek/2020/03/09/changelog-15.html">Changelog #15</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Mar 2, 2020</div>
+        <a class="post-link" href="/thisweek/2020/03/02/changelog-14.html">Changelog #14</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Feb 24, 2020</div>
+        <a class="post-link" href="/thisweek/2020/02/24/changelog-13.html">Changelog #13</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Feb 17, 2020</div>
+        <a class="post-link" href="/thisweek/2020/02/17/changelog-12.html">Changelog #12</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Feb 10, 2020</div>
+        <a class="post-link" href="/thisweek/2020/02/10/changelog-11.html">Changelog #11</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Feb 3, 2020</div>
+        <a class="post-link" href="/thisweek/2020/02/03/changelog-10.html">Changelog #10</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jan 27, 2020</div>
+        <a class="post-link" href="/thisweek/2020/01/27/changelog-9.html">Changelog #9</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jan 20, 2020</div>
+        <a class="post-link" href="/thisweek/2020/01/20/changelog-8.html">Changelog #8</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jan 13, 2020</div>
+        <a class="post-link" href="/thisweek/2020/01/13/changelog-7.html">Changelog #7</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jan 6, 2020</div>
+        <a class="post-link" href="/thisweek/2020/01/06/changelog-6.html">Changelog #6</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Dec 30, 2019</div>
+        <a class="post-link" href="/thisweek/2019/12/30/changelog-5.html">Changelog #5</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Dec 23, 2019</div>
+        <a class="post-link" href="/thisweek/2019/12/23/changelog-4.html">Changelog #4</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Dec 16, 2019</div>
+        <a class="post-link" href="/thisweek/2019/12/16/changelog-3.html">Changelog #3</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Dec 9, 2019</div>
+        <a class="post-link" href="/thisweek/2019/12/09/changelog-2.html">Changelog #2</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Dec 4, 2019</div>
+        <a class="post-link" href="/thisweek/2019/12/04/changelog-1.html">Changelog #1</a>
+    </li>
+    
+    <li class="post">
+        <div class="post-date">Jul 24, 2019</div>
+        <a class="post-link" href="/thisweek/2019/07/24/changelog-0.html">Changelog #0</a>
+    </li>
+    
+</ul>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

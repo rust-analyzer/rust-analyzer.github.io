@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #31</title>
+  <meta name="description"
+    content="Commit: ca31b1dRelease: 2020-06-29">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2020/06/29/changelog-31.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #31</h1>
+<div class="post-meta sect1">
+  Jun 29, 2020
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/ca31b1d63ae91a69f1ce9c0b075403834ba19f38"><code>ca31b1d</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2020-06-29"><code>2020-06-29</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sponsors"><a class="anchor" href="#sponsors"></a>Sponsors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This week, we&#8217;d like to thank another long-time sponsor:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://www.parity.io/">Parity</a> is building tooling and infrastructure for the decentralised, trustless Web in Rust.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4990"><code>#4990</code></a> introduce an <code>ItemTree</code> layer to avoid reparsing files.
+This reduces the latency of "go to definition" in a simple benchmark on rust-analyzer by around 30%.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5017"><code>#5017</code></a> add custom cargo runners support. This adds an option to delegate actual cargo commands building to another extension.
+For example, to use a different manager like <a href="https://github.com/rust-embedded/cross">cross</a>.
+<a href="https://marketplace.visualstudio.com/items?itemName=vsrs.cross-rust-analyzer">cross-rust-analyzer</a> is an example of such extension.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5069"><code>#5069</code></a> <strong>Extract Variable</strong> understands field init shorthand</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/86007529-d2b03980-ba17-11ea-998f-0e44f659041f.gif" alt="86007529 d2b03980 ba17 11ea 998f 0e44f659041f">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4999"><code>#4999</code></a> allow matching of whole macro calls in structural search replace.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5007"><code>#5007</code></a> allow matching within macro calls in structural search replace.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4997"><code>#4997</code></a> document GNOME Builder (Nightly) support for rust-analyzer.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4940"><code>#4940</code></a> set <code>injected</code> modifier for code in doctests.
+Theme authors can use it to dim injected code.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5047"><code>#5047</code></a> matching brace works for | in lambdas</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/86006971-122a5600-ba17-11ea-8be7-f60b0a97eead.gif" alt="86006971 122a5600 ba17 11ea 8be7 f60b0a97eead">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5066"><code>#5066</code></a> infer type for slice wildcard patterns.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4587"><code>#4587</code></a> missing unsafe diagnostics.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5100"><code>#5100</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5102"><code>#5102</code></a>: Add support for <code>include_str</code> and <code>include_bytes</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4900"><code>#4900</code></a> fix name resolution for <code>Self</code> in enums.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4988"><code>#4988</code></a> don&#8217;t offer to add missing fields of unknown types.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4992"><code>#4992</code></a> never disable error logging on the frontend.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5002"><code>#5002</code></a> fix underflow panic when doctests are at top of file.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5004"><code>#5004</code></a> fix panic in split/merge import assists.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5023"><code>#5023</code></a> fix string literal inference in match.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5015"><code>#5015</code></a> account for updated module ids when determining whether a resolution is changed.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5033"><code>#5033</code></a> order of glob imports does not affect import shadowing.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4976"><code>#4976</code></a> new VFS.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5068"><code>#5068</code></a> prepare for dynamic project reloading.</p>
+</li>
+<li>
+<p>Rewrite main loop in rust-analyzer.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4982"><code>#4982</code></a> upgrade chalk. This, and other type system improvements, bring the proportion of of unknown types in rust-analzyer to less than 1%.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4983"><code>#4983</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5010"><code>#5010</code></a> add <code>paths::RelPath[Buf]</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5013"><code>#5013</code></a> uniformly trim test data.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5014"><code>#5014</code></a> centralize test data parsing.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5029"><code>#5029</code></a> use <code>paths::AbsPath</code> in more places.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5034"><code>#5034</code></a> cleanup project.json deserialization.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5048"><code>#5048</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5056"><code>#5056</code></a> Canonicalize actor API.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

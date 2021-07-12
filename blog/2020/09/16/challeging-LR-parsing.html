@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Challenging LR Parsing</title>
+  <meta name="description"
+    content="This post is a direct response to Which Parsing Approach?.If you haven&#8217;t read that article, do it now&#8201;&#8212;&#8201;it is the best short survey o...">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//blog/2020/09/16/challeging-LR-parsing.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Challenging LR Parsing</h1>
+<div class="post-meta sect1">
+  @matklad, Sep 16, 2020
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This post is a direct response to <a href="https://tratt.net/laurie/blog/entries/which_parsing_approach.html">Which Parsing Approach?</a>.
+If you haven&#8217;t read that article, do it now&#8201;&#8212;&#8201;it is the best short survey of the lay of the land of modern parsing techniques.
+I agree with conclusion&#8201;&#8212;&#8201;LR parsing is the way to go if you want to do parsing &#8220;properly&#8221;.
+I reasoned the same a couple of years ago: <a href="https://matklad.github.io/2018/06/06/modern-parser-generator.html#parsing-techniques">Modern Parser Generator</a>.</p>
+</div>
+<div class="paragraph">
+<p>However, and here&#8217;s the catch, rust-analyzer uses a hand-written recursive descent / <a href="https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html">Pratt parser</a>.
+One of the reasons for that is that I find existing LR parser generators inadequate for production grade compiler/IDE.
+In this article, I want to list specific challenges for the authors of LR parser generators.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="error-resilience"><a class="anchor" href="#error-resilience"></a>Error Resilience</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Consider this incomplete snippet of Rust code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="k">fn</span> <span class="nf">foo</span><span class="p">(</span>
+
+<span class="k">struct</span> <span class="n">S</span> <span class="p">{</span>
+   <span class="n">f</span><span class="p">:</span> <span class="nb">u32</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I want to see an LR parser which produces the following syntax tree
+(from <a href="https://rust-analyzer.github.io/manual.html#show-syntax-tree"><strong>Show Syntax Tree</strong></a> rust-analyzer command, with whitespace nodes elided for clarity):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="code"><pre>SOURCE_FILE@0..32
+  FN@0..7
+    FN_KW@0..2 "fn"
+    NAME@3..6
+      IDENT@3..6 "foo"
+    PARAM_LIST@6..7
+      L_PAREN@6..7 "("
+  STRUCT@9..31
+    STRUCT_KW@9..15 "struct"
+    NAME@16..17
+      IDENT@16..17 "S"
+    RECORD_FIELD_LIST@18..31
+      L_CURLY@18..19 "{"
+      RECORD_FIELD@23..29
+        NAME@23..24
+          IDENT@23..24 "f"
+        COLON@24..25 ":"
+        PATH_TYPE@26..29
+          PATH@26..29
+            PATH_SEGMENT@26..29
+              NAME_REF@26..29
+                IDENT@26..29 "u32"
+      R_CURLY@30..31 "}"
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The most error-resilient LR-style parser I know, <a href="https://github.com/tree-sitter/tree-sitter">tree sitter</a>, produces this instead (tree sitter is GLR, this is <strong>not</strong> the style of parsing advocated by the article):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+</pre></td><td class="code"><pre>source_file [0, 0] - [5, 0])
+  ERROR [0, 0] - [4, 1])
+    identifier [0, 3] - [0, 6])
+    struct_pattern [2, 0] - [4, 1])
+      type: type_identifier [2, 0] - [2, 6])
+      ERROR [2, 7] - [2, 8])
+        identifier [2, 7] - [2, 8])
+      field_pattern [3, 3] - [3, 9])
+        name: field_identifier [3, 3] - [3, 4])
+        pattern: identifier [3, 6] - [3, 9])
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note two things about the rust-analyzer&#8217;s tree:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>There&#8217;s an (incomplete) &#8220;function&#8221; node for <code>fn foo(</code>.
+Unclosed parenthesis doesn&#8217;t preclude the parser from recognizing parameter list.</p>
+</li>
+<li>
+<p>Incomplete function does not prevent struct definition from being recognized.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These are important for IDE support.</p>
+</div>
+<div class="paragraph">
+<p>For example, suppose that the cursor is just after <code>(</code>.
+If we have rust-analyzer&#8217;s syntax tree, than we can figure out that we are completing a function parameter.
+If we are to get fancy we might find the calls to the (not yet fully written) <code>foo</code>, run type inference to figure out the type of the first argument, and than suggest parameter name &amp; type based on that (not currently implemented&#8201;&#8212;&#8201;there&#8217;s soooooo much yet to be done in rust-analyzer).
+And correctly recognizing <code>struct S</code> is important to not break type-inference in the code which uses <code>S</code>.</p>
+</div>
+<div class="paragraph">
+<p>There&#8217;s a lot of literature about error recovery for LR parsers, how come academics haven&#8217;t figured this out already?
+I have a bold claim to make: error-recovery research in academia is focusing on a problem irrelevant for IDEs.
+Specifically, the research is focused on finding &#8220;minimal cost repair sequence&#8221;:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a set of edit operations is defined (skip, change or insert token),</p>
+</li>
+<li>
+<p>a &#8220;cost&#8221; metric is defined to distinguish big and small edits,</p>
+</li>
+<li>
+<p>an algorithm is devised to find the smallest edit which makes the current text parse.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This is a very academia-friendly problem&#8201;&#8212;&#8201;there&#8217;s a precise mathematical formulation, there&#8217;s an obvious brute force solution (try all edits), and there&#8217;s ample space for finding polynomial algorithm.</p>
+</div>
+<div class="paragraph">
+<p>But IDEs don&#8217;t care about actually guessing &amp; repairing the text!
+They just need to see as much of (possibly incomplete) syntax nodes in the existing text as possible.
+When rust-analyzer&#8217;s parser produces</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre>  PARAM_LIST@6..7
+    L_PAREN@6..7 "("
+STRUCT@9..31
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>it doesn&#8217;t think &#8220;Oh, I need to insert <code>)</code> here to complete the list of parameters&#8221;.
+Rather, it sees <code>struct</code> and thinks &#8220;Oh wow, didn&#8217;t expect that! I guess I&#8217;ll just stop parsing parameter list right here&#8221;.</p>
+</div>
+<div class="paragraph">
+<p>So, here&#8217;s</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="title">First Challenge</div>
+Design error <em>resilient</em> (and not just error <em>recovering</em>) LR parsing algorithm.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Note that error resilience is a topic orthogonal to error reporting.
+I haven&#8217;t payed much attention to error reporting (in my experience, synchronous reporting of syntax errors in the editor compensates for bad syntax error messages), but it might be the case that MCRS are a good approach to there.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="expressions-grammar"><a class="anchor" href="#expressions-grammar"></a>Expressions Grammar</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Next challenge concerns expressing operator precedence and associativity.
+Today, the standard solution is to write the grammar like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+</pre></td><td class="code"><pre>%start Expr
+%%
+Expr: Expr "-" Term
+    | Term
+    ;
+Term: Term "*" Factor
+    | Factor
+    ;
+Factor: "INT"
+    ;
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>I argue that this is a nice solution for the machine, but is a terrible UX for a human.
+Rust has 13 levels of precedence&#8201;&#8212;&#8201;no way I can come up with 13 different names like <code>Term</code> and <code>Factor</code>.
+A much more readable formulation here is <a href="https://doc.rust-lang.org/reference/expressions.html#expression-precedence">precedence table</a>.
+Interestingly, this is the case where hand-written <a href="https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html">Pratt parser</a> is more declarative:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+</pre></td><td class="code"><pre><span class="k">fn</span> <span class="nf">infix_binding_power</span><span class="p">(</span><span class="n">op</span><span class="p">:</span> <span class="nb">char</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Option</span><span class="o">&lt;</span><span class="p">(</span><span class="nb">u8</span><span class="p">,</span> <span class="nb">u8</span><span class="p">)</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">res</span> <span class="o">=</span> <span class="k">match</span> <span class="n">op</span> <span class="p">{</span>
+        <span class="sc">'='</span> <span class="k">=&gt;</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="sc">'?'</span> <span class="k">=&gt;</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="sc">'+'</span> <span class="p">|</span> <span class="sc">'-'</span> <span class="k">=&gt;</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+        <span class="sc">'*'</span> <span class="p">|</span> <span class="sc">'/'</span> <span class="k">=&gt;</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+        <span class="sc">'.'</span> <span class="k">=&gt;</span> <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span>
+        <span class="mi">_</span> <span class="k">=&gt;</span> <span class="k">return</span> <span class="nb">None</span><span class="p">,</span>
+    <span class="p">};</span>
+    <span class="nf">Some</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="title">Second Challenge</div>
+Incorporate precedence and associativity tables into the surface syntax of the grammar.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ide-support"><a class="anchor" href="#ide-support"></a>IDE Support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Finally, please provide decent IDE support ^^
+Here are the features I&#8217;d consider simple and essential:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>precise <a href="https://github.com/microsoft/vscode-languageserver-node/blob/60a5a7825e6f54f57917091f394fd8db7d1724bc/protocol/src/common/protocol.semanticTokens.ts">syntax highlighting</a> (references colored to the same color as the corresponding declaration),</p>
+</li>
+<li>
+<p><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-3-16/#textDocument_documentSymbol">outline</a> (fuzzy search by production names),</p>
+</li>
+<li>
+<p><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-3-16/#textDocument_definition">go to definition</a>,</p>
+</li>
+<li>
+<p><a href="https://microsoft.github.io/language-server-protocol/specifications/specification-3-16/#textDocument_completion">completion</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A somewhat more complex, but also crucial feature is live preview.
+It should be possible to edit the grammar or the sample text, and <em>immediately</em> see the resulting parse tree.
+Like this: <a href="https://www.youtube.com/watch?v=gb1MJnTcvds&amp;feature=youtu.be" class="bare">https://www.youtube.com/watch?v=gb1MJnTcvds&amp;feature=youtu.be</a> (but, of course, the update should be instant).
+For UX, I suggest using doctest syntax:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre>/// fn foo() { }
+Fn = 'fn' Name ParamList Block
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Today, it takes only a day to implement a basic LSP server and get all the basic features working in most popular editors.
+Implementing live-preview would be more involved as there&#8217;s no existing LSP request for this.
+But writing a custom extension isn&#8217;t hard either, so add another day for live preview.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="title">Third Challenge</div>
+Implement LSP server which provides basic IDE features, as well as live preview.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="challenge-responses"><a class="anchor" href="#challenge-responses"></a>Challenge Responses</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Folks fom <a href="https://galois.com/">Galois</a> develop a classy-named <a href="https://github.com/GaloisInc/daedalus">DaeDaLus</a>&#8201;&#8212;&#8201;a flexible data description language for generating parsers with data dependencies.
+DaeDaLus makes an impressive attempt at solving the second challenge.
+The language is powerful enough to just
+<a href="https://github.com/GaloisInc/daedalus/blob/fe088fefc553e37974b47345a1da4b49a10da7f7/bin-exp/pratt-bin-expr.ddl#L53-L69">directly encode</a>
+Pratt-style precedence table.
+Even a
+<a href="https://github.com/GaloisInc/daedalus/blob/fe088fefc553e37974b47345a1da4b49a10da7f7/bin-exp/left-rec-bin-expr.ddl#L62-L73">more declarative</a>
+encoding might be possible, although it doesn&#8217;t fully work at the time of writing.</p>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

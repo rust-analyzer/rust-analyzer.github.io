@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #14</title>
+  <meta name="description"
+    content="Commit: 2c8f136Release: 2020-03-02">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2020/03/02/changelog-14.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #14</h1>
+<div class="post-meta sect1">
+  Mar 2, 2020
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/2c8f136b162e795a32e7dff2d0456c323377575d"><code>2c8f136</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2020-03-02"><code>2020-03-02</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3159"><code>#3159</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/3321"><code>#3321</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/3322"><code>#3322</code></a> switch syntax highlighting implementation to use the new proposed semantic token LSP/VS Code API.To try this out:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>install vscode plugin from source (using <code>cargo xtask install --client-code</code>)</p>
+</li>
+<li>
+<p>set <code>"rust-analyzer.highlighting.semanticTokens": true,</code> in settings,</p>
+</li>
+<li>
+<p>install the recent VS Code Insiders</p>
+</li>
+<li>
+<p>run <code>code</code> as <code>code-insiders --enable-proposed-api matklad.rust-analyzer</code> (handy <a href="https://github.com/matklad/config/blob/0864beea2f19b9130ac1349c74a2b255df2fb0e8/bin/code">bash wrapper</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3362"><code>#3362</code></a> remove kbd:[ctrl+r] default keybinding for running tests &amp; binaries, to avoid conflict with a build-in keybinding.
+You might want to assign shortcut for this action, it is a productivity booster!</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/75686456-93a5ed80-5c9c-11ea-83b3-05adecfd07c2.gif" alt="75686456 93a5ed80 5c9c 11ea 83b3 05adecfd07c2">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3349"><code>#3349</code></a> rust-analyzer now highlights code in rust-analyzer&#8217;s own tests as rust:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/75685194-77a14c80-5c9a-11ea-86b0-5ac223451b10.png" alt="75685194 77a14c80 5c9a 11ea 86b0 5ac223451b10">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3294"><code>#3294</code></a> when joining lines, unwrap single-statement blocks if possible.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3285"><code>#3285</code></a> structural search replace now correctly ignores whitespace differences.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3357"><code>#3357</code></a> <strong>change visibility</strong> assist now works with consts:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/75685982-c56a8480-5c9b-11ea-84ca-a9cf07bfe0ce.gif" alt="75685982 c56a8480 5c9b 11ea 84ca a9cf07bfe0ce">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3355"><code>#3355</code></a> add completion &amp; docs for <code>featureFlag</code> configuration in VS Code extension.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3309"><code>#3309</code></a> look for <code>Cargo.toml</code> not only in the root and parent directory, but also among one-level child directories.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3387"><code>#3387</code></a> type inference for slice patterns.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3397"><code>#3397</code></a> add minimal metatdata to VS Code extension.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3314"><code>#3314</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/3325"><code>#3325</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/3350"><code>#3350</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/3366"><code>#3366</code></a> fix a lot of range-mapping bugs for recursive macro invocations.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3308"><code>#3308</code></a> fix conflict for <code>Enter</code> key with VS Code vim extension.
+If rust-analyzer&#8217;s custom on enter behavior causes you trouble, you can disable it by removing the corresponding shortcut from the settings.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3364"><code>#3364</code></a> correctly handle unions in IDEs.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3367"><code>#3367</code></a> finally fix highlighting and name goto definition for constants in patterns, like <code>None</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3376"><code>#3376</code></a> fix a common false-positive type mismatch.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3380"><code>#3380</code></a> use unsizing in method resolution &amp; autoderef for indexing.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3384"><code>#3384</code></a> fix name resolution for paths with repeated <code>super</code> segments.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3222"><code>#3222</code></a> redo the interface between "compiler" and "IDE".
+IDE no longer needs to explicitly track the file a particular bit of syntax tree originated from.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3296"><code>#3296</code></a> bump TypeScript version.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3299"><code>#3299</code></a> more type safe way to deal with custom LSP extensions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3298"><code>#3298</code></a> update chalk.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3316"><code>#3316</code></a> remove code duplication in assists tests.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3324"><code>#3324</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/3335"><code>#3335</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/3344"><code>#3344</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/3346"><code>#3346</code></a> refactor syntax highlighting infrastructure to be more future proof and robust.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3329"><code>#3329</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/3330"><code>#3330</code></a> run <code>cargo audit</code> and <code>npm audit</code> on CI.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3337"><code>#3337</code></a> remove unused dependencies.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3340"><code>#3340</code></a> gate CI on eslint.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3351"><code>#3351</code></a> better API for working with string literals.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3360"><code>#3360</code></a> fix parsing of attributes in let statements.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3370"><code>#3370</code></a> extract code for adding a new <code>use</code> item to a separate module.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3374"><code>#3374</code></a> cleanup API for constructing syntax trees for paths.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3375"><code>#3375</code></a> cleanup API for editing syntax trees.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3377"><code>#3377</code></a> simplify API for getting semantic definitions from syntax trees.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #34</title>
+  <meta name="description"
+    content="Commit: c9c518eRelease: 2020-07-20">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2020/07/20/changelog-34.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #34</h1>
+<div class="post-meta sect1">
+  Jul 20, 2020
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/c9c518e5e9761bf35d466c47c57c3a1358b56b3c"><code>c9c518e</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2020-07-20"><code>2020-07-20</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sponsors"><a class="anchor" href="#sponsors"></a>Sponsors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Become a sponsor:</strong> <a href="https://opencollective.com/rust-analyzer/">opencollective.com/rust-analyzer</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5378"><code>#5378</code></a> support vararg functions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5354"><code>#5354</code></a> add Cargo feature for enabling mimalloc allocator.
+Call for participation: pure Rust version of mimalloc would be really handy as cross-compilable fast allocator.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5345"><code>#5345</code></a> emit mutable modifier for <code>self</code> in semantic highlighting.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5348"><code>#5348</code></a> highlight punctuation using <code>"operator"</code> tag in semantic highlighting.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5350"><code>#5350</code></a> return only requested assists to the editor.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5401"><code>#5401</code></a> leverage chalk for type checking closures.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5418"><code>#5418</code></a> continue non-doc comments if there&#8217;s a trailing whitespace:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/87931694-7d050500-ca8a-11ea-8b3f-c958663795e6.gif" alt="87931694 7d050500 ca8a 11ea 8b3f c958663795e6">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5327"><code>#5327</code></a> mark fixes from check on save as preferred.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5430"><code>#5430</code></a> <strong>Add turbofish</strong> assist works after <code>()</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/87852942-8f563600-c906-11ea-808b-63e8bf3fc228.gif" alt="87852942 8f563600 c906 11ea 808b 63e8bf3fc228">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4676"><code>#4676</code></a> upgrade procmacro ABI for the latest stable.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5352"><code>#5352</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5361"><code>#5361</code></a> fix build on powerpc.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5367"><code>#5367</code></a> remove associated type bounds in <strong>Add Missing Members</strong> assist.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5370"><code>#5370</code></a> don&#8217;t insert duplicate <code>()</code> when completing tuple struct pattern.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5377"><code>#5377</code></a> fix goto definition for multi-segment macro paths.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5379"><code>#5379</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5396"><code>#5396</code></a> guard against infinite macro expansion.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5381"><code>#5381</code></a> fix macro handling in type position.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5385"><code>#5385</code></a> fix off by one error when determining the active param.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5390"><code>#5390</code></a> fix progress registration error for check on save.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5394"><code>#5394</code></a> fix freeze when processing <a href="https://github.com/retep998/winapi-rs">a certain crate</a> with a lot of glob imports.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5427"><code>#5427</code></a> various fixes for <strong>Add/Remove #</strong> assists.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5423"><code>#5423</code></a> Correctly resolve associated types in path bindings.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5357"><code>#5357</code></a> use relaxed atomic ordering for single location test marks.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5358"><code>#5358</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5373"><code>#5373</code></a> cleanup hir diagnostics API.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5355"><code>#5355</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5376"><code>#5376</code></a> implement license check.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5387"><code>#5387</code></a> add <code>--memory-usage</code> to analysis-bench.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5405"><code>#5405</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5415"><code>#5415</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5417"><code>#5417</code></a> refactor support for callables, so that IDE features that work for functions, work for lambdas as well.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5413"><code>#5413</code></a> rewrite call info to use semantic information.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5422"><code>#5422</code></a> use <code>expect!</code> for snapshot testing in <code>ra_hir_def</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5433"><code>#5433</code></a> simplify file exclusion logic in VFS.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

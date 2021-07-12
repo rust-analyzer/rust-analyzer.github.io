@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Cost of rust-analyzer</title>
+  <meta name="description"
+    content="In this post, we&#8217;ll talk about financial side of the rust-analyzer project.The goal is to find out how much rust-analyzer costs now, formulate financia...">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//blog/2019/10/16/finance.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Cost of rust-analyzer</h1>
+<div class="post-meta sect1">
+  @matklad, Oct 16, 2019
+</div>
+<div class="paragraph">
+<p>In this post, we&#8217;ll talk about financial side of the rust-analyzer project.
+The goal is to find out how much rust-analyzer costs now, formulate financial goals for speeding up the development and document the <a href="https://opencollective.com/rust-analyzer/">Open Collective</a> expenses policy.</p>
+</div>
+<div class="paragraph">
+<p>Note that "rust-analyzer" here refers to the umbrella project of "making great Rust IDE from first-principles", and not to the specific rust-analyzer binary.
+The long term plan is to merge all of rustc, rls and rust-analyzer into a single tool, and there are already some first steps in this direction.</p>
+</div>
+<div class="paragraph">
+<p>At the moment, the de-facto project lead is me, <a href="https://github.com/matklad">@matklad</a>.
+I do both engineering tasks (code, design, mentoring) as well as project-management tasks (like writing this post).
+I am employed by Ferrous Systems, and dedicate half of my time to rust-analyzer.
+No one else at Ferrous is involved in rust-analyzer on a daily basis, but I do occasionally ask other folks for help in non-coding areas.
+Most notably, processing of open-collective donations needs help from a professional accountant.
+I would estimate this additional load on Ferrous as roughly two work days per month.</p>
+</div>
+<div class="paragraph">
+<p>If we take 4500 EUR as a base monthly salary (this is roughly the Blue Card level salary for Berlin), the cost of rust-analyzer for Ferrous Systems would be</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre>4500 * 0.5            my work
++ 4500 * (2 / 20)     work of other folks at Ferrous
+= 2700 EUR / Month
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If I were to work full time, the cost would be</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+</pre></td><td class="code"><pre>4500 + 4500 * (2 / 20) = 4950 EUR / Month
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There is a large number of  absolutely awesome contributors to rust-analyzer, not employed by Ferrous Systems!
+It would be fair to reward their work as well.
+It&#8217;s unclear exactly how rewarding should work like, but I would like to allocate at least 20% of the budget for payouts to people not affiliated with Ferrous Systems or Mozilla.
+The current scheme for payouts is as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>contributors who make recurring, significant changes, influence design and co-maintain subsystems are eligible for payouts</p>
+</li>
+<li>
+<p>the exact conditions are discussed on the case by case bases</p>
+</li>
+<li>
+<p>the decision requires consensus from <a href="https://github.com/matklad">@matklad</a>, <a href="https://github.com/flodiebold">@flodiebold</a>, <a href="https://github.com/skade">@skade</a> and the contributor</p>
+</li>
+<li>
+<p>the final arrangement is made public</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The biggest weakness of this scheme is that the decision quorum is not well-balanced.
+We hope to overcome this issue by being transparent and tweaking the descision process if it doesn&#8217;t work well.</p>
+</div>
+<div class="paragraph">
+<p>We also need to pay taxes from the money we receive via Open Collective.
+The VAT is 19%, but donations from EU-based companies are exempt from VAT.
+Additionally, total transaction processing fee (Open Collective + Stripe) is 8%;</p>
+</div>
+<div class="paragraph">
+<p>So, the final formula for the yearly budget looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+</pre></td><td class="code"><pre>(cost * 10/8 payouts * 119/100 VAT * 108/100 transaction fee) * 12
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Pluggin the costs from above, we get the following budget targets:</p>
+</div>
+<div class="paragraph">
+<p><strong>52050 EUR / Year</strong>: I dedicate half of my time for rust-analyzer, 20% of the budget is spend funding people outside of Ferrous Systems.</p>
+</div>
+<div class="paragraph">
+<p><strong>95245 EUR / Year</strong>: I work on rust-analyzer full-time (yay!), 20% of the budget is spend funding people outside of Ferrous Systems.</p>
+</div>
+<div class="paragraph">
+<p>We are currently at 22280 EUR / Year, which is a good start (and roughly pays for one quarter of my time)! The work on rust-analyzer up to this point was sponsored by Mozilla and Ferrous Systems.</p>
+</div>
+<div class="paragraph">
+<p>The road map for the next year is not ready yet.
+It will be published by the end of October.
+The preliminary plan is to focus on library-ification of two areas of the compiler: type system and parsing.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://opencollective.com/rust-analyzer/">Support rust-analyzer on Open Collective</a>.
+If you are finding rust-analyzer useful in your work, consider talking to management about sponsoring rust-analyzer.
+We are specifically seeking sponsorship from companies that use Rust!</p>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

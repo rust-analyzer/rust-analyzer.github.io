@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Find Usages</title>
+  <meta name="description"
+    content="Last month, rust-analyzer gained an exciting new feature: find usages. It was implemented by @viorina in #1892.">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//blog/2019/11/13/find-usages.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Find Usages</h1>
+<div class="post-meta sect1">
+  @matklad, Nov 13, 2019
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Last month, rust-analyzer gained an exciting new feature: find usages. It was implemented by <a href="https://github.com/viorina">@viorina</a> in <a href="https://github.com/rust-analyzer/rust-analyzer/pull/1892">#1892</a>.</p>
+</div>
+<div class="paragraph">
+<p>This post describes how the feature works under the hood.
+It&#8217;s an excellent case study to compare approaches of traditional compilers with IDE-oriented compilers (shortened to IDE from now on).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="definitions-and-usages"><a class="anchor" href="#definitions-and-usages"></a>Definitions and Usages</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s start with a simple example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+</pre></td><td class="code"><pre><span class="k">fn</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">92</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">62</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="n">condition</span> <span class="p">{</span>
+        <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Suppose that a user invoked <strong>find usages</strong> (also known as <strong>reference search</strong>) on <code>x</code>.
+An IDE should highlight <code>x</code> in <code>x + 2</code> as a usage.</p>
+</div>
+<div class="paragraph">
+<p>But lets start with a simpler problem: <strong>goto definition</strong> (which is the reverse of <strong>find usages</strong>).
+How does a compiler or an IDE understands that <code>x</code> in <code>x + 2</code> refers to <code>let x = 92;</code>?</p>
+</div>
+<div class="paragraph">
+<p>Terminology Note: we will call the <code>x</code> in <code>let x = 92</code> a <strong>definition</strong>, and the <code>x</code> in <code>x + 2</code> a <strong>reference</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Note: the following presentation is oversimplified and is not based directly on any existing compiler or IDE.
+Consider it a text-book illustration, and not a fossil specimen.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="compilers-approach"><a class="anchor" href="#compilers-approach"></a>Compiler&#8217;s Approach</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A typical compiler works by building a symbol table.
+It does a depth-first traversal of the syntax tree of a program, maintaining a hash-map of definitions.
+For the above example, the compiler does the following steps, in order:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create an empty map.</p>
+</li>
+<li>
+<p>Visit <code>let x = 92</code>. Records this definition in the map under the <code>"x"</code> key.</p>
+</li>
+<li>
+<p>Visit <code>let y = 62</code>. Records this definition in the map under the <code>"y"</code> key.</p>
+</li>
+<li>
+<p>Visit <code>condition</code>.</p>
+</li>
+<li>
+<p>Visit "then" branch of the <code>if</code> expression. Lookup <code>"y"</code> in the map and record association between a reference and a definition.</p>
+</li>
+<li>
+<p>Visit "else" branch of the <code>if</code> expression. Lookup <code>"x"</code> in the map and record association between a reference and a definition.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>After the end of the traversal, the compiler knows, for each reference, what definition this reference points to.
+If a reference is unresolved, the compiler emits an error.</p>
+</div>
+<div class="paragraph">
+<p>We may say that a compiler processes a program <strong>top-down</strong>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ide-approach"><a class="anchor" href="#ide-approach"></a>IDE Approach</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To figure out where the <code>x</code> in <code>x + 2</code> points to, a typical IDE does something different.
+Instead of starting from the root of the tree, it starts from the usage, and proceeds upwards.</p>
+</div>
+<div class="paragraph">
+<p>So, the IDE would do the following:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Start at <code>x + 2</code>.</p>
+</li>
+<li>
+<p>Look at the parent "else" branch, notice that there are no definitions there.</p>
+</li>
+<li>
+<p>Look at the parent "if" expression.</p>
+</li>
+<li>
+<p>Look at the parent block, notice that it has <code>x</code> defined, return this definition as an answer.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The crucial point here is that IDE skips "then" branch completely.
+It doesn&#8217;t look like a big deal with this small branch which contains a single expression only.
+However, the real world programs are much more complicated, and an IDE can skip quite a lot of code by only climbing the tree up.</p>
+</div>
+<div class="paragraph">
+<p>This is the <strong>bottom-up</strong> approach.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="which-way-is-better"><a class="anchor" href="#which-way-is-better"></a>Which Way is Better?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It depends!
+Let&#8217;s do a quick estimation of work required to find, for each reference, a definition it points to.</p>
+</div>
+<div class="paragraph">
+<p>The compiler&#8217;s case is easy: we just traverse a program once, doing hashmap operations along the way.
+That would be <code>O(program_size)</code>.</p>
+</div>
+<div class="paragraph">
+<p>The IDE&#8217;s case is more tricky: we still need to traverse a program to find all references.
+Then, for each reference, we need to launch the "traverse tree upwards" procedure.
+Which gives us <code>O(program_size + n_references * program_depth)</code>.
+This is clearly worse!</p>
+</div>
+<div class="paragraph">
+<p>But let&#8217;s now look at the time we need to resolve one specific reference.
+A compiler still has to construct the symbol table, so it&#8217;s still <code>O(program_size)</code>.
+An IDE, however, can launch only a single upward traversal, and that would be only <code>O(program_depth)</code>!</p>
+</div>
+<div class="paragraph">
+<p>These observations are exactly the reason why compilers prefer the first approach, while IDEs favor the second one.
+A compiler has to check and compile all the code anyway, so it&#8217;s important to do all the work as efficiently as possible.
+For IDEs however, the main trick is to ignore as much code as feasible.
+An IDE needs to know only about usages under one specific reference under the cursor in the currently opened file.
+It doesn&#8217;t care what is the definition of a <code>spam</code> variable used in the <code>frobnicate</code> function somewhere in the guts of the standard library.</p>
+</div>
+<div class="paragraph">
+<p>More generally, an IDE would like
+- to know everything about a small droplet of code that is currently on the screen and
+- to know nothing about the vast ocean of code that is off-screen.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="find-usages"><a class="anchor" href="#find-usages"></a>Find Usages</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s get back to the original problem, find usages.</p>
+</div>
+<div class="paragraph">
+<p>If a compiler has already constructed a symbol table, the solution is trivial: just enumerate all the usages.
+It might need a little bit of extra bookkeeping (storing the list of usages in the symbol table), but basically this is just "print the answer we already have".</p>
+</div>
+<div class="paragraph">
+<p>For an IDE, something else is required.
+The trivial solution of doing a bottom-up traversal from every reference is worse than just launching  the compiler from scratch.</p>
+</div>
+<div class="paragraph">
+<p>Instead, IDEs do a cute trick, which can be called a hack even!
+IntelliJ, Type Script, and, since last month, rust-analyzer work like this.</p>
+</div>
+<div class="paragraph">
+<p>First thing an IDE does is a <strong>text</strong> search across all files, which finds the set of potential matches.
+As text search is much simpler than code analysis, this phase finishes relatively quickly.
+Then the IDE filters out false positives, by doing bottom-up traversal from candidate matches.</p>
+</div>
+<div class="paragraph">
+<p>The text-based pre filtering again allows the IDE to skip over most of the code, and complete find-usages in less time than it would the compiler to build a symbol table.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="incrementality-vs-laziness"><a class="anchor" href="#incrementality-vs-laziness"></a>Incrementality vs Laziness</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Can we make the top-down approach as effective as bottom-up (and maybe even more so), by just making the calculation of symbol table incremental?
+The idea is to maintain a data structure that connects references and definitions and, when a user changes a piece of code, apply the diff to the data structure, instead of re-computing it from scratch.</p>
+</div>
+<div class="paragraph">
+<p>The fundamental issue with this approach is that it solves the problem an IDE doesn&#8217;t have in the first place.
+From that symbol data structure, only a tiny part is interesting for an IDE at any given moment of time.
+Most of the code is private implementation details of dependencies, and they are completely irrelevant for IDE tasks, unless a user invokes "go to definition" on a symbol from library and actively studies these details.</p>
+</div>
+<div class="paragraph">
+<p>On the other hand, building and updating such data structure takes time.
+Specifically, because the data is intricate and depends on the language semantics, small changes to the source code (change of a module name, for example) might necessitate big rearrangement of computed result.</p>
+</div>
+<div class="paragraph">
+<p>In general, laziness (ability to ignore most of the code) and incrementality (ability to quickly update derived data based on source changes) are orthogonal features.
+First and foremost, an IDE requires laziness, although incrementality can be used as well to speed some things up.</p>
+</div>
+<div class="paragraph">
+<p>In particular, it is possible to make the text-based phase of reference search incremental.
+An IDE can maintain a trigram index: for each three-byte sequence, a list of files and positions where this sequence occurs.
+Unlike symbol tables, such index is easy to maintain, as any change in a file can only affect trigrams from this file.
+The index can then be used to speedup text search.
+The result is the following <strong>find usages</strong> funnel:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>First, an IDE finds all positions where identifier&#8217;s  trigrams match,</p>
+</li>
+<li>
+<p>Then, the IDE checks if a trigram match is in fact a full identifier match,</p>
+</li>
+<li>
+<p>Finally, IDE uses semantic analysis to prune away remaining false-positives.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This is optimization is not implemented in rust-analyzer yet.
+It definitely is planned, but not for the immediate future.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="tricks"><a class="anchor" href="#tricks"></a>Tricks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s look at a couple of additional tricks an IDE can employ.</p>
+</div>
+<div class="paragraph">
+<p>First, the IDE can add yet another step to the funnel: pruning the set of files worth searching.
+These restrictions can originate from the language semantics: it doesn&#8217;t make sense to look for <code>pub(crate)</code> declaration outside of the current crate or for <code>pub</code> declaration among crate dependencies.
+They also can originate from the user: it&#8217;s often convenient to exclude tests from search results, for example.</p>
+</div>
+<div class="paragraph">
+<p>The second trick is about implementing warnings for unused declarations effectively.
+This is a case where a top-down approach is generally better, as an IDE needs to process every declaration, and that would be slow with top-down approach.
+However, with a trigram index the IDE can apply an interesting optimization: only check those declarations which have few textual matches.
+This will miss an used declaration with a popular name, like <code>new</code>, but will work ok for less-popular names, with a relatively good performance.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="real-world"><a class="anchor" href="#real-world"></a>Real World</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now it&#8217;s time to look at what actually happens in rust-analyzer. First of all, I must confess, it doesn&#8217;t use the bottom-up approach :)</p>
+</div>
+<div class="paragraph">
+<p>Rust type-inference works at a function granularity: statements near the end of a function can affect statements at the beginning.
+So, it doesn&#8217;t make sense to do name resolution at the granularity of an expression, and indeed rust-analyzer builds a per-function
+<a href="https://github.com/rust-analyzer/rust-analyzer/blob/d523366299c8d4813e9845c9402b8dd7b779856a/crates/ra_hir/src/expr/scope.rs">symbol table</a>.
+This is still done lazily though: we don&#8217;t look into the function body unless the text search tells us to do so.</p>
+</div>
+<div class="paragraph">
+<p>Name resolution on the module/item level in Rust is pretty complex as well.
+The interaction between macros, which can bring new names into the scope, and glob imports, which can tie together namespaces of two modules, requires not only top-down processing, but a repeated top-down processing (until a fixed point is reached).
+For this reason, module-level name resolution in rust-analyzer is also implemented using the top-down approach.
+We use <a href="https://github.com/salsa-rs/salsa">salsa</a> to make this phase of name resolution incremental, as a substitute for laziness
+(see <a href="https://github.com/rust-analyzer/rust-analyzer/blob/d523366299c8d4813e9845c9402b8dd7b779856a/crates/ra_hir_def/src/nameres.rs">this module</a> for details).
+The results look promising so far: by processing function bodies lazy, we greatly reduce the amount of data the fixed-point iteration algorithm has to look at.
+By adding salsa on-top, we avoid re-running this algorithm most of the time.</p>
+</div>
+<div class="paragraph">
+<p>However, the general search funnel is there!</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Here&#8217;s the <a href="https://github.com/rust-analyzer/rust-analyzer/blob/d523366299c8d4813e9845c9402b8dd7b779856a/crates/ra_ide_api/src/lib.rs#L383-L390">entry point</a> for find usages.
+Callee can restrict the <code>SearchScope</code>.
+For example, when the editor asks to highlight all usages of the identifier under the cursor, the scope is restricted to a single file.</p>
+</li>
+<li>
+<p>The first step of find usages is figuring out what to find in the first place.
+This is handled by <a href="https://github.com/rust-analyzer/rust-analyzer/blob/c486f8477aca4a42800e81b0b99fd56c14c6219f/crates/ra_ide_api/src/references.rs#L106-L120"><code>find_name</code></a> functions.
+There are two cases to consider: the cursor can be either on the reference, or on the definition.
+We handle the first case by resolving the reference to the definition and converging to the second case.</p>
+</li>
+<li>
+<p>Once we&#8217;ve figured out the definition, we compute it&#8217;s search scope and intersect it with the provided scope: <a href="https://github.com/rust-analyzer/rust-analyzer/blob/c486f8477aca4a42800e81b0b99fd56c14c6219f/crates/ra_ide_api/src/references.rs#L93-L99">source</a>.</p>
+</li>
+<li>
+<p>After that, we do a simple text search over all files in the scope: <a href="https://github.com/rust-analyzer/rust-analyzer/blob/c486f8477aca4a42800e81b0b99fd56c14c6219f/crates/ra_ide_api/src/references.rs#L137">source</a>.
+This is the place where trigram index should be added.</p>
+</li>
+<li>
+<p>If there&#8217;s a match, we parse the file, to make sure that it is indeed a reference, and not a comment or a string literal: <a href="https://github.com/rust-analyzer/rust-analyzer/blob/c486f8477aca4a42800e81b0b99fd56c14c6219f/crates/ra_ide_api/src/references.rs#L135">source</a>.
+Note how we use a local <a href="https://docs.rs/once_cell/1.2.0/once_cell/unsync/struct.Lazy.html">Lazy</a> value to parse only those files, which have at least one match.</p>
+</li>
+<li>
+<p>Finally, we check that the candidate reference indeed resolves to the definition we have started with: <a href="https://github.com/rust-analyzer/rust-analyzer/blob/c486f8477aca4a42800e81b0b99fd56c14c6219f/crates/ra_ide_api/src/references.rs#L150">source</a>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>That&#8217;s all for the find usages, thank you for reading!</p>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

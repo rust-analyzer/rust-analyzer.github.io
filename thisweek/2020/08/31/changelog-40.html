@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #40</title>
+  <meta name="description"
+    content="Commit: ac4b134Release: 2020-08-31">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2020/08/31/changelog-40.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #40</h1>
+<div class="post-meta sect1">
+  Aug 31, 2020
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/ac4b134c6be27642dbe915f32a41f9a21bd0c1c9"><code>ac4b134</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2020-08-31"><code>2020-08-31</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sponsors"><a class="anchor" href="#sponsors"></a>Sponsors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This week we want to thank <a href="https://www.technocreatives.com/">The Techno Creatives</a>, a Gothenburg-based creative tech house merging strategy, design, and technology to catalyze innovation.</p>
+</div>
+<div class="paragraph">
+<p><strong>Become a sponsor:</strong> <a href="https://opencollective.com/rust-analyzer/">opencollective.com/rust-analyzer</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://rust-lang.github.io/compiler-team/working-groups/parselib/">wg-parselib</a> is formed to tackle the hard task of sharing the parser between rust-analyzer and rustc.
+Join discussion on <a href="https://rust-lang.zulipchat.com/#narrow/stream/254930-t-compiler.2Fwg-parselib">Zulip</a> or look for
+<a href="https://github.com/rust-lang/rust/issues?q=label%3AWG-parselib+">WG-parslib</a> tagged issues in rust-lang/rust.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5859"><code>#5859</code></a> automatically publish rust-analyzer crates with <code>ra_ap</code> prefix: <a href="https://crates.io/search?q=ra_ap" class="bare">https://crates.io/search?q=ra_ap</a>.
+You can use these crates to build your own tooling on top of rust-analyzer, which can be compile with stable <code>rustc</code>.
+Note that we provide <strong>no</strong> backwards compatibility guarantees.
+Building external tooling on top of rust-analyzer libraries is a non-goal at the moment.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4873"><code>#4873</code></a> resolve links in hover documentation.</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/91714233-91f5ad80-eb8b-11ea-8149-d9eeaf8150f9.gif" alt="91714233 91f5ad80 eb8b 11ea 8149 d9eeaf8150f9">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5884"><code>#5884</code></a> for non-cargo based projects (<code>rust-project.json</code>) add a short-cut to specify sysroot location.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5861"><code>#5861</code></a> support extern types.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5877"><code>#5877</code></a> complete <code>pub</code> keyword in field definitions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5889"><code>#5889</code></a> add <code>--log-file</code> argument to redirect logs to a file (by default, rust-analyze writes logs to stderr).</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5885"><code>#5885</code></a> add more options to configure the color of inlay hints.</p>
+</li>
+<li>
+<p>pr:5893: Allow running <code>harness = false</code> tests.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5733"><code>#5733</code></a> fix several bugs in <strong>Expand Glob Imports</strong> assist.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5841"><code>#5841</code></a> fix downloading rust-analyzer being stuck on 100%.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5888"><code>#5888</code></a> <strong>Inline Variable</strong> works with field shorthand</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/91714758-aa19fc80-eb8c-11ea-82af-8b86941ca23c.gif" alt="91714758 aa19fc80 eb8c 11ea 82af 8b86941ca23c">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5887"><code>#5887</code></a> improve fenced code block support for doctests.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5866"><code>#5866</code></a> improve logging.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5867"><code>#5867</code></a> unify the API for working with docs &amp; other attributes.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5880"><code>#5880</code></a> detect overlapping text edit bugs earlier.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

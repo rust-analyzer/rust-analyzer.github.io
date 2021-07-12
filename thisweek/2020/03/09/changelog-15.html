@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #15</title>
+  <meta name="description"
+    content="Commit: 5770fa7Release: 2020-03-09">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2020/03/09/changelog-15.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #15</h1>
+<div class="post-meta sect1">
+  Mar 9, 2020
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/5770fa71fa822c998b4d3b57cf1f001dfd84e6e8"><code>5770fa7</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2020-03-09"><code>2020-03-09</code></a></p>
+</div>
+<div class="paragraph">
+<p>Heads up: this update requires VS Code 1.43.0.
+In general, rust-analyzer requires the latest version of VS Code at the moment.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3513"><code>#3513</code></a> code completion in macro calls.</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/906069/76160803-92a60d80-612d-11ea-8b51-9566cbb4c773.gif" alt="76160803 92a60d80 612d 11ea 8b51 9566cbb4c773">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3432"><code>#3432</code></a> insert argument snippets when completing function calls.</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/76219227-cd837080-6215-11ea-8d0d-a9447b1d26b1.gif" alt="76219227 cd837080 6215 11ea 8d0d a9447b1d26b1">
+</div>
+</div>
+<div class="paragraph">
+<p>Insertion of snippets is controled by <code>completion.insertion.add-argument-snippets</code> feature flag.</p>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3498"><code>#3498</code></a> when completing function call, trigger parameter hints automatically.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3500"><code>#3500</code></a> more concise mode for parameter hints:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/76219505-39fe6f80-6216-11ea-9bc2-f2591388c5e6.png" alt="76219505 39fe6f80 6216 11ea 9bc2 f2591388c5e6">
+</div>
+</div>
+<div class="paragraph">
+<p>It is controlled by <code>call-info.full</code> feature flag.</p>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3392"><code>#3392</code></a> support for eager <code>concat!</code> macro.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3456"><code>#3456</code></a> publish nightly binary releases: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/tag/nightly">releases/tag/nightly</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3474"><code>#3474</code></a> on start up, initiate analysis of files even if there were no explicit requests for it.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3490"><code>#3490</code></a> support aliases and Self in struct literals.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3494"><code>#3494</code></a> implement <code>include!</code> macro.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3499"><code>#3499</code></a> resolve <code>Self::AssocTy</code> in impls.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3516"><code>#3516</code></a> account for visibility during code completion.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3514"><code>#3514</code></a> flag to update the server binary automatically, without asking.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3519"><code>#3519</code></a> hover on item now includes full module path.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3378"><code>#3378</code></a> fix inlay hints to work correctly in VS Code for several opened editors.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3388"><code>#3388</code></a> don&#8217;t show wrong inlay hints in a diff view.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3430"><code>#3430</code></a> use correct name when completing re-exported functions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3509"><code>#3509</code></a> disallow <code>include!</code> macro to include itself.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3520"><code>#3520</code></a> don&#8217;t show trivial type hints for unit structs.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3526"><code>#3526</code></a> silence "Rust file outside current workspace" warning.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3502"><code>#3502</code></a> don&#8217;t cache Chalk solver. Counter-intuitively, this allows improves performance by allowing caching elsewhere.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3405"><code>#3405</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/3427"><code>#3427</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/3428"><code>#3428</code></a> refactor reference and definitions to better accommodate edge cases like field init shorthand.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3440"><code>#3440</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/3426"><code>#3426</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/3443"><code>#3443</code></a> refactor reference search infrastructure.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3413"><code>#3413</code></a> update chalk.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3425"><code>#3425</code></a> fix macro expansion for a single dollar.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3458"><code>#3458</code></a> add <code>cargo xtask dist</code> for building the distribution package.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3489"><code>#3489</code></a> make sure that during expression lowering every non-missing expression gets a source.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3487"><code>#3487</code></a> add some editing API for manipulating use statements.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/3497"><code>#3497</code></a> specify additional label on profiling calls, to see, for example, which functions are slow to typecheck.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

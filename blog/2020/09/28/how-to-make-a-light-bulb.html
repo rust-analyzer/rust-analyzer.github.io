@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>How to Make a 💡?</title>
+  <meta name="description"
+    content="rust-analyzer is a new "IDE backend" for the Rust programming language.Support rust-analyzer on Open Collective or GitHub Sponsors.">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//blog/2020/09/28/how-to-make-a-light-bulb.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>How to Make a 💡?</h1>
+<div class="post-meta sect1">
+  @matklad, Sep 28, 2020
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>rust-analyzer is a new "IDE backend" for the <a href="https://www.rust-lang.org/">Rust</a> programming language.
+Support rust-analyzer on <a href="https://opencollective.com/rust-analyzer/">Open Collective</a> or <a href="https://github.com/sponsors/rust-analyzer">GitHub Sponsors</a>.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>My favorite IDE feature is a light bulb&#8201;&#8212;&#8201;a little 💡 icon that appears next to a cursor which you can click on to apply a local refactoring.
+In the first part of this post, I&#8217;ll talk about why this little bulb is so dear to my heart, and in the second part I&#8217;ll go into some implementation tips and tricks.
+First part should be interesting for everyone, while the second part is targeting folks implementing their own IDEs / language serves.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the-mighty"><a class="anchor" href="#the-mighty"></a>The Mighty 💡</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://martinfowler.com/bliki/PostIntelliJ.html">Post-IntelliJ</a> IDEs, with their full access to syntax and semantics of the program, can provide almost an infinite amount of smart features.
+The biggest problem is not implementing the features, the biggest problem is teaching the users that a certain feature exists.</p>
+</div>
+<div class="paragraph">
+<p>One possible UI here is a fuzzy-searchable command palette:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/assets/blog/how-to-make-a-light-bulb/emacs-helm.png" alt="emacs helm">
+</div>
+</div>
+<div class="paragraph">
+<p>This helps if the user (a) knows that some command might exist, and (b) can guess its name.
+Which is to say: not that often.</p>
+</div>
+<div class="paragraph">
+<p>Contrast it with the light bulb UI:</p>
+</div>
+<div class="paragraph">
+<p>First, by noticing a 💡 you see that <em>some</em> feature is available in this particular context:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/assets/blog/how-to-make-a-light-bulb/bulb1.png" alt="bulb1">
+</div>
+</div>
+<div class="paragraph">
+<p>Then, by clicking the 💡 (<span class="keyseq"><kbd>ctrl</kbd>+<kbd>.</kbd></span> in VS Code / <span class="keyseq"><kbd>Alt</kbd>+<kbd>Enter</kbd></span> in IntelliJ) you can see a <em>short</em> list of actions applicable in the current context:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/assets/blog/how-to-make-a-light-bulb/bulb2.png" alt="bulb2">
+</div>
+</div>
+<div class="paragraph">
+<p>This is a rare case where UX is both:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Discoverable, which makes novices happy.</p>
+</li>
+<li>
+<p>Efficient, to make expert users delighted as well.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>I am somewhat surprised that older editors, like Emacs or Vim, still don&#8217;t have the 💡 concept built-in.
+I don&#8217;t know which editor/IDE pioneered the light bulb UX; if you know, please let me know the comments!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="how-to-implement-a"><a class="anchor" href="#how-to-implement-a"></a>How to Implement a 💡?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If we squint hard enough, an IDE/LSP server works a bit like a web server.
+It accepts requests like &#8220;what is the definition of symbol on line 23?&#8221;, processes them according to the language semantics and responds back.
+Some requests also modify the data model itself ("here&#8217;s the new text of foo.rs file: '&#8230;&#8203;'").
+Generally, the state of the world might change between any two requests.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>In single-process IDEs (IntelliJ) requests like code completion generally modify the data directly, as the IDE itself is the source of truth.</p>
+</div>
+<div class="paragraph">
+<p>In client-server architecture (LSP), the server usually responds with a diff and receives an updated state in a separate request&#8201;&#8212;&#8201;client holds the true state.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>This is relevant for 💡 feature, as it usually needs two requests.
+The first request takes the current position of the cursor and returns the list of available assists.
+If the list is not empty, the 💡 icon is shown in the editor.</p>
+</div>
+<div class="paragraph">
+<p>The second request is made when/if a user clicks a specific assist; this request calculates the corresponding diff.</p>
+</div>
+<div class="paragraph">
+<p>Both request are initiated by user&#8217;s actions, and arbitrary events might happen between the two.
+Hence, assists can&#8217;t assume that the state of the world is intact between <code>list</code> and <code>apply</code> actions.</p>
+</div>
+<div class="paragraph">
+<p>This leads to the following interface for assists (lightly adapted
+<a href="https://github.com/JetBrains/intellij-community/blob/680dbb522465d3fd3b599c2c582a7dec9c5ad02b/platform/analysis-api/src/com/intellij/codeInsight/intention/IntentionAction.java"><code>IntentionAction</code></a>
+from IntelliJ
+)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="kd">interface</span> <span class="nc">IntentionAction</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="nc">String</span>
+  <span class="k">fun</span> <span class="nf">isAvailable</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="nc">CursorPosition</span><span class="p">):</span> <span class="nc">Boolean</span>
+  <span class="k">fun</span> <span class="nf">invoke</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="nc">CursorPosition</span><span class="p">):</span> <span class="nc">Diff</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That is, to implement a new assist, you provide a class implementing <code>IntentionAction</code> interface.
+The IDE platform then uses <code>isAvailable</code> and <code>getName</code> to populate the 💡 menu, and calls <code>invoke</code> to apply the assist if the user asks for it.</p>
+</div>
+<div class="paragraph">
+<p>This interface has exactly the right shape for the IDE platform, but is awkward to implement.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>This is a specific instance of a more general phenomenon.
+Each abstraction has <a href="https://en.wikipedia.org/wiki/The_Disk">two faces</a>&#8201;&#8212;&#8201;one for the implementer, one for the user.
+Two sides often have slightly different requirements, but tend to get implemented in a single language construct by default.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Almost always, the code at the start of <code>isAvailable</code> and <code>invoke</code> would be similar.
+Here&#8217;s a bigger example from PyCharm:
+<a href="https://github.com/JetBrains/intellij-community/blob/680dbb522465d3fd3b599c2c582a7dec9c5ad02b/python/python-psi-impl/src/com/jetbrains/python/codeInsight/intentions/PySplitIfIntention.java#L34-L48"><code>isAvailable</code></a>
+and
+<a href="https://github.com/JetBrains/intellij-community/blob/680dbb522465d3fd3b599c2c582a7dec9c5ad02b/python/python-psi-impl/src/com/jetbrains/python/codeInsight/intentions/PySplitIfIntention.java#L72-L82"><code>invoke</code></a>.</p>
+</div>
+<div class="paragraph">
+<p>To reduce this duplication in Intellij Rust, I introduced a convenience base class <a href="https://github.com/intellij-rust/intellij-rust/blob/3527d29f7c42412e33125dabb2f86acf3a46bc86/src/main/kotlin/org/rust/ide/intentions/RsElementBaseIntentionAction.kt"><code>RsElementBaseIntentionAction</code></a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+</pre></td><td class="code"><pre><span class="kd">class</span> <span class="nc">RsIntentionAction</span><span class="p">&lt;</span><span class="nc">Ctx</span><span class="p">&gt;:</span> <span class="nc">IntentionAction</span> <span class="p">{</span>
+  <span class="k">fun</span> <span class="nf">getContext</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="nc">CursorPosition</span><span class="p">):</span> <span class="nc">Ctx</span><span class="p">?</span>
+  <span class="k">fun</span> <span class="nf">invoke</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="nc">CursorPosition</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="nc">Ctx</span><span class="p">):</span> <span class="nc">Diff</span>
+
+  <span class="k">override</span> <span class="k">fun</span> <span class="nf">isAvailable</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="nc">CursorPosition</span><span class="p">)</span> <span class="p">=</span>
+    <span class="nf">getContext</span><span class="p">(</span><span class="n">position</span><span class="p">)</span> <span class="p">!=</span> <span class="k">null</span>
+
+  <span class="k">override</span> <span class="k">fun</span> <span class="nf">invoke</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="nc">CursorPosition</span><span class="p">)</span> <span class="p">=</span>
+    <span class="nf">invoke</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="nf">getContext</span><span class="p">(</span><span class="n">position</span><span class="p">)</span><span class="o">!!</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The duplication is removed in a rather brute-force way&#8201;&#8212;&#8201;common code between <code>isAvailable</code> and <code>invoke</code> is reified into (assist-specific) <code>Ctx</code> data structure.
+This gets the job done, but defining a <code>Context</code> type (which is just a bag of stuff) is tedious, as seen in, for example, <a href="https://github.com/intellij-rust/intellij-rust/blob/3527d29f7c42412e33125dabb2f86acf3a46bc86/src/main/kotlin/org/rust/ide/intentions/InvertIfIntention.kt#L16-L21">InvertIfIntention.kt</a>.</p>
+</div>
+<div class="paragraph">
+<p>rust-analyzer uses what I feel is a slightly better pattern.
+Recall our original analogy between an IDE and a web server.
+If we stretch it even further, we may say that assists are similar to an HTML form.
+The <code>list</code> operation is analogous to the <code>GET</code> part of working with forms, and <code>apply</code> looks like a <code>POST</code>.
+In an HTTP server, the state of the world also changes between <code>GET /my-form</code> and <code>POST /my-form</code>, so an HTTP server also queries the database twice.</p>
+</div>
+<div class="paragraph">
+<p>Django web framework has a nice pattern to implement this&#8201;&#8212;&#8201;function based views.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="python"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre>
+<span class="k">def</span> <span class="nf">my_form</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+  <span class="n">ctx</span> <span class="o">=</span> <span class="n">fetch_stuff_from_postgress</span><span class="p">()</span>
+  <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">'POST'</span><span class="p">:</span>
+    <span class="c1"># apply changes ...
+</span>  <span class="k">else</span><span class="p">:</span>
+    <span class="c1"># render template ...</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A single function handles both <code>GET</code> and <code>POST</code>.
+Common part is handled once, differences are handled in two branches of the <code>if</code>, a runtime parameter selects the branch of <code>if</code>.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>See <a href="https://spookylukey.github.io/django-views-the-right-way/">Django Views — The Right Way</a> for the most recent discussion why function based views are preferable to class based views.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>This pattern, translated from a Python web framework to a Rust IDE, looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="code"><pre><span class="k">enum</span> <span class="n">MaybeDiff</span> <span class="p">{</span>
+  <span class="n">Delayed</span><span class="p">,</span>
+  <span class="nf">Diff</span><span class="p">(</span><span class="n">Diff</span><span class="p">),</span>
+<span class="p">}</span>
+
+
+<span class="k">fn</span> <span class="nf">assist</span><span class="p">(</span><span class="n">position</span><span class="p">:</span> <span class="n">CursorPosition</span><span class="p">,</span> <span class="n">delay</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span>
+    <span class="k">-&gt;</span> <span class="nb">Option</span><span class="o">&lt;</span><span class="n">MaybeDiff</span><span class="o">&gt;</span>
+<span class="p">{</span>
+  <span class="k">let</span> <span class="n">ctx</span> <span class="o">=</span> <span class="nf">compute_common_context</span><span class="p">(</span><span class="n">position</span><span class="p">)</span><span class="o">?</span><span class="p">;</span>
+  <span class="k">if</span> <span class="n">delay</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">Some</span><span class="p">(</span><span class="nn">MaybeDiff</span><span class="p">::</span><span class="n">Delayed</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">let</span> <span class="n">diff</span> <span class="o">=</span> <span class="nf">compute_diff</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">ctx</span><span class="p">);</span>
+  <span class="nf">Some</span><span class="p">(</span><span class="nn">MaybeDiff</span><span class="p">::</span><span class="nf">Diff</span><span class="p">(</span><span class="n">diff</span><span class="p">))</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>Context</code> type got dissolved into a set of local variables.
+Or, equivalently, <code>Context</code> is a reification of control flow&#8201;&#8212;&#8201;it is a set of local variables which are live before the <code>if</code>.
+One might even want to implement this pattern with coroutines/generators/async, but there&#8217;s no real need to, as there&#8217;s only one fixed suspension point.</p>
+</div>
+<div class="paragraph">
+<p>For a non-simplified example, take a look at <a href="https://github.com/rust-analyzer/rust-analyzer/blob/550709175071a865a7e5101a910eee9e0f8761a2/crates/assists/src/handlers/invert_if.rs#L31-L63">invert_if.rs</a>.</p>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

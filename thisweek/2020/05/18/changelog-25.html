@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #25</title>
+  <meta name="description"
+    content="Commit: 31611daRelease: 2020-05-18">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2020/05/18/changelog-25.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #25</h1>
+<div class="post-meta sect1">
+  May 18, 2020
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/31611da2538e66027ea67482235f6b8659bedf09"><code>31611da</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2020-05-18"><code>2020-05-18</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4397"><code>#4397</code></a> implement a basic TextMate grammar which plays better with our semantic highlighting.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4358"><code>#4358</code></a> <code>ifl</code> postfix template for <code>Result</code> and <code>Option</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/82217445-b7331880-991a-11ea-8e9a-698e3dc07106.gif" alt="82217445 b7331880 991a 11ea 8e9a 698e3dc07106">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4423"><code>#4423</code></a> <code>tmod</code> item-level snippet.</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/82217447-b8644580-991a-11ea-87e1-a8c61d21583f.gif" alt="82217447 b8644580 991a 11ea 87e1 a8c61d21583f">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4273"><code>#4273</code></a> <strong>Add Visibility</strong> assist now works on paths, adding a visibility to an item in other module:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/82217439-b39f9180-991a-11ea-92e9-f162c41debc6.gif" alt="82217439 b39f9180 991a 11ea 92e9 f162c41debc6">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4448"><code>#4448</code></a> <strong>Generate Launch Configuration</strong> command to save debug configurations for specific tests:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/82217442-b601eb80-991a-11ea-99dd-b0c2bba786c8.gif" alt="82217442 b601eb80 991a 11ea 99dd b0c2bba786c8">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4436"><code>#4436</code></a> use <code>.rust</code> sufix on TextMate scopes introduced by rust-analyzer for easier theming.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4427"><code>#4427</code></a> use Ubuntu 16.04 to build releases, to get older glibc.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4400"><code>#4400</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/4473"><code>#4473</code></a> improve syntax higlighting, underline mutable bindings in all themes.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4455"><code>#4455</code></a> in completion, prioritise locals with correct types.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4288"><code>#4288</code></a> initial implementation of renaming of <code>self</code> parameter, for switching between associated function and a method.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4479"><code>#4479</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/4484"><code>#4484</code></a> support for <code>dyn Trait</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4489"><code>#4489</code></a> reduce allocations, improving performance for batch analysis for up to 4%.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4496"><code>#4496</code></a> we now support two latest versions of VS Code.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4421"><code>#4421</code></a> fix visibility handling in find references.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4403"><code>#4403</code></a> check client capabilities before sending progres notifications.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4447"><code>#4447</code></a> make sure that play arrow in <code>Run</code> lens is not emoji-ifyied.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4431"><code>#4431</code></a> don&#8217;t garbage-collect results of procedural macro expansion, to combat non-deterministic proc macros.
+Please avoid randomized hash maps when writing procedural macros :-)</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4470"><code>#4470</code></a> handle <code>Self</code> in values and patterns.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4472"><code>#4472</code></a> fix path resolution for module and function with same name.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4424"><code>#4424</code></a> use <code>RA_LOG</code> variable to enable rust-analyzer&#8217;s logging, so as not to conflict with usual <code>RUST_LOG</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4083"><code>#4083</code></a> document rust-analyzer&#8217;s AST.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4405"><code>#4405</code></a> make some internal types public so that rust-analyzer is easier to use as a library.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

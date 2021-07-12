@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>First Release</title>
+  <meta name="description"
+    content="I am pleased to announce the first alpha release of rust-analyzer&#8201;&#8212;&#8201;a new "IDE backend" for the Rust programming language.Support rust-anal...">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//blog/2020/04/20/first-release.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>First Release</h1>
+<div class="post-meta sect1">
+  @matklad, Apr 20, 2020
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>I am pleased to announce the first alpha release of rust-analyzer&#8201;&#8212;&#8201;a new "IDE backend" for the <a href="https://www.rust-lang.org/">Rust</a> programming language.
+Support rust-analyzer on <a href="https://opencollective.com/rust-analyzer/">Open Collective</a>.</p>
+</div>
+<div class="paragraph">
+<p>Wait a second&#8230;&#8203; Haven&#8217;t people been using rust-analyzer for a long time now?
+Well, yes, but we&#8217;ve never actually made a release announcement, so here&#8217;s one!
+Better late than never :-)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="what-exactly-is-rust-analyzer"><a class="anchor" href="#what-exactly-is-rust-analyzer"></a>What exactly is rust-analyzer?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Broadly speaking, rust-analyzer is a new compiler front-end for the Rust programming language, aimed at drastically improving IDE integration.
+If you are familiar with C# ecosystem, rust-analyzer is to rustc what <a href="https://github.com/dotnet/roslyn">Roslyn</a> is to the original C# compiler.</p>
+</div>
+<div class="paragraph">
+<p>More specifically the goal of rust-analyzer project is improving Rust IDE support to the standard expected of a modern language.
+Under this umbrella project the following activities take place:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>We build the <code>rust-analyzer</code> binary, an implementation of the <a href="https://microsoft.github.io/language-server-protocol/">language server protocol</a>, which can provide a basic IDE experience for Rust today.</p>
+</li>
+<li>
+<p>We use <code>rust-analyzer</code> as a workbench and a laboratory for investigating approaches to lazy and incremental compilation.</p>
+</li>
+<li>
+<p>We try to modularize the existing <code>rustc</code> compiler and extract <strong>production ready</strong> components for sharing with <code>rust-analyzer</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For the users, the most immediately relevant facet is the first one&#8201;&#8212;&#8201;a language server you can install to get smart code completion in <span class="line-through">Emacs</span> your favorite editor.
+This is what this post focuses on.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="what-is-its-relationship-with-rls"><a class="anchor" href="#what-is-its-relationship-with-rls"></a>What is its relationship with RLS?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Rust had a language server for quite some time now&#8201;&#8212;&#8201;the <a href="https://github.com/rust-lang/rls">RLS</a>.
+RLS and rust-analyzer use fundamentally different architectures for understanding Rust.
+RLS works by running a compiler on the whole project and dumping a huge JSON file with facts derived during the compilation process.
+rust-analyzer works by maintaining a persistent compiler process, which is able to analyze code on-demand as it changes.
+Concretely, after every keystroke RLS looks at every function body and re-typechecks it;  rust-analyzer generally processes only the code in the currently opened file(s), reusing name resolution results if possible.</p>
+</div>
+<div class="paragraph">
+<p>rust-analyzer started as an experiment and a proof-of-concept, but today it is becoming increasingly clear that:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>rust-analyzer already provides a better experience than RLS for many users.</p>
+</li>
+<li>
+<p>rust-analyzer is further ahead on the road towards the envisioned end-state of a fully on-demand, fully incremental Rust compiler.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>So we&#8217;ve opened <a href="https://github.com/rust-lang/rfcs/pull/2912">RFC 2912</a>.
+That RFC proposes a process of replacing RLS with rust-analyzer as the official LSP implementation for Rust.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="what-is-its-relationship-with-intellij-rust"><a class="anchor" href="#what-is-its-relationship-with-intellij-rust"></a>What is its relationship with IntelliJ Rust?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://intellij-rust.github.io/">IntelliJ Rust</a> is a plugin providing Rust support for IDEs build on top of <a href="https://www.jetbrains.com/opensource/idea/">IntelliJ Platform</a>.
+The rust-analyzer project is indebted to IntelliJ Rust: it builds on the same architectural ideas and patterns, and is directly inspired by the experience of developing IntelliJ Rust.</p>
+</div>
+<div class="paragraph">
+<p>IntelliJ Rust contains its own implementation of an IDE-ready compiler frontend, implemented in Kotlin.
+This engine is very advanced, but, by design, does not use LSP.
+IntelliJ Rust is a production ready Rust IDE and is wholly recommended for users of JetBrains' products.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="quick-start"><a class="anchor" href="#quick-start"></a>Quick Start</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://rust-analyzer.github.io/manual.html">The manual</a> contains detailed documentation, so in this blog post I want to just quickly run through the most exciting features.</p>
+</div>
+<div class="paragraph">
+<p>rust-analyzer is compatible with any editor that supports LSP, and has dedicated plugins for
+<a href="https://github.com/fannheyward/coc-rust-analyzer">Vim</a>,
+<a href="https://github.com/emacs-lsp/lsp-mode/blob/3d6283f936dff2098e36b149fc414ea7acd332c8/lsp-rust.el">Emacs</a>
+and <a href="https://github.com/rust-analyzer/rust-analyzer/tree/4a250021b1a1def483f7faf2b534ec4dd7defd02/editors/code">VS Code</a>.
+Support for VS Code is maintained in-tree and in general is expected to be the most complete.
+For this reason, the following info takes a VS Code-centric point of view, but should be translatable to equivalent concepts in other editors.</p>
+</div>
+<div class="paragraph">
+<p>To add rust-analyzer to VS Code:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Remove existing rls extension, if you have one.</p>
+</li>
+<li>
+<p>Install the <a href="https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer">rust-analyzer extension</a> from the marketplace.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To check that everything is working open a "Hello World" Rust application.
+You should see the <code>Run | Debug</code> code lens, and editor symbols should show the main function:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/80090876-7b49a500-8560-11ea-8abc-b4b5f786c026.png" alt="80090876 7b49a500 8560 11ea 8abc b4b5f786c026">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="features"><a class="anchor" href="#features"></a>Features</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that rust-analyzer is successfully installed, what are some of the most important features?</p>
+</div>
+<div class="paragraph">
+<p>I suggest, first and foremost, to familiarize oneself with many <strong>navigation</strong> capabilities, as we spend more time reading code than writing it.
+Here&#8217;s an inexhaustive list of features.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Definition <kbd>F12</kbd></dt>
+<dd>
+<p>The most famous navigation shortcut.
+One rust-analyzer specific trick is that <kbd>F12</kbd> on an <code>mod submodule;</code> brings you to the <code>submodule.rs</code> file.
+This is useful in combination with:</p>
+</dd>
+<dt class="hdlist1">Parent module (no default keybinding)</dt>
+<dd>
+<p>This action brings to the <code>mod</code> declaration which declared the current module.
+It doesn&#8217;t have a shortcut assigned by default, as there&#8217;s no corresponding built-in action, but it is highly recommended to assign one.</p>
+</dd>
+<dt class="hdlist1">Workspace Symbol <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>T</kbd></span></dt>
+<dd>
+<p>This is probably the shortcut I use most often.
+It is a fuzzy-search interface for all "symbols" (structs, enums, functions, field) in the project, its dependencies and the standard library.
+The search tries to be smart, in that, by default, it looks only for types in your project, and, failing that, for functions.
+It is possible to force search in dependencies by adding <code>#</code> to the query string, and search for all symbols by adding <code>*</code>.
+Unfortunately, this doesn&#8217;t work in VS Code at the moment, as it stopped passing these symbols to the language server since the last update.</p>
+</dd>
+</dl>
+</div>
+<div class="videoblock">
+<div class="content">
+<video src="/assets/blog/first-release/workspace-symbol.webm" width="100%" autoplay controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Document Symbol <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>O</kbd></span></dt>
+<dd>
+<p>Like workspace symbol, but for things in the current file.
+The same underlying LSP request powers file outline and breadcrumbs.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/80090645-1e4def00-8560-11ea-901d-d1cdc0ab8f50.png" alt="80090645 1e4def00 8560 11ea 901d d1cdc0ab8f50">
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Implementation <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>F12</kbd></span></dt>
+<dd>
+<p>This shortcut works on structs, enums and traits, and will show you the list of corresponding impls.</p>
+</dd>
+<dt class="hdlist1">Syntax Highlighting</dt>
+<dd>
+<p>While not exactly about navigation, semantic syntax highlighting helps with reading code.
+Rust analyzer underlines mutable variables, distinguishes between modules, traits and types and
+provides helpful type and parameter hints.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/80091615-b5677680-8561-11ea-82de-e1517e4fef18.png" alt="80091615 b5677680 8561 11ea 82de e1517e4fef18">
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Run (no default keybinding)</dt>
+<dd>
+<p>After navigation, the feature I use most is probably the <strong>Run</strong> button.
+This action runs the test function, test module or main function at the given cursor position.
+It is also available as a code-lens, but I personally exclusively use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>r</kbd></span> for it, as I need this action all the time.
+What&#8217;s more, with a short cut you can re-run the last command, which is hugely useful when you are debugging a failing test.
+This action is pretty smart in that it does the following things for you:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>determines the appropriate <code>--package</code> argument for <code>Cargo</code>,</p>
+</li>
+<li>
+<p>uses the full path to the test, including the module,</p>
+</li>
+<li>
+<p>sets the <code>--no-capture</code> argument, so that debug prints are visible,</p>
+</li>
+<li>
+<p>sets the <code>RUST_BACKTRACE</code> environmental variable, so that you don&#8217;t have to re-run on panic.</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Sadly, such context-dependent run configurations are not a part of the LSP protocol yet, so this feature is implemented using a custom protocol extension.</p>
+</div>
+<div class="videoblock">
+<div class="content">
+<video src="/assets/blog/first-release/run.webm" width="100%" autoplay controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Punctuation-aware code completion</dt>
+<dd>
+<p>Naturally, rust-analyzer helps with writing code as well.
+When completing <code>return</code>, it checks if the return type is <code>()</code>.
+When completing function and method calls, <code>rust-analyzer</code> places the cursor between parentheses, unless the function has zero arguments.
+When typing <code>let</code>, rust-analyzer tries to helpfully add the semicolon.</p>
+</dd>
+</dl>
+</div>
+<div class="videoblock">
+<div class="content">
+<video src="/assets/blog/first-release/return-completion.webm" width="100%" autoplay controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Extend selection <span class="keyseq"><kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>&#8594;</kbd></span></dt>
+<dd>
+<p>This is again a feature which is relatively simple to implement, but a huge helper.
+It progressively selects larger and larger expressions, statements and items.
+It works exceptionally well in combination with multiple cursors.
+One hidden capability of this feature is a navigation help: if you are in a middle of a function, you can get to the beginning of it by extending seleciton several times, and then pressing <kbd>&#8592;</kbd>.</p>
+</dd>
+</dl>
+</div>
+<div class="videoblock">
+<div class="content">
+<video src="/assets/blog/first-release/extend-selection.webm" width="100%" autoplay controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Fixit for missing module</dt>
+<dd>
+<p>Another disproportionally nice feature&#8201;&#8212;&#8201;to create a new file, type <code>mod file_name;</code> and use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>.</kbd></span> to add the file itself.</p>
+</dd>
+</dl>
+</div>
+<div class="videoblock">
+<div class="content">
+<video src="/assets/blog/first-release/new-mod.webm" width="100%" autoplay controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Assists</dt>
+<dd>
+<p>More generally, there are a lot of cases where the light bulb can write some boring code for you.
+Some of my favorites are impl generation:</p>
+</dd>
+</dl>
+</div>
+<div class="videoblock">
+<div class="content">
+<video src="/assets/blog/first-release/impl-iter.webm" width="100%" autoplay controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+<div class="paragraph">
+<p>And filling match arms:</p>
+</div>
+<div class="videoblock">
+<div class="content">
+<video src="/assets/blog/first-release/fill-match-arms.webm" width="100%" autoplay controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="drawbacks"><a class="anchor" href="#drawbacks"></a>Drawbacks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>rust-analyzer is a young tool and comes with a lot of limitations.
+The most significant one is that we are not at the moment using <code>rustc</code> directly, so our capabilities for detecting errors are limited.</p>
+</div>
+<div class="paragraph">
+<p>In particular, to show inline errors we are doing what Emacs has been doing for ages&#8201;&#8212;&#8201;running <code>cargo check</code> after the file is saved.
+If auto-save is enabled in the editor, the result is actually quite nice for small projects.</p>
+</div>
+<div class="paragraph">
+<p>For bigger projects though, I feel like <code>cargo check</code> in background gets in the way.
+So for <code>rust-analyzer</code> I have <code>rust-analyzer.checkOnSave.enabled = false;</code> in the settings.
+Instead, I use the <strong>Run</strong> functionality to run <code>check</code> / <code>test</code> and keyboard shortcuts to navigate between errors.</p>
+</div>
+<div class="paragraph">
+<p>Another big issue is that at the moment we, for simplicity, don&#8217;t persist caches to disk.
+That means that every time you open a project with rust-analyzer, it needs to analyze, from source:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>all sysroot crates (std, core, alloc, etc)</p>
+</li>
+<li>
+<p>all crates.io dependencies</p>
+</li>
+<li>
+<p>all crates in your workspace</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This takes time, tens of seconds for medium sized projects.</p>
+</div>
+<div class="paragraph">
+<p>Similarly, because we never save anything to disk, we need to keep analysis results for all crates in memory.
+At the moment, rust-analyzer process might requires gigabytes of ram for larger projects.</p>
+</div>
+<div class="paragraph">
+<p>Finally, because analysis is not complete, features are not working correctly every time.
+Sometimes there are missing completions, sometimes goto definition is wrong, we may even show false-positive errors on occasion.</p>
+</div>
+<div class="paragraph">
+<p>This is an alpha release.
+We have a long road ahead of us towards solid and reliable IDE support.
+Luckily (and this is the instance where a life of an IDE writer is simpler than that of a compiler writer) an IDE doesn&#8217;t have to be 100% correct to be useful.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="how-can-i-help"><a class="anchor" href="#how-can-i-help"></a>How can I help?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you find rust-analyzer useful and use it professionally, please consider asking your company to sponsor rust-analyzer via our <a href="https://opencollective.com/rust-analyzer/">Open Collective</a>.
+Sponsorships from individuals are also accepted (and greatly appreciated!).</p>
+</div>
+<div class="paragraph">
+<p>For other financial support options, customization requests, or extended support, please write an email to <a href="mailto:rust-analyzer@ferrous-systems.com">rust-analyzer@ferrous-systems.com</a>.</p>
+</div>
+<div class="paragraph">
+<p>Many people like starting contributing to the project with docs, and we certainly can use some help as well.
+For user-visible documentation, we have <a href="https://github.com/rust-analyzer/rust-analyzer/blob/7a9ba1657daa9fd90c639dcd937da11b4f526675/docs/user/readme.adoc">a manual</a> which is pretty bare bones at the moment.
+In particular, it doesn&#8217;t talk about <strong>features</strong> of rust-analyzer yet.
+The primary document for developers is <a href="https://github.com/rust-analyzer/rust-analyzer/blob/7a9ba1657daa9fd90c639dcd937da11b4f526675/docs/dev/architecture.md">architecture.md</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you want to contribute code, the best way to start is the aforementioned architecture document.
+In general, rust-analyzer code base is comparatively easy to contribute to: it is a standard Rust crate, which builds with stable compiler.
+The best first issue to fix is something that you personally find lacking.
+If you are already perfectly happy with rust-analyzer, we have a <a href="https://github.com/rust-analyzer/rust-analyzer/issues">bunch of issues</a> others have reported :-)</p>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

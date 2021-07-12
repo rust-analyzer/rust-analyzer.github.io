@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Introducing Ungrammar</title>
+  <meta name="description"
+    content="rust-analyzer is a new "IDE backend" for the Rust programming language.Support rust-analyzer on Open Collective or GitHub Sponsors.">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//blog/2020/10/24/introducing-ungrammar.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Introducing Ungrammar</h1>
+<div class="post-meta sect1">
+  @matklad, Oct 24, 2020
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>rust-analyzer is a new "IDE backend" for the <a href="https://www.rust-lang.org/">Rust</a> programming language.
+Support rust-analyzer on <a href="https://opencollective.com/rust-analyzer/">Open Collective</a> or <a href="https://github.com/sponsors/rust-analyzer">GitHub Sponsors</a>.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>This post introduces ungrammars: a new formalism for describing concrete syntax trees.
+The ideas behind ungrammar are simple, and are more valuable than a specific implementation.
+Nonetheless, an implementation is available here:</p>
+</div>
+<div class="paragraph text-center">
+<p><a href="https://github.com/rust-analyzer/ungrammar" class="bare">https://github.com/rust-analyzer/ungrammar</a></p>
+</div>
+<div class="paragraph">
+<p>At a glance, ungrammar looks a lot like <a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form">EBNF</a> notation:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre>Module =
+  Attr* Visibility?
+  'mod' Name
+  (ItemList | ';')
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The two differ at a fundamental level though:</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>EBNF specifies a language&#8201;&#8212;&#8201;a set of strings.</p>
+</div>
+<div class="paragraph">
+<p>Ungrammar describes concrete syntax tree&#8201;&#8212;&#8201;a set of data types (or a set of trees, if you will).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>That&#8217;s why it is called <em>un</em>grammar!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="motivation"><a class="anchor" href="#motivation"></a>Motivation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>So, what exactly does &#8220;describing syntax trees&#8221; mean and why is it useful?
+When writing an IDE, one of the core data structure is the concrete syntax tree.
+It is a full-fidelity tree which represents the original source code in detail, including parenthesis, comments, and whitespace.
+CSTs are used for initial analysis of the language.
+They are also a vocabulary type for refactors.
+Although the ultimate result of a refactor is a text diff, tree modification is a more convenient internal representation.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>If you want to learn more about concrete syntax trees, check out this guide, check out these two links:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/dev/syntax.md">CST in rust-analyzer</a></p>
+</li>
+<li>
+<p><a href="https://github.com/apple/swift/tree/main/lib/Syntax">CST in Swift</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>At the lowest level, the CST is typically unityped: there&#8217;s some <code>Node</code> superclass, which has a collection of <code>Node</code> children and an optional <code>Node</code> parent.
+On top of this raw layer, a more AST-like API is provided: <code>Struct</code> has a <code>.name()</code> and a list of <code>.fields()</code>, etc.
+This typed API is huge!
+For rust-analyzer, it is comprised of more than 130 <em>types</em>!
+And it is also more detailed than a typical AST: <code>Struct</code> also has <code>.l_curly()</code> and <code>.r_curly()</code>.</p>
+</div>
+<div class="paragraph">
+<p>What&#8217;s worse, this API changes a lot, especially at the beginning.
+You may start with nesting <code>.fields()</code> directly under the <code>Struct</code>, but then introduce a <code>StructFields</code> node for everything between the curly braces to share the code with enum variants.</p>
+</div>
+<div class="paragraph">
+<p>In short, writing this by hand sucks :-)
+Ungrammar is a notation to concisely describe the structure of the syntax tree, which can be used by a code generator to build an API in the target language.
+If you&#8217;ve heard about <a href="https://www.oilshell.org/blog/2016/12/11.html">ASDL</a>, ungrammar is ASDL for concrete syntax trees.
+For rust-analyzer&#8217;s case, that means taking the following input:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre>Module =
+  Attr* Visibility?
+  'mod' Name
+  (ItemList | ';')
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And generating the following output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="k">impl</span> <span class="nn">ast</span><span class="p">::</span><span class="n">AttrsOwner</span>      <span class="k">for</span> <span class="n">Module</span> <span class="p">{}</span>
+<span class="k">impl</span> <span class="nn">ast</span><span class="p">::</span><span class="n">VisibilityOwner</span> <span class="k">for</span> <span class="n">Module</span> <span class="p">{}</span>
+<span class="k">impl</span> <span class="nn">ast</span><span class="p">::</span><span class="n">NameOwner</span>       <span class="k">for</span> <span class="n">Module</span> <span class="p">{}</span>
+<span class="k">impl</span> <span class="n">Module</span> <span class="p">{</span>
+    <span class="k">pub</span> <span class="k">fn</span> <span class="nf">mod_token</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span>       <span class="k">-&gt;</span> <span class="nb">Option</span><span class="o">&lt;</span><span class="n">SyntaxToken</span><span class="o">&gt;</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+    <span class="k">pub</span> <span class="k">fn</span> <span class="nf">item_list</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span>       <span class="k">-&gt;</span> <span class="nb">Option</span><span class="o">&lt;</span><span class="n">ItemList</span><span class="o">&gt;</span>    <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+    <span class="k">pub</span> <span class="k">fn</span> <span class="nf">semicolon_token</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Option</span><span class="o">&lt;</span><span class="n">SyntaxToken</span><span class="o">&gt;</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In typical parser generators, something similar can be achieved by generating <em>both</em> the parser and the syntax tree from the same grammar.
+This works to some extent, but has an inherent problem that the shape of the tree you want for the programmatic API, and the shape of the grammar you need to implement the parser are often different.
+&#8220;Technical&#8221; transformations like left-recursion elimination don&#8217;t affect the language described by the grammar, but completely change the shape of the parse tree.
+In contrast, ungrammar focuses solely on the second task, which radically reduces the complexity of the grammar.
+In rust-analyzer, it is paired with a hand-written parser.</p>
+</div>
+<div class="paragraph">
+<p>Treated as an ordinary (context free) grammar, ungrammar describes a superset of the language.
+For example, for programmatic API it might be convenient to treat commas in comma-separate lists as a part of the list element
+(rust-analyzer doesn&#8217;t do this yet, but it should).
+This leads to the following ungrammar, which obviously doesn&#8217;t treat commas precisely:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>FieldList =
+  '{' Field* '}'
+
+Field:
+  Name ':' Type ','?
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Similarly, ungrammar defines binary and unary expressions, but doesn&#8217;t specify their relative precedence and associativity.</p>
+</div>
+<div class="paragraph">
+<p>An interesting side-effect is that the resulting grammars turn out to be pretty human readable.
+For example, a full production ready Rust grammar takes about 600 short lines:<br></p>
+</div>
+<div class="paragraph text-center">
+<p><a href="https://github.com/rust-analyzer/ungrammar/blob/784f345e5e799e828650da1b1acbb947f1e49a52/rust.ungram">https://github.com/rust-analyzer/ungrammar/blob/master/rust.ungram</a></p>
+</div>
+<div class="paragraph">
+<p>This might be a good fit for reference documentation!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="nuts-and-bolts"><a class="anchor" href="#nuts-and-bolts"></a>Nuts and Bolts</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that we&#8217;ve answered the &#8220;why&#8221; question, let&#8217;s look at how ungrammar works.</p>
+</div>
+<div class="paragraph">
+<p>Like grammars, ungrammars operate with a set of terminals and non-terminals.
+Terminals are atomic indivisible tokens, like keyword <code>fn</code> or a semicolon <code>;</code>.
+Non-terminals are composite internal nodes consisting of other nodes and tokens.</p>
+</div>
+<div class="paragraph">
+<p>Tokens (terminals) are spelled using single quotes: <code>'+'</code>, <code>'fn'</code>, <code>'ident'</code>, <code>'int_number'</code>.
+Tokens are defined outside of an ungrammar, and don&#8217;t need to be declared to use them.
+By convention, keywords and punctuation are represented using themselves, other tokens use lower_snake_case.
+Because ungrammar describes trees, it uses parser tokens rather then lexer tokens.
+What this means is that context-sensitive keywords like <code>default</code> are recognized as separate tokens (<code>'default'</code>).
+The same goes for composite tokens like <code>'&lt;&lt;'</code>.</p>
+</div>
+<div class="paragraph">
+<p>Nodes (non-terminals) are defined within the grammar by associating node name and a rule.
+The ungrammar itself is a set of node definitions.
+By convention, nodes are named using UpperCamelCase.
+Each node must be defined exactly once.
+Rules are regular expressions over the set of tokens and nodes.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s ungrammar which describes ungrammar syntax:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre>Grammar =
+  Node*
+
+Node =
+  name:'ident' '=' Rule
+
+Rule =
+  'ident'                // Alphabetic identifier
+| 'token_ident'          // Single quoted string
+| Rule*                  // Concatenation
+| Rule ('|' Rule)*       // Alternation
+| Rule '?'               // Zero or one repetition
+| Rule '*'               // Kleene star
+| '(' Rule ')'           // Grouping
+| label:'ident' ':' Rule // Labeled rule
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The only unusual thing are optional labels.
+By default, the names in the generated code are derived automatically from the type, but a label can be used as an override, or if there&#8217;s an ambiguity:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre>Expr =
+  literal
+| lhs:Expr op:('+' | '-' | '*' | '/') rhs:Expr
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By convention, ungrammar is indented with two spaces, leading <code>|</code> is not indented.</p>
+</div>
+<div class="paragraph">
+<p>Ungrammar doesn&#8217;t specify any particular way to lower rules to syntax node definitions.
+It&#8217;s up to the generator to pattern-match rules to target language constructs: Java would use inheritance, Rust enums and TypeScript&#8201;&#8212;&#8201;union types.
+The generator can accept only a subset of all possible rules.
+An example of restriction might be: &#8220;Alternation (<code>|</code>) is only allowed at the top level. Alternatives must be other nodes&#8221;.
+With this restriction, an alternative can be lowered to an interface definition with a number of subclasses.</p>
+</div>
+<div class="paragraph">
+<p>The <a href="https://docs.rs/ungrammar/1.1.4/ungrammar/">ungrammar</a> crate provides a Rust API for parsing ungrammars, use it if your code generator is implemented in Rust.
+Alternatively, <a href="https://crates.io/crates/ungrammar2json"><code>ungrammar2json</code></a> binary converts ungrammar syntax into equivalent JSON.
+For an example of generator, take a look at <a href="https://github.com/rust-analyzer/rust-analyzer/blob/4105378dc7479a3dbd39a4afb3eba67d083bd7f8/xtask/src/codegen/gen_syntax.rs"><code>gen_syntax</code></a> in rst-analyzer.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="designing-ungrammar"><a class="anchor" href="#designing-ungrammar"></a>Designing ungrammar</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The concluding section briefly mentions some lessons learned.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Node</code> and <code>Token</code> terminology is inherited from <a href="https://github.com/rust-analyzer/rowan">rowan</a>, rust-analyzer&#8217;s syntax library.
+A better choice would be <code>Tree</code> and <code>Token</code>, as nodes contain other nodes and <em>are</em> trees.</p>
+</div>
+<div class="paragraph">
+<p>Always single-quoting terminals is a nice concrete syntax for grammars.
+Some parser generators I&#8217;ve worked with required only some terminals to be quoted, which, without knowing the rules by heart, reduced readability.
+Similarly, spelling <code>PLUS</code> instead of <code>'+'</code> is not very readable.</p>
+</div>
+<div class="paragraph">
+<p>&#8220;Recursive regular expressions&#8221; feels like a convenient syntax for CFGs.
+Not restricting right-hand-side to be a flat list of alternatives, using <code>()</code> for grouping and allowing basic conveniences like <code>*</code> and <code>?</code> subjectively makes the resulting grammars quiet readable.
+The catch is that one needs union types and anonymous records to faithfully lower arbitrary regex-represented rule.
+Placing restrictions into the specific generator, rather then the base language, feels like a better division of responsibility.</p>
+</div>
+<div class="paragraph">
+<p>By quoting terminals, using punctuation (<code>: = () | * ?</code>) for syntax and completely avoiding keywords, ungrammar avoids clashes between names of productions and the syntax of ungrammar itself.</p>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

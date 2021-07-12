@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #78</title>
+  <meta name="description"
+    content="Commit: 495c958Release: 2021-05-24">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2021/05/24/changelog-78.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #78</h1>
+<div class="post-meta sect1">
+  May 24, 2021
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/495c9586ec51e0cf9b06397d99ec4f65c55e7a28"><code>495c958</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2021-05-24"><code>2021-05-24</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sponsors"><a class="anchor" href="#sponsors"></a>Sponsors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Become a sponsor:</strong> On <a href="https://opencollective.com/rust-analyzer/">OpenCollective</a> or
+<a href="https://github.com/sponsors/rust-analyzer">GitHub Sponsors</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7698"><code>#7698</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8877"><code>#8877</code></a> (first contribution) add new LSP extension for workspace symbol lookup.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8873"><code>#8873</code></a> implement import granularity guessing.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8948"><code>#8948</code></a> "Generate getter" assist places the cursor at the generated function.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8953"><code>#8953</code></a> "Generate getter" avoids generating types like <code>&amp;Vec&lt;T&gt;</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8345"><code>#8345</code></a> (first contribution) add <code>pub mod</code> option to the "Unlinked file" diagnostic fix.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8766"><code>#8766</code></a> (first contribution) add <code>async</code> if required in "Extract function" assist.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8945"><code>#8945</code></a> make expected type work in more situations:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/906069/119269023-dd5a5b00-bbf5-11eb-993a-b6e122c3b9a6.png" alt="119269023 dd5a5b00 bbf5 11eb 993a b6e122c3b9a6">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/906069/119269025-dfbcb500-bbf5-11eb-983c-fc415b8428e0.png" alt="119269025 dfbcb500 bbf5 11eb 983c fc415b8428e0">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8795"><code>#8795</code></a> allow semantic tokens for strings to be disabled.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8858"><code>#8858</code></a> ignore macro imports from <code>extern crate self</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8863"><code>#8863</code></a> don&#8217;t add extra whitespace around fields.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8880"><code>#8880</code></a> fix module renaming.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8875"><code>#8875</code></a> avoid false positive "Missing match arm" when an or-pattern has mismatched types.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8884"><code>#8884</code></a> fix "Add explicit type" producing invalid code on <code>@</code> patterns.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8893"><code>#8893</code></a> update outdated auto-import documentation.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8902"><code>#8902</code></a> fix code completion not inserting borrow text when client supports <code>InsertAndReplace</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8910"><code>#8910</code></a> don&#8217;t hang on unresolved attribute on extern block and its children.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8918"><code>#8918</code></a> fix hang caused by non-unique attribute IDs.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8901"><code>#8901</code></a> speed up <code>fill_match_arms</code> on tuples of large enums.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8935"><code>#8935</code></a> mention <code>rust-tools.nvim</code> for <code>nvim-lsp</code> in the manual.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8936"><code>#8936</code></a> improve nightly downloads with better local state management.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8940"><code>#8940</code></a> give <code>unsafe</code> semantic token modifier to unsafe traits.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8947"><code>#8947</code></a> correctly resolve crate name in use paths when import shadows it.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8856"><code>#8856</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8921"><code>#8921</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8938"><code>#8938</code></a> use Chalk for unification.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8862"><code>#8862</code></a> reorganize module structure of fixits.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8871"><code>#8871</code></a> simplify <code>DefCollector::resolve_macros</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8882"><code>#8882</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8887"><code>#8887</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8888"><code>#8888</code></a> resolve attributes in name resolution (minimal version).</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8885"><code>#8885</code></a> greatly simplify eager macro representation.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8889"><code>#8889</code></a> track in-scope derive helpers during name resolution.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8898"><code>#8898</code></a> resolve derive helpers.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8900"><code>#8900</code></a> support <code>#[register_attr]</code> and <code>#[register_tool]</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8914"><code>#8914</code></a> remove <code>StructDefKind</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8916"><code>#8916</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8932"><code>#8932</code></a> implement <code>ItemTree</code> pretty-printing.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8868"><code>#8868</code></a> replace <code>AstTransformer</code> with mutable syntax trees.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8922"><code>#8922</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8923"><code>#8923</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8924"><code>#8924</code></a> add more docs.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8926"><code>#8926</code></a> drop uncompressed release artifacts and those following the old naming convention.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8954"><code>#8954</code></a> document <code>ItemTree</code> design.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

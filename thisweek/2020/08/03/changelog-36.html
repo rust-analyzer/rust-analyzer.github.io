@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #36</title>
+  <meta name="description"
+    content="Commit: e96bfd8Release: 2020-08-03">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2020/08/03/changelog-36.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #36</h1>
+<div class="post-meta sect1">
+  Aug 3, 2020
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/e96bfd812a0f883bc9aa6b5ebe3b0a712c860487"><code>e96bfd8</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2020-08-03"><code>2020-08-03</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sponsors"><a class="anchor" href="#sponsors"></a>Sponsors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Become a sponsor:</strong> <a href="https://opencollective.com/rust-analyzer/">opencollective.com/rust-analyzer</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>We started the effort to share the parser between rust-analyzer and rustc.
+This will take a while to complete, and won&#8217;t give any new user-visible features until completion.
+As the first step, rust-analyzer now uses
+<a href="https://github.com/rust-analyzer/ungrammar/blob/da1aa8a99738c1a4fe5e321e39aae857c1eb54c8/rust.ungram">this grammar</a>
+to generate syntax tree structure.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5547"><code>#5547</code></a> fold multiline parameter lists.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5561"><code>#5561</code></a>: allow running more tests at once via the module runners:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/2690773/88724896-e85a7100-d133-11ea-99ee-689126679cbc.png" alt="88724896 e85a7100 d133 11ea 99ee 689126679cbc">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5563"><code>#5563</code></a> Check all targets for package-level tasks.
+When invoking "Select Runnable" with the caret on a runnable with a specific target (test, bench, binary), append the corresponding argument for the <code>cargo check -p</code> module runnable.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5586"><code>#5586</code></a> Support new sysroot layout on nightly.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5596"><code>#5596</code></a> add checkOnSave.noDefaultFeatures and correct how we handle some cargo flags.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5565"><code>#5565</code></a> don&#8217;t mix non-path-based rules with path-based in <strong>S</strong>tructural <strong>S</strong>earch <strong>R</strong>eplace.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5554"><code>#5554</code></a> fix <strong>Remove dbg</strong> assist to not remove meaningful parenthesis and semicolons.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5567"><code>#5567</code></a> wrap placeholder expansions in SSR in parenthesis when necessary.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5513"><code>#5513</code></a> when generating launch.json configurations, correctly handle multi-folder workspaces.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5572"><code>#5572</code></a> Switch to ungrammar for generating syntax trees.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5574"><code>#5574</code></a> Replace rand with oorandom.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5581"><code>#5581</code></a> Use perf-events to measure number of instructions in addition to wall clock time for <a href="https://rust-analyzer.github.io/metrics/">metrics</a> to get more stable measurements on CI. That plan was foiled by perf not working on the CI.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5573"><code>#5573</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5578"><code>#5578</code></a>, &#8230;&#8203; : rename various AST types</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Old Name</th>
+<th class="tableblock halign-left valign-top">New Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ast::NominalDef</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ast::AdtDef</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ast::ModuleItem</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ast::Item</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ast::Alias</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ast::Rename</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ast::TypeParamList</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ast::GenericParamList</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ast::TypeRef</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ast::Type</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ast::PlaceholderType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ast::InferType</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ast::DotDotPat</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ast::RestPat</code></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

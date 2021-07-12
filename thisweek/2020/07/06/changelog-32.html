@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #32</title>
+  <meta name="description"
+    content="Commit: 8b0983eRelease: 2020-07-06">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2020/07/06/changelog-32.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #32</h1>
+<div class="post-meta sect1">
+  Jul 6, 2020
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/8b0983e89ad9a28b142eccf3755a8c9aaeb37852"><code>8b0983e</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2020-07-06"><code>2020-07-06</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sponsors"><a class="anchor" href="#sponsors"></a>Sponsors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This week we&#8217;d like to thank one of our individual sponsors, <a href="https://github.com/anp">@anp</a>.</p>
+</div>
+<div class="paragraph">
+<p>@anp maintains <a href="https://moxie.rs">moxie</a> project: a lightweight platform-agnostic declarative UI runtime, because incremental feedback latency and quality are core to building interactive software.</p>
+</div>
+<div class="paragraph">
+<p><strong>Become a sponsor:</strong> <a href="https://opencollective.com/rust-analyzer/">opencollective.com/rust-analyzer</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5169"><code>#5169</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5188"><code>#5188</code></a> initial support for dynamic workspace reloading.</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1711539/86605844-8335b480-bfa7-11ea-964f-72e06f535607.gif" alt="86605844 8335b480 bfa7 11ea 964f 72e06f535607">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5119"><code>#5119</code></a> show notification while SSR is in progress.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5120"><code>#5120</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5154"><code>#5154</code></a> add a simple SSR subcommand to the rust-analyzer command line binary:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>rust-analyzer ssr '$a.foo($b) ==&gt; bar($a, $b)'</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5161"><code>#5161</code></a> add initial support for placeholder constraints in structural search replace.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5142"><code>#5142</code></a> allow parallel type inference in batch mode (<code>rust-analyzer analysis-stats</code>).</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5178"><code>#5178</code></a> emit folding ranges for multiline calls.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5149"><code>#5149</code></a> implement Chalk variable kinds, which improves type inference for primitives.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5116"><code>#5116</code></a> set categories for code actions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5192"><code>#5192</code></a> take <code>rust-analyzer.cargo.features</code> into account when generating run configurations.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5202"><code>#5202</code></a> allow to set default environment for run configurations (<a href="https://rust-analyzer.github.io/manual.html#setting-runnable-environment-variables">docs</a>):</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="jsonc"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre><span class="nl">"rust-analyzer.runnableEnv"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="c1">// null mask means that this rule will be applied for all runnables</span><span class="w">
+    </span><span class="c1">// "mask": null,</span><span class="w">
+    </span><span class="na">env</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"APP_ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"APP_DATA"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asdf"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"mask"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test_name"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"env"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"APP_ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w"> </span><span class="c1">// overwrites only APP_ID</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/4864"><code>#4864</code></a> Add optional target to crates in json project</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5122"><code>#5122</code></a> fix "Run | Debug" lens for examples.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5124"><code>#5124</code></a> partially fix handling of type params depending on type params.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5211"><code>#5211</code></a> partially fix inference of indexing argument.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5096"><code>#5096</code></a> fix handling of whitespace when applying SSR within macro expansions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5110"><code>#5110</code></a> fix call hierarchy.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5179"><code>#5179</code></a> lower fields despite invalid type.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5089"><code>#5089</code></a> disable auto-complete on comments.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5189"><code>#5189</code></a> record and suggest assoc. items of traits via ImportMap.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5212"><code>#5212</code></a> fix renaming of nested out of line modules <code>mod outer { mod inner; }</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5136"><code>#5136</code></a> split namespace maps in <code>ItemScope</code>, reducing memory usage of the CrateDefMap query by ~130 MB (50%) on r-a.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5175"><code>#5175</code></a> more memory-efficient impl collection.
+This saves roughly 90 MB in <code>ImplsFromDepsQuery</code>, which used to copy the list of all impls from libcore into <strong>every</strong> crate in the graph.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5127"><code>#5127</code></a> improve test infra for type inference test.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5126"><code>#5126</code></a> use <code>FxHash{Map,Set}</code> consistently.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5101"><code>#5101</code></a> add expect&#8201;&#8212;&#8201;a lighter-weight alternative to the <code>insta</code> snapshot testing library.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5137"><code>#5137</code></a> make gotodef tests more data-driven.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5138"><code>#5138</code></a> refactor runnable tests.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5146"><code>#5146</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5151"><code>#5151</code></a> simplify inlay hints tests.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5153"><code>#5153</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5156"><code>#5156</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5157"><code>#5157</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5162"><code>#5162</code></a> remove some generics from <code>ra_hir</code> interface.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5158"><code>#5158</code></a> correctly distinguish between semantical and display crate names.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5160"><code>#5160</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5167"><code>#5167</code></a> reuse caches in more cases.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5176"><code>#5176</code></a> update expand macro tests.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5193"><code>#5193</code></a> move <code>cargo metadata</code> off the main loop.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5199"><code>#5199</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5200"><code>#5200</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5201"><code>#5201</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5205"><code>#5205</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5214"><code>#5214</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5215"><code>#5215</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5219"><code>#5219</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5221"><code>#5221</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/5226"><code>#5226</code></a> refactor completion tests.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5197"><code>#5197</code></a> SSR internal refactors.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/5222"><code>#5222</code></a> add "rehighlight after adding a new top-level function" to the set of bechmarks.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

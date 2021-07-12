@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #72</title>
+  <meta name="description"
+    content="Commit: 7be0613Release: 2021-04-12">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2021/04/12/changelog-72.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #72</h1>
+<div class="post-meta sect1">
+  Apr 12, 2021
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/7be06139b632ee615fc18af04dd67947e2c794b2"><code>7be0613</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2021-04-12"><code>2021-04-12</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sponsors"><a class="anchor" href="#sponsors"></a>Sponsors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Become a sponsor:</strong> On <a href="https://opencollective.com/rust-analyzer/">OpenCollective</a> or
+<a href="https://github.com/sponsors/rust-analyzer">GitHub Sponsors</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8388"><code>#8388</code></a> auto-close blocks when typing <code>{</code>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1786438/114024061-e8d70a00-9873-11eb-89d6-c50296cbf495.gif" alt="114024061 e8d70a00 9873 11eb 89d6 c50296cbf495">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8375"><code>#8375</code></a> show errors from <code>cargo metadata</code> and initial <code>cargo check</code> in the status bar.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8410"><code>#8410</code></a> support <code>InsertReplaceSupport</code> capability</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8433"><code>#8433</code></a> intern lots of things (great for memory usage):</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/114185930-f1504300-994e-11eb-8e99-7925c54ab3c3.png" alt="114185930 f1504300 994e 11eb 8e99 7925c54ab3c3">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8406"><code>#8406</code></a> improve indexing of impls (great for analysis speed):</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/114210350-595f5300-9968-11eb-87aa-b7835faafdb8.png" alt="114210350 595f5300 9968 11eb 87aa b7835faafdb8">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8355"><code>#8355</code></a> do not drop errors from <code>cargo metadata</code> and <code>cargo check</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8339"><code>#8339</code></a> fix "Extract variable" assist in guards.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8245"><code>#8245</code></a> properly resolve intra-doc links in hover and goto_definition.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8371"><code>#8371</code></a> don&#8217;t use <code>HirDisplayWrapper</code> when displaying <code>SourceCode</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8381"><code>#8381</code></a> lower attributes on tuple fields.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8386"><code>#8386</code></a> avoid O(n²) when constructing <code>AttrSourceMap</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8389"><code>#8389</code></a> do not import on the fly inside record literal fields.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8390"><code>#8390</code></a> support trait impls in unnamed consts.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8392"><code>#8392</code></a> (first contribution) add space after lifetime in "Expand macro" output.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8394"><code>#8394</code></a> infer variants through type aliased enums.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8397"><code>#8397</code></a> (first contribution) improve "still loading" error message.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8412"><code>#8412</code></a> emit folding ranges for multiline array literals.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8207"><code>#8207</code></a> offer "Remove `dbg!`" assist on empty calls.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8421"><code>#8421</code></a> reduce allocations in "Expand macro" formatter.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8426"><code>#8426</code></a> track recursion limit when expanding custom derive.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8431"><code>#8431</code></a> add trait member token modifier to associated types.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8440"><code>#8440</code></a> fix crash on <code>syn</code> involving lifetimes returned by Chalk.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8444"><code>#8444</code></a> shrink <code>unlinked-file</code> diagnostic to 3 characters.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8447"><code>#8447</code></a> resolve prelude and crate root names in the root <code>DefMap</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8450"><code>#8450</code></a> don&#8217;t ignore unnamed consts when looking for definitions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8457"><code>#8457</code></a> don&#8217;t assume wrong binary operator return type when primitives are involved.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8436"><code>#8436</code></a> fix "Extract function"'s mutability of variables outliving the body.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8463"><code>#8463</code></a> support macros in pattern position.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8334"><code>#8334</code></a> intern and shrink more data to reduce memory usage.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8337"><code>#8337</code></a> explain "extract if condition" refactoring.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8326"><code>#8326</code></a> rewrite "Reorder fields" assist to use mutable syntax trees.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8343"><code>#8343</code></a> document hypothetical completion problem.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8348"><code>#8348</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8353"><code>#8353</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8359"><code>#8359</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8366"><code>#8366</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8419"><code>#8419</code></a> type inference now uses Chalk&#8217;s types everywhere.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8350"><code>#8350</code></a> prepare to store <code>OpQueue</code> results in the queue itself.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8364"><code>#8364</code></a> (first contribution) slightly reduce the memory usage of some `enum`s</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8374"><code>#8374</code></a> intern <code>TypeRef</code>s stored in <code>Body</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8376"><code>#8376</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8380"><code>#8380</code></a> infer: remove redundant <code>record_field_resolutions</code> and <code>record_pat_field_resolutions</code> fields.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8379"><code>#8379</code></a> document broken windows.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8429"><code>#8429</code></a> add documentation and test for <code>//!</code> doc comment continuation on Enter.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8384"><code>#8384</code></a> use linear regression to catch accidentally super-linear performance regressions.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
