@@ -1076,27 +1076,26 @@ fn foo() -> i32 { 42i32 }
 
 [discrete]
 === `inline_call`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_call.rs#L13[inline_call.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_call.rs#L15[inline_call.rs]
 
-Inlines a function or method body.
+Inlines a function or method body creating a `let` statement per parameter unless the parameter
+can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
+or if the parameter is only accessed inside the function body once.
 
 .Before
 ```rust
-fn add(a: u32, b: u32) -> u32 { a + b }
-fn main() {
-    let x = add┃(1, 2);
+fn foo(name: Option<&str>) {
+    let name = name.unwrap┃();
 }
 ```
 
 .After
 ```rust
-fn add(a: u32, b: u32) -> u32 { a + b }
-fn main() {
-    let x = {
-        let a = 1;
-        let b = 2;
-        a + b
-    };
+fn foo(name: Option<&str>) {
+    let name = match name {
+            Some(val) => val,
+            None => panic!("called `Option::unwrap()` on a `None` value"),
+        };
 }
 ```
 
@@ -1156,7 +1155,6 @@ impl<'a> Cursor<'a> {
 === `invert_if`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/invert_if.rs#L12[invert_if.rs]
 
-Apply invert_if
 This transforms if expressions of the form `if !x {A} else {B}` into `if x {B} else {A}`
 This also works with `!=`. This assist can only be applied with the cursor
 on `if`.
@@ -1677,7 +1675,7 @@ fn foo<B: Bar>(bar: B) {}
 === `replace_let_with_if_let`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_let_with_if_let.rs#L15[replace_let_with_if_let.rs]
 
-Replaces `let` with an `if-let`.
+Replaces `let` with an `if let`.
 
 .Before
 ```rust
@@ -1735,7 +1733,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `replace_qualified_name_with_use`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_qualified_name_with_use.rs#L10[replace_qualified_name_with_use.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_qualified_name_with_use.rs#L13[replace_qualified_name_with_use.rs]
 
 Adds a use statement for a given fully-qualified name.
 
@@ -1769,32 +1767,6 @@ fn main() {
 ```rust
 fn main() {
     find('{');
-}
-```
-
-
-[discrete]
-=== `replace_unwrap_with_match`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_unwrap_with_match.rs#L18[replace_unwrap_with_match.rs]
-
-Replaces `unwrap` with a `match` expression. Works for Result and Option.
-
-.Before
-```rust
-fn main() {
-    let x: Result<i32, i32> = Ok(92);
-    let y = x.┃unwrap();
-}
-```
-
-.After
-```rust
-fn main() {
-    let x: Result<i32, i32> = Ok(92);
-    let y = match x {
-        Ok(it) => it,
-        ┃_ => unreachable!(),
-    };
 }
 ```
 

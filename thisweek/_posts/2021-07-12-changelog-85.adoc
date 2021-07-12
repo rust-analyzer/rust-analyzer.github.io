@@ -1,0 +1,60 @@
+= Changelog #85
+:sectanchors:
+:page-layout: post
+
+Commit: commit:fe00358888a24c64878abc15f09b0e60e16db9d6[] +
+Release: release:2021-07-12[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:9478[], pr:9494[], pr:9523[] (first contribution) show imported trait on autocompletion of associated items:
++
+image::https://user-images.githubusercontent.com/62165556/124471905-b5dcdd80-ddb2-11eb-8852-1d703ef6023f.png[]
++
+image::https://user-images.githubusercontent.com/62165556/124471923-bffedc00-ddb2-11eb-9571-31b8b95499f1.png[]
+* pr:9568[] add `for` postfix completion:
++
+image::https://user-images.githubusercontent.com/62165556/125194692-a0aaf780-e267-11eb-952a-81de7955d9a1.gif[]
+* pr:9498[] remove "Replace `unwrap` with `match`" assist in favor of "Inline call":
++
+image::https://user-images.githubusercontent.com/3757771/124482574-b58c1480-dda9-11eb-940d-bc6a2fe4050b.gif[]
+* pr:9503[] make "Join lines" behavior configurable:
++
+image::https://user-images.githubusercontent.com/1711539/124515923-4504e800-dde9-11eb-8d58-d97945a1a785.gif[]
+* pr:9449[] emit test names in "Run test" runnables if they come from a macro expansion:
++
+image::https://user-images.githubusercontent.com/3757771/124174493-bb81ad00-daac-11eb-96c7-3de6545a62e1.png[]
+* pr:9555[] enable `auto_import` on ident patterns.
+* pr:9520[] complete `crate`, `super` and `self` in non-use tree paths.
+* pr:9548[] add `self` parameter completion.
+
+== Fixes
+
+* pr:9541[] (first contribution) make "Generate function" add `async` if the call is followed by `await`.
+* pr:9474[], pr:9500[] inline parameters in "Inline call" if possible.
+* pr:9497[] wrap inlined closures in parens when using "Inline call".
+* pr:9499[] fix cycle in visibility computation with modules from the same block.
+* pr:9496[] make file logging line-buffered.
+* pr:9526[], pr:9529[] coerce array elements to a common type.
+* pr:9536[] represent opaque types with `TyKind::OpaqueType`.
+* pr:9551[] keep qualifier in "Replace qualified name with use".
+* pr:9552[] make "Add explicit type" respect coercions.
+* pr:9557[] respect coercions in "Inline call".
+* pr:9569[] fix highlighting of field shorthands.
+* pr:9572[] work around older `synstructure` derives.
+
+== Internal Improvements
+
+* pr:9519[] (first contribution) name all spawned threads.
+* pr:9505[] ensure consistent passing of config params.
+* pr:9514[] invert boolean literals in assist negation logic.
+* pr:9512[] record coercion adjustments.
+* pr:9545[] record autoderef adjustments.
+* pr:9563[] move some presentation-specific concerns out of the IDE crate.
+* pr:9565[] document `NameClass` and `NameRefClass`.
+* pr:9567[] remove unneeded `NameClass::ExternCrate`.
