@@ -294,9 +294,13 @@ image::https://user-images.githubusercontent.com/48062697/113020660-b5f98b80-917
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Join Lines
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/join_lines.rs#L15[join_lines.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/join_lines.rs#L21[join_lines.rs]
 
 Join selected lines into one, smartly fixing up whitespace, trailing commas, and braces.
+
+See
+https://user-images.githubusercontent.com/1711539/124515923-4504e800-dde9-11eb-8d58-d97945a1a785.gif[this gif]
+for the cases handled specially by joined lines.
 
 |===
 | Editor  | Action Name
@@ -485,7 +489,7 @@ image::https://user-images.githubusercontent.com/48062697/113065580-04c21800-91b
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Related Tests
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L146[runnables.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L189[runnables.rs]
 
 Provides a sneak peek of all tests where the current item is used.
 
@@ -519,7 +523,7 @@ image::https://user-images.githubusercontent.com/48062697/113065582-055aae80-91b
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Run
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L91[runnables.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L108[runnables.rs]
 
 Shows a popup suggesting to run a test/benchmark/binary **at the current cursor
 location**. Super useful for repeatedly running just a single test. Do bind this
