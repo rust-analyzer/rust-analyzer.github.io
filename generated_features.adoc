@@ -157,10 +157,10 @@ image::https://user-images.githubusercontent.com/48062697/113020670-b7c34f00-917
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Folding
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/folding_ranges.rs#L31[folding_ranges.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/folding_ranges.rs#L36[folding_ranges.rs]
 
-Defines folding regions for curly braced blocks, runs of consecutive import
-statements, and `region` / `endregion` comment markers.
+Defines folding regions for curly braced blocks, runs of consecutive use, mod, const or static
+items, and `region` / `endregion` comment markers.
 
 
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
@@ -228,7 +228,7 @@ image::https://user-images.githubusercontent.com/48062697/113065566-02f85480-91b
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Go to Type Definition
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_type_definition.rs#L8[goto_type_definition.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_type_definition.rs#L6[goto_type_definition.rs]
 
 Navigates to the type of an identifier.
 
@@ -489,7 +489,7 @@ image::https://user-images.githubusercontent.com/48062697/113065580-04c21800-91b
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Related Tests
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L189[runnables.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L196[runnables.rs]
 
 Provides a sneak peek of all tests where the current item is used.
 
@@ -523,7 +523,7 @@ image::https://user-images.githubusercontent.com/48062697/113065582-055aae80-91b
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Run
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L108[runnables.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L111[runnables.rs]
 
 Shows a popup suggesting to run a test/benchmark/binary **at the current cursor
 location**. Super useful for repeatedly running just a single test. Do bind this
