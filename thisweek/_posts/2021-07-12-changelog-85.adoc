@@ -20,7 +20,7 @@ image::https://user-images.githubusercontent.com/62165556/124471923-bffedc00-ddb
 * pr:9568[] add `for` postfix completion:
 +
 image::https://user-images.githubusercontent.com/62165556/125194692-a0aaf780-e267-11eb-952a-81de7955d9a1.gif[]
-* pr:9498[] remove "Replace `unwrap` with `match`" assist in favor of "Inline call":
+* pr:9498[] remove "Replace `unwrap` with ``match``" assist in favor of "Inline call":
 +
 image::https://user-images.githubusercontent.com/3757771/124482574-b58c1480-dda9-11eb-940d-bc6a2fe4050b.gif[]
 * pr:9503[] make "Join lines" behavior configurable:

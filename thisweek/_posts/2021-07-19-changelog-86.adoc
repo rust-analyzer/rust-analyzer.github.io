@@ -1,0 +1,46 @@
+= Changelog #86
+:sectanchors:
+:page-layout: post
+
+Commit: commit:ea105f9396a9dab68e71efb06016b7c76c83ba7c[] +
+Release: release:2021-07-19[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:9550[] (first contribution) add multiple proc macro ABI support.
+* pr:9595[] show test mod runnable in outline modules:
++
+image::https://user-images.githubusercontent.com/3757771/125494747-169c9238-3faa-4eed-9700-90bd730b4e3c.png[]
+* pr:9596[] include type arguments in "Go to type definition" result:
++
+image::https://user-images.githubusercontent.com/308347/126110831-5a16d375-b7fa-4556-a4f2-eb739b641f60.gif[]
+* pr:9594[] add `mutable` semantic token modifier to assignment operators.
+* pr:9622[] improve parser error recovery for function parameters.
+* pr:9619[] parse GATs in associated type arguments.
+* pr:9585[] rename the old server binary before update.
+
+== Fixes
+
+* pr:9599[] (first contribution) complete `true` and `false` keywords.
+* pr:9600[] (first contribution) fix "Unwrap block" assist on single-line and nested blocks.
+* pr:9621[] (first contribution) update manual after NeoVim 0.5 release.
+* pr:9579[] set more ``CARGO_`` env vars.
+* pr:9604[] don't fold consecutive modules with item lists.
+
+== Internal Improvements
+
+* pr:9535[] remove proc macro management thread.
+* pr:9582[] remove erroneous default impl.
+* pr:9583[] get rid of a call to slow O(N) `visibility_of` function.
+* pr:9592[] split main highlighting function.
+* pr:9597[] use `Type::walk` for goto_type_definition.
+* pr:9603[] move attribute completion tests.
+* pr:9605[] make folding ranges respect item visibilities.
+* pr:9614[] simplify "Remove ``dbg!``" assist.
+* pr:9620[] don't depend on the current working directory.
+* pr:9623[] make it clearer where IO happens.

@@ -1424,7 +1424,7 @@ fn main() {
 
 [discrete]
 === `remove_dbg`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/remove_dbg.rs#L8[remove_dbg.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/remove_dbg.rs#L9[remove_dbg.rs]
 
 Removes `dbg!()` macro call.
 
