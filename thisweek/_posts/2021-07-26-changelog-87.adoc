@@ -1,0 +1,56 @@
+= Changelog #87
+:sectanchors:
+:page-layout: post
+
+Commit: commit:5983d3745ac8490c1c2798fdc963aa9fc803dd03[] +
+Release: release:2021-07-26[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:9660[] (first contribution) hide keyword suggestions in non-trivial paths:
++
+image::https://user-images.githubusercontent.com/14952658/126478222-54c742bb-2bd3-4e5b-b533-f835264604be.png[]
++
+image::https://user-images.githubusercontent.com/14952658/126479635-819127d8-322b-4e34-acd2-194d1e9ba504.png[]
+* pr:9678[] add configuration for "highlight related" features:
++
+image::https://user-images.githubusercontent.com/2295721/126728849-a38b560c-b687-42c1-9c41-7584ad718469.gif[]
+* pr:9665[] only complete ancestors and `self` in visibility path completions.
+* pr:9681[], pr:9681[] respect `#[doc(hidden)]` in dot-completion.
+* pr:9688[] resolve `derive` attribute input macro paths.
+
+
+== Fixes
+
+* pr:9634[] (first contribution) improve `rust-analyzer.files.excludeDirs` docs.
+* pr:9637[] overhaul `doc_links` testing infra and fix several issues.
+* pr:9646[] show `use` prefix in completion list for auto-imports.
+* pr:9651[] restrict completions inside visibility modifiers.
+* pr:9662[] only import public items from other crates.
+* pr:9663[] don't offer "Extract variable" when there is no surrounding block.
+* pr:9674[] fix pattern name resolution when the name also exists as a type.
+* pr:9677[] correctly classify renamed imports.
+* pr:9691[] keep catch-all arm in "Fill match arms" if it has a non-empty expression.
+
+
+== Internal Improvements
+
+* pr:9453[] (first contribution) add `Limit` struct.
+* pr:9631[] (fisrt contribution) add some metadata to make `cargo deb` happy.
+* pr:9641[] link to the "Explaining Rust Analyzer" series.
+* pr:9625[] simplify handling of build scripts.
+* pr:9633[] add `TreeId` to identify ``ItemTree``s.
+* pr:9635[] explain why we avoid serializing everything.
+* pr:9638[] replace some unwraps with types.
+* pr:9645[] make CI logs easier to skim.
+* pr:9644[] add simple smoke test for project model.
+* pr:9647[] remove potentially slow method.
+* pr:9652[] don't concat path in the "Replace qualified name with use" assist when it starts with a keyword.
+* pr:9675[] move and clean up record completion tests.
+* pr:9683[] move out expression-based `unqualified_path` completion tests.
+* pr:9685[] add tests for tuple struct field completion and resolve a FIXME.
