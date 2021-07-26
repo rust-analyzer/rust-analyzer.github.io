@@ -244,7 +244,7 @@ image::https://user-images.githubusercontent.com/48062697/113020657-b560f500-917
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Highlight Related
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L21[highlight_related.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L29[highlight_related.rs]
 
 Highlights constructs related to the thing under the cursor:
 - if on an identifier, highlights all references to that identifier in the current file
