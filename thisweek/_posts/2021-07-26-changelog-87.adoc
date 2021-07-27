@@ -21,7 +21,7 @@ image::https://user-images.githubusercontent.com/14952658/126479635-819127d8-322
 +
 image::https://user-images.githubusercontent.com/2295721/126728849-a38b560c-b687-42c1-9c41-7584ad718469.gif[]
 * pr:9665[] only complete ancestors and `self` in visibility path completions.
-* pr:9681[], pr:9681[] respect `#[doc(hidden)]` in dot-completion.
+* pr:9681[], pr:9684[] respect `#[doc(hidden)]` in dot-completion.
 * pr:9688[] resolve `derive` attribute input macro paths.
 
 
