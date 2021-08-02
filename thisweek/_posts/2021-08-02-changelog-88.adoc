@@ -17,7 +17,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 image::https://user-images.githubusercontent.com/22298999/126914293-0ce49a92-545d-4005-a59e-9294fa2330d6.gif[]
 * pr:9715[], pr:9719[] make completions respect `#[doc(hidden)]`.
 * pr:9731[] add "Replace char with string" assist.
-* pr:9732[] gate custom clint-side commands behind capabilities.
+* pr:9732[] gate custom client-side commands behind capabilities.
 * pr:9740[] make "Add explicit type" work for closure parameters.
 * pr:9593[] make "Remove unused param" work for methods and associated functions.
 
