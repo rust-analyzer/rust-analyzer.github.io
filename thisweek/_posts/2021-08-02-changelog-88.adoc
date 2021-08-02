@@ -1,0 +1,52 @@
+= Changelog #88
+:sectanchors:
+:page-layout: post
+
+Commit: commit:df0936b4af7bd573dc8906b6dbdbf80ff40b75f3[] +
+Release: release:2021-08-02[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:9693[] (first contribution) add Hover Range capability to get the type of an expression:
++
+image::https://user-images.githubusercontent.com/22298999/126914293-0ce49a92-545d-4005-a59e-9294fa2330d6.gif[]
+* pr:9715[], pr:9719[] make completions respect `#[doc(hidden)]`.
+* pr:9731[] add "Replace char with string" assist.
+* pr:9732[] gate custom clint-side commands behind capabilities.
+* pr:9740[] make "Add explicit type" work for closure parameters.
+* pr:9593[] make "Remove unused param" work for methods and associated functions.
+
+== Fixes
+
+* pr:9749[] (first contribution) exclude `rust-analyzer.server.path` from VS Code's sync feature.
+* pr:9744[] annotate type hints for pattern name ranges instead of the pattern itself:
++
+image::https://user-images.githubusercontent.com/3757771/127741276-e1dd173b-2964-4df0-abae-860283b2e1be.png[]
++
+image::https://user-images.githubusercontent.com/3757771/127741277-e7fc2836-4f31-4c45-a3a9-69cbff3d52d9.png[]
+* pr:9558[] do not erase Cargo diagnostics from the closed documents.
+* pr:9699[] parse extra ``::``s in generic arguments.
+* pr:9701[] correctly update diagnostics when files are opened and closed.
+* pr:9709[] add capability for the "Open ``Cargo.toml``" LSP extension.
+* pr:9710[] don't qualify `self` as `crate` in "Add missing impl members".
+* pr:9700[] remove the legacy macro scoping hack.
+* pr:9722[] refine the targets of the "Extract function" assist.
+* pr:9728[] attach comma token to `MATCH_ARM` instead of `MATCH_ARM_LIST`.
+* pr:9742[] fix hover range for derive inputs.
+* pr:9739[] favor ``deref``fed types in "Generate function" assist.
+* pr:9747[] wrap inner tail expressions in the "Missing `Ok` or ``Some``" diagnostic.
+
+== Internal Improvements
+
+* pr:9718[] (first contribution) bump `notify` version.
+* pr:9716[] stop reexporting ``hir_def``'s `ItemInNs` from HIR.
+* pr:9724[] use more strictly-typed syntax nodes for analysis in "Extract function".
+* pr:9727[] simplify the "Extract function" assist.
+* pr:9743[] improve completion profiling.
+* pr:9746[] add API to check what are the max limits in practice.
+* pr:9703[] fix several typos and grammar mistakes.
