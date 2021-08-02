@@ -2,7 +2,7 @@
 
 [discrete]
 === `add_explicit_type`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_explicit_type.rs#L9[add_explicit_type.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_explicit_type.rs#L6[add_explicit_type.rs]
 
 Specify type for a let binding.
 
@@ -407,7 +407,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_function`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_function.rs#L28[extract_function.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_function.rs#L31[extract_function.rs]
 
 Extracts selected statements into new function.
 
@@ -860,7 +860,7 @@ impl From<u32> for A {
 
 [discrete]
 === `generate_function`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_function.rs#L19[generate_function.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_function.rs#L20[generate_function.rs]
 
 Adds a stub function with a signature matching the function under the cursor.
 
@@ -891,7 +891,7 @@ fn bar(arg: &str, baz: Baz) ${0:-> ()} {
 
 [discrete]
 === `generate_getter`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_getter.rs#L9[generate_getter.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_getter.rs#L10[generate_getter.rs]
 
 Generate a getter method.
 
@@ -919,7 +919,7 @@ impl Person {
 
 [discrete]
 === `generate_getter_mut`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_getter.rs#L35[generate_getter.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_getter.rs#L36[generate_getter.rs]
 
 Generate a mut getter method.
 
@@ -1156,8 +1156,7 @@ impl<'a> Cursor<'a> {
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/invert_if.rs#L12[invert_if.rs]
 
 This transforms if expressions of the form `if !x {A} else {B}` into `if x {B} else {A}`
-This also works with `!=`. This assist can only be applied with the cursor
-on `if`.
+This also works with `!=`. This assist can only be applied with the cursor on `if`.
 
 .Before
 ```rust
@@ -1571,6 +1570,27 @@ impl Foo for Bar {
 
 
 [discrete]
+=== `replace_char_with_string`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_string_with_char.rs#L51[replace_string_with_char.rs]
+
+Replace a char literal with a string literal.
+
+.Before
+```rust
+fn main() {
+    find('{┃');
+}
+```
+
+.After
+```rust
+fn main() {
+    find("{");
+}
+```
+
+
+[discrete]
 === `replace_derive_with_manual_impl`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_derive_with_manual_impl.rs#L19[replace_derive_with_manual_impl.rs]
 
@@ -1752,9 +1772,9 @@ fn process(map: HashMap<String, String>) {}
 
 [discrete]
 === `replace_string_with_char`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_string_with_char.rs#L5[replace_string_with_char.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_string_with_char.rs#L11[replace_string_with_char.rs]
 
-Replace string with char.
+Replace string literal with char literal.
 
 .Before
 ```rust
