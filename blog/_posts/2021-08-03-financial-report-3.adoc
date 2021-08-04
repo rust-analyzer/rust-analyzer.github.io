@@ -1,0 +1,38 @@
+= Financial Report #3
+:sectanchors:
+:page-layout: post
+
+This is the third financial status report of the rust-analyzer project.
+
+Since the https://rust-analyzer.github.io/blog/2020/08/20/financial-report.html[last update], we've set up a https://github.com/sponsors/rust-analyzer[GitHub Sponsors profile] in addition to the https://opencollective.com/rust-analyzer[OpenCollective]. You can support the project on whichever platform suits you best.
+
+rust-analyzer has also grown from an experimental Ferrous Systems project to one that is slated to become Rust's official solution for IDE support, with multiple companies directly funding work on it.
+For that reason, we'll be posting future financial updates on the https://ferrous-systems.com/blog/[Ferrous Systems blog], as Ferrous runs the OpenCollective and GitHub Sponsors fundraising.
+
+(side note: if your company would like to support rust-analyzer, but these platforms don't fit into your procurement process or are otherwise too hard to deal with, you can https://ferrous-systems.com/[contact Ferrous Systems] to figure out a solution)
+
+== 2020-07-01 to 2021-02-28
+
+In these 8 months, you've supported the project with approximately 32500€ on OpenCollective, and 6500€ on GitHub Sponsors.
+
+Host share, payment processing, and bank account fees amounted to around 6000€, leaving us with 33000€.
+
+We've paid 15000€ of that to rust-analyzer contributors, while the rest went towards funding Jonas' time on the project.
+
+== 2021-03-01 to now
+
+Since March, you've supported rust-analyzer with around 21000€ on OpenCollective and 6500€ on GitHub Sponsors, while the fees add up to around 1000€ so far.
+
+We haven't yet completed the contributor payouts for this time frame and will update when they happen.
+
+=== Hired contributor: https://github.com/Veykril[Lukas Wirth]
+
+Your constant funding enabled us to hire https://github.com/Veykril[Lukas Wirth] as a working student! Lukas is being coached by Jonas.
+
+=== Sponsor highlight: Kraken
+
+We've also received a generous 50000€ grant from Kraken during this time. This enabled us to hire with confidence. You can read their announcement here https://blog.kraken.com/post/7964/oxidizing-kraken-improving-kraken-infrastructure-using-rust/[blog post]. Thank you, Kraken!
+
+== Next Steps
+
+In the coming months, we'll complete the next batch of contributor payouts and follow up with another quick update.
