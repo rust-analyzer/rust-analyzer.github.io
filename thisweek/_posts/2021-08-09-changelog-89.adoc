@@ -1,0 +1,66 @@
+= Changelog #89
+:sectanchors:
+:page-layout: post
+
+Commit: commit:5664a2b0b31403024ce5ab927760d630d5ddc9a4[] +
+Release: release:2021-08-09[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:9752[] (first contribution) support `proc_macro` dependencies in `project.json`.
+* pr:9785[] (first contribution) add struct literal completion:
++
+image::https://user-images.githubusercontent.com/35599359/128211142-116361e9-7a69-425f-83ea-473c6ea47b26.gif[]
+* pr:9814[] generate default code when converting ``#[derive(Debug)]`` to a manual implementation:
++
+image::https://user-images.githubusercontent.com/308347/128694292-99a3e694-dd2b-42f5-9e38-798217f433b0.gif[]
+* pr:9761[] show coerced types on hover:
++
+image::https://user-images.githubusercontent.com/3757771/127883884-2935b624-a3e5-4f35-861a-7d6d3266d187.png[]
++
+image::https://user-images.githubusercontent.com/3757771/127883951-4ff96b6b-7576-4886-887b-1198c1121841.png[]
+* pr:9800[] include suggested replacement in diagnostics:
++
+image::https://user-images.githubusercontent.com/1786438/128521022-c16e0967-6cc6-410d-917d-5db5cfbb96be.png[]
+* pr:9810[] add "missing reference" diagnostic:
++
+image::https://user-images.githubusercontent.com/308347/128681441-9024a0b1-1ef6-4b3c-92e1-01ac3497aa1e.png[]
+* pr:9816[] implement "Convert `if` to ``bool::then``" assist:
++
+image::https://user-images.githubusercontent.com/308347/128693801-51eeec03-55e5-4dd8-8fff-5b84251e7a12.gif[]
+* pr:9734[] add `reference` semantic highlighting modifier.
+* pr:9806[] add support for the 1.56 nightly proc macro ABI.
+* pr:9772[] filter out duplicate macro completions.
+
+== Fixes
+
+* pr:9771[] (first contribution) give better error message when the `rust-analyzer` binary path is invalid.
+* pr:9801[] don't publish diagnostics in crates.io or sysroot files.
+* pr:9762[] fix ranged hover result range.
+* pr:9764[] don't use the module as the candidate node in fuzzy path flyimport.
+* pr:9770[] downgrade `notify` to fix building on NetBSD.
+* pr:9773[] improve the "Extract function" assist.
+* pr:9775[] handle ownership in "Extract function".
+* pr:9786[] fix detection of macro files in the inactive code diagostic.
+* pr:9788[] don't move locals defined outside loops in "Extract function".
+* pr:9780[] support `exclusive_range_pattern`.
+* pr:9790[] handle generics correctly in "Extract type alias".
+* pr:9794[] fix binders with bare `dyn Trait`.
+* pr:9808[] gather enum variants and associated trait functions when collecting lang items.
+* pr:9812[] add `!` to macro completions with existing argument list.
+* pr:9817[] increase `chalk` overflow depth for `tonic`.
+
+== Internal Improvements
+
+* pr:9756[] make `resolve_doc_path` is  to resolve to macros.
+* pr:9757[] completion cleanups.
+* pr:9758[] explain that we don't `ref` in `style.md`.
+* pr:9759[] simplify `inline_local_variable` assist.
+* pr:9751[] make `LoadCargoConfig`, `fn load_workspace_at` and `fn load_workspace` public again.
+* pr:9765[] introduce `TypeInfo` to record coercions and other adjustments.
+* pr:9793[] remove unused structs in `ide_db`.

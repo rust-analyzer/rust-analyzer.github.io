@@ -227,6 +227,31 @@ pub(crate) fn frobnicate() {}
 
 
 [discrete]
+=== `convert_if_to_bool_then`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_bool_then.rs#L16[convert_bool_then.rs]
+
+Converts an if expression into a corresponding `bool::then` call.
+
+.Before
+```rust
+fn main() {
+    if┃ cond {
+        Some(val)
+    } else {
+        None
+    }
+}
+```
+
+.After
+```rust
+fn main() {
+    cond.then(|| val)
+}
+```
+
+
+[discrete]
 === `convert_integer_literal`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_integer_literal.rs#L5[convert_integer_literal.rs]
 
@@ -407,7 +432,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_function`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_function.rs#L31[extract_function.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_function.rs#L32[extract_function.rs]
 
 Extracts selected statements into new function.
 
@@ -457,7 +482,7 @@ enum A { One(One) }
 
 [discrete]
 === `extract_type_alias`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_type_alias.rs#L8[extract_type_alias.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_type_alias.rs#L10[extract_type_alias.rs]
 
 Extracts the selected type as a type alias.
 
@@ -1102,9 +1127,9 @@ fn foo(name: Option<&str>) {
 
 [discrete]
 === `inline_local_variable`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_local_variable.rs#L15[inline_local_variable.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_local_variable.rs#L17[inline_local_variable.rs]
 
-Inlines local variable.
+Inlines a local variable.
 
 .Before
 ```rust
@@ -1592,7 +1617,7 @@ fn main() {
 
 [discrete]
 === `replace_derive_with_manual_impl`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_derive_with_manual_impl.rs#L19[replace_derive_with_manual_impl.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_derive_with_manual_impl.rs#L21[replace_derive_with_manual_impl.rs]
 
 Converts a `derive` impl into a manual one.
 
@@ -1608,8 +1633,8 @@ struct S;
 struct S;
 
 impl Debug for S {
-    fn fmt(&self, f: &mut Formatter) -> Result<()> {
-        ${0:todo!()}
+    ┃fn fmt(&self, f: &mut Formatter) -> Result<()> {
+        f.debug_struct("S").finish()
     }
 }
 ```

@@ -256,7 +256,7 @@ Highlights constructs related to the thing under the cursor:
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Hover
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/hover.rs#L74[hover.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/hover.rs#L70[hover.rs]
 
 Shows additional information, like the type of an expression or the documentation for a definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.
@@ -389,7 +389,7 @@ image::https://user-images.githubusercontent.com/48062697/113065573-04298180-91b
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Memory Usage
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_db/src/apply_change.rs#L95[apply_change.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_db/src/apply_change.rs#L67[apply_change.rs]
 
 Clears rust-analyzer's internal database and prints memory usage statistics.
 
@@ -639,8 +639,9 @@ documentation:: Emitted for documentation comments.
 injected:: Emitted for doc-string injected highlighting like rust source blocks in documentation.
 intraDocLink:: Emitted for intra doc links in doc-strings.
 library:: Emitted for items that are defined outside of the current crate.
+mutable:: Emitted for mutable locals and statics as well as functions taking `&mut self`.
 public:: Emitted for items that are from the current crate and are `pub`.
-mutable:: Emitted for mutable locals and statics.
+reference: Emitted for locals behind a reference and functions taking `self` by reference.
 static:: Emitted for "static" functions, also known as functions that do not take a `self` param, as well as statics and consts.
 trait:: Emitted for associated trait items.
 unsafe:: Emitted for unsafe operations, like unsafe function calls, as well as the `unsafe` token.

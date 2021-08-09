@@ -2,6 +2,14 @@
 
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
+== add-reference-here
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_diagnostics/src/handlers/add_reference_here.rs#L8[add_reference_here.rs]
+
+This diagnostic is triggered when there's a missing referencing of expression.
+
+
+// IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
+
 == break-outside-of-loop
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_diagnostics/src/handlers/break_outside_of_loop.rs#L3[break_outside_of_loop.rs]
 
