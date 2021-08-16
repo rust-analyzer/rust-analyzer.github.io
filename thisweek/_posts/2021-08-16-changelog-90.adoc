@@ -1,0 +1,66 @@
+= Changelog #90
+:sectanchors:
+:page-layout: post
+
+Commit: commit:b641a66078ce2f2363e9a3b050ba448b93fb7cb6[] +
+Release: release:2021-08-16[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:9828[] (first contribution) use `graphviz-d3` for the crate graph instead of running an installed binary:
++
+image::https://user-images.githubusercontent.com/6619062/128995056-9e70197a-3e83-4eda-b813-2485d0800cfe.png[]
+* pr:9825[], pr:9835[], pr:9846[], pr:9863[] Generate default impls when converting `Default`, `Hash`, `Clone` or `PartialEq` ``#[derive]``s:
++
+image::https://user-images.githubusercontent.com/308347/129512152-622a7445-e424-4780-9d91-17051989e666.gif[]
+* pr:9804[] add "Generate method" assist:
++
+image::https://user-images.githubusercontent.com/62165556/128745185-4b4674e8-fc5f-45d2-b5a7-22af5c28abfe.gif[]
+* pr:9837[] implement "Convert `bool::then` to ``if``" assist:
++
+image::https://user-images.githubusercontent.com/308347/129512597-b0f92f9b-a73b-4ca4-847f-678357505878.gif[]
+* pr:9856[] show type actions on ranged type hover:
++
+image::https://user-images.githubusercontent.com/308347/129512807-c8e79a7e-3693-4847-9a93-a4e5fd2c6443.gif[]
+* pr:9735[] add assist to sort members alphabetically:
++
+image::https://user-images.githubusercontent.com/308347/129513196-4ffc7937-be58-44d4-9ec7-ba8745dcb460.gif[]
+* pr:9879[], pr:9886[] support `if let` match guards.
+* pr:9833[] highlight methods that take `self` by value as `consuming`.
+
+
+== Fixes
+
+* pr:9889[] (first contribution) add setup instructions for the juCi++ editor.
+* pr:9845[], pr:9849[] do not drop `..Default::default()` completion when typing `..`.
+* pr:9862[] fill out expected type for functional update syntax completion.
+* pr:9842[] substitute generic types in "Inline call".
+* pr:9860[] fix "Extract function" unnecessarily tagging parameters as `mut`.
+* pr:9861[] make "Extract variable" handle selection ranges better.
+* pr:9896[] only complete type annotations for patterns in function parameters.
+* pr:9823[] avoid some pathological macro expansions.
+* pr:9893[] don't use uncached syntax nodes in `generate_function` for `sema` lookups.
+* pr:9874[] always add implicit `proc_macro` dependency.
+* pr:9871[] jump to generated function after triggering assist.
+* pr:9882[] fix source map detection for debugging.
+
+
+== Internal Improvements
+
+* pr:9832[] (first contribution) switch Code extension from `rollup` to `esbuild`.
+* pr:9807[] generate implicit `Sized` bounds for trait solving.
+* pr:9826[], pr:9827[] drop latest requests tracking.
+* pr:9892[], pr:9897[], pr:9900[], pr:9901[] remove old editing APIs.
+* pr:9890[] refactor binary operator handling.
+* pr:9834[] unify subcommand handling between `ra` and `xtask`.
+* pr:9830[] enable more assists to generate default trait body implementations.
+* pr:9838[] document codebase stance on using functional combinators.
+* pr:9854[] document that ascription is preferred to a turbofish.
+* pr:9841[] print total size of source code in `analysis-stats`.
+* pr:9894[] use standard test style.
+* pr:9905[] drop `serde_path_to_error` from LSP deserialization to reduce compile time.

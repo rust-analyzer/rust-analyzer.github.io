@@ -44,7 +44,7 @@ fn main() {
 
 [discrete]
 === `add_impl_default_members`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_missing_impl_members.rs#L53[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_missing_impl_members.rs#L55[add_missing_impl_members.rs]
 
 Adds scaffold for overriding default impl members.
 
@@ -81,7 +81,7 @@ impl Trait for () {
 
 [discrete]
 === `add_impl_missing_members`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_missing_impl_members.rs#L12[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_missing_impl_members.rs#L14[add_missing_impl_members.rs]
 
 Adds scaffold for required impl members.
 
@@ -181,7 +181,7 @@ fn main() {
 .After
 ```rust
 fn main() {
-    if !(x == 4 && !(y < 3.14)) {}
+    if !(x == 4 && y >= 3.14) {}
 }
 ```
 
@@ -227,8 +227,33 @@ pub(crate) fn frobnicate() {}
 
 
 [discrete]
+=== `convert_bool_then_to_if`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_bool_then.rs#L108[convert_bool_then.rs]
+
+Converts a `bool::then` method call to an equivalent if expression.
+
+.Before
+```rust
+fn main() {
+    (0 == 0).then┃(|| val)
+}
+```
+
+.After
+```rust
+fn main() {
+    if 0 == 0 {
+        Some(val)
+    } else {
+        None
+    }
+}
+```
+
+
+[discrete]
 === `convert_if_to_bool_then`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_bool_then.rs#L16[convert_bool_then.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_bool_then.rs#L17[convert_bool_then.rs]
 
 Converts an if expression into a corresponding `bool::then` call.
 
@@ -328,7 +353,7 @@ fn main() {
 
 [discrete]
 === `convert_to_guarded_return`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/early_return.rs#L21[early_return.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_to_guarded_return.rs#L20[convert_to_guarded_return.rs]
 
 Replace a large conditional with a guarded return.
 
@@ -1127,7 +1152,7 @@ fn foo(name: Option<&str>) {
 
 [discrete]
 === `inline_local_variable`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_local_variable.rs#L17[inline_local_variable.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_local_variable.rs#L19[inline_local_variable.rs]
 
 Inlines a local variable.
 
@@ -1290,7 +1315,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `move_arm_cond_to_match_guard`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L68[move_guard.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L72[move_guard.rs]
 
 Moves if expression from match arm body into a guard.
 
@@ -1617,7 +1642,7 @@ fn main() {
 
 [discrete]
 === `replace_derive_with_manual_impl`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_derive_with_manual_impl.rs#L21[replace_derive_with_manual_impl.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_derive_with_manual_impl.rs#L19[replace_derive_with_manual_impl.rs]
 
 Converts a `derive` impl into a manual one.
 
@@ -1812,6 +1837,98 @@ fn main() {
 ```rust
 fn main() {
     find('{');
+}
+```
+
+
+[discrete]
+=== `sort_items`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/sort_items.rs#L12[sort_items.rs]
+
+Sorts item members alphabetically: fields, enum variants and methods.
+
+.Before
+```rust
+struct ┃Foo┃ { second: u32, first: String }
+```
+
+.After
+```rust
+struct Foo { first: String, second: u32 }
+```
+
+---
+
+.Before
+```rust
+trait ┃Bar┃ {
+    fn second(&self) -> u32;
+    fn first(&self) -> String;
+}
+```
+
+.After
+```rust
+trait Bar {
+    fn first(&self) -> String;
+    fn second(&self) -> u32;
+}
+```
+
+---
+
+.Before
+```rust
+struct Baz;
+impl ┃Baz┃ {
+    fn second(&self) -> u32;
+    fn first(&self) -> String;
+}
+```
+
+.After
+```rust
+struct Baz;
+impl Baz {
+    fn first(&self) -> String;
+    fn second(&self) -> u32;
+}
+```
+
+---
+There is a difference between sorting enum variants:
+
+.Before
+```rust
+enum ┃Animal┃ {
+  Dog(String, f64),
+  Cat { weight: f64, name: String },
+}
+```
+
+.After
+```rust
+enum Animal {
+  Cat { weight: f64, name: String },
+  Dog(String, f64),
+}
+```
+
+and sorting a single enum struct variant:
+
+.Before
+```rust
+enum Animal {
+  Dog(String, f64),
+  Cat ┃{ weight: f64, name: String }┃,
+}
+```
+
+.After
+```rust
+enum Animal {
+  Dog(String, f64),
+  Cat { name: String, weight: f64 },
 }
 ```
 
