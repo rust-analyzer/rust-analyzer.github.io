@@ -39,7 +39,7 @@ image::https://user-images.githubusercontent.com/15612932/129020107-775d7c94-dca
 == Internal Improvements
 
 * pr:9934[] (first contribution) upgrade `notify` again.
-* pr:9984[], pr:9985[], pr:9987[], pr:9989[] fix "a"/"an" typos.
+* pr:9984[], pr:9985[], pr:9987[], pr:9989[] (first contribution) fix "a"/"an" typos.
 * pr:9921[] don't expand all macros in `source_to_def`.
 * pr:9960[] use `ExpandResult` in all ``TokenExpander``s.
 * pr:9972[] refactor "Generate function" assist.
