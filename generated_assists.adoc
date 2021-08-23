@@ -425,6 +425,29 @@ impl Point {
 
 
 [discrete]
+=== `destructure_tuple_binding`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/destructure_tuple_binding.rs#L14[destructure_tuple_binding.rs]
+
+Destructures a tuple binding in place.
+
+.Before
+```rust
+fn main() {
+    let ┃t = (1,2);
+    let v = t.0;
+}
+```
+
+.After
+```rust
+fn main() {
+    let (┃_0, _1) = (1,2);
+    let v = _0;
+}
+```
+
+
+[discrete]
 === `expand_glob_import`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/expand_glob_import.rs#L18[expand_glob_import.rs]
 
@@ -845,6 +868,8 @@ enum Version {
 
 impl Version {
     /// Returns `true` if the version is [`Minor`].
+    ///
+    /// [`Minor`]: Version::Minor
     fn is_minor(&self) -> bool {
         matches!(self, Self::Minor)
     }

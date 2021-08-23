@@ -1,0 +1,48 @@
+= Changelog #91
+:sectanchors:
+:page-layout: post
+
+Commit: commit:996300f4a061e895a339a909fddce94f68ce7d19[] +
+Release: release:2021-08-23[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:9855[] (first contribution) add "Destructure tuple" assist:
++
+image::https://user-images.githubusercontent.com/15612932/129020107-775d7c94-dca7-4d1f-a0a2-cd63cabf4132.gif[]
+* pr:9941[] include full path in workspace cyclic deps errors.
+
+== Fixes
+
+* pr:9936[] (first contribution) make compiler commit and date optional in proc macros.
+* pr:9962[] (first contribution) improve "Replace `match` with ``if let``" code generation.
+* pr:9963[] resolve `core::arch` module.
+* pr:9973[], pr:9988[] refactor and improve handling of overloaded binary operators.
+* pr:9943[] don't strip items with built-in attributes.
+* pr:9976[] hide functional update completion with qualified identifier.
+* pr:9979[] fix token mapping with derive macros.
+* pr:9924[] fix `Debug` code generation in assist.
+* pr:9950[] fix documentation for generated `is_` enum methods.
+* pr:9928[] highlight function exit points on `fn` keywords.
+* pr:9929[] handle all rename special cases for record pattern fields.
+* pr:9955[] refuse to rename macro-generated definitions.
+* pr:9942[] don't trigger related highlighting on unrelated tokens.
+* pr:9966[] determine expected parameters from expected return types in calls.
+* pr:9978[] expand attributes recursively in "Expand macros".
+* pr:9908[] fix toolchain path check.
+
+== Internal Improvements
+
+* pr:9934[] (first contribution) upgrade `notify` again.
+* pr:9984[], pr:9985[], pr:9987[], pr:9989[] fix "a"/"an" typos.
+* pr:9921[] don't expand all macros in `source_to_def`.
+* pr:9960[] use `ExpandResult` in all ``TokenExpander``s.
+* pr:9972[] refactor "Generate function" assist.
+* pr:9961[] prepare for the 2021 edition.
+* pr:9982[], pr:9983[] reduce crate interdependence.
+* pr:9937[] pester `rust-analyzer` developers to fix panics.
