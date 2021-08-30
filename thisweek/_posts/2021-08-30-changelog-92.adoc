@@ -1,0 +1,58 @@
+= Changelog #92
+:sectanchors:
+:page-layout: post
+
+Commit: commit:d15f646ff17e2da0d4e8dc2754ba83213cf1a8bb[] +
+Release: release:2021-08-30[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:10008[] highlight declarations and references for both definitions in field shorthands:
++
+image::https://user-images.githubusercontent.com/308347/131287051-f42dce5e-2892-44fe-ba9e-04347f2c5d66.png[]
+* pr:9994[] make `Generate function` work for static methods:
++
+image::https://user-images.githubusercontent.com/62165556/130415812-57192e15-eab9-4596-92ec-b102c3b3bcd2.gif[]
+* pr:9993[] merge assignments in `Join lines`:
++
+image::https://user-images.githubusercontent.com/16212576/130366571-3ebb1753-f8d5-4884-be8f-222cda71a2a7.gif[]
+* pr:10014[] expand derive macros under cursor in `Expand Macro Recursively`:
++
+image::https://user-images.githubusercontent.com/3757771/130638252-5125d41f-2cc0-48fa-af77-9a7f85016438.png[]
++
+image::https://user-images.githubusercontent.com/3757771/130638250-debe0a1a-2584-426a-8377-72d6d46276eb.png[]
+* pr:9970[] implement attribute input token mapping and fix attribute item token mapping:
++
+image::https://user-images.githubusercontent.com/3757771/130328577-4c1ad72c-51b1-47c3-8d3d-3242ec44a355.png[]
+* pr:10067[] downmap tokens to all token descendants instead of just the first:
++
+image::https://user-images.githubusercontent.com/3757771/131233056-7e645b1d-b82f-468c-bf19-d3335a2cf7c2.png[]
+* pr:10059[] enable diagnostics in `const` and `static` items.
+
+
+== Fixes
+
+* pr:10004[] update `rowan` to fix a memory leak.
+* pr:10032[] fix false positive `missing unsafe` diagnostic on nightly toolchains.
+* pr:10057[] remove incorrect assertion in `Extract function`.
+* pr:10001[] fix sorting of enum variants.
+* pr:10024[] fix reporting of build script errors.
+* pr:10029[], pr:10030[] improve `Expand Macro Recursively`.
+* pr:10055[] don't use fake text range in original node search as is in completions.
+
+
+== Internal Improvements
+
+* pr:10053[] (first contribution) remove workaround for old Node versions.
+* pr:10062[] (first contribution) set `esbuild` target to Node 14.
+* pr:9944[] introduce in-place indenting API.
+* pr:9999[] use single env var to controll all benchmarks.
+* pr:10010[] use idiomatic form of assertions.
+* pr:10025[] don't mutate syntax trees when preparing proc-macro input.
+* pr:10069[] use `ManuallyDrop` in `RootDatabase` to improve build times.
+* pr:10066[], pr:10071[], pr:10074[] slightly improve compile times.
