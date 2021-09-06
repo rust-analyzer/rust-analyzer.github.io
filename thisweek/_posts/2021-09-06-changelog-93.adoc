@@ -1,0 +1,57 @@
+= Changelog #93
+:sectanchors:
+:page-layout: post
+
+Commit: commit:b73b321478d3b2a98d380eb79de717e01620c4e9[] +
+Release: release:2021-09-06[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:10088[] only run cache priming after load to improve CPU usage.
+* pr:10092[] improve "Extract struct from enum variant" output.
+* pr:10076[] use struct init shorthand in "Fill struct fields" assist.
+* pr:9954[] show try (`?`) operator propagated types on ranged hover:
++
+image::https://user-images.githubusercontent.com/3757771/130111025-f7ee0742-214a-493b-947a-b4a671e4be92.png[]
++
+image::https://user-images.githubusercontent.com/3757771/130111024-f9caef82-92e4-4070-b3dd-f2ff9e5d87a9.png[]
+
+== Fixes
+
+* pr:10139[] (first contribution) fix `for` loop to `for_each` conversion with range expressions.
+* pr:10085[] avoid panic when parsing extern block.
+* pr:10091[] fix `disjunction in conjunction` panic in `cfg` parsing.
+* pr:10097[] allow inherent impls for arrays.
+* pr:9405[] fix missing parameters in "Extract function" with macros.
+* pr:10108[] make "Go to implementation" multi-token mapping aware.
+* pr:10103[] make "Find references" multi-token mapping aware.
+* pr:10109[] enable flyimport for ident patterns.
+* pr:10114[] deduplicate imports for "Qualify path".
+* pr:10124[] use correct search scopes for macros.
+* pr:10127[] don't bail on failed macro call expansions when descending tokens:
++
+image::https://user-images.githubusercontent.com/3757771/131887786-ced9988b-80fa-4e8f-b114-337572950cc3.png[]
+* pr:10147[] don't panic if the client sends invalid request.
+* pr:10146[] use placeholder as default type in "Generate function" and "Extract into function".
+
+
+== Internal Improvements
+
+* pr:9906[], pr:10132[] (first contribution) switch from the `log` crate to `tracing`.
+* pr:10081[] (first contribution) fix some error messages.
+* pr:10078[] use Ubuntu 18.04 on CI.
+* pr:10079[] make upstream bug less annoying.
+* pr:10080[] refactor panic handling in the main loop.
+* pr:10015[] more declarative re-indentation API.
+* pr:10005[] extend `CargoConfig.unset_test_crates`.
+* pr:10094[] split database loading time in anaysis-stats into components.
+* pr:10095[] augment panic context when resolving path.
+* pr:10100[], pr:10101[] clean up proc macro server error handling.
+* pr:10161[] remove accidental code re-use.
+* pr:10148[] make dev docs more discoverable.
+* pr:10145[] update deps and pin `libc` to fix build error in `rust-lang/rust`.

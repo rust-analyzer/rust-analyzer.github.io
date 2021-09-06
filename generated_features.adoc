@@ -141,7 +141,7 @@ image::https://user-images.githubusercontent.com/48062697/113020654-b42fc800-917
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Find All References
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/references.rs#L40[references.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/references.rs#L43[references.rs]
 
 Shows all references of the item at the cursor location
 
@@ -212,7 +212,7 @@ image::https://user-images.githubusercontent.com/48062697/113065563-025fbe00-91b
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Go to Implementation
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_implementation.rs#L10[goto_implementation.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_implementation.rs#L12[goto_implementation.rs]
 
 Navigates to the impl block of structs, enums or traits. Also implemented as a code lens.
 
@@ -244,7 +244,7 @@ image::https://user-images.githubusercontent.com/48062697/113020657-b560f500-917
 // IMPORTANT: master copy of this document lives in the https://github.com/rust-analyzer/rust-analyzer repository
 
 == Highlight Related
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L31[highlight_related.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L33[highlight_related.rs]
 
 Highlights constructs related to the thing under the cursor:
 - if on an identifier, highlights all references to that identifier in the current file

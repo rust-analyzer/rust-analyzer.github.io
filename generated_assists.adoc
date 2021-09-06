@@ -511,7 +511,7 @@ fn ┃fun_name(n: i32) {
 
 [discrete]
 === `extract_struct_from_enum_variant`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_struct_from_enum_variant.rs#L28[extract_struct_from_enum_variant.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_struct_from_enum_variant.rs#L29[extract_struct_from_enum_variant.rs]
 
 Extracts a struct from enum variant.
 
@@ -522,7 +522,7 @@ enum A { ┃One(u32, u32) }
 
 .After
 ```rust
-struct One(pub u32, pub u32);
+struct One(u32, u32);
 
 enum A { One(One) }
 ```
@@ -957,7 +957,7 @@ fn foo() {
     bar("", baz());
 }
 
-fn bar(arg: &str, baz: Baz) ${0:-> ()} {
+fn bar(arg: &str, baz: Baz) ${0:-> _} {
     todo!()
 }
 
