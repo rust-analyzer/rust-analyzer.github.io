@@ -1,0 +1,44 @@
+= Changelog #94
+:sectanchors:
+:page-layout: post
+
+Commit: commit:516eb40ba5b9d20e59e98185d1b2fcba5599ef7a[] +
+Release: release:2021-09-13[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:10152[] (first contribution) quote raw identifier in completion:
++
+image::https://user-images.githubusercontent.com/894305/132110362-c21b713d-acaf-4a6d-9749-ff812172cbce.gif[]
+* pr:10162[] enable completions after `.` in some macros:
++
+image::https://user-images.githubusercontent.com/308347/133029878-127e4022-999b-4a53-829a-16ad0e0723c0.gif[]
++
+image::https://user-images.githubusercontent.com/308347/133030167-edc88366-ac46-491d-811e-d1cf533ba9f4.gif[]
+
+== Fixes
+
+* pr:10093[] (first contribution) fix `cargo` task filtering in Code workspaces.
+* pr:10154[] (first contribution) complete `+#![recursion_limit = "N"]+` instead of `+#![recursion_limit = N]+`.
+* pr:10157[] (first contribution) document enabling `flycheck` with `rust-project.json`.
+* pr:10188[] (first contribution) add multi-token mapping support to runnables.
+* pr:10180[] fix resolution of inherent array methods.
+* pr:10177[] treat path dependencies like workspace members.
+* pr:10193[] fix type mismatches with `panic!()` on Rust 1.55.
+* pr:10174[] fix path display with `crate` and `super` prefixes.
+* pr:10186[] configure `colorizedBracketPairs` for Code.
+* pr:10202[] show correct `Sized` bounds on type param hover.
+* pr:10212[] avoid a type inference panic on `BitSlice` methods.
+* pr:10215[] use correct file for `decl_access` computation in `find_all_refs`.
+
+== Internal Improvements
+
+* pr:10165[] (first contribution) bump `tracing-tree` to avoid a `syn` dependency.
+* pr:10206[] remove unused dependencies.
+* pr:10168[] make name consistent with usage.
+* pr:10169[] parser cleanup.
