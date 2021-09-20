@@ -425,6 +425,34 @@ impl Point {
 
 
 [discrete]
+=== `convert_while_to_loop`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_while_to_loop.rs#L18[convert_while_to_loop.rs]
+
+Replace a while with a loop.
+
+.Before
+```rust
+fn main() {
+    ┃while cond {
+        foo();
+    }
+}
+```
+
+.After
+```rust
+fn main() {
+    loop {
+        if !cond {
+            break;
+        }
+        foo();
+    }
+}
+```
+
+
+[discrete]
 === `destructure_tuple_binding`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/destructure_tuple_binding.rs#L14[destructure_tuple_binding.rs]
 
@@ -1249,6 +1277,27 @@ fn main() {
 
 
 [discrete]
+=== `line_to_block`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_comment_block.rs#L9[convert_comment_block.rs]
+
+Converts comments between block and single-line form.
+
+.Before
+```rust
+   // Multi-line┃
+   // comment
+```
+
+.After
+```rust
+  /*
+  Multi-line
+  comment
+  */
+```
+
+
+[discrete]
 === `make_raw_string`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/raw_string.rs#L7[raw_string.rs]
 
@@ -1796,7 +1845,7 @@ fn compute() -> Option<i32> { None }
 
 [discrete]
 === `replace_match_with_if_let`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_if_let_with_match.rs#L151[replace_if_let_with_match.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_if_let_with_match.rs#L158[replace_if_let_with_match.rs]
 
 Replaces a binary `match` with a wildcard pattern and no guards with an `if let` expression.
 

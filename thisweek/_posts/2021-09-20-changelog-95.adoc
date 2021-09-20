@@ -1,0 +1,53 @@
+= Changelog #95
+:sectanchors:
+:page-layout: post
+
+Commit: commit:f1d7f98ed07b9934286b9c4809dd4d7a47537879[] +
+Release: release:2021-09-20[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:10204[] (first contribution) show dereferenced types in hover:
++
+image::https://user-images.githubusercontent.com/308347/134001136-00ddbb95-11b4-45bf-8592-b5fd96f814d9.png[]
+* pr:10257[] (first contribution) add Convert `while` to `loop` assist:
++
+image::https://user-images.githubusercontent.com/308347/134001921-433c5b9b-5c40-4a00-9219-7786106e97dc.gif[]
+* pr:10126[] speculatively expand attributes in completions:
++
+image::https://user-images.githubusercontent.com/3757771/133163858-91930072-1441-4ce4-9979-b0ad2727b47f.gif[]
+* pr:10274[] make inlay hints work in some attributed items:
++
+image::https://user-images.githubusercontent.com/3757771/133887500-091675db-f473-44f8-9bf5-8313ecfbc9e7.png[]
+
+== Fixes
+
+* pr:10252[] (first contribution) make "Go to definition" multi-token mapping aware.
+* pr:10233[] (first contribution) add multi-token mapping support to hovers.
+* pr:10199[] detect even a second change to `Cargo.toml`.
+* pr:10229[] do not complete builtin attributes for qualified paths.
+* pr:10230[] fix expansion order for fn-like macros and attributes when descending tokens.
+* pr:10237[] do not wrap inlined local in parens when at block tail position.
+* pr:10247[] don't highlight unsafe traits as unsafe in safe impls.
+* pr:10048[] correctly complete macro call when cursor on `!`.
+* pr:10264[] don't seek outside of character boundaries in completion handler.
+* pr:10260[] fix name generation in "Generate function" assist.
+* pr:10267[] narrow `+if-let+` to `+match+` assist range.
+* pr:10282[] don't allow two turbo-fishes in generic arguments.
+* pr:10289[] only strip derive attributes when preparing macro input.
+* pr:10293[] don't bail on parse errors in macro input for built-in expansion.
+
+== Internal Improvements
+
+* pr:10221[] prevent possible bugs when adding magical comments.
+* pr:10222[] work around bad error reporting when renaming the server binary.
+* pr:10225[] add proc-macro fixture directive.
+* pr:10232[] add more tests for ide functionality in attributed items.
+* pr:10248[] remove dead code.
+* pr:10250[] improve `call_hierarchy` and `incoming/outgoing_calls`.
+* pr:10265[], pr:10269[], pr:10275[], pr:10276[], pr:10268[], pr:10270[], pr:10280[], pr:10287[] parser cleanups.
