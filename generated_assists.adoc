@@ -2,7 +2,7 @@
 
 [discrete]
 === `add_explicit_type`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_explicit_type.rs#L6[add_explicit_type.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_explicit_type.rs#L7[add_explicit_type.rs]
 
 Specify type for a let binding.
 
@@ -140,6 +140,54 @@ struct Point<'a> {
 
 
 [discrete]
+=== `add_missing_match_arms`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_missing_match_arms.rs#L15[add_missing_match_arms.rs]
+
+Adds missing clauses to a `match` expression.
+
+.Before
+```rust
+enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    match action {
+        ┃
+    }
+}
+```
+
+.After
+```rust
+enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    match action {
+        ┃Action::Move { distance } => todo!(),
+        Action::Stop => todo!(),
+    }
+}
+```
+
+
+[discrete]
+=== `add_return_type`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_return_type.rs#L6[add_return_type.rs]
+
+Adds the return type to a function or closure inferred from its tail expression if it doesn't have a return
+type specified. This assists is useable in a functions or closures tail expression or return type position.
+
+.Before
+```rust
+fn foo() { 4┃2i32 }
+```
+
+.After
+```rust
+fn foo() -> i32 { 42i32 }
+```
+
+
+[discrete]
 === `add_turbo_fish`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_turbo_fish.rs#L9[add_turbo_fish.rs]
 
@@ -228,7 +276,7 @@ pub(crate) fn frobnicate() {}
 
 [discrete]
 === `convert_bool_then_to_if`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_bool_then.rs#L108[convert_bool_then.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_bool_then.rs#L112[convert_bool_then.rs]
 
 Converts a `bool::then` method call to an equivalent if expression.
 
@@ -252,8 +300,35 @@ fn main() {
 
 
 [discrete]
+=== `convert_for_loop_with_for_each`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_iter_for_each_to_for.rs#L73[convert_iter_for_each_to_for.rs]
+
+Converts a for loop into a for_each loop on the Iterator.
+
+.Before
+```rust
+fn main() {
+    let x = vec![1, 2, 3];
+    for┃ v in x {
+        let y = v * 2;
+    }
+}
+```
+
+.After
+```rust
+fn main() {
+    let x = vec![1, 2, 3];
+    x.into_iter().for_each(|v| {
+        let y = v * 2;
+    });
+}
+```
+
+
+[discrete]
 === `convert_if_to_bool_then`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_bool_then.rs#L17[convert_bool_then.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_bool_then.rs#L21[convert_bool_then.rs]
 
 Converts an if expression into a corresponding `bool::then` call.
 
@@ -326,7 +401,7 @@ impl From<usize> for Thing {
 
 [discrete]
 === `convert_iter_for_each_to_for`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_iter_for_each_to_for.rs#L9[convert_iter_for_each_to_for.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_iter_for_each_to_for.rs#L11[convert_iter_for_each_to_for.rs]
 
 Converts an Iterator::for_each function into a for loop.
 
@@ -508,7 +583,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_function`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_function.rs#L32[extract_function.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_function.rs#L33[extract_function.rs]
 
 Extracts selected statements into new function.
 
@@ -558,7 +633,7 @@ enum A { One(One) }
 
 [discrete]
 === `extract_type_alias`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_type_alias.rs#L10[extract_type_alias.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_type_alias.rs#L11[extract_type_alias.rs]
 
 Extracts the selected type as a type alias.
 
@@ -597,36 +672,6 @@ fn main() {
 fn main() {
     let ┃var_name = (1 + 2);
     var_name * 4;
-}
-```
-
-
-[discrete]
-=== `fill_match_arms`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/fill_match_arms.rs#L15[fill_match_arms.rs]
-
-Adds missing clauses to a `match` expression.
-
-.Before
-```rust
-enum Action { Move { distance: u32 }, Stop }
-
-fn handle(action: Action) {
-    match action {
-        ┃
-    }
-}
-```
-
-.After
-```rust
-enum Action { Move { distance: u32 }, Stop }
-
-fn handle(action: Action) {
-    match action {
-        ┃Action::Move { distance } => todo!(),
-        Action::Stop => todo!(),
-    }
 }
 ```
 
@@ -963,7 +1008,7 @@ impl From<u32> for A {
 
 [discrete]
 === `generate_function`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_function.rs#L20[generate_function.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_function.rs#L25[generate_function.rs]
 
 Adds a stub function with a signature matching the function under the cursor.
 
@@ -1160,26 +1205,8 @@ impl Person {
 
 
 [discrete]
-=== `infer_function_return_type`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/infer_function_return_type.rs#L6[infer_function_return_type.rs]
-
-Adds the return type to a function or closure inferred from its tail expression if it doesn't have a return
-type specified. This assists is useable in a functions or closures tail expression or return type position.
-
-.Before
-```rust
-fn foo() { 4┃2i32 }
-```
-
-.After
-```rust
-fn foo() -> i32 { 42i32 }
-```
-
-
-[discrete]
 === `inline_call`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_call.rs#L15[inline_call.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_call.rs#L156[inline_call.rs]
 
 Inlines a function or method body creating a `let` statement per parameter unless the parameter
 can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
@@ -1204,6 +1231,50 @@ fn foo(name: Option<&str>) {
 
 
 [discrete]
+=== `inline_into_callers`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_call.rs#L23[inline_call.rs]
+
+Inline a function or method body into all of its callers where possible, creating a `let` statement per parameter
+unless the parameter can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
+or if the parameter is only accessed inside the function body once.
+If all calls can be inlined the function will be removed.
+
+.Before
+```rust
+fn print(_: &str) {}
+fn foo┃(word: &str) {
+    if !word.is_empty() {
+        print(word);
+    }
+}
+fn bar() {
+    foo("안녕하세요");
+    foo("여러분");
+}
+```
+
+.After
+```rust
+fn print(_: &str) {}
+
+fn bar() {
+    {
+        let word = "안녕하세요";
+        if !word.is_empty() {
+            print(word);
+        }
+    };
+    {
+        let word = "여러분";
+        if !word.is_empty() {
+            print(word);
+        }
+    };
+}
+```
+
+
+[discrete]
 === `inline_local_variable`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_local_variable.rs#L19[inline_local_variable.rs]
 
@@ -1222,6 +1293,23 @@ fn main() {
 fn main() {
     (1 + 2) * 4;
 }
+```
+
+
+[discrete]
+=== `introduce_named_generic`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/introduce_named_generic.rs#L8[introduce_named_generic.rs]
+
+Replaces `impl Trait` function argument with the named generic.
+
+.Before
+```rust
+fn foo(bar: ┃impl Bar) {}
+```
+
+.After
+```rust
+fn foo<B: Bar>(bar: B) {}
 ```
 
 
@@ -1389,7 +1477,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `move_arm_cond_to_match_guard`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L72[move_guard.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L76[move_guard.rs]
 
 Moves if expression from match arm body into a guard.
 
@@ -1488,6 +1576,26 @@ mod ┃foo {
 .After
 ```rust
 mod foo;
+```
+
+
+[discrete]
+=== `move_to_mod_rs`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_to_mod_rs.rs#L38[move_to_mod_rs.rs]
+
+Moves xxx.rs to xxx/mod.rs.
+
+.Before
+```rust
+//- /main.rs
+mod a;
+//- /a.rs
+┃fn t() {}┃
+```
+
+.After
+```rust
+fn t() {}
 ```
 
 
@@ -1740,33 +1848,6 @@ impl Debug for S {
 
 
 [discrete]
-=== `replace_for_loop_with_for_each`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_for_loop_with_for_each.rs#L9[replace_for_loop_with_for_each.rs]
-
-Converts a for loop into a for_each loop on the Iterator.
-
-.Before
-```rust
-fn main() {
-    let x = vec![1, 2, 3];
-    for┃ v in x {
-        let y = v * 2;
-    }
-}
-```
-
-.After
-```rust
-fn main() {
-    let x = vec![1, 2, 3];
-    x.into_iter().for_each(|v| {
-        let y = v * 2;
-    });
-}
-```
-
-
-[discrete]
 === `replace_if_let_with_match`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_if_let_with_match.rs#L19[replace_if_let_with_match.rs]
 
@@ -1795,23 +1876,6 @@ fn handle(action: Action) {
         _ => bar(),
     }
 }
-```
-
-
-[discrete]
-=== `replace_impl_trait_with_generic`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_impl_trait_with_generic.rs#L8[replace_impl_trait_with_generic.rs]
-
-Replaces `impl Trait` function argument with the named generic.
-
-.Before
-```rust
-fn foo(bar: ┃impl Bar) {}
-```
-
-.After
-```rust
-fn foo<B: Bar>(bar: B) {}
 ```
 
 

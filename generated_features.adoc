@@ -237,7 +237,7 @@ image::https://user-images.githubusercontent.com/48062697/113020670-b7c34f00-917
 
 
 === Folding
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/folding_ranges.rs#L36[folding_ranges.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/folding_ranges.rs#L37[folding_ranges.rs]
 
 Defines folding regions for curly braced blocks, runs of consecutive use, mod, const or static
 items, and `region` / `endregion` comment markers.
@@ -270,7 +270,7 @@ Navigates to the declaration of an identifier.
 
 
 === Go to Definition
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L20[goto_definition.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L16[goto_definition.rs]
 
 Navigates to the definition of an identifier.
 
@@ -324,7 +324,7 @@ Note: `?` and `->` do not currently trigger this behavior in the VSCode editor.
 
 
 === Hover
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/hover.rs#L91[hover.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/hover.rs#L85[hover.rs]
 
 Shows additional information, like the type of an expression or the documentation for a definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.
@@ -358,7 +358,7 @@ image::https://user-images.githubusercontent.com/48062697/113020660-b5f98b80-917
 
 
 === Join Lines
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/join_lines.rs#L21[join_lines.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/join_lines.rs#L22[join_lines.rs]
 
 Join selected lines into one, smartly fixing up whitespace, trailing commas, and braces.
 
