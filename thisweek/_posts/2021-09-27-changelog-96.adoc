@@ -1,0 +1,46 @@
+= Changelog #96
+:sectanchors:
+:page-layout: post
+
+Commit: commit:009e6ceb1ddcd27a9ced3bcb7d0ef823379185a1[] +
+Release: release:2021-09-27[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:10211[] (first contribution) add assist to convert file module to directory:
++
+image::https://user-images.githubusercontent.com/308347/134807312-cd82dd6a-753b-479c-9f11-02f71a6074a8.gif[]
+* pr:10320[] Make hover and Go to definition work in macro invocations and doc attribute strings:
++
+image::https://user-images.githubusercontent.com/3757771/134554781-b903d33d-674f-4ed4-8acb-71ff5913f1cb.png[]
+* pr:10352[] implement "Inline into callers" assist:
++
+image::https://user-images.githubusercontent.com/308347/134812039-d9389522-eb1d-4654-b00c-77381a31f513.gif[]
+
+== Fixes
+
+* pr:10334[] (first contribution) set error context when spawning `rustfmt` fails.
+* pr:10105[] (first contribution) use `todo!()` instead of `()` in "Fill missing fields".
+* pr:10315[] (first contribution) fix manual page title.
+* pr:10306[] use better names for consts and statics in "Generate function" parameters.
+* pr:10328[] fix incorrect `mod.rs` handling in "Unlinked file" fixes.
+* pr:10338[] fix diagnostics in unnamed consts.
+* pr:10339[] fix reporting of item-level macro errors.
+* pr:10321[] change the global setting when toggling inlay hints.
+
+== Internal Improvements
+
+* pr:10284[] (first contribution) refactor hover and go to definition lookups.
+* pr:10313[] (first contribution) tell Git that the benchmark files are binary.
+* pr:10303[] add a `mirror` proc macro expander for tests.
+* pr:10304[] generate ast nodes for each ast trait.
+* pr:10319[], pr:10322[] clean up and split the `hover` code.
+* pr:10335[] avoid some `Arc` cloning.
+* pr:10358[] remove inherent methods from ast nodes that do non-syntactic complex tasks.
+* pr:10343[], pr:10354[], pr:10350[], pr:10360[] parser cleanups.
+* pr:10357[] fix and force-disable block validation.
