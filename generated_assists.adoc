@@ -276,7 +276,7 @@ pub(crate) fn frobnicate() {}
 
 [discrete]
 === `convert_bool_then_to_if`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_bool_then.rs#L112[convert_bool_then.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_bool_then.rs#L134[convert_bool_then.rs]
 
 Converts a `bool::then` method call to an equivalent if expression.
 
@@ -656,7 +656,7 @@ struct S {
 
 [discrete]
 === `extract_variable`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_variable.rs#L13[extract_variable.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_variable.rs#L14[extract_variable.rs]
 
 Extracts subexpression into a variable.
 
@@ -1528,6 +1528,26 @@ fn apply<T, U, F>(f: F, x: T) -> U where F: FnOnce(T) -> U {
 
 
 [discrete]
+=== `move_from_mod_rs`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_from_mod_rs.rs#L12[move_from_mod_rs.rs]
+
+Moves xxx/mod.rs to xxx.rs.
+
+.Before
+```rust
+//- /main.rs
+mod a;
+//- /a/mod.rs
+┃fn t() {}┃
+```
+
+.After
+```rust
+fn t() {}
+```
+
+
+[discrete]
 === `move_guard_to_arm_body`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L8[move_guard.rs]
 
@@ -1581,7 +1601,7 @@ mod foo;
 
 [discrete]
 === `move_to_mod_rs`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_to_mod_rs.rs#L38[move_to_mod_rs.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_to_mod_rs.rs#L12[move_to_mod_rs.rs]
 
 Moves xxx.rs to xxx/mod.rs.
 

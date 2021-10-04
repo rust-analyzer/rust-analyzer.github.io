@@ -84,7 +84,7 @@ This diagnostic is triggered if created structure does not have field provided i
 
 
 === remove-this-semicolon
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_diagnostics/src/handlers/remove_this_semicolon.rs#L8[remove_this_semicolon.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_diagnostics/src/handlers/remove_this_semicolon.rs#L10[remove_this_semicolon.rs]
 
 This diagnostic is triggered when there's an erroneous `;` at the end of the block.
 

@@ -1,0 +1,64 @@
+= Changelog #97
+:sectanchors:
+:page-layout: post
+
+Commit: commit:4b7675fcc30d3e2c05eafc68a5724db66b58142c[] +
+Release: release:2021-10-04[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:10395[] (first contribution) add `pub(super)` keyword completion.
+* pr:10398[] (first contribution) set `defaultLibrary` semantic token on standard library items.
+* pr:10403[] add semantic token modifier for crate root.
+* pr:10362[] add assist to convert `a/mod.rs` into `a.rs`:
++
+image::https://user-images.githubusercontent.com/13777628/134837717-074c23e9-1ca2-4207-b780-8443b2241272.gif[]
+* pr:10412[] highlight `asm!` as format string:
++
+image::https://user-images.githubusercontent.com/1786438/135606261-a1cb6caf-0a7f-45f7-9dde-0275370b0889.png[]
+* pr:10441[] hide type inlay hints for constructors:
++
+image::https://user-images.githubusercontent.com/3757771/135773135-caa363a2-ff40-42c2-baea-95809b85017f.png[]
+* pr:10181[] add basic LSIF support.
+* pr:10384[] add native `onEnterRules` for Code.
+* pr:10385[] make `extern crate test;` work.
+* pr:10366[] enable attribute proc macros by default.
+
+
+== Fixes
+
+* pr:10416[] (first contribution) about `vscode-vim` in the `onEnter` docs.
+* pr:10374[] make `stringify!` insert/collapse whitespace when needed.
+* pr:10418[] add whitespace between lifetime and mut keyword in expand macro command.
+* pr:10377[] fix proc macro crash on nightly.
+* pr:10378[] implement most `proc_macro` span handling methods.
+* pr:10305[] move ``GenericParams``'s handling of `impl Trait` into `GenericParams::generic_params_query`.
+* pr:10382[] fix `inline_call` breaking `RecordExprField` shorthands.
+* pr:10373[], pr:10399[] fix `into_iterator` completion on `Vec<{unknown}>`.
+* pr:10389[] use the right `HirFileId` when expanding macros in function parameters.
+* pr:10397[], pr:10400[], pr:10413[] fix format string highlighting for `panic!`, `assert!`, `todo!`, `unimplemented!`, `concat!` and `unreachable!`.
+* pr:10402[] don't show flyimport completions in `use` renames.
+* pr:10411[] parenthesize expressions in `if_to_bool_then` assist where required.
+* pr:10422[] overwrite files when calling `patchelf`.
+* pr:10425[] only highlight the semicolon in "Remove semicolon" diagnostics.
+* pr:10430[] fix rename trying to edit the same range multiple times for certain macro inputs.
+* pr:10437[] fix `extract_variable` not working on macro calls.
+* pr:10436[] fix `await` insertion with `?` during `extract_function`.
+* pr:10439[] fix `insert_use` incorrectly merging glob imports.
+* pr:10442[] limit depth to 1 when searching for `Cargo.toml` to prevent activation in non-Rust projects.
+
+
+== Internal Improvements
+
+* pr:10353[] (first contribution) remove `GenericParams::new`.
+* pr:10364[] rename `Dyn*` to `Any*` nodes.
+* pr:10406[] restructure syntax element highlighting into node and token branches.
+* pr:10414[] add some profiling calls to name resolution.
+* pr:10426[] use naming that matches intended use case.
+* pr:10429[] remove deprecated method.
+* pr:10431[] clean up MBE a bit.

@@ -312,7 +312,7 @@ image::https://user-images.githubusercontent.com/48062697/113020657-b560f500-917
 
 
 === Highlight Related
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L33[highlight_related.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L36[highlight_related.rs]
 
 Highlights constructs related to the thing under the cursor:
 - if on an identifier, highlights all references to that identifier in the current file
@@ -333,7 +333,7 @@ image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L35[inlay_hints.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L36[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
@@ -495,6 +495,16 @@ Add the following to `keybindings.json`:
   "key": "Enter",
   "command": "rust-analyzer.onEnter",
   "when": "editorTextFocus && !suggestWidgetVisible && editorLangId == rust"
+}
+----
+
+When using the Vim plugin:
+[source,json]
+----
+{
+  "key": "Enter",
+  "command": "rust-analyzer.onEnter",
+  "when": "editorTextFocus && !suggestWidgetVisible && editorLangId == rust && vim.mode == 'Insert'"
 }
 ----
 
@@ -676,7 +686,9 @@ callable:: Emitted for locals whose types implements one of the `Fn*` traits.
 constant:: Emitted for consts.
 consuming:: Emitted for locals that are being consumed when use in a function call.
 controlFlow:: Emitted for control-flow related tokens, this includes the `?` operator.
+crateRoot:: Emitted for crate names, like `serde` and `crate`.
 declaration:: Emitted for names of definitions, like `foo` in `fn foo() {}`.
+defaultLibrary:: Emitted for items from built-in crates (std, core, alloc, test and proc_macro).
 documentation:: Emitted for documentation comments.
 injected:: Emitted for doc-string injected highlighting like rust source blocks in documentation.
 intraDocLink:: Emitted for intra doc links in doc-strings.
