@@ -763,6 +763,32 @@ fn foo<T: Copy + Clone>() { }
 
 
 [discrete]
+=== `generate_constant`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_constant.rs#L12[generate_constant.rs]
+
+Generate a named constant.
+
+.Before
+```rust
+struct S { i: usize }
+impl S { pub fn new(n: usize) {} }
+fn main() {
+    let v = S::new(CAPA┃CITY);
+}
+```
+
+.After
+```rust
+struct S { i: usize }
+impl S { pub fn new(n: usize) {} }
+fn main() {
+    const CAPACITY: usize = ┃;
+    let v = S::new(CAPACITY);
+}
+```
+
+
+[discrete]
 === `generate_default_from_enum_variant`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_default_from_enum_variant.rs#L6[generate_default_from_enum_variant.rs]
 
@@ -1206,7 +1232,7 @@ impl Person {
 
 [discrete]
 === `inline_call`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_call.rs#L156[inline_call.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_call.rs#L155[inline_call.rs]
 
 Inlines a function or method body creating a `let` statement per parameter unless the parameter
 can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
@@ -1995,6 +2021,30 @@ fn main() {
 ```rust
 fn main() {
     find('{');
+}
+```
+
+
+[discrete]
+=== `replace_try_expr_with_match`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_try_expr_with_match.rs#L18[replace_try_expr_with_match.rs]
+
+Replaces a `try` expression with a `match` expression.
+
+.Before
+```rust
+fn handle() {
+    let pat = Some(true)┃?;
+}
+```
+
+.After
+```rust
+fn handle() {
+    let pat = match Some(true) {
+        Some(it) => it,
+        None => return None,
+    };
 }
 ```
 

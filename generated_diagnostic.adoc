@@ -31,7 +31,7 @@ This diagnostic is shown for macro expansion errors.
 
 
 === mismatched-arg-count
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_diagnostics/src/handlers/mismatched_arg_count.rs#L3[mismatched_arg_count.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_diagnostics/src/handlers/mismatched_arg_count.rs#L10[mismatched_arg_count.rs]
 
 This diagnostic is triggered if a function is invoked with an incorrect amount of arguments.
 
