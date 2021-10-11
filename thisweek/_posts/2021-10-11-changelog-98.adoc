@@ -1,0 +1,47 @@
+= Changelog #98
+:sectanchors:
+:page-layout: post
+
+Commit: commit:ed4b312fa777ebb39ba1348fe3df574c441a485e[] +
+Release: release:2021-10-11[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:10476[] (first contribution) add `replace_try_expr_with_match` assist:
++
+image::https://user-images.githubusercontent.com/308347/136434480-f0ae5b34-36cb-4bbf-98ca-4b77b58482e1.gif[]
+* pr:10447[] (first contribution) implement enum variant code lens:
++
+image::https://user-images.githubusercontent.com/308347/136690713-9eb5f108-af80-41c3-86e2-8250b6ef9a40.gif[]
+* pr:10458[] implement custom user snippets:
++
+image::https://user-images.githubusercontent.com/3757771/136059454-ceccfc2c-2c90-46da-8ad1-bac9c2e83ec1.gif[]
+* pr:10459[] add "Generate constant" assist:
++
+image::https://user-images.githubusercontent.com/13777628/135885262-c80de86f-5555-4f84-9508-822243f8a876.gif[]
+* pr:10474[] support `let...else`.
+* pr:10499[] make "mismatched arggument counts" diagnostic range more precise.
+
+== Fixes
+
+* pr:10479[] fix index out of bounds panic in name resolution.
+* pr:10456[] avoid cycle when lowering predicates for associated item lookup.
+* pr:10482[] fix `inline_call` trying to use an uncached syntax node in `Semantics`.
+* pr:10460[] only add `proc_macro` to prelude in proc-macro crates.
+* pr:10477[] fix parsing of macro call inside generic args.
+* pr:10449[] fix parsing of `Some(1..)`.
+* pr:10420[] parse outer attributes on `StructPatternEtCetera`.
+* pr:10480[] change snake case fix to match rustc implementation.
+
+== Internal Improvements
+
+* pr:10504[] (first contribution) remove needless clones
+* pr:10467[] optimize code lens for references and implementations.
+* pr:10494[], pr:10495[], pr:10496[], pr:10497[], pr:10501[], pr:10507[], pr:10508[], pr:10509[], pr:10510[], pr:10512[], pr:10514[] start new macro test suite
+* pr:10457[] remove support for pre-1.47 sysroots.
+* pr:10440[] fix Clippy warnings and replace some ``if let``s with `match`.
