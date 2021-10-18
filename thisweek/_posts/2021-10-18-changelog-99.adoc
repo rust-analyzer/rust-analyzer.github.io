@@ -1,0 +1,57 @@
+= Changelog #99
+:sectanchors:
+:page-layout: post
+
+Commit: commit:91cbda43c2af82b9377eff70a21f59ade18cd23c[] +
+Release: release:2021-10-18[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:10529[] generate `PartialOrd` implementations:
++
+image::https://user-images.githubusercontent.com/308347/137682192-12f729c3-c70b-456e-9b6c-a92fa4ea275f.gif[]
+* pr:10434[] allow `Locate parent module` in `Cargo.toml`:
++
+image::https://user-images.githubusercontent.com/308347/137682837-46cb51b3-f6fa-41b1-b947-ae65f9a6509c.gif[]
+* pr:10539[] add "Generate delegate methods" assist:
++
+image::https://user-images.githubusercontent.com/3757771/137555191-2f9ff184-a235-4afb-87c7-aa03cea4a96f.gif[]
+* pr:10546[] implement "Promote local to const" assist:
++
+image::https://user-images.githubusercontent.com/3757771/137555943-51a11a43-5e8f-4309-8178-417b677d74ad.gif[]
+* pr:10417[] add "Unwrap `Result` return type" assist:
++
+image::https://user-images.githubusercontent.com/308347/137636737-06a3d47d-f647-45dd-85a2-fe0579ef24a7.gif[]
+
+== Fixes
+
+* pr:10519[] (first contribution) set `toolinfo` in LSIF export.
+* pr:10522[] (first contribution) fix serialization of `SignatureHelp` response.
+* pr:10534[] (first contribution) improve logo rendering on dark backgrounds.
+* pr:10538[] (first contribution) make brace matching prefer the one to the right of the cursor.
+* pr:10542[] (first contribution) use workspace `cargo` to fetch `rust-src` metadata.
+* pr:10543[] (first contribution) narrow "Add missing match arms" assist range.
+* pr:10533[] fix `AssistContext` panic on sole whitespace selection.
+* pr:10503[] only include targets of packages that are workspace members.
+* pr:10517[] report `cargo check` failures.
+* pr:10491[] support nested type in "Replace `if-let` with ``match``".
+* pr:10552[] fix "Missing fields" diagnostic fix replacing wrong text ranges.
+* pr:10557[] fix qualified path completion not completing macros.
+* pr:10562[] fix clippy attribute completions always inserting `clippy::`.
+* pr:10569[] skip non clippy completions when completing a clippy path.
+
+== Internal Improvements
+
+* pr:10532[] (first contribution) rename `descend_into_macros` functions.
+* pr:10525[] regenerate lints and features.
+* pr:10526[] improve user snippet import performance.
+* pr:10528[], pr:10533[] make selections in assists with trailing/leading whitespace more forgiving.
+* pr:10423[] refactor for `mdbook` plugin.
+* pr:10309[] use `ControlFlow` in "Extract function" assist.
+* pr:10558[] refactor lifetime completion context fields.
+* pr:10561[] don't turn local names into strings in `CompletionContext`.

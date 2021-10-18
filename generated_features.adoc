@@ -799,7 +799,7 @@ be parsed as a valid structural search and replace rule.
 
 
 === User Snippet Completions
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_completion/src/snippet.rs#L5[snippet.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_completion/src/snippet.rs#L7[snippet.rs]
 
 rust-analyzer allows the user to define custom (postfix)-snippets that may depend on items to be accessible for the current scope to be applicable.
 
