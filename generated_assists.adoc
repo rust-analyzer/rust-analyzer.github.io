@@ -141,7 +141,7 @@ struct Point<'a> {
 
 [discrete]
 === `add_missing_match_arms`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_missing_match_arms.rs#L15[add_missing_match_arms.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_missing_match_arms.rs#L16[add_missing_match_arms.rs]
 
 Adds missing clauses to a `match` expression.
 
@@ -583,7 +583,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_function`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_function.rs#L33[extract_function.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_function.rs#L38[extract_function.rs]
 
 Extracts selected statements into new function.
 
@@ -849,6 +849,47 @@ impl Example {
 impl Default for Example {
     fn default() -> Self {
         Self::new()
+    }
+}
+```
+
+
+[discrete]
+=== `generate_delegate_methods`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_delegate_methods.rs#L10[generate_delegate_methods.rs]
+
+Generate delegate methods.
+
+.Before
+```rust
+struct Age(u8);
+impl Age {
+    fn age(&self) -> u8 {
+        self.0
+    }
+}
+
+struct Person {
+    ag┃e: Age,
+}
+```
+
+.After
+```rust
+struct Age(u8);
+impl Age {
+    fn age(&self) -> u8 {
+        self.0
+    }
+}
+
+struct Person {
+    age: Age,
+}
+
+impl Person {
+    ┃fn age(&self) -> u8 {
+        self.age.age()
     }
 }
 ```
@@ -1646,6 +1687,40 @@ fn t() {}
 
 
 [discrete]
+=== `promote_local_to_const`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/promote_local_to_const.rs#L19[promote_local_to_const.rs]
+
+Promotes a local variable to a const item changing its name to a `SCREAMING_SNAKE_CASE` variant
+if the local uses no non-const expressions.
+
+.Before
+```rust
+fn main() {
+    let foo┃ = true;
+
+    if foo {
+        println!("It's true");
+    } else {
+        println!("It's false");
+    }
+}
+```
+
+.After
+```rust
+fn main() {
+    const ┃FOO: bool = true;
+
+    if FOO {
+        println!("It's true");
+    } else {
+        println!("It's false");
+    }
+}
+```
+
+
+[discrete]
 === `pull_assignment_up`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/pull_assignment_up.rs#L11[pull_assignment_up.rs]
 
@@ -1955,7 +2030,7 @@ fn compute() -> Option<i32> { None }
 
 [discrete]
 === `replace_match_with_if_let`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_if_let_with_match.rs#L158[replace_if_let_with_match.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_if_let_with_match.rs#L160[replace_if_let_with_match.rs]
 
 Replaces a binary `match` with a wildcard pattern and no guards with an `if let` expression.
 
@@ -2220,6 +2295,23 @@ fn foo() {
 fn foo() {
     println!("foo");
 }
+```
+
+
+[discrete]
+=== `unwrap_result_return_type`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/unwrap_result_return_type.rs#L9[unwrap_result_return_type.rs]
+
+Unwrap the function's return type.
+
+.Before
+```rust
+fn foo() -> Result<i32>┃ { Ok(42i32) }
+```
+
+.After
+```rust
+fn foo() -> i32 { 42i32 }
 ```
 
 
