@@ -141,7 +141,7 @@ struct Point<'a> {
 
 [discrete]
 === `add_missing_match_arms`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_missing_match_arms.rs#L16[add_missing_match_arms.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_missing_match_arms.rs#L15[add_missing_match_arms.rs]
 
 Adds missing clauses to a `match` expression.
 
@@ -613,6 +613,38 @@ fn ┃fun_name(n: i32) {
 
 
 [discrete]
+=== `extract_module`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_module.rs#L25[extract_module.rs]
+
+Extracts a selected region as seperate module. All the references, visibility and imports are
+resolved.
+
+.Before
+```rust
+┃fn foo(name: i32) -> i32 {
+    name + 1
+}┃
+
+fn bar(name: i32) -> i32 {
+    name + 2
+}
+```
+
+.After
+```rust
+mod modname {
+    pub(crate) fn foo(name: i32) -> i32 {
+        name + 1
+    }
+}
+
+fn bar(name: i32) -> i32 {
+    name + 2
+}
+```
+
+
+[discrete]
 === `extract_struct_from_enum_variant`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_struct_from_enum_variant.rs#L29[extract_struct_from_enum_variant.rs]
 
@@ -1075,7 +1107,7 @@ impl From<u32> for A {
 
 [discrete]
 === `generate_function`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_function.rs#L25[generate_function.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_function.rs#L27[generate_function.rs]
 
 Adds a stub function with a signature matching the function under the cursor.
 
@@ -1126,7 +1158,7 @@ struct Person {
 impl Person {
     /// Get a reference to the person's name.
     fn ┃name(&self) -> &str {
-        self.name.as_str()
+        self.name.as_ref()
     }
 }
 ```
@@ -1134,7 +1166,7 @@ impl Person {
 
 [discrete]
 === `generate_getter_mut`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_getter.rs#L36[generate_getter.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_getter.rs#L51[generate_getter.rs]
 
 Generate a mut getter method.
 
@@ -1754,6 +1786,37 @@ fn main() {
 
 
 [discrete]
+=== `qualify_method_call`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/qualify_method_call.rs#L13[qualify_method_call.rs]
+
+Replaces the method call with a qualified function call.
+
+.Before
+```rust
+struct Foo;
+impl Foo {
+    fn foo(&self) {}
+}
+fn main() {
+    let foo = Foo;
+    foo.fo┃o();
+}
+```
+
+.After
+```rust
+struct Foo;
+impl Foo {
+    fn foo(&self) {}
+}
+fn main() {
+    let foo = Foo;
+    Foo::foo(&foo);
+}
+```
+
+
+[discrete]
 === `qualify_path`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/qualify_path.rs#L21[qualify_path.rs]
 
@@ -2300,7 +2363,7 @@ fn foo() {
 
 [discrete]
 === `unwrap_result_return_type`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/unwrap_result_return_type.rs#L9[unwrap_result_return_type.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/unwrap_result_return_type.rs#L10[unwrap_result_return_type.rs]
 
 Unwrap the function's return type.
 

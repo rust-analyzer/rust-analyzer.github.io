@@ -358,7 +358,7 @@ image::https://user-images.githubusercontent.com/48062697/113020660-b5f98b80-917
 
 
 === Join Lines
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/join_lines.rs#L22[join_lines.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/join_lines.rs#L20[join_lines.rs]
 
 Join selected lines into one, smartly fixing up whitespace, trailing commas, and braces.
 

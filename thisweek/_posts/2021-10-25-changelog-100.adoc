@@ -1,0 +1,41 @@
+= Changelog #100
+:sectanchors:
+:page-layout: post
+
+Commit: commit:1f47693e02809c97db61b51247ae4e4d46744c61[] +
+Release: release:2021-10-25[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:10602[] (first contribution) add "Qualify method call" assist:
++
+image::https://user-images.githubusercontent.com/308347/138670976-837b64aa-bf46-40bc-81c2-a9bdd62cdafe.gif[]
+* pr:9939[] add "Extract module" assist:
++
+image::https://user-images.githubusercontent.com/308347/138671404-b740c4ff-0de3-426e-b9d7-134f02ab0e4e.gif[]
+* pr:10563[] make "Generate getter" assist use semantic info.
+* pr:10551[] pull in new `lsp-types` for Visual Studio 2022 compatibility.
+
+== Fixes
+
+* pr:10608[] (first contribution) amend the `rustup` installation instructions.
+* pr:10574[], pr:10578[] fix "Generate `PartialOrd` implementation" codegen.
+* pr:10568[] improve codegen for "Unwrap `Result` return type".
+* pr:10585[] resolve derive attributes even when shadowed.
+* pr:10587[] fix `add_missing_match_arm` panicking on failed upmapping.
+* pr:10589[] expand unused glob import into `{}`.
+* pr:10594[] generate and complete rustdoc lints.
+* pr:10597[] fix standard library doclinks not going to the correct page.
+* pr:10603[] don't resolve attributes to non-attribute macros.
+
+== Internal Improvements
+
+* pr:10607[], pr:10617[] migrate to the 2021 edition.
+* pr:10586[] make derive completions work on HIR, not names.
+* pr:10588[] parse const trait bounds.
+* pr:10387[] move `IdxRange` into `la-arena`.
