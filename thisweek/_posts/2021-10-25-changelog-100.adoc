@@ -17,7 +17,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 image::https://user-images.githubusercontent.com/308347/138670976-837b64aa-bf46-40bc-81c2-a9bdd62cdafe.gif[]
 * pr:9939[] add "Extract module" assist:
 +
-image::https://user-images.githubusercontent.com/308347/138671404-b740c4ff-0de3-426e-b9d7-134f02ab0e4e.gif[]
+image::https://user-images.githubusercontent.com/308347/138672377-9f5ca92b-13bc-4aa2-8ad1-8cdd70fe5b88.gif[]
 * pr:10563[] make "Generate getter" assist use semantic info.
 * pr:10551[] pull in new `lsp-types` for Visual Studio 2022 compatibility.
 
