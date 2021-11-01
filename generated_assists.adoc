@@ -2188,6 +2188,29 @@ fn handle() {
 
 
 [discrete]
+=== `replace_turbofish_with_explicit_type`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_turbofish_with_explicit_type.rs#L12[replace_turbofish_with_explicit_type.rs]
+
+Converts `::<_>` to an explicit type assignment.
+
+.Before
+```rust
+fn make<T>() -> T { ) }
+fn main() {
+    let a = make┃::<i32>();
+}
+```
+
+.After
+```rust
+fn make<T>() -> T { ) }
+fn main() {
+    let a: i32 = make();
+}
+```
+
+
+[discrete]
 === `sort_items`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/sort_items.rs#L12[sort_items.rs]
 

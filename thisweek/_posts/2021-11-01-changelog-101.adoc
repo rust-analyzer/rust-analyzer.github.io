@@ -1,0 +1,45 @@
+= Changelog #101
+:sectanchors:
+:page-layout: post
+
+Commit: commit:04f03a360ab8fef3d9c0ff84de2d39b8a196c717[] +
+Release: release:2021-11-01[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:10629[] add assist to replace turbofish with explicit type:
++
+image::https://user-images.githubusercontent.com/308347/139633425-11b38f56-f56e-48bb-9a86-a70c07301062.gif[]
+* pr:10657[] make unqualified derive attributes flyimportable:
++
+image::https://user-images.githubusercontent.com/3757771/139436613-1e6eb8fd-f591-4fca-9383-ff7408ee9b18.gif[]
+* pr:10672[] (potentially breaking) upgrade Ubuntu builders to 20.04.
+
+
+== Fixes
+
+* pr:10656[] enable auto-import and qualify-path in derive attributes.
+* pr:10630[] don't for reload when changing `HoverAction` config in VSCode.
+* pr:10631[] fix postfix completion panic.
+* pr:10633[] implement most `proc_macro` span handling for the other ABIs.
+* pr:10635[] fix "Extract variable" not working on macro calls.
+* pr:10637[] make `goto_type_definition` multi-token mapping aware.
+* pr:10592[] fix rendering of `##` in doc comments.
+* pr:10639[] make `goto_declaration` multi-token mapping aware.
+* pr:10641[] make `expand_macro` multi-token mapping aware.
+* pr:10648[] don't discard attributed items when a proc-macro unexpectedly fails to expand.
+* pr:10662[] fix plain-text `textDocument/hover` content type.
+* pr:10668[] fix for-loop expressions breaking with `BlockExpr` iterable.
+
+
+== Internal Improvements
+
+* pr:10649[] remove `CompletionKind` in favor of `CompletionItemKind`.
+* pr:10623[] replace `L_DOLLAR`/`R_DOLLAR` with parenthesis hack.
+* pr:10654[] refactor `ide` handling for paths in derive inputs.
+* pr:10595[] fix links in Code setting descriptions.
