@@ -1,0 +1,32 @@
+= Changelog #102
+:sectanchors:
+:page-layout: post
+
+Commit: commit:2c0f433fd2e838ae181f87019b6f1fefe33c6f54[] +
+Release: release:2021-11-08[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:10596[] set server status to warning when proc-macro sources change.
++
+image::https://user-images.githubusercontent.com/3757771/138102552-208d3edf-a843-49e6-9f48-1e911f54a4ba.png[]
+* pr:10701[], pr:10703[], pr:10704[] speed up completion and highlighting in the presence of macros.
+
+== Fixes
+
+* pr:10645[] make `rename` multi-token mapping aware.
+* pr:10685[] enable Markdown table rendering in comments.
+* pr:10680[] implement `Literal::from_str` in the proc macro API (fixes `rtic 0.6-dev`).
+
+== Internal Improvements
+
+* pr:10696[] replace more `Name::to_string` usages with `Name::to_smol_str`.
+* pr:10699[] make CompletionItem `label` and `lookup` fields ``SmolStr``s.
+* pr:10698[] implement multi-token mapping for `ssr`.
+* pr:10667[] expose version string of crates from `hir`.
+* pr:10686[] add `Semantics::original_ast_node` for up-mapping nodes out of macro files.
