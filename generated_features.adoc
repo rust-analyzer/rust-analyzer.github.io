@@ -563,7 +563,7 @@ The simplest way to use this feature is via the context menu:
 
 
 === Rename
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/rename.rs#L44[rename.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/rename.rs#L65[rename.rs]
 
 Renames the item below the cursor and all of its references
 
