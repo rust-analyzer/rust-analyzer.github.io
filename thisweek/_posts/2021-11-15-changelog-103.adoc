@@ -1,0 +1,34 @@
+= Changelog #103
+:sectanchors:
+:page-layout: post
+
+Commit: commit:73668334f05c3446b04116ccc3156240d2d8ab19[] +
+Release: release:2021-11-15[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:10761[] show constructor inlay hints by default, add option to disable.
+* pr:10743[] index fewer crates on startup/reload.
+
+== Fixes
+
+* pr:10731[] (first contribution) show the right check command in Code.
+* pr:10756[] (first contribution) allow the check command to terminate with no output.
+* pr:10729[] lookup impls in local def maps.
+* pr:10722[] fix proc-macro attributes being shadowed by their functions in IDE layer.
+* pr:10689[] handle pub tuple fields in tuple structs.
+* pr:10720[] don't ascribe types in pattern completion for param patterns twice.
+* pr:10747[] remove faulty logic for ascending test attributes for runnables.
+* pr:10762[] trigger flyimport on enum variants.
+* pr:10759[] make `add_missing_match_arms` applicable at the end of the match.
+
+== Internal Improvements
+
+* pr:10688[] type-check TS on CI.
+* pr:10738[] do not search through all three namespaces in `ItemScope::name_of`.
+* pr:10741[], pr:10745[] flatten `Definition::ModuleDef` variant.
