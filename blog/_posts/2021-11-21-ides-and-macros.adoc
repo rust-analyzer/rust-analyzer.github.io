@@ -3,7 +3,7 @@
 :sectanchors:
 :page-layout: post
 
-In article, we'll discuss challenges that language servers face when supporting macros.
+In this article, we'll discuss challenges that language servers face when supporting macros.
 This is interesting, because rust-analyzer, macros are the hardest nut to crack.
 
 While we use Rust as an example, the primary motivation here is to inform future language design.
