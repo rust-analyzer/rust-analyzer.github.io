@@ -4,7 +4,7 @@
 :page-layout: post
 
 In this article, we'll discuss challenges that language servers face when supporting macros.
-This is interesting, because rust-analyzer, macros are the hardest nut to crack.
+This is interesting, because for rust-analyzer, macros are the hardest nut to crack.
 
 While we use Rust as an example, the primary motivation here is to inform future language design.
 As this is a case study rather than a thorough analysis, conclusions should be taken with a grain of salt.
@@ -36,7 +36,7 @@ fn make_S() -> S {
 }
 ----
 
-Here, a reasonable IDE feature (known as intention, code action, assist or just 💡) is to suggesting adding the rest of the fields to the struct literal:
+Here, a reasonable IDE feature (known as intention, code action, assist or just 💡) is to suggest adding the rest of the fields to the struct literal:
 
 [source,rust]
 ----
@@ -60,11 +60,11 @@ reflect![
 ];
 ----
 
-What the macro does here is just mirroring every token.
-IDE has no troubles expanding this macro.
+What the macro does here is just to mirror every token.
+The IDE has no troubles expanding this macro.
 It also understands that, in the expansion, the `y` field is missing, and that `y: todo!()` can be added to the _expansion_ as a fix.
-What the IDE can't do though, is to figure out what should be changed in the code that the user wrote to achieve that effect.
-Another interesting case to think about is what if the macro just encrypts all identifiers?
+What the IDE can't do, though, is to figure out what should be changed in the code that the user wrote to achieve that effect.
+Another interesting case to think about is: What if the macro just encrypts all identifiers?
 
 This is where "`__disproportionally__ hard`" bit lies.
 In a batch compiler, code generally moves only forward through compilation phases.
@@ -85,22 +85,22 @@ async fn main() {
 What a user sees here is just a usual Rust function with some annotation attached.
 Clearly, everything should just work, right?
 But from an IDE point of view, this example isn't that different from the `reflect!` one.
-`tokio::main` is just an opaque code which takes the tokens of the source function as an input, and produces some tokens as an output, which then replace the original function.
+`tokio::main` is just an opaque bit of code which takes the tokens of the source function as an input, and produces some tokens as an output, which then replace the original function.
 It just _happens_ that the semantics of the original code is mostly preserved.
-Again, `tokio::main` _could_ have encrypted every identifier!.
+Again, `tokio::main` _could_ have encrypted every identifier!
 
-So, to make thing appear to work, an IDE necessary involves heuristics in such cases.
+So, to make thing appear to work, an IDE necessarily involves heuristics in such cases.
 Some possible options are:
 
 * Just completely ignore the macro.
-  This make boring things like completion mostly work, but leads to semantic errors elsewhere.
-* Expand the macro, apply IDE features to expansion, and try heuristically lift them to the original source code
+  This makes boring things like completion mostly work, but leads to semantic errors elsewhere.
+* Expand the macro, apply IDE features to the expansion, and try to heuristically lift them to the original source code
   (this is the bit where "`and now we just guess the private key used to encrypt an identifier`" conceptually lives).
   This is the pedantically correct approach, but it breaks most IDE features in minor and major ways.
   What's worse, the breakage is unexplainable to users: "`I just added an annotation to the function, why I don't get any completions?`"
-* In the semantic model, maintain both precisely analyzed expanded code, as well as heuristically analyzed source code.
+* In the semantic model, maintain both the precisely analyzed expanded code and the heuristically analyzed source code.
   When writing IDE features, try to intelligently use precise analysis from the expansion to augment knowledge about the source.
-  This still doesn't solve all the problems, but solves most of them good enough such that the users now are completely befuddled by those rare cases where heuristics break down.
+  This still doesn't solve all the problems, but solves most of them good enough such that the users are now completely befuddled by those rare cases where the heuristics break down.
 
 .First Lesson
 [NOTE]
@@ -114,14 +114,14 @@ Avoid situations where what looks like normal syntax is instead an arbitrary lan
 == Parallel Name Resolution
 
 _The second_ challenge is performance and phasing.
-Batch compilers typically compile all the code, so a natural solution of just expanding all the macros works.
+Batch compilers typically compile all the code, so the natural solution of just expanding all the macros works.
 Or rather, there isn't a problem at all here, you just write the simplest code to do the expansion and things just work.
-Situation for an IDE is quite different -- the main reason why IDE is capable of working with keystroke latency is that it cheats.
+The situation for an IDE is quite different -- the main reason why the IDE is capable of working with keystroke latency is that it cheats.
 It just doesn't look at the majority of the code during code editing, and analyses the absolute minimum to provide a completion widget.
 To be able to do so, an IDE needs help from the language to understand which parts of code can be safely ignored.
 
-Read https://rust-analyzer.github.io/blog/2020/07/20/three-architectures-for-responsive-ide.html[this other article] to understand specific tricks IDE can employ here.
-The most powerful idea there is that generally IDE needs to know only about top-level names, and it doesn't need to look inside, e.g, function bodies most of the time.
+Read https://rust-analyzer.github.io/blog/2020/07/20/three-architectures-for-responsive-ide.html[this other article] to understand specific tricks IDEs can employ here.
+The most powerful idea there is that, generally, an IDE needs to know only about top-level names, and it doesn't need to look inside e.g. function bodies most of the time.
 Ideally, an IDE processes all files in parallel, noting, for each file, which top-level names it contributes.
 
 The problem with macros, of course, is that they can contribute new top-level names.
@@ -151,8 +151,8 @@ macro_rules! _declare_mod {
 pub(crate) use _declare_mod as declare_mod;
 ----
 
-Semantics like this is what prevents rust-analyzer to just process every file in isolation.
-Instead, there's a hard-to-parallelize and hard to make incremental bit in rust-analyzer, where we just accept high implementation complexity and poor runtime performance.
+Semantics like this are what prevents rust-analyzer to just process every file in isolation.
+Instead, there are bits in rust-analyzer that are hard to parallelize and hard to make incremental, where we just accept high implementation complexity and poor runtime performance.
 
 There is an alternative -- design meta programming such that it can work "`file at a time`", and can be plugged into an embarrassingly parallel indexing phase.
 This is the design that Sorbet, a (very) fast type checker for Ruby chooses: https://youtu.be/Gdx6by6tcvw?t=804.
@@ -164,11 +164,11 @@ So let's make sure that the overall thing is still crazy fast, even if a particu
 
 To flesh out this design bit:
 
-* All macros used in a compilation unit must be know up-front.
-  In particular, it's not possible to define a macro in one file of CU and use it in another.
+* All macros used in a compilation unit must be known up-front.
+  In particular, it's not possible to define a macro in one file of a CU and use it in another.
 * Macros follow simplified name resolution rules, which are intentionally different from the usual ones to allow recognizing and expanding macros _before_ name resolution.
-  For example, macro invocations could have a unique syntax, like `name!`, where `name` identifies a macro definition in the flat namespace of know-up-front macros.
-* Macros don't get to access anything outside of the file with macro invocation.
+  For example, macro invocations could have a unique syntax, like `name!`, where `name` identifies a macro definition in the flat namespace of known-up-front macros.
+* Macros don't get to access anything outside of the file with the macro invocation.
   They _can_ simulate name resolution for identifiers within the file, but can't reach across files.
 
 Here, limiting macros to local-only information is a conscious design choice.
@@ -176,7 +176,7 @@ By limiting the power available to macros, we gain the properties we can use to 
 For example, a macro can't know a type of the variable, but because it can't do that, we know we can re-use macro expansion results when unrelated files change.
 
 An interesting hack to regain the full power of type-inspecting macros is to move the problem from the language to the tooling.
-It is possible to run a code generation step before the build, which can use compiler as a library to do a global semantic analysis of the code written by the user.
+It is possible to run a code generation step before the build, which can use the compiler as a library to do a global semantic analysis of the code written by the user.
 Based on the analysis results, the tool can write some generated code, which would then be processed by IDEs as if it was written by a human.
 
 .Second Lesson
@@ -199,15 +199,15 @@ macro_rules! m {
 m!(no);
 ----
 
-The behavior of command-line compiler here is to just die with out-of-memory error, and that's an OK behavior for this context.
+The behavior of the command-line compiler here is to just die with an out-of-memory error, and that's an OK behavior for this context.
 Of course it's better when the compiler gives a nice error message, but if it misbehaves and panics or loops infinitely on erroneous code, that is also OK -- the user can just `^C` the process.
 
 For a long-running IDE process though, looping or eating all the memory is not an option -- all resources need to be strictly limited.
 This is especially important given that an IDE looks at incomplete and erroneous code most of the time, so it hits far more weird edge cases than a batch compiler.
 
 Rust procedural macros are all-powerful, so rust-analyzer and IntelliJ Rust have to implement extra tricks to contain them.
-While `rustc` just loads proc-macro shared library into the process, IDEs load macros into a dedicated external process which can be killed without bringing the whole IDE down.
-Adding IPC to an otherwise purely-functional compiler code is technically challenging.
+While `rustc` just loads proc-macros as shared libraries into the process, IDEs load macros into a dedicated external process which can be killed without bringing the whole IDE down.
+Adding IPC to an otherwise purely functional compiler code is technically challenging.
 
 A related problem is determinism.
 rust-analyzer assumes that all computations are deterministic, and it uses this fact to smartly forget about subsets of derived data, to save memory.
@@ -226,22 +226,22 @@ For a batch compiler, it's OK to go with optimistic best-effort guarantees: "`we
 IDEs have stricter availability requirements, so they have to be pessimistic: "`we cannot crash, so we assume that any macro is potentially non-deterministic`".
 ====
 
-Curiously, similar to the previous point, moving meta programming to a code generation build system step sidesteps the problem, as you again can optimistically assume determinism.
+Curiously, similar to the previous point, moving metaprogramming to a code generation build system step sidesteps the problem, as you again can optimistically assume determinism.
 
 == Recap
 
-When it comes to meta programming, IDEs are harder than the batch compilers.
-To paraphrase Kernighan, if you design meta programming in your compiler as cleverly as possible, you are not smart enough to write an IDE for it.
+When it comes to metaprogramming, IDEs have a harder time than the batch compilers.
+To paraphrase Kernighan, if you design metaprogramming in your compiler as cleverly as possible, you are not smart enough to write an IDE for it.
 
 Some specific hard macro bits:
 
-* In a compiler, code flows forward through compilation pipeline.
+* In a compiler, code flows forward through the compilation pipeline.
   IDE features generally flow _back_, from desugared code into the original source.
   Macros can easily make for an irreversible transformation.
 
-* IDE is fast because it knows what to _not_ look at.
+* IDEs are fast because they know what to _not_ look at.
   Macros can hide what is there, and increase the minimum amount of work necessary to understand an isolated bit of code.
 
 * User-written macros can crash.
-  IDE can not crash.
+  IDEs must not crash.
   Running macros from an IDE is therefore fun :-)
