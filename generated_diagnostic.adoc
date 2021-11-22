@@ -24,10 +24,23 @@ This diagnostic is shown for code with inactive `#[cfg]` attributes.
 This diagnostic is triggered if an item name doesn't follow https://doc.rust-lang.org/1.0.0/style/style/naming/README.html[Rust naming convention].
 
 
+=== invalid-derive-target
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_diagnostics/src/handlers/invalid_derive_target.rs#L3[invalid_derive_target.rs]
+
+This diagnostic is shown when the derive attribute is used on an item other than a `struct`,
+`enum` or `union`.
+
+
 === macro-error
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_diagnostics/src/handlers/macro_error.rs#L3[macro_error.rs]
 
 This diagnostic is shown for macro expansion errors.
+
+
+=== malformed-derive
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_diagnostics/src/handlers/malformed_derive.rs#L3[malformed_derive.rs]
+
+This diagnostic is shown when the derive attribute has invalid input.
 
 
 === mismatched-arg-count

@@ -1,0 +1,50 @@
+= Changelog #104
+:sectanchors:
+:page-layout: post
+
+Commit: commit:183ef048f61ae36aa389d1d0345cde940fe788e9[] +
+Release: release:2021-11-22[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:10769[] Add proc macro ABI for rustc 1.58
+* pr:10785[], pr:10796[] Show values of `const`s and `static`s in hover
++
+image::https://user-images.githubusercontent.com/5489149/142163890-b6aa2ab4-7bd0-4dd3-b35d-5eaa83fffb7f.png[]
+* pr:10798[] Show "go to type" for function return type on hover
++
+image::https://user-images.githubusercontent.com/5489149/142375722-4a385216-494b-45a4-be1c-59664213b8d6.png[]
+* pr:10812[], pr:10823[] Format `Fn` traits using parentheses
+* pr:10810[] Add toggle to disable cache priming
+
+
+== Fixes
+
+* pr:10773[] Reimplement mapping out of test/bench attributes for runnables
+* pr:10734[] Add generic parameters in "convert to manual impl" assist
+* pr:10776[] Remove validation of `super` in use paths
+* pr:10799[] Fix proc macro ABI version checks
+* pr:10794[] Parse range patterns inside tuple patterns
+* pr:10795[] Fix crash in doc path resolution
+* pr:10804[] Diagnose using `derive` on non-adt items
+* pr:10806[] Make inlay param hint hiding heurstic case unsensitive
+* pr:10807[] Diagnose invalid derive attribute input
+* pr:10808[] Really show custom check-command
+* pr:10821[] Wrap `inline_call` and `inline_into_callers` if it inlines into the left side of a binary expression
+* pr:10805[] Dedupe or merge hover actions
+* pr:10817[] Omit redundant `{unnamed}` where clauses on hover
+
+
+== Internal Improvements
+
+* pr:10777[] Allow disabling perf counters access via `RA_DISABLE_PERF`
+* pr:10778[] Skip test/bench attr expansion in resolution instead of collection
+* pr:10781[] Do not use reference search in `runnables::related_tests`
+* pr:10789[] Check for derive attributes by item path, not `derive` identifier
+* pr:10819[] Replace some `Vec` occurences with `Box` 
+

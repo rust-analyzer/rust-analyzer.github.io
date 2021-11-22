@@ -583,7 +583,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_function`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_function.rs#L38[extract_function.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_function.rs#L35[extract_function.rs]
 
 Extracts selected statements into new function.
 

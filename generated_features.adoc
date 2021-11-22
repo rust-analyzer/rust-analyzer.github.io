@@ -223,7 +223,7 @@ image::https://user-images.githubusercontent.com/48062697/113020654-b42fc800-917
 
 
 === Find All References
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/references.rs#L43[references.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/references.rs#L40[references.rs]
 
 Shows all references of the item at the cursor location
 
@@ -547,7 +547,7 @@ image::https://user-images.githubusercontent.com/48062697/113065580-04c21800-91b
 
 
 === Related Tests
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L189[runnables.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L192[runnables.rs]
 
 Provides a sneak peek of all tests where the current item is used.
 
@@ -577,7 +577,7 @@ image::https://user-images.githubusercontent.com/48062697/113065582-055aae80-91b
 
 
 === Run
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L111[runnables.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L114[runnables.rs]
 
 Shows a popup suggesting to run a test/benchmark/binary **at the current cursor
 location**. Super useful for repeatedly running just a single test. Do bind this
