@@ -1,0 +1,38 @@
+= Changelog #105
+:sectanchors:
+:page-layout: post
+
+Commit: commit:d9b2291f546abc77d24499339a72a89127464b95[] +
+Release: release:2021-11-29[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:10840[] omit generic defaults for types in hover messages.
+
+== Fixes
+
+* pr:10846[] (first contribution) qualify struct name in constructor completion.
+* pr:10809[] don't discard formatting of `use` lines.
+* pr:10834[] make lint groups work correctly with `warningsAsInfo` and `warningsAsHint`.
+* pr:10839[] fix `mbe::Shift::new` not accounting for non-ident token ids.
+* pr:10849[] fix string highlight injection for macros.
+* pr:10853[] remove possible multiline details in completions.
+* pr:10847[] improve derive attribute path handling in `replace_derive_with_manual_impl`.
+* pr:10824[] print full command if `cargo metadata` fails to run.
+* pr:10859[] prioritize tuple fields in `highlight_related`.
+* pr:10870[] fix macro expansion for ``as _``.
+* pr:10876[] show parameter hints unconditionally for logical not expressions.
+
+== Internal Improvements
+
+* pr:10863[], pr:10865[] build per-block `ItemTree`s.
+* pr:10828[] doc: document absence of stability guarantees.
+* pr:10838[] add the ability to emit token map ids in macro expansion tests.
+* pr:10832[] split parts of `ide_db::call_info` off into `ide`.
+* pr:10833[] set upstream branch when promoting.
+* pr:10835[] pull website before generating new changelog.
