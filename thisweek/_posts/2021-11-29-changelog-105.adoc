@@ -30,7 +30,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 
 == Internal Improvements
 
-* pr:10863[], pr:10865[] build per-block `ItemTree`s.
+* pr:10863[], pr:10865[] build per-block ``ItemTree``s.
 * pr:10828[] doc: document absence of stability guarantees.
 * pr:10838[] add the ability to emit token map ids in macro expansion tests.
 * pr:10832[] split parts of `ide_db::call_info` off into `ide`.
