@@ -1,0 +1,46 @@
+= Changelog #106
+:sectanchors:
+:page-layout: post
+
+Commit: commit:7d6fcbc0be2151bfa85ec146545b42d8be2fb28c[] +
+Release: release:2021-12-06[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:10915[] resolve built-in attributes and tools in `ide`:
++
+image::https://user-images.githubusercontent.com/3757771/144661639-dbd324df-807c-4cc0-b860-4953a98b9fa5.png[]
++
+image::https://user-images.githubusercontent.com/3757771/144661637-e9276cc8-e975-420e-ab32-29fa7732a21f.png[]
+* pr:10943[] enable completions for attributes:
++
+image::https://user-images.githubusercontent.com/3757771/144752483-5dd868fb-b0f3-4f69-9db3-859f0414dc06.gif[]
+* pr:10916[] implement `while let ...` to `loop { if let ...}` conversion in the `convert_while_to_loop` assist.
+
+== Fixes
+
+* pr:10906[] (first contributation) "add return type" assist when missing whitespace before brace.
+* pr:10896[] resolve associated trait types in paths.
+* pr:10902[] handle multiple cargo check quick fix spans.
+* pr:10920[] shorten spans of `mismatched_arg_count` diagnostics.
+* pr:10930[] fix `self` highlighting in imports.
+* pr:10899[] add hack to highlight `self` properly with some proc macro crates.
+* pr:10937[] add back highlighting hack for unresolved attributes.
+* pr:10841[] emit moniker in LSIF.
+* pr:10891[] emit trait names in moniker identifier.
+* pr:10871[], pr:10905[], pr:10940[] try to respect `http.proxyStrictSSL`.
+
+== Internal Improvements
+
+* pr:10872[] build symbol index from crate def map
+* pr:10887[] update bug report template to include version info.
+* pr:10919[] add missing semantic tokens to `package.json`.
+* pr:10897[] make client-side tests actually work.
+* pr:10903[] replace `mocha` with a custom test runner.
+* pr:10929[] split up macro/attribute semantic tokens a bit more.
+* pr:10944[] prefer resolution of inert attributes.
