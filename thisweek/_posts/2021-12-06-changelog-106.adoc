@@ -24,7 +24,7 @@ image::https://user-images.githubusercontent.com/3757771/144752483-5dd868fb-b0f3
 
 == Fixes
 
-* pr:10906[] (first contributation) "add return type" assist when missing whitespace before brace.
+* pr:10906[] (first contribution) "add return type" assist when missing whitespace before brace.
 * pr:10896[] resolve associated trait types in paths.
 * pr:10902[] handle multiple cargo check quick fix spans.
 * pr:10920[] shorten spans of `mismatched_arg_count` diagnostics.
