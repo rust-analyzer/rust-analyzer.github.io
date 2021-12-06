@@ -68,7 +68,7 @@ image::https://user-images.githubusercontent.com/48062697/113020673-b85be580-917
 
 
 === Completion With Autoimport
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_completion/src/completions/flyimport.rs#L17[flyimport.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_completion/src/completions/flyimport.rs#L18[flyimport.rs]
 
 When completing names in the current scope, proposes additional imports from other modules or crates,
 if they can be qualified in the scope, and their name contains all symbols from the completion input.
@@ -610,9 +610,11 @@ Rust-analyzer currently emits the following token tags:
 - For items:
 +
 [horizontal]
+attribute:: Emitted for attribute macros.
 enum:: Emitted for enums.
 function:: Emitted for free-standing functions.
-macro:: Emitted for macros.
+derive:: Emitted for derive macros.
+macro:: Emitted for function-like macros.
 method:: Emitted for associated functions, also knowns as methods.
 namespace:: Emitted for modules.
 struct:: Emitted for structs.
@@ -643,6 +645,7 @@ logical:: Emitted for the logical operators `||`, `&&`, `!`.
 +
 [horizontal]
 punctuation:: Emitted for general punctuation.
+attributeBracket:: Emitted for attribute invocation brackets, that is the `#[` and `]` tokens.
 angle:: Emitted for `<>` angle brackets.
 brace:: Emitted for `{}` braces.
 bracket:: Emitted for `[]` brackets.
@@ -655,7 +658,6 @@ Semi:: Emitted for the `;` token.
 //-
 
 [horizontal]
-attribute:: Emitted for the `#[` `]` tokens.
 builtinAttribute:: Emitted for names to builtin attributes in attribute path, the `repr` in `#[repr(u8)]` for example.
 builtinType:: Emitted for builtin types like `u32`, `str` and `f32`.
 comment:: Emitted for comments.
@@ -668,6 +670,7 @@ lifetime:: Emitted for lifetimes.
 parameter:: Emitted for non-self function parameters.
 property:: Emitted for struct and union fields.
 selfKeyword:: Emitted for the self function parameter and self path-specifier.
+toolModule:: Emitted for tool modules.
 typeParameter:: Emitted for type parameters.
 unresolvedReference:: Emitted for unresolved references, names that rust-analyzer can't find the definition of.
 variable:: Emitted for locals, constants and statics.
@@ -720,7 +723,7 @@ image::https://user-images.githubusercontent.com/48062697/113065586-068bdb80-91b
 
 
 === Status
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/status.rs#L26[status.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/status.rs#L25[status.rs]
 
 Shows internal statistic about memory usage of rust-analyzer.
 
@@ -878,7 +881,7 @@ image::https://user-images.githubusercontent.com/48062697/113065588-068bdb80-91b
 
 
 === Workspace Symbol
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_db/src/symbol_index.rs#L148[symbol_index.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_db/src/symbol_index.rs#L159[symbol_index.rs]
 
 Uses fuzzy-search to find types, modules and functions by name across your
 project and dependencies. This is **the** most useful feature, which improves code
