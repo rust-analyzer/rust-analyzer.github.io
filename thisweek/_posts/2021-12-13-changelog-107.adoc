@@ -1,0 +1,40 @@
+= Changelog #107
+:sectanchors:
+:page-layout: post
+
+Commit: commit:db2a7087b994e20f264f26ad6db75184282ad120[] +
+Release: release:2021-12-13[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:10951[] (first contribution) add assist to generate documentation templates:
++
+image::https://user-images.githubusercontent.com/308347/145762247-8f6f3f01-2eec-494d-a18d-3c4d163118a1.gif[]
+* pr:10877[] make syntax hightlighting linear.
+
+== Fixes
+
+* pr:10979[] don't show trait flyimports for impl trait and placeholders.
+* pr:10976[] show case-insensitive exact matches instead of fuzzy flyimport for short paths.
+* pr:10986[] fix lint completions not working for unclosed attributes.
+* pr:10960[] fix handling of macros in `extern` blocks.
+* pr:10957[] fix some `TryToNav` impls not upmapping ranges out of macros.
+* pr:10966[] fix library target overriding sysroot deps.
+* pr:10977[] fix `concat!` with captured expression.
+* pr:10987[] respect inner attributes for ``Struct``s and ``Enum``s.
+* pr:10988[] fix expected type calculation in struct literal followed by comma.
+
+== Internal Improvements
+
+* pr:10995[] switch from trait-based `TokenSource` to simple struct of arrays.
+* pr:10978[] only prime direct dependencies of the workspace crates.
+* pr:10958[] add `Shuffle Crate Graph` command.
+* pr:10950[] split out more ``PathKind``s from ``ImmediateLocation``.
+* pr:10975[] shrink ``TraitImpl``s and ``InherentImpl``s hashmaps.
+* pr:10981[] remove some allocations.
+* pr:10949[] bump parser step limit.

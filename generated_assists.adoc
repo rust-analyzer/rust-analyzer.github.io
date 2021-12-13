@@ -983,6 +983,40 @@ struct Point {
 
 
 [discrete]
+=== `generate_documentation_template`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_documentation_template.rs#L12[generate_documentation_template.rs]
+
+Adds a documentation template above a function definition / declaration.
+
+.Before
+```rust
+pub fn my_┃func(a: i32, b: i32) -> Result<(), std::io::Error> {
+    unimplemented!()
+}
+```
+
+.After
+```rust
+/// .
+///
+/// # Examples
+///
+/// ```
+/// use test::my_func;
+///
+/// assert_eq!(my_func(a, b), );
+/// ```
+///
+/// # Errors
+///
+/// This function will return an error if .
+pub fn my_func(a: i32, b: i32) -> Result<(), std::io::Error> {
+    unimplemented!()
+}
+```
+
+
+[discrete]
 === `generate_enum_as_method`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_enum_projection_method.rs#L55[generate_enum_projection_method.rs]
 
@@ -2345,7 +2379,7 @@ fn arithmetics {
 
 [discrete]
 === `unmerge_use`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/unmerge_use.rs#L13[unmerge_use.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/unmerge_use.rs#L12[unmerge_use.rs]
 
 Extracts single use item from use list.
 
