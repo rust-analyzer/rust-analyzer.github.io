@@ -38,7 +38,7 @@ image::https://user-images.githubusercontent.com/462486/145726802-f528a2f7-9159-
 
 == Internal Improvements
 
-* pr:10527[] remove a few snippet completions, replace them with user snippets definitions in VSCode.
+* pr:10527[] remove a few snippet completions, replace them with user snippets definitions.
 * pr:11046[] move all lexing to the parser crate.
 * pr:11009[] extract doc-links tests into a separate module.
 * pr:11021[] use default XCode version on MacOS 11 builders.
