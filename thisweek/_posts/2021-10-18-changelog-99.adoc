@@ -36,10 +36,10 @@ image::https://user-images.githubusercontent.com/308347/137636737-06a3d47d-f647-
 * pr:10538[] (first contribution) make brace matching prefer the one to the right of the cursor.
 * pr:10542[] (first contribution) use workspace `cargo` to fetch `rust-src` metadata.
 * pr:10543[] (first contribution) narrow "Add missing match arms" assist range.
+* pr:10491[] (first contribution) support nested type in "Replace `if-let` with ``match``".
 * pr:10533[] fix `AssistContext` panic on sole whitespace selection.
 * pr:10503[] only include targets of packages that are workspace members.
 * pr:10517[] report `cargo check` failures.
-* pr:10491[] support nested type in "Replace `if-let` with ``match``".
 * pr:10552[] fix "Missing fields" diagnostic fix replacing wrong text ranges.
 * pr:10557[] fix qualified path completion not completing macros.
 * pr:10562[] fix clippy attribute completions always inserting `clippy::`.
