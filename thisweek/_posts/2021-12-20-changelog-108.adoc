@@ -1,0 +1,46 @@
+= Changelog #108
+:sectanchors:
+:page-layout: post
+
+Commit: commit:0add6e95e58633fde2fff0bccaf6c7d71ebc130f[] +
+Release: release:2021-12-20[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:11035[] include clippy lint groups in autocomplete:
++
+video::https://user-images.githubusercontent.com/23740172/146465758-bc7d5cdd-e2fb-48d6-abf7-804ba859c9b1.mov[]
+* pr:10998[] add number representation assists:
++
+image::https://user-images.githubusercontent.com/462486/145726792-47700215-26f2-4fdc-9520-63d1487901e5.png[]
++
+image::https://user-images.githubusercontent.com/462486/145726802-f528a2f7-9159-41d3-b459-fc3fae033e60.png[]
+* pr:11053[] (possibly breaking) publish platform-specific Code extensions.
+
+
+== Fixes
+
+* pr:11054[] (first contribution) don't trim twice in `Unwrap block`.
+* pr:11017[] (first contribution) support `Move condition to guard` with an `else` branch.
+* pr:11030[] add missing comma in `Move condition to guard`.
+* pr:11043[] fix incorrect `mismatched argument count` diagnostic with `std::arch` functions.
+* pr:11050[] show primitive docs when hovering `fn` keyword inside function pointer type.
+* pr:11004[] infer associated methods in local scope.
+* pr:11040[] don't duplicate attribute completions.
+* pr:11000[] insert whitespace into associated items for `Implement missing members` for macro-generated structs.
+* pr:11002[] add support for v6 macro metadata format for recent nightly support.
+
+
+== Internal Improvements
+
+* pr:10527[] remove a few snippet completions, replace them with user snippets definitions in VSCode.
+* pr:11046[] move all lexing to the parser crate.
+* pr:11009[] extract doc-links tests into a separate module.
+* pr:11021[] use default XCode version on MacOS 11 builders.
+* pr:11029[] refactor release workflow to reduce duplication, upgrade to MacOS 11 builders, set target version to 10.15.
+* pr:11047[] prepare Code extension for server bundling.
