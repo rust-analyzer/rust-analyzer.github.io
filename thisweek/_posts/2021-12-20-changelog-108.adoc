@@ -14,7 +14,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 
 * pr:11035[] include clippy lint groups in autocomplete:
 +
-video::https://user-images.githubusercontent.com/23740172/146465758-bc7d5cdd-e2fb-48d6-abf7-804ba859c9b1.mov[]
+video::https://user-images.githubusercontent.com/23740172/146465758-bc7d5cdd-e2fb-48d6-abf7-804ba859c9b1.mov[options=loop]
 * pr:10998[] add number representation assists:
 +
 image::https://user-images.githubusercontent.com/462486/145726792-47700215-26f2-4fdc-9520-63d1487901e5.png[]
