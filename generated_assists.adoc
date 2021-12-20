@@ -1610,7 +1610,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `move_arm_cond_to_match_guard`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L76[move_guard.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L77[move_guard.rs]
 
 Moves if expression from match arm body into a guard.
 
@@ -1682,7 +1682,7 @@ fn t() {}
 
 [discrete]
 === `move_guard_to_arm_body`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L8[move_guard.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L9[move_guard.rs]
 
 Moves match guard into match arm body.
 
@@ -1872,6 +1872,23 @@ fn main() {
 
 
 [discrete]
+=== `reformat_number_literal`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/number_representation.rs#L7[number_representation.rs]
+
+Adds or removes seprators from integer literal.
+
+.Before
+```rust
+const _: i32 = 1012345┃;
+```
+
+.After
+```rust
+const _: i32 = 1_012_345;
+```
+
+
+[discrete]
 === `remove_dbg`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/remove_dbg.rs#L9[remove_dbg.rs]
 
@@ -2042,7 +2059,7 @@ fn main() {
 
 [discrete]
 === `replace_derive_with_manual_impl`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_derive_with_manual_impl.rs#L22[replace_derive_with_manual_impl.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_derive_with_manual_impl.rs#L23[replace_derive_with_manual_impl.rs]
 
 Converts a `derive` impl into a manual one.
 
