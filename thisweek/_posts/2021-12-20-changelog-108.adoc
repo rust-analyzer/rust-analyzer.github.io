@@ -20,7 +20,7 @@ video::https://user-images.githubusercontent.com/23740172/146465758-bc7d5cdd-e2f
 image::https://user-images.githubusercontent.com/462486/145726792-47700215-26f2-4fdc-9520-63d1487901e5.png[]
 +
 image::https://user-images.githubusercontent.com/462486/145726802-f528a2f7-9159-41d3-b459-fc3fae033e60.png[]
-* pr:11053[] (possibly breaking) publish platform-specific Code extensions.
+* pr:11053[] (possibly breaking) publish platform-specific Code extensions with bundled server binaries.
 
 
 == Fixes
