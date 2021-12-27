@@ -1,0 +1,58 @@
+= Changelog #109
+:sectanchors:
+:page-layout: post
+
+Commit: commit:68319187d63707fa36d7c215ed0e444e87d9652a[] +
+Release: release:2021-12-27[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== Known Issues
+
+There are some recent known issues related to the VS Code extension and the update mechanism:
+
+* Since last week, users running VSCodium or another open-source build of Code might have issues opening projects. This is caused by a change to bundle the server binary with the extension, instead of downloading it on the first load. Unfortunately, Open VSX, which is the marketplace used by VSCodium and other forks https://github.com/rust-analyzer/rust-analyzer/issues/11080[does not] support platform-specific, sometimes serving users binaries for the wrong platform. The workaround is to manually download the VSIX for your platform from GitHub releases, or to install the non-free version of Code.
+* Since last Wednesday, if you install the rust-analyzer from Code, you might get an older version of the extension (`0.2.853`, from two weeks ago). This is caused by us publishing the nightlies as pre-release version to the Marketplace, which was done to avoid having to download VSIX updates from GitHub for users on the nightly channel. Unfortunately, after publishing the first pre-release version, the Marketplace https://github.com/rust-analyzer/rust-analyzer/issues/11098[stopped showing] the latest stable version (`0.2.867`, from last week). The workaround is to manually download the VSIX from GitHub releases, or to switch to the pre-release version, then back to the stable one which appears to fix it, probably by triggering another Code bug.
+* VS Code allows installing VSIX files that don't match your platform. Please don't do that.
+* If you're running a 32-bit version of VS Code on a 64-bit Windows system, please install the 64-bit version of Code instead. This configuration used to work thanks to a workaround in the extension (it downloaded the 64-bit binary), but it's no longer supported. If you are actually running 32-bit Windows, you don't need to do anything different since that's not a supported platform anyway.
+* It's not yet known how updating between stable versions works.
+
+If you're not running one of the supported platforms, GitHub releases have a VSIX without an included server, but you'll need to compile the server or obtain it by using `rustup`, just like before.
+
+If you have any problems, please check the version you're running against the one published on https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer[the Marketplace], check if you've set `rust-analyzer.server.path` (it's not required on the supported platforms), and maybe file an issue if it still doesn't work.
+
+== New Features
+
+* pr:11071[] build and publish pre-release Code extension versions.
+* pr:11106[] remove network updates from the Code extension.
+* pr:10933[] show values of constants in hover.
+
+== Fixes
+
+* pr:11122[] remove note about alpha status Code extension description.
+* pr:11062[] don't say "a reference to" `Copy` types in the docs created by `Generate getter`.
+* pr:11069[] partially fix `ide_db::search` for crate roots.
+* pr:11073[] fix Windows not finding the PDB file.
+* pr:11074[] bump default `CHALK_SOLVER_MAX_SIZE`.
+* pr:11083[] fix `Inline local` assist not working in `let` statement initializer.
+* pr:11093[] complete `std::mem::drop` instead of `Drop::drop`.
+
+== Internal Improvements
+
+* pr:10484[] update match checking algorithm to match `rustc`.
+* pr:11065[] don't kick off inference in `Semantics::descend_into_macros_impl`.
+* pr:11082[] do less work in `hir::Semantics`.
+* pr:11067[] store function parameter names in `ItemTree`.
+* pr:11086[] simplify completion rendering.
+* pr:11089[] render more completions from HIR instead of AST.
+* pr:11090[] deduplicate lowering ctx hygiene field.
+* pr:11092[] directly use the `self` parameter in completions instead of searching for it.
+* pr:11095[] disable unstable APIs for nightly releases.
+* pr:11103[] improve GitHub release action.
+* pr:11117[] replace `TreeSink` with a data structure.
+* pr:11118[] move whitespace attachment logic to the parser crate.
+* pr:11120[] move parser tests to the `parser` crate.
+* pr:11028[] bump MSRV to 1.57.
