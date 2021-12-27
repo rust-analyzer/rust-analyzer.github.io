@@ -1875,7 +1875,7 @@ fn main() {
 === `reformat_number_literal`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/number_representation.rs#L7[number_representation.rs]
 
-Adds or removes seprators from integer literal.
+Adds or removes separators from integer literal.
 
 .Before
 ```rust
