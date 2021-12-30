@@ -1,0 +1,136 @@
+= rust-analyzer in 2021
+:sectanchors:
+:page-layout: post
+
+[NOTE]
+====
+In case this post piques your interest in contributing, consider checking out the https://www.youtube.com/playlist?list=PLhb66M_x9UmrqXhQuIpWC5VgTdrGxMx3y[Explaining rust-analyzer] series on YouTube, the development docs https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/dev[on GitHub] or visit our https://rust-lang.zulipchat.com/#narrow/stream/185405-t-compiler.2Frust-analyzer[Zulip stream].
+====
+
+A lot has happened this year, so we want to take a brief look back at what we have achieved and what has yet to come.
+
+Unfortunately, we did not manage to make rust-analyzer an official Rust project in 2021. But if all goes well this should change at the start of the coming year.
+
+We started the year out by trying out a different meeting style from our usual weekly syncs on https://rust-lang.zulipchat.com/#narrow/stream/185405-t-compiler.2Frust-analyzer/topic/weekly.20sync-up[Zulip]. We now have six-weeks sprints, with a steering meeting between them, where the working group gets together and discusses what topics and issues to focus on next.
+
+== (Proc-)Macros and Attributes
+
+Probably one of the biggest improvements that landed this year was attribute
+proc-macro support, implemented in https://github.com/rust-analyzer/rust-analyzer/pull/9128[#9128]. Attributes are used pervasively in some Rust codebases, usually expanding to enough new items (functions, `impl` blocks etc.), and are essential in making the IDE work without significantly degrading the user experience. It took us roughly four months until we felt comfortable enough to enable their expansion https://github.com/rust-analyzer/rust-analyzer/pull/10366[by default], the main reason being the amount of code that had to be adapted to properly support them.
+While this feature mostly works nowadays, there is still one big problem we are facing, that of how attributes can interact with incomplete code. This is described in issue https://github.com/rust-analyzer/rust-analyzer/issues/11014[#11014] in more detail, but attribute proc macros fail to expand when they encounter syntax errors, as is often the case when the user is typing. Of course, function-like proc macros are affected in a similar way. We are still unsure about how to address this problem, so if you have any thoughts on the matter please comment on the linked issue.
+
+Attributes aside, a lot of improvements landed for proc-macros in general. We enabled https://github.com/rust-analyzer/rust-analyzer/pull/8032[proc-macros by default], https://github.com/rust-analyzer/rust-analyzer/pull/7412[started loading proc-macros asynchronously] and added support for https://github.com/rust-analyzer/rust-analyzer/pull/9550[multiple proc-macro ABIs], a finicky feature. The Rust proc-macro ABI is deliberately outside of usual stability guarantees. It constantly evolves, but with every change it breaks our proc-macro server. To counteract this we now try to at least support ~3 ABI versions which nominally correspond to the latest stable, beta and nightly toolchains. In practice, we support much older versions: 1.47 and later, at this moment.
+
+It's worth pointing out that parts of our proc macro infrastructure are used by https://intellij-rust.github.io[IntelliJ Rust]. It's a great example of cross-polination of ideas between the two projects -- our `proc_macro_srv` is based on a design originally implemented in IntelliJ Rust!
+
+Finally, declarative macros also saw some love. We switched to an https://github.com/rust-analyzer/rust-analyzer/pull/7513[NFA parser] which brings us closer to how rustc handles them, added basic support for https://github.com/rust-analyzer/rust-analyzer/pull/8212[macro 2.0] and https://github.com/rust-analyzer/rust-analyzer/pull/8462[type position macros].
+
+== Local Item Resolution
+
+Rust offers the ability to define new items inside of functions, consts and statics, making them effectively unnameable outside of these items. This idiom is seldom seen but is still useful at times. This is another piece of the language that is tricky to support, as an IDE wants to be lazy and only look at the big picture to understand a file's structure. Unfortunately, local items require us to look inside function bodies and the like.
+
+As such, finding a compromise took some work:
+https://github.com/rust-analyzer/rust-analyzer/pull/7336[#7336], https://github.com/rust-analyzer/rust-analyzer/pull/7359[#7359], https://github.com/rust-analyzer/rust-analyzer/pull/7366[#7366], https://github.com/rust-analyzer/rust-analyzer/pull/7375[#7375], https://github.com/rust-analyzer/rust-analyzer/pull/7426[#7426], https://github.com/rust-analyzer/rust-analyzer/pull/7431[#7431], https://github.com/rust-analyzer/rust-analyzer/pull/7466[#7466], https://github.com/rust-analyzer/rust-analyzer/pull/7480[#7480], https://github.com/rust-analyzer/rust-analyzer/pull/7481[#7481], https://github.com/rust-analyzer/rust-analyzer/pull/7482[#7482], https://github.com/rust-analyzer/rust-analyzer/pull/7485[#7485], https://github.com/rust-analyzer/rust-analyzer/pull/7518[#7518], https://github.com/rust-analyzer/rust-analyzer/pull/7525[#7525], https://github.com/rust-analyzer/rust-analyzer/pull/7541[#7541], https://github.com/rust-analyzer/rust-analyzer/pull/7544[#7544], https://github.com/rust-analyzer/rust-analyzer/pull/7554[#7554], https://github.com/rust-analyzer/rust-analyzer/pull/7555[#7555], https://github.com/rust-analyzer/rust-analyzer/pull/7557[#7557], https://github.com/rust-analyzer/rust-analyzer/pull/7559[#7559], https://github.com/rust-analyzer/rust-analyzer/pull/7561[#7561], https://github.com/rust-analyzer/rust-analyzer/pull/7568[#7568], https://github.com/rust-analyzer/rust-analyzer/pull/7575[#7575], https://github.com/rust-analyzer/rust-analyzer/pull/7627[#7627], https://github.com/rust-analyzer/rust-analyzer/pull/9244[#9244].
+The final piece, enabling it all, landed in https://github.com/rust-analyzer/rust-analyzer/pull/7614[#7614]
+
+== Chalk integration
+
+We managed to switch our type representation to the one used by https://github.com/rust-lang/chalk[chalk], avoiding the need to convert between them every time we invoke the trait solver.
+
+This work was done over a bunch of different pull requests: https://github.com/rust-analyzer/rust-analyzer/pull/7804[#7804], https://github.com/rust-analyzer/rust-analyzer/pull/7813[#7813], https://github.com/rust-analyzer/rust-analyzer/pull/7814[#7814], https://github.com/rust-analyzer/rust-analyzer/pull/7816[#7816], https://github.com/rust-analyzer/rust-analyzer/pull/7823[#7823], https://github.com/rust-analyzer/rust-analyzer/pull/7826[#7826], https://github.com/rust-analyzer/rust-analyzer/pull/7833[#7833], https://github.com/rust-analyzer/rust-analyzer/pull/7870[#7870], https://github.com/rust-analyzer/rust-analyzer/pull/8016[#8016], https://github.com/rust-analyzer/rust-analyzer/pull/7998[#7998], https://github.com/rust-analyzer/rust-analyzer/pull/8001[#8001], https://github.com/rust-analyzer/rust-analyzer/pull/8018[#8018], https://github.com/rust-analyzer/rust-analyzer/pull/8038[#8038], https://github.com/rust-analyzer/rust-analyzer/pull/8136[#8136], https://github.com/rust-analyzer/rust-analyzer/pull/8190[#8190], https://github.com/rust-analyzer/rust-analyzer/pull/8139[#8139], https://github.com/rust-analyzer/rust-analyzer/pull/8309[#8309], https://github.com/rust-analyzer/rust-analyzer/pull/8327[#8327], https://github.com/rust-analyzer/rust-analyzer/pull/8856[#8856], https://github.com/rust-analyzer/rust-analyzer/pull/8921[#8921], https://github.com/rust-analyzer/rust-analyzer/pull/8938[#8938], https://github.com/rust-analyzer/rust-analyzer/pull/8856[#8856], and we were finally able to fully move over in https://github.com/rust-analyzer/rust-analyzer/pull/8419[#8419].
+
+== Const Generic Params
+
+We started working on basic const generics support, tracking issue https://github.com/rust-analyzer/rust-analyzer/issues/8655[#8655]. This is one of the major pieces left for us to properly support, but also one of the more difficult ones. This problem becomes more and more apparent as libraries are switching over to using them. A notable example being `nalgebra`, which rust-analyzer is completely confused by.
+
+For an ideal experience we would need to evaluate expressions in const generic position like rustc does. Unlike rustc though, we are unable to use https://github.com/rust-lang/miri/[`miri`]. The reason for that is the fact that we do not share the internal data structures that the compiler and miri make use of, nor do we plan to do so in the near future. Because of this, we are required to build our own basic evaluator.
+
+This isn't the only problem we have. As it currently stands, the majority of rust-analyzer's type checking codebase doesn't even know about const generics (or lifetimes), and just assumes that only type parameters exist.
+
+== Mutable Immutable Syntax Trees
+
+https://github.com/rust-analyzer/rowan[Rowan], our concrete syntax tree crate has been adjusted to allow creating mutable copies of the immutable syntax trees. For more in-depth information behind this, check out https://github.com/rust-analyzer/rust-analyzer/issues/6857[this issue].
+
+To put it short, the assists like to take existing syntax in a file, modify it slightly, then paste back the result, changing only a few parts of the code. What most assists did before was to reconstruct the output syntax trees out of the original tree nodes, with the changes inserted or left out. This is unfortunately a tedious process depending on the type of syntax node that has to be edited. These mutable immutable trees now allow us to instead mutably clone a tree, modify it in-place and paste this modified tree back as is.
+
+This does not come without its own problems of course, with the main one being that iterating while mutating, which is now possible, will now panic or produce an incorrect tree.
+
+== The Code extension and server downloads
+
+The final releases of the year brought two important changes to the way the language server binary is acquired. Until now, the extension called the GitHub API to find a matching release, and downloaded the server from there. In addition, if you opted in to the nightly channel, every day the extension would search for an updated VSIX.
+
+While this suited us well for a long time, it had some downsides:
+
+ - edge cases like MITM HTTPS proxies with untrusted certificates never worked
+ - not being able to replace running executable on Windows (in case you had two running instances) has been a major source of complaints
+ - Code checks for extension updates automatically, but the server was downloaded on activation. Many users had an unpleasant surprise when opening a Rust project without a working Internet connection.
+ - GitHub Actions has been increasingly unreliable lately causing the nightly builds to fail very often. This broke the extension for users running the nightlies.
+ - the download and update code brought a lot of non-essential complexity and even exposed a Node.js bug
+ - the required client-side dependencies increased the surface for supply chain attacks
+
+So when the Marketplace added support for platform-specific and pre-release extensions, we starting using it with https://github.com/rust-analyzer/rust-analyzer/pull/11053[#11053], https://github.com/rust-analyzer/rust-analyzer/pull/11071[#11071] and https://github.com/rust-analyzer/rust-analyzer/pull/11071[#11106]. On a related note, we also https://github.com/rust-analyzer/rust-analyzer/pull/10903[replaced] the client-side unit testing framework with a bit of custom code, dropping our transitive dependencies by the dozens.
+
+Unfortunately, the update changes exposed some issues with both the Code Marketplace and Open VSX (used by open-source builds of Code). This is discussed in detail https://rust-analyzer.github.io/thisweek/2021/12/27/changelog-109.html#known-issues[here], the gist being that you currently need to take manual action when installing or updating the extension. The two issues have been reported upstream, so we hope they will be fixed soon.
+
+
+== General IDE Experience Improvements
+
+We now support standalone Rust files (https://github.com/rust-analyzer/rust-analyzer/pull/8955[#8955]), so just opening a single file should allow you to use most of rust-analyzer's functionality that is not reliant on cargo.
+
+We also improved and added a bunch of smaller features, some noteworthy ones are:
+
+- https://github.com/rust-analyzer/rust-analyzer/pull/7297[Flyimport Completions for Trait Associated Items]
+- https://github.com/rust-analyzer/rust-analyzer/pull/10458[Custom User Snippet Completions]
+- https://github.com/rust-analyzer/rust-analyzer/pull/7335[Region Folding]
+- https://github.com/rust-analyzer/rust-analyzer/pull/7799[Related Test Peeking]
+- https://github.com/rust-analyzer/rust-analyzer/pull/8054[Move Item Command]
+- https://github.com/rust-analyzer/rust-analyzer/pull/8801[Crate Graph View]
+- https://github.com/rust-analyzer/rust-analyzer/pull/8873[Import Granularity Guessing]
+- Highlighting https://github.com/rust-analyzer/rust-analyzer/pull/9375[Function Exit and Yield Points] and https://github.com/rust-analyzer/rust-analyzer/pull/9396[Loop Break Points]
+- https://github.com/rust-analyzer/rust-analyzer/pull/8774[Respect `.cargo/config.toml`]
+
+An impressive ~37 new assists have been implemented, some by the main contributors, but most by newcomers:
+
+- https://github.com/rust-analyzer/rust-analyzer/pull/7310[Add Lifetime to Type]
+- https://github.com/rust-analyzer/rust-analyzer/pull/7824[Add Type Ascription]
+- https://github.com/rust-analyzer/pull/10362[Convert `a/mod.rs` into `a.rs`]
+- https://github.com/rust-analyzer/pull/9837[Convert `bool::then` to `if`]
+- https://github.com/rust-analyzer/rust-analyzer/pull/7741[Convert `for` Loop to `Iterator::for_each`]
+- https://github.com/rust-analyzer/pull/9816[Convert `if` to `bool::then`]
+- https://github.com/rust-analyzer/rust-analyzer/pull/8295[Convert `Into` Impl to `From` Impl]
+- https://github.com/rust-analyzer/rust-analyzer/pull/7956[Convert `Iterator::for_each` to `for` Loop]
+- https://github.com/rust-analyzer/rust-analyzer/pull/7777[Convert Between Line and Block Comments]
+- https://github.com/rust-analyzer/pull/10211[Convert File Module to Directory]
+- https://github.com/rust-analyzer/pull/10998[Convert Number Representation]
+- https://github.com/rust-analyzer/rust-analyzer/pull/8317[Convert Tuple Struct to Named Struct]
+- https://github.com/rust-analyzer/pull/9855[Destructure Pattern into Tuple Pattern]
+- https://github.com/rust-analyzer/rust-analyzer/pull/7130[Extract Assignment]
+- https://github.com/rust-analyzer/rust-analyzer/pull/7535[Extract Function]
+- https://github.com/rust-analyzer/pull/9939[Extract module]
+- https://github.com/rust-analyzer/rust-analyzer/pull/8210[Extract Type Alias]
+- https://github.com/rust-analyzer/rust-analyzer/pull/8037[Generate `fn is_empty`]
+- https://github.com/rust-analyzer/pull/10459[Generate Constant]
+- https://github.com/rust-analyzer/rust-analyzer/pull/7800[Generate Default Impl]
+- https://github.com/rust-analyzer/pull/10539[Generate Delegate Methods]
+- https://github.com/rust-analyzer/rust-analyzer/pull/8467[Generate Deref Impl]
+- https://github.com/rust-analyzer/pull/10951[Generate Documentation Templates]
+- https://github.com/rust-analyzer/rust-analyzer/pull/7562[Generate Enum Match]
+- https://github.com/rust-analyzer/rust-analyzer/pull/7677[Generate Enum Match 2]
+- https://github.com/rust-analyzer/rust-analyzer/pull/7617[Generate Getter and Setter]
+- https://github.com/rust-analyzer/pull/9804[Generate Method]
+- https://github.com/rust-analyzer/rust-analyzer/pull/7131[Inline Function]
+- https://github.com/rust-analyzer/pull/10352[Inline into Callers]
+- https://github.com/rust-analyzer/pull/10546[Promote Local to Const]
+- https://github.com/rust-analyzer/pull/10602[Qualify method call]
+- https://github.com/rust-analyzer/pull/10476[Replace `?` with `match`]
+- https://github.com/rust-analyzer/pull/10629[Replace Turbofish with Explicit Type]
+- https://github.com/rust-analyzer/rust-analyzer/pull/6809[Sort Impl Functions by Trait definition]
+- https://github.com/rust-analyzer/pull/9735[Sort Members Lexicographically]
+- https://github.com/rust-analyzer/rust-analyzer/pull/7289[Unmerge Use]
+- https://github.com/rust-analyzer/pull/10417[Unwrap `Result` Return Type]
+
+== Conclusion
+
+We made a bunch of progress this year, finishing up work on important functionality pieces as well as quality of life changes. But there is still a lot more to be done, as a quick look at the https://github.com/rust-analyzer/rust-analyzer/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3AArchitecture[issue tracker] may tell.
+
+A big thanks to everyone supporting the project, be it through donations, contributions or cheers. We wish you a fortunate next year 🎉.
