@@ -21,7 +21,7 @@ While this feature mostly works nowadays, there is still one big problem we are 
 
 Attributes aside, a lot of improvements landed for proc-macros in general. We enabled https://github.com/rust-analyzer/rust-analyzer/pull/8032[proc-macros by default], https://github.com/rust-analyzer/rust-analyzer/pull/7412[started loading proc-macros asynchronously] and added support for https://github.com/rust-analyzer/rust-analyzer/pull/9550[multiple proc-macro ABIs], a finicky feature. The Rust proc-macro ABI is deliberately outside of usual stability guarantees. It constantly evolves, but with every change it breaks our proc-macro server. To counteract this we now try to at least support ~3 ABI versions which nominally correspond to the latest stable, beta and nightly toolchains. In practice, we support much older versions: 1.47 and later, at this moment.
 
-It's worth pointing out that parts of our proc macro infrastructure are used by https://intellij-rust.github.io[IntelliJ Rust]. It's a great example of cross-polination of ideas between the two projects -- our `proc_macro_srv` is based on a design originally implemented in IntelliJ Rust!
+It's worth pointing out that parts of our proc macro infrastructure are used by https://intellij-rust.github.io[IntelliJ Rust]. It's a great example of cross-pollination of ideas between the two projects -- our `proc_macro_srv` is based on a design originally implemented in IntelliJ Rust!
 
 Finally, declarative macros also saw some love. We switched to an https://github.com/rust-analyzer/rust-analyzer/pull/7513[NFA parser] which brings us closer to how rustc handles them, added basic support for https://github.com/rust-analyzer/rust-analyzer/pull/8212[macro 2.0] and https://github.com/rust-analyzer/rust-analyzer/pull/8462[type position macros].
 
@@ -49,7 +49,7 @@ This isn't the only problem we have. As it currently stands, the majority of rus
 
 == Mutable Immutable Syntax Trees
 
-https://github.com/rust-analyzer/rowan[Rowan], our concrete syntax tree crate has been adjusted to allow creating mutable copies of the immutable syntax trees. For more in-depth information behind this, check out https://github.com/rust-analyzer/rust-analyzer/issues/6857[this issue].
+https://github.com/rust-analyzer/rowan[Rowan], our concrete syntax tree crate, has been adjusted to allow creating mutable copies of the immutable syntax trees. For more in-depth information behind this, check out https://github.com/rust-analyzer/rust-analyzer/issues/6857[this issue].
 
 To put it short, the assists like to take existing syntax in a file, modify it slightly, then paste back the result, changing only a few parts of the code. What most assists did before was to reconstruct the output syntax trees out of the original tree nodes, with the changes inserted or left out. This is unfortunately a tedious process depending on the type of syntax node that has to be edited. These mutable immutable trees now allow us to instead mutably clone a tree, modify it in-place and paste this modified tree back as is.
 
