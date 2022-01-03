@@ -20,8 +20,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 * pr:11136[] (first contribution) use the right numbers of placeholders in `Add turbofish`.
 * pr:11088[] hide some trivial type hints.
 * pr:11158[] enable completions for `<_>::$0`.
-* pr:11171[] fix tool module classification.
-* pr:11175[] fix highlighting hack for `self` params.
+* pr:11171[], pr:11175[] fix tool module classification.
 * pr:11144[] fix server path on NixOS.
 
 == Internal Improvements
