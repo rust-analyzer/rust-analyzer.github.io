@@ -653,7 +653,8 @@ parenthesis:: Emitted for `()` parentheses.
 colon:: Emitted for the `:` token.
 comma:: Emitted for the `,` token.
 dot:: Emitted for the `.` token.
-Semi:: Emitted for the `;` token.
+semi:: Emitted for the `;` token.
+macroBang:: Emitted for the `!` token in macro calls.
 
 //-
 
