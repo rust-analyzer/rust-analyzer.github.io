@@ -1,0 +1,38 @@
+= Changelog #110
+:sectanchors:
+:page-layout: post
+
+Commit: commit:8e9ccbf97a70259b6c6576e8fd7d77d28238737e[] +
+Release: release:2022-01-03[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:11151[] correctly fall back to `notify` if the client-side file watching is not supported.
+* pr:11173[] allow partially resolved types in `Add explicit type`.
+
+== Fixes
+
+* pr:11136[] (first contribution) use the right numbers of placeholders in `Add turbofish`.
+* pr:11088[] hide some trivial type hints.
+* pr:11158[] enable completions for `<_>::$0`.
+* pr:11171[] fix tool module classification.
+* pr:11175[] fix highlighting hack for `self` params.
+* pr:11144[] fix server path on NixOS.
+
+== Internal Improvements
+
+* pr:11131[] avoid speculation when completing macros.
+* pr:11156[] record unresolved derive invocations in `hir`.
+* pr:11160[] use a basic `NonEmptyVec` in `mbe::syntax_bridge`.
+* pr:11169[], pr:11177[] handle macro calls better in highlighting.
+* pr:11134[] tighten up parser API.
+* pr:11141[], pr:11152[], pr:11153[] add tests for extra parser entry points.
+* pr:11163[] add tests for top-level parser entry points.
+* pr:11164[] more macro tests.
+* pr:11165[], pr:11167[] start enforcing invariants for top-level entry points.
+* pr:11127[] set a timeout on the Octokit client.

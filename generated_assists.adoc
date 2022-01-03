@@ -529,7 +529,7 @@ fn main() {
 
 [discrete]
 === `destructure_tuple_binding`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/destructure_tuple_binding.rs#L14[destructure_tuple_binding.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/destructure_tuple_binding.rs#L13[destructure_tuple_binding.rs]
 
 Destructures a tuple binding in place.
 
