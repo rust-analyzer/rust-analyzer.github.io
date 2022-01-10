@@ -189,7 +189,7 @@ fn foo() -> i32 { 42i32 }
 
 [discrete]
 === `add_turbo_fish`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_turbo_fish.rs#L9[add_turbo_fish.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_turbo_fish.rs#L10[add_turbo_fish.rs]
 
 Adds `::<_>` to a call of a generic method or function.
 
@@ -1610,7 +1610,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `move_arm_cond_to_match_guard`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L77[move_guard.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L79[move_guard.rs]
 
 Moves if expression from match arm body into a guard.
 
@@ -1682,7 +1682,7 @@ fn t() {}
 
 [discrete]
 === `move_guard_to_arm_body`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L9[move_guard.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L11[move_guard.rs]
 
 Moves match guard into match arm body.
 
