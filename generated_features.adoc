@@ -512,7 +512,7 @@ image::https://user-images.githubusercontent.com/48062697/113065578-04c21800-91b
 
 
 === On Typing Assists
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/typing.rs#L39[typing.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/typing.rs#L37[typing.rs]
 
 Some features trigger on typing certain characters:
 
@@ -941,7 +941,7 @@ image::https://user-images.githubusercontent.com/48062697/113065588-068bdb80-91b
 
 
 === Workspace Symbol
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_db/src/symbol_index.rs#L159[symbol_index.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_db/src/symbol_index.rs#L156[symbol_index.rs]
 
 Uses fuzzy-search to find types, modules and functions by name across your
 project and dependencies. This is **the** most useful feature, which improves code
