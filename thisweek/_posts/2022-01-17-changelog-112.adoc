@@ -14,7 +14,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 
 * pr:11258[] (first contribution) Kate uses rust-analyzer by default now.
 * pr:11210[], pr:11292[] deprioritize ops and comparison methods in completion.
-* pr:11248[] take arm types into consideration in `Merge match assist`.
+* pr:11248[] take arm types into consideration in `Merge match arms assist`.
 
 == Fixes
 
@@ -24,7 +24,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 * pr:11261[] don't complete attributes with existing expressions.
 * pr:11263[] don't drop param completions when fully typing out a pattern.
 * pr:11265[] fix postfix completion panic.
-* pr:11282[] properly cache files in Semantics when ascending macros.
+* pr:11282[] properly cache files in `Semantics` when ascending macros.
 * pr:11283[] adjust auto-indentation when typing `.`.
 * pr:11287[] quiet down "overly long loop turn" messages during project load.
 
