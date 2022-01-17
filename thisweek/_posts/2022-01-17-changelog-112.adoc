@@ -1,0 +1,37 @@
+= Changelog #112
+:sectanchors:
+:page-layout: post
+
+Commit: commit:e6e72809e3b55da3a57af95e6445a12729331ad6[] +
+Release: release:2022-01-17[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:11258[] (first contribution) Kate uses rust-analyzer by default now.
+* pr:11210[], pr:11292[] deprioritize ops and comparison methods in completion.
+* pr:11248[] take arm types into consideration in `Merge match assist`.
+
+== Fixes
+
+* pr:11247[] print a single ellipsis for any number of omitted types.
+* pr:11257[] report missing macro diagnostics in item bodies.
+* pr:11259[] fix `use super::{super::...};`.
+* pr:11261[] don't complete attributes with existing expressions.
+* pr:11263[] don't drop param completions when fully typing out a pattern.
+* pr:11265[] fix postfix completion panic.
+* pr:11282[] properly cache files in Semantics when ascending macros.
+* pr:11283[] adjust auto-indentation when typing `.`.
+* pr:11287[] quiet down "overly long loop turn" messages during project load.
+
+== Internal Improvements
+
+* pr:11266[], pr:11267[], pr:11274[] restore `hir` API boundary.
+* pr:11284[] remove redundant recursion limit.
+* pr:11276[] clean up `HasFormatSpecifier::lex_format_specifier` slightly.
+* pr:11286[] clean up associated item collection.
+* pr:11294[] move format specifier lexing from `syntax` to `ide_db`.
