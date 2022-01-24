@@ -1,0 +1,25 @@
+= Changelog #113
+:sectanchors:
+:page-layout: post
+
+Commit: commit:17afa2e7780f399df99bec802c4ab7d2f920f158[] +
+Release: release:2022-01-24[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== Fixes
+
+* pr:11310[] (first contribution) remove pipe from `surroundingPairs`.
+* pr:11311[] insert auto-imports after header comments.
+* pr:11307[] allow macros to expand to or-patterns.
+* pr:11314[] don't load auxiliary crates outside the workspace.
+* pr:11334[] avoid panic in `semantics` due to `cfg_attr` disrupting offsets.
+
+
+== Internal Improvements
+
+* pr:11327[] remove redundant `Option` from eager macro functions.
+* pr:11308[] status: output all crates a file belongs to.
