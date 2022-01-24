@@ -21,5 +21,5 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 
 == Internal Improvements
 
-* pr:11327[] remove redundant `Option` from eager macro functions.
+* pr:11327[] remove redundant `Option` from eager macro expansions.
 * pr:11308[] status: output all crates a file belongs to.
