@@ -1,0 +1,31 @@
+= Changelog #114
+:sectanchors:
+:page-layout: post
+
+Commit: commit:fd3942eb620e37a4e4bfdd587d8a2893ccf6fea0[] +
+Release: release:2022-01-31[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:11360[] add support for the `#![recursion_limit]` attribute.
+* pr:11281[] implement parallel cache priming.
+
+== Fixes
+
+* pr:11288[] (first contribution) enable `<code>` blocks in hover.
+* pr:11347[], pr:11354[] fix resolution of eager macro contents.
+* pr:11382[] fix IDE panics caused by `#[cfg_attr]`.
+
+
+== Internal Improvements
+
+* pr:11340[] make syntax bridge fully infallible.
+* pr:11353[] set current working directory for procedural macros.
+* pr:11356[] roll back env vars changed by a proc macro.
+* pr:11365[] allow `proc_macro_srv` users to disable copying of compiled macros.
+* pr:11348[] fix merge commit check for git 2.35.
