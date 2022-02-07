@@ -585,13 +585,14 @@ fn qux(bar: Bar, baz: Baz) {}
 === `extract_function`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_function.rs#L35[extract_function.rs]
 
-Extracts selected statements into new function.
+Extracts selected statements and comments into new function.
 
 .Before
 ```rust
 fn main() {
     let n = 1;
     ┃let m = n + 2;
+    // calculate
     let k = m + n;┃
     let g = 3;
 }
@@ -607,6 +608,7 @@ fn main() {
 
 fn ┃fun_name(n: i32) {
     let m = n + 2;
+    // calculate
     let k = m + n;
 }
 ```

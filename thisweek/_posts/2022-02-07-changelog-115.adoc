@@ -1,0 +1,46 @@
+= Changelog #115
+:sectanchors:
+:page-layout: post
+
+Commit: commit:ba330548023607717295f0dfd61b72eda41aa9dd[] +
+Release: release:2022-02-07[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:11384[] complete local function and closure parameters from surrounding scopes:
++
+image::https://user-images.githubusercontent.com/3757771/152641087-78f8e4c4-275c-4259-a17e-9fe2cc698269.gif[]
+* pr:11401[] add ABI string completions:
++
+image::https://user-images.githubusercontent.com/3757771/152686208-4546f830-e6bd-47f0-ae48-4bb48b499a73.png[]
+* pr:11293[], pr:11395[] implement format string completion:
++
+video::https://user-images.githubusercontent.com/308347/152745371-f6b9a801-ddf1-41ae-afc1-c148f7bfddef.mp4[options=loop]
+* pr:11393[] complete functions and methods from block level impls.
+* pr:11394[] de-prioritize completions of private but editable definitions.
+
+== Fixes
+
+* pr:11182[] (first contribution) don't panic on seeing an unexpected offset.
+* pr:11412[] (first contribution) include `fn`/`type`/`const` keyword in trait impl completion item source ranges.
+* pr:11388[] fix proc-macro server not using the supplied span in `Ident::new`:
++
+image::https://user-images.githubusercontent.com/3757771/151827812-c03b8fc7-7ecf-4959-804a-2680d8e61e8b.png[]
+* pr:11390[] de-prioritize completions of qualified operator function completions.
+* pr:11322[] include comments in "Extract function".
+* pr:11399[] fix assoc type shorthand from method bounds.
+* pr:11402[] fix visibility restriction path completions always using the parent module.
+
+== Internal Improvements
+
+* pr:11416[] (first contribution) fix `eslint` LSP config.
+* pr:11418[] (first contribution) bump `pulldown-cmark-to-cmark` to fix link rendering bug.
+* pr:11291[] make range up-mapping more precise.
+* pr:11397[] refactor completion module split.
+* pr:11403[] shrink `mbe::ExpandError` and `mbe::ParseError`.
+* pr:11406[] update install notes for bundled servers.
