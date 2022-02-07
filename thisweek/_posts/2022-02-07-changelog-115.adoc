@@ -33,7 +33,7 @@ video::https://user-images.githubusercontent.com/308347/152745371-f6b9a801-ddf1-
 image::https://user-images.githubusercontent.com/3757771/151827812-c03b8fc7-7ecf-4959-804a-2680d8e61e8b.png[]
 * pr:11390[] de-prioritize completions of qualified operator function completions.
 * pr:11322[] include comments in "Extract function".
-* pr:11399[] fix assoc type shorthand from method bounds.
+* pr:11399[] fix associated type shorthand from method bounds.
 * pr:11402[] fix visibility restriction path completions always using the parent module.
 
 == Internal Improvements
