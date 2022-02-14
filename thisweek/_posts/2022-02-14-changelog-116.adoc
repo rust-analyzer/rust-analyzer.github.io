@@ -1,0 +1,32 @@
+= Changelog #116
+:sectanchors:
+:page-layout: post
+
+Commit: commit:02904e99acc3daf39b56ed18aa07e62aeb9492c5[] +
+Release: release:2022-02-14[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:11444[] fix up syntax errors in attribute macro inputs to make completion work more often:
++
+image::https://user-images.githubusercontent.com/906069/153276465-81f780ed-8cc1-44ff-88a7-9080ce58116a.gif[]
+* pr:11437[] render whether a function is `async` / `const` / `unsafe` in completion details:
++
+image::https://user-images.githubusercontent.com/5489149/153089518-5419afe4-b2c6-4be8-80f7-585f5c514ff2.png[]
+
+== Fixes
+
+* pr:11459[] (first contribution) add missing experimental capabilities.
+* pr:11442[] (first contribution) use text range of a mod name after macro expansion when renaming a module.
+* pr:11436[] don't change references to `super` when renaming a module.
+* pr:11460[] fix documentation of `SsrParams`.
+
+== Internal Improvements
+
+* pr:11453[] make `ascend_call_token` iterative instead of recursive.
+* pr:11427[] fix serialization of `WorkspaceSymbolParams`.
