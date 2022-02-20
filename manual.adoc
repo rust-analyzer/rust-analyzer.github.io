@@ -430,7 +430,7 @@ https://gitlab.com/cppit/jucipp[juCi++] has built-in support for the language se
 == Troubleshooting
 
 Start with looking at the rust-analyzer version.
-Try **Rust Analyzer: Show RA Version** in VS Code (using **Command Palette** feature typically acticated by Ctrl+Shift+P) or `rust-analyzer --version` in the command line.
+Try **Rust Analyzer: Show RA Version** in VS Code (using **Command Palette** feature typically activated by Ctrl+Shift+P) or `rust-analyzer --version` in the command line.
 If the date is more than a week ago, it's better to update rust-analyzer version.
 
 The next thing to check would be panic messages in rust-analyzer's log.
