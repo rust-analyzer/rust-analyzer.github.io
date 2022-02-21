@@ -1,0 +1,31 @@
+= Changelog #117
+:sectanchors:
+:page-layout: post
+
+Commit: commit:d6ed146a1caa41c65a831efbc80d79067c8f5955[] +
+Release: release:2022-02-21[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:11369[] (first contribution) add type hints for keyword expression hovers:
++
+image::https://user-images.githubusercontent.com/39541871/151611737-12325c23-a1f9-4fca-ae48-279b374bdcdf.png[]
+* pr:11484[] infer array size for slice patterns.
+
+== Fixes
+
+* pr:11458[] (first contribution) parse immovable generator syntax (`static ||`).
+* pr:11477[] fix `Merge Imports` dropping imports.
+* pr:11480[] fix keyword hover on macro-expanded tokens.
+
+== Internal Improvements
+
+* pr:11470[] (first contribution) fix typo in `GlobalState` docs.
+* pr:11475[] avoid temporary `Vec` in MBE.
+* pr:11511[] wrap `MacroCallKind::Attr` `attr_args` field in an `Arc`.
+* pr:11512[] remove `name` fields from `MacroCallKind`.
