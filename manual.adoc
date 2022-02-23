@@ -429,7 +429,7 @@ https://gitlab.com/cppit/jucipp[juCi++] has built-in support for the language se
 
 === Kakoune
 
-https://kakoune.org/[Kakoune] editor support LSP with the help of https://github.com/kak-lsp/kak-lsp[`kak-lsp`].
+https://kakoune.org/[Kakoune] supports LSP with the help of https://github.com/kak-lsp/kak-lsp[`kak-lsp`].
 Follow the https://github.com/kak-lsp/kak-lsp#installation[instructions] to install `kak-lsp`.
 To configure `kak-lsp`, refer to the https://github.com/kak-lsp/kak-lsp#configuring-kak-lsp[configuration section] which is basically about copying the https://github.com/kak-lsp/kak-lsp/blob/master/kak-lsp.toml[configuration file] in the right place (latest versions should use `rust-analyzer` by default).
 
@@ -457,7 +457,7 @@ hook global WinSetOption filetype=rust %{
 
 === Helix
 
-https://docs.helix-editor.com/[Helix] editor does support LSP by default.
+https://docs.helix-editor.com/[Helix] supports LSP by default.
 However, it won't install `rust-analyzer` automatically.
 You can follow instructions for installing <<rust-analyzer-language-server-binary,`rust-analyzer` binary>>.
 
