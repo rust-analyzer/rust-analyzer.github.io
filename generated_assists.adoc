@@ -276,7 +276,7 @@ pub(crate) fn frobnicate() {}
 
 [discrete]
 === `convert_bool_then_to_if`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_bool_then.rs#L134[convert_bool_then.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_bool_then.rs#L133[convert_bool_then.rs]
 
 Converts a `bool::then` method call to an equivalent if expression.
 
@@ -428,7 +428,7 @@ fn main() {
 
 [discrete]
 === `convert_to_guarded_return`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_to_guarded_return.rs#L20[convert_to_guarded_return.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_to_guarded_return.rs#L21[convert_to_guarded_return.rs]
 
 Replace a large conditional with a guarded return.
 
@@ -501,7 +501,7 @@ impl Point {
 
 [discrete]
 === `convert_while_to_loop`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_while_to_loop.rs#L18[convert_while_to_loop.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_while_to_loop.rs#L19[convert_while_to_loop.rs]
 
 Replace a while with a loop.
 
@@ -648,7 +648,7 @@ fn bar(name: i32) -> i32 {
 
 [discrete]
 === `extract_struct_from_enum_variant`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_struct_from_enum_variant.rs#L29[extract_struct_from_enum_variant.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_struct_from_enum_variant.rs#L28[extract_struct_from_enum_variant.rs]
 
 Extracts a struct from enum variant.
 
@@ -1479,7 +1479,7 @@ impl<'a> Cursor<'a> {
 
 [discrete]
 === `invert_if`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/invert_if.rs#L12[invert_if.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/invert_if.rs#L13[invert_if.rs]
 
 This transforms if expressions of the form `if !x {A} else {B}` into `if x {B} else {A}`
 This also works with `!=`. This assist can only be applied with the cursor on `if`.
@@ -1612,7 +1612,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `move_arm_cond_to_match_guard`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L79[move_guard.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L69[move_guard.rs]
 
 Moves if expression from match arm body into a guard.
 
@@ -1684,7 +1684,7 @@ fn t() {}
 
 [discrete]
 === `move_guard_to_arm_body`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L11[move_guard.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/move_guard.rs#L8[move_guard.rs]
 
 Moves match guard into match arm body.
 
@@ -2086,7 +2086,7 @@ impl Debug for S {
 
 [discrete]
 === `replace_if_let_with_match`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_if_let_with_match.rs#L19[replace_if_let_with_match.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_if_let_with_match.rs#L24[replace_if_let_with_match.rs]
 
 Replaces a `if let` expression with a `match` expression.
 
@@ -2146,7 +2146,7 @@ fn compute() -> Option<i32> { None }
 
 [discrete]
 === `replace_match_with_if_let`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_if_let_with_match.rs#L160[replace_if_let_with_match.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_if_let_with_match.rs#L174[replace_if_let_with_match.rs]
 
 Replaces a binary `match` with a wildcard pattern and no guards with an `if let` expression.
 

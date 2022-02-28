@@ -1,0 +1,62 @@
+= Changelog #118
+:sectanchors:
+:page-layout: post
+
+Commit: commit:4e72700e38421a12993fe5fa5c33d712652bc6c8[] +
+Release: release:2022-02-28[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:11549[] (first contribution) add support for `concat_bytes!`.
+* pr:11481[] display parameter names when hovering over a function pointer alias:
++
+image::https://user-images.githubusercontent.com/308347/155932516-2459a4e5-dae8-40bc-a094-adc64d48025e.png[]
+* pr:11513[] expand `derive` attribute into a pseudo expansion:
++
+image::https://user-images.githubusercontent.com/3757771/155107902-abca028d-f985-408a-b2ec-97aa34e8ae83.png[]
++
+image::https://user-images.githubusercontent.com/3757771/155108170-b0e81d69-3533-4ad3-8f81-c34ce87dc46b.gif[]
+* pr:11462[] highlight continue points:
++
+image::https://user-images.githubusercontent.com/308347/155933288-3e1a1e43-6dcc-4ced-9385-f469d9a39a99.png[]
+* pr:11375[] add support for `if`- and `while`- `let` chains.
+* pr:11538[] disable private-editable completions by default (controlled by `rust-analyzer.completion.privateEditable.enable`).
+
+== Fixes
+
+* pr:11461[] (first-contribution) filter generics in `Extract struct from enum variant`.
+* pr:11531[] (first contribution) make `fill_match_arms` assist handle `+#[doc(hidden)]+` and `#[non_exhaustive]`.
+* pr:11535[] (first contribution) add install instructions for Kakoune and Helix.
+* pr:11524[] (first contribution) state that only the latest stable toolchain is officially supported.
+* pr:11424[] pass required features to `cargo` when using the `Run` action.
+* pr:11540[] resolve private fields in type inference.
+* pr:11490[] fix doc test formatting with generics.
+* pr:11525[] drop generic args in path in `replace_qualified_name_with_use`.
+* pr:11562[] don't emit `unresolvedReference` highlight tags in unlinked files.
+* pr:11516[] don't count commas when looking for the derive attribute in diagnostics.
+* pr:11517[] fix qualified record literal completion triggering too eagerly.
+* pr:11522[] make code lenses work on attributed items.
+* pr:11530[] fix `expand_macro` always expanding the first listed derive.
+* pr:11472[] fix visibility in `impl` items and change `pub(crate)` to `pub` in `extract_module`.
+* pr:11552[] properly display `$crate` in hovers.
+* pr:11554[] fix type mismatches with `unreachable!` in Rust 1.59.
+* pr:11565[] fix body selection in `while` loops with block conditions.
+* pr:11567[] fix `if` with block conditions.
+* pr:11514[] update manual for `coc-rust-analyzer`.
+
+== Internal Improvements
+
+* pr:11573[] reuse buffer in `TextEdit::apply` and add tests.
+* pr:11550[] refactor autoderef/method resolution.
+* pr:11455[] handle proc-macro functions as the proc-macro they resolve to.
+* pr:11527[] split unresolved proc-macro error out of `mbe`.
+* pr:11536[] resolve functions as proc-macros via `FileAstId`.
+* pr:11537[] reduce visibility of proc-macros to `pub(crate)` in nameres.
+* pr:11548[] add CSV output to `analysis-stats`.
+* pr:11564[] clean up highlighting tests.
+* pr:11560[] update `url` to make `webrender` build when computing metrics.

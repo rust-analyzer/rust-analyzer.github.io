@@ -174,7 +174,7 @@ Displays the ItemTree of the currently open file, for debugging.
 
 
 === Expand Macro Recursively
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/expand_macro.rs#L16[expand_macro.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/expand_macro.rs#L15[expand_macro.rs]
 
 Shows the full macro expansion of the macro at current cursor.
 
@@ -312,7 +312,7 @@ image::https://user-images.githubusercontent.com/48062697/113020657-b560f500-917
 
 
 === Highlight Related
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L36[highlight_related.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L38[highlight_related.rs]
 
 Highlights constructs related to the thing under the cursor:
 - if on an identifier, highlights all references to that identifier in the current file
