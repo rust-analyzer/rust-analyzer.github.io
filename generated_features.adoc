@@ -10,7 +10,7 @@ image::https://user-images.githubusercontent.com/48062697/113020672-b7c34f00-917
 
 
 === Auto Import
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/auto_import.rs#L10[auto_import.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/auto_import.rs#L12[auto_import.rs]
 
 Using the `auto-import` assist it is possible to insert missing imports for unresolved items.
 When inserting an import it will do so in a structured manner by keeping imports grouped,
@@ -312,7 +312,7 @@ image::https://user-images.githubusercontent.com/48062697/113020657-b560f500-917
 
 
 === Highlight Related
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L38[highlight_related.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L37[highlight_related.rs]
 
 Highlights constructs related to the thing under the cursor:
 - if on an identifier, highlights all references to that identifier in the current file
@@ -324,7 +324,7 @@ Note: `?` and `->` do not currently trigger this behavior in the VSCode editor.
 
 
 === Hover
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/hover.rs#L83[hover.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/hover.rs#L84[hover.rs]
 
 Shows additional information, like the type of an expression or the documentation for a definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.
@@ -485,6 +485,10 @@ rust-analyzer can override kbd:[Enter] key to make it smarter:
 - kbd:[Enter] after `{` indents contents and closing `}` of single-line block
 
 This action needs to be assigned to shortcut explicitly.
+
+Note that, depending on the other installed extensions, this feature can visibly slow down typing.
+Similarly, if rust-analyzer crashes or stops responding, `Enter` might not work.
+In that case, you can still press `Shift-Enter` to insert a newline.
 
 VS Code::
 
@@ -671,6 +675,7 @@ lifetime:: Emitted for lifetimes.
 parameter:: Emitted for non-self function parameters.
 property:: Emitted for struct and union fields.
 selfKeyword:: Emitted for the self function parameter and self path-specifier.
+selfTypeKeyword:: Emitted for the Self type parameter.
 toolModule:: Emitted for tool modules.
 typeParameter:: Emitted for type parameters.
 unresolvedReference:: Emitted for unresolved references, names that rust-analyzer can't find the definition of.
