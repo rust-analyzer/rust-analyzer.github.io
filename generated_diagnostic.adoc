@@ -70,7 +70,7 @@ This diagnostic is triggered if `match` block is missing one or more match arms.
 
 
 === missing-ok-or-some-in-tail-expr
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_diagnostics/src/handlers/missing_ok_or_some_in_tail_expr.rs#L8[missing_ok_or_some_in_tail_expr.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_diagnostics/src/handlers/missing_ok_or_some_in_tail_expr.rs#L10[missing_ok_or_some_in_tail_expr.rs]
 
 This diagnostic is triggered if a block that should return `Result` returns a value not wrapped in `Ok`,
 or if a block that should return `Option` returns a value not wrapped in `Some`.

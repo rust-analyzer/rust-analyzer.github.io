@@ -44,7 +44,7 @@ fn main() {
 
 [discrete]
 === `add_impl_default_members`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_missing_impl_members.rs#L55[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_missing_impl_members.rs#L57[add_missing_impl_members.rs]
 
 Adds scaffold for overriding default impl members.
 
@@ -81,7 +81,7 @@ impl Trait for () {
 
 [discrete]
 === `add_impl_missing_members`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_missing_impl_members.rs#L14[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/add_missing_impl_members.rs#L16[add_missing_impl_members.rs]
 
 Adds scaffold for required impl members.
 
@@ -236,7 +236,7 @@ fn main() {
 
 [discrete]
 === `auto_import`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/auto_import.rs#L66[auto_import.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/auto_import.rs#L68[auto_import.rs]
 
 If the name is unresolved, provides all possible imports for it.
 
@@ -276,7 +276,7 @@ pub(crate) fn frobnicate() {}
 
 [discrete]
 === `convert_bool_then_to_if`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_bool_then.rs#L133[convert_bool_then.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_bool_then.rs#L132[convert_bool_then.rs]
 
 Converts a `bool::then` method call to an equivalent if expression.
 
@@ -328,7 +328,7 @@ fn main() {
 
 [discrete]
 === `convert_if_to_bool_then`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_bool_then.rs#L21[convert_bool_then.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_bool_then.rs#L20[convert_bool_then.rs]
 
 Converts an if expression into a corresponding `bool::then` call.
 
@@ -370,7 +370,7 @@ const _: i32 = 0b1010;
 
 [discrete]
 === `convert_into_to_from`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_into_to_from.rs#L11[convert_into_to_from.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/convert_into_to_from.rs#L8[convert_into_to_from.rs]
 
 Converts an Into impl to an equivalent From impl.
 
@@ -583,7 +583,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_function`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_function.rs#L35[extract_function.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_function.rs#L33[extract_function.rs]
 
 Extracts selected statements and comments into new function.
 
@@ -648,7 +648,7 @@ fn bar(name: i32) -> i32 {
 
 [discrete]
 === `extract_struct_from_enum_variant`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_struct_from_enum_variant.rs#L28[extract_struct_from_enum_variant.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/extract_struct_from_enum_variant.rs#L26[extract_struct_from_enum_variant.rs]
 
 Extracts a struct from enum variant.
 
@@ -1120,7 +1120,7 @@ impl Value {
 
 [discrete]
 === `generate_from_impl_for_enum`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_from_impl_for_enum.rs#L7[generate_from_impl_for_enum.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_from_impl_for_enum.rs#L6[generate_from_impl_for_enum.rs]
 
 Adds a From impl for an enum variant with one tuple field.
 
@@ -1143,7 +1143,7 @@ impl From<u32> for A {
 
 [discrete]
 === `generate_function`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_function.rs#L27[generate_function.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_function.rs#L26[generate_function.rs]
 
 Adds a stub function with a signature matching the function under the cursor.
 
@@ -1341,7 +1341,7 @@ impl Person {
 
 [discrete]
 === `inline_call`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_call.rs#L155[inline_call.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_call.rs#L156[inline_call.rs]
 
 Inlines a function or method body creating a `let` statement per parameter unless the parameter
 can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
@@ -1367,7 +1367,7 @@ fn foo(name: Option<&str>) {
 
 [discrete]
 === `inline_into_callers`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_call.rs#L23[inline_call.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_call.rs#L24[inline_call.rs]
 
 Inline a function or method body into all of its callers where possible, creating a `let` statement per parameter
 unless the parameter can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
@@ -2061,7 +2061,7 @@ fn main() {
 
 [discrete]
 === `replace_derive_with_manual_impl`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_derive_with_manual_impl.rs#L23[replace_derive_with_manual_impl.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/replace_derive_with_manual_impl.rs#L21[replace_derive_with_manual_impl.rs]
 
 Converts a `derive` impl into a manual one.
 
@@ -2439,7 +2439,7 @@ fn foo() {
 
 [discrete]
 === `unwrap_result_return_type`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/unwrap_result_return_type.rs#L10[unwrap_result_return_type.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/unwrap_result_return_type.rs#L13[unwrap_result_return_type.rs]
 
 Unwrap the function's return type.
 
@@ -2456,7 +2456,7 @@ fn foo() -> i32 { 42i32 }
 
 [discrete]
 === `wrap_return_type_in_result`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/wrap_return_type_in_result.rs#L11[wrap_return_type_in_result.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/wrap_return_type_in_result.rs#L14[wrap_return_type_in_result.rs]
 
 Wrap the function's return type into Result.
 

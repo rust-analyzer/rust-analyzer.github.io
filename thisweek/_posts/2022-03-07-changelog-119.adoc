@@ -1,0 +1,68 @@
+= Changelog #119
+:sectanchors:
+:page-layout: post
+
+Commit: commit:5fae65dd28b450a437ebc800a410164c3af1d516[] +
+Release: release:2022-03-07[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== A Message from the Team
+
+We of the rust-analyzer team never took the opportunity to introduce ourselves, but we want to make an exception because of the current events.
+
+One of the early rust-analyzer contributors is currently in Kyiv, amidst falling missiles and artillery shells.
+
+Our friend did not ask for this, did not ask to be liberated or saved by the Russian Army.
+Neither did the other countless Ukrainians who are today at risk.
+Their fault is having been born in a country which a bully decided shouldn't exist.
+
+In Ukraine, Putin's army is committing war crimes, while those at home have no idea because independent journalism has been outlawed.
+
+So please, speak up.
+If you have friends or family in Russia, call and tell them what millions of people.
+And consider https://mobile.twitter.com/Ukraine/status/1497294840110977024[making a donation] or going to a protest.
+
+Thank you and _Slava Ukraini!_
+
+== Heads-up
+
+The latest Visual Studio Code version (1.65, released on March 3) has native support for inlay hints.
+We have been using a custom implementation of that, but would like to switch to the upstream one in pr:11445[], planned to be merged next week.
+This means that the next release will require VS Code 1.65.
+
+Unfortunately, the upstream implementation brings some regressions.
+Specifically, the caret behaves differently when passing over the hint, and the styling is not necessarily better.
+In addition, Code only updates the hints about four times per second while typing, causing them to feel more sluggish.
+
+== New Features
+
+* pr:11620[] support locals with multiple declaration sites:
++
+image::https://user-images.githubusercontent.com/3757771/156833306-6bdb97ae-1fb3-4fd0-9f7d-1783c54c23a5.gif[]
+* pr:11598[] parse destructuring assignments.
+
+== Fixes
+
+* pr:11609[] add another case to the syntax fixup code.
+* pr:11140[] preserve order of generic args.
+* pr:11616[] fix semantic highlighting breaking for lifetimes in macros.
+* pr:11595[] lower string literal values.
+* pr:11622[] show variadic args in hover function signature.
+* pr:11623[] add type variable table to `InferenceTableSnapshot`.
+* pr:11629[] fix macro-calls expanding to items in `if`/`while` conditions.
+* pr:11630[] recognize `Self` as a proper keyword.
+* pr:11613[] add `abort` to safe intrinsics list.
+
+== Internal Improvements
+
+* pr:11593[] build release binaries on Ubuntu 18.04.
+* pr:11610[] add currently failing test for #11242.
+* pr:11574[] slightly refactor `TextEdit`.
+* pr:11631[] refactor `syntax_highlighting`.
+* pr:11632[] bring back syntax highlighting in test data.
+* pr:11639[] re-arrange `ide_db` modules.
+* pr:11633[] automatically change text color in logo based on dark mode.
