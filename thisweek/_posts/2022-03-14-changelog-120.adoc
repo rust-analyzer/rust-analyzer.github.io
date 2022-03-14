@@ -1,0 +1,45 @@
+= Changelog #120
+:sectanchors:
+:page-layout: post
+
+Commit: commit:5e8515870674983cce5b945946045bc1e9b80200[] +
+Release: release:2022-03-14[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:11686[] (first contribution) improve enum variant field completion, enum variant / struct consistency.
+* pr:11687[] (first contribution) highlight escape sequences in byte strings.
+* pr:11445[], pr:11647[], pr:11658[] BREAKING: switch to upstream inlay hints:
++
+image::https://user-images.githubusercontent.com/308347/157213798-0bb2dd91-2e40-41c7-939c-a63d366d9001.png[]
+* pr:11691[] suggest union literals, suggest union fields within an empty union literal:
++
+image::https://user-images.githubusercontent.com/38578268/158023335-84c03e39-daf0-4a52-b969-f40b01501cc8.png[]
++
+image::https://user-images.githubusercontent.com/38578268/158023398-4695ae34-ce64-4f40-8494-68731a3030c6.png[]
+* pr:11676[] offer qualified path completions in derives.
+* pr:11684[] allow configuration of colons in inlay hints (`rust-analyzer.inlayHints.renderColons`).
+
+
+== Fixes
+
+* pr:11672[] (first contribution) add support for new `where` clause location in associated types.
+* pr:11683[] (first contribution) stop wrapping `ConstParam` default values in `ConstArg`.
+* pr:11660[] insert dummy values for const generics in subst.
+* pr:11664[] properly handle proc-macro crate types for nameres.
+* pr:11662[] fix `extract_module` on inherent impls.
+* pr:11680[] show what file paths were expected for unresolved modules.
+* pr:11644[] emit more detailed highlighting for `%`, `>>`, `<<`.
+* pr:11696[] detect NixOS when `/etc/os-release` includes quotes.
+
+== Internal Improvements
+
+* pr:11663[] add `hir_def::MacroId`, add `Macro{Id}` to `ModuleDef{Id}`.
+* pr:11685[] simplify `CompletionContext`.
+* pr:11693[] remove `ide_completion::render::build_ext` module.
+* pr:11692[] another round of clippy fixes.

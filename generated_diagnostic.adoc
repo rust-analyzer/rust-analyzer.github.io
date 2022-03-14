@@ -148,7 +148,7 @@ to a macro in a macro invocation.
 
 
 === unresolved-module
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_diagnostics/src/handlers/unresolved_module.rs#L7[unresolved_module.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_diagnostics/src/handlers/unresolved_module.rs#L8[unresolved_module.rs]
 
 This diagnostic is triggered if rust-analyzer is unable to discover referred module.
 

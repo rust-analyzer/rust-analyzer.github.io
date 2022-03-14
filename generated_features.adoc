@@ -333,7 +333,7 @@ image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L36[inlay_hints.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L37[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
@@ -596,7 +596,7 @@ image::https://user-images.githubusercontent.com/48062697/113065583-055aae80-91b
 
 
 === Semantic Syntax Highlighting
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/syntax_highlighting.rs#L42[syntax_highlighting.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/syntax_highlighting.rs#L40[syntax_highlighting.rs]
 
 rust-analyzer highlights the code semantically.
 For example, `Bar` in `foo::Bar` might be colored differently depending on whether `Bar` is an enum or a trait.
@@ -946,7 +946,7 @@ image::https://user-images.githubusercontent.com/48062697/113065588-068bdb80-91b
 
 
 === Workspace Symbol
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_db/src/symbol_index.rs#L156[symbol_index.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_db/src/symbol_index.rs#L155[symbol_index.rs]
 
 Uses fuzzy-search to find types, modules and functions by name across your
 project and dependencies. This is **the** most useful feature, which improves code
