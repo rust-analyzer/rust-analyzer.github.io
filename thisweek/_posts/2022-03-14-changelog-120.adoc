@@ -14,7 +14,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 
 * pr:11686[] (first contribution) improve enum variant field completion, enum variant / struct consistency.
 * pr:11687[] (first contribution) highlight escape sequences in byte strings.
-* pr:11445[], pr:11647[], pr:11658[] BREAKING: switch to upstream inlay hints:
+* pr:11445[], pr:11647[], pr:11658[] BREAKING: switch to upstream inlay hints (requires Code 1.65):
 +
 image::https://user-images.githubusercontent.com/308347/157213798-0bb2dd91-2e40-41c7-939c-a63d366d9001.png[]
 * pr:11691[] suggest union literals, suggest union fields within an empty union literal:
