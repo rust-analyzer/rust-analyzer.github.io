@@ -333,20 +333,22 @@ image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L37[inlay_hints.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L55[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
 
-rust-analyzer shows hints for
+rust-analyzer by default shows hints for
 
 * types of local variables
 * names of function arguments
 * types of chained expressions
 
-**Note:** VS Code does not have native support for inlay hints https://github.com/microsoft/vscode/issues/16221[yet] and the hints are implemented using decorations.
-This approach has limitations, the caret movement and bracket highlighting near the edges of the hint may be weird:
-https://github.com/rust-analyzer/rust-analyzer/issues/1623[1], https://github.com/rust-analyzer/rust-analyzer/issues/3453[2].
+Optionally, one can enable additional hints for
+
+* return types of closure expressions with blocks
+* elided lifetimes
+* compiler inserted reborrows
 
 |===
 | Editor  | Action Name
@@ -551,7 +553,7 @@ image::https://user-images.githubusercontent.com/48062697/113065580-04c21800-91b
 
 
 === Related Tests
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L189[runnables.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L195[runnables.rs]
 
 Provides a sneak peek of all tests where the current item is used.
 

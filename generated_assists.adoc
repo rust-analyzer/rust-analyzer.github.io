@@ -1078,6 +1078,7 @@ impl Version {
     /// Returns `true` if the version is [`Minor`].
     ///
     /// [`Minor`]: Version::Minor
+    #[must_use]
     fn is_minor(&self) -> bool {
         matches!(self, Self::Minor)
     }
@@ -1193,6 +1194,7 @@ struct Person {
 
 impl Person {
     /// Get a reference to the person's name.
+    #[must_use]
     fn ┃name(&self) -> &str {
         self.name.as_ref()
     }
@@ -1202,7 +1204,7 @@ impl Person {
 
 [discrete]
 === `generate_getter_mut`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_getter.rs#L51[generate_getter.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_getter.rs#L52[generate_getter.rs]
 
 Generate a mut getter method.
 
@@ -1221,6 +1223,7 @@ struct Person {
 
 impl Person {
     /// Get a mutable reference to the person's name.
+    #[must_use]
     fn ┃name_mut(&mut self) -> &mut String {
         &mut self.name
     }
@@ -1264,6 +1267,7 @@ Generates is_empty implementation from the len method.
 struct MyStruct { data: Vec<String> }
 
 impl MyStruct {
+    #[must_use]
     p┃ub fn len(&self) -> usize {
         self.data.len()
     }
@@ -1275,10 +1279,12 @@ impl MyStruct {
 struct MyStruct { data: Vec<String> }
 
 impl MyStruct {
+    #[must_use]
     pub fn len(&self) -> usize {
         self.data.len()
     }
 
+    #[must_use]
     pub fn is_empty(&self) -> bool {
         self.len() == 0
     }
@@ -1306,6 +1312,7 @@ struct Ctx<T: Clone> {
 }
 
 impl<T: Clone> Ctx<T> {
+    #[must_use]
     fn ┃new(data: T) -> Self { Self { data } }
 }
 ```
@@ -1427,6 +1434,31 @@ fn main() {
 ```rust
 fn main() {
     (1 + 2) * 4;
+}
+```
+
+
+[discrete]
+=== `inline_type_alias`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/inline_type_alias.rs#L24[inline_type_alias.rs]
+
+Replace a type alias with its concrete type.
+
+.Before
+```rust
+type A<T = u32> = Vec<T>;
+
+fn main() {
+    let a: ┃A;
+}
+```
+
+.After
+```rust
+type A<T = u32> = Vec<T>;
+
+fn main() {
+    let a: Vec<u32>;
 }
 ```
 
