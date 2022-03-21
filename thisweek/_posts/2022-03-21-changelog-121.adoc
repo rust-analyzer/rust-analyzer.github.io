@@ -54,7 +54,7 @@ image::https://user-images.githubusercontent.com/308347/159210559-f93461b2-9d05-
 
 == Internal Improvements
 
-* pr:11700[], pr:11727[], pr:11734[] Bump `xshell`.
+* pr:11700[], pr:11727[], pr:11734[] bump `xshell`.
 * pr:11775[] treat `global_asm` and `asm` macros as unsafe.
 * pr:11726[] more `ide_completion` refactoring.
 * pr:11752[] allow explicitly specifying end of fixture annotations.
