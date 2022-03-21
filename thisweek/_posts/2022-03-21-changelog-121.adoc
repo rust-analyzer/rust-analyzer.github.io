@@ -15,9 +15,6 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 * pr:11731[] add return type hints for closures with block bodies (enable with `rust-analyzer.inlayHints.closureReturnTypeHints`):
 +
 image::https://user-images.githubusercontent.com/3757771/158839001-de6ec76d-e4e9-4c70-98e0-2c0c4a62b42c.png[]
-* pr:11760[] provide signature help when editing generic args:
-+
-image::https://user-images.githubusercontent.com/1786438/159067106-3917a355-ca77-4d23-ad56-945dcc945425.png[]
 * pr:11755[] implement lifetime elision hints (enable with `rust-analyzer.inlayHints.lifetimeElisionHints` and `rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames`):
 +
 image::https://user-images.githubusercontent.com/3757771/159134856-e2c75d2d-f17c-45c7-9a78-3da5ee8b1acd.png[]
@@ -26,6 +23,9 @@ image::https://user-images.githubusercontent.com/3757771/159134857-30fac3a1-825e
 * pr:11771[] visualize compiler inserted reborrows via inlay hints (enable using `rust-analyzer.inlayHints.reborrowHints`):
 +
 image::https://user-images.githubusercontent.com/3757771/159165178-baaf968a-4381-468e-933f-5326ca1b203d.png[]
+* pr:11760[] provide signature help when editing generic args:
++
+image::https://user-images.githubusercontent.com/1786438/159067106-3917a355-ca77-4d23-ad56-945dcc945425.png[]
 * pr:11774[] tag macro calls as unsafe if they expand to unsafe expressions:
 +
 image::https://user-images.githubusercontent.com/3757771/159177375-619c59fb-565f-42cd-a2f5-73c2c11e77e6.png[]
