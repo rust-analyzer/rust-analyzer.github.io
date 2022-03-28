@@ -1,0 +1,45 @@
+= Changelog #122
+:sectanchors:
+:page-layout: post
+
+Commit: commit:bc08b8eff3f8e4da7c448d7b7f6461938c817a60[] +
+Release: release:2022-03-28[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:11780[] add experimental type mismatch diagnostic (can be disabled using `rust-analyzer.diagnostics.disabled`: ["type-mismatch"]):
++
+video::https://user-images.githubusercontent.com/308347/160331321-fc1b9b82-afc4-4764-85fb-4c4caee78b7b.mp4[options=loop]
+* pr:11809[] disable experimental diagnostics by default (can be re-enabled using `rust-analyzer.diagnostics.enableExperimental`).
+* pr:11772[] support constants in const eval.
+
+== Fixes
+
+* pr:11789[] rename lifetime elision hint configuration key to `rust-analyzer.inlayHints.lifetimeElisionHints.enable`.
+* pr:11805[] don't try to resolve methods on unknown types.
+* pr:11800[] fix `#[macro_use]` no longer importing non-`macro_rules!` macros.
+* pr:11806[] fix async block type inference using containing function return type.
+* pr:11797[] fix unwrap on a `None` value in proc macros built with Rust 1.57.0.
+* pr:11801[] avoid returning `None` from `Span::join` to fix some proc macros.
+* pr:11826[] stop emitting `#[must_use]` in `Generate new` assist.
+* pr:11782[] fix flyimport showing functions in pattern position.
+* pr:11785[] fix tuple- and record struct completions not working with existing braces.
+* pr:11786[] don't add wildcard pattern for `fill_match_arms` with local enums.
+* pr:11795[] correctly suggest auto importing traits from aliases.
+* pr:11791[] fix and improve signature help.
+* pr:11802[] add stubs to make proc macros work that use the `SourceFile` API.
+* pr:11825[] don't complete `Drop::drop` for qualified paths.
+* pr:11831[] disable ref_match for qualified paths as well.
+
+== Internal Improvements
+
+* pr:11793[] (first contribution) consolidate LSIF references into a single edge where possible.
+* pr:11788[] improve `find_path` and extern prelude handling.
+* pr:11833[] move mismatched arg count diagnostic to inference.
+* pr:11776[] replace `write!` with direct `Formatter` calls.
+* pr:11810[] rename the 1.47 proc macro ABI to 1.48.
