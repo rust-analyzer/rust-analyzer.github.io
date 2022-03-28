@@ -15,8 +15,10 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 * pr:11780[] add experimental type mismatch diagnostic (can be disabled using `rust-analyzer.diagnostics.disabled`: ["type-mismatch"]):
 +
 video::https://user-images.githubusercontent.com/308347/160331321-fc1b9b82-afc4-4764-85fb-4c4caee78b7b.mp4[options=loop]
+* pr:11772[] support constants in const eval:
++
+image::https://user-images.githubusercontent.com/45197576/159888144-52e538c6-2034-4e61-b947-a4c4296ee46a.png[]
 * pr:11809[] disable experimental diagnostics by default (can be re-enabled using `rust-analyzer.diagnostics.enableExperimental`).
-* pr:11772[] support constants in const eval.
 
 == Fixes
 
