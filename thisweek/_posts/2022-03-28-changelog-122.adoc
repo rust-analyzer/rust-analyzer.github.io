@@ -12,7 +12,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 
 == New Features
 
-* pr:11780[] add experimental type mismatch diagnostic (can be disabled using `rust-analyzer.diagnostics.disabled`: ["type-mismatch"]):
+* pr:11780[] add experimental type mismatch diagnostic (can be disabled using `"rust-analyzer.diagnostics.disabled": ["type-mismatch"]`):
 +
 video::https://user-images.githubusercontent.com/308347/160331321-fc1b9b82-afc4-4764-85fb-4c4caee78b7b.mp4[options=loop]
 * pr:11772[] support constants in const eval:
