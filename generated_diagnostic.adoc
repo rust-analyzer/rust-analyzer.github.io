@@ -82,7 +82,7 @@ This diagnostic is triggered when `.filter_map(..).next()` is used, rather than 
 
 
 === type-mismatch
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_diagnostics/src/handlers/type_mismatch.rs#L14[type_mismatch.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_diagnostics/src/handlers/type_mismatch.rs#L11[type_mismatch.rs]
 
 This diagnostic is triggered when the type of an expression does not match
 the expected type.

@@ -1,0 +1,52 @@
+= Changelog #123
+:sectanchors:
+:page-layout: post
+
+Commit: commit:46d7ee68f26285db26b2640f2c07d6332380c756[] +
+Release: release:2022-04-04[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:11699[] (first contribution) add assist to remove unneeded ``async``s:
++
+video::https://user-images.githubusercontent.com/308347/161477319-ba66afa6-c532-49e2-9c02-905c28c18d0b.mp4[options=loop]
+* pr:11879[] suggest inferred types in completion (add `:` and trigger it manually):
++
+video::https://user-images.githubusercontent.com/308347/161476343-a8d70387-3d45-4653-8a4e-2a1aff23e017.mp4[options=loop]
+* pr:10802[] allow clients to configure the global workspace search limit.
+
+== Fixes
+
+* pr:11869[] (first contribution) allow tildes as code block fences:
++
+image::https://user-images.githubusercontent.com/26626194/161207693-8e39997c-9ca6-4e69-8c65-e9b70899f7db.png[]
+* pr:11866[] (first contribution) avoid underflows in range conversion.
+* pr:11857[], pr:11886[] decrease relevance of postfix completions.
+* pr:11840[] fix another const generic panic.
+* pr:11842[] fix duplicate type mismatches with blocks.
+* pr:11844[] fix divergence detection for bare match arms.
+* pr:11852[] expand `asm!` to infinite loops to improve type inference.
+* pr:11863[] allow varargs in any param position.
+* pr:11870[] recover from missing type annotation.
+* pr:11878[] paper over GAT panic.
+* pr:11881[] don't rely on lang items to find primitive impls.
+* pr:11877[] don't add `self` when splitting glob imports.
+* pr:11887[] add missing fields diagnostic fix for patterns.
+* pr:11865[] select correct insert position for disabled group import.
+
+== Internal Improvements
+
+* pr:11849[] (first contribution) change `by_self` to `self` and `by_crate` to `crate` in docs.
+* pr:11867[], pr:11874[] (first contribution) create `Generate is, as, try_into` assist group.
+* pr:11861[] add `View file text` command to debug sync issues.
+* pr:11827[] enforce invariant that `Resolver` always contains a `ModuleScope`.
+* pr:11871[] move `rust.ungram` into `rust-analyzer/crates/syntax`.
+* pr:11872[] remove `PathResolution::AssocItem`.
+* pr:11875[] simplify completion.
+* pr:11882[] record outline child modules with missing backing file in def map.
+* pr:11890[] delete `FUNDING.yml`.

@@ -1020,9 +1020,9 @@ pub fn my_func(a: i32, b: i32) -> Result<(), std::io::Error> {
 
 [discrete]
 === `generate_enum_as_method`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_enum_projection_method.rs#L55[generate_enum_projection_method.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_enum_projection_method.rs#L56[generate_enum_projection_method.rs]
 
-Generate an `as_` method for an enum variant.
+Generate an `as_` method for this enum variant.
 
 .Before
 ```rust
@@ -1053,9 +1053,9 @@ impl Value {
 
 [discrete]
 === `generate_enum_is_method`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_enum_is_method.rs#L10[generate_enum_is_method.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_enum_is_method.rs#L11[generate_enum_is_method.rs]
 
-Generate an `is_` method for an enum variant.
+Generate an `is_` method for this enum variant.
 
 .Before
 ```rust
@@ -1088,9 +1088,9 @@ impl Version {
 
 [discrete]
 === `generate_enum_try_into_method`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_enum_projection_method.rs#L11[generate_enum_projection_method.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_enum_projection_method.rs#L12[generate_enum_projection_method.rs]
 
-Generate an `try_into_` method for an enum variant.
+Generate a `try_into_` method for this enum variant.
 
 .Before
 ```rust
@@ -1123,7 +1123,7 @@ impl Value {
 === `generate_from_impl_for_enum`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/generate_from_impl_for_enum.rs#L6[generate_from_impl_for_enum.rs]
 
-Adds a From impl for an enum variant with one tuple field.
+Adds a From impl for this enum variant with one tuple field.
 
 .Before
 ```rust
@@ -2442,6 +2442,26 @@ use std::fmt::{Debug, Display┃};
 ```rust
 use std::fmt::{Debug};
 use std::fmt::Display;
+```
+
+
+[discrete]
+=== `unnecessary_async`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide_assists/src/handlers/unnecessary_async.rs#L15[unnecessary_async.rs]
+
+Removes the `async` mark from functions which have no `.await` in their body.
+Looks for calls to the functions and removes the `.await` on the call site.
+
+.Before
+```rust
+pub async f┃n foo() {}
+pub async fn bar() { foo().await }
+```
+
+.After
+```rust
+pub fn foo() {}
+pub async fn bar() { foo() }
 ```
 
 
