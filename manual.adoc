@@ -126,7 +126,7 @@ Both the server and the Code plugin can be installed from source:
 
 [source]
 ----
-$ git clone https://github.com/rust-analyzer/rust-analyzer.git && cd rust-analyzer
+$ git clone --depth 1 https://github.com/rust-analyzer/rust-analyzer.git && cd rust-analyzer
 $ cargo xtask install
 ----
 
@@ -165,7 +165,7 @@ You'll need the latest stable version of the Rust toolchain.
 
 [source,bash]
 ----
-$ git clone https://github.com/rust-analyzer/rust-analyzer.git && cd rust-analyzer
+$ git clone --depth 1 https://github.com/rust-analyzer/rust-analyzer.git && cd rust-analyzer
 $ cargo xtask install --server
 ----
 
