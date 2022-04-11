@@ -1,0 +1,45 @@
+= Changelog #124
+:sectanchors:
+:page-layout: post
+
+Commit: commit:24cf957627d5ede1b395f92ff871fd7a281d49a4[] +
+Release: release:2022-04-11[]
+
+== Sponsors
+
+**Become a sponsor:** On https://opencollective.com/rust-analyzer/[OpenCollective] or
+https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
+
+== New Features
+
+* pr:11938[] improve associated item completion in trait impls:
++
+image::https://user-images.githubusercontent.com/1786438/162481277-2a0d2f21-dc20-4452-804d-6370766216b6.png[]
+
+== Fixes
+
+* pr:11894[] (first contribution) complete pattern args based on type name
+* pr:11891[] show error message when flycheck fails.
+* pr:11915[] attempt to heuristically resolve paths in const arguments in IDE layer.
+* pr:11953[] make `extract_module` more lazy.
+* pr:11896[] show path to be created in the `unresolved-module` fix label.
+* pr:11899[] skip match check on patterns of unexpected `TyKind::FnDef`.
+* pr:11911[] use correct text ranges in `SearchScope` for macro-emitted inline modules.
+* pr:11914[] fix path qualifiers not resolving generic type params when shadowed by trait.
+* pr:11926[] fix panics with `#[cfg]`'d-out `self` parameter.
+* pr:11920[] fix spurious type mismatch error for const generics with value parameters.
+* pr:11931[] flyimport: omit types when completing where-clause
+* pr:11936[] ignore `Drop` and `Destruct` bounds for now.
+* pr:11942[] check whether a parameter can be converted to a local.
+* pr:11943[] don't create ``hir::Local``s from const path patterns.
+* pr:11954[] parse `for<'a>` closure syntax.
+
+== Internal Improvements
+
+* pr:11904[] wrap macros in expr position in `MacroExpr` node.
+* pr:11905[] remove hir_expand macro recursion check.
+* pr:11916[] add more doc-link tests.
+* pr:11924[] remove `FnFlags::IS_IN_EXTERN_BLOCK`.
+* pr:11927[] use bitflags for `FnFlags`.
+* pr:11925[] add and start using `HirFormatter::write_{str,char}`.
+* pr:11930[] move function unsafety determination out of the `ItemTree`.
