@@ -37,7 +37,7 @@ image::https://user-images.githubusercontent.com/1786438/162481277-2a0d2f21-dc20
 == Internal Improvements
 
 * pr:11904[] wrap macros in expr position in `MacroExpr` node.
-* pr:11905[] remove hir_expand macro recursion check.
+* pr:11905[] remove `hir_expand` macro recursion check.
 * pr:11916[] add more doc-link tests.
 * pr:11924[] remove `FnFlags::IS_IN_EXTERN_BLOCK`.
 * pr:11927[] use bitflags for `FnFlags`.
