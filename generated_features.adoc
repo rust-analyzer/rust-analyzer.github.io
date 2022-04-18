@@ -223,7 +223,7 @@ image::https://user-images.githubusercontent.com/48062697/113020654-b42fc800-917
 
 
 === Find All References
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/references.rs#L40[references.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/references.rs#L42[references.rs]
 
 Shows all references of the item at the cursor location
 
@@ -523,8 +523,11 @@ image::https://user-images.githubusercontent.com/48062697/113065578-04c21800-91b
 Some features trigger on typing certain characters:
 
 - typing `let =` tries to smartly add `;` if `=` is followed by an existing expression
+- typing `=` between two expressions adds `;` when in statement position
+- typing `=` to turn an assignment into an equality comparison removes `;` when in expression position
 - typing `.` in a chain method call auto-indents
 - typing `{` in front of an expression inserts a closing `}` after the expression
+- typing `{` in a use item adds a closing `}` in the right place
 
 VS Code::
 

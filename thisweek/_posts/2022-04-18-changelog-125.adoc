@@ -1,0 +1,54 @@
+= Changelog #125
+:sectanchors:
+:page-layout: post
+
+Commit: commit:65fbe0a8d17fc257f037f4dd465bff69a3d3054a[] +
+Release: release:2022-04-18[]
+
+== Announcement
+
+Since this week, `rust-analyzer` has https://github.com/rust-lang/rust-analyzer[a new home]!
+The repository now lives in the `rust-lang` GitHub organization.
+If you're an existing user or contributor there's no need to take action but if you encounter any glitches, please report them and stay calm.
+
+== New Features
+
+* pr:11935[], pr:12006[] switch to LSP inlay hints (requires VS Code 1.66).
+* pr:11961[] deprioritize already-imported names in `use` items:
++
+image::https://user-images.githubusercontent.com/1786438/162790376-6b133925-7cf9-46c5-b0e2-d8c3cba61d47.png[]
+* pr:11971[] add trailing `;` when typing `=` in assignment:
++
+image::https://user-images.githubusercontent.com/1786438/163022079-1ed114ef-7c75-490f-a8ed-731a13f0b44d.gif[]
+* pr:11956[] allow customizing the command for running build scripts.
+* pr:12014[] attempt to format `expand_macro` output with `rustfmt` if possible.
+
+== Fixes
+
+* pr:11957[] (first contribution) fix GAT panics.
+* pr:11883[] move module directory on rename.
+* pr:11967[] fix trait impl completions not triggering after `fn`/`const`/`type`:
++
+image::https://user-images.githubusercontent.com/1786438/162996087-56540f5e-a6be-4111-a4a5-8de21f483a5e.png[]
+* pr:11969[] add trailing `;` when completing associated const/type in trait impl.
+* pr:11992[] resolve `uN::method` even when `use std::uN;` is present.
+* pr:11993[] enable ADT keyword completions in block expressions.
+* pr:12000[] tag `macro_rules` macro bang with `MacroBang` tag.
+* pr:12001[] do reference search on all downmapped tokens with the same kind only.
+* pr:12002[], pr:12008[] fix source root panic in global state when switching git branches.
+* pr:11991[] fix completion detail for async functions and RPITs.
+* pr:12011[] show `impl Trait` in argument positon in completion details.
+* pr:12013[] support `associated_const_equality` in parser.
+
+== Internal Improvements
+
+* pr:11980[] (first contribution) update repository URL.
+* pr:11964[] unset test feature in rustc source crates.
+* pr:11970[] bump chalk to fix most type mismatches in the `rust-analyzer` repo.
+* pr:11958[] show config deseralization failures on start up.
+* pr:11960[] show more project building errors to the user.
+* pr:11990[] improve `ItemTree` pretty print output.
+* pr:11999[] update feature list in VS Code extension README.
+* pr:12003[] remove duplicated crate id field from `hir::Type`.
+* pr:12005[] remove frequent `Arc<Body>` clones in type checking.
+* pr:12009[] add more visibility into why the project gets reloaded.
