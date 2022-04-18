@@ -9,7 +9,7 @@ Release: release:2022-04-18[]
 
 Since this week, `rust-analyzer` has https://github.com/rust-lang/rust-analyzer[a new home]!
 The repository now lives in the `rust-lang` GitHub organization.
-If you're an existing user or contributor there's no need to take action but if you encounter any glitches, please report them and stay calm.
+If you're an existing user or contributor there's no need to take action but if you encounter any glitches, please keep calm and report them.
 
 == New Features
 
