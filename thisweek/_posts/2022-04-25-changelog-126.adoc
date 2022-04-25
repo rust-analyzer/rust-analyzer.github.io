@@ -9,7 +9,7 @@ Release: release:2022-04-25[]
 
 * pr:12032[] display signature help when applying the ``Add ::<>`` assist.
 * pr:12041[] prefer `core` and `alloc` over `std` in auto-imports in conditionally-`#[no_std]` crates.
-* pr:12024[] don't suggest existing `#[derive]`s in completion.
+* pr:12024[] don't suggest existing ``#[derive]``s in completion.
 
 == Fixes
 
