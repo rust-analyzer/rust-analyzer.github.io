@@ -1,0 +1,32 @@
+= Changelog #126
+:sectanchors:
+:page-layout: post
+
+Commit: commit:b5d7a712e1c5d1e602feb8320f902ee9cd6ec197[] +
+Release: release:2022-04-25[]
+
+== New Features
+
+* pr:12032[] display signature help when applying the ``Add ::<>`` assist.
+* pr:12041[] prefer `core` and `alloc` over `std` in auto-imports in conditionally-`#[no_std]` crates.
+* pr:12024[] don't suggest existing `#[derive]`s in completion.
+
+== Fixes
+
+* pr:12044[] (first contribution) fix `CargoWorkspace` panic when `rustcSource` is set.
+* pr:12040[] improve parameter completion.
+* pr:12054[] fix const generic panic in `dyn Trait`.
+* pr:12058[] increase stack size in the LSP and proc-macro servers.
+* pr:12037[] remove `rust-analyzer.inlayHints.enable` and set language scope when toggling hints.
+* pr:12042[] remove angle brackets from language configuration.
+* pr:12063[] fall back to parameter definitions on error types in signature help.
+* pr:12064[] fix `ide_db::search` not searching bodies of attributed items.
+
+== Internal Improvements
+
+* pr:12053[] (first contribution) export `lc.LanguageClient` from the VSCode extension.
+* pr:12015[] (first contribution) update developer documentation link.
+* pr:12023[] add more visibility why switching workspaces happens.
+* pr:12021[] add a `NameContext` to `CompletionContext`, move out some `ImmediateLocation` variants.
+* pr:12028[] fix changelog generation after repository move.
+* pr:12051[] add `triagebot.toml`.
