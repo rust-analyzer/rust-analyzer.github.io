@@ -8,7 +8,7 @@ Release: release:2022-05-02[]
 == Configuration Revamp
 
 pr:12010[] renames most configuration keys to allow for more flexibility.
-Once it gets merged (probably next week), the VS Code extension should still seamlessly the old versions.
+Once it gets merged (probably next week), the VS Code extension should still seamlessly support the old versions.
 
 However, if you are using a different client, you might need to update your settings.
 The linked PR contains a comprehensive description of the keys that were renamed.
