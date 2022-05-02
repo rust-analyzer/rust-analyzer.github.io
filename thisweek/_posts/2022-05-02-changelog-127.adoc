@@ -5,6 +5,14 @@
 Commit: commit:5dce1ff0212e467271c9e895478670c74d847ee9[] +
 Release: release:2022-05-02[]
 
+== Configuration Revamp
+
+pr:12010[] renames most configuration keys to allow for more flexibility.
+Once it gets merged (probably next week), the VS Code extension should still seamlessly the old versions.
+
+However, if you are using a different client, you might need to update your settings.
+The linked PR contains a comprehensive description of the keys that were renamed.
+
 == New Features
 
 * pr:12103[] diagnose unresolved derive macros:
