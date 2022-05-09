@@ -1,0 +1,41 @@
+= Changelog #128
+:sectanchors:
+:page-layout: post
+
+Commit: commit:5d5bbec9b60010dd7389a084c56693baf6bda780[] +
+Release: release:2022-05-09[]
+
+== New Features
+
+* pr:12123[] provide `Self` in record literal completion:
++
+image::https://user-images.githubusercontent.com/308347/167346272-7e1effe9-ec72-4e62-986a-06c8ff9de016.png[]
+* pr:12142[] update `Sort methods by trait definition` assist to sort all associated items:
++
+image::https://user-images.githubusercontent.com/38225716/166491828-0bc10dbd-91be-408f-9fe0-636ef5e99377.gif[]
+* pr:12157[] lower values of char and byte literals:
++
+image::https://user-images.githubusercontent.com/308347/166866713-6430869a-594b-4fe8-bf9e-1bc5c3ce0aa7.png[]
+
+== Fixes
+
+* pr:12093[] (first contribution) reload project on `.cargo/config[.toml]` changes.
+* pr:12143[] improve the default constructor mode when filling fields
+* pr:12120[] don't show signature help after closing bracket.
+* pr:12086[] use RPIT bounds of current function in inference.
+* pr:12150[] fix keyword doc links in hover.
+* pr:12149[], pr:12177[], pr:12178[], pr:12185[] split float literal tokens at `.` to fix parsing of tuple field accesses.
+* pr:12171[] fix inlay hints flashing after being re-enabled due to state invalidation.
+* pr:12175[] fix snippets triggering where they shouldn't.
+* pr:12188[] allow auto-importing starting segments of use items.
+* pr:12134[] fix incorrect double braces in `HirDisplay` implementations.
+
+== Internal Improvements
+
+* pr:12136[] add a `Converter` type for token conversion.
+* pr:12159[] lift out macro bang property from completion `PathKind` enum.
+* pr:12161[] lift out item list path completions from `(un)qualified_path`.
+* pr:12164[], pr:12168[] remove `unqualified_path`, `qualified_path` completions modules.
+* pr:12173[] make completion `PathKind` mandatory.
+* pr:12174[] improve completion tests by checking that the offset is included in the source_range of items.
+* pr:12187[] more completion context refactoring.

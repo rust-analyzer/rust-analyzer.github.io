@@ -2030,40 +2030,40 @@ const test: Foo = Foo {foo: 1, bar: 0}
 
 
 [discrete]
-=== `reorder_impl`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/reorder_impl.rs#L11[reorder_impl.rs]
+=== `reorder_impl_items`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/reorder_impl_items.rs#L11[reorder_impl_items.rs]
 
-Reorder the methods of an `impl Trait`. The methods will be ordered
+Reorder the items of an `impl Trait`. The items will be ordered
 in the same order as in the trait definition.
 
 .Before
 ```rust
 trait Foo {
-    fn a() {}
-    fn b() {}
-    fn c() {}
+    type A;
+    const B: u8;
+    fn c();
 }
 
 struct Bar;
 ┃impl Foo for Bar {
-    fn b() {}
+    const B: u8 = 17;
     fn c() {}
-    fn a() {}
+    type A = String;
 }
 ```
 
 .After
 ```rust
 trait Foo {
-    fn a() {}
-    fn b() {}
-    fn c() {}
+    type A;
+    const B: u8;
+    fn c();
 }
 
 struct Bar;
 impl Foo for Bar {
-    fn a() {}
-    fn b() {}
+    type A = String;
+    const B: u8 = 17;
     fn c() {}
 }
 ```
