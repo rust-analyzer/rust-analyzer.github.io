@@ -25,7 +25,7 @@ If that happens, try uninstalling and reinstalling the extension.
 * pr:12199[] Don't show assoc. type binding completions when invalid
 * pr:12201[] Add cast expressions to param name inlay hint heuristics
 * pr:12202[] Don't panic at fully qualified call syntax in signature help
-* pr:12209[] pr:12213[] pr:12228[] pr:12229[] r:12245[] pr:12246[] Follow-up fixes to the config revamp
+* pr:12209[] pr:12213[] pr:12228[] pr:12229[] pr:12245[] pr:12246[] Follow-up fixes to the config revamp
 * pr:12231[] Fix X is not a valid punct panic with floats in macros
 * pr:12241[] Revert float parsing fix to avoid macro-related panics
 * pr:12212[] Fix a typo in the `inlayHints.renderColons` option description
