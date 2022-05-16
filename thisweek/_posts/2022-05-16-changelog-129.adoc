@@ -1,0 +1,45 @@
+= Changelog #129
+:sectanchors:
+:page-layout: post
+
+Commit: commit:ac4ce4259b906e7998695722b5af4cf2f261b250[] +
+Release: release:2022-05-16[]
+
+== New Features
+
+* pr:12208[] Include associated types in trait signature help
++
+image::https://user-images.githubusercontent.com/1786438/167658642-8df42fba-523a-46fe-a0f6-e0e041b3659d.png[]
+* pr:12215[] Support variable substitution in VSCode settings
+* pr:12226[] Allow reborrow inlay hints to be restricted to mutable reborrows only
+* pr:12010[] Revamp the server configuration to be more consistent and future-proof
+* pr:12238[] Change VSCode extension publisher to `rust-lang`
+
+Note: due to the publisher change, you might get a "Server returned 404" error message.
+If that happens, try uninstalling and reinstalling the extension.
+
+== Fixes
+
+* pr:12197[] Fix import insertion inserting after last comment in a file
+* pr:12198[] Resolve assoc. types of supertraits in the IDE layer
+* pr:12199[] Don't show assoc. type binding completions when invalid
+* pr:12201[] Add cast expressions to param name inlay hint heuristics
+* pr:12202[] Don't panic at fully qualified call syntax in signature help
+* pr:12209[] pr:12213[] pr:12228[] pr:12229[] r:12245[] pr:12246[] Follow-up fixes to the config revamp
+* pr:12231[] Fix X is not a valid punct panic with floats in macros
+* pr:12241[] Revert float parsing fix to avoid macro-related panics
+* pr:12212[] Fix a typo in the `inlayHints.renderColons` option description
+* pr:12220[] Fix `character` semantic token type definition
+* pr:12190[] Fix cargo check diagnostics getting mapped incorrectly with non-BMP codepoints
+* pr:12262[] Insert whitespace between 'mut' and 'self' in macro expansion
+
+== Internal Improvements
+
+* pr:11983[] Remove handling of `#[rustc_deprecated]`
+* pr:12204[] Move keyword expressions to expr completions module
+* pr:12223[] Rename `primeCaches` config keys
+* pr:12225[] Add token mapping test for float literals
+* pr:12224[] Remove redundant offset data in annotations
+* pr:12252[] Make VSCode config more GUI edit friendly
+* pr:12251[] Vendor `lsp-server`
+* pr:12242[] Improve extension description and README
