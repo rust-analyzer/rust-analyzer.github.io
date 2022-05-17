@@ -12,6 +12,8 @@ This release increments the VS Code extension version to fix installation proble
 The VS Code extension version of this release is `v0.3.1059`.
 It corresponds to the nightly release `v0.4.1058`.
 
+If you get a "Server returned 404" error when upgrading, try uninstalling and reinstalling the extension.
+
 == New Features
 
 * pr:12253[] Add binding mode inlay hints
