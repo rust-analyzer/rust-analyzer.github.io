@@ -1,0 +1,40 @@
+= Changelog #129.5
+:sectanchors:
+:page-layout: post
+
+Commit: commit:7e95c14ea730c6b06f5760c8c92e69b9a6def828[] +
+Release: release:2022-05-17[]
+
+Bonus Release 🎉
+
+This release increments the VS Code extension version to fix installation problems on the stable channel.
+
+The VS Code extension version of this release is `v0.3.1059`.
+It corresponds to the nightly release `v0.4.1058`.
+
+== New Features
+
+* pr:12253[] Add binding mode inlay hints
++
+image::https://user-images.githubusercontent.com/3757771/168427387-2f299438-a0cc-496b-a9a5-d689ef6a2b55.png[]
+* pr:12244[] Show inlay hints after a `}` to indicate the closed item
++
+image::https://user-images.githubusercontent.com/1786438/168338713-4cedef50-3611-4667-aa6a-49e154ec16a7.png[]
+* pr:12274[] pr:12275[] Handle getters and setters in documentation template assist
+* pr:12276[] Improve Generate `Deref` impl assist
+* pr:12285[] Implement inlay hint tooltips
++
+image::https://user-images.githubusercontent.com/1786438/168842815-0c814163-25ab-4a63-aae6-bd63e3562857.gif[]
+
+== Fixes
+
+* pr:12272[] Fix signature help LSP offset conversion
+* pr:12289[] Fix incorrect config key in client config update
+* pr:12271[] Fix type mismatch error with `Box`
+
+== Internal Improvements
+
+* pr:12284[] Cleanup lifetime elision hints
+* pr:12292[] Bump extension version
+
+

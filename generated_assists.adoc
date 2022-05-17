@@ -931,7 +931,7 @@ impl Person {
 
 [discrete]
 === `generate_deref`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_deref.rs#L15[generate_deref.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_deref.rs#L16[generate_deref.rs]
 
 Generate `Deref` impl using the given struct field.
 
@@ -950,7 +950,7 @@ struct B {
    a: A
 }
 
-impl std::ops::Deref for B {
+impl core::ops::Deref for B {
     type Target = A;
 
     fn deref(&self) -> &Self::Target {
@@ -1193,7 +1193,6 @@ struct Person {
 }
 
 impl Person {
-    /// Get a reference to the person's name.
     #[must_use]
     fn ┃name(&self) -> &str {
         self.name.as_ref()
@@ -1204,7 +1203,7 @@ impl Person {
 
 [discrete]
 === `generate_getter_mut`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter.rs#L52[generate_getter.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter.rs#L51[generate_getter.rs]
 
 Generate a mut getter method.
 
@@ -1222,7 +1221,6 @@ struct Person {
 }
 
 impl Person {
-    /// Get a mutable reference to the person's name.
     #[must_use]
     fn ┃name_mut(&mut self) -> &mut String {
         &mut self.name
@@ -1337,7 +1335,6 @@ struct Person {
 }
 
 impl Person {
-    /// Set the person's name.
     fn set_name(&mut self, name: String) {
         self.name = name;
     }

@@ -345,10 +345,26 @@ Whether to allow import insertion to merge new imports into single path glob imp
 --
 The path structure for newly inserted paths to use.
 --
+[[rust-analyzer.inlayHints.bindingModeHints.enable]]rust-analyzer.inlayHints.bindingModeHints.enable (default: `false`)::
++
+--
+Whether to show inlay type hints for binding modes.
+--
 [[rust-analyzer.inlayHints.chainingHints.enable]]rust-analyzer.inlayHints.chainingHints.enable (default: `true`)::
 +
 --
 Whether to show inlay type hints for method chains.
+--
+[[rust-analyzer.inlayHints.closingBraceHints.enable]]rust-analyzer.inlayHints.closingBraceHints.enable (default: `true`)::
++
+--
+Whether to show inlay hints after a closing `}` to indicate what item it belongs to.
+--
+[[rust-analyzer.inlayHints.closingBraceHints.minLines]]rust-analyzer.inlayHints.closingBraceHints.minLines (default: `25`)::
++
+--
+Minimum number of lines required before the `}` until the hint is shown (set to 0 or 1
+to always show them).
 --
 [[rust-analyzer.inlayHints.closureReturnTypeHints.enable]]rust-analyzer.inlayHints.closureReturnTypeHints.enable (default: `false`)::
 +
