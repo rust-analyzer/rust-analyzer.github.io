@@ -1,0 +1,46 @@
+= Changelog #130
+:sectanchors:
+:page-layout: post
+
+Commit: commit:84be2eaf99c1c057b401f755f92d22d5896900f2[] +
+Release: release:2022-05-23[]
+
+== New Features
+
+* pr:12334[] (first contribution) add `Generate enum variant` assist:
++
+video::https://user-images.githubusercontent.com/308347/169745420-959a2079-4123-4a52-8ccd-bd1386783706.mp4[options=loop]
+* pr:12345[] (first contribution) add `escapeSequence` semantic token type.
+* pr:12263[] hide type inlay hints for `let` statements that initialize a closure (enable using `rust-analyzer.inlayHints.typeHints.hideClosureInitialization`):
++
+image::https://user-images.githubusercontent.com/12008103/168470158-6cb77b18-068e-4431-a8b5-e2b22d50d263.gif[]
+* pr:12130[] add assist to turn let-else statements into let and match:
++
+video::https://user-images.githubusercontent.com/308347/169746069-9820ae1a-1dd5-4546-b73d-f4096da0e4e3.mp4[options=loop]
+* pr:12316[] show parameter inlay hints for closure invocations:
++
+image::https://user-images.githubusercontent.com/308347/169746543-bf3e7de1-896f-4af7-bf5c-766bc6f8e4be.png[]
+* pr:11830[] add "on typing" handler for angle brackets (`<`, `>`).
+* pr:12303[] improve docs generation assist.
+* pr:12326[] add `cargo clippy` task preset.
+* pr:12329[] don't swallow build script errors.
+
+== Fixes
+
+* pr:12320[] (first contribution) hide closure return hints if type is specified.
+* pr:12277[] fix `Show implementations` link display error.
+* pr:12309[] fix incorrect expected type in completions for trailing match arms.
+* pr:12301[] adjust `rustc` diagnostic ranges for DOS line endings.
+* pr:12325[] clear `cargo check` diagnostics when turning off flycheck.
+* pr:12342[] avoid async callback to make `Join lines` work again.
+* pr:12346[] special-case base URLs of ``BuiltinType``s to `core`.
+* pr:12281[] increase default `chalk` overflow depth to fix some crashes.
+
+== Internal Improvements
+
+* pr:12311[] improve inlay hint tooltips.
+* pr:12349[] publish universal VSIX to make Code happy.
+* pr:12294[] switch to Prettier for TypeScript formatting.
+* pr:12327[] rename `Expr::Lambda` to `Expr::Closure`.
+* pr:12337[] document overall approach to reload.
+* pr:12313[] remove duplicate word in `cachePriming.numThreads` description.

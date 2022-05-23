@@ -427,6 +427,30 @@ fn main() {
 
 
 [discrete]
+=== `convert_let_else_to_match`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_let_else_to_match.rs#L100[convert_let_else_to_match.rs]
+
+Converts let-else statement to let statement and match expression.
+
+.Before
+```rust
+fn main() {
+    let Ok(mut x) = f() else┃ { return };
+}
+```
+
+.After
+```rust
+fn main() {
+    let mut x = match f() {
+        Ok(x) => x,
+        _ => return,
+    };
+}
+```
+
+
+[discrete]
 === `convert_to_guarded_return`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_to_guarded_return.rs#L21[convert_to_guarded_return.rs]
 
@@ -985,35 +1009,64 @@ struct Point {
 
 
 [discrete]
+=== `generate_doc_example`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_documentation_template.rs#L76[generate_documentation_template.rs]
+
+Generates a rustdoc example when editing an item's documentation.
+
+.Before
+```rust
+/// Adds two numbers.┃
+pub fn add(a: i32, b: i32) -> i32 { a + b }
+```
+
+.After
+```rust
+/// Adds two numbers.
+///
+/// # Examples
+///
+/// ```
+/// use test::add;
+///
+/// assert_eq!(add(a, b), );
+/// ```
+pub fn add(a: i32, b: i32) -> i32 { a + b }
+```
+
+
+[discrete]
 === `generate_documentation_template`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_documentation_template.rs#L12[generate_documentation_template.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_documentation_template.rs#L13[generate_documentation_template.rs]
 
 Adds a documentation template above a function definition / declaration.
 
 .Before
 ```rust
-pub fn my_┃func(a: i32, b: i32) -> Result<(), std::io::Error> {
-    unimplemented!()
+pub struct S;
+impl S {
+    pub unsafe fn set_len┃(&mut self, len: usize) -> Result<(), std::io::Error> {
+        /* ... */
+    }
 }
 ```
 
 .After
 ```rust
-/// .
-///
-/// # Examples
-///
-/// ```
-/// use test::my_func;
-///
-/// assert_eq!(my_func(a, b), );
-/// ```
-///
-/// # Errors
-///
-/// This function will return an error if .
-pub fn my_func(a: i32, b: i32) -> Result<(), std::io::Error> {
-    unimplemented!()
+pub struct S;
+impl S {
+    /// Sets the length of this [`S`].
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if .
+    ///
+    /// # Safety
+    ///
+    /// .
+    pub unsafe fn set_len(&mut self, len: usize) -> Result<(), std::io::Error> {
+        /* ... */
+    }
 }
 ```
 
@@ -1120,6 +1173,36 @@ impl Value {
 
 
 [discrete]
+=== `generate_enum_variant`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_enum_variant.rs#L10[generate_enum_variant.rs]
+
+Adds a variant to an enum.
+
+.Before
+```rust
+enum Countries {
+    Ghana,
+}
+
+fn main() {
+    let country = Countries::Lesotho┃;
+}
+```
+
+.After
+```rust
+enum Countries {
+    Ghana,
+    Lesotho,
+}
+
+fn main() {
+    let country = Countries::Lesotho;
+}
+```
+
+
+[discrete]
 === `generate_from_impl_for_enum`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_from_impl_for_enum.rs#L6[generate_from_impl_for_enum.rs]
 
@@ -1193,7 +1276,6 @@ struct Person {
 }
 
 impl Person {
-    #[must_use]
     fn ┃name(&self) -> &str {
         self.name.as_ref()
     }
@@ -1203,7 +1285,7 @@ impl Person {
 
 [discrete]
 === `generate_getter_mut`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter.rs#L51[generate_getter.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter.rs#L50[generate_getter.rs]
 
 Generate a mut getter method.
 
@@ -1221,7 +1303,6 @@ struct Person {
 }
 
 impl Person {
-    #[must_use]
     fn ┃name_mut(&mut self) -> &mut String {
         &mut self.name
     }
