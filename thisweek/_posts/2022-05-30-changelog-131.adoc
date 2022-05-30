@@ -7,8 +7,10 @@ Release: release:2022-05-30[]
 
 == New Features
 
+* pr:12395[] lower `f32` and `f64` literals:
++
+image::https://user-images.githubusercontent.com/308347/170912650-5b5fe34a-d9dc-4c8d-bde9-ab7437a812a1.png[]
 * pr:12359[], pr:12365[], pr:12366[] fix publishing to VS Code Marketplace after extension move.
-* pr:12395[] lower `f32` and `f64` literals.
 * pr:12376[] insert whitespace into trait-impl completions produced by macros.
 * pr:12357[] when reference searching macro inputs, don't search everything that was downmapped.
 
