@@ -1,0 +1,33 @@
+= Changelog #131
+:sectanchors:
+:page-layout: post
+
+Commit: commit:f94fa62d69faf5bd63b3772d3ec4f0c76cf2db57[] +
+Release: release:2022-05-30[]
+
+== New Features
+
+* pr:12359[], pr:12365[], pr:12366[] fix publishing to VS Code Marketplace after extension move.
+* pr:12395[] lower `f32` and `f64` literals.
+* pr:12376[] insert whitespace into trait-impl completions produced by macros.
+* pr:12357[] when reference searching macro inputs, don't search everything that was downmapped.
+
+== Fixes
+
+* pr:12382[] make auto-closing angle brackets configurable, disabled by default.
+* pr:12341[] make `files.excludeDirs` work.
+* pr:12355[] fix inference when pattern matching a tuple field with a wildcard.
+* pr:12409[] fix overflow during type inference for tuple struct patterns.
+* pr:12384[], pr:12386[] `Generate variant`: insert code in file with enum definition.
+* pr:12370[] insert whitespaces around `_` in macro expansion.
+* pr:12360[] fix completions not working after attributes.
+* pr:12383[] clear native diagnostics for deleted files.
+* pr:12371[] vscode: fix `extraEnv` handling of numeric values.
+
+== Internal Improvements
+
+* pr:12361[] simplify `DotAccess` representation in completions.
+* pr:12373[] refactor record pattern/expression handling in completion context.
+* pr:12388[] make use of the `statusBarItem` colors in VSCode.
+* pr:12393[] remove `Interned` usage from nameres collector.
+* pr:12350[] fix build on OpenBSD (and probably other BSDs too).
