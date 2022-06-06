@@ -1,0 +1,44 @@
+= Changelog #132
+:sectanchors:
+:page-layout: post
+
+Commit: commit:ad6810e90bf89a4ef0ae21349d077050bc2a4fa2[] +
+Release: release:2022-06-06[]
+
+== New Features
+
+* pr:12451[] (first contribution) support `$$` in macros.
+* pr:12333[] (first contribution) order auto-imports by relevance.
+* pr:12452[] support merging multiple imports in `Merge imports`.
+* pr:12416[] add implicit static lifetime hints:
++
+image::https://user-images.githubusercontent.com/308347/172144439-cf0f987f-4e8d-4e16-80fc-f4be7589b9af.png[]
+
+== Fixes
+
+* pr:12387[] (first contribution) fix module rename to not try to edit directories instead of files.
+* pr:12440[] don't remove diagnostics with empty message:
++
+image::https://user-images.githubusercontent.com/49202620/171412661-9b9575e9-e71b-4b84-a5c0-00271548d50c.png[]
+* pr:12406[] add option to show return inlay hints for closures without a block.
+* pr:12412[] retrigger visibility completion after opening bracket.
+* pr:12347[] fix panic in `Extract module` and improve import resolution.
+* pr:12425[] fix float display in hover.
+* pr:12336[] fix a type mismatch with associated types.
+* pr:12427[] fix VSCode config patching incorrectly patching some configs.
+* pr:12431[] fix completions disappearing when typing quickly.
+* pr:12444[] implement parsing of `?` opt-out trait bounds.
+* pr:12467[] fix `Match to if-let` assist for wildcard patterns.
+* pr:12470[], pr:12472[] avoid duplicating output channels when restarting the server.
+* pr:12471[] restart the server instead of reloading the window when config changes.
+* pr:12475[] fix insert position in trait impl completions.
+* pr:12435[] Code: clear status bar color, command when server status is ok.
+
+== Internal Improvements
+
+* pr:12418[] improve completion filtering with existing item qualifiers.
+* pr:12461[] move trait impl completion analysis into `CompletionContext`.
+* pr:12459[] clean up keyword completion handling.
+* pr:12456[] shorten main thread names.
+* pr:12457[], pr:12465[] don't log default build script output.
+* pr:12466[] increase worker thread stack and give them names.

@@ -10,7 +10,7 @@ image::https://user-images.githubusercontent.com/48062697/113020672-b7c34f00-917
 
 
 === Auto Import
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/auto_import.rs#L12[auto_import.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/auto_import.rs#L15[auto_import.rs]
 
 Using the `auto-import` assist it is possible to insert missing imports for unresolved items.
 When inserting an import it will do so in a structured manner by keeping imports grouped,
@@ -338,7 +338,7 @@ image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L76[inlay_hints.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L83[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
@@ -351,7 +351,7 @@ rust-analyzer by default shows hints for
 
 Optionally, one can enable additional hints for
 
-* return types of closure expressions with blocks
+* return types of closure expressions
 * elided lifetimes
 * compiler inserted reborrows
 
