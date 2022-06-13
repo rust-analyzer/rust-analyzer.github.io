@@ -117,6 +117,33 @@ impl Trait<u32> for () {
 
 
 [discrete]
+=== `add_label_to_loop`
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_label_to_loop.rs#L9[add_label_to_loop.rs]
+
+Adds a label to a loop.
+
+.Before
+```rust
+fn main() {
+    loop┃ {
+        break;
+        continue;
+    }
+}
+```
+
+.After
+```rust
+fn main() {
+    'l: loop {
+        break 'l;
+        continue 'l;
+    }
+}
+```
+
+
+[discrete]
 === `add_lifetime_to_type`
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_lifetime_to_type.rs#L5[add_lifetime_to_type.rs]
 
@@ -1517,7 +1544,7 @@ fn main() {
 
 [discrete]
 === `inline_type_alias`
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_type_alias.rs#L24[inline_type_alias.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_type_alias.rs#L19[inline_type_alias.rs]
 
 Replace a type alias with its concrete type.
 

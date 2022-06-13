@@ -1,0 +1,31 @@
+= Changelog #133
+:sectanchors:
+:page-layout: post
+
+Commit: commit:366bd7242ed00c65f293497a26eb81c7510ac682[] +
+Release: release:2022-06-13[]
+
+== New Features
+
+* pr:12481[] introduce `Add label to loop` assist.
+* pr:12477[] restart server automatically on configuration changes.
+* pr:12492[] add proc macro ABI for rustc 1.63.
+
+== Fixes
+
+* pr:12487[] (first contribution) hide parameter inlay hint when argument is function-like macro with similar name.
+* pr:12508[] don't respond to cancelled requests when retrying them, thus fixing `NO_RESULT_CALLBACK_FOUND` errors in NeoVim.
+* pr:12455[] fix false-positive type-mismatch error with generic future.
+* pr:12515[] pass the build data to `rustc_private` crates.
+* pr:12464[] fix `Inline variable` producing a type mismatch.
+* pr:12473[] avoid adding enum brackets in use paths.
+* pr:12490[] prioritize enums in `use` completions.
+* pr:12504[] fix config patching for callable snippets.
+
+== Internal Improvements
+
+* pr:12449[] bring the version number in line with other Rust tools.
+* pr:12509[] remove `Generics::type_iter` in favor of `Generics::iter`.
+* pr:12513[] simplify `hir_ty::utils`.
+* pr:12514[] improve proc-macro errors.
+* pr:12502[], pr:12501[] bump dependencies.
