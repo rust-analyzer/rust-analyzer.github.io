@@ -68,7 +68,7 @@ image::https://user-images.githubusercontent.com/48062697/113020673-b85be580-917
 
 
 === Completion With Autoimport
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-completion/src/completions/flyimport.rs#L18[flyimport.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-completion/src/completions/flyimport.rs#L20[flyimport.rs]
 
 When completing names in the current scope, proposes additional imports from other modules or crates,
 if they can be qualified in the scope, and their name contains all symbols from the completion input.
@@ -237,7 +237,7 @@ image::https://user-images.githubusercontent.com/48062697/113020670-b7c34f00-917
 
 
 === Folding
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/folding_ranges.rs#L35[folding_ranges.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/folding_ranges.rs#L36[folding_ranges.rs]
 
 Defines folding regions for curly braced blocks, runs of consecutive use, mod, const or static
 items, and `region` / `endregion` comment markers.
@@ -320,10 +320,11 @@ image::https://user-images.githubusercontent.com/48062697/113020657-b560f500-917
 **Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L36[highlight_related.rs]
 
 Highlights constructs related to the thing under the cursor:
-- if on an identifier, highlights all references to that identifier in the current file
-- if on an `async` or `await token, highlights all yield points for that async context
-- if on a `return` or `fn` keyword, `?` character or `->` return type arrow, highlights all exit points for that context
-- if on a `break`, `loop`, `while` or `for` token, highlights all break points for that loop or block context
+
+. if on an identifier, highlights all references to that identifier in the current file
+. if on an `async` or `await token, highlights all yield points for that async context
+. if on a `return` or `fn` keyword, `?` character or `->` return type arrow, highlights all exit points for that context
+. if on a `break`, `loop`, `while` or `for` token, highlights all break points for that loop or block context
 
 Note: `?` and `->` do not currently trigger this behavior in the VSCode editor.
 
@@ -383,7 +384,7 @@ image::https://user-images.githubusercontent.com/48062697/113020661-b6922200-917
 
 
 === Magic Completions
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-completion/src/lib.rs#L39[lib.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-completion/src/lib.rs#L40[lib.rs]
 
 In addition to usual reference completion, rust-analyzer provides some ✨magic✨
 completions as well:
