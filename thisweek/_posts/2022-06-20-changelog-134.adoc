@@ -9,7 +9,7 @@ Release: release:2022-06-20[]
 
 * pr:12519[] render docs from trait declaration when hovering associated items:
 +
-image::https://user-images.githubusercontent.com/308347/174536149-4ea778dc-1d9f-4384-8e7e-4789cad17072.png[]
+image::https://user-images.githubusercontent.com/308347/174540431-17118771-c8c9-4159-b430-e7bf897f15b7.png[]
 * pr:12576[] add folding ranges for multi-line match arm list.
 
 == Fixes
