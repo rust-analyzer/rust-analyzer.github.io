@@ -1,0 +1,27 @@
+= Changelog #135
+:sectanchors:
+:page-layout: post
+
+Commit: commit:b74e96f509baf0be70281c55f14cb18fefbc6b22[] +
+Release: release:2022-06-27[]
+
+== New Features
+
+* pr:12599[] only apply `cfg(test)` for local crates, helping crates using `#[cfg(not(test))]`.
+* pr:12629[] improve proc macro errors.
+
+== Fixes
+
+* pr:12605[] (first contribution) fix auto-links in doc comments:
++
+image::https://user-images.githubusercontent.com/59463268/174696581-3b1140a5-cdf0-4eda-9a11-ec648e4e7d21.gif[]
+* pr:12596[] don't trigger pattern completions when typing a wildcard pattern.
+* pr:12597[] fix auto-ref completions inserting in the wrong locations.
+* pr:12625[] completes non-exhaustive enum variants within the defining crate.
+
+== Internal Improvements
+
+* pr:12520[] bring back `JodChild` into flycheck for cancellation.
+* pr:12588[], pr:12604[] more completion refactoring.
+* pr:12594[] lift out `IdentContext` from `CompletionContext`.
+* pr:12628[] minor `hir` simplifications.

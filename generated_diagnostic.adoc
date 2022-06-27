@@ -121,7 +121,7 @@ a `use` declaration.
 
 
 === unresolved-macro-call
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_macro_call.rs#L6[unresolved_macro_call.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_macro_call.rs#L3[unresolved_macro_call.rs]
 
 This diagnostic is triggered if rust-analyzer is unable to resolve the path
 to a macro in a macro invocation.

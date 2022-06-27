@@ -384,7 +384,7 @@ image::https://user-images.githubusercontent.com/48062697/113020661-b6922200-917
 
 
 === Magic Completions
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-completion/src/lib.rs#L40[lib.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-completion/src/lib.rs#L43[lib.rs]
 
 In addition to usual reference completion, rust-analyzer provides some ✨magic✨
 completions as well:
@@ -831,7 +831,7 @@ be parsed as a valid structural search and replace rule.
 
 
 === User Snippet Completions
-**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-completion/src/snippet.rs#L7[snippet.rs]
+**Source:** https://github.com/rust-analyzer/rust-analyzer/blob/master/crates/ide-completion/src/snippet.rs#L5[snippet.rs]
 
 rust-analyzer allows the user to define custom (postfix)-snippets that may depend on items to be accessible for the current scope to be applicable.
 
