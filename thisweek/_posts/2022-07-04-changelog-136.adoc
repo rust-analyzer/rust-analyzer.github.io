@@ -1,0 +1,34 @@
+= Changelog #136
+:sectanchors:
+:page-layout: post
+
+Commit: commit:75b22326dad1914c22484ab6672de5cae94f7457[] +
+Release: release:2022-07-04[]
+
+== New Features
+
+* pr:12634[] show witnesses of non-exhaustiveness in `missing-match-arm` diagnostic:
++
+image::https://user-images.githubusercontent.com/308347/177103408-995f4fb9-42b8-4793-864e-45c3b7b9ff9f.png[]
+* pr:12428[], pr:12680[] implement destructuring assignment.
+
+== Fixes
+
+* pr:12662[] (first contribution) disambiguate function names in `Extract Function`.
+* pr:12626[] (first contribution) avoid trailing `:` in inactive code reason with empty directive list.
+* pr:12635[] (first contribution) improve target_feature completion.
+* pr:12642[] deduplicate cfg completions.
+* pr:12643[] fix completions for locals inside macro calls.
+* pr:12627[] complete enum variants as patterns in pattern paths.
+* pr:12636[] complete raw identifiers with `r#` prefix.
+* pr:12668[] fix completion after some macro calls and simplify macro statement expansion handling.
+* pr:12678[] trigger again flyimport completions in item lists.
+* pr:12648[] report proc macro errors in expressions.
+* pr:12660[] fix flycheck sending cancel progress with no running process.
+* pr:12650[] improve whitespace insertion in pretty printer.
+* pr:12670[], pr:12671[] fix attribute macros on assoc items being discarded with disabled proc macros.
+* pr:12655[] ignore the `bin` artifact for `bench` targets.
+
+== Internal Improvements
+
+* pr:12652[] set up publishing to OpenVSX (currently broken).
