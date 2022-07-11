@@ -1,0 +1,25 @@
+= Changelog #137
+:sectanchors:
+:page-layout: post
+
+Commit: commit:5342f47f4276641ddb5f0a5e08fb307742d6cdc4[] +
+Release: release:2022-07-11[]
+
+== Fixes
+
+* pr:12676[] fix `Extract into function` in trait impls.
+* pr:12706[] handle captured variables in `Extract into Function`.
+* pr:12727[] improve suggested names for extracted variables.
+* pr:12695[] improve associated type completions.
+
+== Internal Improvements
+
+* pr:12690[] update inert attribute list.
+* pr:12704[] use `SmallVec` to slightly shrink `ModPath` size.
+* pr:12687[] improve documentation for `buildScripts.overrideCommand` / `checkOnSave.overrideCommand`.
+* pr:12719[] remove unnecessary unsafe from `format_args!` expansion.
+* pr:12716[] fix publishing of `ra_ap_` crates.
+* pr:12722[] update remaining GitHub URLs.
+* pr:12702[] Code: use a different scheme for each custom view.
+* pr:12694[] remove old `bors.toml`.
+* pr:12732[] bump npm deps.
