@@ -1,0 +1,39 @@
+= Changelog #138
+:sectanchors:
+:page-layout: post
+
+Commit: commit:897a7ec4b826f85ec1626870e734490701138097[] +
+Release: release:2022-07-18[]
+
+== New Features
+
+* pr:12539[] (first contribution) automatically instantiate trivial structs in `Generate new` and `Fill struct fields`.
+* pr:12778[], pr:12785[] (first contribution) support negative, `char` & `bool` const generics:
++
+image::https://user-images.githubusercontent.com/29541480/179379863-b62475dd-e7bf-41f2-b437-08dfe55951af.png[]
+* pr:12696[] add quick fix for `&str` to `String` type mismatch:
++
+video::https://user-images.githubusercontent.com/308347/179480044-bc6ff0a1-3ea3-45bc-bbf6-23181957ab3e.mp4[options=loop]
+* pr:12745[] implement `ignore` and `index` metavar expressions.
+* pr:12747[] update 1.63 proc macro ABI to match `rustc`.
+
+== Fixes
+
+* pr:12781[] fix stack overflows and wrong type inference of associated type shorthands.
+* pr:12691[] fix unresolved proc macro diagnostics pointing to macro expansions.
+* pr:12754[] fix VSCode status bar tooltip not showing the error messages.
+* pr:12556[] support generics in `Extract function`.
+* pr:12765[] insert imports after doc comments in inline modules.
+* pr:12766[] don't show qualified path completions for private items.
+* pr:12773[] improve `self` param completion applicability.
+* pr:12775[] improve syntax fixup, handle incomplete `if`.
+* pr:12712[] ignore renames for crate root.
+* pr:12735[] make `super::` completions depth-aware.
+
+== Internal Improvements
+
+* pr:12742[] (first contribution) fix references to obsolete config keys.
+* pr:12772[] remove allocation in `DefCollector::reseed_with_unresolved_attribute`.
+* pr:12689[] record all macro definitions in `ItemScope`.
+* pr:12764[], pr:12776[] remove deprecated `actions-rs/toolchain` action.
+* pr:12755[] set server binary version for GitHub builds.

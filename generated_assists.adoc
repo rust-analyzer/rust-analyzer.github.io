@@ -634,7 +634,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_function`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_function.rs#L34[extract_function.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_function.rs#L36[extract_function.rs]
 
 Extracts selected statements and comments into new function.
 
@@ -1400,7 +1400,7 @@ impl MyStruct {
 
 [discrete]
 === `generate_new`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_new.rs#L10[generate_new.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_new.rs#L13[generate_new.rs]
 
 Adds a new inherent impl for a type.
 

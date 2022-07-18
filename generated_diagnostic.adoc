@@ -44,7 +44,7 @@ This diagnostic is triggered if a function is invoked with an incorrect amount o
 
 
 === missing-fields
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/missing_fields.rs#L17[missing_fields.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/missing_fields.rs#L20[missing_fields.rs]
 
 This diagnostic is triggered if record lacks some fields that exist in the corresponding structure.
 
@@ -134,7 +134,7 @@ This diagnostic is triggered if rust-analyzer is unable to discover referred mod
 
 
 === unresolved-proc-macro
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_proc_macro.rs#L5[unresolved_proc_macro.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_proc_macro.rs#L6[unresolved_proc_macro.rs]
 
 This diagnostic is shown when a procedural macro can not be found. This usually means that
 procedural macro support is simply disabled (and hence is only a weak hint instead of an error),
