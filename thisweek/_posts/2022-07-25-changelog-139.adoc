@@ -1,0 +1,59 @@
+= Changelog #139
+:sectanchors:
+:page-layout: post
+
+Commit: commit:7e2b983fd459977e11026683ee4afb9598960a4c[] +
+Release: release:2022-07-25[]
+
+== New Features
+
+* pr:12549[], pr:12841[] make `Go to implementation` work on trait methods:
++
+video::https://user-images.githubusercontent.com/308347/180722666-15962825-02b8-4b8e-b3e1-a86dbfefa369.mp4[options=loop]
+* pr:12286[] don't ignore the path prefix in `Generate constant`:
++
+video::https://user-images.githubusercontent.com/10148927/168710096-59d5c594-0e4a-4ba7-bfb3-21c4b99409ea.mov[options=loop]
++
+video::https://user-images.githubusercontent.com/10148927/168710111-cd6d3df4-58eb-4358-ae9e-791bfc408efa.mov[options=loop]
+* pr:12798[] drop support for the 1.47&ndash;1.58 proc macro ABIs.
+* pr:12795[] add support for the 1.64 nightly proc macro ABI.
+* pr:12859[] don't highlight the whole fn on return-type mismatch.
+
+== Fixes
+
+* pr:12821[] (first contribution) don't generate default `PartialEq::ne`.
+* pr:12811[] (first contribution) insert `pub(crate)` after doc comments and attribute macros.
+* pr:12863[] fix missing fields check on destructuring assignment.
+* pr:12809[] work around Code bug with empty diagnostics.
+* pr:12789[] prevent panic on overlapping ranges in `Remove Unused Parameter`.
+* pr:12788[] fix `Extract variable` for subexpression with mutable borrow.
+* pr:12646[] escape receiver texts in completion
+* pr:12825[] make searching for associated trait items consistent.
+* pr:12844[] improve syntax highlighting in attributes
+* pr:12847[] don't duplicate language clients in `Restart server`.
+* pr:12850[] fix error tooltip message for VSCode status bar item.
+* pr:12851[] don't add braces to 'if' completion in match guard position.
+* pr:12832[] don't try to implement default members.
+* pr:12861[] include receiver in struct field autocomplete.
+* pr:12807[] add basic support for completion item details.
+* pr:12804[] clarify `rust-analyzer.files.watcher` and add enum variants for it.
+* pr:12796[] use `to_owned` instead of `to_string` in `&str to String`.
+
+== Internal Improvements
+
+* pr:12827[] construct fewer ``AstIdMap``s while lowering.
+* pr:12840[] use `ItemTree` for variant, field and module attribute collection in `attrs_query`.
+* pr:12849[] don't parse files unnecessarily in scope_for_offset.
+* pr:12800[] find original AST node before calling `compute_ref_match`.
+* pr:12817[] bump `expect-test` and set `CARGO_WORKSPACE_DIR`.
+* pr:12826[] enable (and fix) extra lint groups required for building inside `rust-lang/rust`.
+* pr:12828[] rename proc macro server from `Rustc` to `RustAnalyzer`.
+* pr:12829[] remove `check_merge_commits` test.
+* pr:12831[] build `proc-macro-test-impl` out-of-tree.
+* pr:12833[] add `proc-macro-srv` integration test that clones literals.
+* pr:12834[] add `PROC_MACRO_TEST_TOOLCHAIN` environment variable.
+* pr:12835[] introduce `proc-macro-srv/sysroot-abi` feature.
+* pr:12854[] fix `generate_new` description.
+
+== Others
+

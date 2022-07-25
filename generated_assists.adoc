@@ -328,7 +328,7 @@ fn main() {
 
 [discrete]
 === `convert_for_loop_with_for_each`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_iter_for_each_to_for.rs#L73[convert_iter_for_each_to_for.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_iter_for_each_to_for.rs#L76[convert_iter_for_each_to_for.rs]
 
 Converts a for loop into a for_each loop on the Iterator.
 
@@ -849,7 +849,7 @@ fn foo<T: Copy + Clone>() { }
 
 [discrete]
 === `generate_constant`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_constant.rs#L12[generate_constant.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_constant.rs#L13[generate_constant.rs]
 
 Generate a named constant.
 
@@ -1100,7 +1100,7 @@ impl S {
 
 [discrete]
 === `generate_enum_as_method`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_enum_projection_method.rs#L56[generate_enum_projection_method.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_enum_projection_method.rs#L59[generate_enum_projection_method.rs]
 
 Generate an `as_` method for this enum variant.
 
@@ -1402,7 +1402,7 @@ impl MyStruct {
 === `generate_new`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_new.rs#L13[generate_new.rs]
 
-Adds a new inherent impl for a type.
+Adds a `fn new` for a type.
 
 .Before
 ```rust
@@ -1959,7 +1959,7 @@ fn main() {
 
 [discrete]
 === `qualify_method_call`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/qualify_method_call.rs#L13[qualify_method_call.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/qualify_method_call.rs#L10[qualify_method_call.rs]
 
 Replaces the method call with a qualified function call.
 

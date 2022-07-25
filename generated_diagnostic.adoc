@@ -38,7 +38,7 @@ This diagnostic is shown when the derive attribute has invalid input.
 
 
 === mismatched-arg-count
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mismatched_arg_count.rs#L10[mismatched_arg_count.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mismatched_arg_count.rs#L8[mismatched_arg_count.rs]
 
 This diagnostic is triggered if a function is invoked with an incorrect amount of arguments.
 

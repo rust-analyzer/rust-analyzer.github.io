@@ -384,7 +384,7 @@ image::https://user-images.githubusercontent.com/48062697/113020661-b6922200-917
 
 
 === Magic Completions
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/lib.rs#L43[lib.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/lib.rs#L45[lib.rs]
 
 In addition to usual reference completion, rust-analyzer provides some ✨magic✨
 completions as well:
@@ -765,7 +765,7 @@ image::https://user-images.githubusercontent.com/48062697/113065584-05f34500-91b
 
 
 === Structural Search and Replace
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-ssr/src/lib.rs#L6[lib.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-ssr/src/lib.rs#L8[lib.rs]
 
 Search and replace with named wildcards that will match any expression, type, path, pattern or item.
 The syntax for a structural search replace command is `<search_pattern> ==>> <replace_pattern>`.
@@ -846,7 +846,7 @@ A custom snippet can be defined by adding it to the `rust-analyzer.completion.sn
       "body": [
         "thread::spawn(move || {",
         "\t$0",
-        ")};",
+        "});",
       ],
       "description": "Insert a thread::spawn call",
       "requires": "std::thread",
