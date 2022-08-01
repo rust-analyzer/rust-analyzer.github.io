@@ -1,0 +1,48 @@
+= Changelog #140
+:sectanchors:
+:page-layout: post
+
+Commit: commit:2b472f6684bb1958274995d12b2c50310d88cc52[] +
+Release: release:2022-08-01[]
+
+== An Update on Proc Macros
+
+Rust toolchains newer than `2022-07-29` contain a proc macro server that should be compatible with macros built by the matching compiler.
+Since today's release, the server is automatically detected by and used `rust-analyzer`.
+This means that, from now on, proc macros will keep working when the `proc_macro` crate changes.
+
+For more details, you can read @fasterthanlime's https://fasterthanli.me/articles/proc-macro-support-in-rust-analyzer-for-nightly-rustc-versions#what-s-next[blog post].
+
+== New Features
+
+* pr:12864[], pr:12881[] resolve derive helper attributes in IDE layer:
++
+image::https://user-images.githubusercontent.com/3757771/180647125-98cae13b-a7b4-446b-8a64-fae014f982e2.png[]
++
+image::https://user-images.githubusercontent.com/3757771/180642110-699bdc73-e1f3-4692-94f2-21544f824ab9.png[]
+* pr:12858[], pr:12878[] add `rust-analyzer-proc-macro-srv` binary and use it if found in sysroot.
+* pr:12856[] spawn a `proc-macro-srv` instance per Cargo workspace.
+
+== Fixes
+
+* pr:12877[] (first contribution) insert whitespace when inlining a function defined in a macro.
+* pr:12886[] cache the resulting file in `Semantics::original_ast_node`.
+* pr:12887[] don't duplicate existing `&mut` in completions.
+* pr:12895[] compte completions after type anchors.
+* pr:12830[] insert references in the correct position in macros.
+* pr:12898[] don't add unnecessary brackets in pattern completions.
+* pr:12899[] offer completions in path qualifier position.
+* pr:12901[] don't complete marker traits in expression position.
+* pr:12906[] complete paths of existing record expressions.
+* pr:12913[] fix highlight injection with doc comments.
+* pr:12891[] increase stack size on macro expander thread.
+
+== Internal Improvements
+
+* pr:12890[] assume condition/iterable is missing if there is only a `BlockExpr` in `for` and `while` loops.
+* pr:12902[] sort `ItemScope::entries` results.
+* pr:12900[] use `cargo ws rename` to rename crates for publishing.
+* pr:12903[] only run rainbow highlighting test on 64-bit Unix.
+* pr:12904[] be more explicit when filtering built-in completions.
+* pr:12915[] update `xtask promote` and release instructions.
+* pr:12871[] sync from `rust-lang/rust`.

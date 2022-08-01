@@ -54,6 +54,3 @@ video::https://user-images.githubusercontent.com/10148927/168710111-cd6d3df4-58e
 * pr:12834[] add `PROC_MACRO_TEST_TOOLCHAIN` environment variable.
 * pr:12835[] introduce `proc-macro-srv/sysroot-abi` feature.
 * pr:12854[] fix `generate_new` description.
-
-== Others
-
