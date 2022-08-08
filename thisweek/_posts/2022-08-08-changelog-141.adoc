@@ -1,0 +1,34 @@
+= Changelog #141
+:sectanchors:
+:page-layout: post
+
+Commit: commit:634cfe3d72e785c843ca5d412b12be137b2e14fb[] +
+Release: release:2022-08-08[]
+
+== New Features
+
+* pr:12837[] support record and tuple variants in `Generate Enum Variant`:
++
+video::https://user-images.githubusercontent.com/5692947/181302996-c2f8143e-dd0e-4df7-83ea-2a694a3cfcb9.mov[options=loop]
+* pr:12948[] handle operators like their trait methods in the IDE layer:
++
+video::https://user-images.githubusercontent.com/3757771/183076683-c9899bd6-60d3-461b-965f-0c0f9745e2e8.gif[options=loop]
+* pr:12920[] publish extension for 32-bit ARM (`arm-linux-gnueabihf`) systems.
+* pr:12808[] only flycheck the workspace that contains the saved file.
+* pr:12934[] add setting to disable comment continuation in VS Code (`rust-analyzer.typing.continueCommentsOnNewline`).
+
+== Fixes
+
+* pr:12880[] (first contribution) implement syntax fixup for while loops.
+* pr:12939[] (first contribution) fix diagnostics location when hovering unresolved types.
+* pr:12918[] remove whitespace from doctest names when running them.
+* pr:12947[] don't switch workspace on VFS file changes from libraries.
+* pr:12949[] fix incorrect token pick rankings.
+* pr:12919[] normalize extension spelling to `rust-analyzer`.
+
+== Internal Improvements
+
+* pr:12931[], pr:12956[] add more constructors and entry APIs for `la-arena`.
+* pr:12933[] use an empty expander for ignored non-attribute proc-macros.
+* pr:12953[] avoid `RUSTUP_TOOLCHAIN` in tests, to work around `rustup` bug.
+* pr:12959[] fix `test_rainbow_highlighting` gate.

@@ -169,7 +169,7 @@ Displays the ItemTree of the currently open file, for debugging.
 |===
 | Editor  | Action Name
 
-| VS Code | **Rust Analyzer: Debug ItemTree**
+| VS Code | **rust-analyzer: Debug ItemTree**
 |===
 
 
@@ -181,7 +181,7 @@ Shows the full macro expansion of the macro at current cursor.
 |===
 | Editor  | Action Name
 
-| VS Code | **Rust Analyzer: Expand macro recursively**
+| VS Code | **rust-analyzer: Expand macro recursively**
 |===
 
 image::https://user-images.githubusercontent.com/48062697/113020648-b3973180-917a-11eb-84a9-ecb921293dc5.gif[]
@@ -359,7 +359,7 @@ Optionally, one can enable additional hints for
 |===
 | Editor  | Action Name
 
-| VS Code | **Rust Analyzer: Toggle inlay hints*
+| VS Code | **rust-analyzer: Toggle inlay hints*
 |===
 
 image::https://user-images.githubusercontent.com/48062697/113020660-b5f98b80-917a-11eb-8d70-3be3fd558cdd.png[]
@@ -377,7 +377,7 @@ for the cases handled specially by joined lines.
 |===
 | Editor  | Action Name
 
-| VS Code | **Rust Analyzer: Join lines**
+| VS Code | **rust-analyzer: Join lines**
 |===
 
 image::https://user-images.githubusercontent.com/48062697/113020661-b6922200-917a-11eb-87c4-b75acc028f11.gif[]
@@ -448,7 +448,7 @@ braces, so it won't confuse generics with comparisons.
 |===
 | Editor  | Action Name
 
-| VS Code | **Rust Analyzer: Find matching brace**
+| VS Code | **rust-analyzer: Find matching brace**
 |===
 
 image::https://user-images.githubusercontent.com/48062697/113065573-04298180-91b1-11eb-8dec-d4e2a202f304.gif[]
@@ -462,7 +462,7 @@ Clears rust-analyzer's internal database and prints memory usage statistics.
 |===
 | Editor  | Action Name
 
-| VS Code | **Rust Analyzer: Memory Usage (Clears Database)**
+| VS Code | **rust-analyzer: Memory Usage (Clears Database)**
 |===
 image::https://user-images.githubusercontent.com/48062697/113065592-08559f00-91b1-11eb-8c96-64b88068ec02.gif[]
 
@@ -475,8 +475,8 @@ Move item under cursor or selection up and down.
 |===
 | Editor  | Action Name
 
-| VS Code | **Rust Analyzer: Move item up**
-| VS Code | **Rust Analyzer: Move item down**
+| VS Code | **rust-analyzer: Move item up**
+| VS Code | **rust-analyzer: Move item down**
 |===
 
 image::https://user-images.githubusercontent.com/48062697/113065576-04298180-91b1-11eb-91ce-4505e99ed598.gif[]
@@ -555,7 +555,7 @@ Navigates to the parent module of the current module.
 |===
 | Editor  | Action Name
 
-| VS Code | **Rust Analyzer: Locate parent module**
+| VS Code | **rust-analyzer: Locate parent module**
 |===
 
 image::https://user-images.githubusercontent.com/48062697/113065580-04c21800-91b1-11eb-9a32-00086161c0bd.gif[]
@@ -573,7 +573,7 @@ The simplest way to use this feature is via the context menu:
 |===
 | Editor  | Action Name
 
-| VS Code | **Rust Analyzer: Peek related tests**
+| VS Code | **rust-analyzer: Peek related tests**
 |===
 
 
@@ -601,7 +601,7 @@ to a shortcut!
 |===
 | Editor  | Action Name
 
-| VS Code | **Rust Analyzer: Run**
+| VS Code | **rust-analyzer: Run**
 |===
 image::https://user-images.githubusercontent.com/48062697/113065583-055aae80-91b1-11eb-958f-d67efcaf6a2f.gif[]
 
@@ -735,7 +735,7 @@ rust-analyzer itself.
 |===
 | Editor  | Action Name
 
-| VS Code | **Rust Analyzer: Show Syntax Tree**
+| VS Code | **rust-analyzer: Show Syntax Tree**
 |===
 image::https://user-images.githubusercontent.com/48062697/113065586-068bdb80-91b1-11eb-9507-fee67f9f45a0.gif[]
 
@@ -748,7 +748,7 @@ Randomizes all crate IDs in the crate graph, for debugging.
 |===
 | Editor  | Action Name
 
-| VS Code | **Rust Analyzer: Shuffle Crate Graph**
+| VS Code | **rust-analyzer: Shuffle Crate Graph**
 |===
 
 
@@ -760,7 +760,7 @@ Shows internal statistic about memory usage of rust-analyzer.
 |===
 | Editor  | Action Name
 
-| VS Code | **Rust Analyzer: Status**
+| VS Code | **rust-analyzer: Status**
 |===
 image::https://user-images.githubusercontent.com/48062697/113065584-05f34500-91b1-11eb-98cc-5c196f76be7f.gif[]
 
@@ -818,7 +818,7 @@ String::from((y + 5).foo(z))
 |===
 | Editor  | Action Name
 
-| VS Code | **Rust Analyzer: Structural Search Replace**
+| VS Code | **rust-analyzer: Structural Search Replace**
 |===
 
 Also available as an assist, by writing a comment containing the structural
@@ -942,7 +942,7 @@ Only workspace crates are included, no crates.io dependencies or sysroot crates.
 |===
 | Editor  | Action Name
 
-| VS Code | **Rust Analyzer: View Crate Graph**
+| VS Code | **rust-analyzer: View Crate Graph**
 |===
 
 
@@ -952,7 +952,7 @@ Only workspace crates are included, no crates.io dependencies or sysroot crates.
 |===
 | Editor  | Action Name
 
-| VS Code | **Rust Analyzer: View Hir**
+| VS Code | **rust-analyzer: View Hir**
 |===
 image::https://user-images.githubusercontent.com/48062697/113065588-068bdb80-91b1-11eb-9a78-0b4ef1e972fb.gif[]
 
