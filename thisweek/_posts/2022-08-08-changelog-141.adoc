@@ -12,7 +12,7 @@ Release: release:2022-08-08[]
 video::https://user-images.githubusercontent.com/5692947/181302996-c2f8143e-dd0e-4df7-83ea-2a694a3cfcb9.mov[options=loop]
 * pr:12948[] handle operators like their trait methods in the IDE layer:
 +
-video::https://user-images.githubusercontent.com/3757771/183076683-c9899bd6-60d3-461b-965f-0c0f9745e2e8.gif[options=loop]
+image::https://user-images.githubusercontent.com/3757771/183076683-c9899bd6-60d3-461b-965f-0c0f9745e2e8.gif[]
 * pr:12920[] publish extension for 32-bit ARM (`arm-linux-gnueabihf`) systems.
 * pr:12808[] only flycheck the workspace that contains the saved file.
 * pr:12934[] add setting to disable comment continuation in VS Code (`rust-analyzer.typing.continueCommentsOnNewline`).
