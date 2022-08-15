@@ -2091,7 +2091,7 @@ impl Walrus {
 
 [discrete]
 === `remove_unused_param`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/remove_unused_param.rs#L14[remove_unused_param.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/remove_unused_param.rs#L15[remove_unused_param.rs]
 
 Removes unused function parameter.
 

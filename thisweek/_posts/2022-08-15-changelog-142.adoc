@@ -1,0 +1,37 @@
+= Changelog #142
+:sectanchors:
+:page-layout: post
+
+Commit: commit:b6d59f2bb4fae0ba4f74e2c967b5e2f777f8c860[] +
+Release: release:2022-08-15[]
+
+== New Features
+
+* pr:12905[] generate Rust type from JSON:
++
+video::https://user-images.githubusercontent.com/308347/184581800-aafcf12e-30ca-4bcf-a7fd-862651854d64.mp4[options=loop]
+
+== Fixes
+
+* pr:12937[] (first contribution) implement syntax fix-up for `match` and `for` loops.
+* pr:13010[] actually call `rustc` from the `RUSTC_WRAPPER` when run by build scripts (fixes feature detection for `anyhow`).
+* pr:12942[] make `concat!` work with characters.
+* pr:12990[] improve whitespace insertion in macro-expansion.
+* pr:12992[] infer byte string pattern as `&[u8]` when matched against slices.
+* pr:12962[] parse range patterns in struct and slice without trailing comma.
+* pr:12986[] fix pattern field completions not working for unions.
+* pr:12987[] recover from missing ellipsis in record literals for path expressions.
+* pr:12967[] Code: make `ToggleInlayHints` understand `{off,on}UntilPressed`.
+* pr:12997[] fix panic in `no_such_field` when using tuple fields on record structs.
+
+== Internal Improvements
+
+* pr:12981[] (first contribution) drop imports from the 2021 edition prelude.
+* pr:13000[] (first contribution) Code: use new id when debugging the extension.
+* pr:12951[] document CLI flag stability.
+* pr:12974[] fix printing of compound assignment ops.
+* pr:12984[] pass `--keep-going` cargo flag when building build scripts.
+* pr:12989[] remove incomplete 1.64 ABI.
+* pr:12993[] make `Name` hold escaped name.
+* pr:13007[] switch to Node 16 on CI and upgrade lockfile version.
+* pr:13016[], pr:13017[] move VSCode diagnostics workaround into client code.
