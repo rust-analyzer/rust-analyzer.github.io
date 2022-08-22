@@ -1,0 +1,37 @@
+= Changelog #143
+:sectanchors:
+:page-layout: post
+
+Commit: commit:a670ff888437f4b6a3d24cc2996e9f969a87cbae[] +
+Release: release:2022-08-22[]
+
+== New Features
+
+* pr:13036[] (first contribution) add `Inline type alias into uses` assist:
++
+image::https://user-images.githubusercontent.com/45790125/184905226-9cb8ac81-1439-4387-a13b-e18ad4ecf208.gif[]
+* pr:12982[] (first contribution) implement type inference for `IntoFuture`.
+* pr:13074[] consider bounds on inherent impl in method resolution (fixes `nalgebra` constructors).
+* pr:13063[] add LSP extension for cancelling running flychecks.
+* pr:13045[] allow running tests in inline module from anywhere in parent file.
+* pr:13037[] support disabling keyword hover popups (`rust-analyzer.hover.documentation.keywords.enable`).
+
+== Fixes
+
+* pr:13049[] resolve associated types of bare `dyn` types.
+* pr:13053[] resolve path `Self` alone in value namespace.
+* pr:13041[] support `Self::assoc()` syntax in `Generate function`.`
+* pr:13061[] replace `Self` in `Inline call`.
+* pr:13027[] fix incorrect type mismatch with `cfg_if!` and other macros in expression position.
+* pr:13028[] fix record completion filtering.
+* pr:13034[] escape keywords used as names in earlier editions.
+* pr:13038[] revert pr:12947[], trigger workspace switches on all structure changes again.
+* pr:13064[] log `rustfmt` parsing errors as warnings.
+
+== Internal Improvements
+
+* pr:13071[] build release binaries on `ubuntu-20.04`.
+* pr:13065[] document interaction of `checkOnSave.overrideCommand` and multiple linked projects.
+* pr:13024[] add an HIR pretty-printer.
+* pr:13026[] make `resolve_name_in_module` a bit more lazy.
+* pr:13044[] fix a bunch of typos.

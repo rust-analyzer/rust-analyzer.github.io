@@ -330,7 +330,7 @@ Note: `?` and `->` do not currently trigger this behavior in the VSCode editor.
 
 
 === Hover
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/hover.rs#L84[hover.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/hover.rs#L85[hover.rs]
 
 Shows additional information, like the type of an expression or the documentation for a definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.

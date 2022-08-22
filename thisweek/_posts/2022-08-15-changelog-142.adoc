@@ -26,7 +26,7 @@ video::https://user-images.githubusercontent.com/308347/184581800-aafcf12e-30ca-
 
 == Internal Improvements
 
-* pr:12981[] (first contribution) drop imports from the 2021 edition prelude.
+* pr:12981[] (first contribution) drop imports from the 2021 Edition prelude.
 * pr:13000[] (first contribution) Code: use new id when debugging the extension.
 * pr:12951[] document CLI flag stability.
 * pr:12974[] fix printing of compound assignment ops.

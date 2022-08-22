@@ -669,7 +669,7 @@ fn ┃fun_name(n: i32) {
 === `extract_module`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_module.rs#L30[extract_module.rs]
 
-Extracts a selected region as seperate module. All the references, visibility and imports are
+Extracts a selected region as separate module. All the references, visibility and imports are
 resolved.
 
 .Before
@@ -1544,7 +1544,7 @@ fn main() {
 
 [discrete]
 === `inline_type_alias`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_type_alias.rs#L19[inline_type_alias.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_type_alias.rs#L91[inline_type_alias.rs]
 
 Replace a type alias with its concrete type.
 
@@ -1563,6 +1563,35 @@ type A<T = u32> = Vec<T>;
 
 fn main() {
     let a: Vec<u32>;
+}
+```
+
+
+[discrete]
+=== `inline_type_alias_uses`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_type_alias.rs#L19[inline_type_alias.rs]
+
+Inline a type alias into all of its uses where possible.
+
+.Before
+```rust
+type ┃A = i32;
+fn id(x: A) -> A {
+    x
+};
+fn foo() {
+    let _: A = 3;
+}
+```
+
+.After
+```rust
+type A = i32;
+fn id(x: i32) -> i32 {
+    x
+};
+fn foo() {
+    let _: i32 = 3;
 }
 ```
 
