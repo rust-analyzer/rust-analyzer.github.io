@@ -1,0 +1,34 @@
+= Changelog #144
+:sectanchors:
+:page-layout: post
+
+Commit: commit:e8e598f6415461e7fe957eec1bee6afb55927d59[] +
+Release: release:2022-08-29[]
+
+== New Features
+
+* pr:12965[] (first contribution) mark `#[cfg]`-ed out associated items as inactive:
++
+image::https://user-images.githubusercontent.com/308347/187130565-0a0f0d88-2036-44b0-93f2-daf14f837f95.png[]
+* pr:12976[] emit subcommand to emit SCIP.
+* pr:13084[], pr:13099[] add more highlighting configurations, disable some by default.
+
+== Fixes
+
+* pr:13021[] (first contribution) paper over panics on GATs with const generics.
+* pr:13092[] use correct offsets in macro inputs for reference autocompletions.
+* pr:13096[] accept leading `|` in more pattern positions.
+* pr:13100[] resolve doc links on impl blocks.
+* pr:13110[] make `Extract type as type alias` work on arrays using const generics.
+* pr:13088[] show an error when flycheck can't be restarted.
+* pr:13090[] do not substitute `Self` in the same impl block in `Inline call`.
+* pr:13095[] avoid error message when using Live Share.
+* pr:13133[] move empty diagnostics workaround back into the server.
+
+== Internal Improvements
+
+* pr:13078[] (first contribution) remove unnecessary stream writer `try_clone` in `lsp-server`.
+* pr:13087[] remove automatic config patching from the VS Code extension.
+* pr:13116[] use identity hashing for `FileId` and `CrateId`.
+* pr:13101[] re-export standard semantic token types and modifiers.
+* pr:13001[] replace `crossbeam` scoped threads with standard library ones.

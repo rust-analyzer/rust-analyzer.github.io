@@ -223,7 +223,7 @@ image::https://user-images.githubusercontent.com/48062697/113020654-b42fc800-917
 
 
 === Find All References
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L41[references.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L42[references.rs]
 
 Shows all references of the item at the cursor location
 
@@ -607,7 +607,7 @@ image::https://user-images.githubusercontent.com/48062697/113065583-055aae80-91b
 
 
 === Semantic Syntax Highlighting
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/syntax_highlighting.rs#L39[syntax_highlighting.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/syntax_highlighting.rs#L59[syntax_highlighting.rs]
 
 rust-analyzer highlights the code semantically.
 For example, `Bar` in `foo::Bar` might be colored differently depending on whether `Bar` is an enum or a trait.
@@ -932,7 +932,7 @@ by overwriting the settings object mentioned above, the defaults are:
 
 
 === View Crate Graph
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/view_crate_graph.rs#L9[view_crate_graph.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/view_crate_graph.rs#L10[view_crate_graph.rs]
 
 Renders the currently loaded crate graph as an SVG graphic. Requires the `dot` tool, which
 is part of graphviz, to be installed.
