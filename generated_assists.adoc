@@ -551,6 +551,30 @@ impl Point {
 
 
 [discrete]
+=== `convert_two_arm_bool_match_to_matches_macro`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_two_arm_bool_match_to_matches_macro.rs#L5[convert_two_arm_bool_match_to_matches_macro.rs]
+
+Convert 2-arm match that evaluates to a boolean into the equivalent matches! invocation.
+
+.Before
+```rust
+fn main() {
+    match scrutinee┃ {
+        Some(val) if val.cond() => true,
+        _ => false,
+    }
+}
+```
+
+.After
+```rust
+fn main() {
+    matches!(scrutinee, Some(val) if val.cond())
+}
+```
+
+
+[discrete]
 === `convert_while_to_loop`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_while_to_loop.rs#L19[convert_while_to_loop.rs]
 
@@ -2342,6 +2366,52 @@ fn handle(action: Action) {
 
 
 [discrete]
+=== `replace_or_else_with_or`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_or_with_or_else.rs#L89[replace_or_with_or_else.rs]
+
+Replace `unwrap_or_else` with `unwrap_or` and `ok_or_else` with `ok_or`.
+
+.Before
+```rust
+fn foo() {
+    let a = Some(1);
+    a.unwra┃p_or_else(|| 2);
+}
+```
+
+.After
+```rust
+fn foo() {
+    let a = Some(1);
+    a.unwrap_or(2);
+}
+```
+
+
+[discrete]
+=== `replace_or_with_or_else`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_or_with_or_else.rs#L12[replace_or_with_or_else.rs]
+
+Replace `unwrap_or` with `unwrap_or_else` and `ok_or` with `ok_or_else`.
+
+.Before
+```rust
+fn foo() {
+    let a = Some(1);
+    a.unwra┃p_or(2);
+}
+```
+
+.After
+```rust
+fn foo() {
+    let a = Some(1);
+    a.unwrap_or_else(|| 2);
+}
+```
+
+
+[discrete]
 === `replace_qualified_name_with_use`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_qualified_name_with_use.rs#L13[replace_qualified_name_with_use.rs]
 
@@ -2407,7 +2477,7 @@ fn handle() {
 
 [discrete]
 === `replace_turbofish_with_explicit_type`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_turbofish_with_explicit_type.rs#L12[replace_turbofish_with_explicit_type.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_turbofish_with_explicit_type.rs#L13[replace_turbofish_with_explicit_type.rs]
 
 Converts `::<_>` to an explicit type assignment.
 
@@ -2557,6 +2627,36 @@ fn arithmetics {
 #[ignore]
 fn arithmetics {
     assert_eq!(2 + 2, 5);
+}
+```
+
+
+[discrete]
+=== `unmerge_match_arm`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unmerge_match_arm.rs#L10[unmerge_match_arm.rs]
+
+Splits the current match with a `|` pattern into two arms with identical bodies.
+
+.Before
+```rust
+enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    match action {
+        Action::Move(..) ┃| Action::Stop => foo(),
+    }
+}
+```
+
+.After
+```rust
+enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    match action {
+        Action::Move(..) => foo(),
+        Action::Stop => foo(),
+    }
 }
 ```
 

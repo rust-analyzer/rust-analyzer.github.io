@@ -1,0 +1,43 @@
+= Changelog #145
+:sectanchors:
+:page-layout: post
+
+Commit: commit:67920f797511c360b25dab4d30730be304848f32[] +
+Release: release:2022-09-05[]
+
+== New Features
+
+* pr:13005[] (first contribution) add `Convert match to matches!` assist:
++
+video::https://user-images.githubusercontent.com/308347/188391531-f33ea89a-7aec-4976-948c-db77b1499df0.mp4[options=loop]
+* pr:13120[] (first contribution) add assist to change between `XXX_or` and `XXX_or_else`:
++
+video::https://user-images.githubusercontent.com/308347/188392529-be982a36-756a-400c-836d-b077de270c99.mp4[options=loop]
+* pr:13145[] add `Unmerge match arm` assist:
++
+video::https://user-images.githubusercontent.com/308347/188388609-bb36bbff-bd38-480b-b6ae-7b41329a98af.mp4[options=loop]
+* pr:13167[] add support for unstable `#[feature(exhaustive_patterns)]` feature.
+
+== Fixes
+
+* pr:13134[] highlight name references by syntax until proc macros are loaded.
+* pr:13149[] unescape all occurrences of module name in module resolution.
+* pr:13151[] prefer expression type in `Replace turbofish with type`.
+* pr:12793[] sort and deduplicate auto traits in trait object types.
+* pr:13051[] don't move attributes when extracting a struct from an enum variant.
+* pr:13161[] lower float literals containing underscores.
+* pr:13160[] parse `TypePathFn` with preceding `::`.
+* pr:13187[] fix broken return completion.
+* pr:13165[] properly handle break resolution inside non-breakable expressions.
+* pr:13183[] fix nested break expressions expecting unknown types.
+* pr:13154[] drop the expander borrow in all control flow paths.
+
+== Internal Improvements
+
+* pr:13174[] lift out the module scope into a field in the `Resolver`.
+* pr:13056[] use format arg captures in `syntax::make`.
+* pr:13156[] remove `hir::Expr::MacroStmts`.
+* pr:13171[] ignore failures when publishing to OVSX.
+* pr:12963[] make generated code nice to read.
+* pr:13173[] don't store `SyntheticSyntax` in the reverse maps in `BodySourceMap`.
+* pr:13175[] clarify the state of (extern) preludes for block def maps.

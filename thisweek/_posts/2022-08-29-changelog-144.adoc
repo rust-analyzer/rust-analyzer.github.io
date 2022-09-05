@@ -27,7 +27,7 @@ image::https://user-images.githubusercontent.com/308347/187130565-0a0f0d88-2036-
 
 == Internal Improvements
 
-* pr:13078[] (first contribution) remove unnecessary stream writer `try_clone` in `lsp-server`.
+* pr:13078[] (first contribution) remove unnecessary writer `try_clone` in `lsp-server`.
 * pr:13087[] remove automatic config patching from the VS Code extension.
 * pr:13116[] use identity hashing for `FileId` and `CrateId`.
 * pr:13101[] re-export standard semantic token types and modifiers.
