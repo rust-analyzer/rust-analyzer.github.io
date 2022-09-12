@@ -1,0 +1,25 @@
+= Changelog #146
+:sectanchors:
+:page-layout: post
+
+Commit: commit:2e9f1204ca01c3e20898d4a67c8b84899d394a88[] +
+Release: release:2022-09-12[]
+
+== New Features
+
+* pr:13200[] (first contribution) add sysroot proc macro server support to `rust-project.json` projects.
+* pr:13158[] make clicking a closing brace inlay hint go to the opening brace:
++
+video::https://user-images.githubusercontent.com/308347/189642703-3b16578b-f500-4925-b6a2-0ca25b4c119f.mp4[options=loop]
+
+== Fixes
+
+* pr:13192[] sort all bounds on trait object types.
+* pr:13185[] insert whitespace when hovering over static and const items.
+* pr:13139[] suggest struct record literal when completing enum variant.
+* pr:13091[] remove alias definition after `Inline type alias`.
+* pr:13207[] complete semicolons after `mod`.
+
+== Internal Improvements
+
+* pr:13214[] (first contribution) switch back to Ubuntu 18.04 when building `x86_64-unknown-linux-gnu` release binaries.

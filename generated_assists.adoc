@@ -168,7 +168,7 @@ struct Point<'a> {
 
 [discrete]
 === `add_missing_match_arms`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_match_arms.rs#L15[add_missing_match_arms.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_match_arms.rs#L16[add_missing_match_arms.rs]
 
 Adds missing clauses to a `match` expression.
 
@@ -1476,7 +1476,7 @@ impl Person {
 
 [discrete]
 === `inline_call`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L156[inline_call.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L159[inline_call.rs]
 
 Inlines a function or method body creating a `let` statement per parameter unless the parameter
 can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
@@ -1502,7 +1502,7 @@ fn foo(name: Option<&str>) {
 
 [discrete]
 === `inline_into_callers`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L24[inline_call.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L25[inline_call.rs]
 
 Inline a function or method body into all of its callers where possible, creating a `let` statement per parameter
 unless the parameter can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
@@ -1568,7 +1568,7 @@ fn main() {
 
 [discrete]
 === `inline_type_alias`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_type_alias.rs#L91[inline_type_alias.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_type_alias.rs#L105[inline_type_alias.rs]
 
 Replace a type alias with its concrete type.
 
@@ -1593,7 +1593,7 @@ fn main() {
 
 [discrete]
 === `inline_type_alias_uses`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_type_alias.rs#L19[inline_type_alias.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_type_alias.rs#L24[inline_type_alias.rs]
 
 Inline a type alias into all of its uses where possible.
 
@@ -1610,7 +1610,7 @@ fn foo() {
 
 .After
 ```rust
-type A = i32;
+
 fn id(x: i32) -> i32 {
     x
 };
@@ -1753,7 +1753,7 @@ fn main() {
 
 [discrete]
 === `merge_imports`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/merge_imports.rs#L13[merge_imports.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/merge_imports.rs#L17[merge_imports.rs]
 
 Merges two imports with a common prefix.
 
@@ -1832,7 +1832,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `move_bounds_to_where_clause`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_bounds.rs#L8[move_bounds.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_bounds.rs#L12[move_bounds.rs]
 
 Moves inline type bounds to a where clause.
 
