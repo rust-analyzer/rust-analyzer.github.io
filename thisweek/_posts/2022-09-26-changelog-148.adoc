@@ -1,0 +1,25 @@
+= Changelog #148
+:sectanchors:
+:page-layout: post
+
+Commit: commit:73ab709b38b171d561c119f5c6f94af1bf2e4f3b[] +
+Release: release:2022-09-26[]
+
+== New Features
+
+* pr:12966[], pr:13269[], pr:13285[], pr:13288[] run inference on enum variant bodies and display values on hover:
++
+image::https://user-images.githubusercontent.com/308347/192219254-89c385bc-cd06-435a-bdf7-77976bf9651c.png[]
+
+== Fixes
+
+* pr:13268[] fix operator highlighting tags applying too broadly.
+* pr:13289[] use the sysroot proc macro server for `analysis-stats`.
+
+== Internal Improvements
+
+* pr:13262[] (first contribution) remove reference to `Toggle inlay hints`.
+* pr:13264[] ensure `TyKind::DynTy` has at least one trait bound.
+* pr:13286[] don't run `proc-macro-srv` tests on the rust-analyzer repo.
+* pr:13259[] simplify feature representation in `CargoConfig`.
+* pr:13260[] simplify `extraEnv` handling.
