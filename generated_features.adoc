@@ -1,7 +1,7 @@
 
 // Generated file, do not edit by hand, see `sourcegen_feature_docs`.
 === Annotations
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/annotations.rs#L18[annotations.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/annotations.rs#L20[annotations.rs]
 
 Provides user with annotations above items for looking up references or impl blocks
 and running/debugging binaries.

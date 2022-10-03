@@ -1,0 +1,37 @@
+= Changelog #149
+:sectanchors:
+:page-layout: post
+
+Commit: commit:5c28ad193238635189f849c94ffc178f00008b12[] +
+Release: release:2022-10-03[]
+
+== New Features
+
+* pr:13248[] (first contribution) add assist to unwrap tuple declarations:
++
+video::https://user-images.githubusercontent.com/308347/193514130-10ca01e8-1962-4663-b694-8443d01a6e95.mp4[options=loop]
+* pr:13209[] add type inference for generators.
+* pr:13327[] add config for supplying sysroot path.
+
+== Fixes
+
+* pr:13296[] (first contribution) store package instead of crate name in `PackageInformation`.
+* pr:13311[] infer `for` loop item type with `IntoIterator` and `Iterator`.
+* pr:13275[] use the correct module for visibility computation in `find_path`.
+* pr:13189[] emit unconfigured code diagnostics for enum variants and struct/union fields.
+* pr:13320[] render generic parameters in type alias hovers.
+* pr:13318[] fix annotations not resolving when lens location is set to whole item.
+* pr:13321[] make `move_format_string_arg` token tree-aware.
+* pr:13324[] fix trait impl item completions using macro file text ranges.
+* pr:13326[] do not use the sysroot proc macro server when a server path is given explicitly.
+* pr:13328[] add proc-macro dependency to rustc crates.
+
+== Internal Improvements
+
+* pr:13272[] (first contribution) fix `Analysis` and `AnalysisHost` doc links.
+* pr:13280[] (first contribution) add `RequestFailed` LSP error code.
+* pr:13202[], pr:13319[] don't retry requests that have already been cancelled.
+* pr:13237[] aggregate changes by file in `process_changes`.
+* pr:13295[] remove obsolete `in-rust-tree` feature from `sourcegen`.
+* pr:13300[] use `cfg(any())` instead of `cfg(FALSE)` to disable proc macro tests.
+* pr:13301[] make assist tests panic again on empty source changes.

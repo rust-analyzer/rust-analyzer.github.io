@@ -1853,7 +1853,7 @@ fn apply<T, U, F>(f: F, x: T) -> U where F: FnOnce(T) -> U {
 
 [discrete]
 === `move_format_string_arg`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_format_string_arg.rs#L12[move_format_string_arg.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_format_string_arg.rs#L13[move_format_string_arg.rs]
 
 Move an expression out of a format string.
 
@@ -2771,6 +2771,28 @@ fn foo() -> Result<i32>┃ { Ok(42i32) }
 .After
 ```rust
 fn foo() -> i32 { 42i32 }
+```
+
+
+[discrete]
+=== `unwrap_tuple`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unwrap_tuple.rs#L8[unwrap_tuple.rs]
+
+Unwrap the tuple to different variables.
+
+.Before
+```rust
+fn main() {
+    ┃let (foo, bar) = ("Foo", "Bar");
+}
+```
+
+.After
+```rust
+fn main() {
+    let foo = "Foo";
+    let bar = "Bar";
+}
 ```
 
 
