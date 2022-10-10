@@ -1,0 +1,18 @@
+= Changelog #150
+:sectanchors:
+:page-layout: post
+
+Commit: commit:61504c8d951c566eb03037dcb300c96f4bd9a8b6[] +
+Release: release:2022-10-10[]
+
+== Fixes
+
+* pr:13353[] (first contribution) fix assertion failure in type inference.
+* pr:13362[] make go-to-def work for `#[doc = include_str!(path)]`
+* pr:13342[] revert "add `proc-macro` dependency to rustc crates".
+
+== Internal Improvements
+
+* pr:13335[], pr:13339[], pr:13344[] change generic parameter order.
+* pr:13338[] prioritize restart messages in `flycheck`.
+* pr:13366[] bump `xflags`.
