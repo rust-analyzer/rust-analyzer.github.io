@@ -1,0 +1,41 @@
+= Changelog #151
+:sectanchors:
+:page-layout: post
+
+Commit: commit:0531aab522f25d6aae30b2cc23a09f4b9257eedc[] +
+Release: release:2022-10-17[]
+
+== New Features
+
+* pr:13358[] (first contribution) complete Cargo environment variables in `env!` and `option_env!`:
++
+video::https://user-images.githubusercontent.com/308347/196144995-64e38e3c-0ad7-4cf3-b0f7-4243866ed341.mp4[options=loop]
+* pr:13303[] add `Convert named to tuple struct` assist:
++
+video::https://user-images.githubusercontent.com/308347/196149918-7a27df57-b525-40cf-ae12-bc58e077d637.mp4[options=loop]
+* pr:13354[] diagnose some incorrect usages of the question mark operator:
++
+video::https://user-images.githubusercontent.com/308347/196147506-111000e4-60a9-4dd2-8f0b-252d766b3cb5.mp4[options=loop]
+
+== Fixes
+
+* pr:13420[] (first contribution) don't trigger auto-import assist on parameter names.
+* pr:13391[] (first contribution) update installation instructions for the stable `rustup` component.
+* pr:13380[] honor `cfg` attributes on params when lowering patterns.
+* pr:13384[] expand unmatched macro-by-example fragments to reasonable default token trees.
+* pr:13382[] reorder `dyn` bounds on render.
+* pr:13392[] prefer similar tokens when expanding macros speculatively.
+* pr:13333[] fix placement of and indentation inside generated methods.
+* pr:13377[] underline only intra-doc links instead of the whole doc comment.
+* pr:13402[] cast `runnableEnv` items to string.
+
+== Internal Improvements
+
+* pr:13397[] (first contribution) fix links in `syntax.md`.
+* pr:13376[] add `GenericParamList::to_generic_args` and `{TypeParam,ConstParam}::remove_default` APIs.
+* pr:13385[] don't report build scripts and proc macros as metadata progress.
+* pr:13386[] refactor completion expansion.
+* pr:13357[] allow `minicore` flags specifications to be order independent.
+* pr:13401[] run `analysis-stats` on CI, with `opt-level = 1`.
+* pr:13415[] set a timeout when publishing to OVSX.
+* pr:13408[] bump `chalk`.

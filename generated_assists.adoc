@@ -478,6 +478,52 @@ fn main() {
 
 
 [discrete]
+=== `convert_named_struct_to_tuple_struct`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_named_struct_to_tuple_struct.rs#L11[convert_named_struct_to_tuple_struct.rs]
+
+Converts struct with named fields to tuple struct, and analogously for enum variants with named
+fields.
+
+.Before
+```rust
+struct Point┃ { x: f32, y: f32 }
+
+impl Point {
+    pub fn new(x: f32, y: f32) -> Self {
+        Point { x, y }
+    }
+
+    pub fn x(&self) -> f32 {
+        self.x
+    }
+
+    pub fn y(&self) -> f32 {
+        self.y
+    }
+}
+```
+
+.After
+```rust
+struct Point(f32, f32);
+
+impl Point {
+    pub fn new(x: f32, y: f32) -> Self {
+        Point(x, y)
+    }
+
+    pub fn x(&self) -> f32 {
+        self.0
+    }
+
+    pub fn y(&self) -> f32 {
+        self.1
+    }
+}
+```
+
+
+[discrete]
 === `convert_to_guarded_return`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_to_guarded_return.rs#L21[convert_to_guarded_return.rs]
 
