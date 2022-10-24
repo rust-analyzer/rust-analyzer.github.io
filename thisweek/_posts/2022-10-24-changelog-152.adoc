@@ -12,6 +12,7 @@ Release: release:2022-10-24[]
 image::https://user-images.githubusercontent.com/3757771/196205329-2df93451-c143-4d1b-a700-d988edf55efa.gif[]
 * pr:13423[] substitute some variables in the VS Code client.
 * pr:13365[] add multiple getters mode to `Generate getter`.
+* pr:13426[], pr:13444[] refactor language client handling and add a "stop server" command.
 
 == Fixes
 
@@ -25,7 +26,6 @@ image::https://user-images.githubusercontent.com/3757771/196205329-2df93451-c143
 == Internal Improvements
 
 * pr:13460[] (first contribution) clean up the SCIP implementation slightly.
-* pr:13426[], pr:13444[] refactor language client handling.
 * pr:13128[], pr:13466[], pr:13471[] allow running build scripts and check only once, in the workspace root.
 * pr:13453[] handle Code commands when the server is stopped.
 * pr:13399[] migrate assists to format args captures, part 2.
