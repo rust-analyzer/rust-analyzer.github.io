@@ -18,12 +18,6 @@ This diagnostic is shown for code with inactive `#[cfg]` attributes.
 This diagnostic is triggered if an item name doesn't follow https://doc.rust-lang.org/1.0.0/style/style/naming/README.html[Rust naming convention].
 
 
-=== incorrect-try-target
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/incorrect_try_expr.rs#L5[incorrect_try_expr.rs]
-
-This diagnostic is triggered if a question mark operator was used in a context where it is not applicable.
-
-
 === invalid-derive-target
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/invalid_derive_target.rs#L3[invalid_derive_target.rs]
 
@@ -79,12 +73,6 @@ This diagnostic is triggered if an operation marked as `unsafe` is used outside 
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/no_such_field.rs#L11[no_such_field.rs]
 
 This diagnostic is triggered if created structure does not have field provided in record.
-
-
-=== not-implemented
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/not_implemented.rs#L5[not_implemented.rs]
-
-This diagnostic is triggered if a type doesn't implement a necessary trait.
 
 
 === replace-filter-map-next-with-find-map

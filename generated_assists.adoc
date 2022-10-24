@@ -976,7 +976,7 @@ impl Default for Version {
 
 [discrete]
 === `generate_default_from_new`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_default_from_new.rs#L14[generate_default_from_new.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_default_from_new.rs#L13[generate_default_from_new.rs]
 
 Generates default implementation from new method.
 
@@ -1355,7 +1355,7 @@ fn bar(arg: &str, baz: Baz) ${0:-> _} {
 
 [discrete]
 === `generate_getter`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter.rs#L10[generate_getter.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter.rs#L13[generate_getter.rs]
 
 Generate a getter method.
 
@@ -1382,7 +1382,7 @@ impl Person {
 
 [discrete]
 === `generate_getter_mut`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter.rs#L50[generate_getter.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter.rs#L53[generate_getter.rs]
 
 Generate a mut getter method.
 

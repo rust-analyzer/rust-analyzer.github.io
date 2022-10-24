@@ -1,0 +1,32 @@
+= Changelog #152
+:sectanchors:
+:page-layout: post
+
+Commit: commit:43fb9563b2943d6abc5f3552195f3e27ac618966[] +
+Release: release:2022-10-24[]
+
+== New Features
+
+* pr:13427[] make flycheck progress reports cancellable:
++
+image::https://user-images.githubusercontent.com/3757771/196205329-2df93451-c143-4d1b-a700-d988edf55efa.gif[]
+* pr:13423[] substitute some variables in the VS Code client.
+* pr:13365[] add multiple getters mode to `Generate getter`.
+
+== Fixes
+
+* pr:13433[] revert "pr:13354[] diagnose some incorrect usages of the question mark operator".
+* pr:13463[] support const generics in built-in derive macros.
+* pr:13428[], pr:13447[] fix formatting requests hanging during start-up.
+*  handle projects sharing common dependencies in `once` strategy.
+* pr:13448[] work around a Python extension polyfill.
+* pr:13451[] handle language configuration changes properly.
+
+== Internal Improvements
+
+* pr:13460[] (first contribution) clean up the SCIP implementation slightly.
+* pr:13426[], pr:13444[] refactor language client handling.
+* pr:13128[], pr:13466[], pr:13471[] allow running build scripts and check only once, in the workspace root.
+* pr:13453[] handle Code commands when the server is stopped.
+* pr:13399[] migrate assists to format args captures, part 2.
+* pr:13461[] remove unnecessary continue.
