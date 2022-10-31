@@ -1,0 +1,29 @@
+= Changelog #153
+:sectanchors:
+:page-layout: post
+
+Commit: commit:ba28e19b7838e3ad4223ae82d074dc3950ef1548[] +
+Release: release:2022-10-31[]
+
+== New Features
+
+* pr:13494[] implement type inference for generic associated types:
++
+image::https://user-images.githubusercontent.com/308347/198942077-e0b9cf31-85f9-45b2-8a9f-98aaf90be4a8.png["A screenshot showing type inference working for a GAT"]
+* pr:13510[] stop or restart the server when clicking the status bar item:
++
+video::https://user-images.githubusercontent.com/308347/198942818-1e2d8c47-0a5b-44ed-b0c6-9cb4807b00dc.mp4[options=loop]
+
+== Fixes
+
+* pr:13478[] run flycheck for the correct workspace.
+* pr:13475[] test all generic args for trait when finding matching impl.
+* pr:13476[] don't respond with an error when requesting a shutdown while starting.
+* pr:13512[] always set up VS Code commands.
+
+== Internal Improvements
+
+* pr:13484[] switch to upstream `positionEncoding`.
+* pr:13496[] clarify feature policy.
+* pr:13513[] properly handle VS Code workspace changes.
+* pr:13505[] clean up tests and add documentation for GAT-related stuff.
