@@ -23,7 +23,7 @@ fn main() {
 
 [discrete]
 === `add_hash`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/raw_string.rs#L91[raw_string.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/raw_string.rs#L88[raw_string.rs]
 
 Adds a hash to a raw string literal.
 
@@ -478,6 +478,30 @@ fn main() {
 
 
 [discrete]
+=== `convert_match_to_let_else`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_match_to_let_else.rs#L12[convert_match_to_let_else.rs]
+
+Converts let statement with match initializer to let-else statement.
+
+.Before
+```rust
+fn foo(opt: Option<()>) {
+    let val = ┃match opt {
+        Some(it) => it,
+        None => return,
+    };
+}
+```
+
+.After
+```rust
+fn foo(opt: Option<()>) {
+    let Some(val) = opt else { return };
+}
+```
+
+
+[discrete]
 === `convert_named_struct_to_tuple_struct`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_named_struct_to_tuple_struct.rs#L11[convert_named_struct_to_tuple_struct.rs]
 
@@ -788,7 +812,7 @@ enum A { One(One) }
 
 [discrete]
 === `extract_type_alias`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_type_alias.rs#L11[extract_type_alias.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_type_alias.rs#L10[extract_type_alias.rs]
 
 Extracts the selected type as a type alias.
 
@@ -1522,7 +1546,7 @@ impl Person {
 
 [discrete]
 === `inline_call`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L159[inline_call.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L161[inline_call.rs]
 
 Inlines a function or method body creating a `let` statement per parameter unless the parameter
 can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
@@ -1548,7 +1572,7 @@ fn foo(name: Option<&str>) {
 
 [discrete]
 === `inline_into_callers`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L25[inline_call.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L27[inline_call.rs]
 
 Inline a function or method body into all of its callers where possible, creating a `let` statement per parameter
 unless the parameter can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
@@ -1778,7 +1802,7 @@ fn main() {
 
 [discrete]
 === `make_usual_string`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/raw_string.rs#L49[raw_string.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/raw_string.rs#L46[raw_string.rs]
 
 Turns a raw string into a plain string.
 
@@ -2183,7 +2207,7 @@ fn main() {
 
 [discrete]
 === `remove_hash`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/raw_string.rs#L119[raw_string.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/raw_string.rs#L116[raw_string.rs]
 
 Removes a hash from a raw string literal.
 

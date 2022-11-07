@@ -1,0 +1,56 @@
+= Changelog #154
+:sectanchors:
+:page-layout: post
+
+Commit: commit:d03c1c87d4ca2d524646316387d47b12524ac451[] +
+Release: release:2022-11-07[]
+
+== An Update on OpenVSX ==
+
+Many users of VS Code are actually running an open-source version of the editor.
+These include VSCodium and the `code` package in Arch Linux.
+The "free" builds are not allowed to connect to the Microsoft Marketplace and instead they download extensions from https://open-vsx.org[OpenVSX].
+
+For a long time, the version of rust-analyzer available on OpenVSX was outdated and did not work very well with recent Rust toolchains.
+But because of various technical reasons, we were not able to publish new versions there.
+This caused countless of disappointed users, and dozens of duplicate issues filed against our tracker.
+
+Last week, with the help of the OpenVSX maintainers, we managed to sort out the issues.
+And for the first time in almost a year, rust-analyzer is https://open-vsx.org/extension/rust-lang/rust-analyzer[available] on OpenVSX.
+Unfortunately, we had to remove the existing versions, under the identifier of `matklad.rust-analyzer`.
+If you have that version installed, it will not be automatically switched over to the new one (`rust-lang.rust-analyzer`).
+
+So if you are not running a Microsoft build of VS Code, our advice is to reinstall rust-analyzer from Code's extension page.
+This will ensure that you get updated versions in the future.
+If you've installed a VSIX from GitHub since March, it should get updated automatically, but it doesn't hurt to check.
+
+If you are using an official build of Code, or a different editor, you don't need to take any action.
+
+== New Features
+
+* pr:13525[] show signature help when calling generic types implementing `FnOnce`:
++
+image::https://user-images.githubusercontent.com/308347/200243832-b81303bd-b833-4d99-b96c-ecec6acdc2df.png["A screenshot showing signature help when calling a `FnOnce` parameter"]
+* pr:13516[] add "Convert `match` to `let`-``else``" assist:
++
+video::https://user-images.githubusercontent.com/308347/200244795-545f0465-ec0f-4d8c-8f70-5f08aea99bf0.mp4[options=loop]
+* pr:13527[] use `let`-`else` statements in "Convert to guarded return".
+* pr:13359[] add `rust-analyzer.assist.emitMustUse` config for inserting `#[must_use]` in `generate_enum_as_method`.
+
+== Fixes
+
+* pr:13454[] (first contribution) handle shadowing of locals in "Inline call".
+* pr:13508[] (first contribution) don't offer to remove unnecessary `async` in trait items.
+* pr:13523[] disregard type variable expectation for `if` expressions.
+* pr:13546[] lower unsafety of function pointer and item types.
+* pr:13517[] make custom expression prefix completions understand references.
+* pr:13549[] fix reference searching accounting for substrings instead of whole identifiers.
+* pr:13456[] generate SCIP symbols for local crates.
+
+== Internal Improvements
+
+* pr:13445[] (first contribution) fix some broken links in `guide.md`.
+* pr:13536[], pr:13556[] (first contribution) mention auto-published crates in the manual.
+* pr:13379[], pr:13435[] migrate assists to format args captures, parts 1 and 3.
+* pr:13544[] add rustbot features related to PR state labels.
+* pr:13541[] clarify which VS Code commands are meant for debugging.
