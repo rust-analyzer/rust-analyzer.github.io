@@ -223,7 +223,7 @@ image::https://user-images.githubusercontent.com/48062697/113020654-b42fc800-917
 
 
 === Find All References
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L42[references.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L43[references.rs]
 
 Shows all references of the item at the cursor location
 
@@ -339,7 +339,7 @@ image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L162[inlay_hints.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L172[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.

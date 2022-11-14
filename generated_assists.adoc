@@ -867,7 +867,7 @@ mod m {
     fn frobnicate() {}
 }
 fn main() {
-    m::frobnicate┃() {}
+    m::frobnicate┃();
 }
 ```
 
@@ -877,7 +877,7 @@ mod m {
     ┃pub(crate) fn frobnicate() {}
 }
 fn main() {
-    m::frobnicate() {}
+    m::frobnicate();
 }
 ```
 

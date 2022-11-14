@@ -1,0 +1,38 @@
+= Changelog #155
+:sectanchors:
+:page-layout: post
+
+Commit: commit:45ec315e01dc8dd1146dfeb65f0ef6e5c2efed78[] +
+Release: release:2022-11-14[]
+
+== New Features
+
+* pr:13545[] generalize reborrow hints as adjustment hints:
++
+image::https://user-images.githubusercontent.com/3757771/200073606-b5cd3b95-a9ad-454d-a3c4-d4d89bf45928.png["A screenshot showing a plethora of inlay hints for reborrows and other adjustments"]
+* pr:13582[] nest `Cargo.lock` under `Cargo.toml` in VS Code.
+
+== Fixes
+
+* pr:12991[] (first contribution) place method extracted method from trait impl in existing impl:
++
+video::https://user-images.githubusercontent.com/1759192/183875769-87f34c7d-52f0-4dfc-9766-f591ee738ebb.mp4[options=loop]
+* pr:13568[] (first contribution) fix the length displayed for byte string literals with escaped newlines.
+* pr:13552[] use a process group allow cancelling flycheck.
+* pr:13602[] check visibility of each path segment.
+* pr:13548[] fix `tt::Punct` spacing computation.
+* pr:13573[] error out instead of panicking on invalid file range.
+* pr:13581[] fix item completions following unit structs and outline modules.
+* pr:13584[] fix panic when computing signature of generic `FnOnce` callable.
+* pr:13604[] prefer similarly-kinded tokens when hovering attributed items.
+
+== Internal Improvements
+
+* pr:13547[] optimize `apply_document_changes` a bit.
+* pr:13606[] add trait alias grammar to `rust.ungram`.
+* pr:13590[] add `proc-macro` dependency to `rustc_private` crates.
+* pr:13607[] add version info to unsupported proc macro ABI error.
+* pr:13565[] update sysroot crates.
+* pr:13603[], pr:13605[] send status notification if no workspaces were found.
+* pr:13572[] use `Cancellable` in favor of `Result` for clarity.
+* pr:13569[] bump manifest `rust-version` fields to latest stable.
