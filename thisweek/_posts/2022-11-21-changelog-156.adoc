@@ -1,0 +1,33 @@
+= Changelog #156
+:sectanchors:
+:page-layout: post
+
+Commit: commit:26562973b3482a635416b2b663a13016d4d90e20[] +
+Release: release:2022-11-21[]
+
+== New Features
+
+* pr:13290[] (first contribution) support multiple targets for `checkOnSave` (with cargo 1.64+):
++
+image::https://user-images.githubusercontent.com/7951708/192122707-7a00606a-e581-4534-b9d5-b81c92694e8e.png["Screenshot showing an editor highlighting two warnings in code gated for different targets on one side and the `cargo check` output on the other side, with the same warnings. It also shows how to configure multiple targets as a `build.target` array in `.cargo/config.toml`."]
+* pr:13633[] allow viewing the full compiler diagnostic in a readonly textview:
++
+image::https://user-images.githubusercontent.com/3757771/202780459-f751f65d-2b1b-4dc3-9685-100d65ebf6a0.gif["Screen case showing  a compilation error in VS Code. The diagnostics pop-up has a `Click here for full compiler diagnostic` link which, when clicked, displays the `rustc` output in another tab, including the ASCII art showing the various spans of the error."]
+* pr:13629[] make "Remove ``dbg!()``" work on selections.
+
+== Fixes
+
+* pr:13642[] don't emit associated consts with a value in "Implement missing members".
+* pr:13622[] include generic parameters in GAT completions.
+* pr:13623[] strip comments and attributes off all trait item completions.
+* pr:13624[] resolve inference variable before applying adjustments.
+* pr:13639[] fix `proc-macro-srv` search paths for Arch Linux.
+* pr:13641[] fix some format expression parsing edge-cases.
+
+== Internal Improvements
+
+* pr:13615[] (first contribution) bump some crates to bring support for the new Tier 3 Windows targets.
+* pr:13653[] (first contribution) fix typo in anchor.
+* pr:13649[] (first contribution) improve grammar of `architecture.md`.
+* pr:13625[] update `proc-macro-srv` tests.
+* pr:13632[] make it more obvious which SCIP features are not yet emitted.
