@@ -1,0 +1,31 @@
+= Changelog #157
+:sectanchors:
+:page-layout: post
+
+Commit: commit:6d61be8e65ac0fd45eaf178e1f7a1ec6b582de1f[] +
+Release: release:2022-11-28[]
+
+== New Features
+
+* pr:13592[] (first contribution) add "Generate trait impl" assist.
+* pr:13638[] add hover hint to `..` in record patterns:
++
+image::https://user-images.githubusercontent.com/51814158/202837115-f424cc26-c2d7-4027-8eea-eeb7749ad146.png["Screenshot showing a hover tooltip with the missing fields over a `..` in a record pattern"]
+
+== Fixes
+
+* pr:13576[] (first contribution) suppress "Implement default members" inside contained items.
+* pr:13661[] (first contribution) handle empty `checkOnSave.targets` values.
+* pr:13647[] (first contribution) fix tuple to named struct conversion inside macro calls.
+* pr:13652[] unquote strings in `compile_error!` expansions.
+* pr:13667[] handle sysroot config in detached-files workspaces.
+* pr:13670[] add `deriveHelper` to the `semanticTokenTypes` section of `package.json`.
+* pr:13611[] don't trigger completions after single colon.
+* pr:13671[] improve Go to declaration.
+* pr:13681[] check tail expressions more precisely in "Extract function".
+
+== Internal Improvements
+
+* pr:13678[] reduce the size of `HirFileId` from 8 to 4 bytes.
+* pr:13676[] mega-sync from `rust-lang/rust`.
+* pr:13669[] properly implement `Drop` for `JodGroupChild`.

@@ -728,7 +728,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_function`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_function.rs#L36[extract_function.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_function.rs#L38[extract_function.rs]
 
 Extracts selected statements and comments into new function.
 
@@ -1433,14 +1433,14 @@ impl Person {
 
 [discrete]
 === `generate_impl`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_impl.rs#L5[generate_impl.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_impl.rs#L8[generate_impl.rs]
 
 Adds a new inherent impl for a type.
 
 .Before
 ```rust
-struct Ctx<T: Clone> {
-    data: T,┃
+struct Ctx┃<T: Clone> {
+    data: T,
 }
 ```
 
@@ -1540,6 +1540,31 @@ impl Person {
     fn set_name(&mut self, name: String) {
         self.name = name;
     }
+}
+```
+
+
+[discrete]
+=== `generate_trait_impl`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_impl.rs#L56[generate_impl.rs]
+
+Adds a new trait impl for a type.
+
+.Before
+```rust
+struct ┃Ctx<T: Clone> {
+    data: T,
+}
+```
+
+.After
+```rust
+struct Ctx<T: Clone> {
+    data: T,
+}
+
+impl<T: Clone> ┃ for Ctx<T> {
+
 }
 ```
 

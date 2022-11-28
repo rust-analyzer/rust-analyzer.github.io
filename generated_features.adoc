@@ -264,12 +264,13 @@ image::https://user-images.githubusercontent.com/48062697/113020656-b560f500-917
 
 
 === Go to Declaration
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/goto_declaration.rs#L10[goto_declaration.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/goto_declaration.rs#L13[goto_declaration.rs]
 
 Navigates to the declaration of an identifier.
 
-This is currently the same as `Go to Definition` with the exception of outline modules where it
-will navigate to the `mod name;` item declaration.
+This is the same as `Go to Definition` with the following exceptions:
+- outline modules will navigate to the `mod name;` item declaration
+- trait assoc items will navigate to the assoc item of the trait declaration opposed to the trait impl
 
 
 === Go to Definition
