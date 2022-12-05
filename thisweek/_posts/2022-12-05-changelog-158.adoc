@@ -1,0 +1,26 @@
+= Changelog #158
+:sectanchors:
+:page-layout: post
+
+Commit: commit:a2beeb8dbb5f4596f8c6f28a09c20355ea4c4628[] +
+Release: release:2022-12-05[]
+
+== New Features
+
+* pr:13690[] implement vararg parameter type inference.
+* pr:13707[] add `move_const_to_impl` assist:
++
+video::https://user-images.githubusercontent.com/308347/205634280-3d75b7a2-643a-43b1-b038-d73bdc01e639.mp4[options=loop]
+
+== Fixes
+
+* pr:13686[] (first contribution) don't show runnable code lenses in libraries outside of the workspace.
+* pr:13713[] (first contribution) don't show implementing methods in call hierarchy.
+* pr:13696[] make signature help show up when the caret is between `))` or `>>`.
+* pr:13717[] handle raw identifiers in proc macro server.
+
+== Internal Improvements
+
+* pr:13697[] version the inlay hint resolve data.
+* pr:13721[] add support for `rustc_has_incoherent_inherent_impls`.
+* pr:13695[] bump `chalk`.

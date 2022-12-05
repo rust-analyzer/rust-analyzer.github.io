@@ -1947,6 +1947,40 @@ fn apply<T, U, F>(f: F, x: T) -> U where F: FnOnce(T) -> U {
 
 
 [discrete]
+=== `move_const_to_impl`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_const_to_impl.rs#L17[move_const_to_impl.rs]
+
+Move a local constant item in a method to impl's associated constant. All the references will be
+qualified with `Self::`.
+
+.Before
+```rust
+struct S;
+impl S {
+    fn foo() -> usize {
+        /// The answer.
+        const C┃: usize = 42;
+
+        C * C
+    }
+}
+```
+
+.After
+```rust
+struct S;
+impl S {
+    /// The answer.
+    const C: usize = 42;
+
+    fn foo() -> usize {
+        Self::C * Self::C
+    }
+}
+```
+
+
+[discrete]
 === `move_format_string_arg`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_format_string_arg.rs#L13[move_format_string_arg.rs]
 
