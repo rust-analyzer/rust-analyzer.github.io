@@ -2307,6 +2307,27 @@ impl Walrus {
 
 
 [discrete]
+=== `remove_parentheses`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/remove_parentheses.rs#L5[remove_parentheses.rs]
+
+Removes redundant parentheses.
+
+.Before
+```rust
+fn main() {
+    _ = ┃(2) + 2;
+}
+```
+
+.After
+```rust
+fn main() {
+    _ = 2 + 2;
+}
+```
+
+
+[discrete]
 === `remove_unused_param`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/remove_unused_param.rs#L15[remove_unused_param.rs]
 
