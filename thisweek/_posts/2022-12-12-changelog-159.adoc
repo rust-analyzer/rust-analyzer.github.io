@@ -10,12 +10,12 @@ Release: release:2022-12-12[]
 * pr:13733[] add "Remove redundant parentheses" assist:
 +
 image::https://user-images.githubusercontent.com/38225716/206542898-d6c97468-d615-4c5b-8650-f89b9c0321a0.gif["Screen recording showing how the assist can remove the brackets in `_ = (4 * 2) + 1;`"]
-* pr:13725[] resolve associated constants of traits.
 * pr:13490[], pr:13745[] compute data layout of types:
 +
 image::https://user-images.githubusercontent.com/308347/207061768-9350a58b-1093-4380-b082-0736fbf1874a.png["Screenshot showing the size and alignment of a struct containing a `Box`, an `u64`, and two `usize`s"]
 +
 image::https://user-images.githubusercontent.com/308347/207062585-ab7d2698-6609-42ca-b84a-40c49bb87197.png["Screenshot showing the size and alignment of a field in a struct enum variant"]
+* pr:13725[] resolve associated constants of traits.
 * pr:13728[] upgrade `chalk` to make solver fuel work again (works around most trait solving hangs).
 
 == Fixes
