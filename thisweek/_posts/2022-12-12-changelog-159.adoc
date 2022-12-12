@@ -21,11 +21,11 @@ image::https://user-images.githubusercontent.com/308347/207062585-ab7d2698-6609-
 == Fixes
 
 * pr:13749[] don't show duplicated adjustment hints for blocks, ``if``s and ``match``es.
-* pr:13742[] only shift `BoundVar`s that come from outside lowering context (fixes a crash with GATs).
-* pr:13750[] normalize projection after discarding free `BoundVar`s in RPIT (fixes a crash during normalization).
+* pr:13742[] only shift ``BoundVar``s that come from outside lowering context (fixes a crash with GATs).
+* pr:13750[] normalize projection after discarding free ``BoundVar``s in RPIT (fixes a crash during normalization).
 
 == Internal Improvements
 
 * pr:13722[] add VS Code schema for `rust-project.json`.
 * pr:13730[] support built-in derive macro helper attributes.
-* pr:13756[] make assoc_resolutions always have a `Substitution`.
+* pr:13756[] make `assoc_resolutions` always have a `Substitution`.
