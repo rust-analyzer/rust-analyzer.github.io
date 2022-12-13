@@ -1,5 +1,6 @@
 = Changelog #21
 :sectanchors:
+:experimental:
 :page-layout: post
 :!figure-caption:
 
