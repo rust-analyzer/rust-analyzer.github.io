@@ -1,0 +1,25 @@
+= Changelog #160
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:9ed1829f1fb61695c21474361ec23b9976793b73[] +
+Release: release:2022-12-19[]
+
+== New Features
+
+* pr:13785[] add a command for manually running flycheck (`Run flycheck`).
+* pr:13792[] add a command to clear flycheck diagnostics (`Clear flycheck diagnostics`).
+* pr:13769[] parse half-open `..=X` patterns.
+
+== Fixes
+
+* pr:13732[] (first contribution) add fallback case to generated `PartialEq` impl.
+* pr:13726[] allow "Unwrap block" in `let` initializers.
+* pr:13762[] fix parsing of `_ = x` in closure body.
+* pr:13715[] fix snippet completions on numeric literals.
+* pr:13746[] keep comments in "Extract function".
+* pr:13774[] resolve all inference variables in `InferenceResult::assoc_resolutions`.
+* pr:13777[] parse `if` correctly after a half-open range in `match`.
+* pr:13783[], pr:13784[] add parentheses to binding mode hints when they attach to an Or-pattern.
+* pr:13766[] fix config patching logic for `addCallParenthesis`.
