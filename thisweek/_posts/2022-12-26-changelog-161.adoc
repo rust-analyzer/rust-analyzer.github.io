@@ -20,7 +20,7 @@ image::https://user-images.githubusercontent.com/38225716/208986376-d607de62-829
 * pr:13805[] (first contribution) complete enum variants without parens when snippets are disabled.
 * pr:13794[] fix "parser seems stuck" panics when parsing colossal files.
 * pr:13795[] use the correct edition when formatting code in path dependencies.
-* pr:13800[] don't match let exprs and inline consts in `expr` MBE fragments.
+* pr:13800[] don't match `let` expressions and inline ``const``s in `expr` MBE fragments.
 * pr:13820[] fix binding mode hints always adding parentheses to or-patterns.
 * pr:13831[] don't autofill associated type trait bounds when generating an implementation.
 * pr:13764[] correctly check for redundant parentheses in the `remove_parentheses` assist.
