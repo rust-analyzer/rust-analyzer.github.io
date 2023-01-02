@@ -75,6 +75,19 @@ This diagnostic is triggered if an operation marked as `unsafe` is used outside 
 This diagnostic is triggered if created structure does not have field provided in record.
 
 
+=== private-assoc-item
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/private_assoc_item.rs#L5[private_assoc_item.rs]
+
+This diagnostic is triggered if the referenced associated item is not visible from the current
+module.
+
+
+=== private-field
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/private_field.rs#L3[private_field.rs]
+
+This diagnostic is triggered if the accessed field is not visible from the current module.
+
+
 === replace-filter-map-next-with-find-map
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/replace_filter_map_next_with_find_map.rs#L11[replace_filter_map_next_with_find_map.rs]
 

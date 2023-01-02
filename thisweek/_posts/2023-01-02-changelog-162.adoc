@@ -1,0 +1,31 @@
+= Changelog #162
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:643bc02ded7141a462bc0c9357c8914f9d50fb06[] +
+Release: release:2023-01-02[]
+
+== New Features
+
+* pr:13870[], pr:13875[] diagnose private field and associated item accesses:
++
+image::https://user-images.githubusercontent.com/308347/210206429-97b3e267-0984-4044-a15f-f9365a45fd3c.png["Screenshot showing an error when accessing a private field of a struct"]
+* pr:13856[] fix inference of `try {}` blocks:
++
+image::https://user-images.githubusercontent.com/38225716/209875594-8bf9c9e2-9998-40b0-8820-28c7f2d9bae4.gif["Screen recording showing the inferred type of a `try { 42 }` block"]
+* pr:13857[] implement https://rust-lang.github.io/rfcs/0243-trait-based-exception-handling.html#throw-and-throws[yeeting]:
++
+image::https://user-images.githubusercontent.com/38225716/209884633-4bba5eba-6dcc-4714-86cb-5c0d1f358364.png["Screenshot showing no type errors on `fn test() -> Result<(), u32> { do yeet 1 }`"]
+
+== Fixes
+
+* pr:13866[] (first contribution) use `rustc_safe_intrinsic` attribute to check for intrinsic safety.
+* pr:13867[] fall back to inaccessible associated functions and constants if no visible resolutions are found.
+* pr:13869[] improve exit point highlighting for `for` and `while` loops in tail position.
+* pr:13871[] merge multiple intersecting ranges to fix panic in "Extract module".
+
+== Internal Improvements
+
+* pr:13861[] (first contribution) derive `Hash` for `FileId`.
+* pr:13841[] fix a couple more Clippy lints.

@@ -761,7 +761,7 @@ fn ┃fun_name(n: i32) {
 
 [discrete]
 === `extract_module`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_module.rs#L30[extract_module.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_module.rs#L32[extract_module.rs]
 
 Extracts a selected region as separate module. All the references, visibility and imports are
 resolved.
