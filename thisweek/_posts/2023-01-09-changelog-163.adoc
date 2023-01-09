@@ -1,0 +1,30 @@
+= Changelog #163
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:f77b68a3cb0b4a8f611322934c4c4d9335167560[] +
+Release: release:2023-01-09[]
+
+== New Features
+
+* pr:13832[] add enum variant discriminants hints:
++
+image::https://user-images.githubusercontent.com/3757771/209320042-eced617a-9a47-4808-ac23-916f469dc90c.png["Screenshot showing the discriminant values on an enum"]
+* pr:13876[] package Windows release artifacts as ZIP and add symbols file.
+
+== Fixes
+
+* pr:13894[] apply fallback before final obligation resolution.
+* pr:13854[] support multi-character punct tokens in MBE.
+* pr:13877[] prefix prelude items whose name collides in current scope.
+* pr:13887[] only set machine-applicable rustc diagnostics as preferred.
+* pr:13882[] remember adjustments introduced by binary operators.
+* pr:13853[] use diagnostic code as link to full message.
+* pr:13886[] add a ZWNJ to prevent VS Code from forming ligatures between hints and code.
+* pr:13885[] skip lifetime elision hints on fn pointers and fn trait types.
+* pr:13893[] complete record enum variants without parens when snippets are disabled.
+
+== Internal Improvements
+
+* pr:13860[] fix a bunch of clippy lints.
