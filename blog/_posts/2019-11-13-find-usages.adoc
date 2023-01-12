@@ -157,7 +157,7 @@ These restrictions can originate from the language semantics: it doesn't make se
 They also can originate from the user: it's often convenient to exclude tests from search results, for example.
 
 The second trick is about implementing warnings for unused declarations effectively.
-This is a case where a top-down approach is generally better, as an IDE needs to process every declaration, and that would be slow with top-down approach.
+This is a case where a top-down approach is generally better, as an IDE needs to process every declaration, and that would be slow with bottom-up approach.
 However, with a trigram index the IDE can apply an interesting optimization: only check those declarations which have few textual matches.
 This will miss an used declaration with a popular name, like `new`, but will work ok for less-popular names, with a relatively good performance.
 
