@@ -1,0 +1,54 @@
+= Changelog #164
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:ff4d55e480470fd6e3c3c003703612294fd09d15[] +
+Release: release:2023-01-16[]
+
+== New Features
+
+* pr:13684[] (first contribution) add `Extract format expression` assist:
++
+video::https://user-images.githubusercontent.com/38400669/204344911-f1f8fbd2-706d-414e-b1ab-d309376efb9b.mov[options=loop]
+* pr:13810[] (first contribution) add action to expand a macro once, inline
++
+image::https://user-images.githubusercontent.com/10906982/208813167-3123e379-8fd5-4206-a4f4-5af1129565f9.gif["Screen recording showing a macro invocation being replaced by its expansion"]
+* pr:13744[] (first contribution) add the ability to limit the thread pool size (`rust-analyzer.numThreads`).
+* pr:13816[] add option to make adjustment (reborrow) hints postfix:
++
+image::https://user-images.githubusercontent.com/38225716/208941721-d48d316f-a918-408a-9757-8d4e2b402a66.png["Screenshot showing some postfix reborrow hints like `db.*.&.<unsize>`"]
+* pr:13825[] add `Unqualify method call` assist:
++
+image::https://user-images.githubusercontent.com/38225716/209206554-8f067206-6fa6-48f8-849e-f6d36ee2e5a1.gif["Screen recording showing the assist converting `Add::add(1, 2)` to `1.add(2)`"]
+* pr:13848[] colorize `cargo check` diagnostics in the full view in VSCode:
++
+image::https://user-images.githubusercontent.com/11131775/209479884-10eef8ca-37b4-4aae-88f7-3591ac01b25e.gif["Screen recording showing colors and ASCII art when displaying the compiler output"]
+* pr:13934[] make `unlinked_file` diagnostic quickfixes work for inline modules:
++
+image::https://user-images.githubusercontent.com/3757771/211927799-023e48ee-7cdd-4dd7-8e25-a23eddc7d897.gif["Screen recording showing a `mod` declaration added into a parent inline module"]
+* pr:13458[] add assist to replace plain arithmetic operations with wrapping/checked/saturating ones.
+* pr:13946[] remove hover inlay tooltips, replace them with location links.
+* pr:13799[] rename `checkOnSave` settings to `check`.
+
+== Fixes
+
+* pr:13843[] (first contribution) add missing `await` in generated delegate methods.
+* pr:13753[] (first contribution) increase proc macro expansion token limit (fixes the visitors in `swc`).
+* pr:13940[] (first contribution) fix a panic in the `match`-to-`let-else` assist.
+* pr:13763[] add type bounds to generated `#[derive]` implementations.
+* pr:13891[] keep whitespace in extracted functions.
+* pr:13890[] unescape inline module names when resolving modules.
+* pr:13897[] resolve inherent methods implemented in ancestor blocks.
+* pr:13948[] make inlay hint location links work for more types.
+* pr:13945[] handle or-patters in missing match diagnostics.
+* pr:13923[] revert "add a ZWNJ to prevent VS Code from forming ligatures between hints and code".
+
+== Internal Improvements
+
+* pr:13956[] (first contribution) upgrade `command-group` to fix build on Haiku OS.
+* pr:13915[] make it clearer when the server expects an initialized notification.
+* pr:13917[] split out `hir-def` attribute handling parts into `hir-expand`.
+* pr:13933[] refine reference search for const and function associated items.
+* pr:13941[] explain the idea behind `rust-project.json`.
+* pr:13928[], pr:13929[], pr:13862[], pr:13919[], pr:13936[], pr:13937[] fix some Clippy lints.

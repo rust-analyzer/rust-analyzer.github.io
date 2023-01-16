@@ -108,7 +108,7 @@ This diagnostic is shown for builtin macros which are not yet implemented by rus
 
 
 === unlinked-file
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unlinked_file.rs#L17[unlinked_file.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unlinked_file.rs#L19[unlinked_file.rs]
 
 This diagnostic is shown for files that are not included in any crate, or files that are part of
 crates rust-analyzer failed to discover. The file will not have IDE features available.

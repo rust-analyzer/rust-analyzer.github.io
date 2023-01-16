@@ -727,6 +727,41 @@ fn qux(bar: Bar, baz: Baz) {}
 
 
 [discrete]
+=== `extract_expressions_from_format_string`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_expressions_from_format_string.rs#L13[extract_expressions_from_format_string.rs]
+
+Move an expression out of a format string.
+
+.Before
+```rust
+macro_rules! format_args {
+    ($lit:literal $(tt:tt)*) => { 0 },
+}
+macro_rules! print {
+    ($($arg:tt)*) => (std::io::_print(format_args!($($arg)*)));
+}
+
+fn main() {
+    print!("{var} {x + 1}┃");
+}
+```
+
+.After
+```rust
+macro_rules! format_args {
+    ($lit:literal $(tt:tt)*) => { 0 },
+}
+macro_rules! print {
+    ($($arg:tt)*) => (std::io::_print(format_args!($($arg)*)));
+}
+
+fn main() {
+    print!("{var} {}"┃, x + 1);
+}
+```
+
+
+[discrete]
 === `extract_function`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_function.rs#L38[extract_function.rs]
 
@@ -812,7 +847,7 @@ enum A { One(One) }
 
 [discrete]
 === `extract_type_alias`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_type_alias.rs#L10[extract_type_alias.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_type_alias.rs#L7[extract_type_alias.rs]
 
 Extracts the selected type as a type alias.
 
@@ -1325,7 +1360,7 @@ fn main() {
 
 [discrete]
 === `generate_from_impl_for_enum`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_from_impl_for_enum.rs#L6[generate_from_impl_for_enum.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_from_impl_for_enum.rs#L8[generate_from_impl_for_enum.rs]
 
 Adds a From impl for this enum variant with one tuple field.
 
@@ -1662,6 +1697,43 @@ fn main() {
 
 
 [discrete]
+=== `inline_macro`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_macro.rs#L5[inline_macro.rs]
+
+Takes a macro and inlines it one step.
+
+.Before
+```rust
+macro_rules! num {
+    (+$($t:tt)+) => (1 + num!($($t )+));
+    (-$($t:tt)+) => (-1 + num!($($t )+));
+    (+) => (1);
+    (-) => (-1);
+}
+
+fn main() {
+    let number = num┃!(+ + + - + +);
+    println!("{number}");
+}
+```
+
+.After
+```rust
+macro_rules! num {
+    (+$($t:tt)+) => (1 + num!($($t )+));
+    (-$($t:tt)+) => (-1 + num!($($t )+));
+    (+) => (1);
+    (-) => (-1);
+}
+
+fn main() {
+    let number = 1+num!(+ + - + +);
+    println!("{number}");
+}
+```
+
+
+[discrete]
 === `inline_type_alias`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_type_alias.rs#L105[inline_type_alias.rs]
 
@@ -1976,41 +2048,6 @@ impl S {
     fn foo() -> usize {
         Self::C * Self::C
     }
-}
-```
-
-
-[discrete]
-=== `move_format_string_arg`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_format_string_arg.rs#L13[move_format_string_arg.rs]
-
-Move an expression out of a format string.
-
-.Before
-```rust
-macro_rules! format_args {
-    ($lit:literal $(tt:tt)*) => { 0 },
-}
-macro_rules! print {
-    ($($arg:tt)*) => (std::io::_print(format_args!($($arg)*)));
-}
-
-fn main() {
-    print!("{x + 1}┃");
-}
-```
-
-.After
-```rust
-macro_rules! format_args {
-    ($lit:literal $(tt:tt)*) => { 0 },
-}
-macro_rules! print {
-    ($($arg:tt)*) => (std::io::_print(format_args!($($arg)*)));
-}
-
-fn main() {
-    print!("{}"┃, x + 1);
 }
 ```
 
@@ -2408,6 +2445,69 @@ impl Foo for Bar {
     type A = String;
     const B: u8 = 17;
     fn c() {}
+}
+```
+
+
+[discrete]
+=== `replace_arith_with_checked`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_arith_op.rs#L9[replace_arith_op.rs]
+
+Replaces arithmetic on integers with the `checked_*` equivalent.
+
+.Before
+```rust
+fn main() {
+  let x = 1 ┃+ 2;
+}
+```
+
+.After
+```rust
+fn main() {
+  let x = 1.checked_add(2);
+}
+```
+
+
+[discrete]
+=== `replace_arith_with_saturating`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_arith_op.rs#L28[replace_arith_op.rs]
+
+Replaces arithmetic on integers with the `saturating_*` equivalent.
+
+.Before
+```rust
+fn main() {
+  let x = 1 ┃+ 2;
+}
+```
+
+.After
+```rust
+fn main() {
+  let x = 1.saturating_add(2);
+}
+```
+
+
+[discrete]
+=== `replace_arith_with_wrapping`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_arith_op.rs#L50[replace_arith_op.rs]
+
+Replaces arithmetic on integers with the `wrapping_*` equivalent.
+
+.Before
+```rust
+fn main() {
+  let x = 1 ┃+ 2;
+}
+```
+
+.After
+```rust
+fn main() {
+  let x = 1.wrapping_add(2);
 }
 ```
 
@@ -2881,6 +2981,27 @@ pub async fn bar() { foo().await }
 ```rust
 pub fn foo() {}
 pub async fn bar() { foo() }
+```
+
+
+[discrete]
+=== `unqualify_method_call`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unqualify_method_call.rs#L8[unqualify_method_call.rs]
+
+Transforms universal function call syntax into a method call.
+
+.Before
+```rust
+fn main() {
+    std::ops::Add::add┃(1, 2);
+}
+```
+
+.After
+```rust
+fn main() {
+    1.add(2);
+}
 ```
 
 
