@@ -11,9 +11,9 @@ Release: release:2023-01-16[]
 * pr:13684[] (first contribution) add `Extract format expression` assist:
 +
 video::https://user-images.githubusercontent.com/38400669/204344911-f1f8fbd2-706d-414e-b1ab-d309376efb9b.mov[options=loop]
-* pr:13810[] (first contribution) add action to expand a macro once, inline
+* pr:13810[] (first contribution) add an assist to expand a macro once, inline
 +
-image::https://user-images.githubusercontent.com/10906982/208813167-3123e379-8fd5-4206-a4f4-5af1129565f9.gif["Screen recording showing a macro invocation being replaced by its expansion"]
+image::https://user-images.githubusercontent.com/10906982/212705267-382ada77-9b61-4722-9bc6-3c8309a4c89a.gif["Screen recording showing a macro invocation being replaced by its expansion"]
 * pr:13744[] (first contribution) add the ability to limit the thread pool size (`rust-analyzer.numThreads`).
 * pr:13816[] add option to make adjustment (reborrow) hints postfix:
 +
