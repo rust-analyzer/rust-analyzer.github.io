@@ -4,8 +4,7 @@
 :page-layout: post
 
 Commit: commit:daa0138e4c159d5753e41a447201b6191437276e[] +
-Release: release:2023-01-23[] +
-VS Code extension: `0.3.1377`
+Release: release:2023-01-23[] (`0.3.1377`)
 
 == New Features
 
