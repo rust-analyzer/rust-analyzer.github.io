@@ -1,0 +1,39 @@
+= Changelog #165
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:daa0138e4c159d5753e41a447201b6191437276e[] +
+Release: release:2023-01-23[] +
+VS Code extension: `0.3.1377`
+
+== New Features
+
+* pr:13935[] (first contribution) add assist to desugar doc-comments:
++
+video::https://user-images.githubusercontent.com/308347/213989235-e20efab2-5e00-4e49-a81b-7adc30d54b9d.mp4[options=loop]
+* pr:13947[] add basic tooltips to adjustment hints:
++
+image::https://user-images.githubusercontent.com/38225716/212681383-a60b60bb-a8e7-410d-8b24-f6b72c197311.png["Screenshot showing a `T → &T (borrow coercion)` tooltip over a `.&` adjustment hint"]
+* pr:13963[] unconditionally enable location links in inlay hints.
+
+== Fixes
+
+* pr:13983[] (first contribution) parse `const_closures` syntax.
+* pr:13993[] (first contribution) VS Code: substitute variables in `config.serverPath`.
+* pr:13981[] don't run flycheck on startup unless `checkOnSave` is enabled.
+* pr:13966[] don't compute layout if `TargetDataLayout` is not available.
+* pr:13971[] improve inference for binary operations more precise.
+* pr:13961[] don't generate `PartialEq`/`PartialOrd` methods body when types don't match.
+* pr:13984[] fix target data layout fetching incorrectly passing `rustc` to `rustc`.
+* pr:13978[] handle slice patterns in `Fill match arms`.
+* pr:13985[] don't respond with `ContentModified` while loading the workspace.
+* pr:13988[] fix whitespace handling in hover Markdown removal.
+* pr:13980[] fix `checkOnSave` config patching.
+
+== Internal Improvements
+
+* pr:13964[] specify `authors`, `edition`, `license` and `rust-version` via `workspace.package`.
+* pr:13969[] use `workspace.dependencies` to declare local dependencies.
+* pr:13989[] remove hover fallback in favor of ranged hover.
+* pr:14001[] replace `SmolStr` usage with enum for lang items.

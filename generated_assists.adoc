@@ -44,7 +44,7 @@ fn main() {
 
 [discrete]
 === `add_impl_default_members`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L57[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L55[add_missing_impl_members.rs]
 
 Adds scaffold for overriding default impl members.
 
@@ -81,7 +81,7 @@ impl Trait for () {
 
 [discrete]
 === `add_impl_missing_members`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L16[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L14[add_missing_impl_members.rs]
 
 Adds scaffold for required impl members.
 
@@ -692,6 +692,25 @@ fn main() {
     let (┃_0, _1) = (1,2);
     let v = _0;
 }
+```
+
+
+[discrete]
+=== `desugar_doc_comment`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/desugar_doc_comment.rs#L14[desugar_doc_comment.rs]
+
+Desugars doc-comments to the attribute form.
+
+.Before
+```rust
+/// Multi-line┃
+/// comment
+```
+
+.After
+```rust
+#[doc = r"Multi-line
+comment"]
 ```
 
 

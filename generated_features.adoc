@@ -332,7 +332,7 @@ Note: `?` and `->` do not currently trigger this behavior in the VSCode editor.
 
 
 === Hover
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/hover.rs#L85[hover.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/hover.rs#L81[hover.rs]
 
 Shows additional information, like the type of an expression or the documentation for a definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.
@@ -341,7 +341,7 @@ image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L345[inlay_hints.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L336[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
