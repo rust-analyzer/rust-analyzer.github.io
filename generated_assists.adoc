@@ -2039,7 +2039,7 @@ fn apply<T, U, F>(f: F, x: T) -> U where F: FnOnce(T) -> U {
 
 [discrete]
 === `move_const_to_impl`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_const_to_impl.rs#L17[move_const_to_impl.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_const_to_impl.rs#L14[move_const_to_impl.rs]
 
 Move a local constant item in a method to impl's associated constant. All the references will be
 qualified with `Self::`.
@@ -2639,7 +2639,7 @@ fn compute() -> Option<i32> { None }
 
 [discrete]
 === `replace_match_with_if_let`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_if_let_with_match.rs#L174[replace_if_let_with_match.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_if_let_with_match.rs#L185[replace_if_let_with_match.rs]
 
 Replaces a binary `match` with a wildcard pattern and no guards with an `if let` expression.
 
@@ -3026,7 +3026,7 @@ fn main() {
 
 [discrete]
 === `unwrap_block`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unwrap_block.rs#L11[unwrap_block.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unwrap_block.rs#L12[unwrap_block.rs]
 
 This assist removes if...else, for, while and loop control statements to just keep the body.
 

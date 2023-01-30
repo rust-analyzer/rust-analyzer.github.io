@@ -1,0 +1,37 @@
+= Changelog #166
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:f1b257f4eb4fef74b42fd7135d1cf3884e8b51c9[] +
+Release: release:2023-01-30[] (`0.3.1386`)
+
+== New Features
+
+* pr:14012[] (first contribution) add installation instructions for Visual Studio.
+* pr:14024[] (first contribution) update documentation for Emacs.
+* pr:14041[] show signature help for record literals:
++
+image::https://user-images.githubusercontent.com/1786438/215165358-8e51cd1a-d7c3-4c9d-a2d8-c22638bcf500.png["Screenshot showing signature help for the fields in a struct literal"]
+* pr:14007[] add "Open server logs" button to the error notification:
++
+image::https://user-images.githubusercontent.com/3757771/214038673-658f3b43-5310-47b0-99da-d3222d173b0c.gif["Screen recording showing a button that opens the logs when `cargo check` fails to run"]
+
+== Fixes
+
+* pr:14015[] (first contribution) don't include lifetime or label apostrophe when renaming.
+* pr:14020[] fix associated item search finding unrelated definitions.
+* pr:14006[] replace soft breaks in Markdown with spaces.
+* pr:14019[], pr:14023[] substitute VS Code variables more generally
+* pr:14004[] don't escape non-snippets in `Move const to impl`.
+* pr:14011[] fix `Unwrap block` for `let` statements.
+* pr:14037[] handle boolean scrutinees better in `Match to if-let` assist.
+* pr:14039[] make `Add missing impl members` work for impls inside blocks.
+* pr:14038[] don't fail workspace loading if sysroot can't be found
+
+== Internal Improvements
+
+* pr:14025[] improve deduplication in `process_changes`.
+* pr:14009[] 🧹 `lsp_ext.ts`.
+* pr:14017[] remove `TypeWalk`.
+* pr:14026[] try to fix auto-publishing of lib crates.
