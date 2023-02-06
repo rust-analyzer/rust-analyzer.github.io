@@ -1402,7 +1402,7 @@ impl From<u32> for A {
 
 [discrete]
 === `generate_function`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_function.rs#L24[generate_function.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_function.rs#L26[generate_function.rs]
 
 Adds a stub function with a signature matching the function under the cursor.
 

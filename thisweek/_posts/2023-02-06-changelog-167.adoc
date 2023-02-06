@@ -1,0 +1,35 @@
+= Changelog #167
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:0b32b65ca6aee21f352d178eeb0b85e092a93177[] +
+Release: release:2023-02-06[] (`0.3.1394`)
+
+== New Features
+
+* pr:14065[] support generic functions in the `generate_function` assist.
+* pr:14057[] handle complex patterns in `match` to `let-else` assist.
+* pr:14063[] drop support for the 1.58 proc-macro ABI.
+
+== Fixes
+
+* pr:14036[] record method resolution for the remaining operator expressions.
+* pr:14067[] Code: create the trace output channel lazily.
+* pr:14068[] apply `unsize` adjustments after pointer casts.
+* pr:14071[] don't render field-less discriminant inlay hints for data-carrying enums.
+* pr:14082[] support non-ASCII characters in case conversion.
+* pr:14043[] use relative offsets when inserting ident token in macro expansion for completion.
+* pr:14058[] fix display of negative trait bounds in outline view.
+
+== Internal Improvements
+
+* pr:14010[] (first contribution) make the fuzzing harness build again.
+* pr:14072[] (first contribution) mention all three Visual Studio extensions in the manual.
+* pr:14049[] add installation instructions for Flatpak VS Code.
+* pr:14070[] implement proc-macro API versioning.
+* pr:14061[] make `tt` generic over the span data.
+* pr:14056[] parse `#[allow_internal_unsafe]` on macros.
+* pr:14062[] set the current edition to 2021.
+* pr:14034[] tweak change collapsing some more.
+* pr:14083[] add more basic issue templates.

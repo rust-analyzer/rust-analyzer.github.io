@@ -27,7 +27,7 @@ image::https://user-images.githubusercontent.com/3757771/214038673-658f3b43-5310
 * pr:14011[] fix `Unwrap block` for `let` statements.
 * pr:14037[] handle boolean scrutinees better in `Match to if-let` assist.
 * pr:14039[] make `Add missing impl members` work for impls inside blocks.
-* pr:14038[] don't fail workspace loading if sysroot can't be found
+* pr:14038[] don't fail workspace loading if sysroot can't be found.
 
 == Internal Improvements
 
