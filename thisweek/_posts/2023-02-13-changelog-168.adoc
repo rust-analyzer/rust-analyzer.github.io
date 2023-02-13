@@ -1,0 +1,40 @@
+= Changelog #168
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:646f97385709fab31db2f10661125c0bbbda6b7c[] +
+Release: release:2023-02-13[] (`0.3.1402`)
+
+== New Features
+
+* pr:14095[] (first contribution) add `unsafe` postfix completions.
+* pr:14098[] (first contribution) add support for `DidChangeWorkspaceFolders` notifications.
+* pr:13991[] add an "Add braces" assist:
++
+image::https://user-images.githubusercontent.com/4973437/213783924-7c8a8ab5-6a52-4d80-837c-cf2a9b56f061.gif["Screen recording showing an assist that adds braces around the bodies of a closure and a `match` arm"]
+* pr:14087[], pr:14094[] support computing layout of RPIT.
+* pr:13986[] add a setting to limit the number of completions.
+* pr:14127[] build `i686-pc-windows-msvc` binaries.
+* pr:14135[] add Lapce installation instructions.
+* pr:14134[] add clippy configuration section to the manual.
+
+== Fixes
+
+* pr:14114[] (first contribution) insert spaces when inlining macros.
+* pr:14084[] fix parsing of nested tuple field accesses (in a cursed way).
+* pr:14092[] don't panic on broken syntax trees in adjustment inlay hints.
+* pr:14099[] properly use location links for type hints of `impl Future` and its associated type.
+* pr:14103[] don't insert a semicolon when typing `=` if parse errors are encountered.
+* pr:14110[] fix completions after functions with no bodies.
+* pr:14111[] hide proc macro server version detection errors.
+* pr:14125[] don't render bind pattern inlay hints for constants.
+* pr:14116[] render discriminant inlay hints for mixed variants if at least one discriminant is specified.
+* pr:13975[] suppress extra indent after the end of field and function chains.
+
+== Internal Improvements
+
+* pr:14091[] support sysroot library source being defined inside the workspace.
+* pr:14100[] allow specifying what proc-macro server to run in `rust_analyzer::load_cargo`.
+* pr:14119[] remove a few allocations in `hir_ty::utils`.
+* pr:14090[] unify language configuration folding markers with server behaviour.
