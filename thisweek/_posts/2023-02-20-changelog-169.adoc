@@ -1,0 +1,36 @@
+= Changelog #169
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:a6603fc21d50b3386a488c96225b2d1fd492e533[] +
+Release: release:2023-02-20[] (`v0.3.1410`)
+
+== New Features
+
+* https://github.com/rust-lang/rust-analyzer/discussions[GitHub Discussions] are now enabled on the `rust-analyzer` repository.
+* pr:14141[] support UTF-32 position encoding; together with https://github.com/emacs-lsp/lsp-mode/pull/3958[this] change, fixes Emacs `lsp-mode` emoji crashes.
+
+== Fixes
+
+* pr:14162[] (first contribution) check snippet capability in "Generate getter".
+* pr:14140[] fix delimiter stripping in `proc-macro-server`.
+* pr:14123[] don't trigger postfix completion before `else`.
+* pr:14122[] don't expand macros in the same expansion tree after overflow.
+* pr:14144[] strip prefix when searching for raw identifiers.
+* pr:14138[] don't include `r#` prefix in filesystem changes.
+* pr:14157[] adjust binding mode inlay hints to render better with `@` patterns.
+* pr:14160[] bring back hovering call parentheses for return type information.
+* pr:14149[] trigger call info for more signature completions.
+
+== Internal Improvements
+
+* pr:14153[] (first contribution) add v7 proc macro metadata support.
+* pr:14171[] (first contribution) fix link in `architecture.md`.
+* pr:14128[] improve parser recovery for delimited lists.
+* pr:14150[] don't allocate the `generic_args` `Vec` in `hir_def::Path` if every element is `None` (~9 MB win on `analysis-stats self`).
+* pr:14152[] replace some often empty ``Vec``s with boxed slices (~2 MB win on `analysis-stats self`).
+* pr:14151[] enable ``smallvec``'s `union` feature (~4 MB win on `analysis-stats self`).
+* pr:14156[] don't reconstruct ref match completion in `to_proto` manually.
+* pr:14165[] make `CompletionItem` more POD-like.
+* pr:14147[] don't rely on VSCode internal commands in the server.
