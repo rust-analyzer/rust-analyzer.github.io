@@ -1,0 +1,22 @@
+= Changelog #170
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:4e29820f6d9880606a403e7bec6e91312e7f0575[] +
+Release: release:2023-02-27[] (`v0.3.1410`)
+
+== New Features
+
+* pr:14175[] (first contribution) add "Open Docs" command to the context menu:
++
+image::https://user-images.githubusercontent.com/6609145/219976062-b46ab21b-5753-48f5-a1da-562566cae71c.gif["Screen recording showing the Open Docs in the context menu and how it opens docs.rs"]
+* pr:14207[] (first contribution) respect `CARGO_HOME` in toolchain detection.
+
+== Fixes
+
+* pr:14203[] (first contribution) add check for extra path segments after a fully qualified one.
+
+== Internal Improvements
+
+* pr:14183[] try to improve the `rustfmt.overrideCommand` docs.
