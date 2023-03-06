@@ -6,6 +6,12 @@
 This diagnostic is triggered if the `break` keyword is used outside of a loop.
 
 
+=== expected-function
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/expected_function.rs#L5[expected_function.rs]
+
+This diagnostic is triggered if a call is made on something that is not callable.
+
+
 === inactive-code
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/inactive_code.rs#L6[inactive_code.rs]
 
@@ -95,9 +101,9 @@ This diagnostic is triggered when `.filter_map(..).next()` is used, rather than 
 
 
 === type-mismatch
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/type_mismatch.rs#L11[type_mismatch.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/type_mismatch.rs#L12[type_mismatch.rs]
 
-This diagnostic is triggered when the type of an expression does not match
+This diagnostic is triggered when the type of an expression or pattern does not match
 the expected type.
 
 
@@ -126,6 +132,12 @@ Diagnostic for unnecessary braces in `use` items.
 This diagnostic is triggered if rust-analyzer is unable to discover referred extern crate.
 
 
+=== unresolved-field
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_field.rs#L13[unresolved_field.rs]
+
+This diagnostic is triggered if a field does not exist on a given type.
+
+
 === unresolved-import
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_import.rs#L3[unresolved_import.rs]
 
@@ -138,6 +150,12 @@ a `use` declaration.
 
 This diagnostic is triggered if rust-analyzer is unable to resolve the path
 to a macro in a macro invocation.
+
+
+=== unresolved-method
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_method.rs#L13[unresolved_method.rs]
+
+This diagnostic is triggered if a method does not exist on a given type.
 
 
 === unresolved-module

@@ -1,0 +1,39 @@
+= Changelog #171
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:0a956ec9326eca09725d64d9f1b63896f93505d1[] +
+Release: release:2023-03-06[] (`v0.3.1426`)
+
+== New Features
+
+* pr:14240[] diagnose `break` with value in incorrect positions:
++
+image::https://user-images.githubusercontent.com/3757771/222832086-1d3b2095-5cee-416f-ab59-47a6188aa6f7.png["Screenshot showing an error on `while true { break 0; }` and `for _ in [()] { break 0; }`"]
+* pr:14243[] diagnose unresolved field, method call and call expression:
++
+image::https://user-images.githubusercontent.com/3757771/222831604-4e7886a6-d2f3-4672-835c-affeafb9fa8b.png["Screenshot showing errors on various unresolved fields and methods]
+* pr:14238[] allow "Generate function" to create functions in a different local crate.
+* pr:14222[], pr:14245[] implement pattern mismatch diagnostics, but keep them disabled.
+
+== Fixes
+
+* pr:14185[] (first contribution) fix running doctests for structs with lifetime parameters.
+* pr:14208[] (first contribution) fix path resolution in the presence of functions and structs with the same name.
+* pr:14223[] implement rendering of tuples in constant values.
+* pr:14225[] removing nested ``dbg!()``s in "Remove ``dbg!()``".
+* pr:14176[] fix associated item visibility in block-local impls.
+* pr:14239[] load the sysroot in all CLI commands.
+* pr:14247[] generate correct completion edits for missing macro arguments.
+* pr:14255[] bring back the hex display in const hover.
+
+== Internal Improvements
+
+* pr:14040[] introduce a MIR and use it for constant evaluation.
+* pr:14218[], pr:14234[] de-duplicate source roots that have overlapping include paths.
+* pr:14184[] handle trait alias definitions.
+* pr:14244[] report type metrics for patterns.
+* pr:14251[] set unit type expectation for expression statements without a semicolon.
+* pr:14252[] handle fields called as method calls as the fields they resolve to.
+* pr:14213[] add API to get `raw_ptr` type.
