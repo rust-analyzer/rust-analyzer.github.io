@@ -1,0 +1,42 @@
+= Changelog #172
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:f1e51afa450ecf352c1f01fc5a5b6d10792e3779[] +
+Release: release:2023-03-13[] (`v0.3.1435`)
+
+== New Features
+
+* pr:14232[], pr:14316[] MIR episode 2, add `need-mut` and experimental `unused-mut` diagnostics:
++
+image::https://user-images.githubusercontent.com/308347/224622684-20570ef7-e5b8-4dfc-8bdb-5c8fc53fea84.png["Screenshot showing an error when reassigning a non-mut variable"]
+* pr:14313[] add fancy buttons to the VS Code status message:
++
+image::https://user-images.githubusercontent.com/3757771/224274817-a5a8cb0c-7bda-454d-9772-5f839f360b9a.png["Screenshot showing the status and Stop, Reload, Restart and Open logs options in a status bar menu"]
+* pr:14266[] make `replace_or_with_or_else` assists more generally applicable.
+* pr:14328[] allow passing extra `cargo` args when running build scripts.
+
+== Fixes
+
+* pr:14323[] (first contribution) fix source root de-duplication.
+* pr:14267[] mark unresolved field, unresolved method and expected function diagnostics as experimental.
+* pr:14297[] add `libcore` dependency to proc macros.
+* pr:14282[] load proc macros for `rustc_private` crates.
+* pr:14260[] tighten `replace_match_with_if_let` applicability range.
+* pr:14271[] don't trigger unresolved method/field diagnostics on types containing errors.
+* pr:14284[] highlight unresolved derives as such.
+* pr:14248[] show diagnostic for `}` followed by `else` in `let-else` statement.
+* pr:14283[] don't send error notifications for workspace failures if server status is supported.
+* pr:14286[] fix block defmap not looking into tail expressions for macro calls.
+* pr:14291[] fix handling of multiple definition bindings in `convert_match_to_let_else`.
+* pr:14299[] fix searching inside bodies of attributed items.
+* pr:14300[] watch both stdout and stderr in flycheck.
+* pr:14306[] fix block with no termination in or-patterns.
+
+== Internal Improvements
+
+* pr:14261[] reuse the resolver in `InferenceContext` instead of rebuilding it when needed.
+* pr:14302[] add missing queries to `per_query_memory_usage`.
+* pr:14311[] don't attempt to compute diagnostics in library crates.
+* pr:14326[] rename `match_expr` field of `hir::diagnostics::MissingMatchArms`.

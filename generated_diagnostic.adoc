@@ -64,7 +64,7 @@ let a = A { a: 10 };
 
 
 === missing-match-arm
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/missing_match_arms.rs#L5[missing_match_arms.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/missing_match_arms.rs#L3[missing_match_arms.rs]
 
 This diagnostic is triggered if `match` block is missing one or more match arms.
 
@@ -73,6 +73,12 @@ This diagnostic is triggered if `match` block is missing one or more match arms.
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/missing_unsafe.rs#L3[missing_unsafe.rs]
 
 This diagnostic is triggered if an operation marked as `unsafe` is used outside of an `unsafe` function or block.
+
+
+=== need-mut
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L7[mutability_errors.rs]
+
+This diagnostic is triggered on mutating an immutable variable.
 
 
 === no-such-field
@@ -174,3 +180,9 @@ but can also indicate project setup problems.
 If you are seeing a lot of "proc macro not expanded" warnings, you can add this option to the
 `rust-analyzer.diagnostics.disabled` list to prevent them from showing. Alternatively you can
 enable support for procedural macros (see `rust-analyzer.procMacro.attributes.enable`).
+
+
+=== unused-mut
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L39[mutability_errors.rs]
+
+This diagnostic is triggered when a mutable variable isn't actually mutated.

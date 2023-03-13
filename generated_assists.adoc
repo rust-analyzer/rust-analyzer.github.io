@@ -811,7 +811,7 @@ fn main() {
 
 [discrete]
 === `extract_function`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_function.rs#L38[extract_function.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_function.rs#L39[extract_function.rs]
 
 Extracts selected statements and comments into new function.
 
@@ -1724,7 +1724,7 @@ fn bar() {
 
 [discrete]
 === `inline_local_variable`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_local_variable.rs#L19[inline_local_variable.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_local_variable.rs#L18[inline_local_variable.rs]
 
 Inlines a local variable.
 
@@ -2668,7 +2668,7 @@ fn compute() -> Option<i32> { None }
 
 [discrete]
 === `replace_match_with_if_let`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_if_let_with_match.rs#L185[replace_if_let_with_match.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_if_let_with_match.rs#L187[replace_if_let_with_match.rs]
 
 Replaces a binary `match` with a wildcard pattern and no guards with an `if let` expression.
 
@@ -2694,52 +2694,6 @@ fn handle(action: Action) {
     } else {
         bar()
     }
-}
-```
-
-
-[discrete]
-=== `replace_or_else_with_or`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_or_with_or_else.rs#L89[replace_or_with_or_else.rs]
-
-Replace `unwrap_or_else` with `unwrap_or` and `ok_or_else` with `ok_or`.
-
-.Before
-```rust
-fn foo() {
-    let a = Some(1);
-    a.unwra┃p_or_else(|| 2);
-}
-```
-
-.After
-```rust
-fn foo() {
-    let a = Some(1);
-    a.unwrap_or(2);
-}
-```
-
-
-[discrete]
-=== `replace_or_with_or_else`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_or_with_or_else.rs#L12[replace_or_with_or_else.rs]
-
-Replace `unwrap_or` with `unwrap_or_else` and `ok_or` with `ok_or_else`.
-
-.Before
-```rust
-fn foo() {
-    let a = Some(1);
-    a.unwra┃p_or(2);
-}
-```
-
-.After
-```rust
-fn foo() {
-    let a = Some(1);
-    a.unwrap_or_else(|| 2);
 }
 ```
 
@@ -2827,6 +2781,52 @@ fn main() {
 fn make<T>() -> T { ) }
 fn main() {
     let a: i32 = make();
+}
+```
+
+
+[discrete]
+=== `replace_with_eager_method`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_method_eager_lazy.rs#L89[replace_method_eager_lazy.rs]
+
+Replace `unwrap_or_else` with `unwrap_or` and `ok_or_else` with `ok_or`.
+
+.Before
+```rust
+fn foo() {
+    let a = Some(1);
+    a.unwra┃p_or_else(|| 2);
+}
+```
+
+.After
+```rust
+fn foo() {
+    let a = Some(1);
+    a.unwrap_or(2);
+}
+```
+
+
+[discrete]
+=== `replace_with_lazy_method`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_method_eager_lazy.rs#L9[replace_method_eager_lazy.rs]
+
+Replace `unwrap_or` with `unwrap_or_else` and `ok_or` with `ok_or_else`.
+
+.Before
+```rust
+fn foo() {
+    let a = Some(1);
+    a.unwra┃p_or(2);
+}
+```
+
+.After
+```rust
+fn foo() {
+    let a = Some(1);
+    a.unwrap_or_else(|| 2);
 }
 ```
 
