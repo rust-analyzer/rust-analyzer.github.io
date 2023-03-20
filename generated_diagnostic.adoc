@@ -18,6 +18,12 @@ This diagnostic is triggered if a call is made on something that is not callable
 This diagnostic is shown for code with inactive `#[cfg]` attributes.
 
 
+=== incoherent-impl
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/incoherent_impl.rs#L5[incoherent_impl.rs]
+
+This diagnostic is triggered if the targe type of an impl is from a foreign crate.
+
+
 === incorrect-ident-case
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/incorrect_case.rs#L13[incorrect_case.rs]
 
@@ -70,7 +76,7 @@ This diagnostic is triggered if `match` block is missing one or more match arms.
 
 
 === missing-unsafe
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/missing_unsafe.rs#L3[missing_unsafe.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/missing_unsafe.rs#L9[missing_unsafe.rs]
 
 This diagnostic is triggered if an operation marked as `unsafe` is used outside of an `unsafe` function or block.
 

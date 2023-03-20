@@ -1,0 +1,46 @@
+= Changelog #173
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:825833c26938d25a95f4c77f0e7011cffc34e15c[] +
+Release: release:2023-03-20[] (`v0.3.1443`)
+
+== New Features
+
+* pr:14281[] add quick fix for inserting an `unsafe` block:
++
+video::https://user-images.githubusercontent.com/308347/226258052-07f7c722-bdc2-49bb-b0af-dac7877c761f.mp4[options=loop]
+* pr:13789[] prioritize missing variants in match pattern completions:
++
+image::https://user-images.githubusercontent.com/49019259/225702513-aefa453d-e0db-4401-bdf8-60da5070c182.png["Screenshot showing existing enum variants being de-prioritized in a match"]
+* pr:14354[] add signature help for record and tuple struct patterns:
++
+image::https://user-images.githubusercontent.com/308347/226259723-e7ccf514-93e5-4d5c-90a2-ee067a4a0914.png["Screenshot showing the doc comments and fields of a struct in a pattern"]
+* pr:13994[] lint incoherent inherent impls:
++
+image::https://user-images.githubusercontent.com/308347/226260981-d41f0c7a-2f06-42b4-b32b-a774bb0e6bdc.png["Screenshot showing an error on `impl Vec<i32> {}`"]
+
+== Fixes
+
+* pr:12958[] fix return type of async closures.
+* pr:14337[] allow the status bar item to be clicked again.
+* pr:14347[] add `StorageDead` for `let` bindings without initializer (fixes false positive `needs-mut` in loops).
+* pr:14348[] fix rustc proc-macro handling in the rustc workspace.
+* pr:14349[] respect parent blocks in visibility resolution.
+* pr:14338[] only skip reborrow adjustment hints for block, `if` and `match` expressions.
+* pr:14353[] don't replace `SyntaxToken` with `SyntaxNode` in "Inline call".
+* pr:14355[] don't emit unnecessary reference completions.
+* pr:14357[] don't pass feature flags to rustc private crates metadata invocation.
+* pr:14359[] don't retry inlay hint requests.
+* pr:14361[] fix `ast::IfExpr` child accessors.
+
+== Internal Improvements
+
+* pr:14307[] add Cargo-style project discovery for Buck and Bazel users.
+* pr:14362[] prioritize "Remove ``dbg!``" assist over "Inline macro".
+* pr:14358[] report sysroot and rustc crate loading errors.
+* pr:14334[], pr:14336[] add `is_float`, `is_char` and `as_slice` to `hir::Type`.
+* pr:14378[] bump `chalk` to fix a GAT bug.
+* pr:14342[] add path of workspace root folders to status output.
+* pr:14340[] rename `AstDatabase` to `ExpandDatabase`.
