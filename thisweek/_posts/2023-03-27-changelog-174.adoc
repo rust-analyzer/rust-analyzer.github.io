@@ -1,0 +1,25 @@
+= Changelog #174
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:b99d5eb97315faca04a33bae40bd2fb809ba9d46[] +
+Release: release:2023-03-27[] (`v0.3.1451`)
+
+== New Features
+
+* pr:14405[], pr:14409[], pr:14415[] load proc macros asynchronously.
+* pr:14368[] MIR episode 3, add support for `?`, function pointers and trait objects.
+
+== Fixes
+
+* pr:14385[] (first contribution) fix VS Code status message formatting error.
+* pr:14407[] fix renames of locals used in macro calls.
+
+== Internal Improvements
+
+* pr:14380[] coalesce adjacent ``Indel``s.
+* pr:14402[] reject symlinks in `rust-project.json`.
+* pr:14408[] only intern blocks that declare items.
+* pr:14412[] handle proc macro fetching via `OpQueue`.
+* pr:14404[] remove client side proc-macro version check.
