@@ -484,7 +484,7 @@ fn main() {
 
 [discrete]
 === `convert_let_else_to_match`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_let_else_to_match.rs#L100[convert_let_else_to_match.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_let_else_to_match.rs#L8[convert_let_else_to_match.rs]
 
 Converts let-else statement to let statement and match expression.
 
@@ -515,7 +515,7 @@ Converts let statement with match initializer to let-else statement.
 .Before
 ```rust
 fn foo(opt: Option<()>) {
-    let val = ┃match opt {
+    let val┃ = match opt {
         Some(it) => it,
         None => return,
     };

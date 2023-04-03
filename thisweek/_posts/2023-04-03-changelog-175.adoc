@@ -1,0 +1,39 @@
+= Changelog #175
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:236576227a299fd19ba836b1834ab50c948af994[] +
+Release: release:2023-04-03[] (`v0.3.1459`)
+
+== New Features
+
+* pr:14366[] prompting the user to add a `Cargo.toml` of unlinked file to the `linkedProjects`.
+
+== Fixes
+
+* pr:14422[] (first contribution) don't escape double hashes outside of Rust code blocks.
+* pr:14444[] (first contribution) pass environment variables to debug runnables.
+* pr:14424[] check ancestor blocks for local trait impls.
+* pr:14434[] use `struct_tail_without_normalization` in `Expectation::rvalue_hint`.
+* pr:14440[] handle box and raw pointers correctly in `builtin_deref`.
+* pr:14461[] use async block in async function type inference.
+* pr:14435[] add missing autoborrow adjustment for index expressions.
+* pr:14426[] fix stack overflow in inhabitedness checking.
+* pr:14464[] fix false-positive `needs-mut` on array.
+* pr:14449[] recover from `pub()` visibility modifier.
+* pr:14468[] don't append ! to derive and attribute macros in "Expand macro recursively".
+* pr:14419[] use the right ``CrateId``s for proc macros in `rust-project.json` workspaces.
+* pr:14427[] allow subsequent `rust-project.json`-based workspaces to get proc macro expansion.
+* pr:14430[] canonicalize `rust-project.json` manifest path.
+
+== Internal Improvements
+
+* pr:14465[] (first contribution) add limited syntax support for return type notations.
+* pr:14425[] (first contribution) fix typo in comment.
+* pr:14410[] add config to specifiy LRU capacities for all queries.
+* pr:14445[] introduce `StructFlags`.
+* pr:14448[] don't expose `InferenceTable` outside of `hir-ty`.
+* pr:14439[] set durability to high for `enable_proc_attr_macros` input.
+* pr:14454[] refine `CrateOrigin` variants.
+* pr:14458[] clean up `CrateGraph` construction.
