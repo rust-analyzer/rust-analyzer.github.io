@@ -119,6 +119,11 @@ This diagnostic is triggered when the type of an expression or pattern does not 
 the expected type.
 
 
+=== undeclared-label
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/undeclared_label.rs#L3[undeclared_label.rs]
+
+
+
 === unimplemented-builtin-macro
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unimplemented_builtin_macro.rs#L3[unimplemented_builtin_macro.rs]
 
@@ -136,6 +141,11 @@ crates rust-analyzer failed to discover. The file will not have IDE features ava
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/useless_braces.rs#L8[useless_braces.rs]
 
 Diagnostic for unnecessary braces in `use` items.
+
+
+=== unreachable-label
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unreachable_label.rs#L3[unreachable_label.rs]
+
 
 
 === unresolved-extern-crate

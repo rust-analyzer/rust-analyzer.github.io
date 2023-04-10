@@ -577,6 +577,35 @@ impl Point {
 
 
 [discrete]
+=== `convert_nested_function_to_closure`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_nested_function_to_closure.rs#L7[convert_nested_function_to_closure.rs]
+
+Converts a function that is defined within the body of another function into a closure.
+
+.Before
+```rust
+fn main() {
+    fn fo┃o(label: &str, number: u64) {
+        println!("{}: {}", label, number);
+    }
+
+    foo("Bar", 100);
+}
+```
+
+.After
+```rust
+fn main() {
+    let foo = |label: &str, number: u64| {
+        println!("{}: {}", label, number);
+    };
+
+    foo("Bar", 100);
+}
+```
+
+
+[discrete]
 === `convert_to_guarded_return`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_to_guarded_return.rs#L21[convert_to_guarded_return.rs]
 
@@ -1118,7 +1147,7 @@ impl Default for Example {
 
 [discrete]
 === `generate_delegate_methods`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_delegate_methods.rs#L10[generate_delegate_methods.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_delegate_methods.rs#L12[generate_delegate_methods.rs]
 
 Generate delegate methods.
 
@@ -1848,7 +1877,7 @@ fn foo(bar: ┃impl Bar) {}
 
 .After
 ```rust
-fn foo<B: Bar>(bar: B) {}
+fn foo<┃B: Bar>(bar: B) {}
 ```
 
 

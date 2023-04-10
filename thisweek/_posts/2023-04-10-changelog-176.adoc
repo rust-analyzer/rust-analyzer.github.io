@@ -1,0 +1,40 @@
+= Changelog #176
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:01120f1213ad928de7300a8acf9f41bed72d0422[] +
+Release: release:2023-04-10[] (`v0.3.1472`)
+
+== New Features
+
+* pr:14433[] (first contribution) add `#[doc(alias(..))]`-based completions.
+* pr:14512[] highlight escapes in `char` literals:
++
+image::https://user-images.githubusercontent.com/30187863/230414581-b8c37355-6626-4745-9f2b-3d9d4f804b47.png["Screenshot showing highlighted char escapes"]
+* pr:14455[] add assist to convert nested functions to closures.
+* pr:14432[] drop support for non-syroot proc macro ABIs (proc macros no longer expand with Rust 1.63).
+
+== Fixes
+
+* pr:14486[] desugar `async fn` completely.
+* pr:14481[] fix VS Code project linking pop-up buttons being swapped.
+* pr:14482[] use the correct path accessor in the project linking pop-up.
+* pr:14483[] do autoderef in "Generate delegate methods".
+* pr:14493[] insert whitespace between text and attribute macros.
+* pr:14505[] fix block-local trait impl solving regressions.
+* pr:14520[] unify types in `infer_expr_coerce_never()`.
+
+== Internal Improvements
+
+* pr:14521[], pr:14526[], pr:14528[] add bounds for fields in derive macros.
+* pr:14436[] normalize associated types in paths in expressions.
+* pr:14490[] use an arena instead of a hash map in the crate graph.
+* pr:14442[] implement structured API for snippets.
+* pr:14509[] resolve labels in body lowering.
+* pr:14511[] always reborrow mutable reference receiver in methods.
+* pr:14517[] shuffle around some `hir-def` modules.
+* pr:14519[] don't recreate `Hygiene` unnecessarily.
+* pr:14518[] remove unnecessary ``Name``s from `FunctionData::params`.
+* pr:14525[] remove parameter names from function item tree.
+* pr:14524[] render function parameters in `hir-def` pretty printing.
