@@ -1,0 +1,47 @@
+= Changelog #177
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:bab80dae445fd576cb4cc22ba208e9fbc39dc18d[] +
+Release: release:2023-04-17[] (`v0.3.1481`)
+
+== New Features
+
+* pr:14533[] make inlay hints insertable:
++
+video::https://user-images.githubusercontent.com/308347/226258052-07f7c722-bdc2-49bb-b0af-dac7877c761f.mp4[options=loop]
+* pr:14561[] map tokens from `include!` expansion to the included file:
++
+video::https://user-images.githubusercontent.com/308347/232407988-7c526795-78b7-4802-90c1-0a9e200f7d95.mp4[options=loop]
+* pr:14470[] compute closure captures.
+* pr:14549[], pr:14551[] don't suggest unstable items on stable toolchain.
+
+== Fixes
+
+* pr:14536[] (first contribution) restrict the applicability range of `Sort trait items`.
+* pr:14540[] (first contribution) allow extracting function from single brace of block expression.
+* pr:14579[] (first contribution) accept unknown notification during initialization.
+* pr:14538[] fix project linking popup appearing for modules that can be linked to a crate.
+* pr:14550[] fix type inference in nested closures.
+* pr:14544[] infer types of nested RPITs.
+* pr:14576[] fix explicit deref problems in closure capture.
+* pr:14560[] fix view crate graph being broken due to webworker usage.
+* pr:14559[], pr:14570[] skip code lens resolution for mismatched document versions.
+* pr:14580[] parse more exclusive range and inline const patterns.
+* pr:14547[] fix receiver adjustments for `Extract variable`.
+* pr:14535[] use the Rust file's parent directory instead of the workspace folder when running the `discoverProjectCommand`.
+
+== Internal Improvements
+
+* pr:14556[] warn when loading sysroot fails to find the `core` library.
+* pr:14446[] only run TypeScript CI when the VS Code extension changes.
+* pr:14572[] encode closing delimiter span in ``FlatTree``s.
+* pr:14573[] allocate `ExprScope` entries in a single arena instead of per-``ScopeData``.
+* pr:14575[] put `Attrs` behind a query instead of `AttsWithOwner`.
+* pr:14574[] make `block_def_map` infallible.
+* pr:14578[] make `inherent_impls_in_block` and `trait_impls_in_block` infallible.
+* pr:14585[] make `ExpandDatabase::parse_macro_expansion` and `ExpandDatabase::parse_or_expand` infallible.
+* pr:14581[] move layout logic from `hir-def` to `hir-ty`.
+* pr:14583[] report macro definition errors on the definition.
+* pr:14584[], pr:14587[], pr:14588[] report item-level macro expansion syntax errors.

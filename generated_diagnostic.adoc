@@ -43,6 +43,12 @@ This diagnostic is shown when the derive attribute is used on an item other than
 This diagnostic is shown for macro expansion errors.
 
 
+=== macro-error
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L12[macro_error.rs]
+
+This diagnostic is shown for macro expansion errors.
+
+
 === malformed-derive
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/malformed_derive.rs#L3[malformed_derive.rs]
 
