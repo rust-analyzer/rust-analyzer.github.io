@@ -10,7 +10,7 @@ Release: release:2023-04-17[] (`v0.3.1481`)
 
 * pr:14533[] make inlay hints insertable:
 +
-video::https://user-images.githubusercontent.com/308347/226258052-07f7c722-bdc2-49bb-b0af-dac7877c761f.mp4[options=loop]
+video::https://user-images.githubusercontent.com/308347/232406455-ce7e7eed-9f6e-4cca-a574-938d90e22017.mp4[options=loop]
 * pr:14561[] map tokens from `include!` expansion to the included file:
 +
 video::https://user-images.githubusercontent.com/308347/232407988-7c526795-78b7-4802-90c1-0a9e200f7d95.mp4[options=loop]
