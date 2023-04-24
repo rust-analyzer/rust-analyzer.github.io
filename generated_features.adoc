@@ -763,7 +763,7 @@ Randomizes all crate IDs in the crate graph, for debugging.
 
 
 === Status
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/status.rs#L25[status.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/status.rs#L27[status.rs]
 
 Shows internal statistic about memory usage of rust-analyzer.
 
@@ -978,7 +978,7 @@ image::https://user-images.githubusercontent.com/48062697/113065588-068bdb80-91b
 
 
 === Workspace Symbol
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-db/src/symbol_index.rs#L155[symbol_index.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-db/src/symbol_index.rs#L166[symbol_index.rs]
 
 Uses fuzzy-search to find types, modules and functions by name across your
 project and dependencies. This is **the** most useful feature, which improves code

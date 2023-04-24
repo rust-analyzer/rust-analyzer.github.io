@@ -1,0 +1,36 @@
+= Changelog #178
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:bc78ebd9d83d614562f0a9280bdedf91a3841a73[] +
+Release: release:2023-04-24[] (`v0.3.1489`)
+
+== New Features
+
+* pr:14610[] resolve `$crate` in derive paths.
+
+== Fixes
+
+* pr:14591[] (first contribution) restrict `Sort items` assist range.
+* pr:14618[] (first contribution) respect `editor.parameterHints.enabled` after triggering a completion.
+* pr:14598[] fix release channel detection for unstable completion filtering.
+* pr:14619[] fix false `need-mut` positive and too large span in closures.
+* pr:14625[] fix token conversion for doc-comments.
+* pr:14634[] report remaining macro errors in associated item collection.
+* pr:14643[] fix const eval panic with parameter destructing.
+* pr:14603[] try to de-duplicate workspaces by top level cargo workspace.
+
+== Internal Improvements
+
+* pr:14577[] (first contribution) fix all spelling mistakes.
+* pr:14621[] (first contribution) support type parameters in `make::impl_trait`.
+* pr:14622[] add `syntax::make::ty_alias`.
+* pr:14632[] increase LRU cache size for `parse_expansion` and `macro_expand` queries.
+* pr:14633[] don't reparse files when trying to expand assoc item macro calls.
+* pr:14630[] replace `Arc<String>` with `Arc<str>`.
+* pr:14594[] move `Expander` and `LowerCtx` into separate modules.
+* pr:14604[] add `minicore` smoke test.
+* pr:14599[] add `RA_UNSTABLE_SYSROOT_HACK`.
+* pr:14628[] restructure symbol queries.
+* pr:14629[] add additional query information to status ouput.
