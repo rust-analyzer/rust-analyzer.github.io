@@ -1,0 +1,35 @@
+= Changelog #179
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:3a27518fee5a723005299cf49e2d58a842a261ca[] +
+Release: release:2023-05-01[] (`v0.3.1498`)
+
+== New Features
+
+* pr:14690[] add hover for closures:
++
+image::https://user-images.githubusercontent.com/308347/235419781-a9add5c5-a6f4-46a8-87bf-cfde0a3fa6eb.png["Screenshot showing a a closure hover with details about captured fields"]
+* pr:14513[] add `#[doc(alias(..))]`-based field and function completions.
+* pr:14659[] de-duplicate crates when extending crate graphs.
+* pr:14644[], pr:14686[] don't underline whole `for` loops and iterator chains on errors.
+
+== Fixes
+
+* pr:14647[] (first contribution) remove extra `rustc` argument in target layout loading.
+* pr:14641[] register obligations during path inference.
+* pr:14652[] fix `pat` fragment handling in the 2021 edition.
+* pr:14651[] fix VS Code workspace root de-duplication.
+* pr:14689[] force `InitializeParams` path drives to uppercase on Windows.
+* pr:14667[] handle nested types in `unwrap_result_return_type`.
+* pr:14671[] fix `proc-macro-srv` path config.
+* pr:14678[] fix "Restart server" button trying to start instead of restart the server.
+* pr:14639[] fix some typos in `StructFlags`.
+
+== Internal Improvements
+
+* pr:14648[] (first contribution) specify `--pre-release` when publishing on the Code Marketplace.
+* pr:14658[] remove `proc-macro` server command from the `rust-analyzer` binary.
+* pr:14654[] fix status command panicking when additional LRU caches are set up.
+* pr:14636[] remove unnecessary `is_derive` field from `MacroCallKind::Attr`.
