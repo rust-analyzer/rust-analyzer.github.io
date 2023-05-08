@@ -4,7 +4,7 @@
 :page-layout: post
 
 Commit: commit:833d5301d1ac47b2d3f0a71b67c5887f7481cc4e[] +
-Release: release:2023-05-08[] (`TBD`)
+Release: release:2023-05-08[] (`v0.3.1506`)
 
 == New Features
 
