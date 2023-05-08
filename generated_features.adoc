@@ -319,7 +319,7 @@ image::https://user-images.githubusercontent.com/48062697/113020657-b560f500-917
 
 
 === Highlight Related
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L36[highlight_related.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L37[highlight_related.rs]
 
 Highlights constructs related to the thing under the cursor:
 
@@ -359,6 +359,16 @@ Optionally, one can enable additional hints for
 * compiler inserted reborrows
 
 image::https://user-images.githubusercontent.com/48062697/113020660-b5f98b80-917a-11eb-8d70-3be3fd558cdd.png[]
+
+
+=== Interpret Function
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/interpret_function.rs#L9[interpret_function.rs]
+
+|===
+| Editor  | Action Name
+
+| VS Code | **rust-analyzer: Interpret Function**
+|===
 
 
 === Join Lines
@@ -451,7 +461,7 @@ image::https://user-images.githubusercontent.com/48062697/113065573-04298180-91b
 
 
 === Memory Usage
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-db/src/apply_change.rs#L41[apply_change.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-db/src/apply_change.rs#L40[apply_change.rs]
 
 Clears rust-analyzer's internal database and prints memory usage statistics.
 
@@ -544,9 +554,9 @@ image::https://user-images.githubusercontent.com/48062697/113171066-105c2000-923
 
 
 === Open Docs
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/doc_links.rs#L110[doc_links.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/doc_links.rs#L120[doc_links.rs]
 
-Retrieve a link to documentation for the given symbol.
+Retrieve a links to documentation for the given symbol.
 
 The simplest way to use this feature is via the context menu. Right-click on
 the selected item. The context menu opens. Select **Open Docs**.
@@ -736,6 +746,15 @@ image::https://user-images.githubusercontent.com/48062697/113164457-06cfb980-923
 image::https://user-images.githubusercontent.com/48062697/113187625-f7f50100-9250-11eb-825e-91c58f236071.png[]
 
 
+=== Show Dependency Tree
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/fetch_crates.rs#L13[fetch_crates.rs]
+
+Shows a view tree with all the dependencies of this project
+
+|===
+image::https://user-images.githubusercontent.com/5748995/229394139-2625beab-f4c9-484b-84ed-ad5dee0b1e1a.png[]
+
+
 === Show Syntax Tree
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/syntax_tree.rs#L7[syntax_tree.rs]
 
@@ -751,7 +770,7 @@ image::https://user-images.githubusercontent.com/48062697/113065586-068bdb80-91b
 
 
 === Shuffle Crate Graph
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/shuffle_crate_graph.rs#L8[shuffle_crate_graph.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/shuffle_crate_graph.rs#L7[shuffle_crate_graph.rs]
 
 Randomizes all crate IDs in the crate graph, for debugging.
 
@@ -763,7 +782,7 @@ Randomizes all crate IDs in the crate graph, for debugging.
 
 
 === Status
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/status.rs#L27[status.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/status.rs#L28[status.rs]
 
 Shows internal statistic about memory usage of rust-analyzer.
 
@@ -942,7 +961,7 @@ by overwriting the settings object mentioned above, the defaults are:
 
 
 === View Crate Graph
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/view_crate_graph.rs#L9[view_crate_graph.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/view_crate_graph.rs#L8[view_crate_graph.rs]
 
 Renders the currently loaded crate graph as an SVG graphic. Requires the `dot` tool, which
 is part of graphviz, to be installed.

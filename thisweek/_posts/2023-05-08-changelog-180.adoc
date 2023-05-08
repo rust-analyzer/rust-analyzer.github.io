@@ -1,0 +1,43 @@
+= Changelog #180
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:833d5301d1ac47b2d3f0a71b67c5887f7481cc4e[] +
+Release: release:2023-05-08[] (`TBD`)
+
+== New Features
+
+* pr:11557[] (first contribution) add dependency tree explorer:
++
+image::https://user-images.githubusercontent.com/5748995/155822183-1e227c7b-7929-4fc8-8eed-29ccfc5e14fe.png["Screenshot showing a new VS Code panel with a tree of the project dependencies"]
+* pr:14662[] (first contribution) support locally-built documentation for `experimental/externalDocs` with compatible clients.
+* pr:14664[] MIR episode 4, support arithmentic assignment operators, statics, constants in patterns and associated constants in traits.
+* pr:14711[] highlight closure captures when cursor is on `|` or `move`.
+* pr:14732[] fix pattern type mismatches for bindings, enable pattern type mismatch diagnostics again.
+* pr:14725[] emit function bodies when expanding built-in derives.
+* pr:14749[] define problem matcher for panics, kbd:[F8] will go to the panic location in Code.
+* pr:14758[] add `rust-analyzer.hover.memoryLayout.enable` config for disabling memory layout info on hover.
+
+== Fixes
+
+* pr:14745[] (first contribution) sort dependencies in VS Code tree view.
+* pr:14707[] don't generate already-existing methods on `generate_delegate_methods`.
+* pr:14713[] don't highlight escapes in raw strings.
+* pr:14714[] exclude `Sized` from go-to actions in hover.
+* pr:14705[] fix floating point evaluation and `try` block tracking in MIR.
+* pr:14712[] only pass unstable flags to `cargo metadata` from extra args config.
+* pr:14738[] use block def maps in body lowering.
+* pr:14739[] parse bare dyn types with leading lifetime.
+* pr:14750[] ignore impls with `#[rustc_reservation_impl]`
+* pr:14748[] show memory layout type aliases.
+
+== Internal Improvements
+
+* pr:14716[] reduce memory consumption by not merging `trait_impls_in_deps` results (saves 59 MB on `self`).
+* pr:14720[] use boxed slices instead of ``Vec``s in declarative macros (saves 8 MB on `self`).
+* pr:14718[] use `triomphe::Arc` instead of `std::sync::Arc` (saves 4 MB on `self`).
+* pr:14715[] refactor symbol index.
+* pr:14710[] refactor notification handlers.
+* pr:14733[] publish `line-index` and switch to `nohash_hasher`.
+* pr:14757[] fix library publish branch filter.

@@ -352,6 +352,11 @@ Controls file watching implementation.
 --
 Enables highlighting of related references while the cursor is on `break`, `loop`, `while`, or `for` keywords.
 --
+[[rust-analyzer.highlightRelated.closureCaptures.enable]]rust-analyzer.highlightRelated.closureCaptures.enable (default: `true`)::
++
+--
+Enables highlighting of all captures of a closure while the cursor is on the `|` or move keyword of a closure.
+--
 [[rust-analyzer.highlightRelated.exitPoints.enable]]rust-analyzer.highlightRelated.exitPoints.enable (default: `true`)::
 +
 --
@@ -416,7 +421,12 @@ Whether to show keyword hover popups. Only applies when
 [[rust-analyzer.hover.links.enable]]rust-analyzer.hover.links.enable (default: `true`)::
 +
 --
-Use markdown syntax for links in hover.
+Use markdown syntax for links on hover.
+--
+[[rust-analyzer.hover.memoryLayout.enable]]rust-analyzer.hover.memoryLayout.enable (default: `true`)::
++
+--
+Whether to show memory layout data on hover.
 --
 [[rust-analyzer.imports.granularity.enforce]]rust-analyzer.imports.granularity.enforce (default: `false`)::
 +
