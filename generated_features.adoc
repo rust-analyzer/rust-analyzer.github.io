@@ -312,7 +312,7 @@ Navigates to the type of an identifier.
 |===
 | Editor  | Action Name
 
-| VS Code | **Go to Type Definition*
+| VS Code | **Go to Type Definition**
 |===
 
 image::https://user-images.githubusercontent.com/48062697/113020657-b560f500-917a-11eb-9007-0f809733a338.gif[]
@@ -751,6 +751,10 @@ image::https://user-images.githubusercontent.com/48062697/113187625-f7f50100-925
 
 Shows a view tree with all the dependencies of this project
 
+|===
+| Editor  | Panel Name
+
+| VS Code | **Rust Dependencies**
 |===
 image::https://user-images.githubusercontent.com/5748995/229394139-2625beab-f4c9-484b-84ed-ad5dee0b1e1a.png[]
 
