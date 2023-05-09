@@ -12,7 +12,7 @@ Release: release:2023-05-08[] (`v0.3.1506`)
 +
 image::https://user-images.githubusercontent.com/5748995/155822183-1e227c7b-7929-4fc8-8eed-29ccfc5e14fe.png["Screenshot showing a new VS Code panel with a tree of the project dependencies"]
 * pr:14662[] (first contribution) support locally-built documentation for `experimental/externalDocs` with compatible clients.
-* pr:14664[] MIR episode 4, support arithmentic assignment operators, statics, constants in patterns and associated constants in traits.
+* pr:14664[] MIR episode 4, support arithmetic assignment operators, statics, constants in patterns and associated constants in traits.
 * pr:14711[] highlight closure captures when cursor is on `|` or `move`.
 * pr:14732[] fix pattern type mismatches for bindings, enable pattern type mismatch diagnostics again.
 * pr:14725[] emit function bodies when expanding built-in derives.
