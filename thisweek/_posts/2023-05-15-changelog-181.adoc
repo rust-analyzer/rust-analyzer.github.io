@@ -1,0 +1,37 @@
+= Changelog #181
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:e5c722820ac6f348c6c674ef3391d7156f1cd1c9[] +
+Release: release:2023-05-15[] (`v0.3.1514`)
+
+== A Note on Today's Release
+
+Because of an infrastructure issue, today's release is not available on the VS Code Marketplace and OpenVSX.
+The VSIX can still be downloaded manually from GitHub Releases, and Code should be able to update it automatically in the future.
+
+We hope we can get everything sorted out by next Monday.
+
+== New Features
+
+* pr:14742[] add closure capture inlay hints, disabled by default:
++
+image::https://user-images.githubusercontent.com/3757771/236447484-649a4ea6-ad61-496e-bad8-765a5236150e.png["A screenshow showing capture hints, like move(&mut count) || { count += 1; }"]
+* pr:14777[] add `rust-analyzer.semanticHighlighting.nonStandardTokens` setting to control the usage of non-standard tokens and modifiers.
+
+== Fixes
+
+* pr:14781[], pr:14800[] introduce macro sub-namespaces and `macro_use` prelude.
+* pr:14727[] evaluate consts lazily in `path_to_const`.
+* pr:14795[] add `macro` modifier for highlighting tokens in macro calls.
+* pr:14797[] fix perf regression from symbol index refactor.
+* pr:14801[] fix `process_changes` duplicating change events.
+* pr:14788[] fix derived `Debug` implementation for unsized structs.
+
+== Internal Improvements
+
+* pr:14799[] (first contribution) remove root component from patched Windows UNC path prefix.
+* pr:14735[] drop canonicalization of paths and normalize all `rust-project.json` paths.
+* pr:14808[] add metrics for unevaluated constants, failed MIR bodies and failed data layouts.
+* pr:14747[] add more APIs to `la_arena::IdxRange`.

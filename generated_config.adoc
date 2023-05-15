@@ -479,6 +479,11 @@ Whether to show inlay hints after a closing `}` to indicate what item it belongs
 Minimum number of lines required before the `}` until the hint is shown (set to 0 or 1
 to always show them).
 --
+[[rust-analyzer.inlayHints.closureCaptureHints.enable]]rust-analyzer.inlayHints.closureCaptureHints.enable (default: `false`)::
++
+--
+Whether to show inlay hints for closure captures.
+--
 [[rust-analyzer.inlayHints.closureReturnTypeHints.enable]]rust-analyzer.inlayHints.closureReturnTypeHints.enable (default: `"never"`)::
 +
 --
@@ -747,6 +752,11 @@ Inject additional highlighting into doc comments.
 
 When enabled, rust-analyzer will highlight rust source in doc comments as well as intra
 doc links.
+--
+[[rust-analyzer.semanticHighlighting.nonStandardTokens]]rust-analyzer.semanticHighlighting.nonStandardTokens (default: `true`)::
++
+--
+Whether the server is allowed to emit non-standard tokens and modifiers.
 --
 [[rust-analyzer.semanticHighlighting.operator.enable]]rust-analyzer.semanticHighlighting.operator.enable (default: `true`)::
 +

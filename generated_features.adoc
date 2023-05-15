@@ -341,7 +341,7 @@ image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L379[inlay_hints.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L384[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
@@ -734,6 +734,7 @@ documentation:: Emitted for documentation comments.
 injected:: Emitted for doc-string injected highlighting like rust source blocks in documentation.
 intraDocLink:: Emitted for intra doc links in doc-strings.
 library:: Emitted for items that are defined outside of the current crate.
+macro::  Emitted for tokens inside macro calls.
 mutable:: Emitted for mutable locals and statics as well as functions taking `&mut self`.
 public:: Emitted for items that are from the current crate and are `pub`.
 reference:: Emitted for locals behind a reference and functions taking `self` by reference.
@@ -756,6 +757,7 @@ Shows a view tree with all the dependencies of this project
 
 | VS Code | **Rust Dependencies**
 |===
+
 image::https://user-images.githubusercontent.com/5748995/229394139-2625beab-f4c9-484b-84ed-ad5dee0b1e1a.png[]
 
 
