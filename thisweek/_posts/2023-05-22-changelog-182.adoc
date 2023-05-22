@@ -19,7 +19,7 @@ image::https://user-images.githubusercontent.com/308347/239809224-3df598fc-2203-
 image::https://user-images.githubusercontent.com/308347/239808933-634a3e29-d79b-4f20-8370-64944e7c9f72.png["Screenshot showing usages of a trait items]
 * pr:14789[] add `moved-out-of-ref` diagnostic:
 +
-image::https://user-images.githubusercontent.com/308347/239808632-c8362c50-10af-4463-a1f6-1428b901a02f.png["Screenshot showing a diagnostic when a local is moved out of a reference"]
+image::https://user-images.githubusercontent.com/308347/239815832-c54aaa32-7814-4d19-be4d-88e465a068ed.png["Screenshot showing a diagnostic when a local is moved out of a reference"]
 * pr:14845[] add layout info for enum variant and locals:
 +
 image::https://user-images.githubusercontent.com/308347/239808173-1f4a2da1-8137-4661-9407-1a3615d38a07.png["Screenshot showing the size of an enum variant on hover"]
