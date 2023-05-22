@@ -1,0 +1,54 @@
+= Changelog #182
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:7ac161ce77dfa31dc39337c2543a1d777e70c16e[] +
+Release: release:2023-05-22[] (`v0.3.1524`)
+
+== New Features
+
+* pr:14775[] add `#[doc(alias(..))]`-based method completions:
++
+image::https://user-images.githubusercontent.com/108802164/237368212-e7c69bb9-3da6-4d8f-a09b-fece1bdd1c0e.png["Screenshot showing completion for method aliases"]
+* pr:14811[] render hover actions for closure captures and signature:
++
+image::https://user-images.githubusercontent.com/308347/239809224-3df598fc-2203-41d8-8afa-3f0a0a360e00.png["Screenshot showing a closure hover with 'Go to' links for returned and captured types, and also its signature"]
+* pr:14812[] highlight used associated trait items when cursor is on trait import or trait bound:
++
+image::https://user-images.githubusercontent.com/308347/239808933-634a3e29-d79b-4f20-8370-64944e7c9f72.png["Screenshot showing usages of a trait items]
+* pr:14789[] add `moved-out-of-ref` diagnostic:
++
+image::https://user-images.githubusercontent.com/308347/239808632-c8362c50-10af-4463-a1f6-1428b901a02f.png["Screenshot showing a diagnostic when a local is moved out of a reference"]
+* pr:14845[] add layout info for enum variant and locals:
++
+image::https://user-images.githubusercontent.com/308347/239808173-1f4a2da1-8137-4661-9407-1a3615d38a07.png["Screenshot showing the size of an enum variant on hover"]
+* pr:14837[] support C string literals.
+* pr:14787[] MIR episode 5, lower slice patterns and anonymous `const` blocks.
+
+== Fixes
+
+* pr:14848[] (first contribution) traverse `else` blocks of `let-else` in `preorder_expr`.
+* pr:14809[] support `#[macro_use(name, ...)]`.
+* pr:14824[] diagnose non-value `return` and `break` type mismatches.
+* pr:14825[] fix evaluation of negation for floating point types.
+* pr:14828[] process `macro_use` prelude in semantic scope resolver.
+* pr:14823[] only render discriminant hints for data-carrying enums with primitive `repr`.
+* pr:14822[] force-disable the `augmentsSyntaxTokens` capability on VS Code.
+* pr:14802[] fix layout for `hir_ty::Ty` and friends.
+* pr:14820[] expand `format_args!` with more details.
+* pr:14851[] handle match scrutinee in closure captures.
+* pr:14855[] consider block impls in `lookup_impl_assoc_item_for_trait_ref`.
+* pr:14863[] consider all tokens in macro calls when analyzing locals.
+
+== Internal Improvements
+
+* pr:14746[] parse unstable associated return type bounds.
+* pr:14794[], pr:14818[], pr:14835[] restructure `InlayHint`, no longer derive properties from its kind.
+* pr:14810[] inline handlers module.
+* pr:14834[] do less file parsing for symbol index generation.
+* pr:14836[] bump `rustc_lexer`.
+* pr:14843[] partially support panic message in `MirEvalError`.
+* pr:14847[] reduce MIR memory usage.
+* pr:14857[] shrink `ProcMacroExpander` from 8 to 4 bytes.
+* pr:14819[] fix division by zero in `analysis-stats`.

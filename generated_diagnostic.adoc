@@ -87,6 +87,12 @@ This diagnostic is triggered if `match` block is missing one or more match arms.
 This diagnostic is triggered if an operation marked as `unsafe` is used outside of an `unsafe` function or block.
 
 
+=== moved-out-of-ref
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/moved_out_of_ref.rs#L4[moved_out_of_ref.rs]
+
+This diagnostic is triggered on moving non copy things out of references.
+
+
 === need-mut
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L7[mutability_errors.rs]
 

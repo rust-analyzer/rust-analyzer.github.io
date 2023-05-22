@@ -319,16 +319,18 @@ image::https://user-images.githubusercontent.com/48062697/113020657-b560f500-917
 
 
 === Highlight Related
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L37[highlight_related.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L39[highlight_related.rs]
 
 Highlights constructs related to the thing under the cursor:
 
 . if on an identifier, highlights all references to that identifier in the current file
+.. additionally, if the identifier is a trait in a where clause, type parameter trait bound or use item, highlights all references to that trait's assoc items in the corresponding scope
 . if on an `async` or `await token, highlights all yield points for that async context
 . if on a `return` or `fn` keyword, `?` character or `->` return type arrow, highlights all exit points for that context
 . if on a `break`, `loop`, `while` or `for` token, highlights all break points for that loop or block context
+. if on a `move` or `|` token that belongs to a closure, highlights all captures of the closure.
 
-Note: `?` and `->` do not currently trigger this behavior in the VSCode editor.
+Note: `?`, `|` and `->` do not currently trigger this behavior in the VSCode editor.
 
 
 === Hover
@@ -341,7 +343,7 @@ image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L384[inlay_hints.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L392[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
@@ -627,7 +629,7 @@ image::https://user-images.githubusercontent.com/48062697/113065583-055aae80-91b
 
 
 === Semantic Syntax Highlighting
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/syntax_highlighting.rs#L62[syntax_highlighting.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/syntax_highlighting.rs#L65[syntax_highlighting.rs]
 
 rust-analyzer highlights the code semantically.
 For example, `Bar` in `foo::Bar` might be colored differently depending on whether `Bar` is an enum or a trait.
@@ -762,7 +764,7 @@ image::https://user-images.githubusercontent.com/5748995/229394139-2625beab-f4c9
 
 
 === Show Syntax Tree
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/syntax_tree.rs#L7[syntax_tree.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/syntax_tree.rs#L9[syntax_tree.rs]
 
 Shows the parse tree of the current file. It exists mostly for debugging
 rust-analyzer itself.

@@ -52,7 +52,7 @@ fn main() {
 
 [discrete]
 === `add_hash`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/raw_string.rs#L88[raw_string.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/raw_string.rs#L89[raw_string.rs]
 
 Adds a hash to a raw string literal.
 
@@ -1976,7 +1976,7 @@ fn main() {
 
 [discrete]
 === `make_usual_string`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/raw_string.rs#L46[raw_string.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/raw_string.rs#L47[raw_string.rs]
 
 Turns a raw string into a plain string.
 
@@ -2380,7 +2380,7 @@ fn main() {
 
 [discrete]
 === `remove_hash`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/raw_string.rs#L116[raw_string.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/raw_string.rs#L117[raw_string.rs]
 
 Removes a hash from a raw string literal.
 
