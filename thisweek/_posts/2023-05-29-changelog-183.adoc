@@ -1,0 +1,49 @@
+= Changelog #183
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:505fd09f9e020b096d014e68b667268e743c2dd6[] +
+Release: release:2023-05-29[] (`v0.3.1533`)
+
+== New Features
+
+* pr:14866[] (first contribution) add Markdown syntax highlighting to doc-comments in VS Code:
++
+image::https://user-images.githubusercontent.com/1593486/239751755-c84f2e83-faea-47ca-853d-3728a07b2b66.png["Screenshot showing Markdown highlighting in a block comment"]
+* pr:14849[] implement symbol search by alias:
++
+image::https://user-images.githubusercontent.com/20956650/241207491-f2d13661-3cd5-4779-b40f-56e6d3efdef1.gif["Screen recording of symbol search including aliases"]
+* pr:14816[] add assist to replace a named generic parameter with impl trait:
++
+video::https://user-images.githubusercontent.com/308347/241656231-9724e2bc-570b-43eb-b0fa-1895e3c02394.mp4[options=loop]
+* pr:14916[] add diagnostic for incorrect `_` expressions:
++
+image::https://user-images.githubusercontent.com/308347/241656740-4527db7f-d14b-454e-890a-abe874ff4437.png["Screenshot of an error on `let _s: String = _;"]
+
+== Fixes
+
+* pr:14752[] (first contribution) fix indentation in `generate_derive`, `add_missing_impl_members` and `add_missing_default_members`.
+* pr:14878[] implement `${count()}` metavariable expressions.
+* pr:14872[] introduce new type variable when expectation for ref pattern is not a reference.
+* pr:14891[], pr:14897[] evaluate `UnevaluatedConst` during unification.
+* pr:14913[] evaluate `UnevaluatedConst` before trait solving.
+* pr:14890[] use `::core` instead of `$crate` in `option_env!` expansion.
+* pr:14893[] fix `need-mut` false positive in closure capture of match scrutinee.
+* pr:14874[] change how `#![cfg(FALSE)]` behaves on crate root.
+* pr:14895[] don't try to determine type of token inside macro calls.
+* pr:14904[] render size, align and offset hover values in hex.
+* pr:14906[] add a toggle to disable the dependency explorer.
+* pr:14910[] filter out unused cargo features from config.
+
+== Internal Improvements
+
+* pr:14894[] (first contribution) allow overriding the SCIP output path.
+* pr:14914[] (first contribution) update outdated `rustup` installation instructions.
+* pr:14859[] specify thread types using Quality of Service API.
+* pr:14880[] remove double lookups from `Interned`.
+* pr:14881[] replace `Display` impl for `Name` to support interning.
+* pr:14889[] add context to "overly long loop" message.
+* pr:14901[] move flycheck and config errors to status notification.
+* pr:14909[] run CI on nightly rust when `proc-macro-*` crates change.
+* pr:14755[] fix a TODO and some Clippy lints.

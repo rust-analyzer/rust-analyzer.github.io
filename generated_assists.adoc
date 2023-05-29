@@ -2728,6 +2728,23 @@ fn handle(action: Action) {
 
 
 [discrete]
+=== `replace_named_generic_with_impl`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_named_generic_with_impl.rs#L15[replace_named_generic_with_impl.rs]
+
+Replaces named generic with an `impl Trait` in function argument.
+
+.Before
+```rust
+fn new<P┃: AsRef<Path>>(location: P) -> Self {}
+```
+
+.After
+```rust
+fn new(location: impl AsRef<Path>) -> Self {}
+```
+
+
+[discrete]
 === `replace_qualified_name_with_use`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_qualified_name_with_use.rs#L13[replace_qualified_name_with_use.rs]
 

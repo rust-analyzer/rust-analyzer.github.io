@@ -131,6 +131,12 @@ This diagnostic is triggered when the type of an expression or pattern does not 
 the expected type.
 
 
+=== typed-hole
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/typed_hole.rs#L12[typed_hole.rs]
+
+This diagnostic is triggered when an underscore expression is used in an invalid position.
+
+
 === undeclared-label
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/undeclared_label.rs#L3[undeclared_label.rs]
 
@@ -211,6 +217,6 @@ enable support for procedural macros (see `rust-analyzer.procMacro.attributes.en
 
 
 === unused-mut
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L39[mutability_errors.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L42[mutability_errors.rs]
 
 This diagnostic is triggered when a mutable variable isn't actually mutated.
