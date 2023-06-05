@@ -217,6 +217,6 @@ enable support for procedural macros (see `rust-analyzer.procMacro.attributes.en
 
 
 === unused-mut
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L42[mutability_errors.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L43[mutability_errors.rs]
 
 This diagnostic is triggered when a mutable variable isn't actually mutated.

@@ -1,0 +1,42 @@
+= Changelog #184
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:2f1b7cedcf5044ba620646c6758bbb99f46b8d95[] +
+Release: release:2023-06-05[] (`v0.3.1541`)
+
+== New Features
+
+* pr:14938[] add signature help for tuple patterns and expressions:
++
+image::https://user-images.githubusercontent.com/308347/243273547-73e109fb-1a67-414d-81cd-77b1c81768a6.png["Screenshot showing a signature help of (i32, &str, char) for (0, "a", 'c')"]
+* pr:14892[], pr:14942[] MIR episode 6, separate monomorphization and speed up interpretation.
+* pr:14905[] render niches on hover.
+* pr:14911[] allow setting ``cfg``s (`rust-analyzer.cargo.cfgs`).
+* pr:14929[] add render configuration for memory layout hovers.
+* pr:14888[] prioritize threads affected by user typing.
+
+== Fixes
+
+* pr:14935[] don't duplicate sysroot crates in `rustc` workspace.
+* pr:14939[] don't discard file id from differing macro upmapping in nav target calculation.
+* pr:14947[] add enum, reference, array and slice to `render_const_scalar`.
+* pr:14952[] make assignment operators right associative.
+* pr:14971[] consider outer binders when folding captured items' type.
+* pr:14912[] don't add `--all-targets` to runnables for `no_std` or `no_core` crates.
+* pr:14945[] don't trigger "replace generic with impl trait" assist when it would produce broken code.
+* pr:14920[] fix edits for `convert_named_struct_to_tuple_struct`.
+* pr:14950[] support floating-point intrinsics in const eval.
+* pr:14951[] fix string pattern matching in mir interpreter.
+* pr:14955[] remove unnecessary `StorageDead`.
+* pr:14961[] fix drop scopes problems in mir.
+* pr:14970[] detect multiple bindings for one identifier in the same pattern and suppress `need-mut`.
+* pr:14972[] fix `unused-mut` false positive for `Box`.
+* pr:14976[] fix missing terminator for slice pattern.
+
+== Internal Improvements
+
+* pr:14941[] shrink `DefMap`, share crate level items with block def maps.
+* pr:14842[] improve `ast::make`.
+* pr:14969[] update built-in attribute list.
