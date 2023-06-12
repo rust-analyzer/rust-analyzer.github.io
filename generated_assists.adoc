@@ -73,7 +73,7 @@ fn main() {
 
 [discrete]
 === `add_impl_default_members`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L55[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L51[add_missing_impl_members.rs]
 
 Adds scaffold for overriding default impl members.
 
@@ -110,7 +110,7 @@ impl Trait for () {
 
 [discrete]
 === `add_impl_missing_members`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L14[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L10[add_missing_impl_members.rs]
 
 Adds scaffold for required impl members.
 
@@ -924,7 +924,7 @@ enum A { One(One) }
 
 [discrete]
 === `extract_type_alias`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_type_alias.rs#L7[extract_type_alias.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_type_alias.rs#L10[extract_type_alias.rs]
 
 Extracts the selected type as a type alias.
 
@@ -1703,6 +1703,31 @@ fn foo(name: Option<&str>) {
             Some(val) => val,
             None => panic!("called `Option::unwrap()` on a `None` value"),
         };
+}
+```
+
+
+[discrete]
+=== `inline_const_as_literal`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_const_as_literal.rs#L5[inline_const_as_literal.rs]
+
+Evaluate and inline const variable as literal.
+
+.Before
+```rust
+const STRING: &str = "Hello, World!";
+
+fn something() -> &'static str {
+    STRING┃
+}
+```
+
+.After
+```rust
+const STRING: &str = "Hello, World!";
+
+fn something() -> &'static str {
+    "Hello, World!"
 }
 ```
 
@@ -2612,7 +2637,7 @@ fn main() {
 
 [discrete]
 === `replace_derive_with_manual_impl`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_derive_with_manual_impl.rs#L21[replace_derive_with_manual_impl.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_derive_with_manual_impl.rs#L18[replace_derive_with_manual_impl.rs]
 
 Converts a `derive` impl into a manual one.
 

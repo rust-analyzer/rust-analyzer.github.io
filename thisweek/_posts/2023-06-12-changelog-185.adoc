@@ -1,0 +1,38 @@
+= Changelog #185
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:a4407b45ee9087486acd818e1b6ccddc585cc924[] +
+Release: release:2023-06-12[] (`v0.3.1549`)
+
+== New Features
+
+* pr:14925[] (first contribution) add "Inline constant as literal" assist.
+* pr:15028[] give `rustfmt` jobs a separate thread.
+
+== Fixes
+
+* pr:14960[] (first contribution) add span to token groups.
+* pr:14974[] (first contribution) properly format documentation for ``SignatureHelpRequest``s.
+* pr:14978[] emit `'_` for lifetime generics in `HirDisplay`.
+* pr:15000[] only generate derived trait bound for associated types in field types.
+* pr:15006[] fix panic in `format_args!` expansion.
+* pr:15012[] infer async return type in `generate_function`.
+* pr:14875[] handle lifetimes in assists.
+* pr:14989[], pr:15025[] derive source scope from syntax node to be transformed.
+* pr:15019[] fix panic in displaying const trait objects.
+* pr:15022[] fix panic in displaying unsized structs.
+* pr:14998[] make eager macros lazier.
+
+== Internal Improvements
+
+* pr:15005[] (first contribution) fix typo in `reload.rs`.
+* pr:14980[], pr:14988[] sync from downstream.
+* pr:14984[], pr:14997[] bring back the `sysroot-abi` feature.
+* pr:14979[] migrate some assists to use the structured snippet API.
+* pr:15014[] document the `sysroot` field in `JsonProject`.
+* pr:15020[] show query entry counts in memory usage command.
+* pr:14827[] offset version number when auto-publishing.
+* pr:14994[] fix CI to actually run when proc-macro things change.
+* pr:14995[] fix proc-macro slow test.
