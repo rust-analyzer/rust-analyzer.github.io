@@ -28,7 +28,7 @@ image::https://user-images.githubusercontent.com/308347/126110831-5a16d375-b7fa-
 
 * pr:9599[] (first contribution) complete `true` and `false` keywords.
 * pr:9600[] (first contribution) fix "Unwrap block" assist on single-line and nested blocks.
-* pr:9621[] (first contribution) update manual after NeoVim 0.5 release.
+* pr:9621[] (first contribution) update manual after Neovim 0.5 release.
 * pr:9579[] set more ``CARGO_`` env vars.
 * pr:9604[] don't fold consecutive modules with item lists.
 

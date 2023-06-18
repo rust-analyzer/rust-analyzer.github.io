@@ -280,7 +280,7 @@ Also see the https://emacs-lsp.github.io/lsp-mode/page/lsp-rust-analyzer/[rust-a
 
 Note the excellent https://robert.kra.hn/posts/2021-02-07_rust-with-emacs/[guide] from https://github.com/rksm[@rksm] on how to set-up Emacs for Rust development with LSP mode and several other packages.
 
-=== Vim/NeoVim
+=== Vim/Neovim
 
 Prerequisites: You have installed the <<rust-analyzer-language-server-binary,`rust-analyzer` binary>>.
 Not needed if the extension can install/update it on its own, coc-rust-analyzer is one example.
@@ -335,7 +335,7 @@ let g:ale_linters = {'rust': ['analyzer']}
 
 ==== nvim-lsp
 
-NeoVim 0.5 has built-in language server support.
+Neovim 0.5 has built-in language server support.
 For a quick start configuration of rust-analyzer, use https://github.com/neovim/nvim-lspconfig#rust_analyzer[neovim/nvim-lspconfig].
 Once `neovim/nvim-lspconfig` is installed, use `+lua require'lspconfig'.rust_analyzer.setup({})+` in your `init.vim`.
 

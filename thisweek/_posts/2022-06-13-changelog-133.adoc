@@ -14,7 +14,7 @@ Release: release:2022-06-13[]
 == Fixes
 
 * pr:12487[] (first contribution) hide parameter inlay hint when argument is function-like macro with similar name.
-* pr:12508[] don't respond to cancelled requests when retrying them, thus fixing `NO_RESULT_CALLBACK_FOUND` errors in NeoVim.
+* pr:12508[] don't respond to cancelled requests when retrying them, thus fixing `NO_RESULT_CALLBACK_FOUND` errors in Neovim.
 * pr:12455[] fix false-positive type-mismatch error with generic future.
 * pr:12515[] pass the build data to `rustc_private` crates.
 * pr:12464[] fix `Inline variable` producing a type mismatch.
