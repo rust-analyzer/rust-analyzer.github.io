@@ -1,0 +1,29 @@
+= Changelog #186
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:cd3bf9fe51676b520c546460e6d8919b8c8ff99f[] +
+Release: release:2023-06-19[] (`v0.3.1557`)
+
+== Fixes
+
+* pr:15026[], pr:15044[] deduplicate fields, and tuple indices in deref handling for completion.
+* pr:14932[] lower const params with a bad id.
+* pr:15054[] use correct const param and default type names in "Implement missing members".
+* pr:15032[] exclude Markdown injection grammar from `.vscodeignore`.
+* pr:15040[] use a more obscure hasher name in `#[derive]` expansion.
+* pr:15075[] add binding definition for for-expr iterator desugared binding.
+
+== Internal Improvements
+
+* pr:15076[] shrink size of `hir::Binding`.
+* pr:15036[] give `ConstBlockId` and `InTypeConstId` named `Location` types.
+* pr:15047[] record file dependencies in crate graph construction.
+* pr:15053[] add a `CrateRootModuleId` that encodes a module id that is always a crate root.
+* pr:15058[] improve "terminator is none" message.
+* pr:14693[] support `Pointee` trait.
+* pr:15065[] do not allocate unnecessarily when importing macros from parent modules.
+* pr:15067[] add more context to "overly long loop turn" messages.
+* pr:15066[] analyze all bodies in `analysis-stats`, not just functions.
+* pr:15069[] add body lowering step, track time of each step separtely.
