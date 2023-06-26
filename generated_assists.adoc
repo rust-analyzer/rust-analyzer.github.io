@@ -1187,6 +1187,73 @@ impl Person {
 
 
 [discrete]
+=== `generate_delegate_trait`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_delegate_trait.rs#L23[generate_delegate_trait.rs]
+
+Generate delegate trait implementation for `StructField`s.
+
+.Before
+```rust
+trait SomeTrait {
+    type T;
+    fn fn_(arg: u32) -> u32;
+    fn method_(&mut self) -> bool;
+}
+struct A;
+impl SomeTrait for A {
+    type T = u32;
+
+    fn fn_(arg: u32) -> u32 {
+        42
+    }
+
+    fn method_(&mut self) -> bool {
+        false
+    }
+}
+struct B {
+    a┃: A,
+}
+```
+
+.After
+```rust
+trait SomeTrait {
+    type T;
+    fn fn_(arg: u32) -> u32;
+    fn method_(&mut self) -> bool;
+}
+struct A;
+impl SomeTrait for A {
+    type T = u32;
+
+    fn fn_(arg: u32) -> u32 {
+        42
+    }
+
+    fn method_(&mut self) -> bool {
+        false
+    }
+}
+struct B {
+    a: A,
+}
+
+impl SomeTrait for B {
+    type T = <A as SomeTrait>::T;
+
+    fn fn_(arg: u32) -> u32 {
+        <A as SomeTrait>::fn_(arg)
+    }
+
+    fn method_(&mut self) -> bool {
+        <A as SomeTrait>::method_( &mut self.a )
+    }
+}
+```
+
+
+[discrete]
 === `generate_deref`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_deref.rs#L16[generate_deref.rs]
 

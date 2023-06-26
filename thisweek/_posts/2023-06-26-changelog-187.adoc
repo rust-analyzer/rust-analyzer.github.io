@@ -1,0 +1,35 @@
+= Changelog #187
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:4a2ceeff0fb53de168691b0f55d9808d221b867e[] +
+Release: release:2023-06-26[] (`v0.3.1566`)
+
+== New Features
+
+* pr:14948[] add "generate delegate impl" assist:
++
+image::https://user-images.githubusercontent.com/20956650/242857423-22114959-caa6-45ec-a154-b4b2f458f6b1.gif["Screen recording showing the assist generating code that delegates a trait implementation to a field."]
+* pr:15116[] remove Markdown injection grammar.
+
+== Fixes
+
+* pr:15105[] (first contribution) fix display of negative integers.
+* pr:15074[] fix inlining of async functions.
+* pr:15112[] support manual implementation of `Fn` traits in the MIR interpreter.
+* pr:15119[] support more intrinsics in the MIR interpreter.
+* pr:15135[] fix some unsizing problems in MIR.
+* pr:15085[] include project path in workspace loading errors.
+* pr:15104[] skip mutability diagnostics on synthetic bindings.
+
+== Internal Improvements
+
+* pr:15093[] use `ArgumentV1` instead of `Argument`.
+* pr:15071[], pr:15089[] remove spurious `regex` dependency.
+* pr:15087[], pr:15097[], pr:15100[] use consistent style for error handling.
+* pr:15086[] intern use and extern crate items like other items.
+* pr:15095[] change in-tree libs to workspace dependencies and bump versions.
+* pr:15098[] use lib crates from crates.io.
+* pr:15070[] report metric timings for file item trees and crate def map creation.
+* pr:15110[] add run-tests CLI command.
