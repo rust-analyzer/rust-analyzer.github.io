@@ -1,0 +1,40 @@
+= Changelog #188
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:ff485b63bfd9a44ab2a0dbe88dcf58b79496f1ac[] +
+Release: release:2023-07-03[] (`v0.3.1575`)
+
+== New Features
+
+* pr:15136[] (first contribution) drop matching brace key binding.
+* pr:15185[] bump `chalk`.
+* pr:15151[] update VS Code extension dependencies and require 1.78.
+
+== Fixes
+
+* pr:15148[] fix `self` and `super` path resolution in block modules.
+* pr:15157[] fix runnable detection for `#[tokio::test]`.
+* pr:15173[] fix data layout of reference to nested unsized structs.
+* pr:15184[] disable MIR interpreter for targets with different pointer size from host.
+* pr:15168[] fix MIR `realloc` allocating a smaller destination.
+* pr:15189[] fix overflow checking in shift operator.
+* pr:15194[] fix layout of SIMD types and respect alignment in MIR interpreter.
+* pr:15101[], pr:15177[], pr:15180[] check client `workspace.workspaceEdit.resourceOperations` capability.
+* pr:15138[] rename `runnableEnv` to `runnables.extraEnv`.
+
+== Internal Improvements
+
+* pr:15030[], pr:15163[] (first contribution) run metrics on parallel.
+* pr:15172[] support `#[derive_const(Trait)]`.
+* pr:15140[] add comment explaining why `HasSource::source()` returns `Option`.
+* pr:15161[] add `library` fixture meta.
+* pr:15175[] drop `cross-env` npm dep.
+* pr:15174[] switch to `@vscode/vsce`.
+* pr:15153[] clean up Code extension `activationEvents`.
+* pr:15154[] use `@tsconfig/strictest` for type checking rules.
+* pr:15159[] enable `noImplicitOverride`.
+* pr:15169[] use anonymous lifetime where possible.
+* pr:15142[] rename crates after removing libs from workspace.
+* pr:15195[] don't specify `proc-macro-test` version.
