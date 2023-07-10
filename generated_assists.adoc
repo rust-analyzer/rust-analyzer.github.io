@@ -1558,7 +1558,7 @@ fn bar(arg: &str, baz: Baz) ${0:-> _} {
 
 [discrete]
 === `generate_getter`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter.rs#L13[generate_getter.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter_or_setter.rs#L73[generate_getter_or_setter.rs]
 
 Generate a getter method.
 
@@ -1585,7 +1585,7 @@ impl Person {
 
 [discrete]
 === `generate_getter_mut`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter.rs#L53[generate_getter.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter_or_setter.rs#L113[generate_getter_or_setter.rs]
 
 Generate a mut getter method.
 
@@ -1698,7 +1698,7 @@ impl<T: Clone> Ctx<T> {
 
 [discrete]
 === `generate_setter`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_setter.rs#L9[generate_setter.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter_or_setter.rs#L13[generate_getter_or_setter.rs]
 
 Generate a setter method.
 
@@ -1716,9 +1716,69 @@ struct Person {
 }
 
 impl Person {
-    fn set_name(&mut self, name: String) {
+    fn ┃set_name(&mut self, name: String) {
         self.name = name;
     }
+}
+```
+
+
+[discrete]
+=== `generate_trait_from_impl`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_trait_from_impl.rs#L13[generate_trait_from_impl.rs]
+
+Generate trait for an already defined inherent impl and convert impl to a trait impl.
+
+.Before
+```rust
+struct Foo<const N: usize>([i32; N]);
+
+macro_rules! const_maker {
+    ($t:ty, $v:tt) => {
+        const CONST: $t = $v;
+    };
+}
+
+impl<const N: usize> Fo┃o<N> {
+    // Used as an associated constant.
+    const CONST_ASSOC: usize = N * 4;
+
+    fn create() -> Option<()> {
+        Some(())
+    }
+
+    const_maker! {i32, 7}
+}
+```
+
+.After
+```rust
+struct Foo<const N: usize>([i32; N]);
+
+macro_rules! const_maker {
+    ($t:ty, $v:tt) => {
+        const CONST: $t = $v;
+    };
+}
+
+trait ${0:TraitName}<const N: usize> {
+    // Used as an associated constant.
+    const CONST_ASSOC: usize = N * 4;
+
+    fn create() -> Option<()>;
+
+    const_maker! {i32, 7}
+}
+
+impl<const N: usize> ${0:TraitName}<N> for Foo<N> {
+    // Used as an associated constant.
+    const CONST_ASSOC: usize = N * 4;
+
+    fn create() -> Option<()> {
+        Some(())
+    }
+
+    const_maker! {i32, 7}
 }
 ```
 

@@ -1,0 +1,50 @@
+= Changelog #189
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:ff15634831f4a3cdb8abf5690a9848a6fdf48432[] +
+Release: release:2023-07-10[] (`v0.3.1583`)
+
+== New Features
+
+* pr:15081[] (first contribution) add a memory layout viewer:
++
+image::https://user-images.githubusercontent.com/308347/252252339-e394e713-ebb9-4567-9acc-60f4a2a19407.png["Screenshot showing a memory layout view for a struct with `i32`, `u8`, `Vec<bool>` and `usize` fields."]
+* pr:15152[] add `Generate trait from impl` assist:
++
+image::https://user-images.githubusercontent.com/20956650/249216814-05d4dda5-604a-4108-8b82-9b60bd45894a.gif["Screen recording showing the assist generating a trait from an `impl` block"]
+* pr:14990[] map our diagnostics to the `rustc` and `clippy` ones.
+* pr:15186[] don't add panics to error jump list by default.
+
+== Fixes
+
+* pr:15118[] (first contribution) follow raw pointers in autoderef chain when resolving methods with custom receiver.
+* pr:15235[] (first contribution) don't insert semicolon when extracting `match` arm.
+* pr:15226[] make `Expand glob import` work on enum imports.
+* pr:15211[] support GATs in bounds for associated types.
+* pr:15223[] don't show `unresolved-field` diagnostic for missing names.
+* pr:15216[] don't mark braces around `self` imports as unnecessary.
+* pr:15212[] recover from missing associated items and generic const defaults.
+* pr:15245[] fix missing terminator in pattern matching of consts.
+* pr:15222[] fix `size_of_val` and support `min_align_of_val` intrinsic.
+* pr:15244[] support `read_via_copy` intrinsic.
+* pr:15228[] implement recursion in MIR interpreter without recursion.
+* pr:15230[] use `Debug` impl for const eval result rendering.
+* pr:15227[] indent after pressing enter on a blank line.
+
+== Internal Improvements
+
+* pr:15202[] don't diagnose built-in derives.
+* pr:15204[] add analysis-stats flag to trigger some IDE features.
+* pr:15149[] speed up line index calculation via SSE2.
+* pr:15219[] unify Generate getter and setter assists.
+* pr:15205[] split out project loading capabilities from the `rust-analyzer` crate.
+* pr:15203[] shuffle some `proc_macro_expand` query things around.
+* pr:15209[] use stronger typing for `AstId` and `AstIdMap`.
+* pr:15181[] clean up `ImportMap`.
+* pr:15210[] remove `CfgExpander`.
+* pr:15206[] format `let`-`else`.
+* pr:15224[] replace `x` with `it`.
+* pr:15160[] enable `noUncheckedIndexedAccess` and `noPropertyAccessFromIndexSignature` TypeScript options.
+* pr:15234[] remind user to check `PATH` after installation.

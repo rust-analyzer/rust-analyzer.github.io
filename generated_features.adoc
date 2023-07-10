@@ -994,6 +994,18 @@ Only workspace crates are included, no crates.io dependencies or sysroot crates.
 image::https://user-images.githubusercontent.com/48062697/113065588-068bdb80-91b1-11eb-9a78-0b4ef1e972fb.gif[]
 
 
+=== View Memory Layout
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/view_memory_layout.rs#L83[view_memory_layout.rs]
+
+Displays the recursive memory layout of a datatype.
+
+|===
+| Editor  | Action Name
+
+| VS Code | **rust-analyzer: View Memory Layout**
+|===
+
+
 === View Mir
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/view_mir.rs#L6[view_mir.rs]
 

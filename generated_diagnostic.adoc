@@ -44,7 +44,7 @@ This diagnostic is shown for macro expansion errors.
 
 
 === macro-error
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L12[macro_error.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L17[macro_error.rs]
 
 This diagnostic is shown for macro expansion errors.
 
@@ -217,6 +217,6 @@ enable support for procedural macros (see `rust-analyzer.procMacro.attributes.en
 
 
 === unused-mut
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L43[mutability_errors.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L45[mutability_errors.rs]
 
 This diagnostic is triggered when a mutable variable isn't actually mutated.
