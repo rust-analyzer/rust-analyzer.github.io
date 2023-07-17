@@ -197,7 +197,7 @@ struct Point<'a> {
 
 [discrete]
 === `add_missing_match_arms`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_match_arms.rs#L16[add_missing_match_arms.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_match_arms.rs#L13[add_missing_match_arms.rs]
 
 Adds missing clauses to a `match` expression.
 
@@ -1147,7 +1147,7 @@ impl Default for Example {
 
 [discrete]
 === `generate_delegate_methods`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_delegate_methods.rs#L12[generate_delegate_methods.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_delegate_methods.rs#L16[generate_delegate_methods.rs]
 
 Generate delegate methods.
 
@@ -1286,7 +1286,7 @@ impl core::ops::Deref for B {
 
 [discrete]
 === `generate_derive`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_derive.rs#L9[generate_derive.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_derive.rs#L8[generate_derive.rs]
 
 Adds a new `#[derive()]` clause to a struct or enum.
 
@@ -2375,7 +2375,7 @@ fn t() {}
 
 [discrete]
 === `promote_local_to_const`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/promote_local_to_const.rs#L19[promote_local_to_const.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/promote_local_to_const.rs#L16[promote_local_to_const.rs]
 
 Promotes a local variable to a const item changing its name to a `SCREAMING_SNAKE_CASE` variant
 if the local uses no non-const expressions.

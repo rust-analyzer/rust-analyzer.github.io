@@ -1,0 +1,32 @@
+= Changelog #190
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:d82451103962b1482cb137850c81a1acb34db0e7[] +
+Release: release:2023-07-17[] (`v0.3.1591`)
+
+== Fixes
+* pr:15248[] fix eager token mapping panics.
+* pr:15297[] normalize type alias in `projected_ty`.
+* pr:15258[] support `getrandom` syscall in MIR.
+* pr:15268[] add `write_bytes` and `ctlz` intrinsics.
+* pr:15282[] add `type_name` intrinsic and give real `discriminant_type` to `chalk`.
+* pr:15284[] add `sched_getaffinity` and enable `cfg(miri)` in analysis.
+
+== Internal Improvements
+
+* pr:15257[] (first contribution) ignore `Content-Length` header case in `lsp-server`.
+* pr:15270[] (first contribution) make fields of `mir::Terminator` public.
+* pr:15292[] (first contribution) fix typo in command line help.
+* pr:15295[] (first contribution) fix `rust-analzyer ssr` help message.
+* pr:15251[] skip building subtrees for built-in derives.
+* pr:15231[], pr:15260[] migrate more assists to use the structured snippet API.
+* pr:15263[] enable `derive` feature for `serde` in `lsp-server`.
+* pr:15267[] mark MIR execution limit test as slow.
+* pr:15252[] enable `useUnknownInCatchVariables` TypeScript option.
+* pr:15259[] use type imports.
+* pr:15254[] add FIXME for `exactOptionalPropertyTypes`.
+* pr:15264[], pr:15265[] bump npm dependencies.
+* pr:15266[] set `.editorconfig` default indent size to `4`.
+* pr:15275[] default to stable toolchain in the metrics workflow.
