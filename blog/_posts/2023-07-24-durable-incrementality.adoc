@@ -1,0 +1,121 @@
+= Durable Incrementality
+:sectanchors:
+:page-layout: post
+
+https://github.com/salsa-rs/salsa[Salsa] is an incremental computation engine used by rust-analyzer.
+In this post, I will describe a particular optimization implemented in Salsa -- durability system.
+It was https://github.com/salsa-rs/salsa/pull/180[implemented] quite a while ago, but only now it occurred to me that this is a nice self-contained trick, which I haven't seen discussed elsewhere, and which is worth writing about.
+
+Let's start with a bird's eye overview of how Salsa works.
+Instrumentation is the first major component.
+When a Salsa-based program is executed, it records dependencies between between function calls.
+Afterwards, salsa gets a complete call graph like this:
+
+image::https://github.com/rust-analyzer/rust-analyzer.github.io/assets/1711539/22d029d0-86f1-429d-b8c6-9eefd46d0ed0[]
+
+Here, square nodes signify inputs explicitly provided by the user, and round nodes are derived data computed using arbitrary Rust code.
+Round node include both the function name, as well as the value of all arguments.
+We call such bundle of function with arguments a query.
+So, `f("foo")` and `f("bar")` are two different queries.
+
+This query graph is then used to make computation incremental.
+When just one input changes, it is clear that we don't need to recompute the whole graph.
+Salsa's job is to figure out which queries _have_ to be re-run.
+
+Salsa's particular approach enjoys two extra properties.
+
+_First_, Salsa implements early cutoff optimization.
+The most direct implementation of incremental computation would invalidate all queries that transitively depend on the changed input, and then re-run those queries (re-using results which do not depend on that input).
+But it is possible to do better.
+It may be the case that, even if one input to a query changes, the result is still the same.
+For example, when parsing a file into an AST, changing the input source code to include an extra whitespace does not change the AST structure.
+Early cutoff takes advantages of that, and re-uses results which depend on the AST, but not on the original source file.
+
+AST computation "`shields`" the code higher in the stack from changes in the source code.
+That is, of course, if you don't store positions in the AST.
+The bulk of work using an incremental system such as Salsa is figuring out things like this -- introducing effective early cutoff shields and preventing volatile details like positions from accidentally sneaking in.
+
+The second Salsa property is laziness.
+When changing the input, one can go and eagerly mark reverse-dependencies as "`this might have changed`".
+This could create redundant work -- if two modifications arrive one-after-another in a row, invalidating everything twice is wasteful.
+Or there might be some top-level queries whose results are no longer interesting (e.g., we computed syntax highlighting for a file, but this file is no longer in the foreground in the editor).
+Instead, in Salsa the work for tracking invalidation is done when a fresh result for a query is request.
+
+More concretely, Salsa has a global version number.
+Whenever an input changes, Salsa does only two things (so, `O(1)`):
+
+- change the input,
+- increment the global version.
+
+The rest of the work happens when Salsa runs a query.
+It compares the version in the query with the global version.
+If it is smaller, the query needs to be re-validated.
+
+[NOTE]
+====
+To support early cutoff, the actual implementation is a bit more complex.
+Each query carries two versions:
+
+- the latest version when we ensured that the result is up-to-date,
+- a potentially earlier version number when the result of the query was actually different.
+
+I'll leave it at that, as going deeper into the Salsa algorithm isn't the today's topic.
+====
+
+The bottom line is that, when computing a top-level query after a change, Salsa does two graph traversals.
+
+First, we flood the graph forward starting from the query, and reaching all the way down to the inputs.
+If we realize that no inputs to the current top-level query have changed, we just increment version numbers of all flooded queries.
+
+However, if at some point we hit an input that _was_ changed since we looked at it last time, we start flooding the graph backwards, propagating the change and recomputing the queries.
+This backward flooding stops when we hit a query whose result is unchanged despite a changed input (early cutoff).
+
+And now we finally approach the topic of today's article, durabilities.
+Imagine a mostly no-op build (some input was changed, but no query looked at this particular input).
+The only work Salsa needs to do here is to traverse the graph of queries and increment version numbers, no queries will be executed.
+_But_ the problem is that even just the graph of queries can be pretty large!
+In the context of rust-analyzer, you could expect every function and type to create a bunch of queries, and there are a _lot_ of functions and types in the standard library.
+
+And this creates a feeling that there's still room for optimization.
+Imagine a typical rust-analyzer session, where a user types in their `src/lib.rs`.
+With the Salsa described so-far (and with the actual Salsa before durability system was implemented), any change to `src/lib.rs` necessitates checking all the queries related to standard library (which adds up to about 300ms).
+This seem wasteful: of course changing my local file can't affect the standard library.
+But how to explain this to Salsa?
+What _actually_ prevents stdlib from depending on local files?
+Somebody could have sneaked up a stray
+
+[source,rust]
+----
+#[path = "/home/your-user-name/projects/crab-life/src/lib.rs"]
+mod we_are_watching_you;
+----
+
+The high level idea is to divide queries into more durable and more volatile, and let the Salsa optimize accordingly.
+We can expect the queries related to the standard library change less than the queries related to the user's code.
+Queries related to crates.io dependencies are somewhere in-between.
+Note again that a "`query`" includes both a particular query function and its arguments.
+We compute the same facts about stdlib code as about user's code.
+It's just that the facts about stdlib depend on other stdlib facts, while user code facts depend on both stdlib and user facts.
+
+To implement this idea, we go from a single version _number_ to a version _vector_.
+E.g., if we have three durability levels `(volatile, normal, durable)`, then our version is a tuple of three numbers.
+Additionally, every time we increment a particular component, we also need to increment all less durable components.
+So, incrementing `volatile` increments _just_ `volatile`, but incrementing `normal` increments _both_ `volatile` and `normal`.
+
+Then, we manually assign a durability level to each input.
+Source files of standard library are marked as `durable`, source files of the current project are marked as `volatile`.
+For derived queries, their durability is computed as the minimum durability among the immediate inputs (which is the same as minimal durability of the ground input queries of the transitive closure).
+
+With this setup, the update-then-revalidate flow becomes:
+
+- Change an input.
+- Depending on the input's durability, change one or more entries in the global version vector.
+- When checking a derived query, note its durability, and compare its version against the corresponding number from the versions vector.
+
+Let's re-visit the example where the user types in `lib.rs`.
+That's a volatile input, so only one component of the version vector is incremented.
+Files from the standard library are marked as durable.
+So, when we subsequently try to validate any query related to standard library (e.g., give me all `Clone` impls in std), we notice that the durable version is the same (because this query ultimately depends only on files in the standard library), and skip over the entire query subgraph.
+
+And that's it! That's the durability subsystem of Salsa. If we look at it from afar, it looks a bit like we took just a step back on laziness.
+By adding just a tiny bit of invalidation which is computed eagerly (the durabilities vector), we significantly improved the efficiency of the system.
