@@ -1,0 +1,30 @@
+= Changelog #191
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:99718d0c8bc5aadd993acdcabc1778fc7b5cc572[] +
+Release: release:2023-07-24[] (`v0.3.1599`)
+
+== New Features
+
+* pr:15303[] fix highlighting of byte escape sequences.
+
+== Fixes
+
+* pr:15277[] (first contribution) limit `change_visibility` assist to top-level items.
+* pr:15312[] don't follow raw pointer derefs when considering method receiver candidates.
+* pr:15317[] look up supertraits in `is_dyn_method`.
+* pr:15320[] report `incorrect-ident-case` for inner items.
+* pr:15325[] normalize expected type in call arguments.
+
+== Internal Improvements
+
+* pr:15290[] (first contribution) use notification command links for debugger installation.
+* pr:15313[] (first contribution) add configuration example for Kate.
+* pr:15301[] support reading uncompressed proc macro metadata.
+* pr:15287[] remove `crate` visibility modifier.
+* pr:15316[] pass `TraitEnvironment` into `layout_ty` and `const_eval`.
+* pr:15323[] optimize `DepKindInfo` to `DepKind` conversion.
+* pr:15304[] use `.kind(Interner)` instead of `.data(Interner).kind`.
+* pr:15281[] break down VS Code extension CI steps to make them clearer.

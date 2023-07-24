@@ -315,7 +315,7 @@ fn main() {
 
 [discrete]
 === `change_visibility`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/change_visibility.rs#L12[change_visibility.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/change_visibility.rs#L13[change_visibility.rs]
 
 Adds or changes existing visibility specifier.
 
