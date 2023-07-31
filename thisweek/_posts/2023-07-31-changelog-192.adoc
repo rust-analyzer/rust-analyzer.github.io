@@ -1,0 +1,21 @@
+= Changelog #192
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:429a3816adb99f33ef557767c874d2cd3a1ffa01[] +
+Release: release:2023-07-31[] (`v0.3.1607`)
+
+== New Features
+* pr:15308[] add platform-specific runnable environment variables.
+
+== Fixes
+
+* pr:15356[] fix bad `unwrap` in `eager_macro_recur`.
+* pr:15357[] do not create function-like macro calls with non-fn expanders.
+* pr:15271[] properly infer types with type casts.
+* pr:15360[] fix up path fragments upon MBE transcription.
+* pr:15353[] add manual implementation of clone for tuples in MIR interpreter and fence intrinsics.
+* pr:15363[] support `Self` without field in MIR lowering.
+* pr:15349[] show anonymous `FnDef` types as function pointers.
+* pr:15359[] include proc macro server spawn errors in the status text.
