@@ -73,7 +73,7 @@ fn main() {
 
 [discrete]
 === `add_impl_default_members`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L51[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L55[add_missing_impl_members.rs]
 
 Adds scaffold for overriding default impl members.
 
@@ -110,7 +110,7 @@ impl Trait for () {
 
 [discrete]
 === `add_impl_missing_members`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L10[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L13[add_missing_impl_members.rs]
 
 Adds scaffold for required impl members.
 
@@ -680,7 +680,7 @@ impl Point {
 
 [discrete]
 === `convert_two_arm_bool_match_to_matches_macro`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_two_arm_bool_match_to_matches_macro.rs#L5[convert_two_arm_bool_match_to_matches_macro.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_two_arm_bool_match_to_matches_macro.rs#L8[convert_two_arm_bool_match_to_matches_macro.rs]
 
 Convert 2-arm match that evaluates to a boolean into the equivalent matches! invocation.
 
@@ -2589,6 +2589,28 @@ fn main() {
 ```rust
 fn main() {
     _ = 2 + 2;
+}
+```
+
+
+[discrete]
+=== `remove_unused_imports`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/remove_unused_imports.rs#L15[remove_unused_imports.rs]
+
+Removes any use statements in the current selection that are unused.
+
+.Before
+```rust
+struct X();
+mod foo {
+    use super::X┃;
+}
+```
+
+.After
+```rust
+struct X();
+mod foo {
 }
 ```
 

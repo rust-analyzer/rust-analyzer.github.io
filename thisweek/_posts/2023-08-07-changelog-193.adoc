@@ -1,0 +1,39 @@
+= Changelog #193
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:baee6b338b0ea076cd7a9f18d47f175dd2ba0e5d[] +
+Release: release:2023-08-07[] (`v0.3.1615`)
+
+== New Features
+
+* pr:14723[] (first contribution) add "Remove unused imports" assist:
++
+video::https://user-images.githubusercontent.com/308347/258729961-f0d36dfb-dd56-4e5c-b4fc-806e5c560d29.mp4[options=loop]
+
+== Fixes
+
+* pr:15361[] expand eager macros to delimited comma-separated expression list.
+* pr:15366[] remove faulty unwrap in eager macro expansion.
+* pr:15367[] strip unused token ids from eager macro input token maps.
+* pr:15380[] fix unsized struct problems in MIR eval.
+* pr:15348[] exclude non-identifier aliases from completions.
+* pr:15050[] skip ``#[doc(hidden)]`` methods in "Implement default members" and "Convert `+#[derive]+` to manual impl".
+* pr:15376[] make "Convert `match` to ``matches!``" assist trigger on non-literal bool arms.
+* pr:15345[] don't provide `add_missing_match_arms` assist when up-mapping match arm list failed.
+* pr:15397[] remove unwraps from "Generate delegate trait".
+* pr:15406[] don't provide `generate_default_from_new` when impl self type is missing.
+* pr:15391[] set the default status bar button action to "Open logs".
+* pr:15392[] use the warning color when server is stopped.
+
+== Internal Improvements
+
+* pr:15373[] (first contribution) desugar `while` to `loop` and `break`.
+* pr:15390[] improve MIR interpreter performance by caching.
+* pr:15269[] defer structured snippet rendering to allow escaping snippet bits.
+* pr:15377[] record extern crate declarations in the HIR.
+* pr:15401[] turn unresolved proc macro expansions into missing expressions.
+* pr:15378[] rename `Import` to `Use` in `hir-def`, add unused placeholder variants for `UseId`.
+* pr:15393[] qualify parameters by the containing function in SCIP.
+* pr:15358[] add triagebot `no-merges` config.
