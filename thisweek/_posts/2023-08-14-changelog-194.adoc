@@ -1,0 +1,32 @@
+= Changelog #194
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:2fbe69d117ff8e3ffb9b21c4a564f835158eb67b[] +
+Release: release:2023-08-14[] (`v0.3.1623`)
+
+== New Features
+* pr:15262[] (first contribution) add `rust-analyzer.check.ignore` setting to ignore specific `check` diagnostics.
+
+== Fixes
+
+* pr:15350[] handle ``#[cfg]``s on generic parameters.
+* pr:15405[] support doc links that resolve to fields.
+* pr:15416[] correctly display fully-qualified associated types correctly.
+* pr:15419[] add MIR lowering support for tuple destructing assignment.
+* pr:15415[] fix float parser hack creating empty `NameRef` tokens.
+* pr:15250[] don't use control flow when keeping the tail expression of the original function.
+* pr:15445[] fix `only_types` config filtering out traits from world symbols.
+* pr:15438[] fix parser getting stuck in eager macro inputs.
+
+== Internal Improvements
+
+* pr:15217[] (first contribution) convert `unwrap` to `expect` in `lsp-server` and add a debug log.
+* pr:15422[] record import source IDs.
+* pr:15435[] derive block attributes from block item tree.
+* pr:15436[] preserve `resolve_obligations_as_possible` allocation across calls.
+* pr:15423[], pr:15433[] de-`unwrap` `convert_named_struct_to_tuple_struct` and `remove_unused_imports`.
+* pr:15417[] use `Cast::cast()` instead of explicit interning.
+* pr:15428[] fix pinned version of `lsp-types`.
+* pr:15421[] add more error context when failing to invoke the Rust toolchain.
