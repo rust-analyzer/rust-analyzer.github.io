@@ -268,7 +268,7 @@ fn main() {
 
 [discrete]
 === `apply_demorgan`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/apply_demorgan.rs#L7[apply_demorgan.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/apply_demorgan.rs#L11[apply_demorgan.rs]
 
 Apply https://en.wikipedia.org/wiki/De_Morgan%27s_laws[De Morgan's law].
 This transforms expressions of the form `!l || !r` into `!(l && r)`.

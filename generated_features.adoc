@@ -193,8 +193,6 @@ image::https://user-images.githubusercontent.com/48062697/113020648-b3973180-917
 Extends or shrinks the current selection to the encompassing syntactic construct
 (expression, statement, item, module, etc). It works with multiple cursors.
 
-This is a standard LSP feature and not a protocol extension.
-
 |===
 | Editor  | Shortcut
 
@@ -319,7 +317,7 @@ image::https://user-images.githubusercontent.com/48062697/113020657-b560f500-917
 
 
 === Highlight Related
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L39[highlight_related.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L40[highlight_related.rs]
 
 Highlights constructs related to the thing under the cursor:
 
