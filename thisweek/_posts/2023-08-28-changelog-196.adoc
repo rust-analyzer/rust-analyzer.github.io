@@ -1,0 +1,25 @@
+= Changelog #196
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:144526c90840e84e799ee06c6cea5c573cf4fdf2[] +
+Release: release:2023-08-28[] (`v0.3.1641`)
+
+== New Features
+
+* pr:15374[] (first contribution) implement extern crate completion.
+
+== Fixes
+
+* pr:15512[] update `offset` intrinsic to match 1.72.
+* pr:15517[] fix unknown label diagnostics for `while let` loop with label in condition.
+
+== Internal Improvements
+
+* pr:15385[] (first contribution) pass target in `proc-macro-test` to fix cross-compilation on Darwin hosts.
+* pr:15490[] fix help text for `rust-analyzer.check.invocation{Strategy,Location}`.
+* pr:15503[] report the rust-analyzer version in the SCPI metadata.
+* pr:15494[] sync from downstream.
+* pr:15523[] use `RUSTC_BOOTSTRAP` when running `analysis-stats` on the standard library.
+* pr:15495[] unpin `serde`.
