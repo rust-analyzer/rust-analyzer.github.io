@@ -1,0 +1,24 @@
+= Changelog #197
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:2df30e1e07eafc1de0359566423f471920693a34[] +
+Release: release:2023-09-04[] (`v0.3.1649`)
+
+== Fixes
+
+* pr:15527[] respect `#[allow(unused_braces)]`.
+
+
+== Internal Improvements
+
+* pr:15465[] fix cargo handle logging in flycheck.
+* pr:15542[] less `once_cell`, more `std`.
+* pr:15543[] remove some allocations in borrowck.
+* pr:15544[] shuffle some locking around.
+* pr:15549[] add a few more `db.unwind_if_cancelled()` calls.
+* pr:15548[] restructure some modules in the `rust-analyzer` crate.
+* pr:15551[] move doc-comment handling into `ide-db`.
+* pr:15552[] bump `rustc-perf` checkout for metrics, replace `webrender`, `diesel` and `ripgrep` with newer versions.
+* pr:15553[] add `hyper` 0.14.18 to metrics.

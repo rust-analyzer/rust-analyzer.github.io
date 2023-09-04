@@ -156,7 +156,7 @@ crates rust-analyzer failed to discover. The file will not have IDE features ava
 
 
 === unnecessary-braces
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/useless_braces.rs#L8[useless_braces.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/useless_braces.rs#L9[useless_braces.rs]
 
 Diagnostic for unnecessary braces in `use` items.
 
