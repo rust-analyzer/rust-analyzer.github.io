@@ -314,6 +314,25 @@ fn main() {
 
 
 [discrete]
+=== `bind_unused_param`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/bind_unused_param.rs#L12[bind_unused_param.rs]
+
+Binds unused function parameter to an underscore.
+
+.Before
+```rust
+fn some_function(x: i32┃) {}
+```
+
+.After
+```rust
+fn some_function(x: i32) {
+    let _ = x;
+}
+```
+
+
+[discrete]
 === `change_visibility`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/change_visibility.rs#L13[change_visibility.rs]
 
@@ -332,7 +351,7 @@ pub(crate) fn frobnicate() {}
 
 [discrete]
 === `convert_bool_then_to_if`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_bool_then.rs#L132[convert_bool_then.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_bool_then.rs#L131[convert_bool_then.rs]
 
 Converts a `bool::then` method call to an equivalent if expression.
 
@@ -811,13 +830,6 @@ Move an expression out of a format string.
 
 .Before
 ```rust
-macro_rules! format_args {
-    ($lit:literal $(tt:tt)*) => { 0 },
-}
-macro_rules! print {
-    ($($arg:tt)*) => (std::io::_print(format_args!($($arg)*)));
-}
-
 fn main() {
     print!("{var} {x + 1}┃");
 }
@@ -825,13 +837,6 @@ fn main() {
 
 .After
 ```rust
-macro_rules! format_args {
-    ($lit:literal $(tt:tt)*) => { 0 },
-}
-macro_rules! print {
-    ($($arg:tt)*) => (std::io::_print(format_args!($($arg)*)));
-}
-
 fn main() {
     print!("{var} {}"┃, x + 1);
 }
@@ -2012,6 +2017,44 @@ fn id(x: i32) -> i32 {
 };
 fn foo() {
     let _: i32 = 3;
+}
+```
+
+
+[discrete]
+=== `into_to_qualified_from`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/into_to_qualified_from.rs#L10[into_to_qualified_from.rs]
+
+Convert an `into` method call to a fully qualified `from` call.
+
+.Before
+```rust
+//- minicore: from
+struct B;
+impl From<i32> for B {
+    fn from(a: i32) -> Self {
+       B
+    }
+}
+
+fn main() -> () {
+    let a = 3;
+    let b: B = a.in┃to();
+}
+```
+
+.After
+```rust
+struct B;
+impl From<i32> for B {
+    fn from(a: i32) -> Self {
+       B
+    }
+}
+
+fn main() -> () {
+    let a = 3;
+    let b: B = B::from(a);
 }
 ```
 

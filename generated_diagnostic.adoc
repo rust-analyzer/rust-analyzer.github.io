@@ -56,7 +56,13 @@ This diagnostic is shown when the derive attribute has invalid input.
 
 
 === mismatched-arg-count
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mismatched_arg_count.rs#L8[mismatched_arg_count.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mismatched_arg_count.rs#L35[mismatched_arg_count.rs]
+
+This diagnostic is triggered if a function is invoked with an incorrect amount of arguments.
+
+
+=== mismatched-tuple-struct-pat-arg-count
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mismatched_arg_count.rs#L10[mismatched_arg_count.rs]
 
 This diagnostic is triggered if a function is invoked with an incorrect amount of arguments.
 
@@ -100,7 +106,7 @@ This diagnostic is triggered on mutating an immutable variable.
 
 
 === no-such-field
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/no_such_field.rs#L11[no_such_field.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/no_such_field.rs#L12[no_such_field.rs]
 
 This diagnostic is triggered if created structure does not have field provided in record.
 

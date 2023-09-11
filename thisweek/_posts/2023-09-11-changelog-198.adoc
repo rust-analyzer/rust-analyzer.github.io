@@ -1,0 +1,42 @@
+= Changelog #198
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:326f37ef1f53575fd38e768065b6bcfcebdce462[] +
+Release: release:2023-09-11[] (`v0.3.1657`)
+
+== New Features
+
+* pr:15578[] diagnose mismatched argument count for tuple struct patterns:
++
+image::https://user-images.githubusercontent.com/308347/266911785-8ab15830-e25b-4a9d-8a38-15e14f91e4df.png["A screenshot showing an error on `let S(a, b) = todo!()`"]
+* pr:15584[] diagnose private fields in record constructor:
++
+image::https://user-images.githubusercontent.com/308347/266912247-cd84cb65-0afc-4f4a-a972-edefc932bf2e.png["A screenshot showing an error when using a private field in a pattern"]
+* pr:15557[] parse `builtin#` syntax and add type checking for `builtin#offset_of`.
+* pr:15559[] implement `builtin#format_args`, using rustc's `format_args` parser.
+* pr:15532[] on-type format `(`, by adding closing `)` automatically.
+* pr:15573[] add "into to qualified from" assist.
+* pr:15524[] add "Bind unused parameter" assist.
+* pr:15528[] enable `cfg(rust_analyzer)` when code is being analyzed.
+
+== Fixes
+
+* pr:15574[] use crate name for `CARGO_CRATE_NAME`.
+* pr:15577[] clear native diagnostics for closed files.
+
+== Internal Improvements
+
+* pr:15568[] replace `format_args` parser with upstream fork.
+* pr:15565[] implement `write_via_move` intrinsic for MIR eval.
+* pr:15571[] remove allocation on MIR eval memory write.
+* pr:15567[] ignore enum variants in analysis stats of MIR bodies.
+* pr:15575[] intern projections in MIR place.
+* pr:15430[] de-unwrap `wrap_return_type_in_result`.
+* pr:15529[] do not send inlay hint refresh requests on file edits.
+* pr:15522[] resolve inlay hint data lazily.
+* pr:15586[], pr:15592[] shrink some stuff.
+* pr:15564[] use current folder's `rustfmt.toml` with custom configurations.
+* pr:15560[] when using `rust-project.json`, prefer the sysroot-defined rustc over discovery in `$PATH`.
+* pr:15558[] remove `rust-analyzer.discoverProjectCommand` in favor of a companion VS Code extension.
