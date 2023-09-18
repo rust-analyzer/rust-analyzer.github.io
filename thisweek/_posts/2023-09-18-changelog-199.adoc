@@ -1,0 +1,21 @@
+= Changelog #199
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:05666441bafd6010787a4097a6bd44266ad21018[] +
+Release: release:2023-09-18[] (`v0.3.1665`)
+
+== Fixes
+
+* pr:15597[] (first contribution) update field shorthands in `promote_local_to_const`.
+* pr:15232[] disallow renaming of non-local items.
+* pr:15601[] "temporarily" skip declaration checks in derive expansions.
+* pr:15625[] don't skip closure captures after `let-else`.
+* pr:15611[] prefer stable paths in import path.
+* pr:15606[] fix `above_whole_item` lens location breaking lenses.
+
+== Internal Improvements
+
+* pr:15431[] de-unwrap `extract_function`.
+* pr:15609[] remove most of the duplication from `Semantics{,Impl}` using `deref`.
