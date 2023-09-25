@@ -1,0 +1,29 @@
+= Changelog #200
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:862a3004e958082d0e9cbdf1172c5fe2bab6cf2d[] +
+Release: release:2023-09-25[] (`v0.3.1673`)
+
+== New Features
+
+* pr:15582[] (first contribution) add option to show full signatures in completion docs.
+* pr:15484[] add "bool to enum" assist, to replace variables, fields, constants and statics with a new enum.
+
+== Fixes
+
+* pr:15621[] (first contribution) give `unmerge_use` a label explaining what it will affect.
+* pr:15651[] wrap inlined closures in parentheses.
+* pr:15635[] compute `inlayHint.textEdit` eagerly for VS Code.
+* pr:15587[] fix autoimport on traits already imported `as _`.
+
+== Internal Improvements
+
+* pr:15615[] (first contribution) fix some Clippy lints.
+* pr:15620[] (first contribution) change `exclude_labels` to `exclude_titles` in triagebot config.
+* pr:15632[] use `load_workspace_at` for `rust-analyzer scip`.
+* pr:15492[] extend `check.overrideCommand` and `buildScripts.overrideCommand` docs.
+* pr:15616[] use in-tree rustc dependencies with a `cfg` flag.
+* pr:15637[] update `chalk`.
+* pr:15432[], pr:15594[] de-`unwrap` `inline_call`, `add_missing_match_arms`, `convert_comment_block` and `desugar_doc_comment`.

@@ -333,6 +333,41 @@ fn some_function(x: i32) {
 
 
 [discrete]
+=== `bool_to_enum`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/bool_to_enum.rs#L25[bool_to_enum.rs]
+
+This converts boolean local variables, fields, constants, and statics into a new
+enum with two variants `Bool::True` and `Bool::False`, as well as replacing
+all assignments with the variants and replacing all usages with `== Bool::True` or
+`== Bool::False`.
+
+.Before
+```rust
+fn main() {
+    let ┃bool = true;
+
+    if bool {
+        println!("foo");
+    }
+}
+```
+
+.After
+```rust
+fn main() {
+    #[derive(PartialEq, Eq)]
+    enum Bool { True, False }
+
+    let bool = Bool::True;
+
+    if bool == Bool::True {
+        println!("foo");
+    }
+}
+```
+
+
+[discrete]
 === `change_visibility`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/change_visibility.rs#L13[change_visibility.rs]
 

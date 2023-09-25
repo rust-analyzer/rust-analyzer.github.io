@@ -17,5 +17,5 @@ Release: release:2023-09-18[] (`v0.3.1665`)
 
 == Internal Improvements
 
-* pr:15431[] de-unwrap `extract_function`.
+* pr:15431[] de-`unwrap` `extract_function`.
 * pr:15609[] remove most of the duplication from `Semantics{,Impl}` using `deref`.
