@@ -1,0 +1,28 @@
+= Changelog #201
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:0840038f02daec6ba3238f05d8caa037d28701a0[] +
+Release: release:2023-10-02[] (`v0.3.1681`)
+
+== New Features
+
+* pr:15659[], pr:15693[] add `unused_variables` native diagnostic:
++
+image::https://user-images.githubusercontent.com/308347/271902902-1eb755d3-3ee0-40bb-b83c-428ce03c7f5a.png["A screenshot showing a native rust-analyzer warning on an unused variable"]
+
+== Fixes
+
+* pr:15662[] fix panic in wrapping and unwrapping `Result` return type assists.
+* pr:15667[] make `bool_to_enum` assist create enum at top-level.
+* pr:15682[] recover better on missing parameter in parameter list.
+* pr:15688[] make `rustc_layout_scalar_valid_range` attributes work for non-decimal literals.
+* pr:15692[] don't trigger completion when typing underscore in types or patterns.
+
+== Internal Improvements
+
+* pr:15680[] (first contribution) re-generate `lints.rs`.
+* pr:15633[] allow customizing SCIP config.
+* pr:15677[] allocate AST ids for parameters.
+* pr:15686[] only run tests on Linux for pull requests.
