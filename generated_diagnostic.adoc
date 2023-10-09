@@ -56,7 +56,7 @@ This diagnostic is shown when the derive attribute has invalid input.
 
 
 === mismatched-arg-count
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mismatched_arg_count.rs#L35[mismatched_arg_count.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mismatched_arg_count.rs#L30[mismatched_arg_count.rs]
 
 This diagnostic is triggered if a function is invoked with an incorrect amount of arguments.
 
@@ -112,7 +112,7 @@ This diagnostic is triggered if created structure does not have field provided i
 
 
 === private-assoc-item
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/private_assoc_item.rs#L5[private_assoc_item.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/private_assoc_item.rs#L3[private_assoc_item.rs]
 
 This diagnostic is triggered if the referenced associated item is not visible from the current
 module.
@@ -131,7 +131,7 @@ This diagnostic is triggered when `.filter_map(..).next()` is used, rather than 
 
 
 === type-mismatch
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/type_mismatch.rs#L12[type_mismatch.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/type_mismatch.rs#L11[type_mismatch.rs]
 
 This diagnostic is triggered when the type of an expression or pattern does not match
 the expected type.

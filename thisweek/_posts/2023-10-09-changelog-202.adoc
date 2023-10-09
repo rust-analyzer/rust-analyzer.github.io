@@ -1,0 +1,28 @@
+= Changelog #202
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:b1f89a84ab350091e6c20cfe30c2fab8d76b80e4[] +
+Release: release:2023-10-09[] (`v0.3.1689`)
+
+== New Features
+
+* pr:15668[] (first contribution) add backtick to surrounding and auto-closing pairs.
+* pr:15700[] add assist for applying De Morgan's law to `Iterator::all` and `Iterator::any`:
++
+video::https://user-images.githubusercontent.com/52933714/271883841-aad1a299-6620-432b-9106-aafd2a7fa9f5.webm[options=loop]
+* pr:15707[] allow configuring the status bar click action in VS Code.
+
+== Fixes
+
+* pr:15690[] (first contribution) fix line and column regex in the VS Code problem matcher.
+* pr:15701[] strip base prefix in `layout_scalar_valid_range`.
+* pr:15698[] allow more kinds of `if-let` patterns in guarded return assist.
+* pr:15709[] recognize `#[export_name = "main"]` function as binary entrypoint for runnables.
+* pr:15641[] fix path syntax produced by the `into_to_qualified_from` assist.
+* pr:15600[] ensure `rustfmt` runs when configured with `./`.
+
+== Internal Improvements
+
+* pr:15721[] shrink `PatPtr` by swapping its `AstPtr` and `Either` wrap order.

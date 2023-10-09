@@ -268,7 +268,7 @@ fn main() {
 
 [discrete]
 === `apply_demorgan`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/apply_demorgan.rs#L11[apply_demorgan.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/apply_demorgan.rs#L17[apply_demorgan.rs]
 
 Apply https://en.wikipedia.org/wiki/De_Morgan%27s_laws[De Morgan's law].
 This transforms expressions of the form `!l || !r` into `!(l && r)`.
@@ -286,6 +286,38 @@ fn main() {
 ```rust
 fn main() {
     if !(x == 4 && y >= 3.14) {}
+}
+```
+
+
+[discrete]
+=== `apply_demorgan_iterator`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/apply_demorgan.rs#L153[apply_demorgan.rs]
+
+Apply https://en.wikipedia.org/wiki/De_Morgan%27s_laws[De Morgan's law] to
+`Iterator::all` and `Iterator::any`.
+
+This transforms expressions of the form `!iter.any(|x| predicate(x))` into
+`iter.all(|x| !predicate(x))` and vice versa. This also works the other way for
+`Iterator::all` into `Iterator::any`.
+
+.Before
+```rust
+fn main() {
+    let arr = [1, 2, 3];
+    if !arr.into_iter().┃any(|num| num == 4) {
+        println!("foo");
+    }
+}
+```
+
+.After
+```rust
+fn main() {
+    let arr = [1, 2, 3];
+    if arr.into_iter().all(|num| num != 4) {
+        println!("foo");
+    }
 }
 ```
 
