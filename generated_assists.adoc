@@ -720,6 +720,38 @@ fn main() {
 
 
 [discrete]
+=== `convert_tuple_return_type_to_struct`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_tuple_return_type_to_struct.rs#L20[convert_tuple_return_type_to_struct.rs]
+
+This converts the return type of a function from a tuple type
+into a tuple struct and updates the body accordingly.
+
+.Before
+```rust
+fn bar() {
+    let (a, b, c) = foo();
+}
+
+fn foo() -> (┃u32, u32, u32) {
+    (1, 2, 3)
+}
+```
+
+.After
+```rust
+fn bar() {
+    let FooResult(a, b, c) = foo();
+}
+
+struct FooResult(u32, u32, u32);
+
+fn foo() -> FooResult {
+    FooResult(1, 2, 3)
+}
+```
+
+
+[discrete]
 === `convert_tuple_struct_to_named_struct`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_tuple_struct_to_named_struct.rs#L10[convert_tuple_struct_to_named_struct.rs]
 
@@ -2947,6 +2979,29 @@ fn handle(action: Action) {
         Action::Move { distance } => foo(distance),
         _ => bar(),
     }
+}
+```
+
+
+[discrete]
+=== `replace_is_some_with_if_let_some`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_is_method_with_if_let_method.rs#L5[replace_is_method_with_if_let_method.rs]
+
+Replace `if x.is_some()` with `if let Some(_tmp) = x` or `if x.is_ok()` with `if let Ok(_tmp) = x`.
+
+.Before
+```rust
+fn main() {
+    let x = Some(1);
+    if x.is_som┃e() {}
+}
+```
+
+.After
+```rust
+fn main() {
+    let x = Some(1);
+    if let Some(${0:_tmp}) = x {}
 }
 ```
 

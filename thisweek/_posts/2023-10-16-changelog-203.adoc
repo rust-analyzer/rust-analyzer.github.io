@@ -1,0 +1,38 @@
+= Changelog #203
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:6572ec8d94c83f8cc6afe0069269abeddc37c25e[] +
+Release: release:2023-10-16[] (`v0.3.1697`)
+
+== New Features
+
+* pr:15728[] (first contribution) VS Code: support opening local documentation if available:
++
+video::https://user-images.githubusercontent.com/9659253/273422126-715b84dd-4f14-4ba0-a904-749b847eb3d5.webm[options=loop]
+* pr:15743[], pr:15752[], pr:15755[] (first contribution) add assist to convert `is_some` / `is_ok` and to `if let`:
++
+image::https://user-images.githubusercontent.com/71162630/275121299-a7866efe-2d54-488b-903e-9df039f34a7e.gif["Screen recording showing an assist that rewrites `if a.is_some()` to `if let Some(_tmp) = a`, and similarly for `is_ok`]
+* pr:15681[] (first contribution) add `rust-analyzer.rust.analyzerTargetDir` option to use `rust-analyzer` specific target directory.
+* pr:15696[] add tuple return to tuple struct assist:
++
+video::https://user-images.githubusercontent.com/52933714/271883958-2803ff58-fde3-4144-9495-7c7c7e139075.webm[options=loop]
+
+== Fixes
+
+* pr:15744[] (first contribution) add diagnostics for char and byte literal errors:
++
+image::https://user-images.githubusercontent.com/308347/275412431-12ddaf06-1d10-4e77-b566-ba8a1b9aff0d.png["Screenshot showing errros on invalid char and byte literal"]
+* pr:15713[] offer prefix match flyimport completions for one and two character paths:
++
+image::https://user-images.githubusercontent.com/308347/275410445-6db5ecf5-8ba2-47fb-82fb-508176a5207a.png["Screenshot showing `IpAddr`, `Ipv4Addr` and `Ipv6Addr` completions for `Ip`"]
+
+== Internal Improvements
+
+* pr:15745[] (first contribution) add Zed to the manual IDE list.
+* pr:15725[] fix automatic `rustc` / `rustdoc` lint generation.
+* pr:15618[] port `anymap` to `stdx`.
+* pr:15760[] make some `mir::ProjectionStore` methods public.
+* pr:15762[] try to use deploy key in the metrics workflow.
+* pr:15691[] update `rustc_abi` dependency.
