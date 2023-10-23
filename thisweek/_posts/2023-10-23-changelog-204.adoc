@@ -1,0 +1,23 @@
+= Changelog #204
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:10872952c03947124f8ccda7d7aa7930b7da32fe[] +
+Release: release:2023-10-23[] (`v0.3.1705`)
+
+== Fixes
+
+* pr:15746[] add diagnostics for string and byte string literal errors.
+* pr:15775[] pick a better name for variables introduced by `replace_is_some_with_if_let_some`.
+* pr:15736[] add incorrect case diagnostics for module names.
+* pr:15789[] store binding mode independently for each instance of a binding.
+* pr:15786[] fix client detectin for VS Code Insiders.
+* pr:15779[] add command for only opening external docs and attempt to fix `vscode-remote` issue.
+
+== Internal Improvements
+
+* pr:15727[] generate descriptors for all unstable features.
+* pr:15764[] expand Emacs documentation.
+* pr:15769[], pr:15770[] really fix the metrics deploy key.
+* pr:15783[] free up some disk space for auto-publish.
