@@ -3419,7 +3419,7 @@ pub async fn bar() { foo() }
 
 [discrete]
 === `unqualify_method_call`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unqualify_method_call.rs#L8[unqualify_method_call.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unqualify_method_call.rs#L9[unqualify_method_call.rs]
 
 Transforms universal function call syntax into a method call.
 
@@ -3432,6 +3432,8 @@ fn main() {
 
 .After
 ```rust
+use std::ops::Add;
+
 fn main() {
     1.add(2);
 }
