@@ -1,0 +1,22 @@
+= Changelog #206
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:c1c9e10f72ffd2e829d20ff1439ff49c2e121731[] +
+Release: release:2023-11-06[] (`v0.3.1722`)
+
+== New Features
+
+* pr:15819[] (first contribution) skip token tree limit for `include!` macro calls.
+* pr:15832[] add `generate_mut_trait_impl` assist:
++
+image::https://user-images.githubusercontent.com/71162630/280443864-362a5a93-e109-4ffc-996e-9b6e4f54fcfa.gif["Screen recording showing the assist adding an `IndexMut` impl from an existing `Index` one"]
+
+== Fixes
+
+* pr:15827[] (first contribution) add `formatters` category to VSCode metadata.
+* pr:15788[] allow importing traits `as _`:
++
+image::https://user-images.githubusercontent.com/71162630/277167845-81601160-fe55-46e3-ab8d-b2705e1aa696.gif["Screen recording showing both `import Foo` and `import Foo as _` being available in the quick fix menu"]
+* pr:15834[] fix docs path for derive macros.

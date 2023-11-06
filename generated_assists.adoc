@@ -1776,6 +1776,45 @@ impl MyStruct {
 
 
 [discrete]
+=== `generate_mut_trait_impl`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_mut_trait_impl.rs#L12[generate_mut_trait_impl.rs]
+
+Adds a IndexMut impl from the `Index` trait.
+
+.Before
+```rust
+pub enum Axis { X = 0, Y = 1, Z = 2 }
+
+impl<T> core::ops::Index┃<Axis> for [T; 3] {
+    type Output = T;
+
+    fn index(&self, index: Axis) -> &Self::Output {
+        &self[index as usize]
+    }
+}
+```
+
+.After
+```rust
+pub enum Axis { X = 0, Y = 1, Z = 2 }
+
+┃impl<T> core::ops::IndexMut<Axis> for [T; 3] {
+    fn index_mut(&mut self, index: Axis) -> &mut Self::Output {
+        &self[index as usize]
+    }
+}
+
+impl<T> core::ops::Index<Axis> for [T; 3] {
+    type Output = T;
+
+    fn index(&self, index: Axis) -> &Self::Output {
+        &self[index as usize]
+    }
+}
+```
+
+
+[discrete]
 === `generate_new`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_new.rs#L13[generate_new.rs]
 
