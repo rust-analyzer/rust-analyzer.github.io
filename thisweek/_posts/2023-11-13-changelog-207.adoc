@@ -1,0 +1,27 @@
+= Changelog #207
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:416e9c856a792ce2214c449677ca0a1f38965248[] +
+Release: release:2023-11-13[] (`v0.3.1730`)
+
+== New Features
+
+* pr:15847[] preview struct fields on hover:
++
+image::https://user-images.githubusercontent.com/14040068/281386921-95894c4b-de6e-4ca4-98b3-6ab4559d0950.gif["Screen recording showing that hover tooltips on structs now include a list the fields"]
+* pr:15871[] add config for preferring / ignoring prelude modules when inserting imports.
+
+== Fixes
+
+* pr:15860[] truncate closure capture place for raw pointer.
+* pr:15864[] be more lax when finding `Self` references.
+* pr:15854[] ignore `#[doc(hidden)]` when implementing missing members.
+* pr:15866[] improve check when overriding expansion limit for `include!`.
+
+== Internal Improvements
+
+* pr:15881[] (first contribution) fix JSON syntax in VS Code settings samples.
+* pr:15849[] update rustc dependencies.
+* pr:15880[] include TOML files in the vfs.
