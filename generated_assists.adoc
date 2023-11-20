@@ -245,7 +245,7 @@ fn foo() -> i32 { 42i32 }
 
 [discrete]
 === `add_turbo_fish`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_turbo_fish.rs#L10[add_turbo_fish.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_turbo_fish.rs#L13[add_turbo_fish.rs]
 
 Adds `::<_>` to a call of a generic method or function.
 
@@ -850,7 +850,7 @@ fn main() {
 
 [discrete]
 === `destructure_tuple_binding`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/destructure_tuple_binding.rs#L13[destructure_tuple_binding.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/destructure_tuple_binding.rs#L15[destructure_tuple_binding.rs]
 
 Destructures a tuple binding in place.
 

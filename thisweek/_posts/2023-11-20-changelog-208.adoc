@@ -1,0 +1,35 @@
+= Changelog #208
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:255eed40c45fcf108ba844b4ad126bdc4e7a18df[] +
+Release: release:2023-11-20[] (`v0.3.1740`)
+
+== New Features
+
+* pr:15891[] diagnose some orphan trait impl cases:
++
+image::https://user-images.githubusercontent.com/308347/284157545-023795e0-8781-4352-87a1-56d393d8da19.png["Screenshot showing an error on `impl Copy for String`"]
+* pr:15895[] diagnose missing associated items in trait impls:
++
+image::https://user-images.githubusercontent.com/308347/284159815-834d5686-99df-459e-b493-dca040e73394.png["Screenshot showing an error on a trait implementation with a missing associated const value"]
+* pr:15893[] diagnose incorrect unsafety for trait impls:
++
+image::https://user-images.githubusercontent.com/308347/284161150-7cedb948-b5b8-4b12-9249-0bd402c763a3.png["Screenshot showing an error on a safe trait implementation of an unsafe trait, and on an unsafe implementation of a safe trait"]
+
+== Fixes
+
+* pr:15901[] diagnose everything in nested items.
+* pr:15903[] make `line!` and `column!` expand to literals.
+
+== Internal Improvements
+
+* pr:15875[] fix `PathSegment` grammar.
+* pr:15899[], pr:15917[] sync from downstream.
+* pr:15874[] migrate assists to the structured snippet API, part 4.
+* pr:15925[] remove debugging code in path resolution.
+* pr:15902[], pr:15913[] bump some deps.
+* pr:15830[] VS Code: expose workspaces to other extensions, remove `addProject` command.
+* pr:15900[] disable VSIX builds for `win32-ia32`, which VS Code no longer supports.
+* pr:15904[] bump minimum supported VS Code to 1.78.

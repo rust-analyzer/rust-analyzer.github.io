@@ -130,6 +130,24 @@ This diagnostic is triggered if the accessed field is not visible from the curre
 This diagnostic is triggered when `.filter_map(..).next()` is used, rather than the more concise `.find_map(..)`.
 
 
+=== trait-impl-incorrect-safety
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/trait_impl_incorrect_safety.rs#L6[trait_impl_incorrect_safety.rs]
+
+Diagnoses incorrect safety annotations of trait impls.
+
+
+=== trait-impl-missing-assoc_item
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/trait_impl_missing_assoc_item.rs#L7[trait_impl_missing_assoc_item.rs]
+
+Diagnoses missing trait items in a trait impl.
+
+
+=== trait-impl-orphan
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/trait_impl_orphan.rs#L5[trait_impl_orphan.rs]
+
+Only traits defined in the current crate can be implemented for arbitrary types
+
+
 === type-mismatch
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/type_mismatch.rs#L11[type_mismatch.rs]
 
