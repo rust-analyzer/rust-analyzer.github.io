@@ -1,0 +1,29 @@
+= Changelog #209
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:237712fa314237e428e7ef2ab83b979f928a43a1[] +
+Release: release:2023-11-27[] (`v0.3.1748`)
+
+== New Features
+
+* pr:15956[], pr:15962[] (first contribution) improve completion label details display:
++
+image::https://user-images.githubusercontent.com/14666676/285445167-45fca112-4612-40a3-81b9-07ff12de0962.png["Screenshot showing the completion label details like the originating trait for a method displayed in gray by VS Code"]
+* pr:15846[] (first contribution) add VS Code option to suppress internal error notifications.
+
+== Fixes
+
+* pr:15940[] ensure renames happen after edits.
+* pr:15911[] handle default constant values in `trait_impl_missing_assoc_item` diagnostic.
+* pr:15825[] better resolve associated item with type bound.
+* pr:15754[] de-dup duplicate crates with differing origins in `CrateGraph` construction.
+
+== Internal Improvements
+
+* pr:15894[] (first contribution) make LSP initialization cancellable.
+* pr:15944[] (first contribution) update Arch Linux package URL.
+* pr:15921[] use `PathSegment::qualifying_trait`.
+* pr:15960[] replace `option.map(cond) == Some(true)` with `option.is_some_and(cond)`.
+* pr:15967[] switch to our own `salsa` fork.
