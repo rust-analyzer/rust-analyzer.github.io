@@ -1,0 +1,31 @@
+= Changelog #210
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:e402c494b7c7d94a37c6d789a216187aaf9ccd3e[] +
+Release: release:2023-12-04[] (`v0.3.1756`)
+
+== New Features
+
+* pr:15879[] implement completion for callable fields:
++
+image::https://user-images.githubusercontent.com/308347/287617210-02c1f9f8-f5c1-488a-8e82-5dc330b0fbc2.png["Screenshot showing a struct field of `fn()` type in the completion results"]
+* pr:16000[] initial support for implicit drop inlay hints (`rust-analyzer.inlayHints.implicitDrops.enable`):
++
+image::https://user-images.githubusercontent.com/308347/287615278-cb743b02-a8c6-4776-a7e9-6881297fe46d.png["Screenshot showing drop(`var`) inlay hints when `var` is dropped"]
+
+== Fixes
+
+* pr:15961[] (first contribution) improve error handling for top-level `let` statements.
+* pr:15993[] (first contribution) use package root as working directory when launching the debugger.
+* pr:15970[] fix variant resolution through for type aliases.
+* pr:15994[] report error on comma after base struct functional update syntax.
+* pr:15857[] fix spacing after using "Remove redundant parentheses".
+* pr:15971[] don't report missing match arms for empty `match` body.
+
+== Internal Improvements
+
+* pr:15946[] (first contribution) simplify workspace de-duplication.
+* pr:15985[] bump `triomphe`.
+* pr:15912[] remove unused `PhantomData`.
