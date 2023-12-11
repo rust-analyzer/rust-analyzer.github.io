@@ -1,0 +1,59 @@
+= Changelog #211
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:457b966b171b09a7e57acb710fbca29a4b3526f0[] +
+Release: release:2023-12-11[] (`v0.3.1766`)
+
+== New Features
+
+* pr:15959[] replace TokenMap with an abstraction that matches reality.
+* pr:16027[] add support for implicit format args:
++
+video::https://user-images.githubusercontent.com/308347/289476161-20bcb7f6-cfa2-4550-a2ba-a524ab52cba3.mp4[options=loop]
+* pr:16034[] support multiple navigation targets when the focus range is in the macro definition site:
++
+image::https://user-images.githubusercontent.com/3757771/288381131-2cc82e5c-320f-4de2-9d55-fe975d180f2a.gif["Screen recording showing two Go to definition results for `tcx.def_span` in the rustc source code"]
+* pr:15990[] diagnose extra trait impl items:
++
+image::https://user-images.githubusercontent.com/308347/289478906-01ab50b3-ad41-482c-8b33-62712efb89e4.png["Screenshot showing an error on a trait impl item that's not a member of original trait"]
+* pr:15627[] prioritize import suggestions based on the expected type:
++
+image::https://user-images.githubusercontent.com/308347/289481260-3325f8cd-8cb5-4a12-8ec7-b2554309dc14.png["Screenshot showing the flyimport pop-up prioritizing `std::sync::atomic::Ordering` in a `fetch_add` call"]
+
+== Fixes
+
+* pr:15896[] (first contribution) show placeholder while getting runnable list from server:
++
+image::https://user-images.githubusercontent.com/16928427/282953072-09de6a1c-6f3c-4d29-8031-ba4baeb43282.png["Screenshot showing a `Looking for runnables...` in the picker before `cargo test` and `cargo check` show up"]
+* pr:15515[] (first contribution) improve handling of binary expressions on the left-hand side of "Flip binary expression".
+* pr:16009[] (first contribution) don't search for `ControlFlow` as string in "Extract function".
+* pr:16028[] make drop inlay hints more readable:
++
+image::https://user-images.githubusercontent.com/71162630/288081867-bb18707f-3278-435d-a938-ccff4c685586.png["Screenshot showing drop hints appearing now after the semicolon"]
+* pr:16024[] fix runnables working directory on Windows.
+* pr:16054[] fix token downmapping being quadratic.
+* pr:16016[] don't insert parantheses around fields in struct literals.
+* pr:16041[] fix `WideChar` offsets calculation in `line-index`.
+* pr:16073[] replace `doc_comments_and_attrs` with `collect_attrs`.
+* pr:16035[] fix diagnostics panicking when resolving to different files due to macros.
+* pr:16037[] don't print proc-macro panic backtraces in the logs.
+* pr:15486[] fix item tree lowering `pub(self)` to `pub()`.
+* pr:15705[] resolve Self type references in delegate method assist.
+* pr:16048[] fix `concat_bytes!` expansion emitting an identifier.
+* pr:16058[] reduce spans for unresolved field and method diagnostics.
+* pr:16060[] fix completion in `format_args!` with invalid template.
+* pr:16078[] fix "View Mir", "View Hir" and "Interpret function" when the caret is inside a macro.
+* pr:16039[] don't emit missing items diagnostic for negative impls.
+* pr:16045[] fix panic with closure inside array length.
+* pr:16055[] fall back to method resolution on unresolved field access.
+
+== Internal Improvements
+
+* pr:16036[] (first contribution) make `ParamLoweringMode` accessible.
+* pr:15986[] use `triomphe::Arc::from_iter`.
+* pr:16042[] bump `salsa`.
+* pr:16022[] don't explicitly warn against `semicolon_in_expressions_from_macros`.
+* pr:16038[] publish `lsp-server 0.7.5`.
+* pr:16043[] bump and unlock some dependencies.

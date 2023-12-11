@@ -56,13 +56,13 @@ This diagnostic is shown when the derive attribute has invalid input.
 
 
 === mismatched-arg-count
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mismatched_arg_count.rs#L30[mismatched_arg_count.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mismatched_arg_count.rs#L31[mismatched_arg_count.rs]
 
 This diagnostic is triggered if a function is invoked with an incorrect amount of arguments.
 
 
 === mismatched-tuple-struct-pat-arg-count
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mismatched_arg_count.rs#L10[mismatched_arg_count.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mismatched_arg_count.rs#L11[mismatched_arg_count.rs]
 
 This diagnostic is triggered if a function is invoked with an incorrect amount of arguments.
 
@@ -88,7 +88,7 @@ This diagnostic is triggered if `match` block is missing one or more match arms.
 
 
 === missing-unsafe
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/missing_unsafe.rs#L9[missing_unsafe.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/missing_unsafe.rs#L10[missing_unsafe.rs]
 
 This diagnostic is triggered if an operation marked as `unsafe` is used outside of an `unsafe` function or block.
 
@@ -148,6 +148,12 @@ Diagnoses missing trait items in a trait impl.
 Only traits defined in the current crate can be implemented for arbitrary types
 
 
+=== trait-impl-redundant-assoc_item
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/trait_impl_redundant_assoc_item.rs#L6[trait_impl_redundant_assoc_item.rs]
+
+Diagnoses redundant trait items in a trait impl.
+
+
 === type-mismatch
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/type_mismatch.rs#L11[type_mismatch.rs]
 
@@ -180,7 +186,7 @@ crates rust-analyzer failed to discover. The file will not have IDE features ava
 
 
 === unnecessary-braces
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/useless_braces.rs#L9[useless_braces.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/useless_braces.rs#L12[useless_braces.rs]
 
 Diagnostic for unnecessary braces in `use` items.
 

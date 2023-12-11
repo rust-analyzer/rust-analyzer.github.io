@@ -221,7 +221,7 @@ image::https://user-images.githubusercontent.com/48062697/113020654-b42fc800-917
 
 
 === Find All References
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L43[references.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L45[references.rs]
 
 Shows all references of the item at the cursor location
 
@@ -303,7 +303,7 @@ image::https://user-images.githubusercontent.com/48062697/113065566-02f85480-91b
 
 
 === Go to Type Definition
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/goto_type_definition.rs#L6[goto_type_definition.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/goto_type_definition.rs#L7[goto_type_definition.rs]
 
 Navigates to the type of an identifier.
 
@@ -317,7 +317,7 @@ image::https://user-images.githubusercontent.com/48062697/113020657-b560f500-917
 
 
 === Highlight Related
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L40[highlight_related.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L41[highlight_related.rs]
 
 Highlights constructs related to the thing under the cursor:
 
@@ -332,7 +332,7 @@ Note: `?`, `|` and `->` do not currently trigger this behavior in the VSCode edi
 
 
 === Hover
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/hover.rs#L97[hover.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/hover.rs#L98[hover.rs]
 
 Shows additional information, like the type of an expression or the documentation for a definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.
@@ -341,7 +341,7 @@ image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L424[inlay_hints.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L425[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
@@ -554,7 +554,7 @@ image::https://user-images.githubusercontent.com/48062697/113171066-105c2000-923
 
 
 === Open Docs
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/doc_links.rs#L121[doc_links.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/doc_links.rs#L123[doc_links.rs]
 
 Retrieve a links to documentation for the given symbol.
 
@@ -598,7 +598,7 @@ the selected item. The context menu opens. Select **Peek Related Tests**.
 
 
 === Rename
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/rename.rs#L73[rename.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/rename.rs#L72[rename.rs]
 
 Renames the item below the cursor and all of its references
 

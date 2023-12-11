@@ -923,7 +923,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_expressions_from_format_string`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_expressions_from_format_string.rs#L13[extract_expressions_from_format_string.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_expressions_from_format_string.rs#L14[extract_expressions_from_format_string.rs]
 
 Move an expression out of a format string.
 
@@ -1073,7 +1073,7 @@ fn main() {
 
 [discrete]
 === `fix_visibility`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/fix_visibility.rs#L12[fix_visibility.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/fix_visibility.rs#L14[fix_visibility.rs]
 
 Makes inaccessible item public.
 
@@ -1251,7 +1251,7 @@ impl Default for Example {
 
 [discrete]
 === `generate_delegate_methods`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_delegate_methods.rs#L16[generate_delegate_methods.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_delegate_methods.rs#L17[generate_delegate_methods.rs]
 
 Generate delegate methods.
 
@@ -1631,7 +1631,7 @@ impl From<u32> for A {
 
 [discrete]
 === `generate_function`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_function.rs#L27[generate_function.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_function.rs#L28[generate_function.rs]
 
 Adds a stub function with a signature matching the function under the cursor.
 
