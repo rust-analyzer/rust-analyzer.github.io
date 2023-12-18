@@ -1,0 +1,26 @@
+= Changelog #212
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:21b06c1beb9bb59369ffd652f5d617bcf6952e05[] +
+Release: release:2023-12-18[] (`v0.3.1774`)
+
+== Fixes
+
+* pr:15887[] (first contribution) fix tuple to named struct conversion inside macro calls some more.
+* pr:16106[] fix syntax bridge assigning invalid spans to lifetime tokens.
+* pr:16061[] fix fragment parser on incomplete parses.
+* pr:16130[] remove subtrees with fake spans in syntax fix-up.
+* pr:16131[] fix false positive type mismatch in const reference patterns.
+* pr:16094[] replace `doc_comments_and_attrs` with `collect_attrs`, second round.
+* pr:16089[] query for nearest parent block around the hint to resolve.
+
+== Internal Improvements
+
+* pr:16099[] improve import asset performance a bit, bump limit, and shorten the paths.
+* pr:16125[] run rust-analyzer on rustc UI tests in metrics.
+* pr:16115[] update built-in attributes.
+* pr:16102[], pr:16104[] publish and bump `line-index`.
+* pr:16123[] remove `ModuleId` from `TypeOwnerId`.
+* pr:16098[] sync from downstream.
