@@ -1,0 +1,36 @@
+= Changelog #213
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:85fb463fc586594925f05fc8e285b1568f98f41a[] +
+Release: release:2023-12-25[] (`v0.3.1782`)
+
+== New Features
+
+* pr:16088[] implement a rust-analyzer span-backed proc-macro server mode.
+
+== Fixes
+
+* pr:16155[] (first contribution) don't assume ASCII in `remove_markdown`.
+* pr:16152[] resolve alias before resolving enum variant.
+* pr:16163[] de-duplicate annotations.
+* pr:16165[] update metavariable expression implementation.
+* pr:16066[], pr:16185[] remove unnecessary braces after with unused imports.
+* pr:16167[] fully remove dummy spans.
+* pr:16175[] correctly set and mark the proc-macro spans.
+* pr:16178[] fix span marking for built-in function-like macros.
+* pr:16184[] fix `Semantics` node caching in completion analysis.
+* pr:16158[] desugar doc comments correctly for MBE.
+* pr:16137[] complete exported macros in `#[macro_use($0)]`.
+
+== Internal Improvements
+
+* pr:16182[] update world symbols request definiton, prefer focus range for macros.
+* pr:16183[] clean up `Expander` a bit.
+* pr:16143[] move proc macro knowledge out of `base-db` and into `hir-expand`.
+* pr:16145[] split out a `span` crate.
+* pr:16150[] move out `WithFixture` into dev-only crate.
+* pr:16151[] add minimal support for the 2024 edition.
+* pr:16144[] sync from downstream.
+* pr:16149[] don't fail changelog generation on missing PRs.
