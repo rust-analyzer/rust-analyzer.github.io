@@ -1,0 +1,282 @@
+= The Heart of a Language Server
+:sectanchors:
+:page-layout: post
+
+In this post, I want to expand on one curious comment from rust-analyzer code base.
+You can find the comment https://github.com/rust-lang/rust-analyzer/blob/34cffbf1d75fb6b5cb6bc68a9854b20dc74f135d/crates/hir/src/semantics/source_to_def.rs#L3-L4[here].
+
+It describes a curious recursive algorithm that is repeated across different language-server-shaped thing:
+I've seen it implemented for Kotlin and C#, and implemented it myself for Rust.
+
+Here's a seemingly random grab bag of IDE features:
+
+- Go to definition
+- Code completion
+- Run test at the cursor
+- Extract variable
+
+What's common among them all?
+All these features are relative to the _current position_ of the cursor!
+The input is not only the state of the code at a give point in time, but a specific location in the source of a project, like `src/main.rs:90:2`.
+
+And the first thing a language server needs to do for any of the above features is to understand what is located at the given offset, semantically speaking.
+Is it an operator, like `+`?
+Is it a name, like `foo`?
+If it is a name, in what context a name is used --- does it _define_ an entity named `foo` or does it _refer_ to a pre-existing entity?
+If it is a reference, then _what_ entity is referenced?
+What type is it?
+
+The first step here is determining a node in the syntax tree which covers the offset.
+This is relatively straightforward:
+
+[source,rust]
+----
+fn node_at_offset(node: SyntaxNode, offset: u32) -> SyntaxNode {
+    assert!(node.text_range().contains(offset));
+    node.children()
+        .find(|it| it.text_range().contains(offset))
+        .map(|it| node_at_offset(it, offset))
+        .unwrap_or(node)
+}
+----
+
+But the syntax tree by itself doesn't contain enough information to drive IDE features.
+Semantic analysis is required.
+
+But the problem with semantic analysis is that it usually involves several layers of intermediate representations, which are only indirectly related to the syntax tree.
+While the syntax tree is relatively uniform, and it is possible to implement a generic traversal like the one above,
+semantic information is usually stored in a menagerie of ad-hoc data structures: trees, graphs, and plain old hash tables.
+
+Traditional compilers attach source span information to semantic elements, which could look like this:
+
+[source,rust]
+----
+struct Span {
+    file: PathBuf,
+    line: u32,
+    column: u32,
+}
+
+struct LocalVariable {
+    name: InternedString,
+    mutability: Mutability,
+    ty: Type,
+    span: Span
+}
+----
+
+With line information in place, it _is_ possible for a language server to find an appropriate semantic element for a given cursor position:
+just iterate all semantic elements there are, and find the one with the smallest span which still contains the cursor.
+
+This approach works, but has two drawbacks.
+
+The _first_ drawback is that it's too slow.
+To iterate over all semantic elements, an entire compilation unit must be analyzed, and that's too slow, even if done incrementally.
+The core trick of a performant language server is that it avoids any analysis unless _absolutely_ necessary.
+The server knows everything about the function currently on the screen, and knows almost nothing about other functions.
+
+The _second_ drawback is more philosophical --- using text spans _erases_ information about the underlying syntax trees.
+A `LocalVariable` didn't originate from a particular `span` of text, it was created using a specific node in the concrete syntax tree.
+For features like "go to definition", which need to go from syntax to semantics, the approximation turns out to be good enough.
+But for refactors, it is often convenient to go in the opposite direction --- from semantics to syntax.
+To change a tuple enum to a record enum, a language server needs to find all usages of the enum in the semantic model, but then it needs to modify the syntax tree.
+And going from a `Span` back to the `SyntaxNode` is not straightforward: different syntax nodes might have the same span!
+
+For example, a `foo` is a:
+
+* name token
+* a reference
+* a trivial path (`foo::bar`)
+* and a path expression
+
+[source]
+----
+PATH_EXPR@20..23
+  PATH@20..23
+    PATH_SEGMENT@20..23
+      NAME_REF@20..23
+        IDENT@20..23 "foo"
+----
+
+== Iterative Recursive Analysis
+
+So, how can a language server map syntax nodes to corresponding semantic elements, so that the mapping is precise and can be computed lazily?
+
+First, every semantic element gets a `source_syntax` method that returns the original syntax node:
+
+[source,rust]
+----
+impl LocalVariable {
+    pub fn source_syntax(&self) -> SyntaxNode
+}
+----
+
+The method is implemented differently for different types.
+Sometimes, storing a reference to a syntax node is appropriate:
+
+[source,rust]
+----
+struct LocalVariable {
+    source_syntax: SyntaxNodeId,
+}
+
+impl LocalVariable {
+    pub fn source_syntax(&self) -> SyntaxNode {
+        node_id_to_node(self.source_syntax)
+    }
+}
+----
+
+Alternatively, the syntax might be computed on demand.
+For example, for local variables we might store a reference to the parent function, and the ordinal number of this local variable:
+
+[source,rust]
+----
+struct LocalVariable {
+    parent: Function,
+    ordinal: usize
+}
+
+impl LocalVariable {
+    pub fn source_syntax(&self) -> SyntaxNode {
+        let parent_function_syntax = self.parent.source_syntax()
+        parent_function_syntax
+            .descendants()
+            .filter(|it| it.kind == SyntaxNodeKind::LocalVariable)
+            .nth(self.ordinal)
+            .unwrap()
+    }
+}
+----
+
+Yet another pattern is to get this information from a side table:
+
+```
+type SyntaxMapping = HashMap<LocalVariable, SyntaxNode>
+```
+
+In rust-analyzer all three approaches are used in various places.
+
+This solves the problem going from a semantic element to a syntax, but what we've started with is the opposite: from an offset like `main.rs:80:20` we go to a `SyntaxNode`, and then we need to discover the semantic element.
+The trick is to use the same solution in _both_ directions:
+
+To find a semantic element for a given piece of syntax:
+
+1. Look at the _parent_ syntax node.
+2. If there is no parent, then the current syntax node corresponds to an entire file, and the appropriate semantic element is the module.
+3. Otherwise, _recursively_ lookup semantics for the parent.
+4. Among all parent's children (our siblings), find the one whose source syntax is the node we started with
+
+
+Or, in pseudocode:
+
+[source,rust]
+----
+fn semantics_for_syntax(node: SyntaxNode) -> SemanticElement {
+    match node.parent() {
+        None => module_for_file(node.source_file),
+        Some(parent) => {
+
+            // Recursive call
+            let parent_semantics = semantics_for_syntax(parent);
+
+            for sibling in parent_semantics.children() {
+                if sibling.source_syntax() == node {
+                    return sibling
+                }
+            }
+        }
+    }
+}
+----
+
+In this formulation, a language server needs to just enough analysis to drill down to a specific node.
+
+Consider this example:
+
+[source,rust]
+---
+struct RangeIter {
+    lo: u32,
+    hi: u32,
+}
+
+impl Iterator for RangeIter {
+    type Item = u32;
+
+    fn next(&mut RangeIter) -> Item {
+                            //  ^ Cursor here
+
+    }
+}
+
+impl RangeIter {
+    ...
+}
+---
+
+Starting from the `Item` syntax node, the language server will consider:
+
+- the return type of the function `next`,
+- the function itself,
+- the `impl Iterator` block,
+- the entire file.
+
+Just enough semantic analysis will be executed to learn that a file has a struct declaration and two impl blocks, but the _contents_ of the struct and the second impl block won't be inspected at all.
+That is a huge win --- typically, source files are much more wide than they are deep.
+
+This recursion-and-loop structure is present in many language servers.
+For rust-analyzer, see the https://github.com/rust-lang/rust-analyzer/blob/34cffbf1d75fb6b5cb6bc68a9854b20dc74f135d/crates/hir/src/semantics/source_to_def.rs#L3-L4[`source_to_def`] module,
+with many functions that convert syntax (`ast::` types) to semantics (unqualified types).
+
+[source,rust]
+----
+fn type_alias_to_def(
+    &mut self,
+    src: InFile<ast::TypeAlias>,
+) -> Option<TypeAliasId> {
+----
+
+For Roslyn, one entry point to the machinery is https://github.com/dotnet/roslyn/blob/36a0c338d6621cc5fe34b79d414074a95a6a489c/src/Compilers/CSharp/Portable/Compilation/SyntaxTreeSemanticModel.cs#L1403-L1429[`GetDeclaredType`] function.
+`BaseTypeDeclarationSyntax` is, well, syntax, while the return type `NamedTypeSymbol` is the semantic info.
+First, Roslyn looks up semantic info for syntactic parent, using https://github.com/dotnet/roslyn/blob/36a0c338d6621cc5fe34b79d414074a95a6a489c/src/Compilers/CSharp/Portable/Compilation/SyntaxTreeSemanticModel.cs#L1423[`GetDeclaredTypeMemberContainer`].
+Then, in https://github.com/dotnet/roslyn/blob/36a0c338d6621cc5fe34b79d414074a95a6a489c/src/Compilers/CSharp/Portable/Compilation/SyntaxTreeSemanticModel.cs#L1783[`GetDeclaredMember`] it iterates semantic siblings and finds the one with the matching text range.
+
+For Kotlin, the entry is https://github.com/JetBrains/kotlin/blob/a288b8b00e4754a1872b164999c6d3f3b8c8994a/idea/idea-frontend-fir/idea-fir-low-level-api/src/org/jetbrains/kotlin/idea/fir/low/level/api/FirModuleResolveStateImpl.kt#L93-L125[`findSourceFirDeclarationByExpression`].
+This function starts with a syntax node (`KtExpression` is syntax, like all `Kt` nodes), and returns a declaration.
+It uses `getNonLocalContainingOrThisDeclaration` to get syntactic container for a current node.
+Then, `findSourceNonLocalFirDeclaration` gets `Fir` for this parent.
+Finally, `findElementIn` function traverses `Fir` children to find one with the same source we originally started with.
+
+== Limitations
+
+There are two properties of the underlying languages which make this approach work:
+
+1. Syntactic nesting must match semantic nesting.
+   Looking at parent's sibling makes sense only if the current element should be among the siblings.
+2. Getting sematic element for an entire file is trivial.
+
+The second one is actually less true in Rust than it is in Kotlin or C#!
+In those languages, each file starts with a package declaration, which immediately mounts the file at the appropriate place in the semantic model.
+
+For Rust, a file `foo.rs` only exists semantically if some parent file includes it via `mod foo;` declaration!
+And, in general, it's impossible to locate the parent file automatically.
+_Usually_, for `src/bar/foo.rs` the parent would be `src/bar.rs`, but, due to `#[path]` attributes which override this default, this might not be true.
+So rust-analyzer has to be less lazy than ideal here --- on every change, it reconstructs the entire module tree for a crate looking at every file, even if only a single file is currently visible.
+
+Here's another interesting example:
+
+[source,rust]
+----
+mod ast {
+    generate_ast_from_grammar!("FooLang.grm");
+}
+----
+
+Here, we have a hypothetical procedural macro, which reads a grammar definition from an external file, and presumably generates a bunch of Rust types for the AST described by the grammar.
+One could dream of an IDE where, without knowing anything specific about `.grammar`, it can still find usages of AST nodes defined therein, using the span information from the procedural macro.
+This works in theory: when the macro creates Rust token trees, it can manufacture spans that point inside `FooLang.grm`, which connects Rust source with the grammar.
+
+Where this breaks down is laziness.
+When a user invokes "find usages" inside `FooLang.grm`, the IDE has no way of knowing, up-front, that the `generate_ast_from_grammar!("FooLang.grm")` macro call needs to be expanded.
+The only way this could work if the IDE conservatively expands all macros all the time.
