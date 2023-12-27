@@ -143,7 +143,9 @@ impl LocalVariable {
         let parent_function_syntax = self.parent.source_syntax()
         parent_function_syntax
             .descendants()
-            .filter(|it| it.kind == SyntaxNodeKind::LocalVariable)
+            .filter(|it| {
+                it.kind == SyntaxNodeKind::LocalVariable
+            })
             .nth(self.ordinal)
             .unwrap()
     }
@@ -196,7 +198,7 @@ In this formulation, a language server needs to just enough analysis to drill do
 Consider this example:
 
 [source,rust]
----
+----
 struct RangeIter {
     lo: u32,
     hi: u32,
@@ -214,7 +216,7 @@ impl Iterator for RangeIter {
 impl RangeIter {
     ...
 }
----
+----
 
 Starting from the `Item` syntax node, the language server will consider:
 
