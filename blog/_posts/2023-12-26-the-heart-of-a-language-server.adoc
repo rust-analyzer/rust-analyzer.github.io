@@ -1,4 +1,5 @@
 = The Heart of a Language Server
+@matklad
 :sectanchors:
 :page-layout: post
 
@@ -17,7 +18,7 @@ Here's a seemingly random grab bag of IDE features:
 
 What's common among them all?
 All these features are relative to the _current position_ of the cursor!
-The input is not only the state of the code at a give point in time, but a specific location in the source of a project, like `src/main.rs:90:2`.
+The input is not only the state of the code at a given point in time, but a specific location in the source of a project, like `src/main.rs:90:2`.
 
 And the first thing a language server needs to do for any of the above features is to understand what is located at the given offset, semantically speaking.
 Is it an operator, like `+`?
