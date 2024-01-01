@@ -1,0 +1,17 @@
+= Changelog #214
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:9db515503f11bda7812cdfb9c2839f70f4cb1fdd[] +
+Release: release:2024-01-01[] (`v0.3.1791`)
+
+== Fixes
+
+* pr:16221[] (first contribution) fix panic in some macros due to unhandled `SyntaxContextId::SELF_REF`.
+* pr:16096[] (first contribution) update VS Code extension panic problem matcher.
+* pr:16224[] fix handling of hygiene in the presence of `SyntaxContextId::SELF_REF`.
+
+== Internal Improvements
+
+* pr:16217[] (first contribution) simplify implementation of `apply_document_changes`.
