@@ -341,7 +341,7 @@ image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L430[inlay_hints.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L433[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
@@ -1015,7 +1015,7 @@ Displays the recursive memory layout of a datatype.
 
 
 === Workspace Symbol
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-db/src/symbol_index.rs#L181[symbol_index.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-db/src/symbol_index.rs#L176[symbol_index.rs]
 
 Uses fuzzy-search to find types, modules and functions by name across your
 project and dependencies. This is **the** most useful feature, which improves code

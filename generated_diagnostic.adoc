@@ -149,7 +149,7 @@ Only traits defined in the current crate can be implemented for arbitrary types
 
 
 === trait-impl-redundant-assoc_item
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/trait_impl_redundant_assoc_item.rs#L6[trait_impl_redundant_assoc_item.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/trait_impl_redundant_assoc_item.rs#L11[trait_impl_redundant_assoc_item.rs]
 
 Diagnoses redundant trait items in a trait impl.
 
@@ -196,6 +196,12 @@ Diagnostic for unnecessary braces in `use` items.
 
 
 
+=== unresolved-assoc-item
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_assoc_item.rs#L3[unresolved_assoc_item.rs]
+
+This diagnostic is triggered if the referenced associated item does not exist.
+
+
 === unresolved-extern-crate
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_extern_crate.rs#L3[unresolved_extern_crate.rs]
 
@@ -223,7 +229,7 @@ to a macro in a macro invocation.
 
 
 === unresolved-method
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_method.rs#L13[unresolved_method.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_method.rs#L16[unresolved_method.rs]
 
 This diagnostic is triggered if a method does not exist on a given type.
 

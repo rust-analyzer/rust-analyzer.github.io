@@ -1,0 +1,71 @@
+= Changelog #215
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:af40101841c45aa75b56f4e9ca745369da8fb4ba[] +
+Release: release:2024-01-08[] (`v0.3.1799`)
+
+== New Features
+
+* pr:16222[] (first contribution) add `unresolved_assoc_item` diagnostic:
++
+image::https://user-images.githubusercontent.com/308347/293725355-a5f0627b-890b-4a7b-b450-ef6acac547bb.png["Screenshot showing a diagnostic on a misspelled associated function"]
+* pr:16279[] support IDE features for tuple fields:
++
+image::https://user-images.githubusercontent.com/308347/294854978-bb047739-2dd4-4a11-a287-6123f4e6d782.png["Screenshot showing hover working on a tuple field, inside a `println!` call"]
+* pr:15933[] resolve inherent and implemented associated items in doc comments:
++
+image::https://user-images.githubusercontent.com/7189784/293935411-c37ed8b7-b572-4684-8e81-2a817b0027c4.png["Screenshot showing associated methods and consts being highlighted in doc comments"]
+* pr:16100[] add quick fix for unresolved methods when an associated function with the same name exists:
++
+image::https://user-images.githubusercontent.com/71162630/289863711-1ea1d8b8-3436-4251-a512-e0f9de01a13c.gif["Screen recording showing quick fixes for invalid method calls where an associated method with the same name exists"]
+* pr:16011[] add `rust-analyzer.cargo.buildScripts.rebuildOnSave` option to rebuild proc macros on save if they change.
+* pr:16223[] add quick fix for "Redundant associated item" diagnostic:
++
+image::https://user-images.githubusercontent.com/71162630/293529876-74022c52-1566-49a0-9be8-03b82f3e730f.gif["Screen recording showing a quick fix that adds an implemented method to the corresponding trait definition"]
+* pr:16298[] add inlay hint for exclusive ranges:
++
+image::https://user-images.githubusercontent.com/94326797/294750534-d6bbc0de-52a5-4af4-b53c-a034749b6cab.png["Screenshot showing inlay hints like 0..<10"]
+
+== Fixes
+
+* pr:16081[] (first contribution) keep trailing whitespace in doc comments.
+* pr:16139[] (first contribution) give methods a container name.
+* pr:16136[] make the expected completion type a tad smarter with function types:
++
+image::https://user-images.githubusercontent.com/29989290/291000125-c06d6c93-5cac-4ebe-a93b-923017a6ae8c.png["Screenshot showing no parantheses when completing a struct field with a function pointer of matching type"]
+* pr:16258[], pr:16261[], pr:16267[], pr:16270[] rewrite and optimize `ImportMap::search_dependencies`.
+* pr:16268[] remove result limit for trait-importing method completions.
+* pr:16153[] tell user that `linkedProjects` is set when failing to discover projects.
+* pr:16234[] fix focus range in attribute/derive upmapping.
+* pr:16085[] fix type inference with `IndexMut` returning references.
+* pr:15810[] fix panic with macros in "Convert boolean to enum" and "Promot local to constant" assists.
+* pr:16112[], pr:16264[] rewrite "Generate delegate trait" assist.
+* pr:16067[] make "Introduce named generic" assist work with nested types.
+* pr:16068[] pick up new generic names on conflict in "Introduce named generic".
+* pr:16114[] fix `Self` type replacement in "Inline function".
+* pr:16199[] resolve `Self` in "Extract struct from enum variant".
+* pr:16049[] don't complete callable parantheses in struct literals.
+* pr:16241[] give a userful error when `rustc` cannot be found in explicit sysroot.
+* pr:16285[] fix panic on unaligned `#[repr(packed)]`.
+* pr:16062[] update `rust-analyzer.cargo.check` documentation references to `rust-analyzer.check`.
+
+== Internal Improvements
+
+* pr:16179[] (first contribution) populate new SCIP `SymbolInformation` fields.
+* pr:16213[] (first contribution) update dev guide based on the 2024-01-01 release.
+* pr:16252[] (first contribution) switch to `expected.assert_eq` for `ide` tests.
+* pr:15922[], pr:16238[], pr:16262[] (first contribution) update Gentoo installation instructions.
+* pr:16302[] (first contribution) add a basic `README.md` to the `line-index` crate.
+* pr:16290[] reduce `Vec` cloning in MIR lowering and eval.
+* pr:16237[] reduce `Arc` allocations in `macro_expand`.
+* pr:16082[] migrate assists to the structured snippet API, part 5.
+* clean up and enhance readability of `generate_delegate_trait`.
+* pr:16226[] expose whether the channel has been dropped in `lsp-server` errors.
+* pr:16211[] use `[workspace.lints.clippy]` to configure lints.
+* pr:16256[] only compare relevant parts in  `ide::{runnables, inlay_hints}` tests.
+* pr:16260[] replace single usage of `check_expect` with `check_diagnostics`.
+* pr:16294[] fix some minor `clippy::perf` issues.
+* pr:16248[] add `proc-macro-test` crate back to the main workspace.
+* pr:16249[] sync from downstream.
