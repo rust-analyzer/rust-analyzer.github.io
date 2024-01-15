@@ -2377,6 +2377,28 @@ fn handle(action: Action) {
 
 
 [discrete]
+=== `merge_nested_if`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/merge_nested_if.rs#L11[merge_nested_if.rs]
+
+This transforms if expressions of the form `if x { if y {A} }` into `if x && y {A}`
+This assist can only be applied with the cursor on `if`.
+
+.Before
+```rust
+fn main() {
+   i┃f x == 3 { if y == 4 { 1 } }
+}
+```
+
+.After
+```rust
+fn main() {
+   if x == 3 && y == 4 { 1 }
+}
+```
+
+
+[discrete]
 === `move_arm_cond_to_match_guard`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_guard.rs#L69[move_guard.rs]
 

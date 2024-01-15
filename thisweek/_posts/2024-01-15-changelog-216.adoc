@@ -1,0 +1,38 @@
+= Changelog #216
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:9d8889cdfcc3aa0302353fc988ed21ff9bc9925c[] +
+Release: release:2024-01-15[] (`v0.3.1807`)
+
+== New Features
+
+* pr:16209[] (first contribution) add assist to merge nested ``if``s:
++
+video::https://user-images.githubusercontent.com/308347/296709371-a674b37c-0d77-487e-9431-e6fac30998ad.mp4[options=loop]
+* pr:16308[] use `$crate` for built-in derives.
+
+== Fixes
+
+* pr:16265[] (first contribution) include `pub(crate)` imports in suggestions.
+* pr:16348[] fix nested ``include!``s resolving from the wrong base file.
+* pr:16312[] fix `rust-analyzer-proc-macro-srv` failing to launch on Windows.
+* pr:16277[] fix panic in `generate_delegate_methods`.
+* pr:16333[] preserve extracted block comments in "Extract function".
+* pr:16310[] fix parsing of method calls on ranges.
+* pr:16274[] consider `#[doc(notable_trait)]` for completion relevance.
+
+== Internal Improvements
+
+* pr:16307[] don't store the VFS contents in memory.
+* pr:16329[] minor perf and memory improvements.
+* pr:16347[] consider all kinds of explicit private imports in `find_path`.
+* pr:16319[] differentiate between VFS configuration and file change events.
+* pr:16275[] fix `ast::Path::segments` implementation.
+* pr:16334[] bump `salsa`.
+* pr:16317[] sync from downstream.
+* pr:16271[] remove `sysroot-abi` feature flag from `proc-macro-test`.
+* pr:16309[] recognize proc macro server unexpectedly quitting and report the exit code.
+* pr:16311[] remove the `rustc_dependencies` crate.
+* pr:16339[] replace `source_root_crates` output hash set with a slice.
