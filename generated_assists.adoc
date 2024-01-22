@@ -324,7 +324,7 @@ fn main() {
 
 [discrete]
 === `auto_import`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/auto_import.rs#L71[auto_import.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/auto_import.rs#L73[auto_import.rs]
 
 If the name is unresolved, provides all possible imports for it.
 
@@ -2330,9 +2330,9 @@ fn main() {
 
 [discrete]
 === `merge_imports`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/merge_imports.rs#L17[merge_imports.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/merge_imports.rs#L20[merge_imports.rs]
 
-Merges two imports with a common prefix.
+Merges neighbor imports with a common prefix.
 
 .Before
 ```rust

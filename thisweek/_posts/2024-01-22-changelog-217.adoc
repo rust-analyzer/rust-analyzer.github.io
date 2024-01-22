@@ -1,0 +1,48 @@
+= Changelog #217
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:d410d4a2baf9e99b37b03dd42f06238b14374bf7[] +
+Release: release:2024-01-22[] (`v0.3.1815`)
+
+== New Features
+
+* pr:16370[] show additional value information when hovering over literals.
+* pr:16374[], pr:16375[] show implemented notable traits on hover.
+* pr:16391[] add config to allow renaming of non-local definitions.
+* pr:16372[] add `One` import granularity.
+
+== Fixes
+
+* pr:16349[] add error recovery for `use_tree_list` parsing:
++
+image::https://user-images.githubusercontent.com/71162630/295905079-30a58c40-2711-48d2-b2e5-fb208fc8636c.png["Screenshot showing only one error for an unclosed brace in a use declaration"]
+* pr:16385[] fix intra-doc links.
+* pr:15868[] infer `OUT_DIR` when workspace root contains a symlink.
+* pr:16396[] fix panic when extracting struct from enum variant.
+* pr:16378[] handle `SelfParam` better in "Inline call".
+* pr:16405[] include `for` in "Convert to guarded return".
+* pr:16314[] parse `macro_rules` as macro name.
+* pr:16367[] make `value_ty` query fallible.
+
+== Internal Improvements
+
+* pr:15636[], pr:16383[] (first contribution) show which roots are being scanned in progress messages.
+* pr:16196[] (first contribution) rename `generator` to `coroutine`.
+* pr:16409[] (first contribution) remove some unused code.
+* pr:16350[] speed up line index calculation via NEON for aarch64.
+* pr:16395[] speed up line ending normalization using `memchr`.
+* pr:16366[] make data queries transparent over their diagnostics variant.
+* pr:16352[], pr:16389[] port ``rustfmt``'s algorithm for import ordering.
+* pr:16351[] eagerly lower enum variants in `CrateDefMap` construction.
+* pr:16388[] record `FnAbi`.
+* pr:16356[] add unstable config for loading the sysroot sources via `cargo metadata`.
+* pr:16380[], pr:16387[] run `cargo metadata` on sysroot for CI metrics.
+* pr:16384[] make use of some new `SmolStr` improvements.
+* pr:16397[] refactor `macro_call` to be consistent with other parsers.
+* pr:16398[] automatically fix Clippy lints.
+* pr:16401[] expand lint tables and make Clippy happy. 
+* pr:16404[] work through temporarily allowed Clippy lints, part 1.
+* pr:16406[] add `max_line_length` to `.editorconfig`.
+* pr:16364[], pr:16412[] sync from downstream.

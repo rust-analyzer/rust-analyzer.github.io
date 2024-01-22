@@ -47,6 +47,8 @@ It has the following configurations:
 - `item`: Don't merge imports at all, creating one import per item.
 - `preserve`: Do not change the granularity of any imports. For auto-import this has the same
  effect as `item`.
+- `one`: Merge all imports into a single use statement as long as they have the same visibility
+ and attributes.
 
 In `VS Code` the configuration for this is `rust-analyzer.imports.granularity.group`.
 
@@ -221,7 +223,7 @@ image::https://user-images.githubusercontent.com/48062697/113020654-b42fc800-917
 
 
 === Find All References
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L45[references.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L44[references.rs]
 
 Shows all references of the item at the cursor location
 
@@ -554,7 +556,7 @@ image::https://user-images.githubusercontent.com/48062697/113171066-105c2000-923
 
 
 === Open Docs
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/doc_links.rs#L123[doc_links.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/doc_links.rs#L122[doc_links.rs]
 
 Retrieve a links to documentation for the given symbol.
 
