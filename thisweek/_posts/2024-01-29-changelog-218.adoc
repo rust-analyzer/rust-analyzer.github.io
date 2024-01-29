@@ -1,0 +1,22 @@
+= Changelog #218
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:7219414e81810fd4d967136c4a0650523892c157[] +
+Release: release:2024-01-29[] (`v0.3.1823`)
+
+== New Features
+
+* pr:16420[] use upstream exhaustiveness checker.
+
+== Fixes
+
+* pr:16431[] (first contribution) use `adjusted_display_range_new` in `mismatched_arg_count` diagnostic.
+* pr:16427[] filter `#[cfg]`-ed out fields when lowering record patterns.
+
+== Internal Improvements
+
+* pr:16415[] make `TryToNav` trait public.
+* pr:16435[] do not return code lens data after resolving.
+* pr:16434[] restructure and clean up `hir-expand` a bit.
