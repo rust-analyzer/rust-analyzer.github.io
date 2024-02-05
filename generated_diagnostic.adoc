@@ -155,7 +155,7 @@ Diagnoses redundant trait items in a trait impl.
 
 
 === type-mismatch
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/type_mismatch.rs#L11[type_mismatch.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/type_mismatch.rs#L12[type_mismatch.rs]
 
 This diagnostic is triggered when the type of an expression or pattern does not match
 the expected type.

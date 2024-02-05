@@ -2330,7 +2330,7 @@ fn main() {
 
 [discrete]
 === `merge_imports`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/merge_imports.rs#L20[merge_imports.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/merge_imports.rs#L21[merge_imports.rs]
 
 Merges neighbor imports with a common prefix.
 
@@ -2573,6 +2573,23 @@ mod a;
 .After
 ```rust
 fn t() {}
+```
+
+
+[discrete]
+=== `normalize_import`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/normalize_import.rs#L9[normalize_import.rs]
+
+Normalizes an import.
+
+.Before
+```rust
+use┃ std::{io, {fmt::Formatter}};
+```
+
+.After
+```rust
+use std::{fmt::Formatter, io};
 ```
 
 

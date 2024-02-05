@@ -1,0 +1,32 @@
+= Changelog #219
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:39ad79bec5202fda903893034918cb5526bb834c[] +
+Release: release:2024-02-05[] (`v0.3.1831`)
+
+== New Features
+
+* pr:16439[] support "Go to definition" from inside ``include!``d files.
+* pr:16417[] add "Normalize import" assist and improve "Merge imports".
+* pr:16441[] add option to exclude tests from references search results.
+
+== Fixes
+
+* pr:15730[] (first contribution) add postfix completion for `let .. else`.
+* pr:16453[] undo special bracket classification in VS Code config.
+
+== Internal Improvements
+
+* pr:16463[] (first contribution) remove references to `abi_amdgpu_kernel`.
+* pr:16394[], pr:16456[] extend `tracing` integration and use it in `hprof`.
+* pr:16459[] use improved `adjusted_display_range` for all diagnostics.
+* pr:16461[] remove unnecessary usages of `ExpansionInfo`.
+* pr:16447[] clean up `mir` error variants.
+* pr:16479[] use MacOS 12 runners for releases.
+* pr:16451[] work through temporarily allowed Clippy lints, part 2.
+* pr:16413[] run `clippy` on CI.
+* pr:16448[], pr:16469[] add typo check to CI.
+* pr:16476[] sync from downstream.
+* pr:16416[] VS Code: report conflict with `panicbit.cargo`.
