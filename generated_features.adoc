@@ -223,7 +223,7 @@ image::https://user-images.githubusercontent.com/48062697/113020654-b42fc800-917
 
 
 === Find All References
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L44[references.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L42[references.rs]
 
 Shows all references of the item at the cursor location
 
@@ -414,6 +414,7 @@ There are postfix completions, which can be triggered by typing something like
 - `expr.ref` -> `&expr`
 - `expr.refm` -> `&mut expr`
 - `expr.let` -> `let $0 = expr;`
+- `expr.lete` -> `let $1 = expr else { $0 };`
 - `expr.letm` -> `let mut $0 = expr;`
 - `expr.not` -> `!expr`
 - `expr.dbg` -> `dbg!(expr)`

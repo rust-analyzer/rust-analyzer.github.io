@@ -124,6 +124,20 @@ module.
 This diagnostic is triggered if the accessed field is not visible from the current module.
 
 
+=== remove-trailing-return
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/remove_trailing_return.rs#L8[remove_trailing_return.rs]
+
+This diagnostic is triggered when there is a redundant `return` at the end of a function
+or closure.
+
+
+=== remove-unnecessary-else
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/remove_unnecessary_else.rs#L14[remove_unnecessary_else.rs]
+
+This diagnostic is triggered when there is an `else` block for an `if` expression whose
+then branch diverges (e.g. ends with a `return`, `continue`, `break` e.t.c).
+
+
 === replace-filter-map-next-with-find-map
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/replace_filter_map_next_with_find_map.rs#L11[replace_filter_map_next_with_find_map.rs]
 

@@ -693,7 +693,7 @@ fn main() {
 
 [discrete]
 === `convert_to_guarded_return`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_to_guarded_return.rs#L21[convert_to_guarded_return.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_to_guarded_return.rs#L24[convert_to_guarded_return.rs]
 
 Replace a large conditional with a guarded return.
 
@@ -944,7 +944,7 @@ fn main() {
 
 [discrete]
 === `extract_function`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_function.rs#L39[extract_function.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_function.rs#L37[extract_function.rs]
 
 Extracts selected statements and comments into new function.
 
@@ -977,7 +977,7 @@ fn ┃fun_name(n: i32) {
 
 [discrete]
 === `extract_module`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_module.rs#L32[extract_module.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_module.rs#L30[extract_module.rs]
 
 Extracts a selected region as separate module. All the references, visibility and imports are
 resolved.
@@ -1251,7 +1251,7 @@ impl Default for Example {
 
 [discrete]
 === `generate_delegate_methods`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_delegate_methods.rs#L17[generate_delegate_methods.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_delegate_methods.rs#L15[generate_delegate_methods.rs]
 
 Generate delegate methods.
 
@@ -1681,7 +1681,7 @@ struct Person {
 
 impl Person {
     fn ┃name(&self) -> &str {
-        self.name.as_ref()
+        &self.name
     }
 }
 ```
@@ -1689,7 +1689,7 @@ impl Person {
 
 [discrete]
 === `generate_getter_mut`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter_or_setter.rs#L113[generate_getter_or_setter.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter_or_setter.rs#L127[generate_getter_or_setter.rs]
 
 Generate a mut getter method.
 
@@ -1733,9 +1733,7 @@ struct Ctx<T: Clone> {
     data: T,
 }
 
-impl<T: Clone> Ctx<T> {
-    ┃
-}
+impl<T: Clone> Ctx<T> {┃}
 ```
 
 
@@ -1816,7 +1814,7 @@ impl<T> core::ops::Index<Axis> for [T; 3] {
 
 [discrete]
 === `generate_new`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_new.rs#L13[generate_new.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_new.rs#L14[generate_new.rs]
 
 Adds a `fn new` for a type.
 
@@ -1834,7 +1832,9 @@ struct Ctx<T: Clone> {
 }
 
 impl<T: Clone> Ctx<T> {
-    fn ┃new(data: T) -> Self { Self { data } }
+    fn ┃new(data: T) -> Self {
+        Self { data }
+    }
 }
 ```
 
@@ -1928,7 +1928,7 @@ impl<const N: usize> ${0:TraitName}<N> for Foo<N> {
 
 [discrete]
 === `generate_trait_impl`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_impl.rs#L56[generate_impl.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_impl.rs#L59[generate_impl.rs]
 
 Adds a new trait impl for a type.
 
@@ -1945,9 +1945,7 @@ struct Ctx<T: Clone> {
     data: T,
 }
 
-impl<T: Clone> ┃ for Ctx<T> {
-
-}
+impl<T: Clone> ${0:_} for Ctx<T> {}
 ```
 
 
@@ -2348,7 +2346,7 @@ use std::{fmt::Formatter, io};
 
 [discrete]
 === `merge_match_arms`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/merge_match_arms.rs#L11[merge_match_arms.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/merge_match_arms.rs#L12[merge_match_arms.rs]
 
 Merges the current match arm with the following if their bodies are identical.
 
@@ -3006,7 +3004,7 @@ fn main() {
 
 [discrete]
 === `replace_derive_with_manual_impl`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_derive_with_manual_impl.rs#L18[replace_derive_with_manual_impl.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_derive_with_manual_impl.rs#L20[replace_derive_with_manual_impl.rs]
 
 Converts a `derive` impl into a manual one.
 
