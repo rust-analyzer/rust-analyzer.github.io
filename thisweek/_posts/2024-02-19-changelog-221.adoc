@@ -1,0 +1,52 @@
+= Changelog #221
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:68c506fd6299c60c96a6202ca08f9d868a0838a3[] +
+Release: release:2024-02-19[] (`v0.3.1850`)
+
+== New Features
+
+* pr:16092[] (first contribution) introduce term search to `rust-analyzer`.
+* pr:16117[] (first contribution) prioritize constructors and builders in completions.
+* pr:15923[] improve support for ignored proc macros.
+* pr:15476[] substitute `$saved_file` in custom `check` commands.
+
+== Fixes
+
+* pr:16550[] (first contribution) activate on top level `Cargo.toml` and `rust-project.json` files.
+* pr:16530[] fix macro transcriber emitting incorrect lifetime tokens.
+* pr:16541[] highlight doc comments.
+* pr:16547[] validate literals in proc macro server's `FreeFunctions::literal_from_str`.
+* pr:16544[] only complete traits in `impl ... for`.
+* pr:16553[] improve parser error recovery on `=` in record field initializer and patterns.
+* pr:16554[] pass `.cargo/config.toml` environment variables to proc-macro server.
+* pr:16563[] set `RUSTUP_TOOLCHAIN` and invoke the proxies instead of sysroot binaries.
+* pr:16247[] fix build scripts not being rebuilt on some occasions.
+* pr:16574[] fix `needless_return` false positives on trailing inner item declarations.
+* pr:16582[] respect textual length of paths in `find_path`.
+* pr:16583[] ignore type mismatches between `{unknown}` and non-`{unknown}` types.
+* pr:16586[] remove cargo knowledge from `CrateData`.
+* pr:16569[] place snippets correctly in multi-edit assists.
+* pr:16579[] fix snippets being placed leftwards of where they should be.
+* pr:16559[] fill in SCIP documentation fields.
+
+== Internal Improvements
+
+* pr:16588[] (first contribution) parse (nightly) `const` and `async` trait bounds.
+* pr:16587[] (first contribution) update GitHub actions and Node version.
+* pr:16576[] (first contribution) add license files to `lsp-server`.
+* pr:15003[] add basic support for `become` expressions (tail calls).
+* pr:16577[] migrate assists to the structured snippet API, part 7 of 7.
+* pr:16446[] implement `literal_from_str` in proc macro server.
+* pr:16537[], pr:16545[] make tool discovery prefer sysroot paths.
+* pr:16540[] make `macro_arg` query always returns a `TokenTree`.
+* pr:16560[] set channel override when querying the sysroot metadata.
+* pr:16558[] update `JsonProject` to include optional fields.
+* pr:16562[] add `clippy` and `rustfmt` problem matchers to CI.
+* pr:16573[] remove `salsa` compile tests.
+* pr:16533[] bump `rustc_pattern_analysis`.
+* pr:16585[] bump `actions/checkout` to `v4`.
+* pr:16598[], pr:16599[], pr:16600[] downgrade `actions/checkout`, `actions/setup-node` and Node in release workflow.
+* pr:16597[] sync from downstream.

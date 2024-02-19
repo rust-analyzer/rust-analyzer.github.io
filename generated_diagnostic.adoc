@@ -176,7 +176,7 @@ the expected type.
 
 
 === typed-hole
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/typed_hole.rs#L12[typed_hole.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/typed_hole.rs#L18[typed_hole.rs]
 
 This diagnostic is triggered when an underscore expression is used in an invalid position.
 
