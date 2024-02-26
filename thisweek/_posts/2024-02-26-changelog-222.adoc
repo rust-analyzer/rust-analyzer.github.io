@@ -1,0 +1,38 @@
+= Changelog #222
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:5346002d07d09badaf37949bec68012d963d61fc[] +
+Release: release:2024-02-26[] (`v0.3.1860`)
+
+== New Features
+
+* pr:16489[] (first contribution) create alias when renaming an import.
+* pr:16589[] add `unresolved-ident` diagnostic.
+* pr:16303[] add `non-exhaustive-let` diagnostic.
+* pr:16475[] support multiple tab stops for edits in VSCode.
+
+== Fixes
+
+* pr:16358[] (first contribution) de-duplicate references from macro expansions.
+* pr:16621[] (first contribution) avoid setting `RUSTC_BOOTSTRAP` for build scripts, to prevent spurious recompiles.
+* pr:16590[] fix `remove-unnecessary-else` false positives on `if` expressions.
+* pr:16616[] try to fix potential server hang with build scripts.
+* pr:16645[] fix deadlock between `recreate_crate_graph` and `file_line_index`.
+* pr:16618[] don't escape `{` in assists.
+* pr:16637[] account for string delimiters correctly in proc macro server.
+* pr:16606[] render associated item owner in hover for items other than functions.
+
+== Internal Improvements
+
+* pr:16654[] (first contribution) add `-V` shorthand for `--version`.
+* pr:16643[], pr:16652[] reduce `salsa` memory usage.
+* pr:16612[] fetch toolchain and data layout for detached files.
+* pr:13112[] set up handling of auto trait bounds, but leave it disabled due to performance problems.
+* pr:16617[] attempt to add a timeout to `rustc_tests`.
+* pr:16648[] pin `rustc-tests` commit.
+* pr:16649[], pr:16650[] disable `rustc-tests` metrics.
+* pr:16601[] check out repository before running `typos`.
+* pr:16646[] remove some repeated words.
+* pr:16668[] sync from downstream.

@@ -601,7 +601,7 @@ the selected item. The context menu opens. Select **Peek Related Tests**.
 
 
 === Rename
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/rename.rs#L72[rename.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/rename.rs#L73[rename.rs]
 
 Renames the item below the cursor and all of its references
 

@@ -111,6 +111,13 @@ This diagnostic is triggered on mutating an immutable variable.
 This diagnostic is triggered if created structure does not have field provided in record.
 
 
+=== non-exhaustive-let
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/non_exhaustive_let.rs#L3[non_exhaustive_let.rs]
+
+This diagnostic is triggered if a `let` statement without an `else` branch has a non-exhaustive
+pattern.
+
+
 === private-assoc-item
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/private_assoc_item.rs#L3[private_assoc_item.rs]
 
@@ -132,7 +139,7 @@ or closure.
 
 
 === remove-unnecessary-else
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/remove_unnecessary_else.rs#L14[remove_unnecessary_else.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/remove_unnecessary_else.rs#L17[remove_unnecessary_else.rs]
 
 This diagnostic is triggered when there is an `else` block for an `if` expression whose
 then branch diverges (e.g. ends with a `return`, `continue`, `break` e.t.c).
@@ -226,6 +233,12 @@ This diagnostic is triggered if rust-analyzer is unable to discover referred ext
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_field.rs#L13[unresolved_field.rs]
 
 This diagnostic is triggered if a field does not exist on a given type.
+
+
+=== unresolved-ident
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_ident.rs#L3[unresolved_ident.rs]
+
+This diagnostic is triggered if an expr-position ident is invalid.
 
 
 === unresolved-import
