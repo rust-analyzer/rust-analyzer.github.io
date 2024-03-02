@@ -167,7 +167,6 @@ You'll need the latest stable version of the Rust toolchain.
 $ git clone https://github.com/rust-lang/rust-analyzer.git && cd rust-analyzer
 $ git checkout release
 $ cargo build --release
-$ git checkout release
 $ cargo xtask install --server
 ----
 
