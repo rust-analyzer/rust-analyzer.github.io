@@ -1,0 +1,43 @@
+= Changelog #223
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:037924c4d8961ded7872cbf6f75f5b0349859686[] +
+Release: release:2024-03-04[] (`v0.3.1868`)
+
+== New Features
+
+* pr:16638[] (first contribution) add `destructure_struct_binding` assist.
+* pr:16651[] add `fill_record_pattern_fields` assist.
+* pr:16687[] support tuples in term search.
+* pr:16555[], pr:16692[] speed up completions by considering coherence.
+
+== Fixes
+
+* pr:16630[] fix type inference of closures with predicates.
+* pr:16679[] resolve modules in blocks in the `ide` layer.
+* pr:16647[] fix false positive for `dyn Trait` in `replace_filter_map_next_with_find_map`.
+* pr:16678[] fix panic when inlining callsites inside macro parameters.
+* pr:16684[] don't panic on synthetic syntax in inference diagnostics.
+* pr:16691[] fix completions panicking with certain macro setups.
+* pr:16693[] prefer sysroot `rustc` in `rust-project.json` projects.
+* pr:16696[], pr:16709[] handle `deref_mut` and `index_mut` in index expressions.
+* pr:16727[] don't highlight related associated items of supertraits.
+* pr:16702[] ignore generic arguments in intra-doc link path resolution.
+* pr:16665[] prioritize `rustup` sysroots over system ones.
+* pr:16695[] revert doc-comment highlighting.
+
+== Internal Improvements
+
+* pr:16670[] (first contribution) document NeoVim inlay hint configuration.
+* pr:16673[] (first contribution) narrow down `typos` ignore list.
+* pr:16706[] drop `load-cargo` dependency on ide.
+* pr:16738[] bump `rustc_pattern_analysis`.
+* pr:16627[] add repository URL and code sample sections to the bug report template.
+* pr:16669[] merge `BorrowKind::Unique` into `BorrowKind::Mut`.
+* pr:16697[] add `RelPath::to_path_buf()` method.
+* pr:16698[] derive `PartialEq`, `Eq` and `Hash` for `hir::Param`.
+* pr:16705[] add public function for resolving callable AST expressions to their HIR equivalents.
+* pr:16707[] export `SemanticsImpl` from `hir`.
+* pr:16680[] remove `salsa` compile-fail tests.

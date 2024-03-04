@@ -849,8 +849,41 @@ fn main() {
 
 
 [discrete]
+=== `destructure_struct_binding`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/destructure_struct_binding.rs#L18[destructure_struct_binding.rs]
+
+Destructures a struct binding in place.
+
+.Before
+```rust
+struct Foo {
+    bar: i32,
+    baz: i32,
+}
+fn main() {
+    let ┃foo = Foo { bar: 1, baz: 2 };
+    let bar2 = foo.bar;
+    let baz2 = &foo.baz;
+}
+```
+
+.After
+```rust
+struct Foo {
+    bar: i32,
+    baz: i32,
+}
+fn main() {
+    let Foo { bar, baz } = Foo { bar: 1, baz: 2 };
+    let bar2 = bar;
+    let baz2 = &baz;
+}
+```
+
+
+[discrete]
 === `destructure_tuple_binding`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/destructure_tuple_binding.rs#L15[destructure_tuple_binding.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/destructure_tuple_binding.rs#L18[destructure_tuple_binding.rs]
 
 Destructures a tuple binding in place.
 
@@ -1067,6 +1100,31 @@ fn main() {
 fn main() {
     let ┃var_name = (1 + 2);
     var_name * 4;
+}
+```
+
+
+[discrete]
+=== `fill_record_pattern_fields`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/fill_record_pattern_fields.rs#L8[fill_record_pattern_fields.rs]
+
+Fills fields by replacing rest pattern in record patterns.
+
+.Before
+```rust
+struct Bar { y: Y, z: Z }
+
+fn foo(bar: Bar) {
+    let Bar { ..┃ } = bar;
+}
+```
+
+.After
+```rust
+struct Bar { y: Y, z: Z }
+
+fn foo(bar: Bar) {
+    let Bar { y, z  } = bar;
 }
 ```
 
@@ -1951,7 +2009,7 @@ impl<T: Clone> ${0:_} for Ctx<T> {}
 
 [discrete]
 === `inline_call`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L161[inline_call.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L164[inline_call.rs]
 
 Inlines a function or method body creating a `let` statement per parameter unless the parameter
 can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
