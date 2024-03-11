@@ -1,0 +1,44 @@
+= Changelog #224
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:574e23ec508064613783cba3d1833a95fd9a5080[] +
+Release: release:2024-03-11[] (`v0.3.1877`)
+
+== New Features
+
+* pr:16662[], pr:16773[], pr:16794[] add test explorer (disabled by default, enable using `rust-analyzer.testExplorer`).
+* pr:15938[], pr:16756[] add hover display for trait assoc items
+
+== Fixes
+
+* pr:16723[] (first contribution) complete constants inside format strings.
+* pr:16769[] fix argument type inference with associated type `impl Trait`.
+* pr:16757[] disable style lints by default (`rust-analyzer.diagnostics.styleLints.enable`).
+* pr:16759[] fix "Go to definition" for constants inside range patterns.
+* pr:16778[] bump `rustc_pattern_analysis` to fix a panic on mismatched types.
+* pr:16770[] fix panic on float numbers without dots in chain calls (`x.1e0`).
+* pr:16779[] skip match diagnostics for partially unknown types.
+* pr:16690[] use four-space indentation in macro expansion.
+* pr:16752[] don't allow destructuring of structs with no public fields.
+* pr:16766[] keep attributes in "Generate delegate trait" assist.
+* pr:16775[] remove accidental dependency between `parse_macro_expansion` and `parse`.
+* pr:16776[] make `SpanMap` accesses lazy to avoid a `salsa` dependency.
+* pr:16777[] don't invalid body query results when generating desugared names.
+* pr:16781[], pr:16782[] don't escape `\` and `$` in "Extract format expression".
+* pr:16719[] add basic support for the VS Code Native Debug extension.
+
+== Internal Improvements
+
+* pr:16722[] (first contribution) avoid some allocations.
+* pr:16748[] compute syntax validation errors on demand.
+* pr:16755[] use `PATH` For toolchain binaries.
+* pr:16785[], pr:16786[], pr:16787[] simplify the parser code somewhat.
+* pr:16742[] add parent-child relationship between ``SourceRoot``s.
+* pr:16703[] add more methods for resolving AST definitions to their corresponding HIR types.
+* pr:16763[] add `index` and `parent_fn` accessors to `hir::Param`.
+* pr:16772[] add `tracing` spans to `salsa` databases.
+* pr:16708[], pr:16751[] move assist, diagnostics docs and lint definition generation into `xtask codegen`.
+* pr:16747[] various clean-ups.
+* pr:16758[] bump dependencies.

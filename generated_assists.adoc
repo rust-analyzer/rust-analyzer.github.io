@@ -1350,7 +1350,7 @@ impl Person {
 
 [discrete]
 === `generate_delegate_trait`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_delegate_trait.rs#L26[generate_delegate_trait.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_delegate_trait.rs#L27[generate_delegate_trait.rs]
 
 Generate delegate trait implementation for `StructField`s.
 
