@@ -230,7 +230,7 @@ This diagnostic is triggered if rust-analyzer is unable to discover referred ext
 
 
 === unresolved-field
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_field.rs#L13[unresolved_field.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_field.rs#L24[unresolved_field.rs]
 
 This diagnostic is triggered if a field does not exist on a given type.
 
@@ -280,12 +280,12 @@ enable support for procedural macros (see `rust-analyzer.procMacro.attributes.en
 
 
 === unused-mut
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L45[mutability_errors.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L51[mutability_errors.rs]
 
 This diagnostic is triggered when a mutable variable isn't actually mutated.
 
 
 === unused-variables
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unused_variables.rs#L3[unused_variables.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unused_variables.rs#L11[unused_variables.rs]
 
 This diagnostic is triggered when a local variable is not used.

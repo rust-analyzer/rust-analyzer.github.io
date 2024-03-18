@@ -1,0 +1,48 @@
+= Changelog #225
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:b6d1887bc4f9543b6c6bf098179a62446f34a6c3[] +
+Release: release:2024-03-18[] (`v0.3.1885`)
+
+== Announcement
+
+Today's release switches to Ubuntu 20.04 for building the official binaries, bringing the minimum supported GLIBC version to 2.31.
+Upgrading was forced by GitHub Actions moving form Node.js 16 to 20.
+See pr:16793[] for more information.
+
+Affected distributions include Debian 10, Ubuntu 18.04, Enterprise Linux 7 and 8, and Amazon Linux 2.
+For now, the alternatives are building from source, or using the `rust-analyzer` toolchain component.
+
+== New Features
+
+* pr:16789[] apply `#[cfg]` to proc macro inputs.
+* pr:16834[] support macro calls in eager macros for IDE features.
+* pr:16808[] add proc macro semantic token type.
+
+== Fixes
+
+* pr:16762[] add quick fix for "undersolved field" diagnostic.
+* pr:16810[] add fix for "unused variable" diagnostic.
+* pr:16856[] fix `where` clause rendering on hover.
+* pr:16846[] fix panic and incorrect handling of `use` in `extract_module`.
+* pr:16861[] ignore some warnings if they originate from macro expansions.
+* pr:16845[] show compilation progress in test explorer.
+* pr:16847[] distinguish integration tests from crates in test explorer.
+* pr:16820[] don't auto-close block comments in strings.
+
+== Internal Improvements
+
+* pr:16819[] improve rooted upmapping.
+* pr:16832[] shrink `MacroCallLoc`.
+* pr:16841[] use associated items as anchors for spans.
+* pr:16842[] make proc macro definition site spans more resistant to invalidation.
+* pr:16844[] replace `Span` with `SyntaxContextId` in `MacroCallLoc`.
+* pr:16771[] don't desugar `self` parameter into a pattern.
+* pr:16335[] compress file text using LZ4.
+* pr:16473[] stop eagerly resolving inlay hint text edits for VS Code.
+* pr:16749[], pr:16811[] some method resolution clean-ups.
+* pr:16862[] remove redundant ``clone``s
+* pr:16784[] remove `synstructure` const hack support.
+* pr:16851[] build `linux-gnu` releases on Ubuntu 20.04.
