@@ -1,0 +1,44 @@
+= Changelog #226
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:6f6b03f9de783f91456080b3f6adc8d92903c1b0[] +
+Release: release:2024-03-25[] (`v0.3.1896`)
+
+== New Features
+
+* pr:16852[] implement ATPIT.
+* pr:16860[] syntax highlighting improvements.
+
+== Fixes
+
+* pr:16915[] (first contribution) fix stack overflow on recursive const types.
+* pr:16913[] make file watching work on Windows and improve subsequent change detection.
+* pr:16935[] handle CTFE panicking like `rustc`.
+* pr:16830[] fix panic on `impl Trait` associated types in `where` clauses.
+* pr:16905[], pr:16927[] rename `ProcMacroKind::FuncLike` to `Bang`.
+* pr:16919[] handle `self::super` in paths.
+* pr:16880[] use `--workspace` and `--no-fail-fast` in test explorer.
+* pr:16868[] handle attributes when auto-closing left braces.
+* pr:16822[] improve resolution for inlay hints targetting the same position.
+* pr:16871[], pr:16886[] skip problematic cyclic dev-dependencies.
+* pr:16885[] improve parser recovery for match arms.
+* pr:16812[] fix "Go to implementation" for impls inside blocks.
+* pr:16909[] keep the `Attr::Literal` spans.
+* pr:16911[] fix hang on projects depending on `rustc_private`.
+
+== Internal Improvements
+
+* pr:16835[] share token trees between derive attributes and their proc macros.
+* pr:16879[] add fuel to match checking.
+* pr:16895[] resolve whether `$pat` is `$pat_param` or not using hygiene.
+* pr:16839[] support arbitrary shell command runnables.
+* pr:16884[] move grammar codegen into `xtask`.
+* pr:16889[], pr:16899[], pr:16918[] enforce UTF-8 paths.
+* pr:16892[] don't try to read root crate file contents before VFS.
+* pr:16912[] remove `Span` trait.
+* pr:16863[] bump `rustc` dependencies and use in-tree `rustc_pattern_analysis`.
+* pr:16928[] build `x86_64-unknown-linux-gnu` releases on Rocky Linux 8 (GLIBC 2.28).
+* pr:16904[] bump `rust-cache` action.
+* pr:16929[] bump release actions and Node version.

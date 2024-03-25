@@ -23,7 +23,7 @@ For now, the alternatives are building from source, or using the `rust-analyzer`
 
 == Fixes
 
-* pr:16762[] add quick fix for "undersolved field" diagnostic.
+* pr:16762[] (first contribution) add quick fix for "undersolved field" diagnostic.
 * pr:16810[] add fix for "unused variable" diagnostic.
 * pr:16856[] fix `where` clause rendering on hover.
 * pr:16846[] fix panic and incorrect handling of `use` in `extract_module`.
