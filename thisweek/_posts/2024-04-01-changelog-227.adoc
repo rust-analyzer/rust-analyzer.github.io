@@ -1,0 +1,25 @@
+= Changelog #227
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:e4a405f877efd820bef9c0e77a02494e47c17512[] +
+Release: release:2024-04-01[] (`v0.3.1906`)
+
+== New Features
+
+* pr:16805[], pr:16960[], pr:16967[] implement lifetime lowering and resolution.
+* pr:16906[] add struct hover field display limit (`rust-analyzer.hover.show.structFields`).
+
+== Fixes
+
+* pr:16964[] revert debug extension priorities.
+* pr:16965[] use LLDB when debugging with C++ extension on MacOS.
+* pr:16957[] check for client relative glob pattern support before using them.
+* pr:16971[] resolve tests per file instead of crate in test explorer.
+* pr:16975[] prompt the user to reload the window when enabling test explorer.
+
+== Internal Improvements
+
+* pr:16944[] revert to the crates.io version of `rustc_pattern_analysis`.
+* pr:16930[] support choosing the allocator in `xtask dist`.
