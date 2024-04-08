@@ -1,0 +1,33 @@
+= Changelog #228
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:7a8374c162c64c17e865b98aad282d16b16e96d6[] +
+Release: release:2024-04-08[] (`v0.3.1916`)
+
+== New Features
+
+* pr:16924[], pr:16988[] add `rust-analyzer.cargo.allTargets` to configure passing `--all-targets` to `cargo` invocations.
+
+== Fixes
+
+* pr:17000[] (first contribution) set the right postfix snippets competion source range.
+* pr:16968[] silence type mismatches involving unresolved projections.
+*  Fix `allTargets` config docs
+* pr:16997[] fix `patch_cfg_if` not applying with stitched sysroot.
+* pr:17006[] fix some `cfg` censoring bugs.
+* pr:17003[] fix off-by-one in LSP offset conversion.
+* pr:16961[] fix crate IDs when multiple workspaces are loaded.
+* pr:16970[] fix tasks in `tasks.json`.
+* pr:17016[] apply cargo flags in test explorer.
+* pr:17014[] consider `#[exported_name=main]` functions in test modules as tests.
+
+== Internal Improvements
+
+* pr:16996[] lower `Outlives` goals and respect them in display impls.
+* pr:17002[] consider ADT generic parameter defaults for unsubstituted layout calculations.
+* pr:16979[] use contiguous indices for enum variants in pattern analysis.
+* pr:17023[] slight clean-ups and perf improvements.
+* pr:16920[] fix new nightly Clippy lints.
+* pr:16986[] add client information to bug report template.
