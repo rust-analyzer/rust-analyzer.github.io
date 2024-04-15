@@ -334,7 +334,7 @@ Note: `?`, `|` and `->` do not currently trigger this behavior in the VSCode edi
 
 
 === Hover
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/hover.rs#L99[hover.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/hover.rs#L100[hover.rs]
 
 Shows additional information, like the type of an expression or the documentation for a definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.
@@ -557,7 +557,7 @@ image::https://user-images.githubusercontent.com/48062697/113171066-105c2000-923
 
 
 === Open Docs
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/doc_links.rs#L122[doc_links.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/doc_links.rs#L120[doc_links.rs]
 
 Retrieve a links to documentation for the given symbol.
 
@@ -586,7 +586,7 @@ image::https://user-images.githubusercontent.com/48062697/113065580-04c21800-91b
 
 
 === Related Tests
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L197[runnables.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L199[runnables.rs]
 
 Provides a sneak peek of all tests where the current item is used.
 
@@ -615,7 +615,7 @@ image::https://user-images.githubusercontent.com/48062697/113065582-055aae80-91b
 
 
 === Run
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L111[runnables.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L113[runnables.rs]
 
 Shows a popup suggesting to run a test/benchmark/binary **at the current cursor
 location**. Super useful for repeatedly running just a single test. Do bind this

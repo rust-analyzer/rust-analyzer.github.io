@@ -1,0 +1,25 @@
+= Changelog #229
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:5dbe3fe75c584aee2063ef7877a639fe3382461e[] +
+Release: release:2024-04-15[] (`v0.3.1924`)
+
+== Fixes
+
+* pr:17019[] don't confuse paths with source roots sharing the same prefix.
+* pr:17063[] fix inlay hint resolution.
+* pr:17056[] run `cargo test` per workspace in the test explorer.
+* pr:17054[] revert "fix: postfix snippet completion source range".
+* pr:17051[] auto-close triple backticks.
+
+== Internal Improvements
+
+* pr:17034[] (first contribution) document enabling the Flatpak Rust SDK extension.
+* pr:17033[] log flycheck errors.
+* pr:17062[] temporarily disable unlinked file popup.
+* pr:16450[], pr:17065[] prepare parser interface for editions.
+* pr:17059[] make function builder create AST directly.
+* pr:17030[] bump `chalk`.
+* pr:17035[] run Windows tests on PRs too.

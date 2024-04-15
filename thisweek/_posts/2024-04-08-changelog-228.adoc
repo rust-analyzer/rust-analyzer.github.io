@@ -12,9 +12,8 @@ Release: release:2024-04-08[] (`v0.3.1916`)
 
 == Fixes
 
-* pr:17000[] (first contribution) set the right postfix snippets competion source range.
+* pr:17000[] (first contribution) set the right postfix snippet completion source range.
 * pr:16968[] silence type mismatches involving unresolved projections.
-*  Fix `allTargets` config docs
 * pr:16997[] fix `patch_cfg_if` not applying with stitched sysroot.
 * pr:17006[] fix some `cfg` censoring bugs.
 * pr:17003[] fix off-by-one in LSP offset conversion.
