@@ -286,6 +286,6 @@ This diagnostic is triggered when a mutable variable isn't actually mutated.
 
 
 === unused-variables
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unused_variables.rs#L11[unused_variables.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unused_variables.rs#L14[unused_variables.rs]
 
 This diagnostic is triggered when a local variable is not used.

@@ -469,6 +469,39 @@ fn main() {
 
 
 [discrete]
+=== `convert_from_to_tryfrom`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_from_to_tryfrom.rs#L10[convert_from_to_tryfrom.rs]
+
+Converts a From impl to a TryFrom impl, wrapping returns in `Ok`.
+
+.Before
+```rust
+impl ┃From<usize> for Thing {
+    fn from(val: usize) -> Self {
+        Thing {
+            b: val.to_string(),
+            a: val
+        }
+    }
+}
+```
+
+.After
+```rust
+impl TryFrom<usize> for Thing {
+    type Error = ${0:()};
+
+    fn try_from(val: usize) -> Result<Self, Self::Error> {
+        Ok(Thing {
+            b: val.to_string(),
+            a: val
+        })
+    }
+}
+```
+
+
+[discrete]
 === `convert_if_to_bool_then`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_bool_then.rs#L20[convert_bool_then.rs]
 
@@ -3650,4 +3683,27 @@ fn foo() -> i32┃ { 42i32 }
 .After
 ```rust
 fn foo() -> Result<i32, ${0:_}> { Ok(42i32) }
+```
+
+
+[discrete]
+=== `wrap_unwrap_cfg_attr`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/wrap_unwrap_cfg_attr.rs#L12[wrap_unwrap_cfg_attr.rs]
+
+Wraps an attribute to a cfg_attr attribute or unwraps a cfg_attr attribute to the inner attributes.
+
+.Before
+```rust
+#[derive┃(Debug)]
+struct S {
+   field: i32
+}
+```
+
+.After
+```rust
+#[cfg_attr(┃, derive(Debug))]
+struct S {
+   field: i32
+}
 ```

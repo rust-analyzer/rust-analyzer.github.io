@@ -1,0 +1,43 @@
+= Changelog #230
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:47a901b9bf1f99b1ec5222d478684fc412d526a5[] +
+Release: release:2024-04-22[] (`v0.3.1932`)
+
+== New Features
+
+* pr:16813[] add wrap/unwrap `#[cfg_attr]` assist.
+* pr:17094[] add "Convert `From` to `TryFrom`" assist.
+* pr:17110[] add minimal `cargo-script` support.
+* pr:17118[] allow `.rs` files to be used linkedProjects.
+* pr:16057[] render matched declarative macro arm on hover.
+
+== Fixes
+
+* pr:17115[] (first contribution) try to generate more meaningful names in JSON converter.
+* pr:16877[] fix `impl Trait<Self>` causing stack overflows.
+* pr:17055[] replace just the variable name in the "Unused variable" quick fix.
+* pr:17093[] avoid some circular symlinks in VFS.
+* pr:17024[] handle escaped chars in doc comments.
+* pr:17074[] add `static` and `const` highlight token types.
+* pr:17105[] make test harness arguments configurable.
+
+== Internal Improvements
+
+* pr:17104[] (first contribution) bump actions in `metrics.yaml`.
+* pr:16639[] redesign `rust-analyzer::config`.
+* pr:17078[] improve diagnostics performance.
+* pr:16726[] remove `#[cfg(test)]` hacks.
+* pr:17108[] clean up `#[cfg]` and environment handling in `project-model`.
+* pr:16938[] handle `BeginPanic` in const eval.
+* pr:17119[] extract common fields out of `ProjectWorkspace` variants.
+* pr:17037[] improve `TokenSet` implementation and add reserved keywords.
+* pr:17072[] use `hir_fmt_args` everywhere in `hir_ty::display`.
+* pr:17070[] remove unnecessay `GlobalState::send_hint_refresh_query` field.
+* pr:17087[] fix a few `tracing` spans without `.entered()`.
+* pr:17083[] improve `ReferenceCategoryType`.
+* pr:16257[] teach Cargo about `#[cfg(rust_analyzer)]`.
+* pr:17025[] use `josh` for subtree syncs.
+* pr:17095[] add a `CONTRIBUTING.md`.
