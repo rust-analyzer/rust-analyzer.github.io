@@ -1,0 +1,24 @@
+= Changelog #231
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:f216be4a0746142c5f30835b254871256a7637b8[] +
+Release: release:2024-04-29[] (`v0.3.1940`)
+
+== Fixes
+
+* pr:16972[] (first contribution) make `cargo run` always available for binaries.
+* pr:17131[] (first contribution) use different codes for "no such field" errors based on variant type.
+* pr:17135[] compute expression scopes for inline consts.
+* pr:17145[] fix source roots creation on changes.
+* pr:17151[] avoid item tree collisions for attributes on generic parameters.
+* pr:17153[] fix doc comment desugaring for proc macros.
+* pr:17021[] support hovering limits for ADTs.
+* pr:17134[] don't render unknown lifetimes in generic arguments.
+
+== Internal Improvements
+
+* pr:17143[] show workspace info in the status bar.
+* pr:17102[] add more `tracing` spans to project loading.
+* pr:17150[] make sure josh `rustc-pull` doesn't add new root commits.
