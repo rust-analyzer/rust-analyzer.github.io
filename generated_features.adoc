@@ -223,7 +223,7 @@ image::https://user-images.githubusercontent.com/48062697/113020654-b42fc800-917
 
 
 === Find All References
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L42[references.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L44[references.rs]
 
 Shows all references of the item at the cursor location
 
@@ -334,7 +334,7 @@ Note: `?`, `|` and `->` do not currently trigger this behavior in the VSCode edi
 
 
 === Hover
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/hover.rs#L100[hover.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/hover.rs#L98[hover.rs]
 
 Shows additional information, like the type of an expression or the documentation for a definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.
@@ -343,7 +343,7 @@ image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L442[inlay_hints.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L433[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
@@ -414,7 +414,6 @@ There are postfix completions, which can be triggered by typing something like
 - `expr.ref` -> `&expr`
 - `expr.refm` -> `&mut expr`
 - `expr.let` -> `let $0 = expr;`
-- `expr.lete` -> `let $1 = expr else { $0 };`
 - `expr.letm` -> `let mut $0 = expr;`
 - `expr.not` -> `!expr`
 - `expr.dbg` -> `dbg!(expr)`
@@ -464,7 +463,7 @@ image::https://user-images.githubusercontent.com/48062697/113065573-04298180-91b
 
 
 === Memory Usage
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-db/src/apply_change.rs#L44[apply_change.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-db/src/apply_change.rs#L43[apply_change.rs]
 
 Clears rust-analyzer's internal database and prints memory usage statistics.
 
@@ -557,7 +556,7 @@ image::https://user-images.githubusercontent.com/48062697/113171066-105c2000-923
 
 
 === Open Docs
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/doc_links.rs#L120[doc_links.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/doc_links.rs#L122[doc_links.rs]
 
 Retrieve a links to documentation for the given symbol.
 
@@ -586,7 +585,7 @@ image::https://user-images.githubusercontent.com/48062697/113065580-04c21800-91b
 
 
 === Related Tests
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L199[runnables.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L195[runnables.rs]
 
 Provides a sneak peek of all tests where the current item is used.
 
@@ -601,7 +600,7 @@ the selected item. The context menu opens. Select **Peek Related Tests**.
 
 
 === Rename
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/rename.rs#L73[rename.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/rename.rs#L72[rename.rs]
 
 Renames the item below the cursor and all of its references
 
@@ -615,7 +614,7 @@ image::https://user-images.githubusercontent.com/48062697/113065582-055aae80-91b
 
 
 === Run
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L113[runnables.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L111[runnables.rs]
 
 Shows a popup suggesting to run a test/benchmark/binary **at the current cursor
 location**. Super useful for repeatedly running just a single test. Do bind this

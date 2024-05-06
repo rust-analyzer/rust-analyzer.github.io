@@ -1,0 +1,24 @@
+= Changelog #232
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:c4618fe14d39992fbbb85c2d6cad028a232c13d2[] +
+Release: release:2024-05-06[] (`v0.3.1950`)
+
+== Fixes
+
+* pr:17177[] (first contribution) hide `Run` lens when lenses are disabled.
+* pr:17160[] create generics for impl traits in associated types.
+* pr:17190[] fix panic on `dyn Trait` with lifetimes.
+* pr:17157[] don't retry requests that rely on positions, and version resolve data.
+* pr:17161[] discard file paths that aren't valid UTF-8.
+* pr:17172[] correctly handle `no_core`/`no_std` for preludes.
+* pr:17175[], pr:17176[] fix implicit tyype argument lowering.
+* pr:17138[] make "Generate function" emit a constructor stub for functions called `new`.
+
+== Internal Improvements
+
+* pr:17144[] (first contribution) remove confusing `rust-project.json` example from the docs.
+* pr:17168[] (first contribution) switch from `winapi` to `windows-sys`.
+* pr:17148[] match tracing span with function names.
