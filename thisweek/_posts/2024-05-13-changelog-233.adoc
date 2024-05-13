@@ -1,0 +1,16 @@
+= Changelog #233
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:5bf2f85c8054d80424899fa581db1b192230efb5[] +
+Release: release:2024-05-13[] (`v0.3.1958`)
+
+== Fixes
+
+* pr:17192[] fix source range for `INT_NUMBER` in completion.
+
+== Internal Improvements
+
+* pr:17207[] report all LSP protocol errors with `invalid_data`.
+* pr:17208[] report both I/O and main loop thread errors.
