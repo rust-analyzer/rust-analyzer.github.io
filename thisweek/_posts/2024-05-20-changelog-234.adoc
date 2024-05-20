@@ -1,0 +1,36 @@
+= Changelog #234
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:21ec8f523812b88418b2bfc64240c62b3dd967bd[] +
+Release: release:2024-05-20[] (`v0.3.1966`)
+
+== Note
+
+Because of an infrastructure issue, this release is not available on the VS Code Marketplace.
+Of course, you can still download and install the VSIX from GitHub Releases.
+
+
+
+== Fixes
+
+* pr:17203[] fix OOM caused by term search.
+* pr:17227[] hash file contents to verify it actually changed.
+* pr:17225[] interleave function-like and attribute macro expansion in "Expand macro recursively".
+* pr:17220[] improve confusing literal hovers.
+* pr:17187[] keep parentheses in De Morgan's law assist when the precedence of inner expression is lower.
+* pr:17216[] respect path attribute in "Extract module to file".
+* pr:17232[] don't emit `--keep-going` with custom build script commands.
+
+== Internal Improvements
+
+* pr:17250[] (first contribution) fix Neovim 0.10 inlay hints config example.
+* pr:17241[] (first contribution) fix some typos.
+* pr:17221[] make macro parse tree validation lazier.
+* pr:17195[] implement `unsafe` attribute parsing.
+* pr:17228[] sort computed runnables.
+* pr:17243[] add `StaticLifetime` to `hir` API.
+* pr:17235[], pr:17238[], pr:17239[], pr:17240[] tweak metrics CI caching.
+* pr:17224[] bump `Cargo.lock` dependencies.
+* pr:17259[] sync from downstream.

@@ -268,7 +268,7 @@ fn main() {
 
 [discrete]
 === `apply_demorgan`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/apply_demorgan.rs#L17[apply_demorgan.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/apply_demorgan.rs#L16[apply_demorgan.rs]
 
 Apply https://en.wikipedia.org/wiki/De_Morgan%27s_laws[De Morgan's law].
 This transforms expressions of the form `!l || !r` into `!(l && r)`.
@@ -292,7 +292,7 @@ fn main() {
 
 [discrete]
 === `apply_demorgan_iterator`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/apply_demorgan.rs#L153[apply_demorgan.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/apply_demorgan.rs#L132[apply_demorgan.rs]
 
 Apply https://en.wikipedia.org/wiki/De_Morgan%27s_laws[De Morgan's law] to
 `Iterator::all` and `Iterator::any`.
@@ -2628,7 +2628,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `move_module_to_file`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_module_to_file.rs#L14[move_module_to_file.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_module_to_file.rs#L15[move_module_to_file.rs]
 
 Moves inline module's contents to a separate file.
 
