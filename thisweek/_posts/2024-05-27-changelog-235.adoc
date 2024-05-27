@@ -1,0 +1,30 @@
+= Changelog #235
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:71a816a90facb6546a0a06010da17598e11812f7[] +
+Release: release:2024-05-27[] (`v0.3.1975`)
+
+== New Features
+
+* pr:17268[] retain more information about callables.
+
+== Fixes
+
+* pr:17248[] (first contribution) only clear diagnostics after new ones were received.
+* pr:17140[] (first contribution) handle `{self}` when removing unused imports.
+* pr:17295[] (first contribution) use correct key for environment variables with the C/C++ extension.
+* pr:17270[] consider implied bounds from associated types in completion.
+* pr:17174[] infer type of async blocks with tail return.
+* pr:17251[] resolve extern prelude for modules nested in blocks.
+* pr:17277[] fix various `find_path` issues.
+* pr:17279[] fix `format_args` lowering.
+* pr:17284[] use correct toolchain channel when generating built-in type doc links.
+* pr:17275[] fix inconsistent working directory for Run and Debug commands.
+
+== Internal Improvements
+
+* pr:17296[] (first contribution) avoid clone when constructing runnable label.
+* pr:17287[] allow sysroot to only consist of the source root dir.
+* pr:17252[] refactor `prefer_no_std` and `prefer_prelude` bools into a struct.

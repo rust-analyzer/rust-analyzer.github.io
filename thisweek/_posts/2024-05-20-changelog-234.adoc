@@ -11,8 +11,6 @@ Release: release:2024-05-20[] (`v0.3.1966`)
 Because of an infrastructure issue, this release is not available on the VS Code Marketplace.
 Of course, you can still download and install the VSIX from GitHub Releases.
 
-
-
 == Fixes
 
 * pr:17203[] fix OOM caused by term search.
