@@ -417,6 +417,25 @@ pub(crate) fn frobnicate() {}
 
 
 [discrete]
+=== `comment_to_doc`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_comment_from_or_to_doc.rs#L9[convert_comment_from_or_to_doc.rs]
+
+Converts comments to documentation.
+
+.Before
+```rust
+// Wow what ┃a nice module
+// I sure hope this shows up when I hover over it
+```
+
+.After
+```rust
+//! Wow what a nice module
+//! I sure hope this shows up when I hover over it
+```
+
+
+[discrete]
 === `convert_bool_then_to_if`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_bool_then.rs#L131[convert_bool_then.rs]
 
@@ -933,6 +952,29 @@ fn main() {
 fn main() {
     let (┃_0, _1) = (1,2);
     let v = _0;
+}
+```
+
+
+[discrete]
+=== `desugar_async_into_impl_future`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/toggle_async_sugar.rs#L103[toggle_async_sugar.rs]
+
+Rewrites asynchronous function from `async fn` into `-> impl Future`.
+This action does not touch the function body and therefore `0`
+block does not transform to `async { 0 }`.
+
+.Before
+```rust
+pub as┃ync fn foo() -> usize {
+    0
+}
+```
+
+.After
+```rust
+pub fn foo() -> impl core::future::Future<Output = usize> {
+    0
 }
 ```
 
@@ -3489,6 +3531,29 @@ use std::┃collections::HashMap;
 .After
 ```rust
 use std::{collections::HashMap};
+```
+
+
+[discrete]
+=== `sugar_impl_future_into_async`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/toggle_async_sugar.rs#L13[toggle_async_sugar.rs]
+
+Rewrites asynchronous function from `-> impl Future` into `async fn`.
+This action does not touch the function body and therefore `async { 0 }`
+block does not transform to just `0`.
+
+.Before
+```rust
+pub fn foo() -> impl core::future::F┃uture<Output = usize> {
+    async { 0 }
+}
+```
+
+.After
+```rust
+pub async fn foo() -> usize {
+    async { 0 }
+}
 ```
 
 
