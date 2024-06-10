@@ -44,7 +44,7 @@ This diagnostic is shown for macro expansion errors.
 
 
 === macro-error
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L17[macro_error.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L16[macro_error.rs]
 
 This diagnostic is shown for macro expansion errors.
 

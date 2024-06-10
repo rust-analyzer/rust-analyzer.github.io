@@ -1031,7 +1031,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_expressions_from_format_string`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_expressions_from_format_string.rs#L14[extract_expressions_from_format_string.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_expressions_from_format_string.rs#L18[extract_expressions_from_format_string.rs]
 
 Move an expression out of a format string.
 

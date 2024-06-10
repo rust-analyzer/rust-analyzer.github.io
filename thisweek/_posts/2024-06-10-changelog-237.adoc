@@ -1,0 +1,38 @@
+= Changelog #237
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:b427d460ebafcd9ba01607a2c920ca7572559288[] +
+Release: release:2024-06-10[] (`v0.3.1992`)
+
+== New Features
+
+* pr:17282[] (first contribution) hide items starting with `__` from symbol search.
+* pr:17058[] add basic, unstable support for `rust-analyzer.toml`.
+
+IMPORTANT: We don't promise **__any__** stability with this feature yet, any configs exposed may be removed again, the ordering may change etc.
+
+== Fixes
+
+* pr:17352[] do not resolve prelude within block modules.
+* pr:17350[] highlight unlinked files more proeminently.
+* pr:17360[] don't touch foreign sources when renaming imports.
+* pr:17333[] check for snippet support in `extract_expressions_from_format_string`.
+* pr:17329[] don't mark `#[rustc_deprecated_safe_2024]` functions as unsafe.
+* pr:17353[] fix hover action formatting.
+* pr:17308[] prioritize local crates in auto-import.
+
+== Internal Improvements
+
+* pr:17346[], pr:17368[] (first contribution) add submenus to GUI VS Code extension settings.
+* pr:17340[] improve `find_path` performance.
+* pr:17004[] cache macro calls more aggressively in `Semantics`.
+* pr:17312[] add `Function::fn_ptr_type(…)` for obtaining name-erased function types.
+* pr:17348[] use fallible indexing in `TypeOrConstParam::source(…)` and `LifetimeParam::source(…)`.
+* pr:17365[] expose snippet capability to diagnostic quickfixes.
+* pr:17375[] don't intern attribute inputs, as their spans make them unique.
+* pr:17341[] clean up inert attribute handling.
+* pr:17356[] prefer shorthand `tracing::span` macros.
+* pr:17315[] use string interpolation in more places.
+* pr:17359[] add version info to VS Code status bar item.
