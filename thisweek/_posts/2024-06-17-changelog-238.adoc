@@ -1,0 +1,31 @@
+= Changelog #238
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:6b8b8ff4c56118ddee6c531cde06add1aad4a6af[] +
+Release: release:2024-06-17[] (`v0.3.2002`)
+
+== New Features
+
+* pr:17372[] compute native diagnostics in parallel.
+* pr:17364[] show type bounds from containers when hovering on functions.
+* pr:17374[] allow choosing logical cores for cache priming threads.
+* pr:16840[] allow arbitrary commands for runnables in `rust-project.json`.
+
+== Fixes
+
+* pr:17412[] (first contribution) add a breaker to avoid infinite loops with source root cycles.
+* pr:17381[] ensure that a `SourceRoot` cannot be its own parent.
+* pr:17380[] remove again extra parse cache from `Semantics`.
+* pr:17394[] fix `HirDisplay` stack overflow for `Self` parameter defaults.
+* pr:17407[] avoid doubling Cargo args in runnables.
+
+== Internal Improvements
+
+* pr:17405[], pr:17406[] avoid unnecessary `ModPath` clones.
+* pr:17377[] improve HIR formatting.
+* pr:17392[] rename `${length()}` to `${len()}` in MBE.
+* pr:17398[] remove `FileId::BOGUS`.
+* pr:17418[] fix `rustdoc` warnings.
+* pr:17417[] prefer a trait over the `impl_intern_value_trivial` macro.
