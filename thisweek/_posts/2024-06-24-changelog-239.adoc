@@ -1,0 +1,36 @@
+= Changelog #239
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:2fd803cc13dc11aeacaa6474e3f803988a7bfe1a[] +
+Release: release:2024-06-24[] (`v0.3.2011`)
+
+== New Features
+
+* pr:17438[] (first contribution) add `Toggle LSP Logs` command.
+
+== Fixes
+
+* pr:17419[] (first contribution) don't expand built-in macros in `Expand macros recursively`.
+* pr:17431[] add space after specific keywords in completion.
+* pr:17459[] include `async` keyword in completions.
+* pr:17442[] handle end of input in `pat` fragment parsers.
+* pr:17415[] only show `unlinked-file` diagnostic on first line during startup.
+* pr:17426[] handle character boundaries for wide chars in extend_selection
+* pr:17457[] actually prevent cycles in the `source_root_parent_map`.
+* pr:17461[] fix panic when cancelling flycheck.
+* pr:17462[] fix IDE features breaking in some attribute macros.
+* pr:17469[] handle `ItemInNs::Macros` when converting `ModuleItem` to `ItemInNs`.
+* pr:17449[] add associated item constants tactic for term search.
+* pr:17439[], pr:17464[] properly prime all crate def maps in `parallel_prime_caches`.
+* pr:17440[] fix and cleanup VS Code task building.
+
+== Internal Improvements
+
+* pr:17434[] (first contribution) document for parameter inlay hints heuristics.
+* pr:17456[] (first contribution) remove conflict warning with `panicbit.cargo`.
+* pr:17473[] tidy up generics handling in `hir-ty`.
+* pr:17474[] avoid some allocations in `hir-ty`.
+* pr:17455[] tidy up the VS Code extension a bit.
+* pr:17435[] fix manual generation instructions.
