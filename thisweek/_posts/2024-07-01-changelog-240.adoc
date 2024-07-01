@@ -1,0 +1,27 @@
+= Changelog #240
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:ea7fdada6a0940b239ddbde2048a4d7dac1efe1e[] +
+Release: release:2024-07-01[] (`v0.3.2020`)
+
+== Fixes
+
+* pr:17467[] (first contribution) allow "Bool to enum" assist on function parameters.
+* pr:17505[] fix stack overflow with TAITs.
+* pr:17481[] allow pattern completions in `let` statements.
+* pr:17471[] keep parentheses for calls of function-like fields.
+* pr:17513[] fix completions after `async`.
+* pr:17518[] fix expression scope calculation in macro expansions.
+* pr:17488[] fix duplicate snippets showing up on hover.
+* pr:17516[] allow disabling borrow checking in term search and don't emit explicit generics.
+* pr:17411[] improve hover text in unlinked file diagnostics.
+
+== Internal Improvements
+
+* pr:17478[] simplify and speed up data constructor term search tactic.
+* pr:17487[] small memory usage optimizations.
+* pr:17519[] move dylib version testing to `proc-macro-srv`.
+* pr:17520[] some `proc-macro-srv` clean-ups.
+* pr:17501[] allow non-org members to assign area labels.

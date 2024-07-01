@@ -366,7 +366,7 @@ fn some_function(x: i32) {
 
 [discrete]
 === `bool_to_enum`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/bool_to_enum.rs#L28[bool_to_enum.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/bool_to_enum.rs#L29[bool_to_enum.rs]
 
 This converts boolean local variables, fields, constants, and statics into a new
 enum with two variants `Bool::True` and `Bool::False`, as well as replacing

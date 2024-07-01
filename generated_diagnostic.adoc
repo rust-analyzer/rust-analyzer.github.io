@@ -19,7 +19,7 @@ This diagnostic is shown for code with inactive `#[cfg]` attributes.
 
 
 === incoherent-impl
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/incoherent_impl.rs#L5[incoherent_impl.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/incoherent_impl.rs#L6[incoherent_impl.rs]
 
 This diagnostic is triggered if the targe type of an impl is from a foreign crate.
 
@@ -37,14 +37,14 @@ This diagnostic is shown when the derive attribute is used on an item other than
 `enum` or `union`.
 
 
-=== macro-error
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L3[macro_error.rs]
+=== macro-def-error
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L16[macro_error.rs]
 
 This diagnostic is shown for macro expansion errors.
 
 
 === macro-error
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L16[macro_error.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L3[macro_error.rs]
 
 This diagnostic is shown for macro expansion errors.
 
