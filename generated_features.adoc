@@ -223,7 +223,7 @@ image::https://user-images.githubusercontent.com/48062697/113020654-b42fc800-917
 
 
 === Find All References
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L44[references.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L42[references.rs]
 
 Shows all references of the item at the cursor location
 
@@ -270,7 +270,7 @@ Navigates to the declaration of an identifier.
 
 This is the same as `Go to Definition` with the following exceptions:
 - outline modules will navigate to the `mod name;` item declaration
-- trait assoc items will navigate to the assoc item of the trait declaration opposed to the trait impl
+- trait assoc items will navigate to the assoc item of the trait declaration as opposed to the trait impl
 - fields in patterns will navigate to the field declaration of the struct, union or variant
 
 
@@ -334,7 +334,7 @@ Note: `?`, `|` and `->` do not currently trigger this behavior in the VSCode edi
 
 
 === Hover
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/hover.rs#L98[hover.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/hover.rs#L101[hover.rs]
 
 Shows additional information, like the type of an expression or the documentation for a definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.
@@ -343,7 +343,7 @@ image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L433[inlay_hints.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L441[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
@@ -359,6 +359,23 @@ Optionally, one can enable additional hints for
 * return types of closure expressions
 * elided lifetimes
 * compiler inserted reborrows
+
+Note: inlay hints for function argument names are heuristically omitted to reduce noise and will not appear if
+any of the
+link:https://github.com/rust-lang/rust-analyzer/blob/6b8b8ff4c56118ddee6c531cde06add1aad4a6af/crates/ide/src/inlay_hints/param_name.rs#L92-L99[following criteria]
+are met:
+
+* the parameter name is a suffix of the function's name
+* the argument is a qualified constructing or call expression where the qualifier is an ADT
+* exact argument<->parameter match(ignoring leading underscore) or parameter is a prefix/suffix
+  of argument with _ splitting it off
+* the parameter name starts with `ra_fixture`
+* the parameter name is a
+link:https://github.com/rust-lang/rust-analyzer/blob/6b8b8ff4c56118ddee6c531cde06add1aad4a6af/crates/ide/src/inlay_hints/param_name.rs#L200[well known name]
+in a unary function
+* the parameter name is a
+link:https://github.com/rust-lang/rust-analyzer/blob/6b8b8ff4c56118ddee6c531cde06add1aad4a6af/crates/ide/src/inlay_hints/param_name.rs#L201[single character]
+in a unary function
 
 image::https://user-images.githubusercontent.com/48062697/113020660-b5f98b80-917a-11eb-8d70-3be3fd558cdd.png[]
 
@@ -392,7 +409,7 @@ image::https://user-images.githubusercontent.com/48062697/113020661-b6922200-917
 
 
 === Magic Completions
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/lib.rs#L45[lib.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/lib.rs#L44[lib.rs]
 
 In addition to usual reference completion, rust-analyzer provides some ✨magic✨
 completions as well:
@@ -414,6 +431,7 @@ There are postfix completions, which can be triggered by typing something like
 - `expr.ref` -> `&expr`
 - `expr.refm` -> `&mut expr`
 - `expr.let` -> `let $0 = expr;`
+- `expr.lete` -> `let $1 = expr else { $0 };`
 - `expr.letm` -> `let mut $0 = expr;`
 - `expr.not` -> `!expr`
 - `expr.dbg` -> `dbg!(expr)`
@@ -556,7 +574,7 @@ image::https://user-images.githubusercontent.com/48062697/113171066-105c2000-923
 
 
 === Open Docs
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/doc_links.rs#L122[doc_links.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/doc_links.rs#L120[doc_links.rs]
 
 Retrieve a links to documentation for the given symbol.
 
@@ -585,7 +603,7 @@ image::https://user-images.githubusercontent.com/48062697/113065580-04c21800-91b
 
 
 === Related Tests
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L195[runnables.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L213[runnables.rs]
 
 Provides a sneak peek of all tests where the current item is used.
 
@@ -600,7 +618,7 @@ the selected item. The context menu opens. Select **Peek Related Tests**.
 
 
 === Rename
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/rename.rs#L72[rename.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/rename.rs#L73[rename.rs]
 
 Renames the item below the cursor and all of its references
 
@@ -614,7 +632,7 @@ image::https://user-images.githubusercontent.com/48062697/113065582-055aae80-91b
 
 
 === Run
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L111[runnables.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L113[runnables.rs]
 
 Shows a popup suggesting to run a test/benchmark/binary **at the current cursor
 location**. Super useful for repeatedly running just a single test. Do bind this
@@ -790,7 +808,7 @@ Randomizes all crate IDs in the crate graph, for debugging.
 
 
 === Status
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/status.rs#L28[status.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/status.rs#L27[status.rs]
 
 Shows internal statistic about memory usage of rust-analyzer.
 
@@ -803,7 +821,7 @@ image::https://user-images.githubusercontent.com/48062697/113065584-05f34500-91b
 
 
 === Structural Search and Replace
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-ssr/src/lib.rs#L8[lib.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-ssr/src/lib.rs#L6[lib.rs]
 
 Search and replace with named wildcards that will match any expression, type, path, pattern or item.
 The syntax for a structural search replace command is `<search_pattern> ==>> <replace_pattern>`.
@@ -1036,7 +1054,8 @@ workspace to dependencies.
 Note that filtering does not currently work in VSCode due to the editor never
 sending the special symbols to the language server. Instead, you can configure
 the filtering via the `rust-analyzer.workspace.symbol.search.scope` and
-`rust-analyzer.workspace.symbol.search.kind` settings.
+`rust-analyzer.workspace.symbol.search.kind` settings. Symbols prefixed
+with `__` are hidden from the search results unless configured otherwise.
 
 |===
 | Editor  | Shortcut

@@ -1,0 +1,37 @@
+= Changelog #241
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:a5b21ea0aa644dffd7cf958b43f11f221d53404e[] +
+Release: release:2024-07-08[] (`v0.3.2029`)
+
+== New Features
+
+* pr:17508[] add walkthrough and FAQ pages.
+
+== Fixes
+
+* pr:17523[] (first contribution) add an option to use :: for the external crate prefix.
+* pr:17529[] fix lifetime parameters shifting parameter defaults.
+* pr:17534[] skip match exhaustiveness checking if pattern type contains errors.
+* pr:17536[] don't emit semantic diagnostics in files with a lot of syntax errors.
+* pr:17552[] use original source ranges in macro parameter completions.
+* pr:17554[] fix `callHierarchy` LSP violation.
+* pr:17541[] fix stack overflow on recursive calls with `impl Trait`.
+* pr:17494[] don't normalize `use foo::{self}` to `use foo`.
+* pr:17546[] diagnose unresolved `self` value in path expressions.
+* pr:17549[] fix runnable construction.
+* pr:17495[], pr:17548[] pass extra Cargo args when debugging.
+
+== Internal Improvements
+
+* pr:17522[] bump `rustc_pattern_analysis`.
+* pr:17551[] set `InferenceResult::has_errors` on error types.
+* pr:17526[] improve error message when the proc macro server unexpectedly exits.
+* pr:17535[] fix up the syntax tree for macro 2.0.
+* pr:17547[] clean up runnable LSP extension.
+* pr:17555[] inline generated syntax methods.
+* pr:17553[] move remaining codegen things to `xtask codegen`.
+* pr:17530[] move lifetimes in front of type and const params.
+* pr:17527[] move capability querying out of the config module.
