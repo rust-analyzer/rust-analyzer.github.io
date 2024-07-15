@@ -1,0 +1,23 @@
+= Changelog #242
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:e9afba57a5a8780285f530172e3ceea1f9c7eff7[] +
+Release: release:2024-07-15[] (`v0.3.2037`)
+
+== New Features
+
+* pr:17544[] (first contribution) add inlay hints for generic parameters.
+* pr:17572[] add `f16` and `f128` support.
+
+== Fixes
+
+* pr:17558[] (first contribution) fix double rounding of `f32` literals.
+* pr:17571[] do not add duplicate enum in "bool to enum".
+* pr:17561[] add `--keep-going` to the check command.
+
+== Internal Improvements
+
+* pr:17565[] drop version check for `--keep-going` (drops support for pre-1.74).
+* pr:17576[] remove FAQ landing page, improve main one.

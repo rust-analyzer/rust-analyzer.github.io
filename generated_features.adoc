@@ -343,7 +343,7 @@ image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L441[inlay_hints.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L451[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
@@ -352,6 +352,7 @@ rust-analyzer by default shows hints for
 
 * types of local variables
 * names of function arguments
+* names of const generic parameters
 * types of chained expressions
 
 Optionally, one can enable additional hints for
@@ -359,6 +360,7 @@ Optionally, one can enable additional hints for
 * return types of closure expressions
 * elided lifetimes
 * compiler inserted reborrows
+* names of generic type and lifetime parameters
 
 Note: inlay hints for function argument names are heuristically omitted to reduce noise and will not appear if
 any of the
