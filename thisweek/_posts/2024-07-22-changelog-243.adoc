@@ -1,0 +1,39 @@
+= Changelog #243
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:4afe0d5393cdedde58881295752fe68acb3148ae[] +
+Release: release:2024-07-22[] (`v0.3.2045`)
+
+== New Features
+
+* pr:17588[] (first contribution) add incorrect case diagnostics for enum variant fields and all variables/params.
+* pr:17620[], pr:17640[], pr:17646[] make parser edition-aware.
+* pr:17635[] add inlay hint support for lifetime labels in block expressions.
+* pr:17246[] teach rust-analyzer to discover `linked_projects`.
+
+== Fixes
+
+* pr:17650[] (first contribution) fix path resolution for child modules of those expanded by `include!`.
+* pr:17587[] trigger a rename in VS Code "Extract variable".
+* pr:17649[] be more robust to type errors in match analysis.
+* pr:17656[] allow flyimport to import modules that shadow a primitive.
+* pr:17653[] prefer standard library paths over shorter extern re-exports.
+* pr:17611[] don't call `macro_arg` directly in `ExpandDatabase::syntax_context`.
+* pr:17622[] handle renaming in "Merge imports".
+* pr:17605[] set `RUSTC_TOOLCHAIN` for runnables.
+
+== Internal Improvements
+
+* pr:17584[], pr:17603[], pr:17604[] implement symbol interning.
+* pr:17657[] make `CfgExpr` slightly smaller.
+* pr:17638[] reduce memory usage of `salsa` slots by 8 bytes.
+* pr:17639[] some more `salsa` memory improvements.
+* pr:17559[], pr:17601[] encode ident rawness and literal kind separately in `tt::Leaf`.
+* pr:17655[] more `find_path` improvements.
+* pr:17618[] support `rustc_skip_during_method_dispatch`.
+* pr:17617[] derive syntax kind information from ungrammar file.
+* pr:17637[] remove `rust-analyzer.openFAQ` command.
+* pr:17616[] fix incorrect generic parameter hint defaults.
+* pr:17641[] don't take references in `format_args!` and friends.

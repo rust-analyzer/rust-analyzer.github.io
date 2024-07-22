@@ -1085,7 +1085,7 @@ fn ┃fun_name(n: i32) {
 
 [discrete]
 === `extract_module`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_module.rs#L30[extract_module.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_module.rs#L29[extract_module.rs]
 
 Extracts a selected region as separate module. All the references, visibility and imports are
 resolved.
@@ -1292,7 +1292,7 @@ fn foo<T: Copy + Clone>() { }
 
 [discrete]
 === `generate_constant`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_constant.rs#L13[generate_constant.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_constant.rs#L14[generate_constant.rs]
 
 Generate a named constant.
 
@@ -1764,7 +1764,7 @@ impl From<u32> for A {
 
 [discrete]
 === `generate_function`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_function.rs#L29[generate_function.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_function.rs#L28[generate_function.rs]
 
 Adds a stub function with a signature matching the function under the cursor.
 
@@ -2084,7 +2084,7 @@ impl<T: Clone> ${0:_} for Ctx<T> {}
 
 [discrete]
 === `inline_call`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L166[inline_call.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L165[inline_call.rs]
 
 Inlines a function or method body creating a `let` statement per parameter unless the parameter
 can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
@@ -2135,7 +2135,7 @@ fn something() -> &'static str {
 
 [discrete]
 === `inline_into_callers`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L29[inline_call.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L28[inline_call.rs]
 
 Inline a function or method body into all of its callers where possible, creating a `let` statement per parameter
 unless the parameter can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
@@ -2179,7 +2179,7 @@ fn bar() {
 
 [discrete]
 === `inline_local_variable`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_local_variable.rs#L18[inline_local_variable.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_local_variable.rs#L17[inline_local_variable.rs]
 
 Inlines a local variable.
 
@@ -2946,7 +2946,7 @@ fn main() {
 
 [discrete]
 === `remove_unused_imports`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/remove_unused_imports.rs#L15[remove_unused_imports.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/remove_unused_imports.rs#L14[remove_unused_imports.rs]
 
 Removes any use statements in the current selection that are unused.
 
@@ -3277,7 +3277,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `replace_named_generic_with_impl`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_named_generic_with_impl.rs#L19[replace_named_generic_with_impl.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_named_generic_with_impl.rs#L18[replace_named_generic_with_impl.rs]
 
 Replaces named generic with an `impl Trait` in function argument.
 

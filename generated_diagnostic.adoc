@@ -170,7 +170,7 @@ Only traits defined in the current crate can be implemented for arbitrary types
 
 
 === trait-impl-redundant-assoc_item
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/trait_impl_redundant_assoc_item.rs#L11[trait_impl_redundant_assoc_item.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/trait_impl_redundant_assoc_item.rs#L12[trait_impl_redundant_assoc_item.rs]
 
 Diagnoses redundant trait items in a trait impl.
 
@@ -207,7 +207,7 @@ crates rust-analyzer failed to discover. The file will not have IDE features ava
 
 
 === unnecessary-braces
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/useless_braces.rs#L12[useless_braces.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/useless_braces.rs#L9[useless_braces.rs]
 
 Diagnostic for unnecessary braces in `use` items.
 
@@ -230,7 +230,7 @@ This diagnostic is triggered if rust-analyzer is unable to discover referred ext
 
 
 === unresolved-field
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_field.rs#L24[unresolved_field.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_field.rs#L23[unresolved_field.rs]
 
 This diagnostic is triggered if a field does not exist on a given type.
 
@@ -256,7 +256,7 @@ to a macro in a macro invocation.
 
 
 === unresolved-method
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_method.rs#L16[unresolved_method.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_method.rs#L15[unresolved_method.rs]
 
 This diagnostic is triggered if a method does not exist on a given type.
 
@@ -286,6 +286,6 @@ This diagnostic is triggered when a mutable variable isn't actually mutated.
 
 
 === unused-variables
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unused_variables.rs#L14[unused_variables.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unused_variables.rs#L13[unused_variables.rs]
 
 This diagnostic is triggered when a local variable is not used.
