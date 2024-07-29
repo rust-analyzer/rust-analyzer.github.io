@@ -1,0 +1,44 @@
+= Changelog #244
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:fd74511f34ae6c165466543cc6e55ea60e7365af[] +
+Release: release:2024-07-29[] (`v0.3.2053`)
+
+== New Features
+
+* pr:17542[] Support "Go to definition" and "Find all references" on control flow keywords.
+* pr:17676[] add preliminary support for the `+ use<..>` `precise_capturing` syntax.
+
+== Fixes
+
+* pr:17511[] (first contribution) fix trait solving with `Deref` as a supertrait.
+* pr:17472[] (first contribution) filter run unit tests by crate when running them.
+* pr:17660[] fix again the path resolution for included submodules.
+* pr:17706[] fix ``include!``s with `expr` fragment inputs.
+* pr:17586[] allow macro expansions into `RestPat` in tuple args.
+* pr:17697[] support the new `cargo config get env` format.
+* pr:17709[] fix hover links.
+* pr:17713[] fix panic on unresolved index fields.
+* pr:17720[] flip the naming of the doc-comment to comment assist.
+
+== Internal Improvements
+
+* pr:17675[] (first contribution) remove the `lens.forceCustomCommands` config.
+* pr:17670[] enable LRU for the `body_with_source_map` query.
+* pr:17671[] shrink `Binding`.
+* pr:17695[] shrink `TypeRef` by 8 bytes.
+* pr:17693[] remove params and fields from `AstIdMap`.
+* pr:17668[] remove incorrect `never!` invocations for `async` functions.
+* pr:17647[] rename internal rust-analyzer commands.
+* pr:17698[] remove unused `trace` module.
+* pr:17690[] fix and enable `unsafe_op_in_unsafe_fn`.
+* pr:17483[] improve `rust-analyzer.toml` error reporting.
+* pr:17667[] use the rustup `rust-analyzer` component when `rust-toolchain.toml` exists.
+* pr:17610[] add `Impl::all_in_module(…)` for more localized querying.
+* pr:17674[] add version and config to the `Status` command.
+* pr:17395[] remove `UnindexedProject` notification.
+
+== Others
+

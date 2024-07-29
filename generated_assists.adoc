@@ -564,7 +564,7 @@ const _: i32 = 0b1010;
 
 [discrete]
 === `convert_into_to_from`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_into_to_from.rs#L9[convert_into_to_from.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_into_to_from.rs#L8[convert_into_to_from.rs]
 
 Converts an Into impl to an equivalent From impl.
 
@@ -1947,7 +1947,7 @@ impl<T> core::ops::Index<Axis> for [T; 3] {
 
 [discrete]
 === `generate_new`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_new.rs#L15[generate_new.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_new.rs#L14[generate_new.rs]
 
 Adds a `fn new` for a type.
 
@@ -2793,7 +2793,7 @@ fn main() {
 
 [discrete]
 === `qualify_method_call`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/qualify_method_call.rs#L13[qualify_method_call.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/qualify_method_call.rs#L10[qualify_method_call.rs]
 
 Replaces the method call with a qualified function call.
 
@@ -2824,7 +2824,7 @@ fn main() {
 
 [discrete]
 === `qualify_path`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/qualify_path.rs#L22[qualify_path.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/qualify_path.rs#L23[qualify_path.rs]
 
 If the name is unresolved, provides all possible qualified paths for it.
 

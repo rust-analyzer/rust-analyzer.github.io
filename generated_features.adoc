@@ -275,7 +275,7 @@ This is the same as `Go to Definition` with the following exceptions:
 
 
 === Go to Definition
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L17[goto_definition.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L28[goto_definition.rs]
 
 Navigates to the definition of an identifier.
 
@@ -319,7 +319,7 @@ image::https://user-images.githubusercontent.com/48062697/113020657-b560f500-917
 
 
 === Highlight Related
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L41[highlight_related.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L42[highlight_related.rs]
 
 Highlights constructs related to the thing under the cursor:
 
