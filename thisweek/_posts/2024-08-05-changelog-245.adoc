@@ -1,0 +1,30 @@
+= Changelog #245
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:c9109f23de57359df39db6fa36b5ca4c64b671e1[] +
+Release: release:2024-08-05[] (`v0.3.2062`)
+
+== New Features
+
+* pr:17707[] use spans for built-in and declarative macro expansion errors.
+* pr:17735[] introduce workspace-level `rust-analyzer.toml`.
+
+== Fixes
+
+* pr:17750[] don't require absolute paths in `linkedProjects`.
+* pr:17715[] let glob imports override other globs' visibility.
+* pr:17747[] fix inference for method calls with elided lifetimes.
+* pr:17755[] apply `IndexMut` obligations for non-assigning mutable usages.
+* pr:17741[] make `include!` work with raw string literals.
+* pr:17763[] insert a tail `Ok(())` in type mismatch quick fix.
+* pr:17736[] show `async` in trait method completions.
+* pr:17789[] insert a generic args for `impl Trait` during lowering.
+* pr:17742[] don't retry inlay hint and code lens requests.
+
+== Internal Improvements
+
+* pr:17705[] (first contribution) use oldest `rustup` rust-analyzer when toolchain override is present.
+* pr:17722[] use VS Code logging helpers.
+* pr:17770[] remove `TryFrom` implementation for `AbsPathBuf`.

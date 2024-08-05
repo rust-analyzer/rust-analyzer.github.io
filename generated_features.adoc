@@ -797,18 +797,6 @@ rust-analyzer itself.
 image::https://user-images.githubusercontent.com/48062697/113065586-068bdb80-91b1-11eb-9507-fee67f9f45a0.gif[]
 
 
-=== Shuffle Crate Graph
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/shuffle_crate_graph.rs#L8[shuffle_crate_graph.rs]
-
-Randomizes all crate IDs in the crate graph, for debugging.
-
-|===
-| Editor  | Action Name
-
-| VS Code | **rust-analyzer: Shuffle Crate Graph**
-|===
-
-
 === Status
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/status.rs#L28[status.rs]
 

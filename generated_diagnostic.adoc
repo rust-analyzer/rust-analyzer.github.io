@@ -38,7 +38,7 @@ This diagnostic is shown when the derive attribute is used on an item other than
 
 
 === macro-def-error
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L16[macro_error.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L19[macro_error.rs]
 
 This diagnostic is shown for macro expansion errors.
 
@@ -176,7 +176,7 @@ Diagnoses redundant trait items in a trait impl.
 
 
 === type-mismatch
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/type_mismatch.rs#L12[type_mismatch.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/type_mismatch.rs#L16[type_mismatch.rs]
 
 This diagnostic is triggered when the type of an expression or pattern does not match
 the expected type.
@@ -265,18 +265,6 @@ This diagnostic is triggered if a method does not exist on a given type.
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_module.rs#L8[unresolved_module.rs]
 
 This diagnostic is triggered if rust-analyzer is unable to discover referred module.
-
-
-=== unresolved-proc-macro
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_proc_macro.rs#L5[unresolved_proc_macro.rs]
-
-This diagnostic is shown when a procedural macro can not be found. This usually means that
-procedural macro support is simply disabled (and hence is only a weak hint instead of an error),
-but can also indicate project setup problems.
-
-If you are seeing a lot of "proc macro not expanded" warnings, you can add this option to the
-`rust-analyzer.diagnostics.disabled` list to prevent them from showing. Alternatively you can
-enable support for procedural macros (see `rust-analyzer.procMacro.attributes.enable`).
 
 
 === unused-mut
