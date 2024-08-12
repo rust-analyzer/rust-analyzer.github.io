@@ -1,0 +1,37 @@
+= Changelog #246
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:0daeb5c0b05cfdf2101b0f078c27539099bf38e6[] +
+Release: release:2024-08-12[] (`v0.3.2070`)
+
+== New Features
+
+* pr:17791[] add diagnostic for `await` outside of `async`.
+* pr:17795[] load sysroot library via `cargo metadata` (for toolchains after `176e54520 2024-08-04`).
+* pr:17775[], pr:17824[] segregate syntax and semantic diagnostics to improve latency.
+* pr:17771[] load VFS config changes in parallel.
+
+== Fixes
+
+* pr:17802[] supress type mismatches in calls with mismatched argument counts.
+* pr:17823[] attach unconfigured diagnostics to the right file for modules.
+* pr:17784[] support inlay hints for more expressions with labels.
+* pr:17844[] respect non-`std` preference in `find_path`.
+* pr:17805[] fix panic in `path_transform` with default type parameters.
+* pr:17813[] fix type equality check for non-ADT types in usage search.
+* pr:17832[] fix panic while rendering function type hint with `impl Trait` parameters.
+* pr:17818[] support `.rust-project.json` in addition to `rust-project.json`.
+
+== Internal Improvements
+
+* pr:17825[] offload diagnostics serialization to the task pool.
+* pr:17794[] turn `ErasedFileAstId` into a newtype.
+* pr:17821[] remove unnecessary `CfgFlag` definition in `project-model`.
+* pr:17809[] include vendored crates in `StaticIndex`.
+* pr:17831[] merge `flycheck` into the main `rust-analyzer` crate.
+* pr:17799[] split out `syntax-bridge` into a separate crate.
+* pr:17772[] reorganize `debug.ts`.
+* pr:17745[], pr:17827[] add missing repository and description fields to the crate manifests.
+* pr:17793[] suggest installing the MSVC Redistributable in the manual.
