@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - src
+  schedule:
+    # Every day, to pick up the latest rust-analyzer repo changes.
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   CI:
@@ -15,6 +19,31 @@ jobs:
           ruby-version: "2.7"
 
       - run: bundle install && bundle exec jekyll build
+
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: mdbook@0.4.40
+
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: mdbook-toc@0.14.2
+
+      - name: Clone the rust-analyzer repository
+        uses: GuillaumeFalourd/clone-github-repo-action@v2.3
+        with:
+          depth: 1
+          branch: 'master'
+          owner: 'rust-lang'
+          repository: 'rust-analyzer'
+
+      - name: Build generated.md files
+        run: cd rust-analyzer && cargo xtask codegen
+
+      - name: Run mdbook
+        run: cd rust-analyzer/docs/book && mdbook build
+
+      - name: Include mdbook output
+        run: mv rust-analyzer/docs/book/book _site
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4.0.0
