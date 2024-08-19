@@ -73,7 +73,7 @@ fn main() {
 
 [discrete]
 === `add_impl_default_members`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L55[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L58[add_missing_impl_members.rs]
 
 Adds scaffold for overriding default impl members.
 
@@ -110,7 +110,7 @@ impl Trait for () {
 
 [discrete]
 === `add_impl_missing_members`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L13[add_missing_impl_members.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L16[add_missing_impl_members.rs]
 
 Adds scaffold for required impl members.
 
@@ -2824,7 +2824,7 @@ fn main() {
 
 [discrete]
 === `qualify_path`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/qualify_path.rs#L23[qualify_path.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/qualify_path.rs#L24[qualify_path.rs]
 
 If the name is unresolved, provides all possible qualified paths for it.
 

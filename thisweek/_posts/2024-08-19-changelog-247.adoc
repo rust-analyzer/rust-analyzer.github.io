@@ -1,0 +1,41 @@
+= Changelog #247
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:fa003262474185fd62168379500fe906b331824b[] +
+Release: release:2024-08-19[] (`v0.3.2078`)
+
+== New Features
+
+* pr:17845[] implement TAIT and fix ATPIT.
+* pr:17853[] support `min_exhaustive_patterns`.
+* pr:17595[] implement lifetime inference.
+* pr:17915[] make rust-analyzer partially work while offline.
+
+== Fixes
+
+* pr:17833[] (first contribution) reuse recursion limit as expansion depth limit.
+* pr:17900[] (first contribution) add option to exclude vendored libraries from SCIP/LSIF output.
+* pr:17864[] build and run build scripts for LSIF.
+* pr:17859[] support `#[rustc_deprecated_safe_2024]`.
+* pr:17905[] properly account for editions in names.
+* pr:17863[] resolve included files to their calling modules in IDE layer.
+* pr:17865[] emit non-exhaustive let diagnostics for async and unsafe blocks.
+* pr:17882[] fix panic while canonicalizing erroneous projection type.
+* pr:17893[] fix panic on associated functions with type annotations.
+* pr:17916[] fix panic while lowering `impl Trait` parameter of parent generics.
+* pr:17867[] handle trailing excess comma in "Convert to named struct".
+
+== Internal Improvements
+
+* pr:17903[] (first contribution) don't kill the flycheck process command group.
+* pr:17908[] test for word boundary in `FindUsages`.
+* pr:17842[], pr:17843[] optimize channel usage.
+* pr:17850[] send back empty responses while the VFS is still loading.
+* pr:17876[] remove unreachable logic for include token mapping.
+* pr:17896[] check the edition for edition-dependent syntax kinds.
+* pr:17891[] be more resilient to bad language item definitions in binary operator inference.
+* pr:17907[] replace `once_cell` with the `std` types.
+* pr:17862[] fix auto-publishing workflow.
+* pr:17909[] remove `rust-analyzer.workspace.discoverProjectRunner`.

@@ -176,7 +176,7 @@ Displays the ItemTree of the currently open file, for debugging.
 
 
 === Expand Macro Recursively
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/expand_macro.rs#L15[expand_macro.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/expand_macro.rs#L16[expand_macro.rs]
 
 Shows the full macro expansion of the macro at the current caret position.
 
@@ -223,7 +223,7 @@ image::https://user-images.githubusercontent.com/48062697/113020654-b42fc800-917
 
 
 === Find All References
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L41[references.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L42[references.rs]
 
 Shows all references of the item at the cursor location
 
@@ -334,7 +334,7 @@ Note: `?`, `|` and `->` do not currently trigger this behavior in the VSCode edi
 
 
 === Hover
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/hover.rs#L100[hover.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/hover.rs#L106[hover.rs]
 
 Shows additional information, like the type of an expression or the documentation for a definition when "focusing" code.
 Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.
@@ -343,7 +343,7 @@ image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L452[inlay_hints.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L454[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
@@ -605,7 +605,7 @@ image::https://user-images.githubusercontent.com/48062697/113065580-04c21800-91b
 
 
 === Related Tests
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L212[runnables.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L213[runnables.rs]
 
 Provides a sneak peek of all tests where the current item is used.
 
@@ -620,7 +620,7 @@ the selected item. The context menu opens. Select **Peek Related Tests**.
 
 
 === Rename
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/rename.rs#L74[rename.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/rename.rs#L70[rename.rs]
 
 Renames the item below the cursor and all of its references
 
@@ -634,7 +634,7 @@ image::https://user-images.githubusercontent.com/48062697/113065582-055aae80-91b
 
 
 === Run
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L112[runnables.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L113[runnables.rs]
 
 Shows a popup suggesting to run a test/benchmark/binary **at the current cursor
 location**. Super useful for repeatedly running just a single test. Do bind this
@@ -1003,7 +1003,7 @@ image::https://user-images.githubusercontent.com/48062697/113065588-068bdb80-91b
 
 
 === View Memory Layout
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/view_memory_layout.rs#L73[view_memory_layout.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/view_memory_layout.rs#L74[view_memory_layout.rs]
 
 Displays the recursive memory layout of a datatype.
 
