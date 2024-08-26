@@ -275,7 +275,7 @@ This is the same as `Go to Definition` with the following exceptions:
 
 
 === Go to Definition
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L28[goto_definition.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L25[goto_definition.rs]
 
 Navigates to the definition of an identifier.
 
@@ -293,7 +293,7 @@ image::https://user-images.githubusercontent.com/48062697/113065563-025fbe00-91b
 === Go to Implementation
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/goto_implementation.rs#L11[goto_implementation.rs]
 
-Navigates to the impl blocks of types.
+Navigates to the impl items of types.
 
 |===
 | Editor  | Shortcut
@@ -576,7 +576,7 @@ image::https://user-images.githubusercontent.com/48062697/113171066-105c2000-923
 
 
 === Open Docs
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/doc_links.rs#L121[doc_links.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/doc_links.rs#L118[doc_links.rs]
 
 Retrieve a links to documentation for the given symbol.
 
@@ -649,7 +649,7 @@ image::https://user-images.githubusercontent.com/48062697/113065583-055aae80-91b
 
 
 === Semantic Syntax Highlighting
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/syntax_highlighting.rs#L66[syntax_highlighting.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/syntax_highlighting.rs#L68[syntax_highlighting.rs]
 
 rust-analyzer highlights the code semantically.
 For example, `Bar` in `foo::Bar` might be colored differently depending on whether `Bar` is an enum or a trait.

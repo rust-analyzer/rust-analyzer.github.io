@@ -1,0 +1,37 @@
+= Changelog #248
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:7106cd3be50b2a43c1d9f2787bf22d4369c2b25b[] +
+Release: release:2024-08-26[] (`v0.3.2086`)
+
+== New Features
+
+* pr:17936[] implement `module_path!`.
+* pr:17857[] allow declaring `cfg` groups in `rust-project.json`.
+* pr:17927[], pr:17955[] speed up search for short associated functions.
+
+== Fixes
+
+* pr:17942[] implement floating point casts in const eval.
+* pr:17958[] Consider `Deref` impls in trait method completions.
+* pr:17960[] use `extra_test_bin_args` in Test Explorer runner.
+* pr:17925[] include generics when lowering `extern type`.
+* pr:17928[] keep comments in "Convert `while` to `loop`".
+* pr:17924[] fix panic when a TAIT exists in a RPIT.
+* pr:17932[] fix semantic highlighting panics during start-up.
+* pr:17939[], pr:17948[] improve handling of `Sized` predicates.
+* pr:17943[] improve proc macro panic message and workspace loading failure diagnostic.
+* pr:17912[], pr:17946[] run flycheck without reverse dependencies when target is specified.
+* pr:17949[] watch build files from `rust-project.json`.
+* pr:17956[] keep original error when retrying `cargo metadata` with `--no-deps`.
+* pr:17913[] add workspace-level config to `rust-analyzer.toml`.
+
+== Internal Improvements
+
+* pr:17888[] remove `invocationLocation` in favor of `invocationStrategy`.
+* pr:17886[] wait for cache priming before reporting that the server is ready.
+* pr:17898[] improve macro token mapping heuristics.
+* pr:17961[] don't allocate autoderef steps when not needed.
+* pr:17930[] remove the ability to configure the user config path.

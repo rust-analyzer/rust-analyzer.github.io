@@ -874,7 +874,7 @@ fn main() {
 
 [discrete]
 === `convert_while_to_loop`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_while_to_loop.rs#L19[convert_while_to_loop.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_while_to_loop.rs#L20[convert_while_to_loop.rs]
 
 Replace a while with a loop.
 
@@ -1031,7 +1031,7 @@ fn qux(bar: Bar, baz: Baz) {}
 
 [discrete]
 === `extract_expressions_from_format_string`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_expressions_from_format_string.rs#L18[extract_expressions_from_format_string.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_expressions_from_format_string.rs#L14[extract_expressions_from_format_string.rs]
 
 Move an expression out of a format string.
 
