@@ -1,0 +1,44 @@
+= Changelog #249
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:779d9eee2ea403da447278a7007c9627c8878856[] +
+Release: release:2024-09-02[] (`v0.3.2096`)
+
+== New Features
+
+* pr:17814[], pr:17999[] implement object-safety and add it to hover.
+* pr:17940[], pr:17941[] implement "Convert closure to function" assist.
+* pr:17757[] implement "Toggle macro delimiters" assist.
+* pr:17985[] implement "Add explicit enum discriminants" assist.
+* pr:18006[] add an option to hide deprecated items from completion.
+* pr:18010[] support function types in lifetime elision hints.
+
+== Fixes
+
+* pr:17972[] revert "pr:17936[] implement ``module_path!``".
+* pr:17994[] fix `TokenStream::to_string` implementation dropping quotation marks.
+* pr:17987[] fix resolution of shadowed built-in macros.
+* pr:17963[] show error lifetime arguments as `'_`.
+* pr:17737[] sprinkle some sugar on async `impl Trait` completions.
+* pr:17970[] fix "Unwrap block" for blocks with modifiers.
+* pr:17991[] don't add unnecessary reference in "Extract variable".
+* pr:17973[] expand proc macros in workspace, not package root.
+* pr:17993[] keep field attributes when converting between tuples and named structs.
+* pr:17982[] consider indentation in "Generate impl" and "Generate trait impl".
+* pr:18015[] handle attributes in "Flip comma".
+* pr:18003[] do not report missing unsafe on `addr_of!(EXTERN_OR_MUT_STATIC)`.
+* pr:18005[] don't suggest `for` loops in `impl T for A` in function bodies.
+* pr:17962[] update return type syntax to match compiler.
+* pr:17988[] fix incorrect symbol definitions in SCIP output.
+
+== Internal Improvements
+
+* pr:17975[], pr:18009[] (first contribution) do not assume `rustup` is installed in `xtask codegen`.
+* pr:18008[], pr:18012[] make inlay hint resolution more reliable.
+* pr:17945[] recategorize config classes.
+* pr:17967[] prepare for stand-alone MBE tests.
+* pr:17992[] avoid newlines in worspace fetch errors.
+* pr:18011[] add some doc-comments to `OpQueue`.
+* pr:17974[] drop Apache license appendices.

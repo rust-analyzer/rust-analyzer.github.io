@@ -12,7 +12,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 
 == New Features
 
-* pr:8955[] add support for standalone Rust files:
+* pr:8955[] add support for stand-alone Rust files:
 +
 image::https://user-images.githubusercontent.com/2690773/119277037-0b579380-bc26-11eb-8d77-20d46ab4916a.gif[]
 * pr:8988[], pr:8990[] support "Go to implementations" on trait functions and associated constants:
