@@ -1,0 +1,29 @@
+= Changelog #250
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:08c7bbc2dbe4dcc8968484f1a0e1e6fe7a1d4f6d[] +
+Release: release:2024-09-09[] (`v0.3.2104`)
+
+== New Features
+
+* pr:17984[] implement cast typecheck and diagnostics.
+* pr:18022[], pr:18053[] add IDE support for `asm!` expressions.
+
+== Fixes
+
+* pr:18031[] suggest name in pattern completion.
+* pr:18016[] use existing type aliases in "Wrap return type in Result".
+* pr:18028[] prevent lifetime hint panic in non-generic definitions.
+* pr:18045[] keep loop blocks during lowering.
+* pr:18068[] set `TraitRef` self types explicitly during lowering.
+* pr:18067[] prevent MIR building when unknown types are present.
+* pr:18059[] don't clobber discovered projects when updating settings.
+
+== Internal Improvements
+
+* pr:18026[] tweak completion scoring.
+* pr:18044[] add edition-dependent keyword highlighting tests.
+* pr:18065[] catch panics from diagnostics computation.
+* pr:18066[] don't panic LSP writer thread when the receiver gets dropped.

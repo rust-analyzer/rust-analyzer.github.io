@@ -1213,7 +1213,7 @@ struct S {
 
 [discrete]
 === `extract_variable`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_variable.rs#L11[extract_variable.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_variable.rs#L12[extract_variable.rs]
 
 Extracts subexpression into a variable.
 
@@ -1479,7 +1479,7 @@ impl Person {
 
 [discrete]
 === `generate_delegate_trait`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_delegate_trait.rs#L28[generate_delegate_trait.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_delegate_trait.rs#L29[generate_delegate_trait.rs]
 
 Generate delegate trait implementation for `StructField`s.
 
@@ -2384,7 +2384,7 @@ fn main() -> () {
 
 [discrete]
 === `introduce_named_generic`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/introduce_named_generic.rs#L8[introduce_named_generic.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/introduce_named_generic.rs#L9[introduce_named_generic.rs]
 
 Replaces `impl Trait` function argument with the named generic.
 
@@ -3248,7 +3248,7 @@ fn handle(action: Action) {
 
 [discrete]
 === `replace_is_some_with_if_let_some`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_is_method_with_if_let_method.rs#L8[replace_is_method_with_if_let_method.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_is_method_with_if_let_method.rs#L9[replace_is_method_with_if_let_method.rs]
 
 Replace `if x.is_some()` with `if let Some(_tmp) = x` or `if x.is_ok()` with `if let Ok(_tmp) = x`.
 
@@ -3815,7 +3815,7 @@ fn main() {
 
 [discrete]
 === `wrap_return_type_in_result`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/wrap_return_type_in_result.rs#L14[wrap_return_type_in_result.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/wrap_return_type_in_result.rs#L16[wrap_return_type_in_result.rs]
 
 Wrap the function's return type into Result.
 

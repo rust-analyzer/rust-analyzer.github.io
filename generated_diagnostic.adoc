@@ -12,6 +12,12 @@ This diagnostic is triggered if the `await` keyword is used outside of an async 
 This diagnostic is triggered if the `break` keyword is used outside of a loop.
 
 
+=== cast-to-unsized
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/invalid_cast.rs#L106[invalid_cast.rs]
+
+This diagnostic is triggered when casting to an unsized type
+
+
 === expected-function
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/expected_function.rs#L5[expected_function.rs]
 
@@ -34,6 +40,12 @@ This diagnostic is triggered if the targe type of an impl is from a foreign crat
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/incorrect_case.rs#L13[incorrect_case.rs]
 
 This diagnostic is triggered if an item name doesn't follow https://doc.rust-lang.org/1.0.0/style/style/naming/README.html[Rust naming convention].
+
+
+=== invalid-cast
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/invalid_cast.rs#L18[invalid_cast.rs]
+
+This diagnostic is triggered if the code contains an illegal cast
 
 
 === invalid-derive-target
