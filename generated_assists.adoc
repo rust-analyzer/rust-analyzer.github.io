@@ -197,7 +197,7 @@ struct Point<'a> {
 
 [discrete]
 === `add_missing_match_arms`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_match_arms.rs#L13[add_missing_match_arms.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_match_arms.rs#L14[add_missing_match_arms.rs]
 
 Adds missing clauses to a `match` expression.
 
@@ -2292,7 +2292,7 @@ fn main() {
 
 [discrete]
 === `inline_type_alias`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_type_alias.rs#L105[inline_type_alias.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_type_alias.rs#L106[inline_type_alias.rs]
 
 Replace a type alias with its concrete type.
 
@@ -2384,7 +2384,7 @@ fn main() -> () {
 
 [discrete]
 === `introduce_named_generic`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/introduce_named_generic.rs#L9[introduce_named_generic.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/introduce_named_generic.rs#L10[introduce_named_generic.rs]
 
 Replaces `impl Trait` function argument with the named generic.
 

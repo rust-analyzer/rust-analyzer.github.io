@@ -1,0 +1,35 @@
+= Changelog #251
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:94b526fc86eaa0e90fb4d54a5ba6313aa1e9b269[] +
+Release: release:2024-09-16[] (`v0.3.2112`)
+
+== New Features
+
+* pr:18038[] generate names for tuple struct fields in "Fill match arms".
+* pr:18018[] automatically add semicolon when completing unit-returning function call.
+
+== Fixes
+
+* pr:18052[] (first contribution) don't output hex when inlining integer constants.
+* pr:18041[] improve name suggestions for variables extracted from function calls.
+* pr:18075[] render patterns when hovering on function parameters.
+* pr:18093[] skip diagnostics when casting to `dyn Trait`.
+* pr:18092[] correctly escape strings in `stringify!`.
+* pr:18101[] fix false positive error when casting literals.
+* pr:18106[] don't report typed hole error in `asm!` `out` operands.
+* pr:18073[] fix "immutable tree" in `generate_delegate_trait`.
+* pr:18119[] fix printing of constants greater than `i128::MAX`.
+* pr:18099[] improve handling of lint attributes.
+* pr:18050[] offer `replace_qualified_name_with_use` on the first segment of a path.
+* pr:18107[] don't emit empty inlay hint parts.
+* pr:18105[] don't panic on invalid LSP notifications from buggy clients.
+
+== Internal Improvements
+
+* pr:18032[] add preliminary `SyntaxEditor` functionality.
+* pr:18057[] improve testing infra for `rust-analyzer.toml`.
+* pr:18080[] remove crate graph deduplication logic.
+* pr:17904[] add CLI command to report unresolved references.
