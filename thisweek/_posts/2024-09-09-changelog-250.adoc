@@ -14,7 +14,7 @@ Release: release:2024-09-09[] (`v0.3.2104`)
 == Fixes
 
 * pr:18031[] suggest name in pattern completion.
-* pr:18016[] use existing type aliases in "Wrap return type in Result".
+* pr:18016[] use existing type aliases in "Wrap return type in ``Result``".
 * pr:18028[] prevent lifetime hint panic in non-generic definitions.
 * pr:18045[] keep loop blocks during lowering.
 * pr:18068[] set `TraitRef` self types explicitly during lowering.
