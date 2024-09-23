@@ -2138,7 +2138,7 @@ impl<T: Clone> ${0:_} for Ctx<T> {}
 
 [discrete]
 === `inline_call`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L165[inline_call.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L170[inline_call.rs]
 
 Inlines a function or method body creating a `let` statement per parameter unless the parameter
 can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
@@ -2189,7 +2189,7 @@ fn something() -> &'static str {
 
 [discrete]
 === `inline_into_callers`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L28[inline_call.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L32[inline_call.rs]
 
 Inline a function or method body into all of its callers where possible, creating a `let` statement per parameter
 unless the parameter can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
@@ -2255,7 +2255,7 @@ fn main() {
 
 [discrete]
 === `inline_macro`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_macro.rs#L6[inline_macro.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_macro.rs#L7[inline_macro.rs]
 
 Takes a macro and inlines it one step.
 

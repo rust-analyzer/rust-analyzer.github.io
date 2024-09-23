@@ -176,7 +176,7 @@ Displays the ItemTree of the currently open file, for debugging.
 
 
 === Expand Macro Recursively
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/expand_macro.rs#L16[expand_macro.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/expand_macro.rs#L17[expand_macro.rs]
 
 Shows the full macro expansion of the macro at the current caret position.
 
