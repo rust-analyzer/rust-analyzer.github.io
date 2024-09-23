@@ -6,10 +6,6 @@
 Commit: commit:1301e4268f44e404f0a5847ed72a0b4879e253d3[] +
 Release: release:2024-09-23[] (`v0.3.2121`)
 
-== Note
-
-Because of infrastructure issues, this release is not available on GitHub Releases.
-
 == New Features
 
 * pr:18135[] add diagnostics for `unsafe_op_in_unsafe_fn`.
