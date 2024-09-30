@@ -1,0 +1,35 @@
+= Changelog #253
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:822644d97d7f64e1bdff25b1d636e366a29facc4[] +
+Release: release:2024-09-30[] (`v0.3.2129`)
+
+== New Features
+
+* pr:18180[] index workspace symbols at start-up rather than on the first search.
+
+== Fixes
+
+* pr:17923[] (first contribution) add option to rebuild project before restarting debugging.
+* pr:18160[] fix name resolution with renamed imports and shadowing.
+* pr:18164[] handle import aliases in `remove_unused_imports`.
+* pr:18161[] improve reference handling in consuming postfix completions.
+* pr:18172[] support `#[expect]` in attribute completion and hover.
+* pr:18162[] report lifetime GATs as object-unsafe.
+* pr:18123[] disambiguate package names in flycheck.
+* pr:18166[] fix a bug in span map merging.
+* pr:18184[] pass `--all-targets` for build scripts in more CLI commands.
+* pr:18193[] don't report start-up error when a workspace discovery command is configured.
+
+== Internal Improvements
+
+* pr:18205[] (first contribution) rename object-safety to `dyn`-compatibility.
+* pr:18196[] add `SyntaxFactory` to simplify generating nodes with syntax mappings.
+* pr:18181[] add `tracing` to project discovery and VFS loading.
+* pr:18192[] include `rust-project.json` build files in VFS.
+* pr:18157[] respect `--disable-proc-macros` in `analysis-stats`.
+* pr:18208[] allow overriding proc macro server in `analysis-stats`.
+* pr:18188[] bump MSRV to 1.81.
+* pr:18175[] drop `COMPLETION_MARKER` Easter egg.
