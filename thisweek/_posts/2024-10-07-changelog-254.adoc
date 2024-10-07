@@ -1,0 +1,26 @@
+= Changelog #254
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:2b750da1a1a2c1d2c70896108d7096089842d877[] +
+Release: release:2024-10-07[] (`v0.3.2137`)
+
+== New Features
+
+* pr:18085[] provide an option (`rust-analyzer.cfg.setTest`) to not set `cfg(test)`.
+
+== Fixes
+
+* pr:18207[] (first contribution) suggest UpperCamelCase instead of CamelCase to match `rustc`.
+* pr:18210[] fix resolution of labels inside macro calls.
+* pr:18206[] handle block expressions as modules when finding their parents.
+* pr:18219[] fix incorrect bootstrap error message.
+* pr:18255[] use external stack in borrow check DFS.
+
+== Internal Improvements
+
+* pr:18167[] send less data for completions, if possible.
+* pr:18234[] filter out opaque tokens when descending into macros for some IDE features.
+* pr:18195[] remove `Default` from OpQueue.
+* pr:18227[] add JSON `tracing` `Layer` for profiling start-up.

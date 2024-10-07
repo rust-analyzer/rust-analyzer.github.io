@@ -411,7 +411,7 @@ image::https://user-images.githubusercontent.com/48062697/113020661-b6922200-917
 
 
 === Magic Completions
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/lib.rs#L42[lib.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/lib.rs#L67[lib.rs]
 
 In addition to usual reference completion, rust-analyzer provides some ✨magic✨
 completions as well:

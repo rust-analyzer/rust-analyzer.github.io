@@ -8,11 +8,11 @@ Release: release:2024-09-30[] (`v0.3.2129`)
 
 == New Features
 
+* pr:17923[] (first contribution) add option to rebuild project before restarting debugging.
 * pr:18180[] index workspace symbols at start-up rather than on the first search.
 
 == Fixes
 
-* pr:17923[] (first contribution) add option to rebuild project before restarting debugging.
 * pr:18160[] fix name resolution with renamed imports and shadowing.
 * pr:18164[] handle import aliases in `remove_unused_imports`.
 * pr:18161[] improve reference handling in consuming postfix completions.
