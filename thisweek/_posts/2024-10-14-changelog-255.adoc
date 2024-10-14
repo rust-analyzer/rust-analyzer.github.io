@@ -1,0 +1,20 @@
+= Changelog #255
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:d7628c0a8b95cadefe89d9a45f9be5ee4898c6b1[] +
+Release: release:2024-10-14[] (`v0.3.2146`)
+
+== Fixes
+
+* pr:18246[] fix crash in `prettify_macro_expansion()` when the node isn't the whole file.
+* pr:18245[] fix detail label in completions.
+* pr:18247[] fix `something_to_resolve` sometimes being reset in `completion_item`
+* pr:18269[] display constructor types in a nicer way.
+* pr:18289[] fix panic on JSON projects with relative buildfile paths.
+
+== Internal Improvements
+
+* pr:18266[] use macos-13 runners and bump `MACOSX_DEPLOYMENT_TARGET` to `13.0`.
+* pr:18281[] stop using `spawnSync` in the VS Code extension.
