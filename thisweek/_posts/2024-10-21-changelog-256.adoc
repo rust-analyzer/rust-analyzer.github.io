@@ -1,0 +1,36 @@
+= Changelog #256
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:9323b5385863739d1c113f02e4cf3f2777c09977[] +
+Release: release:2024-10-21[] (`v0.3.2154`)
+
+== New Features
+
+* pr:18152[] highlight exit points of `async` blocks.
+* pr:18291[] respect `references.excludeTests` in Call Hierarchy.
+* pr:18350[], pr:18354[] add initial support for `safe` in `extern` blocks.
+* pr:18292[] support renaming `self` parameters in functions.
+
+== Fixes
+
+* pr:18265[], pr:18320[] (first contribution) add support for LLDB-DAP.
+* pr:18226[] (first contribution) fix parsing of `use` in generic parameters.
+* pr:18229[] (first contribution) make `rustfmt.overrideCommand` relative to project, not workspace root.
+* pr:18336[] (first contribution) increase macro expansion token limit once more.
+* pr:18278[] do not consider matching of places that evaluate to `!` to diverge, and disallow coercions from them.
+* pr:18217[] stop doing cast checks for unknown pointer kinds.
+* pr:18252[] do not consider mutable usage of `deref` to `*mut T` as `deref_mut`.
+* pr:18299[] fix `Ok` wrapping quick fix for return statements.
+* pr:18275[] don't expand `#[test_case]`.
+
+== Internal Improvements
+
+* pr:18242[] don't resolve extern crates in import fixed point resolution.
+* pr:18216[] return structs instead of tuples from `OpQueues`.
+* pr:18331[] support more trivial types in `is_sized` check.
+* pr:17990[] use local time when formatting logs.
+* pr:18243[], pr:18300[] clamp LSP columns to line length.
+* pr:18328[] fix running `analysis-stats` against the standard libraries on CI.
+* pr:18335[] fix `.editorconfig` glob.
