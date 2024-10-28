@@ -1,0 +1,55 @@
+= Changelog #257
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:3b3a87fe9bd3f2a79942babc1d1e385b6805c384[] +
+Release: release:2024-10-28[] (`v0.3.2162`)
+
+== A Note on Windows Artifacts
+
+The next release will stop including `.gz` artifacts for Windows.
+These are harder to use than the `.zip` ones, which should be used instead.
+
+== New Features
+
+* pr:18294[] (first contribution) support `Option` in "Wrap/Unwrap return type".
+* pr:18362[], pr:18370[] (first contribution) support "Go to definition" on range operators and patterns.
+* pr:18359[] (first contribution) add option to not start the server on initialization.
+* pr:18264[] implement mixed-site hygiene.
+* pr:18404[], pr:18408[] implement pull model for diagnostics.
+* pr:18349[] render aliased type documentation when alias doesn't have any.
+* pr:18418[] split `macro-error` diagnostic so users can ignore parts of it.
+
+== Fixes
+
+* pr:18407[] (first contribution) fix formatting on welcome page.
+* pr:18376[] add text edits to more inlay hints.
+* pr:18361[] fix token downmapping failing for `include!` inputs.
+* pr:18254[] nail destructuring assignment down once and for all.
+* pr:18337[] don't show private items from modules nested in blocks in completions.
+* pr:18360[] improve completions for extern blocks.
+* pr:18371[] fix parsing of use bounds.
+* pr:18388[] Fix checking for `false` `labelDetailsSupport` value.
+* pr:18395[] add missing `target_has_atomic` and `target_has_atomic_load_store` `cfg` flags.
+* pr:18390[] prevent public re-exports of private items.
+* pr:18417[] correctly handle `#""` before the 2024 edition.
+* pr:18419[] put leading `|` in patterns under `OrPat`.
+* pr:18415[] mark "Remove ``dbg!``" as a quick fix for better prioritization.
+* pr:18366[] fix Markdown display in status bar message.
+* pr:18399[] respect config to disable native diagnostics.
+* pr:18386[] don't crash when local time offset is unavailable.
+
+== Internal Improvements
+
+* pr:18372[] (first contribution) switch CI from bors to merge queues.
+* pr:18373[] merge separate inlay hints targeting the same range.
+* pr:18391[] log original syntax on panic.
+* pr:18394[], pr:18396[] pretty-print `Config` in "Status" command.
+* pr:18402[] improve proc macro error message for failed build scripts.
+* pr:18410[] invert token iteration order in macro mapping.
+* pr:17954[] update `rustc-hash` to version 2.
+* pr:18392[] swap query call order in `file_item_tree_query` to help with caching issue.
+* pr:18409[] only construct a resolver during macro descension when needed.
+* pr:18368[] add test for LSIF macro-generated constants.
+* pr:18405[] update changelog generation for merge queues.

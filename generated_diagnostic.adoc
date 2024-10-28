@@ -56,7 +56,7 @@ This diagnostic is shown when the derive attribute is used on an item other than
 
 
 === macro-def-error
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L19[macro_error.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L24[macro_error.rs]
 
 This diagnostic is shown for macro expansion errors.
 
@@ -118,7 +118,7 @@ This diagnostic is triggered on moving non copy things out of references.
 
 
 === need-mut
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L7[mutability_errors.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L8[mutability_errors.rs]
 
 This diagnostic is triggered on mutating an immutable variable.
 
@@ -147,6 +147,18 @@ module.
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/private_field.rs#L3[private_field.rs]
 
 This diagnostic is triggered if the accessed field is not visible from the current module.
+
+
+=== proc-macro-disabled
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L11[macro_error.rs]
+
+This diagnostic is shown for proc macros that has been specifically disabled via `rust-analyzer.procMacro.ignored`.
+
+
+=== proc-macros-disabled
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L7[macro_error.rs]
+
+This diagnostic is shown for proc macros where proc macros have been disabled.
 
 
 === remove-trailing-return
@@ -286,7 +298,7 @@ This diagnostic is triggered if rust-analyzer is unable to discover referred mod
 
 
 === unused-mut
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L51[mutability_errors.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L62[mutability_errors.rs]
 
 This diagnostic is triggered when a mutable variable isn't actually mutated.
 

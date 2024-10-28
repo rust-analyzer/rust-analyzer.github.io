@@ -3775,8 +3775,25 @@ fn foo() {
 
 
 [discrete]
+=== `unwrap_option_return_type`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unwrap_return_type.rs#L13[unwrap_return_type.rs]
+
+Unwrap the function's return type.
+
+.Before
+```rust
+fn foo() -> Option<i32>┃ { Some(42i32) }
+```
+
+.After
+```rust
+fn foo() -> i32 { 42i32 }
+```
+
+
+[discrete]
 === `unwrap_result_return_type`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unwrap_result_return_type.rs#L13[unwrap_result_return_type.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unwrap_return_type.rs#L26[unwrap_return_type.rs]
 
 Unwrap the function's return type.
 
@@ -3814,8 +3831,25 @@ fn main() {
 
 
 [discrete]
+=== `wrap_return_type_in_option`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/wrap_return_type.rs#L17[wrap_return_type.rs]
+
+Wrap the function's return type into Option.
+
+.Before
+```rust
+fn foo() -> i32┃ { 42i32 }
+```
+
+.After
+```rust
+fn foo() -> Option<i32> { Some(42i32) }
+```
+
+
+[discrete]
 === `wrap_return_type_in_result`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/wrap_return_type_in_result.rs#L16[wrap_return_type_in_result.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/wrap_return_type.rs#L30[wrap_return_type.rs]
 
 Wrap the function's return type into Result.
 
