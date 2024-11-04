@@ -1794,6 +1794,44 @@ fn main() {
 
 
 [discrete]
+=== `generate_fn_type_alias_named`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_fn_type_alias.rs#L10[generate_fn_type_alias.rs]
+
+Generate a type alias for the function with named parameters.
+
+.Before
+```rust
+unsafe fn fo┃o(n: i32) -> i32 { 42i32 }
+```
+
+.After
+```rust
+type ${0:FooFn} = unsafe fn(n: i32) -> i32;
+
+unsafe fn foo(n: i32) -> i32 { 42i32 }
+```
+
+
+[discrete]
+=== `generate_fn_type_alias_unnamed`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_fn_type_alias.rs#L24[generate_fn_type_alias.rs]
+
+Generate a type alias for the function with unnamed parameters.
+
+.Before
+```rust
+unsafe fn fo┃o(n: i32) -> i32 { 42i32 }
+```
+
+.After
+```rust
+type ${0:FooFn} = unsafe fn(i32) -> i32;
+
+unsafe fn foo(n: i32) -> i32 { 42i32 }
+```
+
+
+[discrete]
 === `generate_from_impl_for_enum`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_from_impl_for_enum.rs#L8[generate_from_impl_for_enum.rs]
 

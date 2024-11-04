@@ -1,0 +1,37 @@
+= Changelog #258
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:a341d598dc55f8c3077394df84ec8c14a502a787[] +
+Release: release:2024-11-04[] (`v0.3.2172`)
+
+== New Features
+
+* pr:18312[] (first contribution) include `let` statements in file outline.
+* pr:18420[] support `+#[cfg(true)]+` and `+#[cfg(false)]+`.
+* pr:18469[] show `static` values on hover.
+* pr:18470[] allow interpreting consts and statics with the Interpret command.
+* pr:18385[] add assist to generate a type alias for a function.
+
+== Fixes
+
+* pr:18436[] only render type layout info on definitions, not usages.
+* pr:18422[] properly resolve prelude paths in modules inside blocks.
+* pr:18413[] allow public re-exports of `extern crate` imports.
+* pr:18432[] honor diagnostic refresh capability.
+* pr:18382[] fix flyimport for aliased functions and modules.
+* pr:18446[] only parse `safe` as a contextual keyword in `extern` blocks.
+* pr:18453[] fix parsing of patterns with leading `|`.
+
+== Internal Improvements
+
+* pr:18304[] (first contribution) add developer setup instructions.
+* pr:18437[] (first contribution) publish `test-fixture` as `ra_ap_test_fixture`.
+* pr:18256[] (first contribution) start using `Option::is_none_or`.
+* pr:18074[] build source map for ``hir_def::TypeRef``s.
+* pr:18427[] clean up TypeRef lowering.
+* pr:18447[] avoid interior mutability in `TyLoweringContext`.
+* pr:18448[] move `child_by_source` from `hir-def` to `hir`.
+* pr:18421[] move `text-edit` into `ide-db`.
+* pr:18412[] stop producing `.gz` artifacts for Windows.

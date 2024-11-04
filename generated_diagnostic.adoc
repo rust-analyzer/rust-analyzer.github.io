@@ -86,7 +86,7 @@ This diagnostic is triggered if a function is invoked with an incorrect amount o
 
 
 === missing-fields
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/missing_fields.rs#L20[missing_fields.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/missing_fields.rs#L19[missing_fields.rs]
 
 This diagnostic is triggered if record lacks some fields that exist in the corresponding structure.
 
