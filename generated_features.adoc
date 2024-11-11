@@ -205,7 +205,7 @@ image::https://user-images.githubusercontent.com/48062697/113020651-b42fc800-917
 
 
 === File Structure
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/file_structure.rs#L25[file_structure.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/file_structure.rs#L26[file_structure.rs]
 
 Provides a tree of the symbols defined in the file. Can be used to
 

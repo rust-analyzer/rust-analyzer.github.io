@@ -1,0 +1,20 @@
+= Changelog #259
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:30e71b609b493897ed81f4fec95eb75d903820c9[] +
+Release: release:2024-11-11[] (`v0.3.2180`)
+
+== New Features
+
+* pr:18473[] include `extern` blocks and macros in file outline.
+
+== Fixes
+
+* pr:18475[] support new `#[rustc_intrinsic]` attribute and fallback bodies.
+
+== Internal Improvements
+
+* pr:18493[] (first contribution) update supported debug engines in configuration.
+* pr:18486[] change minimum VS Code version from 1.78 to 1.83.
