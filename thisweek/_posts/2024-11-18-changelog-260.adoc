@@ -1,0 +1,17 @@
+= Changelog #260
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:ba56d9b9b5f7ae7311b4bd1cc47159d87eb033d0[] +
+Release: release:2024-11-18[] (`v0.3.2188`)
+
+== Fixes
+
+* pr:18503[] use item indices instead of attribute matching when resolving completions.
+* pr:18519[] use correct file in related documents diagnostics.
+
+== Internal Improvements
+
+* pr:18495[] (first contribution) migrate `reorder_fields` assist to use `SyntaxFactory`.
+* pr:18482[] add public `direct_supertraits` and `all_supertraits` accessors to `hir::Trait`.
