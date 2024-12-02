@@ -1,0 +1,16 @@
+= Changelog #262
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:b65911d5eecfa562532549ef7e70e460eb042e2c[] +
+Release: release:2024-12-02[] (`v0.3.2204`)
+
+== Fixes
+
+* pr:18511[] re-add `rust-analyzer.cargo.sysrootQueryMetadata`.
+* pr:18559[] fix stack overflow when computing the sizedness of (co-)recursive types.
+
+== Internal Improvements
+
+* pr:18577[] remove redundant associated type bounds from `dyn TypeFolder`.
