@@ -245,7 +245,7 @@ fn foo() -> i32 { 42i32 }
 
 [discrete]
 === `add_turbo_fish`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_turbo_fish.rs#L13[add_turbo_fish.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_turbo_fish.rs#L14[add_turbo_fish.rs]
 
 Adds `::<_>` to a call of a generic method or function.
 
@@ -1287,7 +1287,7 @@ fn main() {
 
 [discrete]
 === `flip_binexpr`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/flip_binexpr.rs#L5[flip_binexpr.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/flip_binexpr.rs#L8[flip_binexpr.rs]
 
 Flips operands of a binary expression.
 
@@ -1308,7 +1308,7 @@ fn main() {
 
 [discrete]
 === `flip_comma`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/flip_comma.rs#L9[flip_comma.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/flip_comma.rs#L10[flip_comma.rs]
 
 Flips two comma-separated items.
 
@@ -2422,7 +2422,7 @@ fn main() -> () {
 
 [discrete]
 === `introduce_named_generic`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/introduce_named_generic.rs#L10[introduce_named_generic.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/introduce_named_generic.rs#L7[introduce_named_generic.rs]
 
 Replaces `impl Trait` function argument with the named generic.
 

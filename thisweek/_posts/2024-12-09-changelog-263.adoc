@@ -1,0 +1,49 @@
+= Changelog #263
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:4c755e62a617eeeef3066994731ce1cdd16504ac[] +
+Release: release:2024-12-09[] (`v0.3.2212`)
+
+== New Features
+
+* pr:18541[] add infrastructure and a first type lowering diagnostic.
+* pr:18609[] report union field accesses and inline assembly as unsafe.
+* pr:18604[] complete derive helper attributes.
+* pr:18594[] support `AsyncFn` traits.
+* pr:18522[] add setting to exclude trigger characters from format-on-type.
+
+== Fixes
+
+* pr:18610[] add implict unsafety inlay hints for extern blocks.
+* pr:18589[] advertise completions and inlay hints resolve based on the client capabilities.
+* pr:18630[] temporarily disable completion resolve support for Helix and Neovim.
+* pr:18618[] fix parsing of integer/keyword name references in various places.
+* pr:18608[] improve parser recovery for paths.
+* pr:18625[] fix parser getting stuck for bad asm expressions.
+* pr:18593[], pr:18622[] fix parsing of parenthesized type arguments and RTN.
+* pr:18586[] inherit environment in debug configurations.
+* pr:18587[] fix syntax fixup inserting unnecessary semicolons.
+* pr:18555[] fix a bug where synthetic AST nodes were looked up in the AST ID map.
+* pr:18607[] fix shadowing of record enum variants in patterns.
+* pr:18605[] fix another glob import name resolution bug.
+* pr:18611[] do not report warnings from proc macros, ever.
+* pr:18474[], pr:18616[] make bracket typing handler work on more things.
+* pr:18627[] improve semicolon insertion typing handler heuristics.
+* pr:18628[] add typing handler for parameter list pipe.
+* pr:18619[] fix panic when displaying generic parameters with defaults.
+* pr:18620[] parse lifetime bounds in lifetime parameters into `TypeBoundList`.
+* pr:18621[] resolve generic parameters within `use` captures.
+* pr:18629[] highlight `>` as part of `=>` in `macro_rules!` arm.
+* pr:18633[] properly coerce `FnDef`s to function pointers if they are subtypes.
+* pr:18592[] only show VS Code status bar item in relevant files.
+
+== Internal Improvements
+
+* pr:18561[] (first contribution) add macro expansion test for raw variable names.
+* pr:18595[] remove references to `platform-intrinsic` ABI.
+* pr:18483[] migrate `introduce_named_generic` assist to `SyntaxFactory`.
+* pr:18538[] migrate `sort_items` assist to `SyntaxFactory`.
+* pr:18551[] migrate `add_turbo_fish` assist to `SyntaxFditor`.
+* pr:18575[] migrate `flip` assists to `SyntaxEditor`.

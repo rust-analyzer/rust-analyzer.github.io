@@ -343,7 +343,7 @@ image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L39[inlay_hints.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L40[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
@@ -411,7 +411,7 @@ image::https://user-images.githubusercontent.com/48062697/113020661-b6922200-917
 
 
 === Magic Completions
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/lib.rs#L68[lib.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/lib.rs#L80[lib.rs]
 
 In addition to usual reference completion, rust-analyzer provides some ✨magic✨
 completions as well:
@@ -552,7 +552,7 @@ image::https://user-images.githubusercontent.com/48062697/113065578-04c21800-91b
 
 
 === On Typing Assists
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/typing.rs#L40[typing.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/typing.rs#L42[typing.rs]
 
 Some features trigger on typing certain characters:
 
@@ -562,6 +562,7 @@ Some features trigger on typing certain characters:
 - typing `.` in a chain method call auto-indents
 - typing `{` or `(` in front of an expression inserts a closing `}` or `)` after the expression
 - typing `{` in a use item adds a closing `}` in the right place
+- typing `>` to complete a return type `->` will insert a whitespace after it
 
 VS Code::
 
