@@ -1,0 +1,41 @@
+= Changelog #264
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:27e824fad4cb40f9e475757871e7d259d73f20da[] +
+Release: release:2024-12-16[] (`v0.3.2220`)
+
+== New Features
+
+* pr:18670[] drop proc macro server support for 1.66 and older toolchains.
+* pr:18458[] add diagnostic fix to remove unnecessary `Some` or `Ok` wrapper on type mismatch.
+* pr:18652[] add "Extract into constant" assist.
+
+== Fixes
+
+* pr:18667[] (first contribution) fix "Replace #[derive()]` when snippet text edits are disabled.
+* pr:18653[] hash completion items to properly match them when resolved.
+* pr:18645[] allow uninhabited non-exhaustive structs.
+* pr:18663[] swallow `rustfmt` parsing panics.
+* pr:18660[] clean up copied proc macro libraries on exit.
+* pr:18675[] fix panic when displaying generic params with defaults, again.
+* pr:18684[] re-enable snippet text edits capability.
+* pr:18656[] preserve order of parameters in "Extract function".
+* pr:18674[] show expansion errors in "Expand macro at caret".
+* pr:18466[] properly handle different defaults for severity of lints.
+* pr:18668[] fix source root construction for virtual manifests.
+
+== Internal Improvements
+
+* pr:18643[] rename test fixture crates to `ra_test_fixture`.
+* pr:18644[] remove `cfg-if` patching hack.
+* pr:18647[] disable pipe in typing handler.
+* pr:18657[] migrate `generate_enum_variant` assist to `SyntaxEditor`.
+* pr:18531[] map new replacement nodes to their mutable equivalents in `SyntaxEditor`.
+* pr:18669[] only parse the object file once in `proc-macro-srv`.
+* pr:18677[] implement `naked_asm!` built-in.
+* pr:18672[] simplify dummy `proc-macro-srv`.
+* pr:18694[] show MIR eval errors on hover when debug environment variable is set.
+* pr:18693[] fix proc-macro library names on Windows.
+* pr:18441[] try not cache the config directory path.

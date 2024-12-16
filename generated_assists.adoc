@@ -1084,6 +1084,28 @@ enum TheEnum {
 
 
 [discrete]
+=== `extract_constant`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_variable.rs#L31[extract_variable.rs]
+
+Extracts subexpression into a constant.
+
+.Before
+```rust
+fn main() {
+    ┃(1 + 2)┃ * 4;
+}
+```
+
+.After
+```rust
+fn main() {
+    const ┃VAR_NAME: i32 = 1 + 2;
+    VAR_NAME * 4;
+}
+```
+
+
+[discrete]
 === `extract_expressions_from_format_string`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_expressions_from_format_string.rs#L14[extract_expressions_from_format_string.rs]
 
@@ -1106,7 +1128,7 @@ fn main() {
 
 [discrete]
 === `extract_function`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_function.rs#L37[extract_function.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_function.rs#L39[extract_function.rs]
 
 Extracts selected statements and comments into new function.
 
@@ -1170,6 +1192,28 @@ fn bar(name: i32) -> i32 {
 
 
 [discrete]
+=== `extract_static`
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_variable.rs#L48[extract_variable.rs]
+
+Extracts subexpression into a static.
+
+.Before
+```rust
+fn main() {
+    ┃(1 + 2)┃ * 4;
+}
+```
+
+.After
+```rust
+fn main() {
+    static ┃VAR_NAME: i32 = 1 + 2;
+    VAR_NAME * 4;
+}
+```
+
+
+[discrete]
 === `extract_struct_from_enum_variant`
 **Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_struct_from_enum_variant.rs#L26[extract_struct_from_enum_variant.rs]
 
@@ -1213,7 +1257,7 @@ struct S {
 
 [discrete]
 === `extract_variable`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_variable.rs#L16[extract_variable.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_variable.rs#L14[extract_variable.rs]
 
 Extracts subexpression into a variable.
 
@@ -1618,7 +1662,7 @@ pub fn add(a: i32, b: i32) -> i32 { a + b }
 /// # Examples
 ///
 /// ```
-/// use test::add;
+/// use ra_test_fixture::add;
 ///
 /// assert_eq!(add(a, b), );
 /// ```
@@ -2202,7 +2246,7 @@ fn foo(name: Option<&str>) {
 
 [discrete]
 === `inline_const_as_literal`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_const_as_literal.rs#L5[inline_const_as_literal.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_const_as_literal.rs#L6[inline_const_as_literal.rs]
 
 Evaluate and inline const variable as literal.
 
@@ -2818,7 +2862,7 @@ use std::{fmt::Formatter, io};
 
 [discrete]
 === `promote_local_to_const`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/promote_local_to_const.rs#L19[promote_local_to_const.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/promote_local_to_const.rs#L17[promote_local_to_const.rs]
 
 Promotes a local variable to a const item changing its name to a `SCREAMING_SNAKE_CASE` variant
 if the local uses no non-const expressions.
