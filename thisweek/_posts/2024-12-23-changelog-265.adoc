@@ -1,0 +1,41 @@
+= Changelog #265
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:fa4a40bbe867ed54f5a7c905b591fd7d60ba35eb[] +
+Release: release:2024-12-23[] (`v0.3.2228`)
+
+== New Features
+
+* pr:18696[] report unresolved idents for implicit captures in `format_args!()`.
+
+== Fixes
+
+* pr:18723[] fix a case where completion was unable to expand a `tracing` macro.
+* pr:18699[] fix path-qualified auto-importing completions not working with re-exports.
+* pr:18729[] clear flycheck diagnostics more granularly.
+* pr:18741[] delay initial flycheck until after build scripts.
+* pr:18726[] reduce applicability of the `unnecessary_async` assist.
+* pr:18695[] improve name suggestion for `destructure_tuple_binding`.
+* pr:18690[] use string literal contents as a name when extracting into variable.
+* pr:18700[] fix `unresolved_field` when a keyword is used as a field.
+* pr:18708[] fix pretty-printing of `@` patterns.
+* pr:18714[] do not ask the client to resolve for non-existent label details.
+* pr:18716[] consider both completion detail fields in `to_proto`.
+* pr:18727[] fix "tried adding a runnable pointing to a different file" panic.
+* pr:18739[] don't trigger parenthesis wrapping typing handler after identifiers.
+* pr:18740[] fix empty check diagnostics not marking files as changed.
+* pr:18738[], pr:18742[] properly test if workspace flychecking is allowed.
+* pr:18711[] don't mark `&raw` of deref as unsafe.
+
+== Internal Improvements
+
+* pr:18715[] (first contribution) fix `AsmOption` rule in `rust.ungram`.
+* pr:18731[] revert "drop proc macro server support for 1.66 and older toolchains".
+* pr:18698[] don't serialize empty fields in completion and resolve payloads.
+* pr:18713[] cleanup label structure of `CompletionItem`.
+* pr:18717[], pr:18735[] set `result_id` for pull diagnostics.
+* pr:18697[] simplify `ratoml` test directory handling.
+* pr:18728[] use `serde_derive` intead of `derive` feature.
+* pr:18710[] remove `salsa` from proc macro server dependency tree.

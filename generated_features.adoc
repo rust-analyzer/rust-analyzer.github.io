@@ -606,7 +606,7 @@ image::https://user-images.githubusercontent.com/48062697/113065580-04c21800-91b
 
 
 === Related Tests
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L213[runnables.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L200[runnables.rs]
 
 Provides a sneak peek of all tests where the current item is used.
 
