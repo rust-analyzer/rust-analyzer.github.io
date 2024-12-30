@@ -1,0 +1,32 @@
+= Changelog #266
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:59bc7b49d0ad319de8c477c63da552cbc8a05e4c[] +
+Release: release:2024-12-30[] (`v0.3.2237`)
+
+== New Features
+
+* pr:18707[] show substitution where hovering over generic things.
+* pr:18743[] unify handling of path diagnostics in `hir-ty`.
+
+== Fixes
+
+* pr:18744[] (first contribution) treat `;` as a terminator rather than part of a glued expression.
+* pr:18756[] add missing enum name when hovering on variant fields.
+* pr:18778[] fix flycheck diagnostics flickering for binary targets.
+* pr:18784[] do not merge spans with different anchors.
+* pr:18789[] fix invalid `-O` flag used by `cfg` discovery.
+* pr:18722[] rename `rust-analyzer.statusBar.documentSelector` to `showStatusBar`, add `always` and `never` options.
+
+== Internal Improvements
+
+* pr:18774[] implement parameter variance inference.
+* pr:18718[] standardize iterator passing in `SyntaxFactory`.
+* pr:18760[], pr:18762[] work around leaking `salsa` cycles.
+* pr:18761[] swallow `config value is not set` Cargo error.
+* pr:18754[] clean up target fetching for Cargo metadata.
+* pr:18785[] clean up toolchain info fetching.
+* pr:18750[] revert "disable `rustc` test metrics". 
+* pr:18787[] automatically cancel CI checks on new push to PR.
