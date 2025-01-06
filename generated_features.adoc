@@ -70,7 +70,7 @@ image::https://user-images.githubusercontent.com/48062697/113020673-b85be580-917
 
 
 === Completion With Autoimport
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/completions/flyimport.rs#L19[flyimport.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/completions/flyimport.rs#L20[flyimport.rs]
 
 When completing names in the current scope, proposes additional imports from other modules or crates,
 if they can be qualified in the scope, and their name contains all symbols from the completion input.
@@ -606,7 +606,7 @@ image::https://user-images.githubusercontent.com/48062697/113065580-04c21800-91b
 
 
 === Related Tests
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L200[runnables.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L203[runnables.rs]
 
 Provides a sneak peek of all tests where the current item is used.
 
@@ -635,7 +635,7 @@ image::https://user-images.githubusercontent.com/48062697/113065582-055aae80-91b
 
 
 === Run
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L113[runnables.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L116[runnables.rs]
 
 Shows a popup suggesting to run a test/benchmark/binary **at the current cursor
 location**. Super useful for repeatedly running just a single test. Do bind this

@@ -1,0 +1,42 @@
+= Changelog #267
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:3f2bbe9fed9aba5e34c33d3e44898a332df157b2[] +
+Release: release:2025-01-06[] (`v0.3.2249`)
+
+== New Features
+
+* pr:18757[] add support for updating `expect-test`, `insta` and `snapbox` snapshot tests.
+* pr:18179[] allow excluding specific traits from completion.
+* pr:18801[] show "Go to type definition" actions for generics substitutions on hover.
+* pr:18821[] add support for `CoercePointee`.
+
+== Fixes
+
+* pr:18806[] (first contribution) re-enable crate graph de-duplication.
+* pr:18797[] (first contribution) generate exhaustive `match` in "Replace `if-let` with ``match``".
+* pr:18758[] (first contribution) improve SCIP symbols.
+* pr:18835[] hide synthetic locals from completions.
+* pr:18791[] avoid generating colliding names in "Extract variable".
+* pr:18794[] fix "Fill match arm" producing an extra brace in some proc macros.
+* pr:18802[] use the correct `file_id` used for ranges for outgoing calls.
+* pr:18807[], pr:18841[] populate cargo config environment variables.
+* pr:18826[], pr:18848[], pr:18817[] properly clear flycheck diagnostics.
+* pr:18819[] fix overflow detection in MIR evaluation.
+* pr:18843[] correctly handle new-style `rustc_intrinsic` safety.
+* pr:18845[] check the right package in flycheck.
+* pr:18795[], pr:18820[] fix rendering of literals in code blocks.
+* pr:18836[] be more permissive with completion resolve data.
+* pr:18830[] fix custom snippet deserialization.
+
+== Internal Improvements
+
+* pr:18822[] (first contribution) allow `targetDir` to be an absolute path.
+* pr:18327[], pr:18852[] store token trees in contiguous `Vec` instead of as a tree.
+* pr:18809[] do not render closure ids in hover messages.
+* pr:18790[] define a quoting mechanism instead of textual AST `make`.
+* pr:18805[] implement `<RaSpanServer as SourceFile>::eq`.
+* pr:18792[] decouple proc macro server protocol from the server implementation.
+* pr:18829[], pr:18831[] revert 'revert "disable `rustc` test metrics"'.

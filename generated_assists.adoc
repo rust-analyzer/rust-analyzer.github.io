@@ -962,7 +962,7 @@ fn main() {
 
 [discrete]
 === `destructure_tuple_binding`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/destructure_tuple_binding.rs#L20[destructure_tuple_binding.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/destructure_tuple_binding.rs#L19[destructure_tuple_binding.rs]
 
 Destructures a tuple binding in place.
 
@@ -3346,7 +3346,7 @@ fn main() {
 ```rust
 fn main() {
     let x = Some(1);
-    if let Some(${0:x}) = x {}
+    if let Some(${0:x1}) = x {}
 }
 ```
 
