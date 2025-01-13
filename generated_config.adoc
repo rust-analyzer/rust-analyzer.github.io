@@ -94,10 +94,10 @@ avoid checking unnecessary things.
 --
 Default:
 ----
-{
-  "miri": null,
-  "debug_assertions": null
-}
+[
+  "debug_assertion",
+  "miri"
+]
 ----
 List of cfg options to enable with the given values.
 
@@ -135,12 +135,6 @@ Unsetting this disables sysroot loading.
 
 This option does not take effect until rust-analyzer is restarted.
 --
-[[rust-analyzer.cargo.sysrootQueryMetadata]]rust-analyzer.cargo.sysrootQueryMetadata (default: `"cargo_metadata"`)::
-+
---
-How to query metadata for the sysroot crate. Using cargo metadata allows rust-analyzer
-to analyze third-party dependencies of the standard libraries.
---
 [[rust-analyzer.cargo.sysrootSrc]]rust-analyzer.cargo.sysrootSrc (default: `null`)::
 +
 --
@@ -152,7 +146,7 @@ This option does not take effect until rust-analyzer is restarted.
 [[rust-analyzer.cargo.target]]rust-analyzer.cargo.target (default: `null`)::
 +
 --
-Compilation target override (target triple).
+Compilation target override (target tuple).
 --
 [[rust-analyzer.cargo.targetDir]]rust-analyzer.cargo.targetDir (default: `null`)::
 +
@@ -722,6 +716,11 @@ Whether to show generic type parameter name inlay hints.
 --
 Whether to show implicit drop hints.
 --
+[[rust-analyzer.inlayHints.implicitSizedBoundHints.enable]]rust-analyzer.inlayHints.implicitSizedBoundHints.enable (default: `false`)::
++
+--
+Whether to show inlay hints for the implied type parameter `Sized` bound.
+--
 [[rust-analyzer.inlayHints.lifetimeElisionHints.enable]]rust-analyzer.inlayHints.lifetimeElisionHints.enable (default: `"never"`)::
 +
 --
@@ -1056,6 +1055,13 @@ Show documentation.
 +
 --
 Specify the characters to exclude from triggering typing assists. The default trigger characters are `.`, `=`, `<`, `>`, `{`, and `(`.
+--
+[[rust-analyzer.vfs.extraIncludes]]rust-analyzer.vfs.extraIncludes (default: `[]`)::
++
+--
+Additional paths to include in the VFS. Generally for code that is
+generated or otherwise managed by a build system outside of Cargo,
+though Cargo might be the eventual consumer.
 --
 [[rust-analyzer.workspace.discoverConfig]]rust-analyzer.workspace.discoverConfig (default: `null`)::
 +

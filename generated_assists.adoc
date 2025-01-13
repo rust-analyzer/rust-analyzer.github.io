@@ -3298,7 +3298,7 @@ impl Debug for S {
 
 [discrete]
 === `replace_if_let_with_match`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_if_let_with_match.rs#L24[replace_if_let_with_match.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_if_let_with_match.rs#L20[replace_if_let_with_match.rs]
 
 Replaces a `if let` expression with a `match` expression.
 
@@ -3353,7 +3353,7 @@ fn main() {
 
 [discrete]
 === `replace_let_with_if_let`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_let_with_if_let.rs#L15[replace_let_with_if_let.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_let_with_if_let.rs#L9[replace_let_with_if_let.rs]
 
 Replaces `let` with an `if let`.
 
@@ -3381,7 +3381,7 @@ fn compute() -> Option<i32> { None }
 
 [discrete]
 === `replace_match_with_if_let`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_if_let_with_match.rs#L187[replace_if_let_with_match.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_if_let_with_match.rs#L188[replace_if_let_with_match.rs]
 
 Replaces a binary `match` with a wildcard pattern and no guards with an `if let` expression.
 
@@ -3914,7 +3914,7 @@ fn main() {
 
 [discrete]
 === `wrap_return_type_in_option`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/wrap_return_type.rs#L17[wrap_return_type.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/wrap_return_type.rs#L16[wrap_return_type.rs]
 
 Wrap the function's return type into Option.
 
@@ -3931,7 +3931,7 @@ fn foo() -> Option<i32> { Some(42i32) }
 
 [discrete]
 === `wrap_return_type_in_result`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/wrap_return_type.rs#L30[wrap_return_type.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/wrap_return_type.rs#L29[wrap_return_type.rs]
 
 Wrap the function's return type into Result.
 

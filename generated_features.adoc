@@ -343,7 +343,7 @@ image::https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917
 
 
 === Inlay Hints
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L40[inlay_hints.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L41[inlay_hints.rs]
 
 rust-analyzer shows additional information inline with the source code.
 Editors usually render this using read-only virtual text snippets interspersed with code.
@@ -785,17 +785,15 @@ image::https://user-images.githubusercontent.com/5748995/229394139-2625beab-f4c9
 
 
 === Show Syntax Tree
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/syntax_tree.rs#L7[syntax_tree.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/view_syntax_tree.rs#L10[view_syntax_tree.rs]
 
-Shows the parse tree of the current file. It exists mostly for debugging
-rust-analyzer itself.
+Shows a tree view with the syntax tree of the current file
 
 |===
-| Editor  | Action Name
+| Editor  | Panel Name
 
-| VS Code | **rust-analyzer: Show Syntax Tree**
+| VS Code | **Rust Syntax Tree**
 |===
-image::https://user-images.githubusercontent.com/48062697/113065586-068bdb80-91b1-11eb-9507-fee67f9f45a0.gif[]
 
 
 === Status

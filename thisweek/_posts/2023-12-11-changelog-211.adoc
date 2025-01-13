@@ -8,7 +8,7 @@ Release: release:2023-12-11[] (`v0.3.1766`)
 
 == New Features
 
-* pr:15959[] replace TokenMap with an abstraction that matches reality.
+* pr:15959[] replace `TokenMap` with an abstraction that matches reality.
 * pr:16027[] add support for implicit format args:
 +
 video::https://user-images.githubusercontent.com/308347/289476161-20bcb7f6-cfa2-4550-a2ba-a524ab52cba3.mp4[options=loop]
@@ -40,7 +40,7 @@ image::https://user-images.githubusercontent.com/71162630/288081867-bb18707f-327
 * pr:16035[] fix diagnostics panicking when resolving to different files due to macros.
 * pr:16037[] don't print proc-macro panic backtraces in the logs.
 * pr:15486[] fix item tree lowering `pub(self)` to `pub()`.
-* pr:15705[] resolve Self type references in delegate method assist.
+* pr:15705[] resolve `Self` type references in delegate method assist.
 * pr:16048[] fix `concat_bytes!` expansion emitting an identifier.
 * pr:16058[] reduce spans for unresolved field and method diagnostics.
 * pr:16060[] fix completion in `format_args!` with invalid template.

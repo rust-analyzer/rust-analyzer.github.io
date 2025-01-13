@@ -1,0 +1,43 @@
+= Changelog #268
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:8364ef299790cb6ec22b9e09e873c97dbe9f2cb5[] +
+Release: release:2025-01-13[] (`v0.3.2264`)
+
+== New Features
+
+* pr:18880[] (first contribution) add config to include additional paths in the VFS.
+* pr:18885[] (first contribution) change `rust-analyzer.cargo.cfgs` from a map to a list.
+* pr:18907[] implement `#[rust_analyzer::skip]` for bodies.
+* pr:18903[] implement implicit sized bound inlay hints.
+* pr:18813[] reimplement the syntax tree view as a sidebar.
+* pr:18906[] reimplement Rust string highlighting using a tool attribute.
+* pr:18788[] re-remove `rust-analyzer.cargo.sysrootQueryMetadata`.
+
+== Fixes
+
+* pr:18832[] (first contribution) do not offer completions within strings in macro calls.
+* pr:18866[] (first contribution) fix JSON project buildfile inclusion.
+* pr:18858[] clear diagnostics on cancel unconditionally.
+* pr:18853[] fix case where completion inside macro that expands to `#[test]` was unavailable.
+* pr:18864[] fix diagnostics not clearing between flychecks.
+* pr:18877[] fix performance issue on missing MBE bindings.
+* pr:18884[] fix `env!` completions.
+* pr:18900[] do not call `prettify_macro_expansion` unless "Inline macro" has actually been invoked.
+* pr:18904[] improve module path rendering in hover.
+* pr:18861[] make edition per-token, not file.
+* pr:18920[] fix `ref` text edit for binding mode hints.
+* pr:18889[] fix token lookup in macro call completions.
+* pr:18899[] fix another panic in fixup reversing.
+
+== Internal Improvements
+
+* pr:18855[] migrate `if-let` replacement assists to `SyntaxEditor`.
+* pr:18524[] migrate `(un)wrap_return_type` assists to `SyntaxEditor`.
+* pr:18902[] add `Definition::Crate`.
+* pr:18921[] compute inlay hint text edits lazily.
+* pr:18923[] compute inlay hint tooltips lazily.
+* pr:18867[] support `target-tuple` (vs. `target-triple`) and clean up version fetching.
+* pr:18887[] refactor test helpers within `ide-completions`.
