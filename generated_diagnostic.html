@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>rust-analyzer</title>
+  <meta name="description"
+    content="rust-analyzer: building a better Rust IDE">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//generated_diagnostic.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <div class="sect2">
+<h3 id="attribute-expansion-disabled">attribute-expansion-disabled</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L7">macro_error.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is shown for attribute proc macros when attribute expansions have been disabled.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="await-outside-of-async">await-outside-of-async</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/await_outside_of_async.rs#L3">await_outside_of_async.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if the <code>await</code> keyword is used outside of an async function or block</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="break-outside-of-loop">break-outside-of-loop</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/break_outside_of_loop.rs#L3">break_outside_of_loop.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if the <code>break</code> keyword is used outside of a loop.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="cast-to-unsized">cast-to-unsized</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/invalid_cast.rs#L106">invalid_cast.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered when casting to an unsized type</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="expected-function">expected-function</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/expected_function.rs#L5">expected_function.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if a call is made on something that is not callable.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="generic-args-prohibited">generic-args-prohibited</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/generic_args_prohibited.rs#L10">generic_args_prohibited.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is shown when generic arguments are provided for a type that does not accept
+generic arguments.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="inactive-code">inactive-code</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/inactive_code.rs#L6">inactive_code.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is shown for code with inactive <code>#[cfg]</code> attributes.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="incoherent-impl">incoherent-impl</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/incoherent_impl.rs#L6">incoherent_impl.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if the targe type of an impl is from a foreign crate.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="incorrect-ident-case">incorrect-ident-case</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/incorrect_case.rs#L13">incorrect_case.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if an item name doesn&#8217;t follow <a href="https://doc.rust-lang.org/1.0.0/style/style/naming/README.html">Rust naming convention</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="invalid-cast">invalid-cast</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/invalid_cast.rs#L18">invalid_cast.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if the code contains an illegal cast</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="invalid-derive-target">invalid-derive-target</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/invalid_derive_target.rs#L3">invalid_derive_target.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is shown when the derive attribute is used on an item other than a <code>struct</code>,
+<code>enum</code> or <code>union</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="macro-def-error">macro-def-error</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L24">macro_error.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is shown for macro expansion errors.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="macro-error">macro-error</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L3">macro_error.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is shown for macro expansion errors.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="malformed-derive">malformed-derive</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/malformed_derive.rs#L3">malformed_derive.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is shown when the derive attribute has invalid input.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mismatched-arg-count">mismatched-arg-count</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mismatched_arg_count.rs#L31">mismatched_arg_count.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if a function is invoked with an incorrect amount of arguments.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mismatched-tuple-struct-pat-arg-count">mismatched-tuple-struct-pat-arg-count</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mismatched_arg_count.rs#L11">mismatched_arg_count.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if a function is invoked with an incorrect amount of arguments.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="missing-fields">missing-fields</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/missing_fields.rs#L19">missing_fields.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if record lacks some fields that exist in the corresponding structure.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="k">struct</span> <span class="n">A</span> <span class="p">{</span> <span class="n">a</span><span class="p">:</span> <span class="nb">u8</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">u8</span> <span class="p">}</span>
+
+<span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="n">A</span> <span class="p">{</span> <span class="n">a</span><span class="p">:</span> <span class="mi">10</span> <span class="p">};</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="missing-match-arm">missing-match-arm</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/missing_match_arms.rs#L3">missing_match_arms.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if <code>match</code> block is missing one or more match arms.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="missing-unsafe">missing-unsafe</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/missing_unsafe.rs#L10">missing_unsafe.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if an operation marked as <code>unsafe</code> is used outside of an <code>unsafe</code> function or block.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="moved-out-of-ref">moved-out-of-ref</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/moved_out_of_ref.rs#L4">moved_out_of_ref.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered on moving non copy things out of references.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="need-mut">need-mut</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L8">mutability_errors.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered on mutating an immutable variable.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="no-such-field">no-such-field</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/no_such_field.rs#L12">no_such_field.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if created structure does not have field provided in record.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="non-exhaustive-let">non-exhaustive-let</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/non_exhaustive_let.rs#L3">non_exhaustive_let.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if a <code>let</code> statement without an <code>else</code> branch has a non-exhaustive
+pattern.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="private-assoc-item">private-assoc-item</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/private_assoc_item.rs#L3">private_assoc_item.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if the referenced associated item is not visible from the current
+module.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="private-field">private-field</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/private_field.rs#L3">private_field.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if the accessed field is not visible from the current module.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proc-macro-disabled">proc-macro-disabled</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/macro_error.rs#L11">macro_error.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is shown for proc macros that have been specifically disabled via <code>rust-analyzer.procMacro.ignored</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="remove-trailing-return">remove-trailing-return</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/remove_trailing_return.rs#L8">remove_trailing_return.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered when there is a redundant <code>return</code> at the end of a function
+or closure.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="remove-unnecessary-else">remove-unnecessary-else</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/remove_unnecessary_else.rs#L17">remove_unnecessary_else.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered when there is an <code>else</code> block for an <code>if</code> expression whose
+then branch diverges (e.g. ends with a <code>return</code>, <code>continue</code>, <code>break</code> e.t.c).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="replace-filter-map-next-with-find-map">replace-filter-map-next-with-find-map</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/replace_filter_map_next_with_find_map.rs#L11">replace_filter_map_next_with_find_map.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered when <code>.filter_map(..).next()</code> is used, rather than the more concise <code>.find_map(..)</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="trait-impl-incorrect-safety">trait-impl-incorrect-safety</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/trait_impl_incorrect_safety.rs#L6">trait_impl_incorrect_safety.rs</a></p>
+</div>
+<div class="paragraph">
+<p>Diagnoses incorrect safety annotations of trait impls.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="trait-impl-missing-assoc_item">trait-impl-missing-assoc_item</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/trait_impl_missing_assoc_item.rs#L7">trait_impl_missing_assoc_item.rs</a></p>
+</div>
+<div class="paragraph">
+<p>Diagnoses missing trait items in a trait impl.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="trait-impl-orphan">trait-impl-orphan</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/trait_impl_orphan.rs#L5">trait_impl_orphan.rs</a></p>
+</div>
+<div class="paragraph">
+<p>Only traits defined in the current crate can be implemented for arbitrary types</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="trait-impl-redundant-assoc_item">trait-impl-redundant-assoc_item</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/trait_impl_redundant_assoc_item.rs#L12">trait_impl_redundant_assoc_item.rs</a></p>
+</div>
+<div class="paragraph">
+<p>Diagnoses redundant trait items in a trait impl.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="type-mismatch">type-mismatch</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/type_mismatch.rs#L20">type_mismatch.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered when the type of an expression or pattern does not match
+the expected type.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="typed-hole">typed-hole</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/typed_hole.rs#L18">typed_hole.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered when an underscore expression is used in an invalid position.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="undeclared-label">undeclared-label</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/undeclared_label.rs#L3">undeclared_label.rs</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unimplemented-builtin-macro">unimplemented-builtin-macro</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unimplemented_builtin_macro.rs#L3">unimplemented_builtin_macro.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is shown for builtin macros which are not yet implemented by rust-analyzer</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unlinked-file">unlinked-file</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unlinked_file.rs#L20">unlinked_file.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is shown for files that are not included in any crate, or files that are part of
+crates rust-analyzer failed to discover. The file will not have IDE features available.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unnecessary-braces">unnecessary-braces</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/useless_braces.rs#L9">useless_braces.rs</a></p>
+</div>
+<div class="paragraph">
+<p>Diagnostic for unnecessary braces in <code>use</code> items.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unreachable-label">unreachable-label</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unreachable_label.rs#L3">unreachable_label.rs</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unresolved-assoc-item">unresolved-assoc-item</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_assoc_item.rs#L3">unresolved_assoc_item.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if the referenced associated item does not exist.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unresolved-extern-crate">unresolved-extern-crate</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_extern_crate.rs#L3">unresolved_extern_crate.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if rust-analyzer is unable to discover referred extern crate.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unresolved-field">unresolved-field</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_field.rs#L23">unresolved_field.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if a field does not exist on a given type.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unresolved-ident">unresolved-ident</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_ident.rs#L3">unresolved_ident.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if an expr-position ident is invalid.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unresolved-import">unresolved-import</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_import.rs#L3">unresolved_import.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if rust-analyzer is unable to resolve a path in
+a <code>use</code> declaration.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unresolved-macro-call">unresolved-macro-call</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_macro_call.rs#L3">unresolved_macro_call.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if rust-analyzer is unable to resolve the path
+to a macro in a macro invocation.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unresolved-method">unresolved-method</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_method.rs#L15">unresolved_method.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if a method does not exist on a given type.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unresolved-module">unresolved-module</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unresolved_module.rs#L8">unresolved_module.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered if rust-analyzer is unable to discover referred module.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unused-mut">unused-mut</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/mutability_errors.rs#L62">mutability_errors.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered when a mutable variable isn&#8217;t actually mutated.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unused-variables">unused-variables</h3>
+<div class="paragraph">
+<p><strong>Source:</strong> <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-diagnostics/src/handlers/unused_variables.rs#L13">unused_variables.rs</a></p>
+</div>
+<div class="paragraph">
+<p>This diagnostic is triggered when a local variable is not used.</p>
+</div>
+</div>
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
