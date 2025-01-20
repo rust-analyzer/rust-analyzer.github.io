@@ -8,8 +8,8 @@ Release: release:2024-10-14[] (`v0.3.2146`)
 
 == Fixes
 
+* pr:18245[] (first contribution) fix detail label in completions.
 * pr:18246[] fix crash in `prettify_macro_expansion()` when the node isn't the whole file.
-* pr:18245[] fix detail label in completions.
 * pr:18247[] fix `something_to_resolve` sometimes being reset in `completion_item`
 * pr:18269[] display constructor types in a nicer way.
 * pr:18289[] fix panic on JSON projects with relative buildfile paths.

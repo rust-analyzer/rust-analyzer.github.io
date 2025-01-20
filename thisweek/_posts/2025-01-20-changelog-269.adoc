@@ -1,0 +1,35 @@
+= Changelog #269
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:248bd511aee2c1c1cb2d5314649521d6d93b854a[] +
+Release: release:2025-01-20[] (`v0.3.2273`)
+
+== New Features
+
+* pr:18917[] add dereferencing completions.
+* pr:18927[] automatically include `await`, `iter()` and `into_iter()` in completions.
+* pr:18925[] render type parameter projection target bounds in inlay hints.
+* pr:18946[], pr:18950[] show "Go to type definition" actions for type bounds in functions.
+* pr:18952[] complete `raw` and `const` keywords.
+* pr:18939[] flip `rust-analyzer.typing.excludeChars` to be opt-in, with better defaults.
+
+== Fixes
+
+* pr:18908[] (first contribution) report errors blocks before `else` in `let`-`else`.
+* pr:18953[] (first contribution) fix broken `#[cfg(debug_assertions)]`.
+* pr:18933[] (first contribution) bump update `notify` to fix a Windows crash.
+* pr:18944[] update `chalk`, to fix trait upcasting.
+* pr:18949[] partially back out "fix source root construction for virtual manifests".
+* pr:18929[] avoid stack overflow when reaching macro expansion limit.
+* pr:18940[] fix `Semantics` not always caching file roots correctly.
+* pr:18922[] don't return inlay hints outside requested range.
+* pr:18897[] make `test_runner::TestState::stdout` optional to fix parsing `cargo test` JSON output.
+* pr:18968[] enable `unstable-options` for `cargo rustc --print`.
+* pr:18937[] hide syntax tree view by default.
+
+== Internal Improvements
+
+* pr:18957[] update syntax tree viewer docs.
+* pr:18951[] add missing `#[rust_analyzer::rust_fixture]` annotations.
