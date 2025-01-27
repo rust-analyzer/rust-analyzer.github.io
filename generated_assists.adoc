@@ -1085,7 +1085,7 @@ enum TheEnum {
 
 [discrete]
 === `extract_constant`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_variable.rs#L34[extract_variable.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_variable.rs#L35[extract_variable.rs]
 
 Extracts subexpression into a constant.
 
@@ -1193,7 +1193,7 @@ fn bar(name: i32) -> i32 {
 
 [discrete]
 === `extract_static`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_variable.rs#L51[extract_variable.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_variable.rs#L52[extract_variable.rs]
 
 Extracts subexpression into a static.
 
@@ -1257,7 +1257,7 @@ struct S {
 
 [discrete]
 === `extract_variable`
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_variable.rs#L17[extract_variable.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_variable.rs#L18[extract_variable.rs]
 
 Extracts subexpression into a variable.
 

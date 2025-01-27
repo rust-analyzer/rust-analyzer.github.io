@@ -275,7 +275,7 @@ This is the same as `Go to Definition` with the following exceptions:
 
 
 === Go to Definition
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L24[goto_definition.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L28[goto_definition.rs]
 
 Navigates to the definition of an identifier.
 
@@ -411,7 +411,7 @@ image::https://user-images.githubusercontent.com/48062697/113020661-b6922200-917
 
 
 === Magic Completions
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/lib.rs#L82[lib.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/lib.rs#L78[lib.rs]
 
 In addition to usual reference completion, rust-analyzer provides some ✨magic✨
 completions as well:
@@ -1024,7 +1024,7 @@ Displays the recursive memory layout of a datatype.
 
 
 === Workspace Symbol
-**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-db/src/symbol_index.rs#L176[symbol_index.rs]
+**Source:** https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-db/src/symbol_index.rs#L174[symbol_index.rs]
 
 Uses fuzzy-search to find types, modules and functions by name across your
 project and dependencies. This is **the** most useful feature, which improves code

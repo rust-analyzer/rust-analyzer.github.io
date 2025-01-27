@@ -1,0 +1,49 @@
+= Changelog #270
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:2df4ecfc74bbadf1281e13d73f8424f7b5c1514b[] +
+Release: release:2025-01-27[] (`v0.3.2282`)
+
+== New Features
+
+* pr:18934[] add the ability to jump from `into` to `from` definitions.
+* pr:18993[] make auto-insertion of `await` and `iter()` in completions configurable.
+* pr:19012[] implement `arbitrary_self_types`.
+
+== Fixes
+
+* pr:19004[] (first contribution) increase `AUTODEREF_RECURSION_LIMIT` to 20.
+* pr:18973[] make niches into nices (improve niche count rendering).
++
+image::https://github.com/user-attachments/assets/3389dd73-5fb5-4d9e-af73-46d503b6aa6f["a type with nicely-formatted 2⁶³ niches"]
+* pr:19034[] don't complete `#[doc(hidden)]` enum variants and use trees.
+* pr:18976[] consider enum variants in type ns resolution.
+* pr:18988[] de-prioritize completions that add `await` and  `iter()`.
+* pr:19016[], pr:19018[] record glob imports in `ItemScope`.
+* pr:19028[] filter by path stability in flyimport.
+* pr:19030[] fix markdown horizontal ruler sometimes being treated as a heading.
+* pr:19020[] prevent infinite recursion when formatting bounds.
+* pr:19017[] fix flycheck panic with `once` invocation strategy.
+* pr:18977[] fix missing upmapping in trait impl completion.
+* pr:18982[] reduce "Extract variable" range.
+* pr:18967[] properly record meaningful imports as re-exports in symbol index.
+* pr:18986[] go to `Display::fmt` when invoked on `to_string`.
+* pr:19014[] check ``cfg``s when collecting macro defs.
+* pr:19026[] only collect implicit visibile use symbols if they have renames.
+* pr:19033[] make `proc-macro-srv` spans lines and columns 1-indexed (but always 1).
+* pr:19019[] explicitly add buildfiles when constructing `ProjectFolders`.
+* pr:18989[] only refresh syntax tree view when the active document changes.
+
+== Internal Improvements
+
+* pr:18981[] (first contribution) make usage of `RTLD_DEEPBIND` in proc macro server portable.
+* pr:18991[] keep already computed inlay hint properties instead of late resolving them.
+* pr:19029[] skip redundant path search in `resolve_completion_edits`.
+* pr:18909[] use `strict_provenance` in symbol interner.
+* pr:18984[] move dual blanket `impl` logic from `source_analyzer` to `goto_def`.
+* pr:18990[] clean up `Name` string rendering.
+* pr:18994[] treat cfg fetching failures as a warning, not error.
+* pr:18878[] document all `rust-project.json` fields.
+* pr:18972[] drop outgoing `lsp-server` messages on a background thread.
