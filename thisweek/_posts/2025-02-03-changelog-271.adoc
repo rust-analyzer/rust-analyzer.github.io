@@ -1,0 +1,34 @@
+= Changelog #271
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:f3998f7f8a197596c5edf72e937996e6674b423b[] +
+Release: release:2025-02-03[] (`v0.3.2291`)
+
+== New Features
+
+* pr:19001[], pr:19063[] implement `default-field-values`.
+* pr:19038[] support RFC 2396 (`target-feature` 1.1).
+
+== Fixes
+
+* pr:19061[] temporarily disable `Receiver`-based completions.
+* pr:19050[] don't suggest `.into_iter().method()` on iterators.
+* pr:19047[] fix syntactic highlighting for renames.
+* pr:19044[] fix `#[rustc_deprecated_safe_2024]`.
+* pr:19045[] fix a missing standard semantic token.
+* pr:19037[] delay recursion check, to help with custom `#[test]` macros.
+* pr:19051[] mark unsafe function pointer calls as unsafe.
+* pr:19056[] properly handle CRLF line endings in the syntax tree view.
+* pr:19057[] show status bar item in the VS Code Output pane.
+
+== Internal Improvements
+
+* pr:19072[] (first contribution) be more principled when computing `completion_item_hash`.
+* pr:19055[] (first contribution) enable some working code on FreeBSD.
+* pr:19052[], pr:19080[] prioritize formatting tasks and only take read VFS lock when rebuilding the crate graph.
+* pr:19036[] split out `ExpressionStore` from `Body`.
+* pr:19070[] remove mutable syntax tree usage from adjustment hints.
+* pr:19067[] bump TentHash to 1.0.
+* pr:19015[] convert manual to mdBook.
