@@ -1,0 +1,2241 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>rust-analyzer</title>
+  <meta name="description"
+    content="rust-analyzer: building a better Rust IDE">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//generated_config.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="rust-analyzer.assist.emitMustUse"></a>rust-analyzer.assist.emitMustUse (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to insert #[must_use] when generating <code>as_</code> methods
+for enum variants.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.assist.expressionFillDefault"></a>rust-analyzer.assist.expressionFillDefault (default: <code>"todo"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Placeholder expression to use for missing expressions in assists.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.assist.termSearch.borrowcheck"></a>rust-analyzer.assist.termSearch.borrowcheck (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Enable borrow checking for term search code assists. If set to false, also there will be more suggestions, but some of them may not borrow-check.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.assist.termSearch.fuel"></a>rust-analyzer.assist.termSearch.fuel (default: <code>1800</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Term search fuel in "units of work" for assists (Defaults to 1800).</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cachePriming.enable"></a>rust-analyzer.cachePriming.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Warm up caches on project load.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cachePriming.numThreads"></a>rust-analyzer.cachePriming.numThreads (default: <code>"physical"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>How many worker threads to handle priming caches. The default <code>0</code> means to pick automatically.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cargo.allTargets"></a>rust-analyzer.cargo.allTargets (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Pass <code>--all-targets</code> to cargo invocation.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cargo.autoreload"></a>rust-analyzer.cargo.autoreload (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Automatically refresh project info via <code>cargo metadata</code> on
+<code>Cargo.toml</code> or <code>.cargo/config.toml</code> changes.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cargo.buildScripts.enable"></a>rust-analyzer.cargo.buildScripts.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Run build scripts (<code>build.rs</code>) for more precise code analysis.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cargo.buildScripts.invocationStrategy"></a>rust-analyzer.cargo.buildScripts.invocationStrategy (default: <code>"per_workspace"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Specifies the invocation strategy to use when running the build scripts command.
+If <code>per_workspace</code> is set, the command will be executed for each Rust workspace with the
+workspace as the working directory.
+If <code>once</code> is set, the command will be executed once with the opened project as the
+working directory.
+This config only has an effect when <code><mark>rust-analyzer.cargo.buildScripts.overrideCommand</mark></code>
+is set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cargo.buildScripts.overrideCommand"></a>rust-analyzer.cargo.buildScripts.overrideCommand (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Override the command rust-analyzer uses to run build scripts and
+build procedural macros. The command is required to output json
+and should therefore include <code>--message-format=json</code> or a similar
+option.</p>
+</div>
+<div class="paragraph">
+<p>If there are multiple linked projects/workspaces, this command is invoked for
+each of them, with the working directory being the workspace root
+(i.e., the folder containing the <code>Cargo.toml</code>). This can be overwritten
+by changing <code><mark>rust-analyzer.cargo.buildScripts.invocationStrategy</mark></code>.</p>
+</div>
+<div class="paragraph">
+<p>By default, a cargo invocation will be constructed for the configured
+targets and features, with the following base command line:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+</pre></td><td class="code"><pre>cargo check <span class="nt">--quiet</span> <span class="nt">--workspace</span> <span class="nt">--message-format</span><span class="o">=</span>json <span class="nt">--all-targets</span> <span class="nt">--keep-going</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cargo.buildScripts.rebuildOnSave"></a>rust-analyzer.cargo.buildScripts.rebuildOnSave (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Rerun proc-macros building/build-scripts running when proc-macro
+or build-script sources change and are saved.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cargo.buildScripts.useRustcWrapper"></a>rust-analyzer.cargo.buildScripts.useRustcWrapper (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Use <code>RUSTC_WRAPPER=rust-analyzer</code> when running build scripts to
+avoid checking unnecessary things.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cargo.cfgs"></a>rust-analyzer.cargo.cfgs</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[
+  "debug_assertions",
+  "miri"
+]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>List of cfg options to enable with the given values.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cargo.extraArgs"></a>rust-analyzer.cargo.extraArgs (default: <code>[]</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Extra arguments that are passed to every cargo invocation.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cargo.extraEnv"></a>rust-analyzer.cargo.extraEnv (default: <code>{}</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Extra environment variables that will be set when running cargo, rustc
+or other commands within the workspace. Useful for setting RUSTFLAGS.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cargo.features"></a>rust-analyzer.cargo.features (default: <code>[]</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>List of features to activate.</p>
+</div>
+<div class="paragraph">
+<p>Set this to <code>"all"</code> to pass <code>--all-features</code> to cargo.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cargo.noDefaultFeatures"></a>rust-analyzer.cargo.noDefaultFeatures (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to pass <code>--no-default-features</code> to cargo.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cargo.sysroot"></a>rust-analyzer.cargo.sysroot (default: <code>"discover"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Relative path to the sysroot, or "discover" to try to automatically find it via
+"rustc --print sysroot".</p>
+</div>
+<div class="paragraph">
+<p>Unsetting this disables sysroot loading.</p>
+</div>
+<div class="paragraph">
+<p>This option does not take effect until rust-analyzer is restarted.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cargo.sysrootSrc"></a>rust-analyzer.cargo.sysrootSrc (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Relative path to the sysroot library sources. If left unset, this will default to
+<code>{cargo.sysroot}/lib/rustlib/src/rust/library</code>.</p>
+</div>
+<div class="paragraph">
+<p>This option does not take effect until rust-analyzer is restarted.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cargo.target"></a>rust-analyzer.cargo.target (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Compilation target override (target tuple).</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cargo.targetDir"></a>rust-analyzer.cargo.targetDir (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Optional path to a rust-analyzer specific target directory.
+This prevents rust-analyzer&#8217;s <code>cargo check</code> and initial build-script and proc-macro
+building from locking the <code>Cargo.lock</code> at the expense of duplicating build artifacts.</p>
+</div>
+<div class="paragraph">
+<p>Set to <code>true</code> to use a subdirectory of the existing target directory or
+set to a path relative to the workspace to use that path.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.cfg.setTest"></a>rust-analyzer.cfg.setTest (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Set <code>cfg(test)</code> for local crates. Defaults to true.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.checkOnSave"></a>rust-analyzer.checkOnSave (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Run the check command for diagnostics on save.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.check.allTargets"></a>rust-analyzer.check.allTargets (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Check all targets and tests (<code>--all-targets</code>). Defaults to
+<code><mark>rust-analyzer.cargo.allTargets</mark></code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.check.command"></a>rust-analyzer.check.command (default: <code>"check"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Cargo command to use for <code>cargo check</code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.check.extraArgs"></a>rust-analyzer.check.extraArgs (default: <code>[]</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Extra arguments for <code>cargo check</code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.check.extraEnv"></a>rust-analyzer.check.extraEnv (default: <code>{}</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Extra environment variables that will be set when running <code>cargo check</code>.
+Extends <code><mark>rust-analyzer.cargo.extraEnv</mark></code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.check.features"></a>rust-analyzer.check.features (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>List of features to activate. Defaults to
+<code><mark>rust-analyzer.cargo.features</mark></code>.</p>
+</div>
+<div class="paragraph">
+<p>Set to <code>"all"</code> to pass <code>--all-features</code> to Cargo.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.check.ignore"></a>rust-analyzer.check.ignore (default: <code>[]</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>List of <code>cargo check</code> (or other command specified in <code>check.command</code>) diagnostics to ignore.</p>
+</div>
+<div class="paragraph">
+<p>For example for <code>cargo check</code>: <code>dead_code</code>, <code>unused_imports</code>, <code>unused_variables</code>,&#8230;&#8203;</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.check.invocationStrategy"></a>rust-analyzer.check.invocationStrategy (default: <code>"per_workspace"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Specifies the invocation strategy to use when running the check command.
+If <code>per_workspace</code> is set, the command will be executed for each workspace.
+If <code>once</code> is set, the command will be executed once.
+This config only has an effect when <code><mark>rust-analyzer.check.overrideCommand</mark></code>
+is set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.check.noDefaultFeatures"></a>rust-analyzer.check.noDefaultFeatures (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to pass <code>--no-default-features</code> to Cargo. Defaults to
+<code><mark>rust-analyzer.cargo.noDefaultFeatures</mark></code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.check.overrideCommand"></a>rust-analyzer.check.overrideCommand (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Override the command rust-analyzer uses instead of <code>cargo check</code> for
+diagnostics on save. The command is required to output json and
+should therefore include <code>--message-format=json</code> or a similar option
+(if your client supports the <code>colorDiagnosticOutput</code> experimental
+capability, you can use <code>--message-format=json-diagnostic-rendered-ansi</code>).</p>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re changing this because you&#8217;re using some tool wrapping
+Cargo, you might also want to change
+<code><mark>rust-analyzer.cargo.buildScripts.overrideCommand</mark></code>.</p>
+</div>
+<div class="paragraph">
+<p>If there are multiple linked projects/workspaces, this command is invoked for
+each of them, with the working directory being the workspace root
+(i.e., the folder containing the <code>Cargo.toml</code>). This can be overwritten
+by changing <code><mark>rust-analyzer.check.invocationStrategy</mark></code>.</p>
+</div>
+<div class="paragraph">
+<p>If <code>$saved_file</code> is part of the command, rust-analyzer will pass
+the absolute path of the saved file to the provided command. This is
+intended to be used with non-Cargo build systems.
+Note that <code>$saved_file</code> is experimental and may be removed in the future.</p>
+</div>
+<div class="paragraph">
+<p>An example command would be:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+</pre></td><td class="code"><pre>cargo check <span class="nt">--workspace</span> <span class="nt">--message-format</span><span class="o">=</span>json <span class="nt">--all-targets</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.check.targets"></a>rust-analyzer.check.targets (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Check for specific targets. Defaults to <code><mark>rust-analyzer.cargo.target</mark></code> if empty.</p>
+</div>
+<div class="paragraph">
+<p>Can be a single target, e.g. <code>"x86_64-unknown-linux-gnu"</code> or a list of targets, e.g.
+<code>["aarch64-apple-darwin", "x86_64-apple-darwin"]</code>.</p>
+</div>
+<div class="paragraph">
+<p>Aliased as <code>"checkOnSave.targets"</code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.check.workspace"></a>rust-analyzer.check.workspace (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether <code>--workspace</code> should be passed to <code>cargo check</code>.
+If false, <code>-p &lt;package&gt;</code> will be passed instead if applicable. In case it is not, no
+check will be performed.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.completion.addSemicolonToUnit"></a>rust-analyzer.completion.addSemicolonToUnit (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to automatically add a semicolon when completing unit-returning functions.</p>
+</div>
+<div class="paragraph">
+<p>In <code>match</code> arms it completes a comma instead.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.completion.autoAwait.enable"></a>rust-analyzer.completion.autoAwait.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Toggles the additional completions that automatically show method calls and field accesses with <code>await</code> prefixed to them when completing on a future.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.completion.autoIter.enable"></a>rust-analyzer.completion.autoIter.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Toggles the additional completions that automatically show method calls with <code>iter()</code> or <code>into_iter()</code> prefixed to them when completing on a type that has them.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.completion.autoimport.enable"></a>rust-analyzer.completion.autoimport.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Toggles the additional completions that automatically add imports when completed.
+Note that your client must specify the <code>additionalTextEdits</code> LSP client capability to truly have this feature enabled.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.completion.autoimport.exclude"></a>rust-analyzer.completion.autoimport.exclude</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[
+  {
+    "path": "core::borrow::Borrow",
+    "type": "methods"
+  },
+  {
+    "path": "core::borrow::BorrowMut",
+    "type": "methods"
+  }
+]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A list of full paths to items to exclude from auto-importing completions.</p>
+</div>
+<div class="paragraph">
+<p>Traits in this list won&#8217;t have their methods suggested in completions unless the trait
+is in scope.</p>
+</div>
+<div class="paragraph">
+<p>You can either specify a string path which defaults to type "always" or use the more verbose
+form <code>{ "path": "path::to::item", type: "always" }</code>.</p>
+</div>
+<div class="paragraph">
+<p>For traits the type "methods" can be used to only exclude the methods but not the trait itself.</p>
+</div>
+<div class="paragraph">
+<p>This setting also inherits <code><mark>rust-analyzer.completion.excludeTraits</mark></code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.completion.autoself.enable"></a>rust-analyzer.completion.autoself.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Toggles the additional completions that automatically show method calls and field accesses
+with <code>self</code> prefixed to them when inside a method.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.completion.callable.snippets"></a>rust-analyzer.completion.callable.snippets (default: <code>"fill_arguments"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to add parenthesis and argument snippets when completing function.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.completion.excludeTraits"></a>rust-analyzer.completion.excludeTraits (default: <code>[]</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>A list of full paths to traits whose methods to exclude from completion.</p>
+</div>
+<div class="paragraph">
+<p>Methods from these traits won&#8217;t be completed, even if the trait is in scope. However, they will still be suggested on expressions whose type is <code>dyn Trait</code>, <code>impl Trait</code> or <code>T where T: Trait</code>.</p>
+</div>
+<div class="paragraph">
+<p>Note that the trait themselves can still be completed.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.completion.fullFunctionSignatures.enable"></a>rust-analyzer.completion.fullFunctionSignatures.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show full function/method signatures in completion docs.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.completion.hideDeprecated"></a>rust-analyzer.completion.hideDeprecated (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to omit deprecated items from autocompletion. By default they are marked as deprecated but not hidden.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.completion.limit"></a>rust-analyzer.completion.limit (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Maximum number of completions to return. If <code>None</code>, the limit is infinite.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.completion.postfix.enable"></a>rust-analyzer.completion.postfix.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show postfix snippets like <code>dbg</code>, <code>if</code>, <code>not</code>, etc.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.completion.privateEditable.enable"></a>rust-analyzer.completion.privateEditable.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Enables completions of private items and fields that are defined in the current workspace even if they are not visible at the current position.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.completion.snippets.custom"></a>rust-analyzer.completion.snippets.custom</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>{
+  "Ok": {
+    "postfix": "ok",
+    "body": "Ok(${receiver})",
+    "description": "Wrap the expression in a `Result::Ok`",
+    "scope": "expr"
+  },
+  "Box::pin": {
+    "postfix": "pinbox",
+    "body": "Box::pin(${receiver})",
+    "requires": "std::boxed::Box",
+    "description": "Put the expression into a pinned `Box`",
+    "scope": "expr"
+  },
+  "Arc::new": {
+    "postfix": "arc",
+    "body": "Arc::new(${receiver})",
+    "requires": "std::sync::Arc",
+    "description": "Put the expression into an `Arc`",
+    "scope": "expr"
+  },
+  "Some": {
+    "postfix": "some",
+    "body": "Some(${receiver})",
+    "description": "Wrap the expression in an `Option::Some`",
+    "scope": "expr"
+  },
+  "Err": {
+    "postfix": "err",
+    "body": "Err(${receiver})",
+    "description": "Wrap the expression in a `Result::Err`",
+    "scope": "expr"
+  },
+  "Rc::new": {
+    "postfix": "rc",
+    "body": "Rc::new(${receiver})",
+    "requires": "std::rc::Rc",
+    "description": "Put the expression into an `Rc`",
+    "scope": "expr"
+  }
+}</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Custom completion snippets.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.completion.termSearch.enable"></a>rust-analyzer.completion.termSearch.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to enable term search based snippets like <code>Some(foo.bar().baz())</code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.completion.termSearch.fuel"></a>rust-analyzer.completion.termSearch.fuel (default: <code>1000</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Term search fuel in "units of work" for autocompletion (Defaults to 1000).</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.diagnostics.disabled"></a>rust-analyzer.diagnostics.disabled (default: <code>[]</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>List of rust-analyzer diagnostics to disable.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.diagnostics.enable"></a>rust-analyzer.diagnostics.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show native rust-analyzer diagnostics.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.diagnostics.experimental.enable"></a>rust-analyzer.diagnostics.experimental.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show experimental rust-analyzer diagnostics that might
+have more false positives than usual.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.diagnostics.remapPrefix"></a>rust-analyzer.diagnostics.remapPrefix (default: <code>{}</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Map of prefixes to be substituted when parsing diagnostic file paths.
+This should be the reverse mapping of what is passed to <code>rustc</code> as <code>--remap-path-prefix</code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.diagnostics.styleLints.enable"></a>rust-analyzer.diagnostics.styleLints.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to run additional style lints.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.diagnostics.warningsAsHint"></a>rust-analyzer.diagnostics.warningsAsHint (default: <code>[]</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>List of warnings that should be displayed with hint severity.</p>
+</div>
+<div class="paragraph">
+<p>The warnings will be indicated by faded text or three dots in code
+and will not show up in the <code>Problems Panel</code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.diagnostics.warningsAsInfo"></a>rust-analyzer.diagnostics.warningsAsInfo (default: <code>[]</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>List of warnings that should be displayed with info severity.</p>
+</div>
+<div class="paragraph">
+<p>The warnings will be indicated by a blue squiggly underline in code
+and a blue icon in the <code>Problems Panel</code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.files.excludeDirs"></a>rust-analyzer.files.excludeDirs (default: <code>[]</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>These directories will be ignored by rust-analyzer. They are
+relative to the workspace root, and globs are not supported. You may
+also need to add the folders to Code&#8217;s <code>files.watcherExclude</code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.files.watcher"></a>rust-analyzer.files.watcher (default: <code>"client"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Controls file watching implementation.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.highlightRelated.breakPoints.enable"></a>rust-analyzer.highlightRelated.breakPoints.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Enables highlighting of related references while the cursor is on <code>break</code>, <code>loop</code>, <code>while</code>, or <code>for</code> keywords.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.highlightRelated.closureCaptures.enable"></a>rust-analyzer.highlightRelated.closureCaptures.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Enables highlighting of all captures of a closure while the cursor is on the <code>|</code> or move keyword of a closure.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.highlightRelated.exitPoints.enable"></a>rust-analyzer.highlightRelated.exitPoints.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Enables highlighting of all exit points while the cursor is on any <code>return</code>, <code>?</code>, <code>fn</code>, or return type arrow (<code>&#8594;</code>).</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.highlightRelated.references.enable"></a>rust-analyzer.highlightRelated.references.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Enables highlighting of related references while the cursor is on any identifier.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.highlightRelated.yieldPoints.enable"></a>rust-analyzer.highlightRelated.yieldPoints.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Enables highlighting of all break points for a loop or block context while the cursor is on any <code>async</code> or <code>await</code> keywords.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.actions.debug.enable"></a>rust-analyzer.hover.actions.debug.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show <code>Debug</code> action. Only applies when
+<code><mark>rust-analyzer.hover.actions.enable</mark></code> is set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.actions.enable"></a>rust-analyzer.hover.actions.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show HoverActions in Rust files.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.actions.gotoTypeDef.enable"></a>rust-analyzer.hover.actions.gotoTypeDef.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show <code>Go to Type Definition</code> action. Only applies when
+<code><mark>rust-analyzer.hover.actions.enable</mark></code> is set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.actions.implementations.enable"></a>rust-analyzer.hover.actions.implementations.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show <code>Implementations</code> action. Only applies when
+<code><mark>rust-analyzer.hover.actions.enable</mark></code> is set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.actions.references.enable"></a>rust-analyzer.hover.actions.references.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show <code>References</code> action. Only applies when
+<code><mark>rust-analyzer.hover.actions.enable</mark></code> is set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.actions.run.enable"></a>rust-analyzer.hover.actions.run.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show <code>Run</code> action. Only applies when
+<code><mark>rust-analyzer.hover.actions.enable</mark></code> is set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.actions.updateTest.enable"></a>rust-analyzer.hover.actions.updateTest.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show <code>Update Test</code> action. Only applies when
+<code><mark>rust-analyzer.hover.actions.enable</mark></code> and <code><mark>rust-analyzer.hover.actions.run.enable</mark></code> are set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.documentation.enable"></a>rust-analyzer.hover.documentation.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show documentation on hover.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.documentation.keywords.enable"></a>rust-analyzer.hover.documentation.keywords.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show keyword hover popups. Only applies when
+<code><mark>rust-analyzer.hover.documentation.enable</mark></code> is set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.links.enable"></a>rust-analyzer.hover.links.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Use markdown syntax for links on hover.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.maxSubstitutionLength"></a>rust-analyzer.hover.maxSubstitutionLength (default: <code>20</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show what types are used as generic arguments in calls etc. on hover, and what is their max length to show such types, beyond it they will be shown with ellipsis.</p>
+</div>
+<div class="paragraph">
+<p>This can take three values: <code>null</code> means "unlimited", the string <code>"hide"</code> means to not show generic substitutions at all, and a number means to limit them to X characters.</p>
+</div>
+<div class="paragraph">
+<p>The default is 20 characters.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.memoryLayout.alignment"></a>rust-analyzer.hover.memoryLayout.alignment (default: <code>"hexadecimal"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>How to render the align information in a memory layout hover.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.memoryLayout.enable"></a>rust-analyzer.hover.memoryLayout.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show memory layout data on hover.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.memoryLayout.niches"></a>rust-analyzer.hover.memoryLayout.niches (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>How to render the niche information in a memory layout hover.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.memoryLayout.offset"></a>rust-analyzer.hover.memoryLayout.offset (default: <code>"hexadecimal"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>How to render the offset information in a memory layout hover.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.memoryLayout.size"></a>rust-analyzer.hover.memoryLayout.size (default: <code>"both"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>How to render the size information in a memory layout hover.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.show.enumVariants"></a>rust-analyzer.hover.show.enumVariants (default: <code>5</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>How many variants of an enum to display when hovering on. Show none if empty.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.show.fields"></a>rust-analyzer.hover.show.fields (default: <code>5</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>How many fields of a struct, variant or union to display when hovering on. Show none if empty.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.hover.show.traitAssocItems"></a>rust-analyzer.hover.show.traitAssocItems (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>How many associated items of a trait to display when hovering a trait.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.imports.granularity.enforce"></a>rust-analyzer.imports.granularity.enforce (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to enforce the import granularity setting for all files. If set to false rust-analyzer will try to keep import styles consistent per file.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.imports.granularity.group"></a>rust-analyzer.imports.granularity.group (default: <code>"crate"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>How imports should be grouped into use statements.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.imports.group.enable"></a>rust-analyzer.imports.group.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Group inserted imports by the <a href="https://rust-analyzer.github.io/manual.html#auto-import">following order</a>. Groups are separated by newlines.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.imports.merge.glob"></a>rust-analyzer.imports.merge.glob (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to allow import insertion to merge new imports into single path glob imports like <code>use std::fmt::*;</code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.imports.preferNoStd"></a>rust-analyzer.imports.preferNoStd (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Prefer to unconditionally use imports of the core and alloc crate, over the std crate.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.imports.preferPrelude"></a>rust-analyzer.imports.preferPrelude (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to prefer import paths containing a <code>prelude</code> module.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.imports.prefix"></a>rust-analyzer.imports.prefix (default: <code>"plain"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>The path structure for newly inserted paths to use.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.imports.prefixExternPrelude"></a>rust-analyzer.imports.prefixExternPrelude (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to prefix external (including std, core) crate imports with <code>::</code>. e.g. "use ::std::io::Read;".</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.bindingModeHints.enable"></a>rust-analyzer.inlayHints.bindingModeHints.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show inlay type hints for binding modes.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.chainingHints.enable"></a>rust-analyzer.inlayHints.chainingHints.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show inlay type hints for method chains.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.closingBraceHints.enable"></a>rust-analyzer.inlayHints.closingBraceHints.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show inlay hints after a closing <code>}</code> to indicate what item it belongs to.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.closingBraceHints.minLines"></a>rust-analyzer.inlayHints.closingBraceHints.minLines (default: <code>25</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Minimum number of lines required before the <code>}</code> until the hint is shown (set to 0 or 1
+to always show them).</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.closureCaptureHints.enable"></a>rust-analyzer.inlayHints.closureCaptureHints.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show inlay hints for closure captures.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.closureReturnTypeHints.enable"></a>rust-analyzer.inlayHints.closureReturnTypeHints.enable (default: <code>"never"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show inlay type hints for return types of closures.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.closureStyle"></a>rust-analyzer.inlayHints.closureStyle (default: <code>"impl_fn"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Closure notation in type and chaining inlay hints.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.discriminantHints.enable"></a>rust-analyzer.inlayHints.discriminantHints.enable (default: <code>"never"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show enum variant discriminant hints.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.expressionAdjustmentHints.enable"></a>rust-analyzer.inlayHints.expressionAdjustmentHints.enable (default: <code>"never"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show inlay hints for type adjustments.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.expressionAdjustmentHints.hideOutsideUnsafe"></a>rust-analyzer.inlayHints.expressionAdjustmentHints.hideOutsideUnsafe (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to hide inlay hints for type adjustments outside of <code>unsafe</code> blocks.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.expressionAdjustmentHints.mode"></a>rust-analyzer.inlayHints.expressionAdjustmentHints.mode (default: <code>"prefix"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show inlay hints as postfix ops (<code>.<strong></code> instead of <code></strong></code>, etc).</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.genericParameterHints.const.enable"></a>rust-analyzer.inlayHints.genericParameterHints.const.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show const generic parameter name inlay hints.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.genericParameterHints.lifetime.enable"></a>rust-analyzer.inlayHints.genericParameterHints.lifetime.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show generic lifetime parameter name inlay hints.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.genericParameterHints.type.enable"></a>rust-analyzer.inlayHints.genericParameterHints.type.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show generic type parameter name inlay hints.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.implicitDrops.enable"></a>rust-analyzer.inlayHints.implicitDrops.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show implicit drop hints.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.implicitSizedBoundHints.enable"></a>rust-analyzer.inlayHints.implicitSizedBoundHints.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show inlay hints for the implied type parameter <code>Sized</code> bound.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.lifetimeElisionHints.enable"></a>rust-analyzer.inlayHints.lifetimeElisionHints.enable (default: <code>"never"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show inlay type hints for elided lifetimes in function signatures.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames"></a>rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to prefer using parameter names as the name for elided lifetime hints if possible.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.maxLength"></a>rust-analyzer.inlayHints.maxLength (default: <code>25</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Maximum length for inlay hints. Set to null to have an unlimited length.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.parameterHints.enable"></a>rust-analyzer.inlayHints.parameterHints.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show function parameter name inlay hints at the call
+site.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.rangeExclusiveHints.enable"></a>rust-analyzer.inlayHints.rangeExclusiveHints.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show exclusive range inlay hints.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.reborrowHints.enable"></a>rust-analyzer.inlayHints.reborrowHints.enable (default: <code>"never"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show inlay hints for compiler inserted reborrows.
+This setting is deprecated in favor of <mark>rust-analyzer.inlayHints.expressionAdjustmentHints.enable</mark>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.renderColons"></a>rust-analyzer.inlayHints.renderColons (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to render leading colons for type hints, and trailing colons for parameter hints.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.typeHints.enable"></a>rust-analyzer.inlayHints.typeHints.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show inlay type hints for variables.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.typeHints.hideClosureInitialization"></a>rust-analyzer.inlayHints.typeHints.hideClosureInitialization (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to hide inlay type hints for <code>let</code> statements that initialize to a closure.
+Only applies to closures with blocks, same as <code><mark>rust-analyzer.inlayHints.closureReturnTypeHints.enable</mark></code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.inlayHints.typeHints.hideNamedConstructor"></a>rust-analyzer.inlayHints.typeHints.hideNamedConstructor (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to hide inlay type hints for constructors.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.interpret.tests"></a>rust-analyzer.interpret.tests (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Enables the experimental support for interpreting tests.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.joinLines.joinAssignments"></a>rust-analyzer.joinLines.joinAssignments (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Join lines merges consecutive declaration and initialization of an assignment.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.joinLines.joinElseIf"></a>rust-analyzer.joinLines.joinElseIf (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Join lines inserts else between consecutive ifs.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.joinLines.removeTrailingComma"></a>rust-analyzer.joinLines.removeTrailingComma (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Join lines removes trailing commas.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.joinLines.unwrapTrivialBlock"></a>rust-analyzer.joinLines.unwrapTrivialBlock (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Join lines unwraps trivial blocks.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.lens.debug.enable"></a>rust-analyzer.lens.debug.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show <code>Debug</code> lens. Only applies when
+<code><mark>rust-analyzer.lens.enable</mark></code> is set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.lens.enable"></a>rust-analyzer.lens.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show CodeLens in Rust files.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.lens.implementations.enable"></a>rust-analyzer.lens.implementations.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show <code>Implementations</code> lens. Only applies when
+<code><mark>rust-analyzer.lens.enable</mark></code> is set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.lens.location"></a>rust-analyzer.lens.location (default: <code>"above_name"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Where to render annotations.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.lens.references.adt.enable"></a>rust-analyzer.lens.references.adt.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show <code>References</code> lens for Struct, Enum, and Union.
+Only applies when <code><mark>rust-analyzer.lens.enable</mark></code> is set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.lens.references.enumVariant.enable"></a>rust-analyzer.lens.references.enumVariant.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show <code>References</code> lens for Enum Variants.
+Only applies when <code><mark>rust-analyzer.lens.enable</mark></code> is set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.lens.references.method.enable"></a>rust-analyzer.lens.references.method.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show <code>Method References</code> lens. Only applies when
+<code><mark>rust-analyzer.lens.enable</mark></code> is set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.lens.references.trait.enable"></a>rust-analyzer.lens.references.trait.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show <code>References</code> lens for Trait.
+Only applies when <code><mark>rust-analyzer.lens.enable</mark></code> is set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.lens.run.enable"></a>rust-analyzer.lens.run.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show <code>Run</code> lens. Only applies when
+<code><mark>rust-analyzer.lens.enable</mark></code> is set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.lens.updateTest.enable"></a>rust-analyzer.lens.updateTest.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show <code>Update Test</code> lens. Only applies when
+<code><mark>rust-analyzer.lens.enable</mark></code> and <code><mark>rust-analyzer.lens.run.enable</mark></code> are set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.linkedProjects"></a>rust-analyzer.linkedProjects (default: <code>[]</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Disable project auto-discovery in favor of explicitly specified set
+of projects.</p>
+</div>
+<div class="paragraph">
+<p>Elements must be paths pointing to <code>Cargo.toml</code>,
+<code>rust-project.json</code>, <code>.rs</code> files (which will be treated as standalone files) or JSON
+objects in <code>rust-project.json</code> format.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.lru.capacity"></a>rust-analyzer.lru.capacity (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Number of syntax trees rust-analyzer keeps in memory. Defaults to 128.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.lru.query.capacities"></a>rust-analyzer.lru.query.capacities (default: <code>{}</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Sets the LRU capacity of the specified queries.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.notifications.cargoTomlNotFound"></a>rust-analyzer.notifications.cargoTomlNotFound (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether to show <code>can&#8217;t find Cargo.toml</code> error message.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.numThreads"></a>rust-analyzer.numThreads (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>How many worker threads in the main loop. The default <code>null</code> means to pick automatically.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.procMacro.attributes.enable"></a>rust-analyzer.procMacro.attributes.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Expand attribute macros. Requires <code><mark>rust-analyzer.procMacro.enable</mark></code> to be set.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.procMacro.enable"></a>rust-analyzer.procMacro.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Enable support for procedural macros, implies <code><mark>rust-analyzer.cargo.buildScripts.enable</mark></code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.procMacro.ignored"></a>rust-analyzer.procMacro.ignored (default: <code>{}</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>These proc-macros will be ignored when trying to expand them.</p>
+</div>
+<div class="paragraph">
+<p>This config takes a map of crate names with the exported proc-macro names to ignore as values.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.procMacro.server"></a>rust-analyzer.procMacro.server (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Internal config, path to proc-macro server executable.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.references.excludeImports"></a>rust-analyzer.references.excludeImports (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Exclude imports from find-all-references.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.references.excludeTests"></a>rust-analyzer.references.excludeTests (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Exclude tests from find-all-references and call-hierarchy.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.runnables.command"></a>rust-analyzer.runnables.command (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Command to be executed instead of 'cargo' for runnables.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.runnables.extraArgs"></a>rust-analyzer.runnables.extraArgs (default: <code>[]</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Additional arguments to be passed to cargo for runnables such as
+tests or binaries. For example, it may be <code>--release</code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.runnables.extraTestBinaryArgs"></a>rust-analyzer.runnables.extraTestBinaryArgs</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Default:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[
+  "--show-output"
+]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Additional arguments to be passed through Cargo to launched tests, benchmarks, or
+doc-tests.</p>
+</div>
+<div class="paragraph">
+<p>Unless the launched target uses a
+[custom test harness](<a href="https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-harness-field" class="bare">https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-harness-field</a>),
+they will end up being interpreted as options to
+[<code>rustc</code>’s built-in test harness (“libtest”)](<a href="https://doc.rust-lang.org/rustc/tests/index.html#cli-arguments" class="bare">https://doc.rust-lang.org/rustc/tests/index.html#cli-arguments</a>).</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.rustc.source"></a>rust-analyzer.rustc.source (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Path to the Cargo.toml of the rust compiler workspace, for usage in rustc_private
+projects, or "discover" to try to automatically find it if the <code>rustc-dev</code> component
+is installed.</p>
+</div>
+<div class="paragraph">
+<p>Any project which uses rust-analyzer with the rustcPrivate
+crates must set <code>[package.metadata.rust-analyzer] rustc_private=true</code> to use it.</p>
+</div>
+<div class="paragraph">
+<p>This option does not take effect until rust-analyzer is restarted.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.rustfmt.extraArgs"></a>rust-analyzer.rustfmt.extraArgs (default: <code>[]</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Additional arguments to <code>rustfmt</code>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.rustfmt.overrideCommand"></a>rust-analyzer.rustfmt.overrideCommand (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Advanced option, fully override the command rust-analyzer uses for
+formatting. This should be the equivalent of <code>rustfmt</code> here, and
+not that of <code>cargo fmt</code>. The file contents will be passed on the
+standard input and the formatted result will be read from the
+standard output.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.rustfmt.rangeFormatting.enable"></a>rust-analyzer.rustfmt.rangeFormatting.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Enables the use of rustfmt&#8217;s unstable range formatting command for the
+<code>textDocument/rangeFormatting</code> request. The rustfmt option is unstable and only
+available on a nightly build.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.semanticHighlighting.doc.comment.inject.enable"></a>rust-analyzer.semanticHighlighting.doc.comment.inject.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Inject additional highlighting into doc comments.</p>
+</div>
+<div class="paragraph">
+<p>When enabled, rust-analyzer will highlight rust source in doc comments as well as intra
+doc links.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.semanticHighlighting.nonStandardTokens"></a>rust-analyzer.semanticHighlighting.nonStandardTokens (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Whether the server is allowed to emit non-standard tokens and modifiers.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.semanticHighlighting.operator.enable"></a>rust-analyzer.semanticHighlighting.operator.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Use semantic tokens for operators.</p>
+</div>
+<div class="paragraph">
+<p>When disabled, rust-analyzer will emit semantic tokens only for operator tokens when
+they are tagged with modifiers.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.semanticHighlighting.operator.specialization.enable"></a>rust-analyzer.semanticHighlighting.operator.specialization.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Use specialized semantic tokens for operators.</p>
+</div>
+<div class="paragraph">
+<p>When enabled, rust-analyzer will emit special token types for operator tokens instead
+of the generic <code>operator</code> token type.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.semanticHighlighting.punctuation.enable"></a>rust-analyzer.semanticHighlighting.punctuation.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Use semantic tokens for punctuation.</p>
+</div>
+<div class="paragraph">
+<p>When disabled, rust-analyzer will emit semantic tokens only for punctuation tokens when
+they are tagged with modifiers or have a special role.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.semanticHighlighting.punctuation.separate.macro.bang"></a>rust-analyzer.semanticHighlighting.punctuation.separate.macro.bang (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>When enabled, rust-analyzer will emit a punctuation semantic token for the <code>!</code> of macro
+calls.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.semanticHighlighting.punctuation.specialization.enable"></a>rust-analyzer.semanticHighlighting.punctuation.specialization.enable (default: <code>false</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Use specialized semantic tokens for punctuation.</p>
+</div>
+<div class="paragraph">
+<p>When enabled, rust-analyzer will emit special token types for punctuation tokens instead
+of the generic <code>punctuation</code> token type.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.semanticHighlighting.strings.enable"></a>rust-analyzer.semanticHighlighting.strings.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Use semantic tokens for strings.</p>
+</div>
+<div class="paragraph">
+<p>In some editors (e.g. vscode) semantic tokens override other highlighting grammars.
+By disabling semantic tokens for strings, other grammars can be used to highlight
+their contents.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.signatureInfo.detail"></a>rust-analyzer.signatureInfo.detail (default: <code>"full"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Show full signature of the callable. Only shows parameters if disabled.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.signatureInfo.documentation.enable"></a>rust-analyzer.signatureInfo.documentation.enable (default: <code>true</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Show documentation.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.typing.triggerChars"></a>rust-analyzer.typing.triggerChars (default: <code>"=."</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Specify the characters allowed to invoke special on typing triggers.
+- typing <code>=</code> after <code>let</code> tries to smartly add <code>;</code> if <code>=</code> is followed by an existing expression
+- typing <code>=</code> between two expressions adds <code>;</code> when in statement position
+- typing <code>=</code> to turn an assignment into an equality comparison removes <code>;</code> when in expression position
+- typing <code>.</code> in a chain method call auto-indents
+- typing <code>{</code> or <code>(</code> in front of an expression inserts a closing <code>}</code> or <code>)</code> after the expression
+- typing <code>{</code> in a use item adds a closing <code>}</code> in the right place
+- typing <code>&gt;</code> to complete a return type <code>&#8594;</code> will insert a whitespace after it
+- typing <code>&lt;</code> in a path or type position inserts a closing <code>&gt;</code> after the path or type.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.vfs.extraIncludes"></a>rust-analyzer.vfs.extraIncludes (default: <code>[]</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Additional paths to include in the VFS. Generally for code that is
+generated or otherwise managed by a build system outside of Cargo,
+though Cargo might be the eventual consumer.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.workspace.discoverConfig"></a>rust-analyzer.workspace.discoverConfig (default: <code>null</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Enables automatic discovery of projects using [<code>DiscoverWorkspaceConfig::command</code>].</p>
+</div>
+<div class="paragraph">
+<p>[<code>DiscoverWorkspaceConfig</code>] also requires setting <code>progress_label</code> and <code>files_to_watch</code>.
+<code>progress_label</code> is used for the title in progress indicators, whereas <code>files_to_watch</code>
+is used to determine which build system-specific files should be watched in order to
+reload rust-analyzer.</p>
+</div>
+<div class="paragraph">
+<p>Below is an example of a valid configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="json"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+</pre></td><td class="code"><pre><span class="nl">"rust-analyzer.workspace.discoverConfig"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"command"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"rust-project"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"develop-json"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"progressLabel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rust-analyzer"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filesToWatch"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"BUCK"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>## On <code>DiscoverWorkspaceConfig::command</code></p>
+</div>
+<div class="paragraph">
+<p><strong>Warning</strong>: This format is provisional and subject to change.</p>
+</div>
+<div class="paragraph">
+<p>[<code>DiscoverWorkspaceConfig::command</code>] <strong>must</strong> return a JSON object
+corresponding to <code>DiscoverProjectData::Finished</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="norun"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre>#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(tag = "kind")]
+#[serde(rename_all = "snake_case")]
+enum DiscoverProjectData {
+    Finished { buildfile: Utf8PathBuf, project: ProjectJsonData },
+    Error { error: String, source: Option&lt;String&gt; },
+    Progress { message: String },
+}
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As JSON, <code>DiscoverProjectData::Finished</code> is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="json"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="p">{</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">internally-tagged</span><span class="w"> </span><span class="err">representation</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">enum.</span><span class="w">
+    </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"finished"</span><span class="p">,</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">file</span><span class="w"> </span><span class="err">used</span><span class="w"> </span><span class="err">by</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">non-Cargo</span><span class="w"> </span><span class="err">build</span><span class="w"> </span><span class="err">system</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">define</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">package</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="err">target.</span><span class="w">
+    </span><span class="nl">"buildfile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rust-analyzer/BUILD"</span><span class="p">,</span><span class="w">
+    </span><span class="err">//</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">contents</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">rust-project.json</span><span class="p">,</span><span class="w"> </span><span class="err">elided</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">brevity</span><span class="w">
+    </span><span class="nl">"project"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"sysroot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"crates"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is encouraged, but not required, to use the other variants on
+<code>DiscoverProjectData</code> to provide a more polished end-user experience.</p>
+</div>
+<div class="paragraph">
+<p><code>DiscoverWorkspaceConfig::command</code> may <strong>optionally</strong> include an <code>{arg}</code>,
+which will be substituted with the JSON-serialized form of the following
+enum:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="norun"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>#[derive(PartialEq, Clone, Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub enum DiscoverArgument {
+   Path(AbsPathBuf),
+   Buildfile(AbsPathBuf),
+}
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The JSON representation of <code>DiscoverArgument::Path</code> is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="json"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="p">{</span><span class="w">
+    </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"src/main.rs"</span><span class="w">
+</span><span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Similarly, the JSON representation of <code>DiscoverArgument::Buildfile</code> is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre>{
+    "buildfile": "BUILD"
+}
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>DiscoverArgument::Path</code> is used to find and generate a <code>rust-project.json</code>,
+and therefore, a workspace, whereas <code>DiscoverArgument::buildfile</code> is used to
+to update an existing workspace. As a reference for implementors,
+buck2&#8217;s <code>rust-project</code> will likely be useful:
+<a href="https://github.com/facebook/buck2/tree/main/integrations/rust-project" class="bare">https://github.com/facebook/buck2/tree/main/integrations/rust-project</a>.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.workspace.symbol.search.kind"></a>rust-analyzer.workspace.symbol.search.kind (default: <code>"only_types"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Workspace symbol search kind.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.workspace.symbol.search.limit"></a>rust-analyzer.workspace.symbol.search.limit (default: <code>128</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Limits the number of items returned from a workspace symbol search (Defaults to 128).
+Some clients like vs-code issue new searches on result filtering and don&#8217;t require all results to be returned in the initial search.
+Other clients requires all results upfront and might require a higher limit.</p>
+</div>
+</div>
+</div>
+</dd>
+<dt class="hdlist1"><a id="rust-analyzer.workspace.symbol.search.scope"></a>rust-analyzer.workspace.symbol.search.scope (default: <code>"workspace"</code>)</dt>
+<dd>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Workspace symbol search scope.</p>
+</div>
+</div>
+</div>
+</dd>
+</dl>
+</div>
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
