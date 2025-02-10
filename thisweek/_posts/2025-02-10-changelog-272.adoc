@@ -1,0 +1,29 @@
+= Changelog #272
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:35181e167efb94d5090df588e6af9f93250421f3[] +
+Release: release:2025-02-10[] (`v0.3.2299`)
+
+== New Features
+
+* pr:19104[] add option to disable inlay type hints for closure parameters.
+
+== Fixes
+
+* pr:19066[] array types from slice patterns.
+* pr:19094[] fix IDE resolution of `use` inside bodies.
+* pr:19086[] fix some MIR eval and lowering issues.
+* pr:18912[] up-map ranges in `convert_tuple_struct_to_named_struct`.
+* pr:19105[] don't emit empty SCIP occurrence for built-ins.
+* pr:19062[] fix SCIP indexing of module names.
+* pr:19106[] resolve projection types before checking pointer casts.
+
+== Internal Improvements
+
+* pr:19083[] (first contribution) don't try to use NEON on big-endian AArch64.
+* pr:19084[] split cache priming into distinct phases.
+* pr:19085[] don't use `InferenceResult::has_errors` flag for MIR building.
+* pr:19099[] use interior mutability for loaded `ProcMacroSrv::expanders`.
+* pr:19093[] prevent panics from tearing down worker threads.

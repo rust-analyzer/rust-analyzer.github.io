@@ -30,5 +30,5 @@ Release: release:2025-02-03[] (`v0.3.2291`)
 * pr:19052[], pr:19080[] prioritize formatting tasks and only take read VFS lock when rebuilding the crate graph.
 * pr:19036[] split out `ExpressionStore` from `Body`.
 * pr:19070[] remove mutable syntax tree usage from adjustment hints.
-* pr:19067[] bump TentHash to 1.0.
+* pr:19067[] bump `tenthash` to 1.0.
 * pr:19015[] convert manual to mdBook.
