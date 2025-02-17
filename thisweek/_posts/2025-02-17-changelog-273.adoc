@@ -1,0 +1,34 @@
+= Changelog #273
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:84b6936e0856d0cac8d616c5ba3306155d8b3b1d[] +
+Release: release:2025-02-17[] (`v0.3.2308`)
+
+== Fixes
+
+* pr:19088[] (first contribution) fix resolution with modules that shadow built-in types.
+* pr:19117[], pr:19144[] (first contribution) don't emit implicit drop inlay hints in macro calls.
+* pr:19137[] (first contribution) highlight `extern crate` in doc comments.
+* pr:19156[] (first contribution) mark `~/.cargo/git/checkouts` as read-only.
+* pr:19129[] fix postfix completions in macro calls.
+* pr:19148[], pr:19160[] improve error recovery when calling a field or associated function.
+* pr:19125[] censor `#[cfg_attr]` for attribute macros.
+* pr:19124[] fix off-by-one error in range formatting.
+* pr:18998[] make `rust-analyzer.files.excludeDirs` actually work.
+* pr:19111[] apply adjustments to proper expression in `CoerceMany`.
+* pr:19109[] do not show safety hints for extern items lacking semantics.
+* pr:18928[] handle character boundaries in import search.
+* pr:18995[] lower range pattern bounds to expressions.
+* pr:19143[] propagate error types in MIR type projections.
+
+== Internal Improvements
+
+* pr:19110[] (first contribution) `panic_context`.
+* pr:19142[] spawn toolchain querying processes in parallel.
+* pr:19155[] migrate `add_missing_match_arms` to `SyntaxFactory`.
+* pr:19163[] stabilize sort order of `related_tests`.
+* pr:19161[], pr:19166[] improve sort order of runnables.
+* pr:19159[] set `RUSTUP_TOOLCHAIN` when loading sysroot workspace.
+* pr:19150[] apply `cfg.setTest` to `rust-project.json`.
