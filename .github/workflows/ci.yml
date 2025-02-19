@@ -22,7 +22,7 @@ jobs:
 
       - uses: taiki-e/install-action@v2
         with:
-          tool: mdbook@0.4.40
+          tool: mdbook@0.4.45
 
       - uses: taiki-e/install-action@v2
         with:
