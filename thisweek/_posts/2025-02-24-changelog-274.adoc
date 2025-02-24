@@ -1,0 +1,25 @@
+= Changelog #274
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:6d68c475c7aaf7534251182662456a4bf4216dfe[] +
+Release: release:2025-02-24[] (`v0.3.2317`)
+
+== New Features
+
+* pr:19158[] (first contribution) add `expand_glob_reexport` assist.
+* pr:19127[] refactor path lowering and serve a new path diagnostic.
+
+== Fixes
+
+* pr:19151[] (first contribution) use correct working directory for proc macro execution.
+* pr:19179[] disable assists with many results if grouping not supported.
+* pr:19182[] fix associated type lowering in trait bounds.
+* pr:19167[] fix detection of `ref` patterns for path patterns.
+
+== Internal Improvements
+
+* pr:19209[] (first contribution) fix inline parser codegen test.
+* pr:19191[] remove `limit` crate in favor `usize`.
+* pr:19188[] use `ubuntu-latest` (with Rocky Linux 8) workers for releases.
