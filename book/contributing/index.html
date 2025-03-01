@@ -1,0 +1,463 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Contributing - rust-analyzer</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">rust-analyzer</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/tree/master/docs/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/edit/master/docs/book/src/contributing/README.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="contributing-quick-start"><a class="header" href="#contributing-quick-start">Contributing Quick Start</a></h1>
+<p>rust-analyzer is an ordinary Rust project, which is organized as a Cargo workspace, builds on stable and doesn't depend on C libraries.
+So, just</p>
+<pre><code>$ cargo test
+</code></pre>
+<p>should be enough to get you started!</p>
+<p>To learn more about how rust-analyzer works, see <a href="architecture.html">Architecture</a>.
+It also explains the high-level layout of the source code.
+Do skim through that document.</p>
+<p>We also publish rustdoc docs to pages: https://rust-lang.github.io/rust-analyzer/ide/.
+Note though, that the internal documentation is very incomplete.</p>
+<p>Various organizational and process issues are discussed in this document.</p>
+<h1 id="getting-in-touch"><a class="header" href="#getting-in-touch">Getting in Touch</a></h1>
+<p>rust-analyzer is a part of the <a href="https://github.com/rust-lang/compiler-team/tree/6a769c13656c0a6959ebc09e7b1f7c09b86fb9c0/working-groups/rls-2.0">RLS-2.0 working
+group</a>.
+Discussion happens in this Zulip stream:</p>
+<p><a href="https://rust-lang.zulipchat.com/#narrow/stream/185405-t-compiler.2Frust-analyzer">https://rust-lang.zulipchat.com/#narrow/stream/185405-t-compiler.2Frust-analyzer</a></p>
+<ul>
+<li><a href="#issue-labels">Issue Labels</a></li>
+<li><a href="#code-style--review-process">Code Style &amp; Review Process</a></li>
+<li><a href="#cookbook">Cookbook</a>
+<ul>
+<li><a href="#ci">CI</a></li>
+<li><a href="#launching-rust-analyzer">Launching rust-analyzer</a></li>
+<li><a href="#typescript-tests">TypeScript Tests</a></li>
+<li><a href="#how-to-">How to ...</a></li>
+<li><a href="#logging">Logging</a></li>
+<li><a href="#profiling">Profiling</a></li>
+<li><a href="#release-process">Release Process</a></li>
+<li><a href="#permissions">Permissions</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="issue-labels"><a class="header" href="#issue-labels">Issue Labels</a></h1>
+<ul>
+<li><a href="https://github.com/rust-lang/rust-analyzer/labels/good%20first%20issue">good-first-issue</a>
+are good issues to get into the project.</li>
+<li><a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aopen+is%3Aissue+label%3AE-has-instructions">E-has-instructions</a>
+issues have links to the code in question and tests.</li>
+<li><a href="https://github.com/rust-lang/rust-analyzer/issues?q=is:issue+is:open+label:%22Broken+Window%22">Broken Window</a>
+are issues which are not necessarily critical by themselves, but which should be fixed ASAP regardless, to avoid accumulation of technical debt.</li>
+<li><a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aopen+is%3Aissue+label%3AE-easy">E-easy</a>,
+<a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aopen+is%3Aissue+label%3AE-medium">E-medium</a>,
+<a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aopen+is%3Aissue+label%3AE-hard">E-hard</a>,
+<a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aopen+is%3Aissue+label%3AE-unknown">E-unknown</a>,
+labels are <em>estimates</em> for how hard would be to write a fix. Each triaged issue should have one of these labels.</li>
+<li><a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aopen+is%3Aissue+label%3AS-actionable">S-actionable</a> and
+<a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aopen+is%3Aissue+label%3AS-unactionable">S-unactionable</a>
+specify if there are concrete steps to resolve or advance an issue. Roughly, actionable issues need only work to be fixed,
+while unactionable ones are blocked either on user feedback (providing a reproducible example), or on larger architectural
+work or decisions. This classification is descriptive, not prescriptive, and might be wrong: Any unactionable issue might have a simple fix that we missed.
+Each triaged issue should have one of these labels.</li>
+<li><a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aopen+is%3Aissue+label%3Afun">fun</a>
+is for cool, but probably hard stuff.</li>
+<li><a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aissue%20state%3Aopen%20label%3AC-Architecture">C-Architecture</a>
+is for moderate/large scale architecture discussion.
+Also a kind of fun.
+These issues should generally include a link to a Zulip discussion thread.</li>
+</ul>
+<h1 id="code-style--review-process"><a class="header" href="#code-style--review-process">Code Style &amp; Review Process</a></h1>
+<p>See the <a href="style.html">Style Guide</a>.</p>
+<h1 id="cookbook"><a class="header" href="#cookbook">Cookbook</a></h1>
+<h2 id="ci"><a class="header" href="#ci">CI</a></h2>
+<p>We use GitHub Actions for CI.
+Most of the things, including formatting, are checked by <code>cargo test</code>.
+If <code>cargo test</code> passes locally, that's a good sign that CI will be green as well.
+The only exception is that some long-running tests are skipped locally by default.
+Use <code>env RUN_SLOW_TESTS=1 cargo test</code> to run the full suite.</p>
+<p>We use bors to enforce the <a href="https://graydon2.dreamwidth.org/1597.html">not rocket science</a> rule.</p>
+<h2 id="launching-rust-analyzer"><a class="header" href="#launching-rust-analyzer">Launching rust-analyzer</a></h2>
+<p>Debugging the language server can be tricky.
+LSP is rather chatty, so driving it from the command line is not really feasible, driving it via VS Code requires interacting with two processes.</p>
+<p>For this reason, the best way to see how rust-analyzer works is to <strong>find a relevant test and execute it</strong>.
+VS Code &amp; Emacs include an action for running a single test.</p>
+<p>Launching a VS Code instance with a locally built language server is also possible.
+There's <strong>"Run Extension (Debug Build)"</strong> launch configuration for this in VS Code.</p>
+<p>In general, I use one of the following workflows for fixing bugs and implementing features:</p>
+<p>If the problem concerns only internal parts of rust-analyzer (i.e. I don't need to touch the <code>rust-analyzer</code> crate or TypeScript code), there is a unit-test for it.
+So, I use <strong>rust-analyzer: Run</strong> action in VS Code to run this single test, and then just do printf-driven development/debugging.
+As a sanity check after I'm done, I use <code>cargo xtask install --server</code> and <strong>Reload Window</strong> action in VS Code to verify that the thing works as I expect.</p>
+<p>If the problem concerns only the VS Code extension, I use <strong>Run Installed Extension</strong> launch configuration from <code>launch.json</code>.
+Notably, this uses the usual <code>rust-analyzer</code> binary from <code>PATH</code>.
+For this, it is important to have the following in your <code>settings.json</code> file:</p>
+<pre><code class="language-json">{
+    "rust-analyzer.server.path": "rust-analyzer"
+}
+</code></pre>
+<p>After I am done with the fix, I use <code>cargo xtask install --client</code> to try the new extension for real.</p>
+<p>If I need to fix something in the <code>rust-analyzer</code> crate, I feel sad because it's on the boundary between the two processes, and working there is slow.
+I usually just <code>cargo xtask install --server</code> and poke changes from my live environment.
+Note that this uses <code>--release</code>, which is usually faster overall, because loading stdlib into debug version of rust-analyzer takes a lot of time.
+To speed things up, sometimes I open a temporary hello-world project which has <code>"rust-analyzer.cargo.sysroot": null</code> in <code>.code/settings.json</code>.
+This flag causes rust-analyzer to skip loading the sysroot, which greatly reduces the amount of things rust-analyzer needs to do, and makes printf's more useful.
+Note that you should only use the <code>eprint!</code> family of macros for debugging: stdout is used for LSP communication, and <code>print!</code> would break it.</p>
+<p>If I need to fix something simultaneously in the server and in the client, I feel even more sad.
+I don't have a specific workflow for this case.</p>
+<p>Additionally, I use <code>cargo run --release -p rust-analyzer -- analysis-stats path/to/some/rust/crate</code> to run a batch analysis.
+This is primarily useful for performance optimizations, or for bug minimization.</p>
+<h2 id="typescript-tests"><a class="header" href="#typescript-tests">TypeScript Tests</a></h2>
+<p>If you change files under <code>editors/code</code> and would like to run the tests and linter, install npm and run:</p>
+<pre><code class="language-bash">cd editors/code
+npm ci
+npm run lint
+</code></pre>
+<h2 id="how-to-"><a class="header" href="#how-to-">How to ...</a></h2>
+<ul>
+<li>... add an assist? <a href="https://github.com/rust-lang/rust-analyzer/pull/7535">#7535</a></li>
+<li>... add a new protocol extension? <a href="https://github.com/rust-lang/rust-analyzer/pull/4569">#4569</a></li>
+<li>... add a new configuration option? <a href="https://github.com/rust-lang/rust-analyzer/pull/7451">#7451</a></li>
+<li>... add a new completion? <a href="https://github.com/rust-lang/rust-analyzer/pull/6964">#6964</a></li>
+<li>... allow new syntax in the parser? <a href="https://github.com/rust-lang/rust-analyzer/pull/7338">#7338</a></li>
+</ul>
+<h2 id="logging"><a class="header" href="#logging">Logging</a></h2>
+<p>Logging is done by both rust-analyzer and VS Code, so it might be tricky to figure out where logs go.</p>
+<p>Inside rust-analyzer, we use the <a href="https://docs.rs/tracing/"><code>tracing</code></a> crate for logging,
+and <a href="https://docs.rs/tracing-subscriber"><code>tracing-subscriber</code></a> for logging frontend.
+By default, log goes to stderr, but the stderr itself is processed by VS Code.
+<code>--log-file &lt;PATH&gt;</code> CLI argument allows logging to file.
+Setting the <code>RA_LOG_FILE=&lt;PATH&gt;</code> environment variable will also log to file, it will also override <code>--log-file</code>.</p>
+<p>To see stderr in the running VS Code instance, go to the "Output" tab of the panel and select <code>rust-analyzer</code>.
+This shows <code>eprintln!</code> as well.
+Note that <code>stdout</code> is used for the actual protocol, so <code>println!</code> will break things.</p>
+<p>To log all communication between the server and the client, there are two choices:</p>
+<ul>
+<li>
+<p>You can log on the server side, by running something like</p>
+<pre><code>env RA_LOG=lsp_server=debug code .
+</code></pre>
+</li>
+<li>
+<p>You can log on the client side, by the <code>rust-analyzer: Toggle LSP Logs</code> command or enabling <code>"rust-analyzer.trace.server": "verbose"</code> workspace setting.
+These logs are shown in a separate tab in the output and could be used with LSP inspector.
+Kudos to <a href="https://github.com/DJMcNab">@DJMcNab</a> for setting this awesome infra up!</p>
+</li>
+</ul>
+<p>There are also several VS Code commands which might be of interest:</p>
+<ul>
+<li>
+<p><code>rust-analyzer: Status</code> shows some memory-usage statistics.</p>
+</li>
+<li>
+<p><code>rust-analyzer: View Hir</code> shows the HIR expressions within the function containing the cursor.</p>
+</li>
+<li>
+<p>If <code>rust-analyzer.showSyntaxTree</code> is enabled in settings, <code>Rust Syntax Tree: Focus on Rust Syntax Tree View</code> shows the syntax tree of the current file.</p>
+<p>You can click on nodes in the rust editor to go to the corresponding syntax node.</p>
+<p>You can click on <code>Reveal Syntax Element</code> next to a syntax node to go to the corresponding rust code and highlight the proper text range.</p>
+<p>If you trigger Go to Definition in the inspected Rust source file,
+the syntax tree view should scroll to and select the
+appropriate syntax node token.</p>
+<p>You can click on <code>Copy</code> next to a syntax node to copy a text representation of the node.</p>
+<p><img src="https://github.com/user-attachments/assets/2d20ae87-0abf-495f-bee8-54aa2494a00d" alt="demo" /></p>
+</li>
+</ul>
+<h2 id="profiling"><a class="header" href="#profiling">Profiling</a></h2>
+<p>We have a built-in hierarchical profiler, you can enable it by using <code>RA_PROFILE</code> env-var:</p>
+<pre><code>RA_PROFILE=*             // dump everything
+RA_PROFILE=foo|bar|baz   // enabled only selected entries
+RA_PROFILE=*@3&gt;10        // dump everything, up to depth 3, if it takes more than 10 ms
+</code></pre>
+<p>Some rust-analyzer contributors have <code>export RA_PROFILE='*&gt;10'</code> in my shell profile.</p>
+<p>For machine-readable JSON output, we have the <code>RA_PROFILE_JSON</code> env variable. We support
+filtering only by span name:</p>
+<pre><code>RA_PROFILE=* // dump everything
+RA_PROFILE_JSON="vfs_load|parallel_prime_caches|discover_command" // dump selected spans
+</code></pre>
+<p>We also have a "counting" profiler which counts number of instances of popular structs.
+It is enabled by <code>RA_COUNT=1</code>.</p>
+<p>To measure time for from-scratch analysis, use something like this:</p>
+<pre><code>$ cargo run --release -p rust-analyzer -- analysis-stats ../chalk/
+</code></pre>
+<p>For measuring time of incremental analysis, use either of these:</p>
+<pre><code>$ cargo run --release -p rust-analyzer -- analysis-bench ../chalk/ --highlight ../chalk/chalk-engine/src/logic.rs
+$ cargo run --release -p rust-analyzer -- analysis-bench ../chalk/ --complete ../chalk/chalk-engine/src/logic.rs:94:0
+</code></pre>
+<p>Look for <code>fn benchmark_xxx</code> tests for a quick way to reproduce performance problems.</p>
+<h2 id="release-process"><a class="header" href="#release-process">Release Process</a></h2>
+<p>Release process is handled by <code>release</code>, <code>dist</code>, <code>publish-release-notes</code> and <code>promote</code> xtasks, <code>release</code> being the main one.</p>
+<p><code>release</code> assumes that you have checkouts of <code>rust-analyzer</code>, <code>rust-analyzer.github.io</code>, and <code>rust-lang/rust</code> in the same directory:</p>
+<pre><code>./rust-analyzer
+./rust-analyzer.github.io
+./rust-rust-analyzer  # Note the name!
+</code></pre>
+<p>The remote for <code>rust-analyzer</code> must be called <code>upstream</code> (I use <code>origin</code> to point to my fork).
+In addition, for <code>xtask promote</code> (see below), <code>rust-rust-analyzer</code> must have a <code>rust-analyzer</code> remote pointing to this repository on GitHub.</p>
+<p><code>release</code> calls the GitHub API calls to scrape pull request comments and categorize them in the changelog.
+This step uses the <code>curl</code> and <code>jq</code> applications, which need to be available in <code>PATH</code>.
+Finally, you need to obtain a GitHub personal access token and set the <code>GITHUB_TOKEN</code> environment variable.</p>
+<p>Release steps:</p>
+<ol>
+<li>Set the <code>GITHUB_TOKEN</code> environment variable.</li>
+<li>Inside rust-analyzer, run <code>cargo xtask release</code>. This will:
+<ul>
+<li>checkout the <code>release</code> branch</li>
+<li>reset it to <code>upstream/nightly</code></li>
+<li>push it to <code>upstream</code>. This triggers GitHub Actions which:
+<ul>
+<li>runs <code>cargo xtask dist</code> to package binaries and VS Code extension</li>
+<li>makes a GitHub release</li>
+<li>publishes the VS Code extension to the marketplace</li>
+</ul>
+</li>
+<li>call the GitHub API for PR details</li>
+<li>create a new changelog in <code>rust-analyzer.github.io</code></li>
+</ul>
+</li>
+<li>While the release is in progress, fill in the changelog.</li>
+<li>Commit &amp; push the changelog.</li>
+<li>Run <code>cargo xtask publish-release-notes &lt;CHANGELOG&gt;</code> -- this will convert the changelog entry in AsciiDoc to Markdown and update the body of GitHub Releases entry.</li>
+<li>Tweet.</li>
+<li>Make a new branch and run <code>cargo xtask rustc-pull</code>, open a PR, and merge it.
+This will pull any changes from <code>rust-lang/rust</code> into <code>rust-analyzer</code>.</li>
+<li>Switch to <code>master</code>, pull, then run <code>cargo xtask rustc-push --rust-path ../rust-rust-analyzer --rust-fork matklad/rust</code>.
+Replace <code>matklad/rust</code> with your own fork of <code>rust-lang/rust</code>.
+You can use the token to authenticate when you get prompted for a password, since <code>josh</code> will push over HTTPS, not SSH.
+This will push the <code>rust-analyzer</code> changes to your fork.
+You can then open a PR against <code>rust-lang/rust</code>.</li>
+</ol>
+<p>Note: besides the <code>rust-rust-analyzer</code> clone, the Josh cache (stored under <code>~/.cache/rust-analyzer-josh</code>) will contain a bare clone of <code>rust-lang/rust</code>.
+This currently takes about 3.5 GB.</p>
+<p>This <a href="https://hackmd.io/7pOuxnkdQDaL1Y1FQr65xg">HackMD</a> has details about how <code>josh</code> syncs work.</p>
+<p>If the GitHub Actions release fails because of a transient problem like a timeout, you can re-run the job from the Actions console.
+If it fails because of something that needs to be fixed, remove the release tag (if needed), fix the problem, then start over.
+Make sure to remove the new changelog post created when running <code>cargo xtask release</code> a second time.</p>
+<p>We release "nightly" every night automatically and promote the latest nightly to "stable" manually, every week.</p>
+<p>We don't do "patch" releases, unless something truly egregious comes up.
+To do a patch release, cherry-pick the fix on top of the current <code>release</code> branch and push the branch.
+There's no need to write a changelog for a patch release, it's OK to include the notes about the fix into the next weekly one.
+Note: we tag releases by dates, releasing a patch release on the same day should work (by overwriting a tag), but I am not 100% sure.</p>
+<h2 id="permissions"><a class="header" href="#permissions">Permissions</a></h2>
+<p>There are two sets of people with extra permissions:</p>
+<ul>
+<li>The <a href="https://github.com/rust-lang">rust-lang</a> team <a href="https://github.com/rust-lang/team/blob/master/teams/rust-analyzer.toml">t-rust-analyzer</a>.
+This team has write access to the repository and merge queue permissions (note the repo itself is managed by infra admins).
+It's ok to self-approve if you think you know what you are doing!
+Feel free to request a review or assign any PR to a reviewer with the relevant expertise to bring the work to their attention.
+Don't feel pressured to review assigned PRs though.
+If you don't feel like reviewing for whatever reason, someone else will pick the review up (but please speak up if you don't feel like it)!</li>
+<li>The <a href="https://github.com/rust-lang">rust-lang</a> team <a href="%5Bhttps://github.com/orgs/rust-analyzer/teams/triage%5D(https://github.com/rust-lang/team/blob/master/teams/rust-analyzer-contributors.toml)">t-rust-analyzer-contributors</a>.
+This team has general triaging permissions allowing to label, close and re-open issues.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../editor_features.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../contributing/architecture.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../editor_features.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../contributing/architecture.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+        <script>
+            window.playground_line_numbers = true;
+        </script>
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace.js"></script>
+        <script src="../editor.js"></script>
+        <script src="../mode-rust.js"></script>
+        <script src="../theme-dawn.js"></script>
+        <script src="../theme-tomorrow_night.js"></script>
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
