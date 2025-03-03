@@ -4,7 +4,7 @@
 :page-layout: post
 
 Commit: commit:6d68c475c7aaf7534251182662456a4bf4216dfe[] +
-Release: release:2025-02-24[] (`v0.3.2317`)
+Release: release:2025-02-24[] (`v0.3.2319`)
 
 == New Features
 

@@ -13,5 +13,5 @@ Release: release:2024-11-18[] (`v0.3.2188`)
 
 == Internal Improvements
 
-* pr:18495[] (first contribution) migrate `reorder_fields` assist to use `SyntaxFactory`.
+* pr:18495[] (first contribution) migrate `reorder_fields` assist to use `SyntaxEditor`.
 * pr:18482[] add public `direct_supertraits` and `all_supertraits` accessors to `hir::Trait`.

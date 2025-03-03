@@ -1,0 +1,44 @@
+= Changelog #275
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:81ff38f53b9a14ac608feb30b21ed42a41d016c6[] +
+Release: release:2025-03-03[] (`v0.3.2328`)
+
+== Announcement
+
+The x86-64, AArch64 and ARM Linux binaries now target GLIBC 2.28, and will keep doing so for the foreseeable future, which might be until June 2029.
+
+== New Features
+
+* pr:18987[] calculate drop glue and show it on hover.
+* pr:19259[] add "flip or-pattern" assist.
+* pr:19230[] set up Zig on CI and start using it in rust-analyzer.
+
+== Fixes
+
+* pr:19197[] (first contribution) update `insta` inline snapshot using `cargo insta` when clicking 'Update Test' runnable.
+* pr:19246[] (first contribution) add anchor for intra-doc links to associated items.
+* pr:19266[] (first contribution) add `identifier` to pull diagnostic LSP capabilities.
+* pr:19211[] include private items in completions for local crates.
+* pr:19223[] support target features implications in `target_feature` 1.1.
+* pr:19204[] allow `package/feature` format for features.
+* pr:19241[] map crate ids for proc macros in sysroot crate graph construction.
+* pr:19249[] avoid unnecessary parantheses in prefix adjustment hints.
+* pr:19250[] use precedence calculation for parentheses in `inline_local_variable`.
+* pr:19221[] add tab stop to impl body in `generate_trait_impl`.
+
+== Internal Improvements
+
+* pr:19239[] (first contribution) configure out performance counters on `ohos` to fix compilation.
+* pr:19096[] allow rust-project.json to specify sysroot workspace.
+* pr:19225[] migrate `remove_mut`, `remove_parantheses` and `remove_unused_param` to `SyntaxEditor`.
+* pr:19171[] migrate `apply_demorgan` to `SyntaxEditor`.
+* pr:19253[] migrate `convert_bool_then` to `SyntaxEditor`.
+* pr:19251[] remove syntax editing from parenthesis computation.
+* pr:19257[] clean up syntax highlighting.
+* pr:19219[] vendor `always-assert` into `stdx`.
+* pr:19237[] enable doctests.
+* pr:19218[] make release builds from source non-incremental.
+* pr:19194[] bump VS Code extension deps.

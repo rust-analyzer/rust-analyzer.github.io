@@ -23,7 +23,7 @@ Release: release:2024-12-30[] (`v0.3.2237`)
 == Internal Improvements
 
 * pr:18774[] implement parameter variance inference.
-* pr:18718[] standardize iterator passing in `SyntaxFactory`.
+* pr:18718[] standardize iterator passing in `SyntaxEditor`.
 * pr:18760[], pr:18762[] work around leaking `salsa` cycles.
 * pr:18761[] swallow `config value is not set` Cargo error.
 * pr:18754[] clean up target fetching for Cargo metadata.

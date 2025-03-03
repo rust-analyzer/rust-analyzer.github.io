@@ -43,7 +43,7 @@ Release: release:2024-12-09[] (`v0.3.2212`)
 
 * pr:18561[] (first contribution) add macro expansion test for raw variable names.
 * pr:18595[] remove references to `platform-intrinsic` ABI.
-* pr:18483[] migrate `introduce_named_generic` assist to `SyntaxFactory`.
-* pr:18538[] migrate `sort_items` assist to `SyntaxFactory`.
+* pr:18483[] migrate `introduce_named_generic` assist to `SyntaxEditor`.
+* pr:18538[] migrate `sort_items` assist to `SyntaxEditor`.
 * pr:18551[] migrate `add_turbo_fish` assist to `SyntaxFditor`.
 * pr:18575[] migrate `flip` assists to `SyntaxEditor`.
