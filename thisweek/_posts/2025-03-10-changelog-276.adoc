@@ -1,0 +1,31 @@
+= Changelog #276
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:5e7dd31c80d5821113ed9c9aa1616a73a63b49a1[] +
+Release: release:2025-03-10[] (`v0.3.2337`)
+
+== New Features
+
+* pr:19243[] allow unsetting default ``#[cfg]``s.
+* pr:19265[] add diagnostic for dangling `dyn` and `impl`.
+
+== Fixes
+
+* pr:19226[] (first contribution) improve completions that return a reference.
+* pr:19279[] (first contribution) add `letm` and improve `let` keyword completion.
+* pr:19308[] bring back support for Rust 1.78 projects.
+* pr:19261[] support tuple structs in `expand_rest_pattern`.
+* pr:19324[] fix adding of brackets in "Inline variable".
+* pr:19297[] fix completion relevance check.
+* pr:19290[] warn when `cargo metadata` fails.
+* pr:19292[] handle modifiers in punctuation highlighting.
+* pr:19274[] don't highlight unsafe definitions as `unsafe`.
+* pr:19295[] make "rust-analyzer: Run" available in manifest file.
+
+== Internal Improvements
+
+* pr:19288[] (first contribution) use `size_of` from the prelude.
+* pr:19244[], pr:19275[] warn when the active toolchain is too old.
+* pr:19286[] twiddle with the `rustup` invocation on CI.
