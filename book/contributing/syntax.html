@@ -1,0 +1,632 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Syntax - rust-analyzer</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">rust-analyzer</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/tree/master/docs/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/edit/master/docs/book/src/contributing/syntax.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="syntax-in-rust-analyzer"><a class="header" href="#syntax-in-rust-analyzer">Syntax in rust-analyzer</a></h1>
+<h2 id="about-the-guide"><a class="header" href="#about-the-guide">About the guide</a></h2>
+<p>This guide describes the current state of syntax trees and parsing in rust-analyzer as of 2020-01-09 (<a href="https://github.com/rust-lang/rust-analyzer/tree/cf5bdf464cad7ceb9a67e07985a3f4d3799ec0b6">link to commit</a>).</p>
+<h2 id="source-code"><a class="header" href="#source-code">Source Code</a></h2>
+<p>The things described are implemented in three places</p>
+<ul>
+<li><a href="https://github.com/rust-analyzer/rowan/tree/v0.15.10">rowan</a> -- a generic library for rowan syntax trees.</li>
+<li><a href="https://github.com/rust-lang/rust-analyzer/tree/36a70b7435c48837018c71576d7bb4e8f763f501/crates/syntax">syntax</a> crate inside rust-analyzer which wraps <code>rowan</code> into rust-analyzer specific API.
+Nothing in rust-analyzer except this crate knows about <code>rowan</code>.</li>
+<li><a href="https://github.com/rust-lang/rust-analyzer/tree/36a70b7435c48837018c71576d7bb4e8f763f501/crates/parser">parser</a> crate parses input tokens into a <code>syntax</code> tree</li>
+</ul>
+<h2 id="design-goals"><a class="header" href="#design-goals">Design Goals</a></h2>
+<ul>
+<li>Syntax trees are lossless, or full fidelity. All comments and whitespace get preserved.</li>
+<li>Syntax trees are semantic-less. They describe <em>strictly</em> the structure of a sequence of characters, they don't have hygiene, name resolution or type information attached.</li>
+<li>Syntax trees are simple value types. It is possible to create trees for a syntax without any external context.</li>
+<li>Syntax trees have intuitive traversal API (parent, children, siblings, etc).</li>
+<li>Parsing is lossless (even if the input is invalid, the tree produced by the parser represents it exactly).</li>
+<li>Parsing is resilient (even if the input is invalid, parser tries to see as much syntax tree fragments in the input as it can).</li>
+<li>Performance is important, it's OK to use <code>unsafe</code> if it means better memory/cpu usage.</li>
+<li>Keep the parser and the syntax tree isolated from each other, such that they can vary independently.</li>
+</ul>
+<h2 id="trees"><a class="header" href="#trees">Trees</a></h2>
+<h3 id="overview"><a class="header" href="#overview">Overview</a></h3>
+<p>The syntax tree consists of three layers:</p>
+<ul>
+<li>GreenNodes</li>
+<li>SyntaxNodes (aka RedNode)</li>
+<li>AST</li>
+</ul>
+<p>Of these, only GreenNodes store the actual data, the other two layers are (non-trivial) views into green tree.
+Red-green terminology comes from Roslyn (<a href="https://ericlippert.com/2012/06/08/red-green-trees/">link</a>) and gives the name to the <code>rowan</code> library. Green and syntax nodes are defined in rowan, ast is defined in rust-analyzer.</p>
+<p>Syntax trees are a semi-transient data structure.
+In general, frontend does not keep syntax trees for all files in memory.
+Instead, it <em>lowers</em> syntax trees to more compact and rigid representation, which is not full-fidelity, but which can be mapped back to a syntax tree if so desired.</p>
+<h3 id="greennode"><a class="header" href="#greennode">GreenNode</a></h3>
+<p>GreenNode is a purely-functional tree with arbitrary arity. Conceptually, it is equivalent to the following run of the mill struct:</p>
+<pre><code class="language-rust">#[derive(PartialEq, Eq, Clone, Copy)]
+struct SyntaxKind(u16);
+
+#[derive(PartialEq, Eq, Clone)]
+struct Node {
+    kind: SyntaxKind,
+    text_len: usize,
+    children: Vec&lt;Arc&lt;Either&lt;Node, Token&gt;&gt;&gt;,
+}
+
+#[derive(PartialEq, Eq, Clone)]
+struct Token {
+    kind: SyntaxKind,
+    text: String,
+}</code></pre>
+<p>All the difference between the above sketch and the real implementation are strictly due to optimizations.</p>
+<p>Points of note:</p>
+<ul>
+<li>The tree is untyped. Each node has a "type tag", <code>SyntaxKind</code>.</li>
+<li>Interior and leaf nodes are distinguished on the type level.</li>
+<li>Trivia and non-trivia tokens are not distinguished on the type level.</li>
+<li>Each token carries its full text.</li>
+<li>The original text can be recovered by concatenating the texts of all tokens in order.</li>
+<li>Accessing a child of particular type (for example, parameter list of a function) generally involves linearly traversing the children, looking for a specific <code>kind</code>.</li>
+<li>Modifying the tree is roughly <code>O(depth)</code>.
+We don't make special efforts to guarantee that the depth is not linear, but, in practice, syntax trees are branchy and shallow.</li>
+<li>If mandatory (grammar wise) node is missing from the input, it's just missing from the tree.</li>
+<li>If an extra erroneous input is present, it is wrapped into a node with <code>ERROR</code> kind, and treated just like any other node.</li>
+<li>Parser errors are not a part of syntax tree.</li>
+</ul>
+<p>An input like <code>fn f() { 90 + 2 }</code> might be parsed as</p>
+<pre><code>FN@0..17
+  FN_KW@0..2 "fn"
+  WHITESPACE@2..3 " "
+  NAME@3..4
+    IDENT@3..4 "f"
+  PARAM_LIST@4..6
+    L_PAREN@4..5 "("
+    R_PAREN@5..6 ")"
+  WHITESPACE@6..7 " "
+  BLOCK_EXPR@7..17
+    L_CURLY@7..8 "{"
+    WHITESPACE@8..9 " "
+    BIN_EXPR@9..15
+      LITERAL@9..11
+        INT_NUMBER@9..11 "90"
+      WHITESPACE@11..12 " "
+      PLUS@12..13 "+"
+      WHITESPACE@13..14 " "
+      LITERAL@14..15
+        INT_NUMBER@14..15 "2"
+    WHITESPACE@15..16 " "
+    R_CURLY@16..17 "}"
+</code></pre>
+<h4 id="optimizations"><a class="header" href="#optimizations">Optimizations</a></h4>
+<p>(significant amount of implementation work here was done by <a href="https://github.com/cad97">CAD97</a>).</p>
+<p>To reduce the amount of allocations, the GreenNode is a <a href="https://doc.rust-lang.org/reference/dynamically-sized-types.html">DST</a>, which uses a single allocation for header and children. Thus, it is only usable behind a pointer.</p>
+<pre><code>*-----------+------+----------+------------+--------+--------+-----+--------*
+| ref_count | kind | text_len | n_children | child1 | child2 | ... | childn |
+*-----------+------+----------+------------+--------+--------+-----+--------*
+</code></pre>
+<p>To more compactly store the children, we box <em>both</em> interior nodes and tokens, and represent
+<code>Either&lt;Arc&lt;Node&gt;, Arc&lt;Token&gt;&gt;</code> as a single pointer with a tag in the last bit.</p>
+<p>To avoid allocating EVERY SINGLE TOKEN on the heap, syntax trees use interning.
+Because the tree is fully immutable, it's valid to structurally share subtrees.
+For example, in <code>1 + 1</code>, there will be a <em>single</em> token for <code>1</code> with ref count 2; the same goes for the <code> </code> whitespace token.
+Interior nodes are shared as well (for example in <code>(1 + 1) * (1 + 1)</code>).</p>
+<p>Note that, the result of the interning is an <code>Arc&lt;Node&gt;</code>.
+That is, it's not an index into interning table, so you don't have to have the table around to do anything with the tree.
+Each tree is fully self-contained (although different trees might share parts).
+Currently, the interner is created per-file, but it will be easy to use a per-thread or per-some-context one.</p>
+<p>We use a <code>TextSize</code>, a newtyped <code>u32</code>, to store the length of the text.</p>
+<p>We currently use <code>SmolStr</code>, a small object optimized string to store text.
+This was mostly relevant <em>before</em> we implemented tree interning, to avoid allocating common keywords and identifiers. We should switch to storing text data alongside the interned tokens.</p>
+<h4 id="alternative-designs"><a class="header" href="#alternative-designs">Alternative designs</a></h4>
+<h5 id="dealing-with-trivia"><a class="header" href="#dealing-with-trivia">Dealing with trivia</a></h5>
+<p>In the above model, whitespace is not treated specially.
+Another alternative (used by swift and roslyn) is to explicitly divide the set of tokens into trivia and non-trivia tokens, and represent non-trivia tokens as</p>
+<pre><code class="language-rust">struct Token {
+    kind: NonTriviaTokenKind,
+    text: String,
+    leading_trivia: Vec&lt;TriviaToken&gt;,
+    trailing_trivia: Vec&lt;TriviaToken&gt;,
+}</code></pre>
+<p>The tree then contains only non-trivia tokens.</p>
+<p>Another approach (from Dart) is to, in addition to a syntax tree, link all the tokens into a bidirectional link list.
+That way, the tree again contains only non-trivia tokens.</p>
+<p>Explicit trivia nodes, like in <code>rowan</code>, are used by IntelliJ.</p>
+<h5 id="accessing-children"><a class="header" href="#accessing-children">Accessing Children</a></h5>
+<p>As noted before, accessing a specific child in the node requires a linear traversal of the children (though we can skip tokens, because the tag is encoded in the pointer itself).
+It is possible to recover O(1) access with another representation.
+We explicitly store optional and missing (required by the grammar, but not present) nodes.
+That is, we use <code>Option&lt;Node&gt;</code> for children.
+We also remove trivia tokens from the tree.
+This way, each child kind generally occupies a fixed position in a parent, and we can use index access to fetch it.
+The cost is that we now need to allocate space for all not-present optional nodes.
+So, <code>fn foo() {}</code> will have slots for visibility, unsafeness, attributes, abi and return type.</p>
+<p>IntelliJ uses linear traversal.
+Roslyn and Swift do <code>O(1)</code> access.</p>
+<h5 id="mutable-trees"><a class="header" href="#mutable-trees">Mutable Trees</a></h5>
+<p>IntelliJ uses mutable trees.
+Overall, it creates a lot of additional complexity.
+However, the API for <em>editing</em> syntax trees is nice.</p>
+<p>For example the assist to move generic bounds to where clause has this code:</p>
+<pre><code class="language-kotlin"> for typeBound in typeBounds {
+     typeBound.typeParamBounds?.delete()
+}
+</code></pre>
+<p>Modeling this with immutable trees is possible, but annoying.</p>
+<h3 id="syntax-nodes"><a class="header" href="#syntax-nodes">Syntax Nodes</a></h3>
+<p>A function green tree is not super-convenient to use.
+The biggest problem is accessing parents (there are no parent pointers!).
+But there are also "identify" issues.
+Let's say you want to write a code which builds a list of expressions in a file: <code>fn collect_expressions(file: GreenNode) -&gt; HashSet&lt;GreenNode&gt;</code>.
+For the input like</p>
+<pre><code class="language-rust">fn main() {
+    let x = 90i8;
+    let x = x + 2;
+    let x = 90i64;
+    let x = x + 2;
+}</code></pre>
+<p>both copies of the <code>x + 2</code> expression are representing by equal (and, with interning in mind, actually the same) green nodes.
+Green trees just can't differentiate between the two.</p>
+<p><code>SyntaxNode</code> adds parent pointers and identify semantics to green nodes.
+They can be called cursors or <a href="https://en.wikipedia.org/wiki/Zipper_(data_structure)">zippers</a> (fun fact: zipper is a derivative (as in ′) of a data structure).</p>
+<p>Conceptually, a <code>SyntaxNode</code> looks like this:</p>
+<pre><code class="language-rust">type SyntaxNode = Arc&lt;SyntaxData&gt;;
+
+struct SyntaxData {
+    offset: usize,
+    parent: Option&lt;SyntaxNode&gt;,
+    green: Arc&lt;GreenNode&gt;,
+}
+
+impl SyntaxNode {
+    fn new_root(root: Arc&lt;GreenNode&gt;) -&gt; SyntaxNode {
+        Arc::new(SyntaxData {
+            offset: 0,
+            parent: None,
+            green: root,
+        })
+    }
+    fn parent(&amp;self) -&gt; Option&lt;SyntaxNode&gt; {
+        self.parent.clone()
+    }
+    fn children(&amp;self) -&gt; impl Iterator&lt;Item = SyntaxNode&gt; {
+        let mut offset = self.offset;
+        self.green.children().map(|green_child| {
+            let child_offset = offset;
+            offset += green_child.text_len;
+            Arc::new(SyntaxData {
+                offset: child_offset,
+                parent: Some(Arc::clone(self)),
+                green: Arc::clone(green_child),
+            })
+        })
+    }
+}
+
+impl PartialEq for SyntaxNode {
+    fn eq(&amp;self, other: &amp;SyntaxNode) -&gt; bool {
+        self.offset == other.offset
+            &amp;&amp; Arc::ptr_eq(&amp;self.green, &amp;other.green)
+    }
+}</code></pre>
+<p>Points of note:</p>
+<ul>
+<li>SyntaxNode remembers its parent node (and, transitively, the path to the root of the tree)</li>
+<li>SyntaxNode knows its <em>absolute</em> text offset in the whole file</li>
+<li>Equality is based on identity. Comparing nodes from different trees does not make sense.</li>
+</ul>
+<h4 id="optimization"><a class="header" href="#optimization">Optimization</a></h4>
+<p>The reality is different though :-)
+Traversal of trees is a common operation, and it makes sense to optimize it.
+In particular, the above code allocates and does atomic operations during a traversal.</p>
+<p>To get rid of atomics, <code>rowan</code> uses non thread-safe <code>Rc</code>.
+This is OK because trees traversals mostly (always, in case of rust-analyzer) run on a single thread. If you need to send a <code>SyntaxNode</code> to another thread, you can send a pair of <strong>root</strong><code>GreenNode</code> (which is thread safe) and a <code>Range&lt;usize&gt;</code>.
+The other thread can restore the <code>SyntaxNode</code> by traversing from the root green node and looking for a node with specified range.
+You can also use the similar trick to store a <code>SyntaxNode</code>.
+That is, a data structure that holds a <code>(GreenNode, Range&lt;usize&gt;)</code> will be <code>Sync</code>.
+However, rust-analyzer goes even further.
+It treats trees as semi-transient and instead of storing a <code>GreenNode</code>, it generally stores just the id of the file from which the tree originated: <code>(FileId, Range&lt;usize&gt;)</code>.
+The <code>SyntaxNode</code> is the restored by reparsing the file and traversing it from root.
+With this trick, rust-analyzer holds only a small amount of trees in memory at the same time, which reduces memory usage.</p>
+<p>Additionally, only the root <code>SyntaxNode</code> owns an <code>Arc</code> to the (root) <code>GreenNode</code>.
+All other <code>SyntaxNode</code>s point to corresponding <code>GreenNode</code>s with a raw pointer.
+They also point to the parent (and, consequently, to the root) with an owning <code>Rc</code>, so this is sound.
+In other words, one needs <em>one</em> arc bump when initiating a traversal.</p>
+<p>To get rid of allocations, <code>rowan</code> takes advantage of <code>SyntaxNode: !Sync</code> and uses a thread-local free list of <code>SyntaxNode</code>s.
+In a typical traversal, you only directly hold a few <code>SyntaxNode</code>s at a time (and their ancestors indirectly), so a free list proportional to the depth of the tree removes all allocations in a typical case.</p>
+<p>So, while traversal is not exactly incrementing a pointer, it's still pretty cheap: TLS + rc bump!</p>
+<p>Traversal also yields (cheap) owned nodes, which improves ergonomics quite a bit.</p>
+<h4 id="alternative-designs-1"><a class="header" href="#alternative-designs-1">Alternative Designs</a></h4>
+<h5 id="memoized-rednodes"><a class="header" href="#memoized-rednodes">Memoized RedNodes</a></h5>
+<p>C# and Swift follow the design where the red nodes are memoized, which would look roughly like this in Rust:</p>
+<pre><code class="language-rust">type SyntaxNode = Arc&lt;SyntaxData&gt;;
+
+struct SyntaxData {
+    offset: usize,
+    parent: Option&lt;SyntaxNode&gt;,
+    green: Arc&lt;GreenNode&gt;,
+    children: Vec&lt;OnceCell&lt;SyntaxNode&gt;&gt;,
+}</code></pre>
+<p>This allows using true pointer equality for comparison of identities of <code>SyntaxNodes</code>.
+rust-analyzer used to have this design as well, but we've since switched to cursors.
+The main problem with memoizing the red nodes is that it more than doubles the memory requirements for fully realized syntax trees.
+In contrast, cursors generally retain only a path to the root.
+C# combats increased memory usage by using weak references.</p>
+<h3 id="ast"><a class="header" href="#ast">AST</a></h3>
+<p><code>GreenTree</code>s are untyped and homogeneous, because it makes accommodating error nodes, arbitrary whitespace and comments natural, and because it makes possible to write generic tree traversals.
+However, when working with a specific node, like a function definition, one would want a strongly typed API.</p>
+<p>This is what is provided by the AST layer. AST nodes are transparent wrappers over untyped syntax nodes:</p>
+<pre><code class="language-rust">pub trait AstNode {
+    fn cast(syntax: SyntaxNode) -&gt; Option&lt;Self&gt;
+    where
+        Self: Sized;
+
+    fn syntax(&amp;self) -&gt; &amp;SyntaxNode;
+}</code></pre>
+<p>Concrete nodes are generated (there are 117 of them), and look roughly like this:</p>
+<pre><code class="language-rust">#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub struct FnDef {
+    syntax: SyntaxNode,
+}
+
+impl AstNode for FnDef {
+    fn cast(syntax: SyntaxNode) -&gt; Option&lt;Self&gt; {
+        match kind {
+            FN =&gt; Some(FnDef { syntax }),
+            _ =&gt; None,
+        }
+    }
+    fn syntax(&amp;self) -&gt; &amp;SyntaxNode {
+        &amp;self.syntax
+    }
+}
+
+impl FnDef {
+    pub fn param_list(&amp;self) -&gt; Option&lt;ParamList&gt; {
+        self.syntax.children().find_map(ParamList::cast)
+    }
+    pub fn ret_type(&amp;self) -&gt; Option&lt;RetType&gt; {
+        self.syntax.children().find_map(RetType::cast)
+    }
+    pub fn body(&amp;self) -&gt; Option&lt;BlockExpr&gt; {
+        self.syntax.children().find_map(BlockExpr::cast)
+    }
+    // ...
+}</code></pre>
+<p>Variants like expressions, patterns or items are modeled with <code>enum</code>s, which also implement <code>AstNode</code>:</p>
+<pre><code class="language-rust">#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub enum AssocItem {
+    FnDef(FnDef),
+    TypeAliasDef(TypeAliasDef),
+    ConstDef(ConstDef),
+}
+
+impl AstNode for AssocItem {
+    ...
+}</code></pre>
+<p>Shared AST substructures are modeled via (dynamically compatible) traits:</p>
+<pre><code class="language-rust">trait HasVisibility: AstNode {
+    fn visibility(&amp;self) -&gt; Option&lt;Visibility&gt;;
+}
+
+impl HasVisibility for FnDef {
+    fn visibility(&amp;self) -&gt; Option&lt;Visibility&gt; {
+        self.syntax.children().find_map(Visibility::cast)
+    }
+}</code></pre>
+<p>Points of note:</p>
+<ul>
+<li>Like <code>SyntaxNode</code>s, AST nodes are cheap to clone pointer-sized owned values.</li>
+<li>All "fields" are optional, to accommodate incomplete and/or erroneous source code.</li>
+<li>It's always possible to go from an ast node to an untyped <code>SyntaxNode</code>.</li>
+<li>It's possible to go in the opposite direction with a checked cast.</li>
+<li><code>enum</code>s allow modeling of arbitrary intersecting subsets of AST types.</li>
+<li>Most of rust-analyzer works with the ast layer, with notable exceptions of:
+<ul>
+<li>macro expansion, which needs access to raw tokens and works with <code>SyntaxNode</code>s</li>
+<li>some IDE-specific features like syntax highlighting are more conveniently implemented over a homogeneous <code>SyntaxNode</code> tree</li>
+</ul>
+</li>
+</ul>
+<h4 id="alternative-designs-2"><a class="header" href="#alternative-designs-2">Alternative Designs</a></h4>
+<h5 id="semantic-full-ast"><a class="header" href="#semantic-full-ast">Semantic Full AST</a></h5>
+<p>In IntelliJ the AST layer (dubbed <strong>P</strong>rogram <strong>S</strong>tructure <strong>I</strong>nterface) can have semantics attached, and is usually backed by either syntax tree, indices, or metadata from compiled libraries.
+The backend for PSI can change dynamically.</p>
+<h3 id="syntax-tree-recap"><a class="header" href="#syntax-tree-recap">Syntax Tree Recap</a></h3>
+<p>At its core, the syntax tree is a purely functional n-ary tree, which stores text at the leaf nodes and node "kinds" at all nodes.
+A cursor layer is added on top, which gives owned, cheap to clone nodes with identity semantics, parent links and absolute offsets.
+An AST layer is added on top, which reifies each node <code>Kind</code> as a separate Rust type with the corresponding API.</p>
+<h2 id="parsing"><a class="header" href="#parsing">Parsing</a></h2>
+<p>The (green) tree is constructed by a DFS "traversal" of the desired tree structure:</p>
+<pre><code class="language-rust">pub struct GreenNodeBuilder { ... }
+
+impl GreenNodeBuilder {
+    pub fn new() -&gt; GreenNodeBuilder { ... }
+
+    pub fn token(&amp;mut self, kind: SyntaxKind, text: &amp;str) { ... }
+
+    pub fn start_node(&amp;mut self, kind: SyntaxKind) { ... }
+    pub fn finish_node(&amp;mut self) { ... }
+
+    pub fn finish(self) -&gt; GreenNode { ... }
+}</code></pre>
+<p>The parser, ultimately, needs to invoke the <code>GreenNodeBuilder</code>.
+There are two principal sources of inputs for the parser:</p>
+<ul>
+<li>source text, which contains trivia tokens (whitespace and comments)</li>
+<li>token trees from macros, which lack trivia</li>
+</ul>
+<p>Additionally, input tokens do not correspond 1-to-1 with output tokens.
+For example, two consecutive <code>&gt;</code> tokens might be glued, by the parser, into a single <code>&gt;&gt;</code>.</p>
+<p>For these reasons, the parser crate defines a callback interfaces for both input tokens and output trees.
+The explicit glue layer then bridges various gaps.</p>
+<p>The parser interface looks like this:</p>
+<pre><code class="language-rust">pub struct Token {
+    pub kind: SyntaxKind,
+    pub is_joined_to_next: bool,
+}
+
+pub trait TokenSource {
+    fn current(&amp;self) -&gt; Token;
+    fn lookahead_nth(&amp;self, n: usize) -&gt; Token;
+    fn is_keyword(&amp;self, kw: &amp;str) -&gt; bool;
+
+    fn bump(&amp;mut self);
+}
+
+pub trait TreeSink {
+    fn token(&amp;mut self, kind: SyntaxKind, n_tokens: u8);
+
+    fn start_node(&amp;mut self, kind: SyntaxKind);
+    fn finish_node(&amp;mut self);
+
+    fn error(&amp;mut self, error: ParseError);
+}
+
+pub fn parse(
+    token_source: &amp;mut dyn TokenSource,
+    tree_sink: &amp;mut dyn TreeSink,
+) { ... }</code></pre>
+<p>Points of note:</p>
+<ul>
+<li>The parser and the syntax tree are independent, they live in different crates neither of which depends on the other.</li>
+<li>The parser doesn't know anything about textual contents of the tokens, with an isolated hack for checking contextual keywords.</li>
+<li>For gluing tokens, the <code>TreeSink::token</code> might advance further than one atomic token ahead.</li>
+</ul>
+<h3 id="reporting-syntax-errors"><a class="header" href="#reporting-syntax-errors">Reporting Syntax Errors</a></h3>
+<p>Syntax errors are not stored directly in the tree.
+The primary motivation for this is that syntax tree is not necessary produced by the parser, it may also be assembled manually from pieces (which happens all the time in refactorings).
+Instead, parser reports errors to an error sink, which stores them in a <code>Vec</code>.
+If possible, errors are not reported during parsing and are postponed for a separate validation step.
+For example, parser accepts visibility modifiers on trait methods, but then a separate tree traversal flags all such visibilities as erroneous.</p>
+<h3 id="macros"><a class="header" href="#macros">Macros</a></h3>
+<p>The primary difficulty with macros is that individual tokens have identities, which need to be preserved in the syntax tree for hygiene purposes.
+This is handled by the <code>TreeSink</code> layer.
+Specifically, <code>TreeSink</code> constructs the tree in lockstep with draining the original token stream.
+In the process, it records which tokens of the tree correspond to which tokens of the input, by using text ranges to identify syntax tokens.
+The end result is that parsing an expanded code yields a syntax tree and a mapping of text-ranges of the tree to original tokens.</p>
+<p>To deal with precedence in cases like <code>$expr * 1</code>, we use special invisible parenthesis, which are explicitly handled by the parser.</p>
+<h3 id="whitespace--comments"><a class="header" href="#whitespace--comments">Whitespace &amp; Comments</a></h3>
+<p>Parser does not see whitespace nodes.
+Instead, they are attached to the tree in the <code>TreeSink</code> layer.</p>
+<p>For example, in</p>
+<pre><code class="language-rust">// non doc comment
+fn foo() {}</code></pre>
+<p>the comment will be (heuristically) made a child of function node.</p>
+<h3 id="incremental-reparse"><a class="header" href="#incremental-reparse">Incremental Reparse</a></h3>
+<p>Green trees are cheap to modify, so incremental reparse works by patching a previous tree, without maintaining any additional state.
+The reparse is based on heuristic: we try to contain a change to a single <code>{}</code> block, and reparse only this block.
+To do this, we maintain the invariant that, even for invalid code, curly braces are always paired correctly.</p>
+<p>In practice, incremental reparsing doesn't actually matter much for IDE use-cases, parsing from scratch seems to be fast enough.</p>
+<h3 id="parsing-algorithm"><a class="header" href="#parsing-algorithm">Parsing Algorithm</a></h3>
+<p>We use a boring hand-crafted recursive descent + pratt combination, with a special effort of continuing the parsing if an error is detected.</p>
+<h3 id="parser-recap"><a class="header" href="#parser-recap">Parser Recap</a></h3>
+<p>Parser itself defines traits for token sequence input and syntax tree output.
+It doesn't care about where the tokens come from, and how the resulting syntax tree looks like.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../contributing/style.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../contributing/style.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+        <script>
+            window.playground_line_numbers = true;
+        </script>
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace.js"></script>
+        <script src="../editor.js"></script>
+        <script src="../mode-rust.js"></script>
+        <script src="../theme-dawn.js"></script>
+        <script src="../theme-tomorrow_night.js"></script>
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
