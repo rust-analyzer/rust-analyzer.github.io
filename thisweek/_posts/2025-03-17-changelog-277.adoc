@@ -1,0 +1,59 @@
+= Changelog #277
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:b0632f749e6abf0f82f71755d7eaca4884c1a808[] +
+Release: release:2025-03-17[] (`v0.3.2345`)
+
+== Announcement
+
+This release brings two major changes, which might make it slightly _spicier_ than usual.
+
+The first is upgrading to the latest version of `salsa`, the incremental evaluation framework used by rust-analyzer.
+This will make it possible to implement parallel evaluation and persistency in the future.
+
+The second change is to use `salsa` for the crate graph, making it incremental.
+Adding or removing a dependency, or editing a build script or proc macro, will now invalidate only the affected crates instead of the entire workspace.
+
+== New Features
+
+* pr:19079[], pr:19332[] warn when a rename will change the meaning of the program:
++
+video::https://github.com/user-attachments/assets/a201da51-a55d-4683-a4e8-14dc32b4330e[options=loop]
+* pr:18964[] put a new batch of `salsa` on rust-analyzer.
+* pr:19337[] put `salsa` on the crate graph.
+* pr:19271[] add "Convert `for` into ``while let``" assist.
+
+== Fixes
+* pr:19344[] add icons to VS Code views:
++
+image::https://github.com/user-attachments/assets/8c7f71b6-0add-4e72-a56c-d125c990cdc8["Screenshot showing an icon on the Explorer: Rust Dependencies sidebar"]
+* pr:19252[] fix syntax fixup producing invalid punctuation.
+* pr:19333[] fix diagnostics being cleared right after being received.
+* pr:19330[] normalize projections in evaluated const display and layout calculation.
+* pr:19363[] display varargs in completion detail.
+* pr:19325[] rank ADT constructors as such for completion scoring.
+* pr:19326[] add missing name-ref parents to syntactic highlighting.
+* pr:19327[] fix `path` macro hygiene.
+* pr:19311[] log build script error output for Cargo projects.
+* pr:19351[] don't panic when the crate graph isn't ready.
+* pr:19356[] avoid recursively debug printing crates.
+
+== Internal Improvements
+
+* pr:19314[] (first contribution) `impl HasSource for VariantDef`.
+* pr:19367[] drop legacy `salsa`.
+* pr:19354[] prepare for Return Type Notation (RTN) and add a diagnostic.
+* pr:19232[] bump chalk to get support for async closures.
+* pr:19305[] vendor `query-group-macro` in rust-analyzer.
+* pr:19364[] add missing `with_durability` calls.
+* pr:19368[] remove `CrateGraphBuilder::iter_mut`.
+* pr:19236[] switch to the 2024 edition.
+* pr:19369[] do not error out for actions with no data to resolve.
+* pr:19366[] remove legacy `SyntaxContextId` re-export.
+* pr:19228[] split up some ADT queries.
+* pr:19355[] render root syntax contexts more clearly.
+* pr:19343[] make `GenericParamsCollector::type_or_consts` private.
+* pr:19328[] run proc-macro server tests in a separate CI job.
+* pr:19334[] remove generated mdbook files.
