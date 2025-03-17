@@ -24,9 +24,9 @@ jobs:
         with:
           tool: mdbook@0.4.45
 
-      - uses: taiki-e/install-action@v2
-        with:
-          tool: mdbook-toc@0.14.2
+#      - uses: taiki-e/install-action@v2
+#        with:
+#          tool: mdbook-toc@0.14.2
 
       - name: Clone the rust-analyzer repository
         uses: GuillaumeFalourd/clone-github-repo-action@v2.3
