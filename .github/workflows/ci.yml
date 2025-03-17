@@ -22,11 +22,12 @@ jobs:
 
       - uses: taiki-e/install-action@v2
         with:
-          tool: mdbook@0.4.45
+          # don't pin this to a specific version, since we're building `mdbook-toc` below
+          tool: mdbook@0.4
 
-#      - uses: taiki-e/install-action@v2
-#        with:
-#          tool: mdbook-toc@0.14.2
+      # we can't use `taiki-e/install-action` because the latest release is ancient
+      # no `--locked` so that it picks up a matching `mdbook`
+      - run: cargo install mdbook-toc
 
       - name: Clone the rust-analyzer repository
         uses: GuillaumeFalourd/clone-github-repo-action@v2.3
