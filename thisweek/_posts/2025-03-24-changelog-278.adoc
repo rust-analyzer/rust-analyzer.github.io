@@ -1,0 +1,32 @@
+= Changelog #278
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:37acea8052d5d27e7f1312d9e6e743a9da176c21[] +
+Release: release:2025-03-24[] (`v0.3.2353`)
+
+== Fixes
+
+* pr:19384[] fix stale "Building ``CrateGraph``" report.
+* pr:19416[] handle multiple `#[repr(..)]` attributes correctly.
+* pr:19362[] speed up resolving a "Generate delegate method" assist.
+* pr:19348[] add text edit support for return type hints on non-block body closures.
+* pr:19413[] properly calculate the layout of unsized tuple pointers.
+* pr:19320[] mark manual trait implementations as unsafe when replacing a derive.
+* pr:19400[] fix syntax highlighting for `&raw const` / `&raw mut` in standalone files.
+* pr:19397[] add postfix completion for const block.
+* pr:19005[] fix testing of packages with multiple targets.
+
+== Internal Improvements
+
+* pr:19408[] replace ``#[derive]``s to reduce codegen burden for generated syntax types.
+* pr:19390[] do not use `Expander` in associated item lowering.
+* pr:19412[] remove some unnecessary usages of `Semantics`.
+* pr:19429[] remove unused dependencies.
+* pr:19419[] render layout and other extra information when hovering `Self`.
+* pr:19329[] add some docs to `proc-macro-api`.
+* pr:19379[] bump `Edition::CURRENT` to 2024.
+* pr:19378[] trigger `salsa` LRU at the end of `analysis-stats`.
+* pr:19315[] do not generate docs with in `xtask codegen --check`.
+* pr:19391[] clean up `proc-macro-srv` CI job.
