@@ -1,0 +1,31 @@
+= Changelog #279
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:fb133c8c8064d9f18f19eae8721347872f1679e4[] +
+Release: release:2025-03-31[] (`v0.3.2362`)
+
+== New Features
+
+* pr:19375[] allow crate authors to disable completions using `#[rust_analyzer::completions]`.
+* pr:19388[] parse `unsafe` record fields.
+* pr:19347[] add diagnostic for ambiguous `&impl 'a + Sized`.
+
+== Fixes
+
+* pr:19475[] (first contribution) fix debug source map.
+* pr:19433[] fix `let else` to `if let else` conversion.
+* pr:19435[] fix ranges in closure return inlay hints.
+* pr:19466[] fix a bug in orphan rule check.
+* pr:19474[] fix, clarify and require a value for `proc_macro_cwd` of `CrateData`.
+
+== Internal Improvements
+
+* pr:19440[] replace custom `ThinVec` with the `thin-vec` crate.
+* pr:19451[] use medium durability for crate graph changes, high for library source files.
+* pr:19359[] emit lines of code and item tree counts in `analysis-stats`.
+* pr:19457[] remove `salsa` dependency from proc macro server again.
+* pr:19446[], pr:19448[] run tests under `cargo miri`.
+* pr:19422[] clean up VS Code output channels, drop `debug.openDebugPane`.
+* pr:19430[] bump dependencies.
