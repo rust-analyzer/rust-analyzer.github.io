@@ -1,0 +1,33 @@
+= Changelog #280
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:588948f2676312152122a4caefccd4062b569823[] +
+Release: release:2025-04-07[] (`v0.3.2370`)
+
+== Fixes
+
+* pr:19526[] (first contribution) use `constant`, not `const` in `rustdoc` links.
+* pr:19447[] add `impl for` completion.
+* pr:19515[] don't drop references with more than one definition.
+* pr:19501[] fix a regression in MBE expansion.
+* pr:19531[] fix `format_args!` lowering for 1.87.
+* pr:19522[] fix panic in "View crate graph".
+* pr:19523[] fix proc macro server spawning.
+* pr:19514[] fix bracket colorization in strings.
+
+== Internal Improvements
+
+* pr:19490[] (first contribution) fix panic in `analysis-stats` progress line slicing.
+* pr:19492[] avoid a needless `block_def_map()` access.
+* pr:19496[] replace some ``#[salsa::invoke]``s with ``invoke_actual``.
+* pr:19494[] unwrap some unnecessary ``Arc``s.
+* pr:19482[] clean up parameter name inlay hint filtering heuristics.
+* pr:19509[] drop `AssistKind::None`.
+* pr:19484[] fix new lints in nightly.
+* pr:19520[] align usage of `default` and `new` with style guide.
+* pr:19485[] clean up CI a bit.
+* pr:19493[] disable `rust-cache` in CI.
+* pr:19533[] set up a job matrix for `rust-cross`.
+* pr:19519[] add `rust-analyzer.cargo.noDeps` option.
