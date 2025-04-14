@@ -1,0 +1,31 @@
+= Changelog #281
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:8365cf853e791c93fa8bc924f031f11949bb1a3c[] +
+Release: release:2025-04-14[] (`v0.3.2379`)
+
+== New Features
+
+* pr:19255[], pr:19554[] (first contribution) add "Locate child modules" command.
+
+== Fixes
+
+* pr:19432[] fix another false positive invalid cast diagnostic.
+* pr:19563[] walk const block expressions for unsafety checking.
+* pr:19541[] prefer imports of matching types for argument lists.
+* pr:19571[] fix missing test update notifications when there are hyphens in the target name and exclude dependencies from "Run all".
+
+== Internal Improvements
+
+* pr:19425[] (first contribution) make drop glue info less verbose.
+* pr:19462[], pr:19558[], pr:19570[] lower ``TypeRef``s before type inference.
+* pr:19536[] port closure inference from `rustc`.
+* pr:19566[] use the `callable_item_signature` query in `dyn`-compatibility checks.
+* pr:19550[] turn `LifetimeRef` into an enum.
+* pr:19562[] tweak invalid signature bitflags.
+* pr:19573[] render sigantures in "View HIR" command.
+* pr:19512[] fix some `stdx` lints.
+* pr:19559[] switch to Rust 1.86.
+* pr:19565[] add `prime-caches` subcommand.
