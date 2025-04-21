@@ -1,0 +1,37 @@
+= Changelog #282
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:723121e5958cf282db3fdb06970776724a7326d5[] +
+Release: release:2025-04-21[] (`v0.3.2431`)
+
+== New Features
+
+* pr:19582[], pr:19585[], pr:19586[], pr:19595[], pr:19597[], pr:19611[], pr:19614[], pr:19618[] enable PGO for most builds (except ARM) for about a 20% speed-up.
+
+== Fixes
+
+* pr:19576[] (first contribution) ignore more `rustfmt` parsing errors.
+* pr:19596[] include generic parameters and default values in signature help.
+* pr:19590[] add `pub(crate) mod` option for unlinked files.
+* pr:19588[] include inline format macro variables in "Extract into function".
+* pr:19589[] fix highlighting for tail expr in labelled blocks.
+* pr:19619[] sort notable traits in hover.
+* pr:19612[] fix a bug with predicate lowering of associated items.
+* pr:19613[] fix panic with implemented trait method that declares an extra lifetime parameter.
+* pr:19579[] prevent panics on cyclic dependencies dependency between closures.
+* pr:19628[], pr:19642[] don't ignore config values that fail to parse.
+
+== Internal Improvements
+
+* pr:19578[] (first contribution) normalize drive letters in the VS Code extension.
+* pr:19638[], pr:19639[] (first contribution) add anchors to configuration options and fix dead links to the manual.
+* pr:19616[] make `hir-ty` non-diagnostic queries transparent (saves 56 MB on `analysis-stats self`).
+* pr:19617[] make `HirFileId`, `EditionedFileId` and macro files `salsa` structs (saves 165 MB on `analysis-stats self`).
+* pr:19591[] use `ast::TokenTree` in `make::expr_macro`.
+* pr:19572[] migrate `expand_rest_pattern` to `SyntaxEditor`.
+* pr:19568[] migrate `destructure_struct_binding` to `SyntaxEditor`.
+* pr:19569[] return correct types for `make::expr_*` methods.
+* pr:19600[] pin the `rustc` used for the `proc-macro-src` CI job.
+* pr:19521[] cancel parallel CI jobs if tests fail.
