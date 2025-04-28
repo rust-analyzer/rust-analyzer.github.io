@@ -1,0 +1,35 @@
+= Changelog #283
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:d8887c0758bbd2d5f752d5bd405d4491e90e7ed6[] +
+Release: release:2025-04-28[] (`v0.3.2441`)
+
+== New Features
+
+* pr:19634[], pr:19629[] allow unsetting env vars in `extraEnv` configs.
+* pr:19479[], pr:19676[], pr:19672[], pr:19675[] add some new diagnostics for incorrect generic arguments.
+* pr:19692[] add an assist to remove underscores from used variables.
+* pr:19653[] parse `super let`.
+* pr:19643[] parse generic consts.
+
+== Fixes
+
+* pr:19622[] (first contribution) fix some bugs in the string rewriting assists.
+* pr:19604[] (first contribution) add semicolon to `use` completion.
+* pr:19657[] improve support for `offset_of!()`.
+* pr:19636[] fix `completion_snippets_custom` config always erroring out.
+* pr:19650[] support unstable `UnsafePinned` struct in type layout computation.
+* pr:19647[] fix panics in inlay hints that produce empty text edits for closure return types.
+* pr:19684[] report error when unable to parse a `DiscoverProjectMessage`.
+
+== Internal Improvements
+
+* pr:19678[] arena-allocate ``LifetimeRef``s.
+* pr:19655[] fold hygiene map into the bindings themselves.
+* pr:19677[] remove `WherePredicateTypeTarget`.
+* pr:19644[] make predefined symbols `const` instead of `static`.
+* pr:19688[] add some missing ``shrink_to_fit()``s and upgrade `dashmap` and `hashbrown`.
+* pr:19624[] bump `chalk` to make the generic parameter order match `rustc`.
+* pr:19661[] bump `salsa`.
