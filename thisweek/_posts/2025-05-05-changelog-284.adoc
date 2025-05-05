@@ -1,0 +1,32 @@
+= Changelog #284
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:3b57c001518aeb42511e177221f98ecf42104016[] +
+Release: release:2025-05-05[] (`v0.3.2449`)
+
+== Fixes
+
+* pr:19704[] add underscore mode for expression filling.
+* pr:19733[] implement mut to const pointer cast for method resolution.
+* pr:19732[] fix associated type bound variable starting index.
+* pr:19699[] properly escape raw names in labels.
+* pr:19247[] fix span info in `mir::Operand`.
+* pr:19723[] improve parser recovery a bit.
+* pr:19581[] render more lifetimes.
+* pr:19735[] improve the `let` and `letm` snippets.
+* pr:19739[] temporarily disable fixpoint for variance computation.
+
+== Internal Improvements
+
+* pr:19685[] (first contribution) add PGO support to `xtask install`.
+* pr:19713[] clean up `cfg` check handling in expression store lowering.
+* pr:19469[] migrate `merge_imports`, `unmerge_imports` and `let_else_to_match` to `SyntaxEditor`.
+* pr:19708[] de-`Arc` language item queries.
+* pr:19712[] clean up cache priming cancellation handling.
+* pr:19731[] simplify macro call id construction.
+* pr:19714[] remove unnecessary extension trait.
+* pr:19719[] adjust panic context printing.
+* pr:19727[] remove a couple of unnecessary ``clone``s.
+* pr:19716[] bump salsa (saves 212 MB on `analysis-stats self`).
