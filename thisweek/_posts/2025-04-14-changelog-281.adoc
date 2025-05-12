@@ -15,6 +15,7 @@ Release: release:2025-04-14[] (`v0.3.2379`)
 * pr:19432[] fix another false positive invalid cast diagnostic.
 * pr:19563[] walk const block expressions for unsafety checking.
 * pr:19541[] prefer imports of matching types for argument lists.
+* pr:19461[] fix shadowing of modules by types.
 * pr:19571[] fix missing test update notifications when there are hyphens in the target name and exclude dependencies from "Run all".
 
 == Internal Improvements

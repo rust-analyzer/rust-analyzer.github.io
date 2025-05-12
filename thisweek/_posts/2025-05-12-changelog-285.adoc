@@ -1,0 +1,32 @@
+= Changelog #285
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:2bafe9d96c6734aacfd49e115f6cf61e7adc68bc[] +
+Release: release:2025-05-12[] (`v0.3.2457`)
+
+== New Features
+
+* pr:19740[] add assist to unwrap a type into its single generic argument.
+
+== Fixes
+
+* pr:19751[] (first contribution) support `CARGO_MANIFEST_PATH`.
+* pr:19763[] complete parentheses and method call arguments if the next line starts with a tuple.
+* pr:19742[] fix incorrect handling of unresolved non-module imports in name resolution.
+* pr:19746[] fix proc-macro API creating malformed negative literals.
+* pr:19747[] fix `move_bounds` assists with lifetimes.
+* pr:19434[] support negative numbers in `concat!`.
+* pr:19764[] don't deref twice in postfix snippets.
+* pr:19738[] fix panic on `<T as Tr>` without an associated type.
+* pr:19507[] fix path resolution in outer doc comments.
+
+== Internal Improvements
+
+* pr:19721[] handle parallelism better in cache priming.
+* pr:19707[] de-`Arc` defmap queries.
+* pr:19750[] remove unnecessary token length check for macros in renaming.
+* pr:19749[] remove unnecessary `AsAny` trait.
+* pr:19772[] make diagnostics experimental by default.
+* pr:19748[] direct users to discussions instead of issues for questions.
