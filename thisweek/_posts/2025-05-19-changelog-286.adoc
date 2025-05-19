@@ -1,0 +1,20 @@
+= Changelog #286
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:e464ff8c755c6e12540a45b83274ec4de4829191[] +
+Release: release:2025-05-19[] (`v0.3.2466`)
+
+== Fixes
+
+* pr:19793[] keep derive macros when removing unused imports.
+* pr:19687[] highlight unsafe operations as related when the caret is on `unsafe`.
+* pr:19801[] improve `asm!` support.
+* pr:19794[] don't allow duplicate crates in the `all_crates` list.
+* pr:19807[] don't override `RUSTUP_TOOLCHAIN` if it is already set.
+
+== Internal Improvements
+
+* pr:19796[] (first contribution) bump some dependencies for Cygwin support.
+* pr:19808[] run metrics on the beta channel.
