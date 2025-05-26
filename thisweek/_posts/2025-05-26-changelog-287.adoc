@@ -1,0 +1,20 @@
+= Changelog #287
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:d2f17873ff19786a121fb3302f91779c1a1b957f[] +
+Release: release:2025-05-26[] (`v0.3.2474`)
+
+== Fixes
+
+* pr:19839[] correctly set the span of the proc_macro crate's `Group` delimiters.
+* pr:19824[] fix caching problems with lint levels.
+
+== Internal Improvements
+
+* pr:19757[] request cancellation while processing changed files.
+* pr:19814[] debounce workspace fetching for workspace structure changes.
+* pr:19809[] catch inference panics in `analysis-stats`.
+* pr:19840[] fix `integrated_benchmarks`.
+* pr:19853[] bump `salsa`.
