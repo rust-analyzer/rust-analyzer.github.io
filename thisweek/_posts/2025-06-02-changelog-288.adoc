@@ -1,0 +1,35 @@
+= Changelog #288
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:2a388d1103450d814a84eda98efe89c01b158343[] +
+Release: release:2025-06-02[] (`v0.3.2482`)
+
+== New Features
+
+* pr:19876[] render padding information when hovering on structs.
+* pr:19881[] add assist to desugar `let pat = expr?;` into `let else`.
+* pr:19819[] change import prefix default to `crate`.
+* pr:19890[] make import insertion `#[cfg]`-aware.
+
+== Fixes
+
+* pr:19879[] fix IDE layer not resolving some macro calls.
+* pr:19880[] handle included files better at the IDE layer.
+* pr:19872[] fix inference of `AsyncFn` return types.
+* pr:19864[] properly implement `might_be_inside_macro_call` using semantic information instead of syntactical hacks.
+* pr:19851[] normalize when checking for uninhabited types for pattern exhaustiveness checks.
+* pr:19875[] skip pattern analysis on type mismatches.
+* pr:19899[] account for "Generate" actions when filtering the allowed ones.
+* pr:19785[], pr:19792[] keep indent in `generate_new` and `generate_mut_trait`.
+* pr:19900[] generate diagnostics docs for the manual.
+
+== Internal Improvements
+
+* pr:19877[] (first contribution) remove support for `concat_idents!`.
+* pr:19861[] (first contribution) add documentation for `find_all_refs` constructor search.
+* pr:19896[] restructure some semantics APIs for virtual macro files.
+* pr:19898[] remove unncessary duplication in `highlight_related`.
+* pr:19888[] recognize salsa cycles in `thread_result_to_response`.
+* pr:19850[] add support for type-erased `Semantics<'db, dyn HirDatabase>`.
