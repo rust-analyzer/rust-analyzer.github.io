@@ -1,0 +1,32 @@
+= Changelog #291
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:0100bc737358e56f5dc2fc7d3c15b8a69cefb56b[] +
+Release: release:2025-06-23[] (`v0.3.2509`)
+
+== New Features
+
+* pr:19939[] add `rust-analyzer.assist.preferSelf` to prefer `Self` instead of the enum name in assists.
+* pr:20047[] use `cargo check --compile-time-deps` when available.
+* pr:20020[] reload workspaces when `cargo` config changes.
+* pr:20018[] copy lockfile into target directory before invoking `cargo metadata`.
+* pr:20056[] support the new `format_args!` expansion in 1.89.
+* pr:20014[] show what `cargo metadata` is doing.
+
+== Fixes
+
+* pr:19945[] add quickfix to the `private-field` diagnostic.
+* pr:20025[] (first contribution) hide imported private methods if "private editable" is disabled.
+* pr:20041[] revert "turn `BlockId` into a ``#[salsa::tracked]``".
+* pr:20022[] never make type mismatch diagnostic stable, even when there is a fix.
+* pr:20023[] improve completions in `if` / `while` expression conditions.
+* pr:20039[] fix closure capturing in `let` expressions.
+* pr:20035[] pass `--color=always` from Test Explorer.
+
+== Internal Improvements
+
+* pr:19495[] start infesting `ide` crates with a `'db` lifetime.
+* pr:20046[] add `hir::TypeParam::parent` method.
+* pr:20050[] improve documentation for excluding imports from symbol search.
