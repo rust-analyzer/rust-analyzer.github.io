@@ -1,0 +1,39 @@
+= Changelog #292
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:6df12139bccaaeecf6a34789e0ca799d1fe99c53[] +
+Release: release:2025-06-30[] (`v0.3.2519`)
+
+== New Features
+
+* pr:20077[] (first contribution) take an optional `"args": "cursor"` in the VS Code "Run" command.
+* pr:19546[] highlight return values as related to `match` / `if` / `=>`.
+* pr:20100[] lower `PointeeSized` to `?Sized` to support the new `Sized` trait hierarchy.
+* pr:20105[] parse new `[const] Trait` syntax.
+
+== Fixes
+
+* pr:20110[] don't show float completions on integer literals.
+* pr:20096[] don't show notifications on failed `rustfmt` calls.
+* pr:20121[] don't append `--compile-time-deps` to build script commands.
+* pr:20073[] use `ROOT` hygiene for `args` in the new `format_args!` expansion.
+* pr:20069[] fix cargo project manifest not pointing to the workspace root.
+* pr:20072[] respect configured `build.target-dir`.
+* pr:20061[] don't wrap exit points with the right type in "Wrap return type".
+* pr:20103[] prettify AST in `PathTransform` if it's coming from a macro.
+* pr:20080[] clean up and expand `folding_ranges`.
+* pr:20092[] don't complain about `rustc` workspace loading if it's not required.
+* pr:20036[] don't default to `'static` for trait object lifetimes.
+
+== Internal Improvements
+
+* pr:20012[] (first contribution) bump `literal-escaper`.
+* pr:20088[] de-`Arc` trait items query.
+* pr:20087[] short-circuit a couple of queries.
+* pr:20106[] make the `VariantFields` query more idiomatic.
+* pr:20098[] unify formatting of progress messages.
+* pr:20104[] clean up `provideCodeActions` VS Code hook.
+* pr:20116[] cancel CI workflow only after the main matrix has finished.
+* pr:20084[] fix CI job cancellation on Windows.
