@@ -1,0 +1,38 @@
+= Changelog #293
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:0ac65592a833bf40238831dd10e15283d63c46d5[] +
+Release: release:2025-07-07[] (`v0.3.2527`)
+
+== New Features
+
+== Fixes
+
+* pr:20151[] only remove keyword prefixes (`macro@` or ``macro ``) from links in the docs if the target is inferred.
+* pr:20158[] don't warn about the proc macro server when the sysroot is missing.
+* pr:20160[] reduce diagnostic range for `macro_calls!`.
+* pr:20120[] fix value resolution in `match` patterns.
+* pr:20161[] fix closure capture analysis for `let` expressions.
+* pr:20167[] improve `#[derive(Default)]` expansion.
+* pr:20031[] respect length limit and improve adjustment hint tooltips.
+* pr:20179[] handle divergence in destructuring assignments.
+* pr:20159[] always couple `--compile-time-deps` with `--all-targets`.
+* pr:20170[] improve flycheck and build script progress reporting.
+* pr:20112[] add workaround for missing `Delimiter::None` support to built-in macros.
+* pr:20126[] improve panic message on discover command spawning errors.
+* pr:20148[] honor `rust-analyzer.cargo.noDeps` option when fetching sysroot metadata.
+
+== Internal Improvements
+
+* pr:20175[] (first contribution) remove special handling for box patterns in `match_check`.
+* pr:20124[] remove last use of `rustc_pattern_analysis::Captures`.
+* pr:20156[] restructure proc macro loading erros.
+* pr:20157[] re-enable fixpoint iteration for variance computation.
+* pr:20184[] remove dead field from `InferenceContext`.
+* pr:20169[] skip unnecessary ``BodySourceMap``'s `eq`.
+* pr:20134[], pr:20135[], pr:20136[], pr:20137[], pr:20165[] migrate `replace_is_method_with_if_let_method`, `promote_local_to_const`, `toggle_macro_delimiter`, `wrap_unwrap_cfg_attr` and `unmerge_match_arm` assists to `SyntaxEditor`.
+* pr:20132[] add `AsMut`, `Borrow` and `BorrowMut` to `minicore`.
+* pr:20144[] add `load_workspace_into_db` version of `load_workspace`.
+* pr:19923[] bump `salsa`.
