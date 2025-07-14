@@ -1,0 +1,31 @@
+= Changelog #294
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:591e3b7624be97e4443ea7b5542c191311aa141d[] +
+Release: release:2025-07-14[] (`v0.3.2539`)
+
+== New Features
+
+* pr:20054[] support folding multi-line parameter list with the function body:
++
+image::https://github.com/user-attachments/assets/0f1918e8-3545-4cd0-839e-fd5c7386f3fc["Screen recording demonstrating folding the parameter list of a function together with its body"]
+* pr:20185[] include enum variants in world symbols.
+* pr:20109[] make `generate_new` work for tuple structs.
+
+== Fixes
+
+* pr:20192[] fix a panic in documentation rendering.
+* pr:20180[] always bump in the parser in `err_and_bump`.
+* pr:20200[] revert "re-enable fixpoint iteration for variance computation".
+* pr:20212[] fix `dyn` inlay hints with parantheses and don't display them on HRTBs.
+* pr:20210[] make `naked_asm!` safe to call and fix `global_asm!`.
+* pr:20232[] normalize projection types before const eval.
+* pr:20235[] fix `where` clause position in trait associated item completion.
+
+== Internal Improvements
+
+* pr:20219[] outline parts of `ExpressionStore` into a different allocation.
+* pr:20198[], pr:20211[], pr:20218[] migrate `pull_assignment_up`, `convert_named_struct_to_tuple_struct`, `convert_match_to_let_else`, `generate_impl` and `remove_dbg` assists to `SyntaxEditor`.
+
