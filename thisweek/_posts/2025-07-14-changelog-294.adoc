@@ -27,5 +27,4 @@ image::https://github.com/user-attachments/assets/0f1918e8-3545-4cd0-839e-fd5c73
 == Internal Improvements
 
 * pr:20219[] outline parts of `ExpressionStore` into a different allocation.
-* pr:20198[], pr:20211[], pr:20218[] migrate `pull_assignment_up`, `convert_named_struct_to_tuple_struct`, `convert_match_to_let_else`, `generate_impl` and `remove_dbg` assists to `SyntaxEditor`.
-
+* pr:20198[], pr:20211[], pr:20218[], pr:20223[], pr:20224[] migrate `pull_assignment_up`, `convert_named_struct_to_tuple_struct`, `convert_match_to_let_else`, `generate_impl` and `remove_dbg` assists to `SyntaxEditor`.
