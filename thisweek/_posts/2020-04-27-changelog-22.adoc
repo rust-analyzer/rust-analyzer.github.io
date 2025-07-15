@@ -7,7 +7,7 @@ Release: release:2020-04-27[]
 
 == New Features
 
-* pr:4065[], pr:4128[] complete unqualifed enum variants
+* pr:4065[], pr:4128[] complete unqualified enum variants
 +
 image::https://user-images.githubusercontent.com/1711539/80367186-ecec6080-888a-11ea-8968-37f93424106a.gif[]
 * pr:4105[] code completion for attributes.

@@ -41,7 +41,7 @@ image::https://user-images.githubusercontent.com/2295721/126728849-a38b560c-b687
 == Internal Improvements
 
 * pr:9453[] (first contribution) add `Limit` struct.
-* pr:9631[] (fisrt contribution) add some metadata to make `cargo deb` happy.
+* pr:9631[] (first contribution) add some metadata to make `cargo deb` happy.
 * pr:9641[] link to the "Explaining Rust Analyzer" series.
 * pr:9625[] simplify handling of build scripts.
 * pr:9633[] add `TreeId` to identify ``ItemTree``s.

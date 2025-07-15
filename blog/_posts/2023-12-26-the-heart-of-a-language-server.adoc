@@ -257,7 +257,7 @@ There are two properties of the underlying languages which make this approach wo
 
 1. Syntactic nesting must match semantic nesting.
    Looking at parent's sibling makes sense only if the current element should be among the siblings.
-2. Getting sematic element for an entire file is trivial.
+2. Getting semantic element for an entire file is trivial.
 
 The second one is actually less true in Rust than it is in Kotlin or C#!
 In those languages, each file starts with a package declaration, which immediately mounts the file at the appropriate place in the semantic model.

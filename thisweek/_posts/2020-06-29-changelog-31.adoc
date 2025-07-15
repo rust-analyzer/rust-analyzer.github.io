@@ -49,7 +49,7 @@ image::https://user-images.githubusercontent.com/1711539/86006971-122a5600-ba17-
 * pr:4976[] new VFS.
 * pr:5068[] prepare for dynamic project reloading.
 * Rewrite main loop in rust-analyzer.
-* pr:4982[] upgrade chalk. This, and other type system improvements, bring the proportion of of unknown types in rust-analzyer to less than 1%.
+* pr:4982[] upgrade chalk. This, and other type system improvements, bring the proportion of of unknown types in rust-analyzer to less than 1%.
 * pr:4983[], pr:5010[] add `paths::RelPath[Buf]`.
 * pr:5013[] uniformly trim test data.
 * pr:5014[] centralize test data parsing.

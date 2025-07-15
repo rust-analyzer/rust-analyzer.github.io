@@ -30,7 +30,7 @@ image::https://user-images.githubusercontent.com/4325700/102942807-59ece000-4484
 * pr:7019[] more helpful serde errors.
 * pr:7020[], pr:7010[] support for const blocks.
 * pr:7026[] coc-rust-analyzer supports inlay hints for variables and chaining.
-* pr:7021[], pr:7030[] support goto def, search and rename for lables.
+* pr:7021[], pr:7030[] support goto def, search and rename for labels.
 
 == Fixes
 

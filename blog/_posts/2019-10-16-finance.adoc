@@ -44,7 +44,7 @@ The current scheme for payouts is as follows:
 * the final arrangement is made public
 
 The biggest weakness of this scheme is that the decision quorum is not well-balanced.
-We hope to overcome this issue by being transparent and tweaking the descision process if it doesn't work well.
+We hope to overcome this issue by being transparent and tweaking the decision process if it doesn't work well.
 
 We also need to pay taxes from the money we receive via Open Collective.
 The VAT is 19%, but donations from EU-based companies are exempt from VAT.
@@ -57,7 +57,7 @@ So, the final formula for the yearly budget looks like this:
 (cost * 10/8 payouts * 119/100 VAT * 108/100 transaction fee) * 12
 ----
 
-Pluggin the costs from above, we get the following budget targets:
+Plugging in the costs from above, we get the following budget targets:
 
 **52050 EUR / Year**: I dedicate half of my time for rust-analyzer, 20% of the budget is spend funding people outside of Ferrous Systems.
 

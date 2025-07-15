@@ -37,5 +37,5 @@ Release: release:2024-12-23[] (`v0.3.2228`)
 * pr:18713[] cleanup label structure of `CompletionItem`.
 * pr:18717[], pr:18735[] set `result_id` for pull diagnostics.
 * pr:18697[] simplify `ratoml` test directory handling.
-* pr:18728[] use `serde_derive` intead of `derive` feature.
+* pr:18728[] use `serde_derive` instead of `derive` feature.
 * pr:18710[] remove `salsa` from proc macro server dependency tree.

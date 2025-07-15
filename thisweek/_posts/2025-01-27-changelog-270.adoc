@@ -31,7 +31,7 @@ image::https://github.com/user-attachments/assets/3389dd73-5fb5-4d9e-af73-46d503
 * pr:18967[] properly record meaningful imports as re-exports in symbol index.
 * pr:18986[] go to `Display::fmt` when invoked on `to_string`.
 * pr:19014[] check ``cfg``s when collecting macro defs.
-* pr:19026[] only collect implicit visibile use symbols if they have renames.
+* pr:19026[] only collect implicit visible use symbols if they have renames.
 * pr:19033[] make `proc-macro-srv` spans lines and columns 1-indexed (but always 1).
 * pr:19019[] explicitly add buildfiles when constructing `ProjectFolders`.
 * pr:18989[] only refresh syntax tree view when the active document changes.

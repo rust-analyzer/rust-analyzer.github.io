@@ -14,7 +14,7 @@ Release: release:2020-02-03[]
 == Fixes
 
 * pr:2933[] don't compute diagnostics on the main thread.
-  That fixes a long-standing issue with peformance degradation due to `cargo check`.
+  That fixes a long-standing issue with performance degradation due to `cargo check`.
 * pr:2810[] make magical search of struct literals work in more contexts.
 * pr:2916[] fix slow `cargo check` performance due to unbuffered reads.
 * pr:2924[] avoid spawning more than one Cargo for `cargo check`.

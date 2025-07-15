@@ -105,7 +105,7 @@ image::https://user-images.githubusercontent.com/308347/111970065-8e178180-8b03-
 * pr:8059[] support `cfg_attr` in doc-comment syntax highlighting.
 * pr:8065[] handle block doc comments better.
 * pr:8069[] support highlight injection in block doc comments.
-* pr:8080[] change `ItemTree` API to accomodate creating an `ItemTree` per block expression.
+* pr:8080[] change `ItemTree` API to accommodate creating an `ItemTree` per block expression.
 * pr:8087[] make MacroDefId's `AstId` mandatory when possible.
 * pr:8093[] record custom derive helpers in `DefMap`.
 * pr:8097[] parse `extended_key_value_attributes`.

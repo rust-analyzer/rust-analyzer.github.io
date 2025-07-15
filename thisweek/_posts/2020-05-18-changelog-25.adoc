@@ -22,9 +22,9 @@ image::https://user-images.githubusercontent.com/1711539/82217439-b39f9180-991a-
 +
 image::https://user-images.githubusercontent.com/1711539/82217442-b601eb80-991a-11ea-99dd-b0c2bba786c8.gif[]
 
-* pr:4436[] use `.rust` sufix on TextMate scopes introduced by rust-analyzer for easier theming.
+* pr:4436[] use `.rust` suffix on TextMate scopes introduced by rust-analyzer for easier theming.
 * pr:4427[] use Ubuntu 16.04 to build releases, to get older glibc.
-* pr:4400[], pr:4473[] improve syntax higlighting, underline mutable bindings in all themes.
+* pr:4400[], pr:4473[] improve syntax highlighting, underline mutable bindings in all themes.
 * pr:4455[] in completion, prioritise locals with correct types.
 * pr:4288[] initial implementation of renaming of `self` parameter, for switching between associated function and a method.
 * pr:4479[], pr:4484[] support for `dyn Trait`.
@@ -34,7 +34,7 @@ image::https://user-images.githubusercontent.com/1711539/82217442-b601eb80-991a-
 == Fixes
 
 * pr:4421[] fix visibility handling in find references.
-* pr:4403[] check client capabilities before sending progres notifications.
+* pr:4403[] check client capabilities before sending progress notifications.
 * pr:4447[] make sure that play arrow in `Run` lens is not emoji-ifyied.
 * pr:4431[] don't garbage-collect results of procedural macro expansion, to combat non-deterministic proc macros.
   Please avoid randomized hash maps when writing procedural macros :-)

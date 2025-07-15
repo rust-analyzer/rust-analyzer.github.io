@@ -39,6 +39,6 @@ Release: release:2024-09-02[] (`v0.3.2096`)
 * pr:18008[], pr:18012[] make inlay hint resolution more reliable.
 * pr:17945[] recategorize config classes.
 * pr:17967[] prepare for stand-alone MBE tests.
-* pr:17992[] avoid newlines in worspace fetch errors.
+* pr:17992[] avoid newlines in workspace fetch errors.
 * pr:18011[] add some doc-comments to `OpQueue`.
 * pr:17974[] drop Apache license appendices.

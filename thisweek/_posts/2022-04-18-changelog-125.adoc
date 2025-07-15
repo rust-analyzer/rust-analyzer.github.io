@@ -37,7 +37,7 @@ image::https://user-images.githubusercontent.com/1786438/162996087-56540f5e-a6be
 * pr:12001[] do reference search on all downmapped tokens with the same kind only.
 * pr:12002[], pr:12008[] fix source root panic in global state when switching git branches.
 * pr:11991[] fix completion detail for async functions and RPITs.
-* pr:12011[] show `impl Trait` in argument positon in completion details.
+* pr:12011[] show `impl Trait` in argument position in completion details.
 * pr:12013[] support `associated_const_equality` in parser.
 
 == Internal Improvements
@@ -45,7 +45,7 @@ image::https://user-images.githubusercontent.com/1786438/162996087-56540f5e-a6be
 * pr:11980[] (first contribution) update repository URL.
 * pr:11964[] unset test feature in rustc source crates.
 * pr:11970[] bump chalk to fix most type mismatches in the `rust-analyzer` repo.
-* pr:11958[] show config deseralization failures on start up.
+* pr:11958[] show config deserialization failures on start up.
 * pr:11960[] show more project building errors to the user.
 * pr:11990[] improve `ItemTree` pretty print output.
 * pr:11999[] update feature list in VS Code extension README.

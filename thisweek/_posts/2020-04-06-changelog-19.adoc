@@ -8,7 +8,7 @@ Release: release:2020-04-06[]
 == New Features
 
 * **BREAKING** pr:3824[] changed the name of many options. The current set is specified https://github.com/rust-analyzer/rust-analyzer/blob/ec3fb1cdb4f1808a11fb6057550ed721c2aa36a9/editors/code/package.json#L176-L390[here]. If you are using a non-VS Code client, note that rust-analyzer now asks for
-`rust-analyzer` secion of configuration, and expects this config to be present in `initializationOptions`.
+`rust-analyzer` section of configuration, and expects this config to be present in `initializationOptions`.
 
 * pr:3804[], pr:3825[] it is now possible to use arbitrary command for on the fly error checking:
 +
@@ -64,7 +64,7 @@ image::https://user-images.githubusercontent.com/1711539/78560584-9a350100-7816-
 * pr:3777[] populate default task list in VS Code with cargo commands.
 * pr:3765[] SSR no longer takes field order into account.
 * pr:3829[] SSR treats method call and UFCS equivalently.
-* pr:3779[] code completion for recrod literals now suggest only fields which are not already present.
+* pr:3779[] code completion for record literals now suggest only fields which are not already present.
 
 == Fixes
 

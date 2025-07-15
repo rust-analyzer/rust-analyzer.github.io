@@ -33,4 +33,4 @@ Release: release:2023-04-24[] (`v0.3.1489`)
 * pr:14604[] add `minicore` smoke test.
 * pr:14599[] add `RA_UNSTABLE_SYSROOT_HACK`.
 * pr:14628[] restructure symbol queries.
-* pr:14629[] add additional query information to status ouput.
+* pr:14629[] add additional query information to status output.

@@ -19,7 +19,7 @@ image::https://user-images.githubusercontent.com/1711539/81537179-18804800-936d-
 +
 image::https://user-images.githubusercontent.com/1711539/81539698-ea046c00-9370-11ea-899f-9e38238ee25b.gif[]
 
-* pr:4166[] `rust-analyzer.cargo.target` setting for specifying target tripple rust-analyzer uses for analysis.
+* pr:4166[] `rust-analyzer.cargo.target` setting for specifying target triple rust-analyzer uses for analysis.
 * pr:4328[] `rust-analyzer.checkOnSave.allFeatures` setting (all by default) to run `cargo check` with all features enabled.
 * pr:4372[] 'rust-analyzer.inlayHints.enable' settings for conveniently disabling all inlay hints.
 * pr:4265[] **Change Visibility** assist now works for tuple struct fields.

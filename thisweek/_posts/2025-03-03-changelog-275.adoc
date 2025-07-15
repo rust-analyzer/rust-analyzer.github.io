@@ -27,7 +27,7 @@ In addition, this version drops support for toolchains older than 1.82.
 * pr:19223[] support target features implications in `target_feature` 1.1.
 * pr:19204[] allow `package/feature` format for features.
 * pr:19241[] map crate ids for proc macros in sysroot crate graph construction.
-* pr:19249[] avoid unnecessary parantheses in prefix adjustment hints.
+* pr:19249[] avoid unnecessary parentheses in prefix adjustment hints.
 * pr:19250[] use precedence calculation for parentheses in `inline_local_variable`.
 * pr:19221[] add tab stop to impl body in `generate_trait_impl`.
 
@@ -35,7 +35,7 @@ In addition, this version drops support for toolchains older than 1.82.
 
 * pr:19239[] (first contribution) configure out performance counters on `ohos` to fix compilation.
 * pr:19096[] allow `rust-project.json` to specify sysroot workspace.
-* pr:19225[] migrate `remove_mut`, `remove_parantheses` and `remove_unused_param` to `SyntaxEditor`.
+* pr:19225[] migrate `remove_mut`, `remove_parentheses` and `remove_unused_param` to `SyntaxEditor`.
 * pr:19171[] migrate `apply_demorgan` to `SyntaxEditor`.
 * pr:19253[] migrate `convert_bool_then` to `SyntaxEditor`.
 * pr:19251[] remove syntax editing from parenthesis computation.

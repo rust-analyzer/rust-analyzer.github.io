@@ -30,6 +30,6 @@ Release: release:2025-06-02[] (`v0.3.2482`)
 * pr:19877[] (first contribution) remove support for `concat_idents!`.
 * pr:19861[] (first contribution) add documentation for `find_all_refs` constructor search.
 * pr:19896[] restructure some semantics APIs for virtual macro files.
-* pr:19898[] remove unncessary duplication in `highlight_related`.
+* pr:19898[] remove unnecessary duplication in `highlight_related`.
 * pr:19888[] recognize salsa cycles in `thread_result_to_response`.
 * pr:19850[] add support for type-erased `Semantics<'db, dyn HirDatabase>`.

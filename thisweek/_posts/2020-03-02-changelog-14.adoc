@@ -32,7 +32,7 @@ image::https://user-images.githubusercontent.com/1711539/75685982-c56a8480-5c9b-
 * pr:3355[] add completion & docs for `featureFlag` configuration in VS Code extension.
 * pr:3309[] look for `Cargo.toml` not only in the root and parent directory, but also among one-level child directories.
 * pr:3387[] type inference for slice patterns.
-* pr:3397[] add minimal metatdata to VS Code extension.
+* pr:3397[] add minimal metadata to VS Code extension.
 
 == Fixes
 

@@ -115,7 +115,7 @@ So, here's
 Design error _resilient_ (and not just error _recovering_) LR parsing algorithm.
 
 Note that error resilience is a topic orthogonal to error reporting.
-I haven't payed much attention to error reporting (in my experience, synchronous reporting of syntax errors in the editor compensates for bad syntax error messages), but it might be the case that MCRS are a good approach to there.
+I haven't paid much attention to error reporting (in my experience, synchronous reporting of syntax errors in the editor compensates for bad syntax error messages), but it might be the case that MCRS are a good approach to there.
 
 == Expressions Grammar
 
@@ -191,7 +191,7 @@ Implement LSP server which provides basic IDE features, as well as live preview.
 
 == Challenge Responses
 
-Folks fom https://galois.com/[Galois] develop a classy-named https://github.com/GaloisInc/daedalus[DaeDaLus] -- a flexible data description language for generating parsers with data dependencies.
+Folks from https://galois.com/[Galois] develop a classy-named https://github.com/GaloisInc/daedalus[DaeDaLus] -- a flexible data description language for generating parsers with data dependencies.
 DaeDaLus makes an impressive attempt at solving the second challenge.
 The language is powerful enough to just
 https://github.com/GaloisInc/daedalus/blob/fe088fefc553e37974b47345a1da4b49a10da7f7/bin-exp/pratt-bin-expr.ddl#L53-L69[directly encode]

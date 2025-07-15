@@ -31,7 +31,7 @@ Release: release:2023-04-03[] (`v0.3.1459`)
 
 * pr:14465[] (first contribution) add limited syntax support for return type notations.
 * pr:14425[] (first contribution) fix typo in comment.
-* pr:14410[] add config to specifiy LRU capacities for all queries.
+* pr:14410[] add config to specify LRU capacities for all queries.
 * pr:14445[] introduce `StructFlags`.
 * pr:14448[] don't expose `InferenceTable` outside of `hir-ty`.
 * pr:14439[] set durability to high for `enable_proc_attr_macros` input.
