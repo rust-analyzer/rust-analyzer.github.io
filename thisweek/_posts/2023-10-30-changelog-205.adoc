@@ -10,7 +10,7 @@ Release: release:2023-10-30[] (`v0.3.1713`)
 
 * pr:15809[] make `extract_variable` assist easier to trigger:
 +
-image::https://user-images.githubusercontent.com/71162630/278656006-96be2de4-42c9-4b24-b3e1-8b3e3a2da1d9.gif["Screen recording showing the assist triggerring on a method call, if statement and array, without selecting them first."]
+image::https://user-images.githubusercontent.com/71162630/278656006-96be2de4-42c9-4b24-b3e1-8b3e3a2da1d9.gif["Screen recording showing the assist triggering on a method call, if statement and array, without selecting them first."]
 * pr:15780[] import trait if needed for `unqualify_method_call` assist:
 +
 image::https://user-images.githubusercontent.com/71162630/276295073-72ffbda4-1615-4413-836e-480eb52e9728.gif["Screen recording showing an import being added when the assist is used."]

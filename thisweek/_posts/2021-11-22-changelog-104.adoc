@@ -46,5 +46,5 @@ image::https://user-images.githubusercontent.com/5489149/142375722-4a385216-494b
 * pr:10778[] Skip test/bench attr expansion in resolution instead of collection
 * pr:10781[] Do not use reference search in `runnables::related_tests`
 * pr:10789[] Check for derive attributes by item path, not `derive` identifier
-* pr:10819[] Replace some `Vec` occurences with `Box` 
+* pr:10819[] Replace some `Vec` occurrences with `Box` 
 

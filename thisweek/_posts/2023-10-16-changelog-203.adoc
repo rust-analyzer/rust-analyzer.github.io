@@ -23,7 +23,7 @@ video::https://user-images.githubusercontent.com/52933714/271883958-2803ff58-fde
 
 * pr:15744[] (first contribution) add diagnostics for char and byte literal errors:
 +
-image::https://user-images.githubusercontent.com/308347/275412431-12ddaf06-1d10-4e77-b566-ba8a1b9aff0d.png["Screenshot showing errros on invalid char and byte literal"]
+image::https://user-images.githubusercontent.com/308347/275412431-12ddaf06-1d10-4e77-b566-ba8a1b9aff0d.png["Screenshot showing errors on invalid char and byte literal"]
 * pr:15713[] offer prefix match flyimport completions for one and two character paths:
 +
 image::https://user-images.githubusercontent.com/308347/275410445-6db5ecf5-8ba2-47fb-82fb-508176a5207a.png["Screenshot showing `IpAddr`, `Ipv4Addr` and `Ipv6Addr` completions for `Ip`"]

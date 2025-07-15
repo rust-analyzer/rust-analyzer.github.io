@@ -34,20 +34,20 @@ image::https://user-images.githubusercontent.com/94326797/294750534-d6bbc0de-52a
 * pr:16139[] (first contribution) give methods a container name.
 * pr:16136[] make the expected completion type a tad smarter with function types:
 +
-image::https://user-images.githubusercontent.com/29989290/291000125-c06d6c93-5cac-4ebe-a93b-923017a6ae8c.png["Screenshot showing no parantheses when completing a struct field with a function pointer of matching type"]
+image::https://user-images.githubusercontent.com/29989290/291000125-c06d6c93-5cac-4ebe-a93b-923017a6ae8c.png["Screenshot showing no parentheses when completing a struct field with a function pointer of matching type"]
 * pr:16258[], pr:16261[], pr:16267[], pr:16270[] rewrite and optimize `ImportMap::search_dependencies`.
 * pr:16268[] remove result limit for trait-importing method completions.
 * pr:16153[] tell user that `linkedProjects` is set when failing to discover projects.
 * pr:16234[] fix focus range in attribute/derive upmapping.
 * pr:16085[] fix type inference with `IndexMut` returning references.
-* pr:15810[] fix panic with macros in "Convert boolean to enum" and "Promot local to constant" assists.
+* pr:15810[] fix panic with macros in "Convert boolean to enum" and "Promote local to constant" assists.
 * pr:16112[], pr:16264[] rewrite "Generate delegate trait" assist.
 * pr:16067[] make "Introduce named generic" assist work with nested types.
 * pr:16068[] pick up new generic names on conflict in "Introduce named generic".
 * pr:16114[] fix `Self` type replacement in "Inline function".
 * pr:16199[] resolve `Self` in "Extract struct from enum variant".
-* pr:16049[] don't complete callable parantheses in struct literals.
-* pr:16241[] give a userful error when `rustc` cannot be found in explicit sysroot.
+* pr:16049[] don't complete callable parentheses in struct literals.
+* pr:16241[] give a useful error when `rustc` cannot be found in explicit sysroot.
 * pr:16285[] fix panic on unaligned `#[repr(packed)]`.
 * pr:16062[] update `rust-analyzer.cargo.check` documentation references to `rust-analyzer.check`.
 

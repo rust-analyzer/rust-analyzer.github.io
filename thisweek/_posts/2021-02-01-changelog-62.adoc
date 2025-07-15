@@ -50,4 +50,4 @@ image::https://user-images.githubusercontent.com/11014119/105610083-8f208100-5de
 * pr:7471[] force Xcode version on CI.
 * pr:7472[] easier to debug timeouts in tests.
 * pr:7491[] handle MBE parse errors during parsing, not matching.
-* pr:7494[] simpilfy mbe parsing.
+* pr:7494[] simplify mbe parsing.

@@ -187,7 +187,7 @@ One wrinkle here is that rustc test suite at the moment consists predominantly o
 Such a test suite is ideal for testing conformance and catching regressions, but is not really well suited for rapid TDD.
 I think we should make an effort to build a unit test suite a-la rust-analyzer, such that it's easy, for example, to test name resolution without building the type checker, and which doesn't require stdlib.
 
-== Scaling Maintainance
+== Scaling Maintenance
 
 Finally, all changes here represent deep cuts into an existing body of software.
 Pushing such ambitious projects to completion require people, who can dedicate significant amounts of their time and energy.

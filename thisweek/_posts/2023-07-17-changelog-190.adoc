@@ -19,7 +19,7 @@ Release: release:2023-07-17[] (`v0.3.1591`)
 * pr:15257[] (first contribution) ignore `Content-Length` header case in `lsp-server`.
 * pr:15270[] (first contribution) make fields of `mir::Terminator` public.
 * pr:15292[] (first contribution) fix typo in command line help.
-* pr:15295[] (first contribution) fix `rust-analzyer ssr` help message.
+* pr:15295[] (first contribution) fix `rust-analyzer ssr` help message.
 * pr:15251[] skip building subtrees for built-in derives.
 * pr:15231[], pr:15260[] migrate more assists to use the structured snippet API.
 * pr:15263[] enable `derive` feature for `serde` in `lsp-server`.

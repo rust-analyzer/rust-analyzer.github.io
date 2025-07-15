@@ -34,7 +34,7 @@ image::https://user-images.githubusercontent.com/16928427/282953072-09de6a1c-6f3
 image::https://user-images.githubusercontent.com/71162630/288081867-bb18707f-3278-435d-a938-ccff4c685586.png["Screenshot showing drop hints appearing now after the semicolon"]
 * pr:16024[] fix runnables working directory on Windows.
 * pr:16054[] fix token downmapping being quadratic.
-* pr:16016[] don't insert parantheses around fields in struct literals.
+* pr:16016[] don't insert parentheses around fields in struct literals.
 * pr:16041[] fix `WideChar` offsets calculation in `line-index`.
 * pr:16073[] replace `doc_comments_and_attrs` with `collect_attrs`.
 * pr:16035[] fix diagnostics panicking when resolving to different files due to macros.

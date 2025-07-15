@@ -26,7 +26,7 @@ Release: release:2025-04-14[] (`v0.3.2379`)
 * pr:19566[] use the `callable_item_signature` query in `dyn`-compatibility checks.
 * pr:19550[] turn `LifetimeRef` into an enum.
 * pr:19562[] tweak invalid signature bitflags.
-* pr:19573[] render sigantures in "View HIR" command.
+* pr:19573[] render signatures in "View HIR" command.
 * pr:19512[] fix some `stdx` lints.
 * pr:19559[] switch to Rust 1.86.
 * pr:19565[] add `prime-caches` subcommand.

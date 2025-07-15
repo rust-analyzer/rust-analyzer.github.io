@@ -21,7 +21,7 @@ Release: release:2024-03-25[] (`v0.3.1896`)
 * pr:16919[] handle `self::super` in paths.
 * pr:16880[] use `--workspace` and `--no-fail-fast` in test explorer.
 * pr:16868[] handle attributes when auto-closing left braces.
-* pr:16822[] improve resolution for inlay hints targetting the same position.
+* pr:16822[] improve resolution for inlay hints targeting the same position.
 * pr:16871[], pr:16886[] skip problematic cyclic dev-dependencies.
 * pr:16885[] improve parser recovery for match arms.
 * pr:16812[] fix "Go to implementation" for impls inside blocks.

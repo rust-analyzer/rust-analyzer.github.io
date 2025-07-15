@@ -62,7 +62,7 @@ image::https://user-images.githubusercontent.com/308347/111139619-03c2a100-858a-
 * pr:7984[] improve version string display.
 * pr:7997[] fix folding range kind.
 * pr:7999[] handle `cfg_attr` gating multiple attributes.
-* pr:8005[] handle ill-formed macros propely.
+* pr:8005[] handle ill-formed macros properly.
 * pr:8010[] attach trivia to `ast::Union` nodes.
 * pr:8017[] keep type params in doc-test paths.
 

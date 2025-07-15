@@ -127,7 +127,7 @@ Django web framework has a nice pattern to implement this -- function based view
 ----
 
 def my_form(request):
-  ctx = fetch_stuff_from_postgress()
+  ctx = fetch_stuff_from_postgres()
   if request.method == 'POST':
     # apply changes ...
   else:

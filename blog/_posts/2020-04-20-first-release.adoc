@@ -142,7 +142,7 @@ Extend selection kbd:[Shift+Alt+->]::
 This is again a feature which is relatively simple to implement, but a huge helper.
 It progressively selects larger and larger expressions, statements and items.
 It works exceptionally well in combination with multiple cursors.
-One hidden capability of this feature is a navigation help: if you are in a middle of a function, you can get to the beginning of it by extending seleciton several times, and then pressing kbd:[<-].
+One hidden capability of this feature is a navigation help: if you are in a middle of a function, you can get to the beginning of it by extending selection several times, and then pressing kbd:[<-].
 
 video::/assets/blog/first-release/extend-selection.webm[options="autoplay,loop",width=100%]
 

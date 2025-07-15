@@ -15,7 +15,7 @@ Release: release:2024-08-12[] (`v0.3.2070`)
 
 == Fixes
 
-* pr:17802[] supress type mismatches in calls with mismatched argument counts.
+* pr:17802[] suppress type mismatches in calls with mismatched argument counts.
 * pr:17823[] attach unconfigured diagnostics to the right file for modules.
 * pr:17784[] support inlay hints for more expressions with labels.
 * pr:17844[] respect non-`std` preference in `find_path`.

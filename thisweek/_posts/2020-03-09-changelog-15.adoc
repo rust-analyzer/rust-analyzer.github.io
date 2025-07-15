@@ -18,7 +18,7 @@ image::https://user-images.githubusercontent.com/906069/76160803-92a60d80-612d-1
 +
 image::https://user-images.githubusercontent.com/1711539/76219227-cd837080-6215-11ea-8d0d-a9447b1d26b1.gif[]
 +
-Insertion of snippets is controled by `completion.insertion.add-argument-snippets` feature flag.
+Insertion of snippets is controlled by `completion.insertion.add-argument-snippets` feature flag.
 
 * pr:3498[] when completing function call, trigger parameter hints automatically.
 * pr:3500[] more concise mode for parameter hints:

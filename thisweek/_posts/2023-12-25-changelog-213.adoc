@@ -26,7 +26,7 @@ Release: release:2023-12-25[] (`v0.3.1782`)
 
 == Internal Improvements
 
-* pr:16182[] update world symbols request definiton, prefer focus range for macros.
+* pr:16182[] update world symbols request definition, prefer focus range for macros.
 * pr:16183[] clean up `Expander` a bit.
 * pr:16143[] move proc macro knowledge out of `base-db` and into `hir-expand`.
 * pr:16145[] split out a `span` crate.

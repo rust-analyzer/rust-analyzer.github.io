@@ -46,7 +46,7 @@ image::https://user-images.githubusercontent.com/308347/128693801-51eeec03-55e5-
 * pr:9770[] downgrade `notify` to fix building on NetBSD.
 * pr:9773[] improve the "Extract function" assist.
 * pr:9775[] handle ownership in "Extract function".
-* pr:9786[] fix detection of macro files in the inactive code diagostic.
+* pr:9786[] fix detection of macro files in the inactive code diagnostic.
 * pr:9788[] don't move locals defined outside loops in "Extract function".
 * pr:9780[] support `exclusive_range_pattern`.
 * pr:9790[] handle generics correctly in "Extract type alias".

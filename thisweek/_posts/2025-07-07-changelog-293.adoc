@@ -28,7 +28,7 @@ Release: release:2025-07-07[] (`v0.3.2527`)
 
 * pr:20175[] (first contribution) remove special handling for box patterns in `match_check`.
 * pr:20124[] remove last use of `rustc_pattern_analysis::Captures`.
-* pr:20156[] restructure proc macro loading erros.
+* pr:20156[] restructure proc macro loading errors.
 * pr:20157[] re-enable fixpoint iteration for variance computation.
 * pr:20184[] remove dead field from `InferenceContext`.
 * pr:20169[] skip unnecessary ``BodySourceMap``'s `eq`.

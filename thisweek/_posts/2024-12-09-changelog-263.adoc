@@ -16,7 +16,7 @@ Release: release:2024-12-09[] (`v0.3.2212`)
 
 == Fixes
 
-* pr:18610[] add implict unsafety inlay hints for extern blocks.
+* pr:18610[] add implicit unsafety inlay hints for extern blocks.
 * pr:18589[] advertise completions and inlay hints resolve based on the client capabilities.
 * pr:18630[] temporarily disable completion resolve support for Helix and Neovim.
 * pr:18618[] fix parsing of integer/keyword name references in various places.

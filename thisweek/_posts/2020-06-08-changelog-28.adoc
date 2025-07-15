@@ -58,7 +58,7 @@ image::https://user-images.githubusercontent.com/1711539/84036167-22fa2580-a99d-
 * pr:4717[] compute assists text edits lazily.
 * pr:4703[] document review process and contribution guidelines.
 * pr:4772[] document certain high-level internal architecture invariants.
-* pr:4688[] document initilizationOptions used by rust-analyzer.
+* pr:4688[] document initializationOptions used by rust-analyzer.
 * pr:4710[] make LSP extension for running tests & binaries less rust-specific.
 * pr:4723[] derive local roots from workspace configuration.
 * pr:4724[] rename WorldState -> GlobalState.

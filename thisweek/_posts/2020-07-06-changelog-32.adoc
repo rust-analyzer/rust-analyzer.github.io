@@ -83,4 +83,4 @@ rust-analyzer ssr '$a.foo($b) ==> bar($a, $b)'
 * pr:5193[] move `cargo metadata` off the main loop.
 * pr:5199[], pr:5200[], pr:5201[], pr:5205[], pr:5214[], pr:5215[], pr:5219[], pr:5221[], pr:5226[] refactor completion tests.
 * pr:5197[] SSR internal refactors.
-* pr:5222[] add "rehighlight after adding a new top-level function" to the set of bechmarks.
+* pr:5222[] add "rehighlight after adding a new top-level function" to the set of benchmarks.

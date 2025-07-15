@@ -15,7 +15,7 @@ https://github.com/sponsors/rust-analyzer[GitHub Sponsors].
 * pr:10951[] (first contribution) add assist to generate documentation templates:
 +
 image::https://user-images.githubusercontent.com/308347/145762247-8f6f3f01-2eec-494d-a18d-3c4d163118a1.gif[]
-* pr:10877[] make syntax hightlighting linear.
+* pr:10877[] make syntax highlighting linear.
 
 == Fixes
 

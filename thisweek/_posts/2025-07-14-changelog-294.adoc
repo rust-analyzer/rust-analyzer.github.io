@@ -19,7 +19,7 @@ image::https://github.com/user-attachments/assets/0f1918e8-3545-4cd0-839e-fd5c73
 * pr:20192[] fix a panic in documentation rendering.
 * pr:20180[] always bump in the parser in `err_and_bump`.
 * pr:20200[] revert "re-enable fixpoint iteration for variance computation".
-* pr:20212[] fix `dyn` inlay hints with parantheses and don't display them on HRTBs.
+* pr:20212[] fix `dyn` inlay hints with parentheses and don't display them on HRTBs.
 * pr:20210[] make `naked_asm!` safe to call and fix `global_asm!`.
 * pr:20232[] normalize projection types before const eval.
 * pr:20235[] fix `where` clause position in trait associated item completion.

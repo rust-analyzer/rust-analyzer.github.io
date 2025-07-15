@@ -32,7 +32,7 @@ image::https://user-images.githubusercontent.com/1786438/117831361-c4a48980-b274
 * pr:8820[] return absolute paths in `find_path` if crate start is ambiguous.
 * pr:8823[] enable task lists in `pulldown_cmark`.
 * pr:8814[] keep doc comments and outer attributes in "Move module to file" assist.
-* pr:8830[] implement bulit-in `concat_idents!` macro.
+* pr:8830[] implement built-in `concat_idents!` macro.
 * pr:8831[] apply `async` semantic token modifier to the `async`/`await` keywords.
 * pr:8840[] fix false positive "Missing match arm" when a tuple pattern is shorter than scrutinee type.
 * pr:8845[] add default type parameters on "Generate `Default` from `new` function".
