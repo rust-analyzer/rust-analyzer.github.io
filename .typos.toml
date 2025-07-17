@@ -1,0 +1,14 @@
+[default]
+extend-ignore-re = [
+    "JodChild",
+    "JodGroupChild",
+    "Lukas Wirth",
+    "\\*\\*S\\*\\*tructural \\*\\*S\\*\\*earch \\*\\*R\\*\\*eplace",
+]
+
+[files]
+extend-exclude = [
+    "css/*.min.css",
+    "css/*.css.map",
+    "fonts/*",
+]
