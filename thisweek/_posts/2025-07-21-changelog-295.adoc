@@ -1,0 +1,27 @@
+= Changelog #295
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:58e507d80728f6f32c93117668dc4510ba80bac9[] +
+Release: release:2025-07-21[] (`v0.3.2547`)
+
+== New Features
+
+* pr:19783[] add "Generate `From` impl from single field" assist.
+* pr:20265[] support `cfg_select!` for the standard library.
+
+== Fixes
+
+* pr:20238[] infer lifetimes for GATs in expression/pattern positions.
+* pr:19917[] handle `AsRef` and `Borrow` in "Generate `IndexMut` impl from ``Index``".
+* pr:20247[] transform tail expression `&` to `&mut` in "Generate `TraitMut` impl from ``Trait``".
+* pr:20255[] fix bounds in "Generate `Deref` impl".
+
+
+== Internal Improvements
+
+* pr:20233[] (first contribution) expand `lsp-server` example.
+* pr:20178[] clean up cargo config querying.
+* pr:20234[] remove `{ConstParam,TypeParam}::remove_default`.
+* pr:20246[] add `AsMut` to `minicore` prelude.
