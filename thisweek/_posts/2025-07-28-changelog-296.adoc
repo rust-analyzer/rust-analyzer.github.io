@@ -1,0 +1,34 @@
+= Changelog #296
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:db02cdc7fc8b0e0b9aa1be4110a74620bbac1f98[] +
+Release: release:2025-07-28[] (`v0.3.2555`)
+
+== New Features
+
+* pr:19938[] add "Generate impl for type" assist.
+
+== Fixes
+
+* pr:20271[] disable tests in flycheck if `cfg.setTest` is set to `false`.
+* pr:20262[] fix search of raw labels and lifetimes.
+* pr:20273[] apply adjustments to patterns and expressions when doing pattern analysis.
+* pr:20281[] parse `for<'a> [const]`.
+* pr:20318[] ignore `Destruct` bounds again.
+* pr:20290[], pr:20315[] use temporary directory for copied lockfiles.
+* pr:20319[] consider all produced artifacts for proc macro dylib search.
+* pr:20302[] fix doc-comment folding with multi-line parameter lists.
+* pr:20285[] use `Self` when renaming `self` parameter.
+* pr:20256[] support `Deref` in `generate_mut_trait_impl`.
+* pr:20297[] fix whitespace in `generate_trait_from_impl`.
+
+== Internal Improvements
+
+* pr:20272[] (first contribution) fix size asserts on `x86_64-unknown-linux-gnux32`.
+* pr:20293[], pr:20306[], pr:20307[], pr:20270[] migrate `replace_derive_with_manual_impl`, `add_missing_impl_members`, `convert_to_guarded_return`, `extract_expressions_from_format_string` and `generate_new` to `SyntaxEditor`.
+* pr:20269[] migrate `AstNodeEdit::Indent` to `SyntaxEditor`.
+* pr:20289[] remove `ExpressionStoreDiagnostics::MacroError`.
+* pr:20278[] fupport filtering in `analysis-stats` MIR lowering.
+* pr:20280[], pr:20282[], pr:20279[] set up `rustc-josh-sync`.
