@@ -30,8 +30,7 @@ Release: release:2025-04-21[] (`v0.3.2431`)
 * pr:19616[] make `hir-ty` non-diagnostic queries transparent (saves 56 MB on `analysis-stats self`).
 * pr:19617[] make `HirFileId`, `EditionedFileId` and macro files `salsa` structs (saves 165 MB on `analysis-stats self`).
 * pr:19591[] use `ast::TokenTree` in `make::expr_macro`.
-* pr:19572[] migrate `expand_rest_pattern` to `SyntaxEditor`.
-* pr:19568[] migrate `destructure_struct_binding` to `SyntaxEditor`.
+* pr:19572[] migrate `expand_rest_pattern` and `destructure_struct_binding` assists to `SyntaxEditor`.
 * pr:19569[] return correct types for `make::expr_*` methods.
 * pr:19600[] pin the `rustc` used for the `proc-macro-src` CI job.
 * pr:19521[] cancel parallel CI jobs if tests fail.

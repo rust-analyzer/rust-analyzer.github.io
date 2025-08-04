@@ -35,9 +35,7 @@ In addition, this version drops support for toolchains older than 1.82.
 
 * pr:19239[] (first contribution) configure out performance counters on `ohos` to fix compilation.
 * pr:19096[] allow `rust-project.json` to specify sysroot workspace.
-* pr:19225[] migrate `remove_mut`, `remove_parentheses` and `remove_unused_param` to `SyntaxEditor`.
-* pr:19171[] migrate `apply_demorgan` to `SyntaxEditor`.
-* pr:19253[] migrate `convert_bool_then` to `SyntaxEditor`.
+* pr:19225[], pr:19171[], pr:19253[] migrate `remove_mut`, `remove_parentheses`, `remove_unused_param`, `apply_demorgan` and `convert_bool_then` assists to `SyntaxEditor`.
 * pr:19251[] remove syntax editing from parenthesis computation.
 * pr:19257[] clean up syntax highlighting.
 * pr:19219[] vendor `always-assert` into `stdx`.

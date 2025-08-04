@@ -27,7 +27,7 @@ Release: release:2025-02-17[] (`v0.3.2308`)
 
 * pr:19110[] (first contribution) `panic_context`.
 * pr:19142[] spawn toolchain querying processes in parallel.
-* pr:19155[] migrate `add_missing_match_arms` to `SyntaxEditor`.
+* pr:19155[] migrate `add_missing_match_arms` assist to `SyntaxEditor`.
 * pr:19163[] stabilize sort order of `related_tests`.
 * pr:19161[], pr:19166[] improve sort order of runnables.
 * pr:19159[] set `RUSTUP_TOOLCHAIN` when loading sysroot workspace.

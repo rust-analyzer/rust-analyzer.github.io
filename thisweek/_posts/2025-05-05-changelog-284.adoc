@@ -22,7 +22,7 @@ Release: release:2025-05-05[] (`v0.3.2449`)
 
 * pr:19685[] (first contribution) add PGO support to `xtask install`.
 * pr:19713[] clean up `cfg` check handling in expression store lowering.
-* pr:19469[] migrate `merge_imports`, `unmerge_imports` and `let_else_to_match` to `SyntaxEditor`.
+* pr:19469[] migrate `merge_imports`, `unmerge_imports` and `let_else_to_match` assists to `SyntaxEditor`.
 * pr:19708[] de-`Arc` language item queries.
 * pr:19712[] clean up cache priming cancellation handling.
 * pr:19731[] simplify macro call id construction.

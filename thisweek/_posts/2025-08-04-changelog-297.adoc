@@ -1,0 +1,30 @@
+= Changelog #297
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:8d75311400a108d7ffe17dc9c38182c566952e6e[] +
+Release: release:2025-08-04[] (`v0.3.2563`)
+
+== New Features
+
+* pr:20351[] change callers to use method call syntax when renaming a parameter to `self`.
+
+== Fixes
+
+* pr:20313[] fix variable substitution in `runnables.extraEnv`.
+* pr:20333[] do not require all rename definitions to be renameable.
+* pr:20336[] check for snippet cap in `generate_mut_trait_impl`.
+* pr:20337[] fix bounds display with `impl Trait`.
+* pr:20300[] don't add `Panics` section for `debug_assert!`.
+* pr:20327[] don't show `$saved_file` literally in IDE status updates.
+
+== Internal Improvements
+
+* pr:20342[] reorganize `proc-macro-srv`, add `--format` and `--version` args.
+* pr:20311[], pr:20314[], pr:20364[], pr:20368[], pr:20371[] migrate `convert_tuple_struct_to_named_struct`, `inline_type_alias`, `convert_from_to_tryfrom`, `generate_delegate_methods` and `generate_trait_from_impl` assists to `SyntaxEditor`.
+* pr:20303[], pr:20372[] migrate `path_transform` to `SyntaxEditor`.
+* pr:20345[] add `SyntaxEditor::delete_all`.
+* pr:20349[] fix new Clippy lints.
+* pr:20154[] improve settings tree descriptions.
+* pr:20335[] use GitHub app for authenticating sync PRs.

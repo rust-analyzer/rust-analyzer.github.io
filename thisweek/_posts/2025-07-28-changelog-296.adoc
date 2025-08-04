@@ -27,7 +27,7 @@ Release: release:2025-07-28[] (`v0.3.2555`)
 == Internal Improvements
 
 * pr:20272[] (first contribution) fix size asserts on `x86_64-unknown-linux-gnux32`.
-* pr:20293[], pr:20306[], pr:20307[], pr:20270[] migrate `replace_derive_with_manual_impl`, `add_missing_impl_members`, `convert_to_guarded_return`, `extract_expressions_from_format_string` and `generate_new` to `SyntaxEditor`.
+* pr:20293[], pr:20306[], pr:20307[], pr:20270[] migrate `replace_derive_with_manual_impl`, `add_missing_impl_members`, `convert_to_guarded_return`, `extract_expressions_from_format_string` and `generate_new` assists to `SyntaxEditor`.
 * pr:20269[] migrate `AstNodeEdit::Indent` to `SyntaxEditor`.
 * pr:20289[] remove `ExpressionStoreDiagnostics::MacroError`.
 * pr:20278[] fupport filtering in `analysis-stats` MIR lowering.

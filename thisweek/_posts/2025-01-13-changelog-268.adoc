@@ -34,8 +34,7 @@ Release: release:2025-01-13[] (`v0.3.2264`)
 
 == Internal Improvements
 
-* pr:18855[] migrate `if-let` replacement assists to `SyntaxEditor`.
-* pr:18524[] migrate `(un)wrap_return_type` assists to `SyntaxEditor`.
+* pr:18855[], pr:18524[] migrate `if-let` replacement and `(un)wrap_return_type` assists to `SyntaxEditor`.
 * pr:18902[] add `Definition::Crate`.
 * pr:18921[] compute inlay hint text edits lazily.
 * pr:18923[] compute inlay hint tooltips lazily.
