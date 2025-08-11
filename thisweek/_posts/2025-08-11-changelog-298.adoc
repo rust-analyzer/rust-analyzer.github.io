@@ -1,0 +1,40 @@
+= Changelog #298
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:4e147e787987fdb1baf081bd5c60bedfb0aabe16[] +
+Release: release:2025-08-11[] (`v0.3.2571`)
+
+== An Update on the Next Trait Solver
+
+We are very close to switching from `chalk` to the next trait solver, which will be shared with `rustc`.
+`chalk` is _de-facto_ unmaintained, and sharing the code with the compiler will greatly improve trait solving accuracy and fix long-standing issues in `rust-analyzer`.
+This will also let us enable more on-the-fly diagnostics (currently marked as experimental), and even significantly improve performance.
+
+However, in order to avoid regressions, we will suspend the weekly releases until the new solver is stabilized.
+In the meanwhile, please test the pre-release versions (nightlies) and report any issues or improvements you notice, either on https://github.com/rust-lang/rust-analyzer/issues[GitHub Issues], https://github.com/rust-lang/rust-analyzer/discussions/20426[GitHub Discussions], or https://rust-lang.zulipchat.com/#narrow/channel/185405-t-compiler.2Frust-analyzer/topic/New.20Trait.20Solver.20feedback[Zulip].
+
+== Fixes
+
+* pr:20381[] check expected type for assignments in completions.
+* pr:20382[] correctly go to `impl From` from `into()` even inside macros.
+* pr:20387[] do not remove the original token when descending into derives.
+* pr:20412[] properly handle names matching identifiers in `generate_function`.
+* pr:20418[] fix `extract_expressions_from_format_string` on `write!` calls.
+* pr:20354[] remove no-op calls in `remove_dbg`.
+* pr:20384[] fix external docs URL for exported macros.
+
+== Internal Improvements
+
+* pr:20417[] (first contribution) fix parsing of trait bound polarity and `for`-binders.
+* pr:20419[] make flycheck generational.
+* pr:20385[] migrate `expand_glob_import` assist to `SyntaxEditor`.
+* pr:20373[] generate an `ast::Module`, not `String`, in `extract_module`.
+* pr:20383[] remove `ted` from `replace_named_generic_with_impl`.
+* pr:20380[] remove `add_attr` from `edit_in_place` because it use `ted`.
+* pr:20409[] add `write!` and `writeln!` to `minicore`.
+* pr:20400[] disable error reporting when clamping a position.
+* pr:20393[] fix non-LSP compliant `Response` definition.
+* pr:20392[] report the incorrect payload when failing to deserialize LSP messages.
+* pr:20389[] slim down compile-time artifact progress reports.
