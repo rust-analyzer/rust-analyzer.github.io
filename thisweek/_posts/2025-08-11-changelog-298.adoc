@@ -4,7 +4,7 @@
 :page-layout: post
 
 Commit: commit:4e147e787987fdb1baf081bd5c60bedfb0aabe16[] +
-Release: release:2025-08-11[] (`v0.3.2575`)
+Release: release:2025-08-11[] (`v0.3.2577`)
 
 == An Update on the Next Trait Solver
 
@@ -14,6 +14,10 @@ This will also let us enable more on-the-fly diagnostics (currently marked as ex
 
 However, in order to avoid regressions, we will suspend the weekly releases until the new solver is stabilized.
 In the meanwhile, please test the pre-release versions (nightlies) and report any issues or improvements you notice, either on https://github.com/rust-lang/rust-analyzer/issues[GitHub Issues], https://github.com/rust-lang/rust-analyzer/discussions/20426[GitHub Discussions], or https://rust-lang.zulipchat.com/#narrow/channel/185405-t-compiler.2Frust-analyzer/topic/New.20Trait.20Solver.20feedback[Zulip].
+
+== New Features
+
+* pr:20420[] (first contribution) add config option to exclude locals from document symbol search.
 
 == Fixes
 
@@ -28,7 +32,7 @@ In the meanwhile, please test the pre-release versions (nightlies) and report an
 == Internal Improvements
 
 * pr:20417[] (first contribution) fix parsing of trait bound polarity and `for`-binders.
-* pr:20419[], pr:20429[] make flycheck generational.
+* pr:20419[], pr:20429[], pr:20434[] make flycheck generational.
 * pr:20385[] migrate `expand_glob_import` assist to `SyntaxEditor`.
 * pr:20373[] generate an `ast::Module`, not `String`, in `extract_module`.
 * pr:20383[] remove `ted` from `replace_named_generic_with_impl`.
