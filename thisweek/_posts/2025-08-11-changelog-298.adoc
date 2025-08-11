@@ -4,7 +4,7 @@
 :page-layout: post
 
 Commit: commit:4e147e787987fdb1baf081bd5c60bedfb0aabe16[] +
-Release: release:2025-08-11[] (`v0.3.2571`)
+Release: release:2025-08-11[] (`v0.3.2575`)
 
 == An Update on the Next Trait Solver
 
@@ -28,7 +28,7 @@ In the meanwhile, please test the pre-release versions (nightlies) and report an
 == Internal Improvements
 
 * pr:20417[] (first contribution) fix parsing of trait bound polarity and `for`-binders.
-* pr:20419[] make flycheck generational.
+* pr:20419[], pr:20429[] make flycheck generational.
 * pr:20385[] migrate `expand_glob_import` assist to `SyntaxEditor`.
 * pr:20373[] generate an `ast::Module`, not `String`, in `extract_module`.
 * pr:20383[] remove `ted` from `replace_named_generic_with_impl`.
