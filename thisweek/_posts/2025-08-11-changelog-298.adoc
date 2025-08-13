@@ -3,7 +3,7 @@
 :experimental:
 :page-layout: post
 
-Commit: commit:4e147e787987fdb1baf081bd5c60bedfb0aabe16[] +
+Commit: commit:9db05508ed08a4c952017769b45b57c4ad505872[] +
 Release: release:2025-08-11[] (`v0.3.2577`)
 
 == An Update on the Next Trait Solver
