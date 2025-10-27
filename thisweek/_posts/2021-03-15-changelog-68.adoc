@@ -90,7 +90,7 @@ image::https://user-images.githubusercontent.com/308347/111139619-03c2a100-858a-
 * pr:7998[], pr:8001[] use more Chalk IDs.
 * pr:8002[] create `TraitEnvironment` through a query.
 * pr:8003[] move type lowering methods to `TyLoweringContext`.
-* pr:8006[] simpify MBE bindings builder.
+* pr:8006[] simplify MBE bindings builder.
 * pr:8011[] add `--no-sysroot` flag for `analysis-stats`.
 * pr:8012[], pr:8013[] replace `xtask lint` with `cargo` alias.
 * pr:8016[] more Chalk adaptations.

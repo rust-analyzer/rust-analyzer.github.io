@@ -14,7 +14,7 @@ changes since last month include:
 - pr:1472[] completion for type aliases.
 - pr:1544[], pr:1550[] mutable variables are underlined.
 - pr:1476[] `add_impl_members` adds types.
-- pr:1478[], pr:1499[] sumbodules with raw names and `#[path]` are resolved.
+- pr:1478[], pr:1499[] submodules with raw names and `#[path]` are resolved.
 - pr:1496[] correctly add obligations in function methods.
 - pr:1501[] initial type inference for `for` loops.
 - pr:1515[] use bounds on generic parameters during type inference.

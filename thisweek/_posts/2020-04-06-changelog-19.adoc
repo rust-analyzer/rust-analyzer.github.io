@@ -70,7 +70,7 @@ image::https://user-images.githubusercontent.com/1711539/78560584-9a350100-7816-
 
 * pr:3785[] attach doc comments to declaration even if there's a blank line after comment.
 * pr:3781[], pr:3819[] make **Run** action correctly handle the case with several major versions of the package in the crate graph.
-* pr:3786[] **Fill Match Arms** assits does not leave the floating comma behind.
+* pr:3786[] **Fill Match Arms** assist does not leave the floating comma behind.
 * pr:3797[] don't show chaining hints for record literals and unit structs.
 * pr:3844[] make sure that default configuration values are honored.
 * pr:3857[] fix inference of function pointer return types.

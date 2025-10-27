@@ -102,7 +102,7 @@ Release: release:2025-10-27[] (`v0.3.2658`)
 * pr:20905[] fix array inhabitedness check.
 * pr:20889[] improve field completion parentheses heuristic.
 * pr:20658[] complete `else` in more expressions.
-* pr:20611[] add parantheses for precedence in `replace_arith_op`.
+* pr:20611[] add parentheses for precedence in `replace_arith_op`.
 * pr:20912[] complete `let` before expression in `if`.
 * pr:20764[] handle `if`-`let` in `convert_to_guarded_return`.
 * pr:20712[] handle shorthand field patterns in `destructure_tuple_binding`.

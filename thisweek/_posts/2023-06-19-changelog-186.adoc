@@ -26,4 +26,4 @@ Release: release:2023-06-19[] (`v0.3.1557`)
 * pr:15065[] do not allocate unnecessarily when importing macros from parent modules.
 * pr:15067[] add more context to "overly long loop turn" messages.
 * pr:15066[] analyze all bodies in `analysis-stats`, not just functions.
-* pr:15069[] add body lowering step, track time of each step separtely.
+* pr:15069[] add body lowering step, track time of each step separately.
