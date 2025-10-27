@@ -1,0 +1,148 @@
+= Changelog #299
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:049767e6faa84b2d1a951d8f227e6ebd99d728a2[] +
+Release: release:2025-10-27[] (`v0.3.2658`)
+
+== New Features
+
+* pr:20854[] feat (first contribution) parse script frontmatter.
+* pr:20837[] feat (first contribution) expose `addConfiguration` API from the Code extension.
+* pr:20329[], pr:20445[], pr:20446[], pr:20454[], pr:20470[], pr:20447[], pr:20496[], pr:20497[], pr:20502[], pr:20506[], pr:20523[], pr:20527[], pr:20537[], pr:20545[], pr:20553[], pr:20563[], pr:20586[], pr:20609[], pr:20578[], pr:20647[], pr:20645[], pr:20649[], pr:20654[], pr:20665[], pr:20671[], pr:20677[], pr:20664[], pr:20717[], pr:20728[], pr:20733[], pr:20735[], pr:20738[], pr:20765[], pr:20777[], pr:20785[], pr:20814[], pr:20834[], pr:20841[], pr:20867[], pr:20873[], pr:20882[], pr:20888[], pr:20896[], pr:20893[], pr:20895[] switch from Chalk to the next trait solver.
+* pr:20632[] support navigation on primitives.
+* pr:20760[] add `all`, `any` and `not` completions in `#[cfg]`.
+* pr:20806[], pr:20835[] log flycheck `stdout` and `stderr` to files.
+* pr:19771[] add "Generate blanket trait impl" assist.
+* pr:20705[] add "Flip range expression" assist.
+* pr:19918[] add "Remove `else` branches" assist.
+* pr:20855[] improve fixture support.
+
+== Fixes
+
+* pr:20583[] (first contribution) add `rust-analyzer.semanticHighlighting.comments.enable` option.
+* pr:20697[], pr:20745[] (first contribution) fix negative literals in const generics.
+* pr:19867[] (first contribution) allow `&raw [mut | const]` for union fields in safe code.
+* pr:20432[] (first contribution) improve identifier pattern handling in assists.
+* pr:20891[] (first contribution) add `negation` semantic token type.
+* pr:20425[] (first contribution) add parser heuristic to warn on unterminated strings.
+* pr:20520[] add option to hide reborrows in adjustment inlay hints.
+* pr:20721[] implement fallback properly.
+* pr:20755[] add `#[doc = include_str!(…)]` completion.
+* pr:20423[] make import sorting order follow the 2024 edition style.
+* pr:20801[] small fixes for import insertion.
+* pr:20866[] run `cargo metadata` on sysroot right from its path.
+* pr:20554[] improve handling of the `env!` macro.
+* pr:20587[] deduplicate methods in completion by function ID and not by name.
+* pr:20803[] replace `--show-output` task defaults with `--nocapture`.
+* pr:20459[] track diagnostic generations per package.
+* pr:20689[] make flycheck clearing dependency-aware.
+* pr:20635[] don't trigger two flychecks when saving files that are part of targets.
+* pr:20402[] add more workarounds for incorrect startup diagnostics.
+* pr:20787[] fix spurious `incorrect_generics_len` on generic enum variants used through type aliases.
+* pr:20770[] don't trigger `trait-impl-incorrect-safety` on unresolved traits.
+* pr:20642[] make `#[target_feature]` safe on WASM.
+* pr:20504[] avoid infinite recursion while lowering associated type bounds from supertraits.
+* pr:20720[] prevent rustup from automatically installing toolchains.
+* pr:20528[] masquerade as nightly cargo when invoking flycheck with `-Zscript`.
+* pr:20612[] fix "Expand macro recursively" on nested macro calls.
+* pr:20517[] only compute unstable paths on nightly toolchains for IDE features.
+* pr:20639[] resolve paths to snapshot test libraries absolutely.
+* pr:20547[] don't highlight unrelated unsafe operation on `unsafe` blocks.
+* pr:20579[] don't pass `--target` to `rustc` twice while fetching target data layout.
+* pr:20475[] don't duplicate lang items with overridden sysroot crates.
+* pr:20518[] fix `else` completion in `let _ = if x {} $0`.
+* pr:20390[] add `if`-`else` completions in `let` statements and argument lists.
+* pr:20620[], pr:20657[] add `else` keyword completion after `let` statements.
+* pr:20653[] don't output an empty generic parameters list in `generate_function`.
+* pr:20708[] fix panic in `destructure_struct_binding`.
+* pr:20702[] fix `else` completion before `else` keyword.
+* pr:20700[] fix `extract_variable` on `if`-`let`.
+* pr:20709[] fix panic in `destructure_struct_binding`.
+* pr:20710[] fix shorthand fields in `unused_variables`.
+* pr:20661[] tighten up expected type completions in `if`.
+* pr:20507[] handle expected `return` type in completions.
+* pr:20725[] fix lifetime elision handling for `Fn`-style trait bounds.
+* pr:20624[] fix `lifetime_bounds`.
+* pr:20723[] fix `bind_unused_param` with binding modes and underscore prefixes.
+* pr:20722[] fix `pull_assignment_up` on chained ``if``s.
+* pr:20679[] fix type completion with nested patterns.
+* pr:20592[] handle closures inside `match` in `add_braces`.
+* pr:20543[] don't suggest invalid transformation in `replace_if_let_with_match`.
+* pr:20742[] don't turn unused variables into raw identifier.
+* pr:20598[] support `let` chains in `convert_to_guarded_return`.
+* pr:20731[] handle tuple and slice rest patterns in `expand_rest_pattern`.
+* pr:20729[] add `const` generic parameter keyword completion.
+* pr:20793[] add missing parentheses on ambiguity in `missing_unsafe`.
+* pr:20513[] complete `let` in `let`-chains.
+* pr:20812[] complete `self` parameters in associated trait functions.
+* pr:20805[] improve parse errors for `static` and `const`.
+* pr:20824[] fix completion type analysis in empty closures.
+* pr:20817[] support `add_explicit_type` on parameters in `let` statements.
+* pr:20816[] handle closure return type adjustments in `add_return_type`.
+* pr:20526[] support `let`-chains for `.let` completions.
+* pr:20788[] allow more string literal conversions from raw strings.
+* pr:20838[] don't make `convert_to_guarded_return` applicable on `let-else`.
+* pr:20758[] support `else` blocks with `!` return type in `convert_to_guarded_return`.
+* pr:20772[] support `match` inside `if` in `pull_assignment_up`.
+* pr:20673[] support `break` with value in completions.
+* pr:20858[] include trailing underscores when hiding inlay hints.
+* pr:20872[] add missing rest pattern in `convert_named_struct_to_tuple_struct`.
+* pr:20880[] fix invalid rest pattern in `convert_tuple_struct_to_named_struct`.
+* pr:20455[] fix indent in `convert_match_to_let_else`.
+* pr:20509[] fix indent in `move_guard_to_arm_body`.
+* pr:20613[] fix indent in `unresolved_field` diagnostic fixes.
+* pr:20845[] fix indent in `add_braces`.
+* pr:20850[] fix indent in `add_missing_match_arms`.
+* pr:20670[] improve incomplete statement heuristic.
+* pr:20831[] add shorthand record field completions.
+* pr:20571[] add type keyword completions.
+* pr:20886[] improve handling of missing names in `MethodCallExpr`.
+* pr:20905[] fix array inhabitedness check.
+* pr:20889[] improve field completion parentheses heuristic.
+* pr:20658[] complete `else` in more expressions.
+* pr:20611[] add parantheses for precedence in `replace_arith_op`.
+* pr:20912[] complete `let` before expression in `if`.
+* pr:20764[] handle `if`-`let` in `convert_to_guarded_return`.
+* pr:20712[] handle shorthand field patterns in `destructure_tuple_binding`.
+* pr:20589[] place new module outside `impl` block in `extract_module`.
+* pr:20913[] support `let`-chains in `replace_is_method_with_if_let_method`.
+* pr:20626[] improve whitespace in `make::struct_field_list`.
+* pr:20534[] improve semicolon handling in `toggle_macro_delimiter`.
+* pr:20442[] only import the item in "Unqualify method call" when needed.
+* pr:20686[] only offer `generate_default_from_enum_variant` when the variant name is completely selected.
+* pr:20771[] offer `invert_if` on `else`.
+* pr:20844[] offer `add_braces` on assignments.
+* pr:20599[] offer `apply_demorgan` on `!`.
+* pr:20456[] support guards in `replace_match_with_if_let`.
+* pr:20714[] allow trailing comma in `remove_dbg!`.
+* pr:20511[] don't offer `convert_integer_literal` on selections.
+* pr:20512[] don't offer `replace_arith_op` on selections.
+* pr:20736[] don't offer `invert_if` on `if-let` chains.
+* pr:20682[] don't offer `change_visibility` for variant fields.
+* pr:20688[] reduce `replace_is_method_with_if_let_method` applicability range.
+* pr:20759[] fix casts and use typed syntax tree API in `convert_to_guarded_return`.
+* pr:20876[] fix `signature_help` LSP conversion creating invalid UTF-16 offsets.
+
+== Internal Improvements
+
+* pr:20379[] (first contribution) consistently use `---` for horizontal rules.
+* pr:20483[] (first contribution) optimize VS Code extension icon.
+* pr:20794[] (first contribution) deduplicate `sort` and `dedup` calls.
+* pr:20667[] add regression test for The One and Only Issue.
+* pr:20376[] merge `Trait` and `TraitAlias` handling.
+* pr:20399[] enable warning logs by default.
+* pr:20706[] avoid allocating in `stdx::replace`.
+* pr:20730[], pr:20748[], pr:20860[] migrate `expand_record_rest_pattern`, `replace_arith_op` and `generate_single_field_struct_from` assists to `SyntaxEditor`.
+* pr:20796[] bump `salsa`.
+* pr:20852[] do not enable `force-always-assert` by default.
+* pr:20631[] remove support for `#[register_attr]`.
+* pr:20804[] pass `--target` to `xtask install`.
+* pr:20683[] expose iterators over the types in `InferenceResult`.
+* pr:20669[] add a testing guide.
+* pr:20633[] clarify introduction in the README and manual.
+* pr:20638[] add FAQ entry about Cargo build lock and cache conflicts.
+* pr:20560[] add progress bars to more places in `analysis-stats`.
+* pr:20652[] improve `rust-analyzer diagnostics`.
+* pr:20774[] build `x86_64-apple-darwin` binaries on `macos-14`.

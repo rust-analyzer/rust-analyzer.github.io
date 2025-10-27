@@ -30,7 +30,7 @@ Release: release:2025-06-16[] (`v0.3.2500`)
 * pr:19995[] turn `BlockId` into a `#[salsa::tracked]`.
 * pr:20006[] clean up incremental tests and verify query execution.
 * pr:19997[] remove `InternedCallableDefId`.
-* pr:19980[] de-duplicate`ItemTree` `ItemVisibilities`.
+* pr:19980[] deduplicate`ItemTree` `ItemVisibilities`.
 * pr:19992[] use `ThinVec` in `ItemScope` in a couple places.
 * pr:19984[] remove `pref_align_of` intrinsic handling, rename `{min_=>}align_of{,_val}`.
 * pr:19930[] add support for type-erased `Semantics<'db, dyn HirDatabase>`.

@@ -12,7 +12,7 @@ Release: release:2023-05-01[] (`v0.3.1498`)
 +
 image::https://user-images.githubusercontent.com/308347/235419781-a9add5c5-a6f4-46a8-87bf-cfde0a3fa6eb.png["Screenshot showing a a closure hover with details about captured fields"]
 * pr:14513[] add `#[doc(alias(..))]`-based field and function completions.
-* pr:14659[] de-duplicate crates when extending crate graphs.
+* pr:14659[] deduplicate crates when extending crate graphs.
 * pr:14644[], pr:14686[] don't underline whole `for` loops and iterator chains on errors.
 
 == Fixes

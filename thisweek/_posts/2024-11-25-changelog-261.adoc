@@ -13,6 +13,6 @@ Release: release:2024-11-25[] (`v0.3.2196`)
 
 == Internal Improvements
 
-* pr:18485[] migrate `add_braces` assist to use `SyntaxEditor`.
-* pr:18521[] migrate `reorder_impl_items` assist to use `SyntaxEditor`.
+* pr:18485[] migrate `add_braces` assist use `SyntaxEditor`.
+* pr:18521[] migrate `reorder_impl_items` assist use `SyntaxEditor`.
 * pr:18552[] fix formatting in "missing ``rust-src``" message.

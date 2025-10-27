@@ -50,7 +50,7 @@ image::https://user-images.githubusercontent.com/308347/111139619-03c2a100-858a-
 == Fixes
 
 * pr:7901[] (first contribution) respect HTTP proxy settings in the Code extension.
-* pr:7912[] de-duplicate import map results.
+* pr:7912[] deduplicate import map results.
 * pr:7941[] fix highlighting of unused definitions.
 * pr:7944[] selecting `&mut foo` completion now actually inserts `&mut`.
 * pr:7957[] fix labels for single import assists.

@@ -31,7 +31,7 @@ image::https://user-images.githubusercontent.com/3757771/222831604-4e7886a6-d2f3
 == Internal Improvements
 
 * pr:14040[] introduce a MIR and use it for constant evaluation.
-* pr:14218[], pr:14234[] de-duplicate source roots that have overlapping include paths.
+* pr:14218[], pr:14234[] deduplicate source roots that have overlapping include paths.
 * pr:14184[] handle trait alias definitions.
 * pr:14244[] report type metrics for patterns.
 * pr:14251[] set unit type expectation for expression statements without a semicolon.

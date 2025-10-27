@@ -19,7 +19,7 @@ Release: release:2023-04-24[] (`v0.3.1489`)
 * pr:14625[] fix token conversion for doc-comments.
 * pr:14634[] report remaining macro errors in associated item collection.
 * pr:14643[] fix const eval panic with parameter destructing.
-* pr:14603[] try to de-duplicate workspaces by top level cargo workspace.
+* pr:14603[] try to deduplicate workspaces by top level cargo workspace.
 
 == Internal Improvements
 

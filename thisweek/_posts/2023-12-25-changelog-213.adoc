@@ -14,7 +14,7 @@ Release: release:2023-12-25[] (`v0.3.1782`)
 
 * pr:16155[] (first contribution) don't assume ASCII in `remove_markdown`.
 * pr:16152[] resolve alias before resolving enum variant.
-* pr:16163[] de-duplicate annotations.
+* pr:16163[] deduplicate annotations.
 * pr:16165[] update metavariable expression implementation.
 * pr:16066[], pr:16185[] remove unnecessary braces after with unused imports.
 * pr:16167[] fully remove dummy spans.

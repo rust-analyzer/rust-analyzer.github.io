@@ -15,7 +15,7 @@ Release: release:2024-02-26[] (`v0.3.1860`)
 
 == Fixes
 
-* pr:16358[] (first contribution) de-duplicate references from macro expansions.
+* pr:16358[] (first contribution) deduplicate references from macro expansions.
 * pr:16621[] (first contribution) avoid setting `RUSTC_BOOTSTRAP` for build scripts, to prevent spurious recompiles.
 * pr:16590[] fix `remove-unnecessary-else` false positives on `if` expressions.
 * pr:16616[] try to fix potential server hang with build scripts.
