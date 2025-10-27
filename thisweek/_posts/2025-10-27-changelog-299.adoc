@@ -8,8 +8,8 @@ Release: release:2025-10-27[] (`v0.3.2658`)
 
 == New Features
 
-* pr:20854[] feat (first contribution) parse script frontmatter.
-* pr:20837[] feat (first contribution) expose `addConfiguration` API from the Code extension.
+* pr:20854[] (first contribution) parse script frontmatter.
+* pr:20837[] (first contribution) expose `addConfiguration` API from the Code extension.
 * pr:20329[], pr:20445[], pr:20446[], pr:20454[], pr:20470[], pr:20447[], pr:20496[], pr:20497[], pr:20502[], pr:20506[], pr:20523[], pr:20527[], pr:20537[], pr:20545[], pr:20553[], pr:20563[], pr:20586[], pr:20609[], pr:20578[], pr:20647[], pr:20645[], pr:20649[], pr:20654[], pr:20665[], pr:20671[], pr:20677[], pr:20664[], pr:20717[], pr:20728[], pr:20733[], pr:20735[], pr:20738[], pr:20765[], pr:20777[], pr:20785[], pr:20814[], pr:20834[], pr:20841[], pr:20867[], pr:20873[], pr:20882[], pr:20888[], pr:20896[], pr:20893[], pr:20895[] switch from Chalk to the next trait solver.
 * pr:20632[] support navigation on primitives.
 * pr:20760[] add `all`, `any` and `not` completions in `#[cfg]`.
