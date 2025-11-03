@@ -1,0 +1,29 @@
+= Changelog #300
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:bacc5bbd3020b8265e472ff98000ef477ff86e4a[] +
+Release: release:2025-11-03[] (`TBD`)
+
+== New Features
+
+* pr:20186[] add option to exclude nearby derives from "Go to implementations" and implementations lens.
+* pr:20906[] support opaques properly.
+
+== Fixes
+
+* pr:20921[] avoid calling `specializes()` query on crates that do not define `#![feature(specialization)]`.
+* pr:20920[] resolve `target-dir` more precisely.
+* pr:20369[] change method to associated function calls when renaming `self`.
+* pr:20931[] show proper async function signatures in the signature help.
+* pr:20930[] fix handling of nested block modules.
+* pr:20919[] consider all matches for flyimport even when searched with a qualifier.
+* pr:20942[] fix false positive syntax errors on frontmatters.
+* pr:20934[] improve error recovery with malformed function return types.
+* pr:20915[] offer `replace_is_method_with_if_let_method` in `while` expression.
+
+== Internal Improvements
+
+* pr:20922[] reduce `client_commands` allocations in LSP conversion.
+* pr:20927[] support memory profiling using `dhat`.
