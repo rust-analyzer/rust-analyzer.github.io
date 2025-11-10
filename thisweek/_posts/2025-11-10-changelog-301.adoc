@@ -1,0 +1,29 @@
+= Changelog #301
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:21f8445ea523e83cd4f11b0a67a3a5ced2b1f56f[] +
+Release: release:2025-11-10[] (`v0.3.2675`)
+
+== New Features
+
+* pr:20565[] add "Convert range `for` to ``while``" assist.
+
+== Fixes
+
+* pr:20964[] canonicalize `custom-target.json` paths when fetching sysroot metadata.
+* pr:20961[] consider more expression types as `in_value`.
+* pr:20963[] expand literals with wrong suffixes into `LitKind::Err`.
+* pr:20971[] fix panic while resolving callable signatures for `AsyncFnMut`.
+* pr:20957[] keep associated items in `generate_blanket_trait_impl`.
+* pr:20973[] handle method calls in `apply_demorgan`.
+
+== Internal Improvements
+
+* pr:21005[] (first contribution) improve wording in testing docs.
+* pr:20994[] reduce memory usage of symbol index.
+* pr:20997[] only populate public items in dependency symbol index.
+* pr:20995[] use new `salsa` API for `SymbolsDatabase`.
+* pr:20991[], pr:20990[], pr:20988[] merge `text-size`, `ungrammar` and `smol_str` into rust-analyzer.
+* pr:21002[] bump library editions to 2024 and remove legacy files.
