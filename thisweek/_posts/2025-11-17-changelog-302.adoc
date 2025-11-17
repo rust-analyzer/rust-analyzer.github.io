@@ -1,0 +1,18 @@
+= Changelog #302
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:2efc80078029894eec0699f62ec8d5c1a56af763[] +
+Release: release:2025-11-17[] (`v0.3.2683`)
+
+== Fixes
+
+* pr:20985[] allow renaming label after `add_label_to_loop`.
+* pr:21003[] add block on postfix `.const` completion.
+* pr:20542[] handle guards in `replace_if_let_with_match`.
+* pr:20972[] parse `impl ! {}`.
+
+== Internal Improvements
+
+* pr:21021[] fix Docs.rs builds after moving `smol_str`.
