@@ -16,7 +16,7 @@ https://discord.com[Discord], a place to talk with your communities and friends,
 * pr:4839[] implement goto type definition for inlay hints
 +
 image::https://user-images.githubusercontent.com/62505555/83335671-0122e380-a2b7-11ea-9922-fbdcfb11a7f3.gif[]
-* pr:4851[] add quickfix to add a struct field
+* pr:4851[] add quick fix to add a struct field
 +
 image::https://user-images.githubusercontent.com/1711539/85289481-d253f380-b497-11ea-8089-2f21e3fdb75e.gif[]
 * pr:4860[] accept relative paths in rust-project.json.

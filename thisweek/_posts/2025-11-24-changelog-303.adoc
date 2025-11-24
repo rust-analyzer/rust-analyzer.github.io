@@ -1,0 +1,51 @@
+= Changelog #303
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:4a2b38f49f2c15f4302502027b6ac09914679a8f[] +
+Release: release:2025-11-24[] (`v0.3.2693`)
+
+== New Features
+
+* pr:21100[] (first contribution) add semantic token modifier for deprecated items.
+* pr:21068[] (first contribution) make `dyn` inlay hints configurable.
+* pr:21093[] add assist to convert char literals.
+* pr:20974[] rewrite method resolution to follow rustc more closely.
+* pr:21015[] parse cargo config files with origins.
+
+== Fixes
+
+* pr:21090[], pr:21092[] (first contribution) don't offer to remove parentheses around control flow expressions.
+* pr:21083[] complete `#[cfg(…)]` keys.
+* pr:20980[] remove some deep normalizations from inference.
+* pr:21084[] fix formatting request blocking on the `crate_def_map` query.
+* pr:21061[] infer array lengths.
+* pr:21060[], pr:21113[], pr:21026[] improve pattern inference.
+* pr:21036[] handle references in postfix completions.
+* pr:21053[] fix panic in `extract_function` when a variable is used multiple times in a macro call.
+* pr:21074[] support parameters with the same name as a macro in `add_missing_impl_members`.
+* pr:21065[] fix field completion in irrefutable patterns.
+* pr:21018[] handle comments in `private_field` quick fix.
+* pr:21042[] import full path in `replace_qualified_name_with_use` when triggered on the first segment.
+* pr:21038[] support multiple selected variants in `generate_from_impl_for_enum`.
+* pr:20559[] add digit group separators in `add_explicit_enum_discriminant`.
+* pr:21111[] fill unguarded arms in `add_missing_match_arms`.
+* pr:21047[] add `#[unsafe(…)]` completion.
+* pr:21048[] don't report `incorrect_case` on `#[no_mangle]` static items.
+* pr:21098[] load targets of all types with paths outside package root.
+
+== Internal Improvements
+
+* pr:21094[] (first contribution) make `DefMap` dumps more verbose.
+* pr:21114[] (first contribution) disable the `tracing/attributes` in some crates.
+* pr:21011[] (first contribution) provide a gdb pretty printer for `SmolStr`.
+* pr:21017[] speed up cloning of inline `SmolStr` variants at the expense of heap ones.
+* pr:21046[], pr:21088[] improve start-up speed.
+* pr:21087[] gather trait implementations during cache priming.
+* pr:21085[] produce fewer progress reports on start-up.
+* pr:21086[] reduce allocations in `try_evaluate_obligations`.
+* pr:21059[] derive `ParamEnv` from `GenericPredicates`.
+* pr:21109[] migrate `replace_qualified_name_with_use` assist to `SyntaxEditor`.
+* pr:21057[] implement precedence in HIR printing.
+* pr:21103[] record lang item queries in `analysis-stats`.

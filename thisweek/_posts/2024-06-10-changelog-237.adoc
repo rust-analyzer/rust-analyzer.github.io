@@ -30,7 +30,7 @@ IMPORTANT: We don't promise **__any__** stability with this feature yet, any con
 * pr:17004[] cache macro calls more aggressively in `Semantics`.
 * pr:17312[] add `Function::fn_ptr_type(…)` for obtaining name-erased function types.
 * pr:17348[] use fallible indexing in `TypeOrConstParam::source(…)` and `LifetimeParam::source(…)`.
-* pr:17365[] expose snippet capability to diagnostic quickfixes.
+* pr:17365[] expose snippet capability to diagnostic quick fixes.
 * pr:17375[] don't intern attribute inputs, as their spans make them unique.
 * pr:17341[] clean up inert attribute handling.
 * pr:17356[] prefer shorthand `tracing::span` macros.

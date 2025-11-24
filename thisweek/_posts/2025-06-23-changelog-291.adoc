@@ -17,8 +17,8 @@ Release: release:2025-06-23[] (`v0.3.2509`)
 
 == Fixes
 
-* pr:19945[] add quickfix to the `private-field` diagnostic.
 * pr:20025[] (first contribution) hide imported private methods if "private editable" is disabled.
+* pr:19945[] add quick fix to the `private-field` diagnostic.
 * pr:20041[] revert "turn `BlockId` into a ``#[salsa::tracked]``".
 * pr:20022[] never make type mismatch diagnostic stable, even when there is a fix.
 * pr:20023[] improve completions in `if` / `while` expression conditions.

@@ -24,7 +24,7 @@ image::https://user-images.githubusercontent.com/38225716/209206554-8f067206-6fa
 * pr:13848[] colorize `cargo check` diagnostics in the full view in VSCode:
 +
 image::https://user-images.githubusercontent.com/11131775/209479884-10eef8ca-37b4-4aae-88f7-3591ac01b25e.gif["Screen recording showing colors and ASCII art when displaying the compiler output"]
-* pr:13934[] make `unlinked_file` diagnostic quickfixes work for inline modules:
+* pr:13934[] make `unlinked_file` diagnostic quick fixes work for inline modules:
 +
 image::https://user-images.githubusercontent.com/3757771/211927799-023e48ee-7cdd-4dd7-8e25-a23eddc7d897.gif["Screen recording showing a `mod` declaration added into a parent inline module"]
 * pr:13458[] add assist to replace plain arithmetic operations with wrapping/checked/saturating ones.

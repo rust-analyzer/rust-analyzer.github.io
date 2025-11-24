@@ -32,7 +32,7 @@ image::https://user-images.githubusercontent.com/1786438/165591059-c759f035-2400
 +
 image::https://user-images.githubusercontent.com/1786438/165821068-a673a154-ce53-4489-af60-56d09dc9061c.png[]
 * pr:12099[] resolve variants in patterns when qualified through type aliases.
-* pr:12075[] don't emit a quickfix for placeholder suggestions from rustc/clippy.
+* pr:12075[] don't emit a quick fix for placeholder suggestions from rustc/clippy.
 * pr:12082[] use correct parameter list for methods in signature help.
 * pr:12085[] fix filtering in function parameter completion.
 * pr:12007[] restart proc-macro client when reloading the workspace.

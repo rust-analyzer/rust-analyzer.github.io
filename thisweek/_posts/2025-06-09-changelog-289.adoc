@@ -15,9 +15,9 @@ Release: release:2025-06-09[] (`v0.3.2490`)
 == Fixes
 
 * pr:19901[] (first contribution) increase the range of the tuple to named struct assists.
-* pr:19869[] (first contribution) add diagnostic and quickfix to make private struct fields public.
+* pr:19869[] (first contribution) add diagnostic and quick fix to make private struct fields public.
 * pr:19894[] handle cycles in `infer` and `const_param_ty_with_diagnostics`.
-* pr:19935[] always emit quickfixes, even when diagnostics are disabled.
+* pr:19935[] always emit quick fixes, even when diagnostics are disabled.
 * pr:19936[], pr:19949[] stabilize the unlinked file and "JSON is not Rust" diagnostics.
 * pr:19932[], pr:19937[] record macro calls in signatures and fields in `ChildBySource` impls.
 
