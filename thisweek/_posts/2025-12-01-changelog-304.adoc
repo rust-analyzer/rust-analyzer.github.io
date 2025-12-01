@@ -1,0 +1,46 @@
+= Changelog #304
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:d646b23f000d099d845f999c2c1e05b15d9cdc78[] +
+Release: release:2025-12-01[] (`v0.3.2702`)
+
+== New Features
+
+* pr:21027[] (first contribution) build releases with static CRT for `-windows-msvc` targets.
+* pr:21121[] add basic support for declarative attribute and derive macros.
+* pr:20125[] display inferred placeholder types inlay hints and use them in "Extract type as type alias".
+
+== Fixes
+
+* pr:21077[] (first contribution) handle more block types and show modifiers in closing brace inlay hints.
+* pr:21151[] don't run cache priming when disabled.
+* pr:21095[] fix iterator completions after auto-deref.
+* pr:20937[] don't suggest duplicate `const` completions after `raw`.
+* pr:20976[] fix completion after inner attributes.
+* pr:21144[] fix completion after `extern` and add `crate` completion.
+* pr:21028[] complete enum aliases in patterns.
+* pr:21126[] fix parameter info with missing arguments.
+* pr:20163[] use per-token, not global, edition in the parser.
+* pr:20164[] pass the per-token, not global, edition when expanding declarative macros.
+* pr:20217[] use root hygiene for speculative resolution.
+* pr:21170[] support multiple ``enable``d features in `#[target_feature]`.
+* pr:21159[], pr:21172[] rewrite `dyn Trait` lowering to follow rustc.
+* pr:20685[] support multiple variants in `generate_enum_{is,projection}_method`.
+* pr:20967[] offer `replace_method_eager_lazy` on `and`.
+* pr:21141[] set `enclosing_range` in the SCIP index.
+* pr:21131[] check snippet capabilities in `#[cfg(…)]` key completion.
+* pr:21023[] fix handling of cloned elements in `SyntaxEditor`.
+* pr:21147[] show a dropdown in the UI for `rust-analyzer.imports.granularity.group`.
+
+== Internal Improvements
+
+* pr:20892[] reintroduce attribute rewrite.
+* pr:21097[], pr:21145[], pr:21146[], pr:21154[] reimplement proc macro server token trees as immutable, to speed up concatenation.
+* pr:20986[], pr:21133[], pr:21135[], pr:21139[], pr:21179[] integrate `postcard` into the proc-macro server.
+* pr:21149[] use a single query per crate for lang items.
+* pr:21167[] shrink `InferenceResult` by ~40 bytes.
+* pr:21169[] use new `salsa` API for `infer`.
+* pr:21115[] bump `rustc` crates.
+* pr:21177[] fix `SmolStr` pretty-printing for `Repr::Static`.
