@@ -1,0 +1,31 @@
+= Changelog #305
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:5e3e9c4e61bba8a5e72134b9ffefbef8f531d008[] +
+Release: release:2025-12-08[] (`v0.3.2711`)
+
+== New Features
+
+* pr:21218[] bump minimum supported toolchain version from 1.78 to 1.90.
+
+== Fixes
+
+* pr:21205[] (first contribution) handle `#[cfg]` in macro input attribute stripping.
+* pr:21203[] add configuration option to hide placeholder type hints.
+* pr:21222[] don't complete unit return type in async associated items.
+* pr:21215[] don't implement sizedness check via `all_field_tys`.
+* pr:21190[], pr:21195[] more proc macro server fixes.
+* pr:21223[] temporarily disable `postcard`.
+* pr:21198[] add missing semicolon in incomplete `let` completion.
+* pr:21183[] register `define_opaque` built-in attribute macro.
+* pr:21164[] allow multiple active discovery operations.
+
+== Internal Improvements
+
+* pr:21182[] remove `TraitEnvironment`.
+* pr:21178[] make `ModuleId` and `BlockLoc` tracked structs.
+* pr:21208[] handle lint attribute expansion in `hir`.
+* pr:21188[] fix rustdoc warnings and enable them on CI.
+* pr:21189[] remove `mdbook-toc` usage from the book.
