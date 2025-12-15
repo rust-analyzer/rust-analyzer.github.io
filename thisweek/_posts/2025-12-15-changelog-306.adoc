@@ -1,0 +1,40 @@
+= Changelog #306
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:87cf6631c60b7e7c9f4a53693a68920a80966c6f[] +
+Release: release:2025-12-15[] (`v0.3.2719`)
+
+== New Features
+
+* pr:21243[] support `#[feature(associated_type_defaults)]`.
+* pr:21242[] support the 1.93 `format_args!` lowering.
+
+== Fixes
+
+* pr:21253[] (first contribution) don't register twice for `didSaveTextDocument`.
+* pr:21265[] (first contribution) properly handle multiple lint attributes on the same item.
+* pr:21238[] (first contribution) add a stub `is_transmutable` to avoid panicking.
+* pr:21226[] (first contribution) show generic args when displaying traits.
+* pr:21235[] pass environment to fix a const generics panic.
+* pr:21251[] fix a panic in `TypeBound::kind()`.
+* pr:21233[] revert "turn `BlockLoc` into a tracked struct".
+* pr:21244[] support `#[rustc_deprecated_safe_2024(audit_that = reason)]`.
+* pr:21210[] fix completion with `{{{` and `_` in format strings.
+* pr:20754[] keep labels and attributes in `convert_for_to_while_let`.
+* pr:21239[] add missing parameter in `replace_method_eager_lazy`.
+* pr:21044[] keep generics in `generate_fn_type_alias`.
+* pr:21175[] fix indent in `toggle_ignore`.
+* pr:21264[] don't offer `bind_unused_param` in closures.
+* pr:21256[] demote `add_return_type`.
+* pr:21187[] include overloaded operators in SCIP index.
+* pr:21221[] don't needlessly add visibility in `no_such_field` quick fix.
+
+== Internal Improvements
+
+* pr:21225[] give `FileSymbol` a `'db` lifetime.
+* pr:21263[] use generated names in old `format_args!` lowering.
+* pr:21174[], pr:21199[] migrate `convert_iter_for_each_to_for` and `generate_delegate_trait` assists to `SyntaxEditor`.
+* pr:21209[] do not create stale expressions in body lowering.
+* pr:21252[] fix two Clippy lints.
