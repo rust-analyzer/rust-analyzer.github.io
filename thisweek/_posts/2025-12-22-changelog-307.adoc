@@ -1,0 +1,47 @@
+= Changelog #307
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:9d58a93602913a1a2ecff29422eb4da67d304d9d[] +
+Release: release:2025-12-22[] (`v0.3.2727`)
+
+== New Features
+
+* pr:21295[], pr:21307[] use GC instead of `salsa` interning for solver types (salves 648 MB and 31 s on `self`).
+* pr:21240[] show parameter inlay hints for missing arguments.
+* pr:20996[] add "Insert explicit method call derefs" assist.
+* pr:21309[] add LSP extension to get failed obligations for a given function.
+* pr:21282[] add `crate_attrs` field to `rust-project.json`.
+
+== Fixes
+
+* pr:21270[] (first contribution) fix "file emitted multiple times" errors in `rust-analyzer scip`.
+* pr:21276[] fix reference-style links in hover.
+* pr:21304[] strip invisible delimiters in MBE.
+* pr:21262[] use the HIR to check for used locals.
+* pr:21032[] don't add semicolons to unit-returning function calls in argument lists.
+* pr:21278[] suggest `&mut T` for `&T` in completions.
+* pr:21289[] suggest `&T` for `&&T` in completions.
+* pr:21212[] use variant name as variable in postfix completions for enums.
+* pr:21166[] support `this` parameter name in closures.
+* pr:21277[] fix reference stripping in expected type analysis.
+* pr:21291[] fix expected type analysis for match arms.
+* pr:20438[] fix guessing of braces for renamed macros.
+* pr:21293[] don't offer `move_guard` in blocks with multiple statements.
+* pr:21258[] support `add_return_type` for functions defined inside closures.
+* pr:20576[] support nested `if-let` in `merge_nested_if`.
+* pr:20577[] fix indent in `merge_nested_if`.
+* pr:21266[] keep expression in `replace_let_with_if_let`.
+* pr:21272[] prepend workspace root to target file for sysroot metadata.
+* pr:21273[] fix method resolution for incoherent impls when there are two sysroots in the crate graph.
+
+== Internal Improvements
+
+* pr:21316[] call out feature freeze on IDE assists.
+* pr:21314[] add "Use of AI tools" https://github.com/rust-lang/rust-analyzer/blob/master/CONTRIBUTING.md#use-of-ai-tools[section] to developer docs.
+* pr:21279[] add special `ErasedFileAstId` used to bypassing downmapping.
+* pr:21298[] pretty-print attributes up to `cfg(false)`.
+* pr:21284[] bump `rustc` crates.
+* pr:20439[] add hint to use `T![]` instead of `T! {}`.
+* pr:20472[] drop style guide entry about precondition checks.
