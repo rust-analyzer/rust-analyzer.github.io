@@ -1,0 +1,40 @@
+= Changelog #308
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:be6975f8f90d33a3b205265a0a858ee29fabae13[] +
+Release: release:2025-12-29[] (`v0.3.2735`)
+
+== New Features
+
+* pr:21200[] don't expand built-in derives, treat them specifically instead (saves 180 MB on `self`).
+* pr:21337[] stabilize type mismatch diagnostic.
+* pr:20193[] add setting to disable showing rename conflicts.
+* pr:20741[] add macro segment completion.
+
+== Fixes
+
+* pr:21326[] keep flycheck generations in sync across multiple workspaces.
+* pr:21348[] re-enable fixpoint variance analysis.
+* pr:21351[] fix parsing of `format_args!(..., keyword=...)`.
+* pr:21358[] fix type inference when hovering on `_`.
+* pr:21354[] fix duplicate `default` item in record update syntax.
+* pr:21330[] fix indent in `convert_to_guarded_return`.
+* pr:20595[] fix indent in `convert_iter_for_each_to_for`.
+* pr:20521[] handle `break` in expected type analysis.
+* pr:21359[] prompt the user to add the `rust-analyzer` component to the toolchain file.
+* pr:21297[] fix LSP configuration request handling.
+
+== Internal Improvements
+
+* pr:21249[], pr:21340[], pr:21345[] implement bidirectional proc macro server messaging prototype.
+* pr:21335[] store closures with "tupled" inputs.
+* pr:21341[] move library and local root inputs to `base-db`.
+* pr:21344[] stop using MIR `ProjectionElem` in closure analysis.
+* pr:21349[] make token trees no longer generic over the span.
+* pr:21353[] pre-allocate some buffers for parsing.
+* pr:21355[] reduce channel lock contention for drop threads.
+* pr:21357[] drop `AstIdMap` asynchronously.
+* pr:21356[] collect garbage when quiescient after events.
+* pr:21334[] add `cargo-machete` CI step.
