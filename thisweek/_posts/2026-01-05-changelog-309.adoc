@@ -1,0 +1,37 @@
+= Changelog #309
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:6a1246b69ca761480b9278df019f717b549cface[] +
+Release: release:2026-01-05[] (`v0.3.2743`)
+
+== New Features
+
+* pr:21376[] allow finding references from doc comments.
+* pr:21308[] add configuration options to override the `test`, `bench` and `doctest` subcommands.
+* pr:21370[] add #[rust_analyzer::macro_style()] attribute to control macro completion brace style.
+
+== Performance Improvements
+
+* pr:21362[], pr:21363[] compress token trees to reduce memory usage (saves 120 MB on `self`).
+* pr:21396[] only compute lang items for `#![feature(lang_items)]` crates.
+* pr:21390[] pre-allocate interner storage with 64 KB of data or 1024 elements.
+* pr:21391[] reduce `impl_signature` query dependencies in method resolution.
+
+== Fixes
+
+* pr:21374[] (first contribution) suppress `non_camel_case_types` lint for `+#[repr(C)]+` structs and enums.
+* pr:21403[] suppress false positive missing associated item diagnostics when specialization is used.
+* pr:21397[] fix `Span::source_text` in proc macro expansion.
+* pr:21377[], pr:21400[] support `Span::file` and `Span::local_file` in proc macro expansion.
+* pr:21393[] add location links for generic parameter type hints.
+* pr:21375[] fix incorrect `dyn` hint in `impl Tr for`.
+* pr:21361[] ignore `try_into_` prefix when suggesting a name.
+
+== Internal Improvements
+
+* pr:21367[] add an `upvars_mentioned` that computes the closure captures.
+* pr:21369[] migrate `move_arm_cond_to_match_guard` assist to `SyntaxEditor`.
+* pr:21388[] remove unnecessary `ConstLiteralRef` enum.
+* pr:21401[] add a `README.md` to `proc-macro-srv-cli`.
