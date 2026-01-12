@@ -1,0 +1,33 @@
+= Changelog #310
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:dd4877761e927e985593f756e8d71e64f1a99241[] +
+Release: release:2026-01-12[] (`v0.3.2753`)
+
+== New Features
+
+* pr:21415[], pr:21446[] allow Rust paths in symbol search.
+* pr:18043[] support configuring flycheck using `workspace.discoverConfig`.
+
+== Performance Improvements
+
+* pr:21407[] reuse scratch allocations for `try_evaluate_obligations`.
+
+== Fixes
+
+* pr:21414[] (first contribution) include traits defined in other crates in flyimport.
+* pr:21436[] (first contribution) handle `#[ignore = "reason"]` on tests.
+* pr:21405[] (first contribution) support `Span::line` and `Span::column` in proc macro expansion.
+* pr:21416[] support `Span::byte_range` in proc macro expansion.
+* pr:21421[] fix recursive built-in derive expansion.
+* pr:21399[] properly lower `SelfOnly` predicates.
+* pr:21434[] remove code made redundant by method resolution rewrite.
+* pr:21432[] fix missing lifetimes diagnostics with function pointers.
+* pr:21420[] ignore escapes when string highlighting is disabled.
+
+== Internal Improvements
+
+* pr:21438[], pr:21439[] add integration test infrastructure to proc macro server.
+* pr:21433[] include private definitions in generated docs.
