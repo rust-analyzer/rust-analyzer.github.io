@@ -1,0 +1,33 @@
+= Changelog #311
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:080e70378c543d26a3a817899cb66934ba76360b[] +
+Release: release:2026-01-19[] (`v0.3.2761`)
+
+== New Features
+
+* pr:21483[] trigger flycheck when non-workspace files get modified.
+
+== Fixes
+
+* pr:21475[] (first contribution) look up flycheck by ID instead of vector index.
+* pr:21462[] sync cast checks to `rustc` once again.
+* pr:21456[] make `naked_asm!()` always return `!`.
+* pr:21364[] fix lowering crash with supertrait predicates.
+* pr:21445[] disable `unused_variables` and `unused_mut` warnings.
+* pr:21459[] hide macro-generated renamed imports from symbol index.
+* pr:21464[] respect re-exports in path symbol search.
+* pr:21484[] don't show sysroot dependencies in symbol search.
+* pr:21451[] complete `mut` and `raw` on `&x.foo()`.
+* pr:21442[] keep `+#[cfg]+` and `+#[track_caller]+` after `extract_function`.
+* pr:21412[] keep guard expression in `move_guard`.
+* pr:20946[] offer `convert_to_guarded_return` on `if let ... else`.
+* pr:21465[] don't offer `remove_parentheses` on `(2 as i32) < 3`.
+
+== Internal Improvements
+
+* pr:21458[], pr:21443[] migrate `unwrap_block` and `generate_mut_trait_impl` assists to `SyntaxEditor`.
+* pr:21466[] remove `postcard-legacy` proc macro server protocol.
+* pr:21468[] improve `workspace.discoverConfig` docs.
