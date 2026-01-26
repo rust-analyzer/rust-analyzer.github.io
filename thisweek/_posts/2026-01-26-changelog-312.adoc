@@ -1,0 +1,22 @@
+= Changelog #312
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:2532c48f1ed25de1b90d0287c364ee4f306bec0e[] +
+Release: release:2026-01-26[] (`v0.3.2769`)
+
+== Fixes
+
+* pr:21497[] (first contribution) allow const evaluation errors in method resolution.
+* pr:21491[] insert type variables for statics.
+* pr:21490[] don't mix up regular and built-in derives in "Expand macro recursively".
+* pr:21485[] avoid emitting redundant block in `move_guard`.
+* pr:21499[] don't offer `apply_demorgan` on `if let`.
+
+== Internal Improvements
+
+* pr:21492[] fix parameter capture and drop order in async functions.
+* pr:21385[] parallelize proc macro expansion.
+* pr:21479[] add tests for bidirectional communication in proc macro expansion.
+* pr:21509[] add tests for renaming keywords in imports.
