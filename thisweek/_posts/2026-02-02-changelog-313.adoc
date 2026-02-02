@@ -1,0 +1,32 @@
+= Changelog #313
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:7cb789d98202b88c34e9710e53f8aeac0fa5096e[] +
+Release: release:2026-02-02[] (`v0.3.2777`)
+
+== New Features
+
+* pr:21408[] add support for default field values.
+* pr:21460[] add support for `#![feature(new_range)]`.
+
+== Fixes
+
+* pr:21564[] fix upvar analysis of nested closures and re-enable `unused_variables` and `unused_mut`.
+* pr:21527[] match `=>` and `==` after `meta` in macros.
+* pr:21528[] handle `Self::EnumVariant` and `Self` on traits in doclinks.
+* pr:21533[] fix panic when an opaque was constrained to an impossible type in method autoderef.
+* pr:21555[] clear diagnostics on panic.
+* pr:21542[] complete inferred types in statics.
+* pr:21495[] complete `else` before tuples.
+* pr:21513[] use binding name for the new function in `extract_function`.
+* pr:21522[] add semicolon in `toggle_macro_delimiter`.
+* pr:21514[] handle `continue` in `convert_range_for_to_while`.
+* pr:21534[] don't panic if spawning the workspace discovery command fails.
+
+== Internal Improvements
+
+* pr:21548[] make JSON and postcard protocols explicit, drop generic `Codec`.
+* pr:21410[] handle cancellation in bidirectional proc macro calls.
+
