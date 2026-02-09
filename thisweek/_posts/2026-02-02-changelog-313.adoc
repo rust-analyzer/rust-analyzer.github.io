@@ -29,4 +29,3 @@ Release: release:2026-02-02[] (`v0.3.2777`)
 
 * pr:21548[] make JSON and postcard protocols explicit, drop generic `Codec`.
 * pr:21410[] handle cancellation in bidirectional proc macro calls.
-

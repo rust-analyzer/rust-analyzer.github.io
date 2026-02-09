@@ -1,0 +1,29 @@
+= Changelog #314
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:c75729db6845c73605115b18d819917dbf6a8972[] +
+Release: release:2026-02-09[] (`v0.3.2786`)
+
+== New Features
+
+* pr:21380[] implement fine-grained request cancellation support.
+* pr:21572[] add support for new `try { ... }` and `try bikeshed Ty { ...}` blocks.
+
+== Fixes
+
+* pr:21561[] fix a glob issue affecting `windows::core::HRESULT`.
+* pr:21579[] fix a panic on lowering cycles.
+* pr:21573[] infer the expected len in `include_bytes!()` to avoid type mismatches.
+* pr:21569[] parenthesise more cases like `&(impl Trait1 + Trait2)`.
+* pr:21578[] use `display_source_code()` in `ReferenceConversion` to avoid trying to parse `{unknown}`.
+* pr:21526[], pr:21557[] complete postfix `not` and `let` in conditions.
+* pr:21508[] emit `else` branch in `move_guard`.
+* pr:21571[] fix stale diagnostics with `rust-project.json` and `rustc` JSON.
+* pr:21580[] truncate display version of commands consistently.
+
+== Internal Improvements
+
+* pr:21488[] remove `Edition::CURRENT_FIXME`.
+* pr:21599[] simplify binding hash computation in syntax highlighting.
