@@ -1,0 +1,35 @@
+= Changelog #315
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:00a9173e57f5c4ba45e380ce065b31afb17436ad[] +
+Release: release:2026-02-16[] (`v0.3.2795`)
+
+== New Features
+
+* pr:21574[] filter auto-import candidates to make sure the resulting path resolves.
+* pr:21591[] split long parameter lists into multiple lines for hover.
+
+== Fixes
+
+* pr:21647[] (first contribution) handle `ref mut` bindings in `contains_explicit_ref_binding`.
+* pr:21649[] treat dereferencing `*mut !` right-hand side values in assignments as reads.
+* pr:21611[] update `allow_normalization` to match `rustc`.
+* pr:21627[] revert "implement fine-grained request cancellation support".
+* pr:21644[] revert "fix stale diagnostics with `rust-project.json` and `rustc` JSON".
+* pr:21632[] treat `extern fn` parameters as identifiers, not patterns.
+* pr:21633[] don't resolve proc macros in value as functions outside their defining crate.
+* pr:21608[] use the right index for the close span in `set_top_subtree_delimiter_span`.
+* pr:21402[] don't insert semicolon after function call in array literal.
+* pr:21583[] keep associated type bounds in `replace_derive_with_manual_impl`.
+* pr:21381[] fix `Self` handling in `inline_call`.
+
+== Internal Improvements
+
+* pr:21609[] use `rayon` for proc macro loading.
+* pr:21606[], pr:21507[], pr:21618[], pr:21619[] migrate `generate_getter_or_setter`, `introduce_named_lifetime`, `destructure_tuple_binding` and `convert_tuple_return_type` assists to `SyntaxEditor`.
+* pr:21636[] replace `edit_in_place::Indent` in migrated assists.
+* pr:21584[] add expression, pattern and binding types iterators to `DefWithBody`.
+* pr:21581[] run clippy as a separate CI step.
+* pr:21628[] temporarily pin `miri` job toolchain.
