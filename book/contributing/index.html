@@ -1,0 +1,509 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Contributing - rust-analyzer</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-05b71aa6.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-6c762e67.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">rust-analyzer</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/tree/master/docs/book" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/edit/master/docs/book/src/contributing/README.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="contributing-quick-start"><a class="header" href="#contributing-quick-start">Contributing Quick Start</a></h1>
+<p>rust-analyzer is an ordinary Rust project, which is organized as a Cargo workspace, builds on stable and doesn’t depend on C libraries.
+So, just</p>
+<pre><code class="language-bash">cargo test
+</code></pre>
+<p>should be enough to get you started!</p>
+<p>To learn more about how rust-analyzer works, see <a href="architecture.html">Architecture</a>.
+It also explains the high-level layout of the source code.
+Do skim through that document.</p>
+<p>We also publish rustdoc docs to <a href="https://rust-lang.github.io/rust-analyzer/ide/">https://rust-lang.github.io/rust-analyzer/ide/</a>.
+Note though, that the internal documentation is very incomplete.</p>
+<p>Various organizational and process issues are discussed in this document.</p>
+<h1 id="getting-in-touch"><a class="header" href="#getting-in-touch">Getting in Touch</a></h1>
+<p>rust-analyzer is a part of the <a href="https://github.com/rust-lang/compiler-team/tree/6a769c13656c0a6959ebc09e7b1f7c09b86fb9c0/working-groups/rls-2.0">RLS-2.0 working
+group</a>.
+Discussion happens in this Zulip stream:</p>
+<p><a href="https://rust-lang.zulipchat.com/#narrow/stream/185405-t-compiler.2Frust-analyzer">https://rust-lang.zulipchat.com/#narrow/stream/185405-t-compiler.2Frust-analyzer</a></p>
+<h1 id="issue-labels"><a class="header" href="#issue-labels">Issue Labels</a></h1>
+<ul>
+<li><a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22">good-first-issue</a>
+are good issues to get into the project.</li>
+<li><a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aopen+is%3Aissue+label%3AE-has-instructions">E-has-instructions</a>
+issues have links to the code in question and tests.</li>
+<li><a href="https://github.com/rust-lang/rust-analyzer/issues?q=is:issue+is:open+label:%22Broken+Window%22">Broken Window</a>
+are issues which are not necessarily critical by themselves, but which should be fixed ASAP regardless, to avoid accumulation of technical debt.</li>
+<li><a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aopen+is%3Aissue+label%3AE-easy">E-easy</a>,
+<a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aopen+is%3Aissue+label%3AE-medium">E-medium</a>,
+<a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aopen+is%3Aissue+label%3AE-hard">E-hard</a>,
+<a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aopen+is%3Aissue+label%3AE-unknown">E-unknown</a>,
+labels are <em>estimates</em> for how hard would be to write a fix. Each triaged issue should have one of these labels.</li>
+<li><a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aopen+is%3Aissue+label%3AS-actionable">S-actionable</a> and
+<a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aopen+is%3Aissue+label%3AS-unactionable">S-unactionable</a>
+specify if there are concrete steps to resolve or advance an issue. Roughly, actionable issues need only work to be fixed,
+while unactionable ones are blocked either on user feedback (providing a reproducible example), or on larger architectural
+work or decisions. This classification is descriptive, not prescriptive, and might be wrong: Any unactionable issue might have a simple fix that we missed.
+Each triaged issue should have one of these labels.</li>
+<li><a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aopen+is%3Aissue+label%3Afun">fun</a>
+is for cool, but probably hard stuff.</li>
+<li><a href="https://github.com/rust-lang/rust-analyzer/issues?q=is%3Aissue%20state%3Aopen%20label%3AC-Architecture">C-Architecture</a>
+is for moderate/large scale architecture discussion.
+Also a kind of fun.
+These issues should generally include a link to a Zulip discussion thread.</li>
+</ul>
+<h1 id="code-style--review-process"><a class="header" href="#code-style--review-process">Code Style &amp; Review Process</a></h1>
+<p>See the <a href="style.html">Style Guide</a>.</p>
+<h1 id="cookbook"><a class="header" href="#cookbook">Cookbook</a></h1>
+<h2 id="ci"><a class="header" href="#ci">CI</a></h2>
+<p>We use GitHub Actions for CI.
+Most of the things, including formatting, are checked by <code>cargo test</code>.
+If <code>cargo test</code> passes locally, that’s a good sign that CI will be green as well.
+The only exception is that some long-running tests are skipped locally by default.
+Use <code>env RUN_SLOW_TESTS=1 cargo test</code> to run the full suite.</p>
+<p>We use bors to enforce the <a href="https://graydon2.dreamwidth.org/1597.html">not rocket science</a> rule.</p>
+<h2 id="launching-rust-analyzer"><a class="header" href="#launching-rust-analyzer">Launching rust-analyzer</a></h2>
+<p>Debugging the language server can be tricky.
+LSP is rather chatty, so driving it from the command line is not really feasible, driving it via VS Code requires interacting with two processes.</p>
+<p>For this reason, the best way to see how rust-analyzer works is to <strong>find a relevant test and execute it</strong>.
+VS Code &amp; Emacs include an action for running a single test.</p>
+<p>Launching a VS Code instance with a locally built language server is also possible.
+There’s <strong>“Run Extension (Debug Build)”</strong> launch configuration for this in VS Code.</p>
+<p>In general, I use one of the following workflows for fixing bugs and implementing features:</p>
+<p>If the problem concerns only internal parts of rust-analyzer (i.e. I don’t need to touch the <code>rust-analyzer</code> crate or TypeScript code), there is a unit-test for it.
+So, I use <strong>rust-analyzer: Run</strong> action in VS Code to run this single test, and then just do printf-driven development/debugging.
+As a sanity check after I’m done, I use <code>cargo xtask install --server</code> and <strong>Reload Window</strong> action in VS Code to verify that the thing works as I expect.</p>
+<p>If the problem concerns only the VS Code extension, I use <strong>Run Installed Extension</strong> launch configuration from <code>launch.json</code>.
+Notably, this uses the usual <code>rust-analyzer</code> binary from <code>PATH</code>.
+For this, it is important to have the following in your <code>settings.json</code> file:</p>
+<pre><code class="language-json">{
+    "rust-analyzer.server.path": "rust-analyzer"
+}
+</code></pre>
+<p>After I am done with the fix, I use <code>cargo xtask install --client</code> to try the new extension for real.</p>
+<p>If I need to fix something in the <code>rust-analyzer</code> crate, I feel sad because it’s on the boundary between the two processes, and working there is slow.
+I usually just <code>cargo xtask install --server</code> and poke changes from my live environment.
+Note that this uses <code>--release</code>, which is usually faster overall, because loading stdlib into debug version of rust-analyzer takes a lot of time.
+To speed things up, sometimes I open a temporary hello-world project which has <code>"rust-analyzer.cargo.sysroot": null</code> in <code>.code/settings.json</code>.
+This flag causes rust-analyzer to skip loading the sysroot, which greatly reduces the amount of things rust-analyzer needs to do, and makes printf’s more useful.
+Note that you should only use the <code>eprint!</code> family of macros for debugging: stdout is used for LSP communication, and <code>print!</code> would break it.</p>
+<p>If I need to fix something simultaneously in the server and in the client, I feel even more sad.
+I don’t have a specific workflow for this case.</p>
+<p>Additionally, I use <code>cargo run --release -p rust-analyzer -- analysis-stats path/to/some/rust/crate</code> to run a batch analysis.
+This is primarily useful for performance optimizations, or for bug minimization.</p>
+<h2 id="typescript-tests"><a class="header" href="#typescript-tests">TypeScript Tests</a></h2>
+<p>If you change files under <code>editors/code</code> and would like to run the tests and linter, install npm and run:</p>
+<pre><code class="language-bash">cd editors/code
+npm ci
+npm run lint
+</code></pre>
+<h2 id="how-to-"><a class="header" href="#how-to-">How to …</a></h2>
+<ul>
+<li>… add an assist? <a href="https://github.com/rust-lang/rust-analyzer/pull/7535">#7535</a></li>
+<li>… add a new protocol extension? <a href="https://github.com/rust-lang/rust-analyzer/pull/4569">#4569</a></li>
+<li>… add a new configuration option? <a href="https://github.com/rust-lang/rust-analyzer/pull/7451">#7451</a></li>
+<li>… add a new completion? <a href="https://github.com/rust-lang/rust-analyzer/pull/6964">#6964</a></li>
+<li>… allow new syntax in the parser? <a href="https://github.com/rust-lang/rust-analyzer/pull/7338">#7338</a></li>
+</ul>
+<h2 id="logging"><a class="header" href="#logging">Logging</a></h2>
+<p>Logging is done by both rust-analyzer and VS Code, so it might be tricky to figure out where logs go.</p>
+<p>Inside rust-analyzer, we use the <a href="https://docs.rs/tracing/"><code>tracing</code></a> crate for logging,
+and <a href="https://docs.rs/tracing-subscriber"><code>tracing-subscriber</code></a> for logging frontend.
+By default, log goes to stderr, but the stderr itself is processed by VS Code.
+<code>--log-file &lt;PATH&gt;</code> CLI argument allows logging to file.
+Setting the <code>RA_LOG_FILE=&lt;PATH&gt;</code> environment variable will also log to file, it will also override <code>--log-file</code>.</p>
+<p>To see the server stderr output in the running VS Code instance, go to the “Output” tab of the panel
+and select <code>rust-analyzer Language Server</code>.
+This shows <code>eprintln!</code> as well.
+Note that <code>stdout</code> is used by LSP messages, so using <code>println!</code>—or anything that writes to <code>stdout</code>—will break rust-analyzer!</p>
+<p>To log all communication between the server and the client, there are two choices:</p>
+<ul>
+<li>
+<p>You can log on the server side, by running something like</p>
+<pre><code class="language-bash">env RA_LOG=lsp_server=debug code .
+</code></pre>
+</li>
+<li>
+<p>You can log on the client side, by the <code>rust-analyzer: Toggle LSP Logs</code> command or enabling <code>"rust-analyzer.trace.server": "verbose"</code> workspace setting.
+These logs are shown in a separate tab named <code>rust-analyzer LSP Trace</code> in the output and could be used with LSP inspector.
+Kudos to <a href="https://github.com/DJMcNab">@DJMcNab</a> for setting this awesome infra up!</p>
+</li>
+</ul>
+<p>Finally there are the logs of the VSCode extension itself which go into the <code>rust-analyzer Extension</code> output tab.</p>
+<p>There are also several VS Code commands which might be of interest:</p>
+<ul>
+<li>
+<p><code>rust-analyzer: Status</code> shows some memory-usage statistics.</p>
+</li>
+<li>
+<p><code>rust-analyzer: View Hir</code> shows the HIR expressions within the function containing the cursor.</p>
+</li>
+<li>
+<p>If <code>rust-analyzer.showSyntaxTree</code> is enabled in settings, <code>Rust Syntax Tree: Focus on Rust Syntax Tree View</code> shows the syntax tree of the current file.</p>
+<p>You can click on nodes in the rust editor to go to the corresponding syntax node.</p>
+<p>You can click on <code>Reveal Syntax Element</code> next to a syntax node to go to the corresponding rust code and highlight the proper text range.</p>
+<p>If you trigger Go to Definition in the inspected Rust source file,
+the syntax tree view should scroll to and select the
+appropriate syntax node token.</p>
+<p>You can click on <code>Copy</code> next to a syntax node to copy a text representation of the node.</p>
+<p><img src="https://github.com/user-attachments/assets/2d20ae87-0abf-495f-bee8-54aa2494a00d" alt="demo"></p>
+</li>
+</ul>
+<h2 id="profiling"><a class="header" href="#profiling">Profiling</a></h2>
+<p>We have a built-in hierarchical profiler, you can enable it by using <code>RA_PROFILE</code> env-var:</p>
+<pre><code class="language-bash">RA_PROFILE=*             // dump everything
+RA_PROFILE=foo|bar|baz   // enabled only selected entries
+RA_PROFILE=*@3&gt;10        // dump everything, up to depth 3, if it takes more than 10 ms
+</code></pre>
+<p>Some rust-analyzer contributors have <code>export RA_PROFILE='*&gt;10'</code> in my shell profile.</p>
+<p>For machine-readable JSON output, we have the <code>RA_PROFILE_JSON</code> env variable. We support
+filtering only by span name:</p>
+<pre><code class="language-bash">RA_PROFILE=* // dump everything
+RA_PROFILE_JSON="vfs_load|parallel_prime_caches|discover_command" // dump selected spans
+</code></pre>
+<p>We also have a “counting” profiler which counts number of instances of popular structs.
+It is enabled by <code>RA_COUNT=1</code>.</p>
+<p>To measure time for from-scratch analysis, use something like this:</p>
+<pre><code class="language-bash">cargo run --release -p rust-analyzer -- analysis-stats ../chalk/
+</code></pre>
+<p>For measuring time of incremental analysis, use either of these:</p>
+<pre><code class="language-bash">cargo run --release -p rust-analyzer -- analysis-bench ../chalk/ --highlight ../chalk/chalk-engine/src/logic.rs
+cargo run --release -p rust-analyzer -- analysis-bench ../chalk/ --complete ../chalk/chalk-engine/src/logic.rs:94:0
+</code></pre>
+<p>Look for <code>fn benchmark_xxx</code> tests for a quick way to reproduce performance problems.</p>
+<h2 id="release-process"><a class="header" href="#release-process">Release Process</a></h2>
+<p>Release process is handled by <code>release</code>, <code>dist</code>, <code>publish-release-notes</code> and <code>promote</code> xtasks, <code>release</code> being the main one.</p>
+<p><code>release</code> assumes that you have checkouts of <code>rust-analyzer</code>, <code>rust-analyzer.github.io</code>, and <code>rust-lang/rust</code> in the same directory:</p>
+<pre><code class="language-bash">./rust-analyzer
+./rust-analyzer.github.io
+./rust-rust-analyzer  # Note the name!
+</code></pre>
+<p>The remote for <code>rust-analyzer</code> must be called <code>upstream</code> (I use <code>origin</code> to point to my fork).
+In addition, for <code>xtask promote</code> (see below), <code>rust-rust-analyzer</code> must have a <code>rust-analyzer</code> remote pointing to this repository on GitHub.</p>
+<p><code>release</code> calls the GitHub API calls to scrape pull request comments and categorize them in the changelog.
+This step uses the <code>curl</code> and <code>jq</code> applications, which need to be available in <code>PATH</code>.
+Finally, you need to obtain a GitHub personal access token and set the <code>GITHUB_TOKEN</code> environment variable.</p>
+<p>Release steps:</p>
+<ol>
+<li>Set the <code>GITHUB_TOKEN</code> environment variable.</li>
+<li>Inside rust-analyzer, run <code>cargo xtask release</code>. This will:
+<ul>
+<li>checkout the <code>release</code> branch</li>
+<li>reset it to <code>upstream/nightly</code></li>
+<li>push it to <code>upstream</code>. This triggers GitHub Actions which:
+<ul>
+<li>runs <code>cargo xtask dist</code> to package binaries and VS Code extension</li>
+<li>makes a GitHub release</li>
+<li>publishes the VS Code extension to the marketplace</li>
+</ul>
+</li>
+<li>call the GitHub API for PR details</li>
+<li>create a new changelog in <code>rust-analyzer.github.io</code></li>
+</ul>
+</li>
+<li>While the release is in progress, fill in the changelog.</li>
+<li>Commit &amp; push the changelog.</li>
+<li>Run <code>cargo xtask publish-release-notes &lt;CHANGELOG&gt;</code> – this will convert the changelog entry in AsciiDoc to Markdown and update the body of GitHub Releases entry.</li>
+<li>Tweet.</li>
+<li>Perform a subtree <a href="#performing-a-pull">pull</a>.</li>
+<li>Perform a subtree <a href="#performing-a-push">push</a>.</li>
+</ol>
+<p>If the GitHub Actions release fails because of a transient problem like a timeout, you can re-run the job from the Actions console.
+If it fails because of something that needs to be fixed, remove the release tag (if needed), fix the problem, then start over.
+Make sure to remove the new changelog post created when running <code>cargo xtask release</code> a second time.</p>
+<p>We release “nightly” every night automatically and promote the latest nightly to “stable” manually, every week.</p>
+<p>We don’t do “patch” releases, unless something truly egregious comes up.
+To do a patch release, cherry-pick the fix on top of the current <code>release</code> branch and push the branch.
+There’s no need to write a changelog for a patch release, it’s OK to include the notes about the fix into the next weekly one.
+Note: we tag releases by dates, releasing a patch release on the same day should work (by overwriting a tag), but I am not 100% sure.</p>
+<h2 id="permissions"><a class="header" href="#permissions">Permissions</a></h2>
+<p>There are two sets of people with extra permissions:</p>
+<ul>
+<li>The <a href="https://github.com/rust-lang">rust-lang</a> team <a href="https://github.com/rust-lang/team/blob/master/teams/rust-analyzer.toml">t-rust-analyzer</a>.
+This team has write access to the repository and merge queue permissions (note the repo itself is managed by infra admins).
+It’s ok to self-approve if you think you know what you are doing!
+Feel free to request a review or assign any PR to a reviewer with the relevant expertise to bring the work to their attention.
+Don’t feel pressured to review assigned PRs though.
+If you don’t feel like reviewing for whatever reason, someone else will pick the review up (but please speak up if you don’t feel like it)!</li>
+<li>The <a href="https://github.com/rust-lang">rust-lang</a> team <a href="https://github.com/rust-lang/team/blob/master/teams/rust-analyzer-contributors.toml">t-rust-analyzer-contributors</a>.
+This team has general triaging permissions allowing to label, close and re-open issues.</li>
+</ul>
+<h2 id="synchronizing-subtree-changes"><a class="header" href="#synchronizing-subtree-changes">Synchronizing subtree changes</a></h2>
+<p><code>rust-analyzer</code> is a <a href="https://josh-project.github.io/josh/intro.html">josh</a> subtree of the <a href="https://github.com/rust-lang/rust">rust-lang/rust</a>
+repository. We use the <a href="https://github.com/rust-lang/josh-sync">rustc-josh-sync</a> tool to perform synchronization between these two
+repositories. You can find documentation of the tool <a href="https://github.com/rust-lang/josh-sync">here</a>.</p>
+<p>You can install the synchronization tool using the following commands:</p>
+<pre><code class="language-bash">cargo install --locked --git https://github.com/rust-lang/josh-sync
+</code></pre>
+<p>Both pulls (synchronizing changes from rust-lang/rust into rust-analyzer) and pushes (synchronizing
+changes from rust-analyzer into rust-lang/rust) are performed from this repository.
+changes from rust-analyzer to rust-lang/rust) are performed from this repository.</p>
+<p>Usually we first perform a pull, wait for it to be merged, and then perform a push.</p>
+<h3 id="performing-a-pull"><a class="header" href="#performing-a-pull">Performing a pull</a></h3>
+<ol>
+<li>Checkout a new branch that will be used to create a PR against rust-analyzer</li>
+<li>Run the pull command
+<pre><code>rustc-josh-sync pull
+</code></pre>
+</li>
+<li>Push the branch to your fork of <code>rust-analyzer</code> and create a PR</li>
+</ol>
+<ul>
+<li>If you have the <code>gh</code> CLI installed, <code>rustc-josh-sync</code> can create the PR for you.</li>
+</ul>
+<h3 id="performing-a-push"><a class="header" href="#performing-a-push">Performing a push</a></h3>
+<p>Wait for the previous pull to be merged.</p>
+<ol>
+<li>Switch to <code>master</code> and pull</li>
+<li>Run the push command to create a branch named <code>&lt;branch-name&gt;</code> in a <code>rustc</code> fork under the <code>&lt;gh-username&gt;</code> account
+<pre><code>rustc-josh-sync push &lt;branch-name&gt; &lt;gh-username&gt;
+</code></pre>
+<ul>
+<li>The push will ask you to download a checkout of the <code>rust-lang/rust</code> repository.</li>
+<li>If you get prompted for a password, see <a href="https://github.com/rust-lang/josh-sync?tab=readme-ov-file#git-peculiarities">this</a>.</li>
+</ul>
+</li>
+<li>Create a PR from <code>&lt;branch-name&gt;</code> into <code>rust-lang/rust</code></li>
+</ol>
+<blockquote>
+<p>Besides the <code>rust</code> checkout, the Josh cache (stored under <code>~/.cache/rustc-josh</code>) will contain a bare clone of <code>rust-lang/rust</code>. This currently takes several GBs.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../editor_features.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../contributing/architecture.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../editor_features.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../contributing/architecture.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+        <script>
+            window.playground_line_numbers = true;
+        </script>
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace-2a3cd908.js"></script>
+        <script src="../mode-rust-2c9d5c9a.js"></script>
+        <script src="../editor-16ca416c.js"></script>
+        <script src="../theme-dawn-4493f9c8.js"></script>
+        <script src="../theme-tomorrow_night-9dbe62a9.js"></script>
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

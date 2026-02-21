@@ -1,0 +1,1136 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Style - rust-analyzer</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-05b71aa6.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-6c762e67.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">rust-analyzer</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/tree/master/docs/book" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/edit/master/docs/book/src/contributing/style.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="style"><a class="header" href="#style">Style</a></h1>
+<p>Our approach to “clean code” is two-fold:</p>
+<ul>
+<li>We generally don’t block PRs on style changes.</li>
+<li>At the same time, all code in rust-analyzer is constantly refactored.</li>
+</ul>
+<p>It is explicitly OK for a reviewer to flag only some nits in the PR, and then send a follow-up cleanup PR for things which are easier to explain by example, cc-ing the original author.
+Sending small cleanup PRs (like renaming a single local variable) is encouraged.</p>
+<p>When reviewing pull requests prefer extending this document to leaving
+non-reusable comments on the pull request itself.</p>
+<h1 id="general"><a class="header" href="#general">General</a></h1>
+<h2 id="scale-of-changes"><a class="header" href="#scale-of-changes">Scale of Changes</a></h2>
+<p>Everyone knows that it’s better to send small &amp; focused pull requests.
+The problem is, sometimes you <em>have</em> to, eg, rewrite the whole compiler, and that just doesn’t fit into a set of isolated PRs.</p>
+<p>The main things to keep an eye on are the boundaries between various components.
+There are three kinds of changes:</p>
+<ol>
+<li>
+<p>Internals of a single component are changed.
+Specifically, you don’t change any <code>pub</code> items.
+A good example here would be an addition of a new assist.</p>
+</li>
+<li>
+<p>API of a component is expanded.
+Specifically, you add a new <code>pub</code> function which wasn’t there before.
+A good example here would be expansion of assist API, for example, to implement lazy assists or assists groups.</p>
+</li>
+<li>
+<p>A new dependency between components is introduced.
+Specifically, you add a <code>pub use</code> reexport from another crate or you add a new line to the <code>[dependencies]</code> section of <code>Cargo.toml</code>.
+A good example here would be adding reference search capability to the assists crates.</p>
+</li>
+</ol>
+<p>For the first group, the change is generally merged as long as:</p>
+<ul>
+<li>it works for the happy case,</li>
+<li>it has tests,</li>
+<li>it doesn’t panic for the unhappy case.</li>
+</ul>
+<p>For the second group, the change would be subjected to quite a bit of scrutiny and iteration.
+The new API needs to be right (or at least easy to change later).
+The actual implementation doesn’t matter that much.
+It’s very important to minimize the amount of changed lines of code for changes of the second kind.
+Often, you start doing a change of the first kind, only to realize that you need to elevate to a change of the second kind.
+In this case, we’ll probably ask you to split API changes into a separate PR.</p>
+<p>Changes of the third group should be pretty rare, so we don’t specify any specific process for them.
+That said, adding an innocent-looking <code>pub use</code> is a very simple way to break encapsulation, keep an eye on it!</p>
+<p>Note: if you enjoyed this abstract hand-waving about boundaries, you might appreciate <a href="https://www.tedinski.com/2018/02/06/system-boundaries.html">this post</a>.</p>
+<h2 id="cratesio-dependencies"><a class="header" href="#cratesio-dependencies">Crates.io Dependencies</a></h2>
+<p>We try to be very conservative with usage of crates.io dependencies.
+Don’t use small “helper” crates (exception: <code>itertools</code> and <code>either</code> are allowed).
+If there’s some general reusable bit of code you need, consider adding it to the <code>stdx</code> crate.
+A useful exercise is to read Cargo.lock and see if some <em>transitive</em> dependencies do not make sense for rust-analyzer.</p>
+<p><strong>Rationale:</strong> keep compile times low, create ecosystem pressure for faster compiles, reduce the number of things which might break.</p>
+<h2 id="commit-style"><a class="header" href="#commit-style">Commit Style</a></h2>
+<p>We don’t have specific rules around git history hygiene.
+Maintaining clean git history is strongly encouraged, but not enforced.
+Use rebase workflow, it’s OK to rewrite history during PR review process.
+After you are happy with the state of the code, please use <a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History">interactive rebase</a> to squash fixup commits.</p>
+<p>Avoid @mentioning people in commit messages and pull request descriptions(they are added to commit message by bors).
+Such messages create a lot of duplicate notification traffic during rebases.</p>
+<p>If possible, write Pull Request titles and descriptions from the user’s perspective:</p>
+<pre><code># GOOD
+Make goto definition work inside macros
+
+# BAD
+Use original span for FileId
+</code></pre>
+<p>This makes it easier to prepare a changelog.</p>
+<p>If the change adds a new user-visible functionality, consider recording a GIF with <a href="https://github.com/phw/peek">peek</a> and pasting it into the PR description.</p>
+<p>To make writing the release notes easier, you can mark a pull request as a feature, fix, internal change, or minor.
+Minor changes are excluded from the release notes, while the other types are distributed in their corresponding sections.
+There are two ways to mark this:</p>
+<ul>
+<li>use a <code>feat: </code>, <code>feature: </code>, <code>fix: </code>, <code>internal: </code> or <code>minor: </code> prefix in the PR title</li>
+<li>write <code>changelog [feature|fix|internal|skip] [description]</code> in a comment or in the PR description; the description is optional, and will replace the title if included.</li>
+</ul>
+<p>These comments don’t have to be added by the PR author.
+Editing a comment or the PR description or title is also fine, as long as it happens before the release.</p>
+<p><strong>Rationale:</strong> clean history is potentially useful, but rarely used.
+But many users read changelogs.
+Including a description and GIF suitable for the changelog means less work for the maintainers on the release day.</p>
+<h2 id="clippy"><a class="header" href="#clippy">Clippy</a></h2>
+<p>We use Clippy to improve the code, but if some lints annoy you, allow them in the <a href="https://github.com/rust-lang/rust-analyzer/blob/master/Cargo.toml">Cargo.toml</a> [workspace.lints.clippy] section.</p>
+<h1 id="code"><a class="header" href="#code">Code</a></h1>
+<h2 id="minimal-tests"><a class="header" href="#minimal-tests">Minimal Tests</a></h2>
+<p>Most tests in rust-analyzer start with a snippet of Rust code.
+These snippets should be minimal – if you copy-paste a snippet of real code into the tests, make sure to remove everything which could be removed.</p>
+<p>It also makes sense to format snippets more compactly (for example, by placing enum definitions like <code>enum E { Foo, Bar }</code> on a single line),
+as long as they are still readable.</p>
+<p>When using multiline fixtures, use unindented raw string literals:</p>
+<pre><code class="language-rust">    #[test]
+    fn inline_field_shorthand() {
+        check_assist(
+            inline_local_variable,
+            r#"
+struct S { foo: i32}
+fn main() {
+    let $0foo = 92;
+    S { foo }
+}
+"#,
+            r#"
+struct S { foo: i32}
+fn main() {
+    S { foo: 92 }
+}
+"#,
+        );
+    }</code></pre>
+<p><strong>Rationale:</strong></p>
+<p>There are many benefits to this:</p>
+<ul>
+<li>less to read or to scroll past</li>
+<li>easier to understand what exactly is tested</li>
+<li>less stuff printed during printf-debugging</li>
+<li>less time to run test</li>
+</ul>
+<p>Formatting ensures that you can use your editor’s “number of selected characters” feature to correlate offsets with test’s source code.</p>
+<h2 id="marked-tests"><a class="header" href="#marked-tests">Marked Tests</a></h2>
+<p>Use
+<a href="https://github.com/matklad/cov-mark"><code>cov_mark::hit! / cov_mark::check!</code></a>
+when testing specific conditions.
+Do not place several marks into a single test or condition.
+Do not reuse marks between several tests.</p>
+<p><strong>Rationale:</strong> marks provide an easy way to find the canonical test for each bit of code.
+This makes it much easier to understand.
+More than one mark per test / code branch doesn’t add significantly to understanding.</p>
+<h2 id="should_panic"><a class="header" href="#should_panic"><code>#[should_panic]</code></a></h2>
+<p>Do not use <code>#[should_panic]</code> tests.
+Instead, explicitly check for <code>None</code>, <code>Err</code>, etc.</p>
+<p><strong>Rationale:</strong> <code>#[should_panic]</code> is a tool for library authors to make sure that the API does not fail silently when misused.
+<code>rust-analyzer</code> is not a library, we don’t need to test for API misuse, and we have to handle any user input without panics.
+Panic messages in the logs from the <code>#[should_panic]</code> tests are confusing.</p>
+<h2 id="ignore"><a class="header" href="#ignore"><code>#[ignore]</code></a></h2>
+<p>Do not <code>#[ignore]</code> tests.
+If the test currently does not work, assert the wrong behavior and add a fixme explaining why it is wrong.</p>
+<p><strong>Rationale:</strong> noticing when the behavior is fixed, making sure that even the wrong behavior is acceptable (ie, not a panic).</p>
+<h2 id="function-preconditions"><a class="header" href="#function-preconditions">Function Preconditions</a></h2>
+<p>Express function preconditions in types and force the caller to provide them (rather than checking in callee):</p>
+<pre><code class="language-rust">// GOOD
+fn frobnicate(walrus: Walrus) {
+    ...
+}
+
+// BAD
+fn frobnicate(walrus: Option&lt;Walrus&gt;) {
+    let walrus = match walrus {
+        Some(it) =&gt; it,
+        None =&gt; return,
+    };
+    ...
+}</code></pre>
+<p><strong>Rationale:</strong> this makes control flow explicit at the call site.
+Call-site has more context, it often happens that the precondition falls out naturally or can be bubbled up higher in the stack.</p>
+<p>Avoid splitting precondition check and precondition use across functions:</p>
+<pre><code class="language-rust">// GOOD
+fn main() {
+    let s: &amp;str = ...;
+    if let Some(contents) = string_literal_contents(s) {
+
+    }
+}
+
+fn string_literal_contents(s: &amp;str) -&gt; Option&lt;&amp;str&gt; {
+    if s.starts_with('"') &amp;&amp; s.ends_with('"') {
+        Some(&amp;s[1..s.len() - 1])
+    } else {
+        None
+    }
+}
+
+// BAD
+fn main() {
+    let s: &amp;str = ...;
+    if is_string_literal(s) {
+        let contents = &amp;s[1..s.len() - 1];
+    }
+}
+
+fn is_string_literal(s: &amp;str) -&gt; bool {
+    s.starts_with('"') &amp;&amp; s.ends_with('"')
+}</code></pre>
+<p>In the “Bad” version, the precondition that <code>1</code> and <code>s.len() - 1</code> are valid string literal boundaries is checked in <code>is_string_literal</code> but used in <code>main</code>.
+In the “Good” version, the precondition check and usage are checked in the same block, and then encoded in the types.</p>
+<p><strong>Rationale:</strong> non-local code properties degrade under change.</p>
+<h2 id="control-flow"><a class="header" href="#control-flow">Control Flow</a></h2>
+<p>As a special case of the previous rule, do not hide control flow inside functions, push it to the caller:</p>
+<pre><code class="language-rust">// GOOD
+if cond {
+    f()
+}
+
+// BAD
+fn f() {
+    if !cond {
+        return;
+    }
+    ...
+}</code></pre>
+<p>See also <a href="https://matklad.github.io/2023/11/15/push-ifs-up-and-fors-down.html">this post</a></p>
+<h2 id="assertions"><a class="header" href="#assertions">Assertions</a></h2>
+<p>Assert liberally.
+Prefer <a href="https://docs.rs/always-assert/0.1.2/always_assert/macro.never.html"><code>stdx::never!</code></a> to standard <code>assert!</code>.</p>
+<p><strong>Rationale:</strong> See <a href="https://github.com/rust-lang/rust-analyzer/blob/master/docs/book/src/contributing/architecture.md#error-handling">cross cutting concern: error handling</a>.</p>
+<h2 id="getters--setters"><a class="header" href="#getters--setters">Getters &amp; Setters</a></h2>
+<p>If a field can have any value without breaking invariants, make the field public.
+Conversely, if there is an invariant, document it, enforce it in the “constructor” function, make the field private, and provide a getter.
+Never provide setters.</p>
+<p>Getters should return borrowed data:</p>
+<pre><code class="language-rust">struct Person {
+    // Invariant: never empty
+    first_name: String,
+    middle_name: Option&lt;String&gt;
+}
+
+// GOOD
+impl Person {
+    fn first_name(&amp;self) -&gt; &amp;str { self.first_name.as_str() }
+    fn middle_name(&amp;self) -&gt; Option&lt;&amp;str&gt; { self.middle_name.as_ref() }
+}
+
+// BAD
+impl Person {
+    fn first_name(&amp;self) -&gt; String { self.first_name.clone() }
+    fn middle_name(&amp;self) -&gt; &amp;Option&lt;String&gt; { &amp;self.middle_name }
+}</code></pre>
+<p><strong>Rationale:</strong> we don’t provide public API, it’s cheaper to refactor than to pay getters rent.
+Non-local code properties degrade under change, privacy makes invariant local.
+Borrowed owned types (<code>&amp;String</code>) disclose irrelevant details about internal representation.
+Irrelevant (neither right nor wrong) things obscure correctness.</p>
+<h2 id="useless-types"><a class="header" href="#useless-types">Useless Types</a></h2>
+<p>More generally, always prefer types on the left</p>
+<pre><code class="language-rust">// GOOD      BAD
+&amp;[T]         &amp;Vec&lt;T&gt;
+&amp;str         &amp;String
+Option&lt;&amp;T&gt;   &amp;Option&lt;T&gt;
+&amp;Path        &amp;PathBuf</code></pre>
+<p><strong>Rationale:</strong> types on the left are strictly more general.
+Even when generality is not required, consistency is important.</p>
+<h2 id="constructors"><a class="header" href="#constructors">Constructors</a></h2>
+<p>Prefer <code>Default</code> to zero-argument <code>new</code> function.</p>
+<pre><code class="language-rust">// GOOD
+#[derive(Default)]
+struct Foo {
+    bar: Option&lt;Bar&gt;
+}
+
+// BAD
+struct Foo {
+    bar: Option&lt;Bar&gt;
+}
+
+impl Foo {
+    fn new() -&gt; Foo {
+        Foo { bar: None }
+    }
+}</code></pre>
+<p>Prefer <code>Default</code> even if it has to be implemented manually.</p>
+<p><strong>Rationale:</strong> less typing in the common case, uniformity.</p>
+<p>Use <code>Vec::new</code> rather than <code>vec![]</code>.</p>
+<p><strong>Rationale:</strong> uniformity, strength reduction.</p>
+<p>Avoid using “dummy” states to implement a <code>Default</code>.
+If a type doesn’t have a sensible default, empty value, don’t hide it.
+Let the caller explicitly decide what the right initial state is.</p>
+<h2 id="functions-over-objects"><a class="header" href="#functions-over-objects">Functions Over Objects</a></h2>
+<p>Avoid creating “doer” objects.
+That is, objects which are created only to execute a single action.</p>
+<pre><code class="language-rust">// GOOD
+do_thing(arg1, arg2);
+
+// BAD
+ThingDoer::new(arg1, arg2).do();</code></pre>
+<p>Note that this concerns only outward API.
+When implementing <code>do_thing</code>, it might be very useful to create a context object.</p>
+<pre><code class="language-rust">pub fn do_thing(arg1: Arg1, arg2: Arg2) -&gt; Res {
+    let mut ctx = Ctx { arg1, arg2 };
+    ctx.run()
+}
+
+struct Ctx {
+    arg1: Arg1, arg2: Arg2
+}
+
+impl Ctx {
+    fn run(self) -&gt; Res {
+        ...
+    }
+}</code></pre>
+<p>The difference is that <code>Ctx</code> is an impl detail here.</p>
+<p>Sometimes a middle ground is acceptable if this can save some busywork:</p>
+<pre><code class="language-rust">ThingDoer::do(arg1, arg2);
+
+pub struct ThingDoer {
+    arg1: Arg1, arg2: Arg2,
+}
+
+impl ThingDoer {
+    pub fn do(arg1: Arg1, arg2: Arg2) -&gt; Res {
+        ThingDoer { arg1, arg2 }.run()
+    }
+    fn run(self) -&gt; Res {
+        ...
+    }
+}</code></pre>
+<p><strong>Rationale:</strong> not bothering the caller with irrelevant details, not mixing user API with implementor API.</p>
+<h2 id="functions-with-many-parameters"><a class="header" href="#functions-with-many-parameters">Functions with many parameters</a></h2>
+<p>Avoid creating functions with many optional or boolean parameters.
+Introduce a <code>Config</code> struct instead.</p>
+<pre><code class="language-rust">// GOOD
+pub struct AnnotationConfig {
+    pub binary_target: bool,
+    pub annotate_runnables: bool,
+    pub annotate_impls: bool,
+}
+
+pub fn annotations(
+    db: &amp;RootDatabase,
+    file_id: FileId,
+    config: AnnotationConfig
+) -&gt; Vec&lt;Annotation&gt; {
+    ...
+}
+
+// BAD
+pub fn annotations(
+    db: &amp;RootDatabase,
+    file_id: FileId,
+    binary_target: bool,
+    annotate_runnables: bool,
+    annotate_impls: bool,
+) -&gt; Vec&lt;Annotation&gt; {
+    ...
+}</code></pre>
+<p><strong>Rationale:</strong> reducing churn.
+If the function has many parameters, they most likely change frequently.
+By packing them into a struct we protect all intermediary functions from changes.</p>
+<p>Do not implement <code>Default</code> for the <code>Config</code> struct, the caller has more context to determine better defaults.
+Do not store <code>Config</code> as a part of the <code>state</code>, pass it explicitly.
+This gives more flexibility for the caller.</p>
+<p>If there is variation not only in the input parameters, but in the return type as well, consider introducing a <code>Command</code> type.</p>
+<pre><code class="language-rust">// MAYBE GOOD
+pub struct Query {
+    pub name: String,
+    pub case_sensitive: bool,
+}
+
+impl Query {
+    pub fn all(self) -&gt; Vec&lt;Item&gt; { ... }
+    pub fn first(self) -&gt; Option&lt;Item&gt; { ... }
+}
+
+// MAYBE BAD
+fn query_all(name: String, case_sensitive: bool) -&gt; Vec&lt;Item&gt; { ... }
+fn query_first(name: String, case_sensitive: bool) -&gt; Option&lt;Item&gt; { ... }</code></pre>
+<h2 id="prefer-separate-functions-over-parameters"><a class="header" href="#prefer-separate-functions-over-parameters">Prefer Separate Functions Over Parameters</a></h2>
+<p>If a function has a <code>bool</code> or an <code>Option</code> parameter, and it is always called with <code>true</code>, <code>false</code>, <code>Some</code> and <code>None</code> literals, split the function in two.</p>
+<pre><code class="language-rust">// GOOD
+fn caller_a() {
+    foo()
+}
+
+fn caller_b() {
+    foo_with_bar(Bar::new())
+}
+
+fn foo() { ... }
+fn foo_with_bar(bar: Bar) { ... }
+
+// BAD
+fn caller_a() {
+    foo(None)
+}
+
+fn caller_b() {
+    foo(Some(Bar::new()))
+}
+
+fn foo(bar: Option&lt;Bar&gt;) { ... }</code></pre>
+<p><strong>Rationale:</strong> more often than not, such functions display “<code>false sharing</code>” – they have additional <code>if</code> branching inside for two different cases.
+Splitting the two different control flows into two functions simplifies each path, and remove cross-dependencies between the two paths.
+If there’s common code between <code>foo</code> and <code>foo_with_bar</code>, extract <em>that</em> into a common helper.</p>
+<h2 id="appropriate-string-types"><a class="header" href="#appropriate-string-types">Appropriate String Types</a></h2>
+<p>When interfacing with OS APIs, use <code>OsString</code>, even if the original source of data is utf-8 encoded.
+<strong>Rationale:</strong> cleanly delineates the boundary when the data goes into the OS-land.</p>
+<p>Use <code>AbsPathBuf</code> and <code>AbsPath</code> over <code>std::Path</code>.
+<strong>Rationale:</strong> rust-analyzer is a long-lived process which handles several projects at the same time.
+It is important not to leak cwd by accident.</p>
+<h1 id="premature-pessimization"><a class="header" href="#premature-pessimization">Premature Pessimization</a></h1>
+<h2 id="avoid-allocations"><a class="header" href="#avoid-allocations">Avoid Allocations</a></h2>
+<p>Avoid writing code which is slower than it needs to be.
+Don’t allocate a <code>Vec</code> where an iterator would do, don’t allocate strings needlessly.</p>
+<pre><code class="language-rust">// GOOD
+use itertools::Itertools;
+
+let (first_word, second_word) = match text.split_ascii_whitespace().collect_tuple() {
+    Some(it) =&gt; it,
+    None =&gt; return,
+}
+
+// BAD
+let words = text.split_ascii_whitespace().collect::&lt;Vec&lt;_&gt;&gt;();
+if words.len() != 2 {
+    return
+}</code></pre>
+<p><strong>Rationale:</strong> not allocating is almost always faster.</p>
+<h2 id="push-allocations-to-the-call-site"><a class="header" href="#push-allocations-to-the-call-site">Push Allocations to the Call Site</a></h2>
+<p>If allocation is inevitable, let the caller allocate the resource:</p>
+<pre><code class="language-rust">// GOOD
+fn frobnicate(s: String) {
+    ...
+}
+
+// BAD
+fn frobnicate(s: &amp;str) {
+    let s = s.to_string();
+    ...
+}</code></pre>
+<p><strong>Rationale:</strong> reveals the costs.
+It is also more efficient when the caller already owns the allocation.</p>
+<h2 id="collection-types"><a class="header" href="#collection-types">Collection Types</a></h2>
+<p>Prefer <code>rustc_hash::FxHashMap</code> and <code>rustc_hash::FxHashSet</code> instead of the ones in <code>std::collections</code>.</p>
+<p><strong>Rationale:</strong> they use a hasher that’s significantly faster and using them consistently will reduce code size by some small amount.</p>
+<h2 id="avoid-intermediate-collections"><a class="header" href="#avoid-intermediate-collections">Avoid Intermediate Collections</a></h2>
+<p>When writing a recursive function to compute a sets of things, use an accumulator parameter instead of returning a fresh collection.
+Accumulator goes first in the list of arguments.</p>
+<pre><code class="language-rust">// GOOD
+pub fn reachable_nodes(node: Node) -&gt; FxHashSet&lt;Node&gt; {
+    let mut res = FxHashSet::default();
+    go(&amp;mut res, node);
+    res
+}
+fn go(acc: &amp;mut FxHashSet&lt;Node&gt;, node: Node) {
+    acc.insert(node);
+    for n in node.neighbors() {
+        go(acc, n);
+    }
+}
+
+// BAD
+pub fn reachable_nodes(node: Node) -&gt; FxHashSet&lt;Node&gt; {
+    let mut res = FxHashSet::default();
+    res.insert(node);
+    for n in node.neighbors() {
+        res.extend(reachable_nodes(n));
+    }
+    res
+}</code></pre>
+<p><strong>Rationale:</strong> re-use allocations, accumulator style is more concise for complex cases.</p>
+<h2 id="avoid-monomorphization"><a class="header" href="#avoid-monomorphization">Avoid Monomorphization</a></h2>
+<p>Avoid making a lot of code type parametric, <em>especially</em> on the boundaries between crates.</p>
+<pre><code class="language-rust">// GOOD
+fn frobnicate(mut f: impl FnMut()) {
+    frobnicate_impl(&amp;mut f)
+}
+fn frobnicate_impl(f: &amp;mut dyn FnMut()) {
+    // lots of code
+}
+
+// BAD
+fn frobnicate(mut f: impl FnMut()) {
+    // lots of code
+}</code></pre>
+<p>Avoid <code>AsRef</code> polymorphism, it pays back only for widely used libraries:</p>
+<pre><code class="language-rust">// GOOD
+fn frobnicate(f: &amp;Path) {
+}
+
+// BAD
+fn frobnicate(f: impl AsRef&lt;Path&gt;) {
+}</code></pre>
+<p><strong>Rationale:</strong> Rust uses monomorphization to compile generic code, meaning that for each instantiation of a generic functions with concrete types, the function is compiled afresh, <em>per crate</em>.
+This allows for exceptionally good performance, but leads to increased compile times.
+Runtime performance obeys 80%/20% rule – only a small fraction of code is hot.
+Compile time <strong>does not</strong> obey this rule – all code has to be compiled.</p>
+<h1 id="style-1"><a class="header" href="#style-1">Style</a></h1>
+<h2 id="order-of-imports"><a class="header" href="#order-of-imports">Order of Imports</a></h2>
+<p>Separate import groups with blank lines.
+Use one <code>use</code> per crate.</p>
+<p>Module declarations come before the imports.
+Order them in “suggested reading order” for a person new to the code base.</p>
+<pre><code class="language-rust">mod x;
+mod y;
+
+// First std.
+use std::{ ... }
+
+// Second, external crates (both crates.io crates and other rust-analyzer crates).
+use crate_foo::{ ... }
+use crate_bar::{ ... }
+
+// Then current crate.
+use crate::{}
+
+// Finally, parent and child modules, but prefer `use crate::`.
+use super::{}
+
+// Re-exports are treated as item definitions rather than imports, so they go
+// after imports and modules. Use them sparingly.
+pub use crate::x::Z;</code></pre>
+<p><strong>Rationale:</strong> consistency.
+Reading order is important for new contributors.
+Grouping by crate allows spotting unwanted dependencies easier.</p>
+<h2 id="import-style"><a class="header" href="#import-style">Import Style</a></h2>
+<p>Qualify items from <code>hir</code> and <code>ast</code>.</p>
+<pre><code class="language-rust">// GOOD
+use syntax::ast;
+
+fn frobnicate(func: hir::Function, strukt: ast::Struct) {}
+
+// BAD
+use hir::Function;
+use syntax::ast::Struct;
+
+fn frobnicate(func: Function, strukt: Struct) {}</code></pre>
+<p><strong>Rationale:</strong> avoids name clashes, makes the layer clear at a glance.</p>
+<p>When implementing traits from <code>std::fmt</code> or <code>std::ops</code>, import the module:</p>
+<pre><code class="language-rust">// GOOD
+use std::fmt;
+
+impl fmt::Display for RenameError {
+    fn fmt(&amp;self, f: &amp;mut fmt::Formatter&lt;'_&gt;) -&gt; fmt::Result { .. }
+}
+
+// BAD
+impl std::fmt::Display for RenameError {
+    fn fmt(&amp;self, f: &amp;mut std::fmt::Formatter&lt;'_&gt;) -&gt; std::fmt::Result { .. }
+}
+
+// BAD
+use std::ops::Deref;
+
+impl Deref for Widget {
+    type Target = str;
+    fn deref(&amp;self) -&gt; &amp;str { .. }
+}</code></pre>
+<p><strong>Rationale:</strong> overall, less typing.
+Makes it clear that a trait is implemented, rather than used.</p>
+<p>Avoid local <code>use MyEnum::*</code> imports.
+<strong>Rationale:</strong> consistency.</p>
+<p>Prefer <code>use crate::foo::bar</code> to <code>use super::bar</code> or <code>use self::bar::baz</code>.
+<strong>Rationale:</strong> consistency, this is the style which works in all cases.</p>
+<p>By default, avoid re-exports.
+<strong>Rationale:</strong> for non-library code, re-exports introduce two ways to use something and allow for inconsistency.</p>
+<h2 id="order-of-items"><a class="header" href="#order-of-items">Order of Items</a></h2>
+<p>Optimize for the reader who sees the file for the first time, and wants to get a general idea about what’s going on.
+People read things from top to bottom, so place most important things first.</p>
+<p>Specifically, if all items except one are private, always put the non-private item on top.</p>
+<pre><code class="language-rust">// GOOD
+pub(crate) fn frobnicate() {
+    Helper::act()
+}
+
+#[derive(Default)]
+struct Helper { stuff: i32 }
+
+impl Helper {
+    fn act(&amp;self) {
+
+    }
+}
+
+// BAD
+#[derive(Default)]
+struct Helper { stuff: i32 }
+
+pub(crate) fn frobnicate() {
+    Helper::act()
+}
+
+impl Helper {
+    fn act(&amp;self) {
+
+    }
+}</code></pre>
+<p>If there’s a mixture of private and public items, put public items first.</p>
+<p>Put <code>struct</code>s and <code>enum</code>s first, functions and impls last. Order type declarations in top-down manner.</p>
+<pre><code class="language-rust">// GOOD
+struct Parent {
+    children: Vec&lt;Child&gt;
+}
+
+struct Child;
+
+impl Parent {
+}
+
+impl Child {
+}
+
+// BAD
+struct Child;
+
+impl Child {
+}
+
+struct Parent {
+    children: Vec&lt;Child&gt;
+}
+
+impl Parent {
+}</code></pre>
+<p><strong>Rationale:</strong> easier to get the sense of the API by visually scanning the file.
+If function bodies are folded in the editor, the source code should read as documentation for the public API.</p>
+<h2 id="context-parameters"><a class="header" href="#context-parameters">Context Parameters</a></h2>
+<p>Some parameters are threaded unchanged through many function calls.
+They determine the “context” of the operation.
+Pass such parameters first, not last.
+If there are several context parameters, consider packing them into a <code>struct Ctx</code> and passing it as <code>&amp;self</code>.</p>
+<pre><code class="language-rust">// GOOD
+fn dfs(graph: &amp;Graph, v: Vertex) -&gt; usize {
+    let mut visited = FxHashSet::default();
+    return go(graph, &amp;mut visited, v);
+
+    fn go(graph: &amp;Graph, visited: &amp;mut FxHashSet&lt;Vertex&gt;, v: usize) -&gt; usize {
+        ...
+    }
+}
+
+// BAD
+fn dfs(v: Vertex, graph: &amp;Graph) -&gt; usize {
+    fn go(v: usize, graph: &amp;Graph, visited: &amp;mut FxHashSet&lt;Vertex&gt;) -&gt; usize {
+        ...
+    }
+
+    let mut visited = FxHashSet::default();
+    go(v, graph, &amp;mut visited)
+}</code></pre>
+<p><strong>Rationale:</strong> consistency.
+Context-first works better when non-context parameter is a lambda.</p>
+<h2 id="variable-naming"><a class="header" href="#variable-naming">Variable Naming</a></h2>
+<p>Use boring and long names for local variables (<a href="https://github.com/rust-lang/rust-analyzer/pull/4162#discussion_r417130973">yay code completion</a>).
+The default name is a lowercased name of the type: <code>global_state: GlobalState</code>.
+Avoid ad-hoc acronyms and contractions, but use the ones that exist consistently (<code>db</code>, <code>ctx</code>, <code>acc</code>).
+Prefer American spelling (color, behavior).</p>
+<p>Default names:</p>
+<ul>
+<li><code>res</code> – “result of the function” local variable</li>
+<li><code>it</code> – I don’t really care about the name</li>
+<li><code>n_foos</code> – number of foos (prefer this to <code>foo_count</code>)</li>
+<li><code>foo_idx</code> – index of <code>foo</code></li>
+</ul>
+<p>Many names in rust-analyzer conflict with keywords.
+We use mangled names instead of <code>r#ident</code> syntax:</p>
+<pre><code>crate  -&gt; krate
+enum   -&gt; enum_
+fn     -&gt; func
+impl   -&gt; imp
+macro  -&gt; mac
+mod    -&gt; module
+struct -&gt; strukt
+trait  -&gt; trait_
+type   -&gt; ty
+</code></pre>
+<p><strong>Rationale:</strong> consistency.</p>
+<h2 id="error-handling-trivia"><a class="header" href="#error-handling-trivia">Error Handling Trivia</a></h2>
+<p>Use <code>anyhow::Result</code> rather than just <code>Result</code>.</p>
+<p><strong>Rationale:</strong> makes it immediately clear what result that is.</p>
+<p>Use <code>anyhow::format_err!</code> rather than <code>anyhow::anyhow</code>.</p>
+<p><strong>Rationale:</strong> consistent, boring, avoids stuttering.</p>
+<p>There’s no specific guidance on the formatting of error messages, see <a href="https://github.com/dtolnay/anyhow/issues/209">anyhow/#209</a>.
+Do not end error and context messages with <code>.</code> though.</p>
+<h2 id="early-returns"><a class="header" href="#early-returns">Early Returns</a></h2>
+<p>Do use early returns</p>
+<pre><code class="language-rust">// GOOD
+fn foo() -&gt; Option&lt;Bar&gt; {
+    if !condition() {
+        return None;
+    }
+
+    Some(...)
+}
+
+// BAD
+fn foo() -&gt; Option&lt;Bar&gt; {
+    if condition() {
+        Some(...)
+    } else {
+        None
+    }
+}</code></pre>
+<p><strong>Rationale:</strong> reduce cognitive stack usage.</p>
+<p>Use <code>return Err(err)</code> to throw an error:</p>
+<pre><code class="language-rust">// GOOD
+fn f() -&gt; Result&lt;(), ()&gt; {
+    if condition {
+        return Err(());
+    }
+    Ok(())
+}
+
+// BAD
+fn f() -&gt; Result&lt;(), ()&gt; {
+    if condition {
+        Err(())?;
+    }
+    Ok(())
+}</code></pre>
+<p><strong>Rationale:</strong> <code>return</code> has type <code>!</code>, which allows the compiler to flag dead
+code (<code>Err(...)?</code> is of unconstrained generic type <code>T</code>).</p>
+<h2 id="comparisons"><a class="header" href="#comparisons">Comparisons</a></h2>
+<p>When doing multiple comparisons use <code>&lt;</code>/<code>&lt;=</code>, avoid <code>&gt;</code>/<code>&gt;=</code>.</p>
+<pre><code class="language-rust">// GOOD
+assert!(lo &lt;= x &amp;&amp; x &lt;= hi);
+assert!(r1 &lt; l2 || r2 &lt; l1);
+assert!(x &lt; y);
+assert!(0 &lt; x);
+
+// BAD
+assert!(x &gt;= lo &amp;&amp; x &lt;= hi);
+assert!(r1 &lt; l2 || l1 &gt; r2);
+assert!(y &gt; x);
+assert!(x &gt; 0);</code></pre>
+<p><strong>Rationale:</strong> Less-then comparisons are more intuitive, they correspond spatially to <a href="https://en.wikipedia.org/wiki/Real_line">real line</a>.</p>
+<h2 id="if-let"><a class="header" href="#if-let">If-let</a></h2>
+<p>Avoid <code>if let ... { } else { }</code> construct, use <code>match</code> instead.</p>
+<pre><code class="language-rust">// GOOD
+match ctx.expected_type.as_ref() {
+    Some(expected_type) =&gt; completion_ty == expected_type &amp;&amp; !expected_type.is_unit(),
+    None =&gt; false,
+}
+
+// BAD
+if let Some(expected_type) = ctx.expected_type.as_ref() {
+    completion_ty == expected_type &amp;&amp; !expected_type.is_unit()
+} else {
+    false
+}</code></pre>
+<p><strong>Rationale:</strong> <code>match</code> is almost always more compact.
+The <code>else</code> branch can get a more precise pattern: <code>None</code> or <code>Err(_)</code> instead of <code>_</code>.</p>
+<h2 id="match-ergonomics"><a class="header" href="#match-ergonomics">Match Ergonomics</a></h2>
+<p>Don’t use the <code>ref</code> keyword.</p>
+<p><strong>Rationale:</strong> consistency &amp; simplicity.
+<code>ref</code> was required before <a href="https://github.com/rust-lang/rfcs/blob/master/text/2005-match-ergonomics.md">match ergonomics</a>.
+Today, it is redundant.
+Between <code>ref</code> and match ergonomics, the latter is more ergonomic in most cases, and is simpler (does not require a keyword).</p>
+<h2 id="empty-match-arms"><a class="header" href="#empty-match-arms">Empty Match Arms</a></h2>
+<p>Use <code>=&gt; (),</code> when a match arm is intentionally empty:</p>
+<pre><code class="language-rust">// GOOD
+match result {
+    Ok(_) =&gt; (),
+    Err(err) =&gt; error!("{}", err),
+}
+
+// BAD
+match result {
+    Ok(_) =&gt; {}
+    Err(err) =&gt; error!("{}", err),
+}</code></pre>
+<p><strong>Rationale:</strong> consistency.</p>
+<h2 id="functional-combinators"><a class="header" href="#functional-combinators">Functional Combinators</a></h2>
+<p>Use high order monadic combinators like <code>map</code>, <code>then</code> when they are a natural choice; don’t bend the code to fit into some combinator.
+If writing a chain of combinators creates friction, replace them with control flow constructs: <code>for</code>, <code>if</code>, <code>match</code>.
+Mostly avoid <code>bool::then</code> and <code>Option::filter</code>.</p>
+<pre><code class="language-rust">// GOOD
+if !x.cond() {
+    return None;
+}
+Some(x)
+
+// BAD
+Some(x).filter(|it| it.cond())</code></pre>
+<p>This rule is more “soft” then others, and boils down mostly to taste.
+The guiding principle behind this rule is that code should be dense in computation, and sparse in the number of expressions per line.
+The second example contains <em>less</em> computation – the <code>filter</code> function is an indirection for <code>if</code>, it doesn’t do any useful work by itself.
+At the same time, it is more crowded – it takes more time to visually scan it.</p>
+<p><strong>Rationale:</strong> consistency, playing to language’s strengths.
+Rust has first-class support for imperative control flow constructs like <code>for</code> and <code>if</code>, while functions are less first-class due to lack of universal function type, currying, and non-first-class effects (<code>?</code>, <code>.await</code>).</p>
+<h2 id="turbofish"><a class="header" href="#turbofish">Turbofish</a></h2>
+<p>Prefer type ascription over the turbofish.
+When ascribing types, avoid <code>_</code></p>
+<pre><code class="language-rust">// GOOD
+let mutable: Vec&lt;T&gt; = old.into_iter().map(|it| builder.make_mut(it)).collect();
+
+// BAD
+let mutable: Vec&lt;_&gt; = old.into_iter().map(|it| builder.make_mut(it)).collect();
+
+// BAD
+let mutable = old.into_iter().map(|it| builder.make_mut(it)).collect::&lt;Vec&lt;_&gt;&gt;();</code></pre>
+<p><strong>Rationale:</strong> consistency, readability.
+If compiler struggles to infer the type, the human would as well.
+Having the result type specified up-front helps with understanding what the chain of iterator methods is doing.</p>
+<h2 id="helper-functions"><a class="header" href="#helper-functions">Helper Functions</a></h2>
+<p>Avoid creating single-use helper functions:</p>
+<pre><code class="language-rust">// GOOD
+let buf = {
+    let mut buf = get_empty_buf(&amp;mut arena);
+    buf.add_item(item);
+    buf
+};
+
+// BAD
+let buf = prepare_buf(&amp;mut arena, item);
+
+...
+
+fn prepare_buf(arena: &amp;mut Arena, item: Item) -&gt; ItemBuf {
+    let mut res = get_empty_buf(&amp;mut arena);
+    res.add_item(item);
+    res
+}</code></pre>
+<p>Exception: if you want to make use of <code>return</code> or <code>?</code>.</p>
+<p><strong>Rationale:</strong> single-use functions change frequently, adding or removing parameters adds churn.
+A block serves just as well to delineate a bit of logic, but has access to all the context.
+Re-using originally single-purpose function often leads to bad coupling.</p>
+<h2 id="local-helper-functions"><a class="header" href="#local-helper-functions">Local Helper Functions</a></h2>
+<p>Put nested helper functions at the end of the enclosing functions
+(this requires using return statement).
+Don’t nest more than one level deep.</p>
+<pre><code class="language-rust">// GOOD
+fn dfs(graph: &amp;Graph, v: Vertex) -&gt; usize {
+    let mut visited = FxHashSet::default();
+    return go(graph, &amp;mut visited, v);
+
+    fn go(graph: &amp;Graph, visited: &amp;mut FxHashSet&lt;Vertex&gt;, v: usize) -&gt; usize {
+        ...
+    }
+}
+
+// BAD
+fn dfs(graph: &amp;Graph, v: Vertex) -&gt; usize {
+    fn go(graph: &amp;Graph, visited: &amp;mut FxHashSet&lt;Vertex&gt;, v: usize) -&gt; usize {
+        ...
+    }
+
+    let mut visited = FxHashSet::default();
+    go(graph, &amp;mut visited, v)
+}</code></pre>
+<p><strong>Rationale:</strong> consistency, improved top-down readability.</p>
+<h2 id="helper-variables"><a class="header" href="#helper-variables">Helper Variables</a></h2>
+<p>Introduce helper variables freely, especially for multiline conditions:</p>
+<pre><code class="language-rust">// GOOD
+let rustfmt_not_installed =
+    captured_stderr.contains("not installed") || captured_stderr.contains("not available");
+
+match output.status.code() {
+    Some(1) if !rustfmt_not_installed =&gt; Ok(None),
+    _ =&gt; Err(format_err!("rustfmt failed:\n{}", captured_stderr)),
+};
+
+// BAD
+match output.status.code() {
+    Some(1)
+        if !captured_stderr.contains("not installed")
+           &amp;&amp; !captured_stderr.contains("not available") =&gt; Ok(None),
+    _ =&gt; Err(format_err!("rustfmt failed:\n{}", captured_stderr)),
+};</code></pre>
+<p><strong>Rationale:</strong> Like blocks, single-use variables are a cognitively cheap abstraction, as they have access to all the context.
+Extra variables help during debugging, they make it easy to print/view important intermediate results.
+Giving a name to a condition inside an <code>if</code> expression often improves clarity and leads to nicely formatted code.</p>
+<h2 id="token-names"><a class="header" href="#token-names">Token names</a></h2>
+<p>Use <code>T![foo]</code> instead of <code>SyntaxKind::FOO_KW</code>.</p>
+<pre><code class="language-rust">// GOOD
+match p.current() {
+    T![true] | T![false] =&gt; true,
+    _ =&gt; false,
+}
+
+// BAD
+
+match p.current() {
+    SyntaxKind::TRUE_KW | SyntaxKind::FALSE_KW =&gt; true,
+    _ =&gt; false,
+}</code></pre>
+<p><strong>Rationale:</strong> The macro uses the familiar Rust syntax, avoiding ambiguities like “is this a brace or bracket?”.</p>
+<h2 id="documentation"><a class="header" href="#documentation">Documentation</a></h2>
+<p>Style inline code comments as proper sentences.
+Start with a capital letter, end with a dot.</p>
+<pre><code class="language-rust">// GOOD
+
+// Only simple single segment paths are allowed.
+MergeBehavior::Last =&gt; {
+    tree.use_tree_list().is_none() &amp;&amp; tree.path().map(path_len) &lt;= Some(1)
+}
+
+// BAD
+
+// only simple single segment paths are allowed
+MergeBehavior::Last =&gt; {
+    tree.use_tree_list().is_none() &amp;&amp; tree.path().map(path_len) &lt;= Some(1)
+}</code></pre>
+<p><strong>Rationale:</strong> writing a sentence (or maybe even a paragraph) rather just “a comment” creates a more appropriate frame of mind.
+It tricks you into writing down more of the context you keep in your head while coding.</p>
+<p>For <code>.md</code> files prefer a sentence-per-line format, don’t wrap lines.
+If the line is too long, you want to split the sentence in two :-)</p>
+<p><strong>Rationale:</strong> much easier to edit the text and read the diff, see <a href="https://asciidoctor.org/docs/asciidoc-recommended-practices/#one-sentence-per-line">this link</a>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../contributing/setup.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../contributing/syntax.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../contributing/setup.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../contributing/syntax.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+        <script>
+            window.playground_line_numbers = true;
+        </script>
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace-2a3cd908.js"></script>
+        <script src="../mode-rust-2c9d5c9a.js"></script>
+        <script src="../editor-16ca416c.js"></script>
+        <script src="../theme-dawn-4493f9c8.js"></script>
+        <script src="../theme-tomorrow_night-9dbe62a9.js"></script>
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
