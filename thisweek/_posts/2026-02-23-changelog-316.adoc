@@ -1,0 +1,33 @@
+= Changelog #316
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:0c746f699034e70e1c3f11036b8c2895a0b1071c[] +
+Release: release:2026-02-23[] (`v0.3.2803`)
+
+== Fixes
+
+* pr:21635[] (first contribution) improve `#[cfg]` handling when inserting or merging imports.
+* pr:21665[] (first contribution) don't qualify parameter names in `add_missing_impl_members`.
+* pr:21675[] (first contribution) exclude references in macro calls inside tests when `excludeTests` is enabled.
+* pr:21664[] handle cycles in `sizedness_constraint_for_ty`.
+* pr:21652[], pr:21692[] fix predicates of built-in derive traits with two parameters defaulting to `Self`.
+* pr:21655[] complete derive helpers on empty namerefs.
+* pr:21594[] complete postfix `let` and `letm` in match arms.
+* pr:21600[] complete postfix `let` on block tail expression.
+* pr:21650[] don't complete suggested parameters in complex patterns.
+* pr:21536[] offer `toggle_macro_delimiter` in nested macro calls.
+* pr:21623[] offer `replace_is_method_with_if_let_method` on `is_some_and`.
+* pr:21684[] pick the enclosing instead of first impl block in `generate_function`.
+* pr:21688[] correctly parenthesize inverted condition in `convert_bool_then`.
+* pr:20353[] support selecting only a subset of fields in `generate_getter_or_setter`.
+* pr:21389[] handle references better in `convert_to_guarded_return`, `replace_if_let_with_match` and `replace_let_with_if_let`.
+* pr:21657[] support `Span::span_source` in proc macro expansion.
+
+== Internal Improvements
+
+* pr:21631[] refactor handling of associated type shorthands.
+* pr:21630[] use `CARGO_RESOLVER_LOCKFILE_PATH` for lockfile copies on `1.95` and later.
+* pr:21643[] replace `edit_in_place::Indent` in `generate_impl`.
+* pr:21661[], pr:21666[] add integration tests for flycheck.
