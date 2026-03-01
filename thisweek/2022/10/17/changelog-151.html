@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #151</title>
+  <meta name="description"
+    content="Commit: 0531aabRelease: 2022-10-17">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2022/10/17/changelog-151.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #151</h1>
+<div class="post-meta sect1">
+  Oct 17, 2022
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/0531aab522f25d6aae30b2cc23a09f4b9257eedc"><code>0531aab</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2022-10-17"><code>2022-10-17</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13358"><code>#13358</code></a> (first contribution) complete Cargo environment variables in <code>env!</code> and <code>option_env!</code>:</p>
+<div class="videoblock">
+<div class="content">
+<video src="https://user-images.githubusercontent.com/308347/196144995-64e38e3c-0ad7-4cf3-b0f7-4243866ed341.mp4" controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13303"><code>#13303</code></a> add <code>Convert named to tuple struct</code> assist:</p>
+<div class="videoblock">
+<div class="content">
+<video src="https://user-images.githubusercontent.com/308347/196149918-7a27df57-b525-40cf-ae12-bc58e077d637.mp4" controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13354"><code>#13354</code></a> diagnose some incorrect usages of the question mark operator:</p>
+<div class="videoblock">
+<div class="content">
+<video src="https://user-images.githubusercontent.com/308347/196147506-111000e4-60a9-4dd2-8f0b-252d766b3cb5.mp4" controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13420"><code>#13420</code></a> (first contribution) don&#8217;t trigger auto-import assist on parameter names.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13391"><code>#13391</code></a> (first contribution) update installation instructions for the stable <code>rustup</code> component.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13380"><code>#13380</code></a> honor <code>cfg</code> attributes on params when lowering patterns.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13384"><code>#13384</code></a> expand unmatched macro-by-example fragments to reasonable default token trees.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13382"><code>#13382</code></a> reorder <code>dyn</code> bounds on render.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13392"><code>#13392</code></a> prefer similar tokens when expanding macros speculatively.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13333"><code>#13333</code></a> fix placement of and indentation inside generated methods.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13377"><code>#13377</code></a> underline only intra-doc links instead of the whole doc comment.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13402"><code>#13402</code></a> cast <code>runnableEnv</code> items to string.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13397"><code>#13397</code></a> (first contribution) fix links in <code>syntax.md</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13376"><code>#13376</code></a> add <code>GenericParamList::to_generic_args</code> and <code>{TypeParam,ConstParam}::remove_default</code> APIs.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13385"><code>#13385</code></a> don&#8217;t report build scripts and proc macros as metadata progress.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13386"><code>#13386</code></a> refactor completion expansion.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13357"><code>#13357</code></a> allow <code>minicore</code> flags specifications to be order independent.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13401"><code>#13401</code></a> run <code>analysis-stats</code> on CI, with <code>opt-level = 1</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13415"><code>#13415</code></a> set a timeout when publishing to OVSX.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13408"><code>#13408</code></a> bump <code>chalk</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

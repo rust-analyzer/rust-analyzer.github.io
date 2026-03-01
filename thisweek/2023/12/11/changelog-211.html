@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #211</title>
+  <meta name="description"
+    content="Commit: 457b966Release: 2023-12-11 (v0.3.1766)">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2023/12/11/changelog-211.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #211</h1>
+<div class="post-meta sect1">
+  Dec 11, 2023
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/457b966b171b09a7e57acb710fbca29a4b3526f0"><code>457b966</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2023-12-11"><code>2023-12-11</code></a> (<code>v0.3.1766</code>)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15959"><code>#15959</code></a> replace <code>TokenMap</code> with an abstraction that matches reality.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16027"><code>#16027</code></a> add support for implicit format args:</p>
+<div class="videoblock">
+<div class="content">
+<video src="https://user-images.githubusercontent.com/308347/289476161-20bcb7f6-cfa2-4550-a2ba-a524ab52cba3.mp4" controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16034"><code>#16034</code></a> support multiple navigation targets when the focus range is in the macro definition site:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/288381131-2cc82e5c-320f-4de2-9d55-fe975d180f2a.gif" alt="Screen recording showing two Go to definition results for `tcx.def_span` in the rustc source code">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15990"><code>#15990</code></a> diagnose extra trait impl items:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/289478906-01ab50b3-ad41-482c-8b33-62712efb89e4.png" alt="Screenshot showing an error on a trait impl item that&#8217;s not a member of original trait">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15627"><code>#15627</code></a> prioritize import suggestions based on the expected type:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/289481260-3325f8cd-8cb5-4a12-8ec7-b2554309dc14.png" alt="Screenshot showing the flyimport pop-up prioritizing `std::sync::atomic::Ordering` in a `fetch_add` call">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15896"><code>#15896</code></a> (first contribution) show placeholder while getting runnable list from server:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/16928427/282953072-09de6a1c-6f3c-4d29-8031-ba4baeb43282.png" alt="Screenshot showing a `Looking for runnables&#8230;&#8203;` in the picker before `cargo test` and `cargo check` show up">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15515"><code>#15515</code></a> (first contribution) improve handling of binary expressions on the left-hand side of "Flip binary expression".</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16009"><code>#16009</code></a> (first contribution) don&#8217;t search for <code>ControlFlow</code> as string in "Extract function".</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16028"><code>#16028</code></a> make drop inlay hints more readable:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/71162630/288081867-bb18707f-3278-435d-a938-ccff4c685586.png" alt="Screenshot showing drop hints appearing now after the semicolon">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16024"><code>#16024</code></a> fix runnables working directory on Windows.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16054"><code>#16054</code></a> fix token downmapping being quadratic.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16016"><code>#16016</code></a> don&#8217;t insert parentheses around fields in struct literals.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16041"><code>#16041</code></a> fix <code>WideChar</code> offsets calculation in <code>line-index</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16073"><code>#16073</code></a> replace <code>doc_comments_and_attrs</code> with <code>collect_attrs</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16035"><code>#16035</code></a> fix diagnostics panicking when resolving to different files due to macros.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16037"><code>#16037</code></a> don&#8217;t print proc-macro panic backtraces in the logs.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15486"><code>#15486</code></a> fix item tree lowering <code>pub(self)</code> to <code>pub()</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15705"><code>#15705</code></a> resolve <code>Self</code> type references in delegate method assist.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16048"><code>#16048</code></a> fix <code>concat_bytes!</code> expansion emitting an identifier.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16058"><code>#16058</code></a> reduce spans for unresolved field and method diagnostics.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16060"><code>#16060</code></a> fix completion in <code>format_args!</code> with invalid template.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16078"><code>#16078</code></a> fix "View Mir", "View Hir" and "Interpret function" when the caret is inside a macro.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16039"><code>#16039</code></a> don&#8217;t emit missing items diagnostic for negative impls.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16045"><code>#16045</code></a> fix panic with closure inside array length.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16055"><code>#16055</code></a> fall back to method resolution on unresolved field access.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16036"><code>#16036</code></a> (first contribution) make <code>ParamLoweringMode</code> accessible.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15986"><code>#15986</code></a> use <code>triomphe::Arc::from_iter</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16042"><code>#16042</code></a> bump <code>salsa</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16022"><code>#16022</code></a> don&#8217;t explicitly warn against <code>semicolon_in_expressions_from_macros</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16038"><code>#16038</code></a> publish <code>lsp-server 0.7.5</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16043"><code>#16043</code></a> bump and unlock some dependencies.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

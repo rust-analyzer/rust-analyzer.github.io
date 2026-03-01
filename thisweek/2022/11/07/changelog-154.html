@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #154</title>
+  <meta name="description"
+    content="Commit: d03c1c8Release: 2022-11-07">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2022/11/07/changelog-154.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #154</h1>
+<div class="post-meta sect1">
+  Nov 7, 2022
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/d03c1c87d4ca2d524646316387d47b12524ac451"><code>d03c1c8</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2022-11-07"><code>2022-11-07</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="an-update-on-openvsx"><a class="anchor" href="#an-update-on-openvsx"></a>An Update on OpenVSX</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Many users of VS Code are actually running an open-source version of the editor.
+These include VSCodium and the <code>code</code> package in Arch Linux.
+The "free" builds are not allowed to connect to the Microsoft Marketplace and instead they download extensions from <a href="https://open-vsx.org">OpenVSX</a>.</p>
+</div>
+<div class="paragraph">
+<p>For a long time, the version of rust-analyzer available on OpenVSX was outdated and did not work very well with recent Rust toolchains.
+But because of various technical reasons, we were not able to publish new versions there.
+This caused countless of disappointed users, and dozens of duplicate issues filed against our tracker.</p>
+</div>
+<div class="paragraph">
+<p>Last week, with the help of the OpenVSX maintainers, we managed to sort out the issues.
+And for the first time in almost a year, rust-analyzer is <a href="https://open-vsx.org/extension/rust-lang/rust-analyzer">available</a> on OpenVSX.
+Unfortunately, we had to remove the existing versions, under the identifier of <code>matklad.rust-analyzer</code>.
+If you have that version installed, it will not be automatically switched over to the new one (<code>rust-lang.rust-analyzer</code>).</p>
+</div>
+<div class="paragraph">
+<p>So if you are not running a Microsoft build of VS Code, our advice is to reinstall rust-analyzer from Code&#8217;s extension page.
+This will ensure that you get updated versions in the future.
+If you&#8217;ve installed a VSIX from GitHub since March, it should get updated automatically, but it doesn&#8217;t hurt to check.</p>
+</div>
+<div class="paragraph">
+<p>If you are using an official build of Code, or a different editor, you don&#8217;t need to take any action.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13525"><code>#13525</code></a> show signature help when calling generic types implementing <code>FnOnce</code>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/200243832-b81303bd-b833-4d99-b96c-ecec6acdc2df.png" alt="A screenshot showing signature help when calling a `FnOnce` parameter">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13516"><code>#13516</code></a> add "Convert <code>match</code> to <code>let</code>-<code>else</code>" assist:</p>
+<div class="videoblock">
+<div class="content">
+<video src="https://user-images.githubusercontent.com/308347/200244795-545f0465-ec0f-4d8c-8f70-5f08aea99bf0.mp4" controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13527"><code>#13527</code></a> use <code>let</code>-<code>else</code> statements in "Convert to guarded return".</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13359"><code>#13359</code></a> add <code>rust-analyzer.assist.emitMustUse</code> config for inserting <code>#[must_use]</code> in <code>generate_enum_as_method</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13454"><code>#13454</code></a> (first contribution) handle shadowing of locals in "Inline call".</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13508"><code>#13508</code></a> (first contribution) don&#8217;t offer to remove unnecessary <code>async</code> in trait items.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13523"><code>#13523</code></a> disregard type variable expectation for <code>if</code> expressions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13546"><code>#13546</code></a> lower unsafety of function pointer and item types.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13517"><code>#13517</code></a> make custom expression prefix completions understand references.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13549"><code>#13549</code></a> fix reference searching accounting for substrings instead of whole identifiers.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13456"><code>#13456</code></a> generate SCIP symbols for local crates.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13445"><code>#13445</code></a> (first contribution) fix some broken links in <code>guide.md</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13536"><code>#13536</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/13556"><code>#13556</code></a> (first contribution) mention auto-published crates in the manual.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13379"><code>#13379</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/13435"><code>#13435</code></a> migrate assists to format args captures, parts 1 and 3.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13544"><code>#13544</code></a> add rustbot features related to PR state labels.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13541"><code>#13541</code></a> clarify which VS Code commands are meant for debugging.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

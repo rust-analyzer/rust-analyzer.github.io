@@ -1,0 +1,3006 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Assists (Code Actions) - rust-analyzer</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-05b71aa6.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-6c762e67.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">rust-analyzer</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/tree/master/docs/book" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/edit/master/docs/book/src/assists.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="assists"><a class="header" href="#assists">Assists</a></h1>
+<p>Assists, or code actions, are small local refactorings, available in a
+particular context. They are usually triggered by a shortcut or by
+clicking a light bulb icon in the editor. Cursor position or selection
+is signified by <code>┃</code> character.</p>
+<h3 id="add_braces"><a class="header" href="#add_braces"><code>add_braces</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_braces.rs#L10">add_braces.rs</a></p>
+<p>Adds braces to closure bodies, match arm expressions and assignment bodies.</p>
+<h4 id="before"><a class="header" href="#before">Before</a></h4>
+<pre><code class="language-rust">fn foo(n: i32) -&gt; i32 {
+    match n {
+        1 =&gt;┃ n + 1,
+        _ =&gt; 0
+    }
+}</code></pre>
+<h4 id="after"><a class="header" href="#after">After</a></h4>
+<pre><code class="language-rust">fn foo(n: i32) -&gt; i32 {
+    match n {
+        1 =&gt; {
+            n + 1
+        },
+        _ =&gt; 0
+    }
+}</code></pre>
+<hr>
+<h4 id="before-1"><a class="header" href="#before-1">Before</a></h4>
+<pre><code class="language-rust">fn foo(n: i32) -&gt; i32 {
+    let x =┃ n + 2;
+}</code></pre>
+<h4 id="after-1"><a class="header" href="#after-1">After</a></h4>
+<pre><code class="language-rust">fn foo(n: i32) -&gt; i32 {
+    let x = {
+        n + 2
+    };
+}</code></pre>
+<h3 id="add_explicit_enum_discriminant"><a class="header" href="#add_explicit_enum_discriminant"><code>add_explicit_enum_discriminant</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_explicit_enum_discriminant.rs#L10">add_explicit_enum_discriminant.rs</a></p>
+<p>Adds explicit discriminant to all enum variants.</p>
+<h4 id="before-2"><a class="header" href="#before-2">Before</a></h4>
+<pre><code class="language-rust">enum TheEnum┃ {
+    Foo,
+    Bar,
+    Baz = 42,
+    Quux,
+}</code></pre>
+<h4 id="after-2"><a class="header" href="#after-2">After</a></h4>
+<pre><code class="language-rust">enum TheEnum {
+    Foo = 0,
+    Bar = 1,
+    Baz = 42,
+    Quux = 43,
+}</code></pre>
+<h3 id="add_explicit_method_call_deref"><a class="header" href="#add_explicit_method_call_deref"><code>add_explicit_method_call_deref</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_explicit_dot_deref.rs#L11">add_explicit_dot_deref.rs</a></p>
+<p>Insert explicit method call reference and dereferences.</p>
+<h4 id="before-3"><a class="header" href="#before-3">Before</a></h4>
+<pre><code class="language-rust">struct Foo;
+impl Foo { fn foo(&amp;self) {} }
+fn test() {
+    Foo┃.┃foo();
+}</code></pre>
+<h4 id="after-3"><a class="header" href="#after-3">After</a></h4>
+<pre><code class="language-rust">struct Foo;
+impl Foo { fn foo(&amp;self) {} }
+fn test() {
+    (&amp;Foo).foo();
+}</code></pre>
+<h3 id="add_explicit_type"><a class="header" href="#add_explicit_type"><code>add_explicit_type</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_explicit_type.rs#L8">add_explicit_type.rs</a></p>
+<p>Specify type for a let binding.</p>
+<h4 id="before-4"><a class="header" href="#before-4">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let x┃ = 92;
+}</code></pre>
+<h4 id="after-4"><a class="header" href="#after-4">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let x: i32 = 92;
+}</code></pre>
+<h3 id="add_hash"><a class="header" href="#add_hash"><code>add_hash</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/raw_string.rs#L85">raw_string.rs</a></p>
+<p>Adds a hash to a raw string literal.</p>
+<h4 id="before-5"><a class="header" href="#before-5">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    r#"Hello,┃ World!"#;
+}</code></pre>
+<h4 id="after-5"><a class="header" href="#after-5">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    r##"Hello, World!"##;
+}</code></pre>
+<h3 id="add_impl_default_members"><a class="header" href="#add_impl_default_members"><code>add_impl_default_members</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L59">add_missing_impl_members.rs</a></p>
+<p>Adds scaffold for overriding default impl members.</p>
+<h4 id="before-6"><a class="header" href="#before-6">Before</a></h4>
+<pre><code class="language-rust">trait Trait {
+    type X;
+    fn foo(&amp;self);
+    fn bar(&amp;self) {}
+}
+
+impl Trait for () {
+    type X = ();
+    fn foo(&amp;self) {}┃
+}</code></pre>
+<h4 id="after-6"><a class="header" href="#after-6">After</a></h4>
+<pre><code class="language-rust">trait Trait {
+    type X;
+    fn foo(&amp;self);
+    fn bar(&amp;self) {}
+}
+
+impl Trait for () {
+    type X = ();
+    fn foo(&amp;self) {}
+
+    ┃fn bar(&amp;self) {}
+}</code></pre>
+<h3 id="add_impl_missing_members"><a class="header" href="#add_impl_missing_members"><code>add_impl_missing_members</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_impl_members.rs#L17">add_missing_impl_members.rs</a></p>
+<p>Adds scaffold for required impl members.</p>
+<h4 id="before-7"><a class="header" href="#before-7">Before</a></h4>
+<pre><code class="language-rust">trait Trait&lt;T&gt; {
+    type X;
+    fn foo(&amp;self) -&gt; T;
+    fn bar(&amp;self) {}
+}
+
+impl Trait&lt;u32&gt; for () {┃
+
+}</code></pre>
+<h4 id="after-7"><a class="header" href="#after-7">After</a></h4>
+<pre><code class="language-rust">trait Trait&lt;T&gt; {
+    type X;
+    fn foo(&amp;self) -&gt; T;
+    fn bar(&amp;self) {}
+}
+
+impl Trait&lt;u32&gt; for () {
+    ┃type X;
+
+    fn foo(&amp;self) -&gt; u32 {
+        todo!()
+    }
+}</code></pre>
+<h3 id="add_label_to_loop"><a class="header" href="#add_label_to_loop"><code>add_label_to_loop</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_label_to_loop.rs#L16">add_label_to_loop.rs</a></p>
+<p>Adds a label to a loop.</p>
+<h4 id="before-8"><a class="header" href="#before-8">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    loop┃ {
+        break;
+        continue;
+    }
+}</code></pre>
+<h4 id="after-8"><a class="header" href="#after-8">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    ${1:'l}: loop {
+        break ${2:'l};
+        continue ${0:'l};
+    }
+}</code></pre>
+<h3 id="add_lifetime_to_type"><a class="header" href="#add_lifetime_to_type"><code>add_lifetime_to_type</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_lifetime_to_type.rs#L5">add_lifetime_to_type.rs</a></p>
+<p>Adds a new lifetime to a struct, enum or union.</p>
+<h4 id="before-9"><a class="header" href="#before-9">Before</a></h4>
+<pre><code class="language-rust">struct Point {
+    x: &amp;┃u32,
+    y: u32,
+}</code></pre>
+<h4 id="after-9"><a class="header" href="#after-9">After</a></h4>
+<pre><code class="language-rust">struct Point&lt;'a&gt; {
+    x: &amp;'a u32,
+    y: u32,
+}</code></pre>
+<h3 id="add_missing_match_arms"><a class="header" href="#add_missing_match_arms"><code>add_missing_match_arms</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_missing_match_arms.rs#L17">add_missing_match_arms.rs</a></p>
+<p>Adds missing clauses to a <code>match</code> expression.</p>
+<h4 id="before-10"><a class="header" href="#before-10">Before</a></h4>
+<pre><code class="language-rust">enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    match action {
+        ┃
+    }
+}</code></pre>
+<h4 id="after-10"><a class="header" href="#after-10">After</a></h4>
+<pre><code class="language-rust">enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    match action {
+        Action::Move { distance } =&gt; ${1:todo!()},
+        Action::Stop =&gt; ${2:todo!()},┃
+    }
+}</code></pre>
+<h3 id="add_return_type"><a class="header" href="#add_return_type"><code>add_return_type</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_return_type.rs#L7">add_return_type.rs</a></p>
+<p>Adds the return type to a function or closure inferred from its tail expression if it doesn’t have a return
+type specified. This assists is useable in a functions or closures tail expression or return type position.</p>
+<h4 id="before-11"><a class="header" href="#before-11">Before</a></h4>
+<pre><code class="language-rust">fn foo() { 4┃2i32 }</code></pre>
+<h4 id="after-11"><a class="header" href="#after-11">After</a></h4>
+<pre><code class="language-rust">fn foo() -&gt; i32 { 42i32 }</code></pre>
+<h3 id="add_turbo_fish"><a class="header" href="#add_turbo_fish"><code>add_turbo_fish</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/add_turbo_fish.rs#L14">add_turbo_fish.rs</a></p>
+<p>Adds <code>::&lt;_&gt;</code> to a call of a generic method or function.</p>
+<h4 id="before-12"><a class="header" href="#before-12">Before</a></h4>
+<pre><code class="language-rust">fn make&lt;T&gt;() -&gt; T { todo!() }
+fn main() {
+    let x = make┃();
+}</code></pre>
+<h4 id="after-12"><a class="header" href="#after-12">After</a></h4>
+<pre><code class="language-rust">fn make&lt;T&gt;() -&gt; T { todo!() }
+fn main() {
+    let x = make::&lt;${0:_}&gt;();
+}</code></pre>
+<h3 id="apply_demorgan"><a class="header" href="#apply_demorgan"><code>apply_demorgan</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/apply_demorgan.rs#L22">apply_demorgan.rs</a></p>
+<p>Apply <a href="https://en.wikipedia.org/wiki/De_Morgan%27s_laws">De Morgan’s law</a>.
+This transforms expressions of the form <code>!l || !r</code> into <code>!(l &amp;&amp; r)</code>.
+This also works with <code>&amp;&amp;</code>. This assist can only be applied with the cursor
+on either <code>||</code> or <code>&amp;&amp;</code>.</p>
+<h4 id="before-13"><a class="header" href="#before-13">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    if x != 4 ||┃ y &lt; 3.14 {}
+}</code></pre>
+<h4 id="after-13"><a class="header" href="#after-13">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    if !(x == 4 &amp;&amp; y &gt;= 3.14) {}
+}</code></pre>
+<h3 id="apply_demorgan_iterator"><a class="header" href="#apply_demorgan_iterator"><code>apply_demorgan_iterator</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/apply_demorgan.rs#L168">apply_demorgan.rs</a></p>
+<p>Apply <a href="https://en.wikipedia.org/wiki/De_Morgan%27s_laws">De Morgan’s law</a> to
+<code>Iterator::all</code> and <code>Iterator::any</code>.</p>
+<p>This transforms expressions of the form <code>!iter.any(|x| predicate(x))</code> into
+<code>iter.all(|x| !predicate(x))</code> and vice versa. This also works the other way for
+<code>Iterator::all</code> into <code>Iterator::any</code>.</p>
+<h4 id="before-14"><a class="header" href="#before-14">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let arr = [1, 2, 3];
+    if !arr.into_iter().┃any(|num| num == 4) {
+        println!("foo");
+    }
+}</code></pre>
+<h4 id="after-14"><a class="header" href="#after-14">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let arr = [1, 2, 3];
+    if arr.into_iter().all(|num| num != 4) {
+        println!("foo");
+    }
+}</code></pre>
+<h3 id="auto_import"><a class="header" href="#auto_import"><code>auto_import</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/auto_import.rs#L75">auto_import.rs</a></p>
+<p>If the name is unresolved, provides all possible imports for it.</p>
+<h4 id="before-15"><a class="header" href="#before-15">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let map = HashMap┃::new();
+}</code></pre>
+<h4 id="after-15"><a class="header" href="#after-15">After</a></h4>
+<pre><code class="language-rust">use std::collections::HashMap;
+
+fn main() {
+    let map = HashMap::new();
+}</code></pre>
+<h3 id="bind_unused_param"><a class="header" href="#bind_unused_param"><code>bind_unused_param</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/bind_unused_param.rs#L8">bind_unused_param.rs</a></p>
+<p>Binds unused function parameter to an underscore.</p>
+<h4 id="before-16"><a class="header" href="#before-16">Before</a></h4>
+<pre><code class="language-rust">fn some_function(x: i32┃) {}</code></pre>
+<h4 id="after-16"><a class="header" href="#after-16">After</a></h4>
+<pre><code class="language-rust">fn some_function(x: i32) {
+    let _ = x;
+}</code></pre>
+<h3 id="change_visibility"><a class="header" href="#change_visibility"><code>change_visibility</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/change_visibility.rs#L13">change_visibility.rs</a></p>
+<p>Adds or changes existing visibility specifier.</p>
+<h4 id="before-17"><a class="header" href="#before-17">Before</a></h4>
+<pre><code class="language-rust">┃fn frobnicate() {}</code></pre>
+<h4 id="after-17"><a class="header" href="#after-17">After</a></h4>
+<pre><code class="language-rust">pub(crate) fn frobnicate() {}</code></pre>
+<h3 id="comment_to_doc"><a class="header" href="#comment_to_doc"><code>comment_to_doc</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_comment_from_or_to_doc.rs#L9">convert_comment_from_or_to_doc.rs</a></p>
+<p>Converts comments to documentation.</p>
+<h4 id="before-18"><a class="header" href="#before-18">Before</a></h4>
+<pre><code class="language-rust">// Wow what ┃a nice module
+// I sure hope this shows up when I hover over it</code></pre>
+<h4 id="after-18"><a class="header" href="#after-18">After</a></h4>
+<pre><code class="language-rust">//! Wow what a nice module
+//! I sure hope this shows up when I hover over it</code></pre>
+<h3 id="convert_bool_then_to_if"><a class="header" href="#convert_bool_then_to_if"><code>convert_bool_then_to_if</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_bool_then.rs#L143">convert_bool_then.rs</a></p>
+<p>Converts a <code>bool::then</code> method call to an equivalent if expression.</p>
+<h4 id="before-19"><a class="header" href="#before-19">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    (0 == 0).then┃(|| val)
+}</code></pre>
+<h4 id="after-19"><a class="header" href="#after-19">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    if 0 == 0 {
+        Some(val)
+    } else {
+        None
+    }
+}</code></pre>
+<h3 id="convert_bool_to_enum"><a class="header" href="#convert_bool_to_enum"><code>convert_bool_to_enum</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_bool_to_enum.rs#L25">convert_bool_to_enum.rs</a></p>
+<p>This converts boolean local variables, fields, constants, and statics into a new
+enum with two variants <code>Bool::True</code> and <code>Bool::False</code>, as well as replacing
+all assignments with the variants and replacing all usages with <code>== Bool::True</code> or
+<code>== Bool::False</code>.</p>
+<h4 id="before-20"><a class="header" href="#before-20">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let ┃bool = true;
+
+    if bool {
+        println!("foo");
+    }
+}</code></pre>
+<h4 id="after-20"><a class="header" href="#after-20">After</a></h4>
+<pre><code class="language-rust">#[derive(PartialEq, Eq)]
+enum Bool { True, False }
+
+fn main() {
+    let bool = Bool::True;
+
+    if bool == Bool::True {
+        println!("foo");
+    }
+}</code></pre>
+<h3 id="convert_char_literal"><a class="header" href="#convert_char_literal"><code>convert_char_literal</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_char_literal.rs#L5">convert_char_literal.rs</a></p>
+<p>Converts character literals between different representations. Currently supports normal character -&gt; ASCII / Unicode escape.</p>
+<h4 id="before-21"><a class="header" href="#before-21">Before</a></h4>
+<pre><code class="language-rust">const _: char = 'a'┃;</code></pre>
+<h4 id="after-21"><a class="header" href="#after-21">After</a></h4>
+<pre><code class="language-rust">const _: char = '\x61';</code></pre>
+<h3 id="convert_closure_to_fn"><a class="header" href="#convert_closure_to_fn"><code>convert_closure_to_fn</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_closure_to_fn.rs#L22">convert_closure_to_fn.rs</a></p>
+<p>This converts a closure to a freestanding function, changing all captures to parameters.</p>
+<h4 id="before-22"><a class="header" href="#before-22">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let mut s = String::new();
+    let closure = |┃a| s.push_str(a);
+    closure("abc");
+}</code></pre>
+<h4 id="after-22"><a class="header" href="#after-22">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let mut s = String::new();
+    fn closure(a: &amp;str, s: &amp;mut String) {
+        s.push_str(a)
+    }
+    closure("abc", &amp;mut s);
+}</code></pre>
+<h3 id="convert_for_loop_to_while_let"><a class="header" href="#convert_for_loop_to_while_let"><code>convert_for_loop_to_while_let</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_for_to_while_let.rs#L11">convert_for_to_while_let.rs</a></p>
+<p>Converts a for loop into a while let on the Iterator.</p>
+<h4 id="before-23"><a class="header" href="#before-23">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let x = vec![1, 2, 3];
+    for┃ v in x {
+        let y = v * 2;
+    };
+}</code></pre>
+<h4 id="after-23"><a class="header" href="#after-23">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let x = vec![1, 2, 3];
+    let mut tmp = x.into_iter();
+    while let Some(v) = tmp.next() {
+        let y = v * 2;
+    };
+}</code></pre>
+<h3 id="convert_for_loop_with_for_each"><a class="header" href="#convert_for_loop_with_for_each"><code>convert_for_loop_with_for_each</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_iter_for_each_to_for.rs#L80">convert_iter_for_each_to_for.rs</a></p>
+<p>Converts a for loop into a for_each loop on the Iterator.</p>
+<h4 id="before-24"><a class="header" href="#before-24">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let x = vec![1, 2, 3];
+    for┃ v in x {
+        let y = v * 2;
+    }
+}</code></pre>
+<h4 id="after-24"><a class="header" href="#after-24">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let x = vec![1, 2, 3];
+    x.into_iter().for_each(|v| {
+        let y = v * 2;
+    });
+}</code></pre>
+<h3 id="convert_from_to_tryfrom"><a class="header" href="#convert_from_to_tryfrom"><code>convert_from_to_tryfrom</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_from_to_tryfrom.rs#L8">convert_from_to_tryfrom.rs</a></p>
+<p>Converts a From impl to a TryFrom impl, wrapping returns in <code>Ok</code>.</p>
+<h4 id="before-25"><a class="header" href="#before-25">Before</a></h4>
+<pre><code class="language-rust">impl ┃From&lt;usize&gt; for Thing {
+    fn from(val: usize) -&gt; Self {
+        Thing {
+            b: val.to_string(),
+            a: val
+        }
+    }
+}</code></pre>
+<h4 id="after-25"><a class="header" href="#after-25">After</a></h4>
+<pre><code class="language-rust">impl TryFrom&lt;usize&gt; for Thing {
+    type Error = ${0:()};
+
+    fn try_from(val: usize) -&gt; Result&lt;Self, Self::Error&gt; {
+        Ok(Thing {
+            b: val.to_string(),
+            a: val
+        })
+    }
+}</code></pre>
+<h3 id="convert_if_to_bool_then"><a class="header" href="#convert_if_to_bool_then"><code>convert_if_to_bool_then</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_bool_then.rs#L21">convert_bool_then.rs</a></p>
+<p>Converts an if expression into a corresponding <code>bool::then</code> call.</p>
+<h4 id="before-26"><a class="header" href="#before-26">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    if┃ cond {
+        Some(val)
+    } else {
+        None
+    }
+}</code></pre>
+<h4 id="after-26"><a class="header" href="#after-26">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    cond.then(|| val)
+}</code></pre>
+<h3 id="convert_integer_literal"><a class="header" href="#convert_integer_literal"><code>convert_integer_literal</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_integer_literal.rs#L5">convert_integer_literal.rs</a></p>
+<p>Converts the base of integer literals to other bases.</p>
+<h4 id="before-27"><a class="header" href="#before-27">Before</a></h4>
+<pre><code class="language-rust">const _: i32 = 10┃;</code></pre>
+<h4 id="after-27"><a class="header" href="#after-27">After</a></h4>
+<pre><code class="language-rust">const _: i32 = 0b1010;</code></pre>
+<h3 id="convert_into_to_from"><a class="header" href="#convert_into_to_from"><code>convert_into_to_from</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_into_to_from.rs#L8">convert_into_to_from.rs</a></p>
+<p>Converts an Into impl to an equivalent From impl.</p>
+<h4 id="before-28"><a class="header" href="#before-28">Before</a></h4>
+<pre><code class="language-rust">impl ┃Into&lt;Thing&gt; for usize {
+    fn into(self) -&gt; Thing {
+        Thing {
+            b: self.to_string(),
+            a: self
+        }
+    }
+}</code></pre>
+<h4 id="after-28"><a class="header" href="#after-28">After</a></h4>
+<pre><code class="language-rust">impl From&lt;usize&gt; for Thing {
+    fn from(val: usize) -&gt; Self {
+        Thing {
+            b: val.to_string(),
+            a: val
+        }
+    }
+}</code></pre>
+<h3 id="convert_iter_for_each_to_for"><a class="header" href="#convert_iter_for_each_to_for"><code>convert_iter_for_each_to_for</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_iter_for_each_to_for.rs#L11">convert_iter_for_each_to_for.rs</a></p>
+<p>Converts an Iterator::for_each function into a for loop.</p>
+<h4 id="before-29"><a class="header" href="#before-29">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let iter = iter::repeat((9, 2));
+    iter.for_each┃(|(x, y)| {
+        println!("x: {}, y: {}", x, y);
+    });
+}</code></pre>
+<h4 id="after-29"><a class="header" href="#after-29">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let iter = iter::repeat((9, 2));
+    for (x, y) in iter {
+        println!("x: {}, y: {}", x, y);
+    }
+}</code></pre>
+<h3 id="convert_let_else_to_match"><a class="header" href="#convert_let_else_to_match"><code>convert_let_else_to_match</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_let_else_to_match.rs#L9">convert_let_else_to_match.rs</a></p>
+<p>Converts let-else statement to let statement and match expression.</p>
+<h4 id="before-30"><a class="header" href="#before-30">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let Ok(mut x) = f() else┃ { return };
+}</code></pre>
+<h4 id="after-30"><a class="header" href="#after-30">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let mut x = match f() {
+        Ok(x) =&gt; x,
+        _ =&gt; return,
+    };
+}</code></pre>
+<h3 id="convert_match_to_let_else"><a class="header" href="#convert_match_to_let_else"><code>convert_match_to_let_else</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_match_to_let_else.rs#L13">convert_match_to_let_else.rs</a></p>
+<p>Converts let statement with match initializer to let-else statement.</p>
+<h4 id="before-31"><a class="header" href="#before-31">Before</a></h4>
+<pre><code class="language-rust">fn foo(opt: Option&lt;()&gt;) {
+    let val┃ = match opt {
+        Some(it) =&gt; it,
+        None =&gt; return,
+    };
+}</code></pre>
+<h4 id="after-31"><a class="header" href="#after-31">After</a></h4>
+<pre><code class="language-rust">fn foo(opt: Option&lt;()&gt;) {
+    let Some(val) = opt else { return };
+}</code></pre>
+<h3 id="convert_named_struct_to_tuple_struct"><a class="header" href="#convert_named_struct_to_tuple_struct"><code>convert_named_struct_to_tuple_struct</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_named_struct_to_tuple_struct.rs#L13">convert_named_struct_to_tuple_struct.rs</a></p>
+<p>Converts struct with named fields to tuple struct, and analogously for enum variants with named
+fields.</p>
+<h4 id="before-32"><a class="header" href="#before-32">Before</a></h4>
+<pre><code class="language-rust">struct Point┃ { x: f32, y: f32 }
+
+impl Point {
+    pub fn new(x: f32, y: f32) -&gt; Self {
+        Point { x, y }
+    }
+
+    pub fn x(&amp;self) -&gt; f32 {
+        self.x
+    }
+
+    pub fn y(&amp;self) -&gt; f32 {
+        self.y
+    }
+}</code></pre>
+<h4 id="after-32"><a class="header" href="#after-32">After</a></h4>
+<pre><code class="language-rust">struct Point(f32, f32);
+
+impl Point {
+    pub fn new(x: f32, y: f32) -&gt; Self {
+        Point(x, y)
+    }
+
+    pub fn x(&amp;self) -&gt; f32 {
+        self.0
+    }
+
+    pub fn y(&amp;self) -&gt; f32 {
+        self.1
+    }
+}</code></pre>
+<h3 id="convert_nested_function_to_closure"><a class="header" href="#convert_nested_function_to_closure"><code>convert_nested_function_to_closure</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_nested_function_to_closure.rs#L7">convert_nested_function_to_closure.rs</a></p>
+<p>Converts a function that is defined within the body of another function into a closure.</p>
+<h4 id="before-33"><a class="header" href="#before-33">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    fn fo┃o(label: &amp;str, number: u64) {
+        println!("{}: {}", label, number);
+    }
+
+    foo("Bar", 100);
+}</code></pre>
+<h4 id="after-33"><a class="header" href="#after-33">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let foo = |label: &amp;str, number: u64| {
+        println!("{}: {}", label, number);
+    };
+
+    foo("Bar", 100);
+}</code></pre>
+<h3 id="convert_range_for_to_while"><a class="header" href="#convert_range_for_to_while"><code>convert_range_for_to_while</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_range_for_to_while.rs#L17">convert_range_for_to_while.rs</a></p>
+<p>Convert for each range into while loop.</p>
+<h4 id="before-34"><a class="header" href="#before-34">Before</a></h4>
+<pre><code class="language-rust">fn foo() {
+    ┃for i in 3..7 {
+        foo(i);
+    }
+}</code></pre>
+<h4 id="after-34"><a class="header" href="#after-34">After</a></h4>
+<pre><code class="language-rust">fn foo() {
+    let mut i = 3;
+    while i &lt; 7 {
+        foo(i);
+        i += 1;
+    }
+}</code></pre>
+<h3 id="convert_to_guarded_return"><a class="header" href="#convert_to_guarded_return"><code>convert_to_guarded_return</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_to_guarded_return.rs#L23">convert_to_guarded_return.rs</a></p>
+<p>Replace a large conditional with a guarded return.</p>
+<h4 id="before-35"><a class="header" href="#before-35">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    ┃if cond {
+        foo();
+        bar();
+    }
+}</code></pre>
+<h4 id="after-35"><a class="header" href="#after-35">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    if !cond {
+        return;
+    }
+    foo();
+    bar();
+}</code></pre>
+<hr>
+<h4 id="before-36"><a class="header" href="#before-36">Before</a></h4>
+<pre><code class="language-rust">//- minicore: option
+fn foo() -&gt; Option&lt;i32&gt; { None }
+fn main() {
+    ┃let x = foo();
+}</code></pre>
+<h4 id="after-36"><a class="header" href="#after-36">After</a></h4>
+<pre><code class="language-rust">fn foo() -&gt; Option&lt;i32&gt; { None }
+fn main() {
+    let Some(x) = foo() else { return };
+}</code></pre>
+<h3 id="convert_tuple_return_type_to_struct"><a class="header" href="#convert_tuple_return_type_to_struct"><code>convert_tuple_return_type_to_struct</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_tuple_return_type_to_struct.rs#L26">convert_tuple_return_type_to_struct.rs</a></p>
+<p>This converts the return type of a function from a tuple type
+into a tuple struct and updates the body accordingly.</p>
+<h4 id="before-37"><a class="header" href="#before-37">Before</a></h4>
+<pre><code class="language-rust">fn bar() {
+    let (a, b, c) = foo();
+}
+
+fn foo() -&gt; (┃u32, u32, u32) {
+    (1, 2, 3)
+}</code></pre>
+<h4 id="after-37"><a class="header" href="#after-37">After</a></h4>
+<pre><code class="language-rust">fn bar() {
+    let FooResult(a, b, c) = foo();
+}
+
+struct FooResult(u32, u32, u32);
+
+fn foo() -&gt; FooResult {
+    FooResult(1, 2, 3)
+}</code></pre>
+<h3 id="convert_tuple_struct_to_named_struct"><a class="header" href="#convert_tuple_struct_to_named_struct"><code>convert_tuple_struct_to_named_struct</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_tuple_struct_to_named_struct.rs#L16">convert_tuple_struct_to_named_struct.rs</a></p>
+<p>Converts tuple struct to struct with named fields, and analogously for tuple enum variants.</p>
+<h4 id="before-38"><a class="header" href="#before-38">Before</a></h4>
+<pre><code class="language-rust">struct Point┃(f32, f32);
+
+impl Point {
+    pub fn new(x: f32, y: f32) -&gt; Self {
+        Point(x, y)
+    }
+
+    pub fn x(&amp;self) -&gt; f32 {
+        self.0
+    }
+
+    pub fn y(&amp;self) -&gt; f32 {
+        self.1
+    }
+}</code></pre>
+<h4 id="after-38"><a class="header" href="#after-38">After</a></h4>
+<pre><code class="language-rust">struct Point { field1: f32, field2: f32 }
+
+impl Point {
+    pub fn new(x: f32, y: f32) -&gt; Self {
+        Point { field1: x, field2: y }
+    }
+
+    pub fn x(&amp;self) -&gt; f32 {
+        self.field1
+    }
+
+    pub fn y(&amp;self) -&gt; f32 {
+        self.field2
+    }
+}</code></pre>
+<h3 id="convert_two_arm_bool_match_to_matches_macro"><a class="header" href="#convert_two_arm_bool_match_to_matches_macro"><code>convert_two_arm_bool_match_to_matches_macro</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_two_arm_bool_match_to_matches_macro.rs#L8">convert_two_arm_bool_match_to_matches_macro.rs</a></p>
+<p>Convert 2-arm match that evaluates to a boolean into the equivalent matches! invocation.</p>
+<h4 id="before-39"><a class="header" href="#before-39">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    match scrutinee┃ {
+        Some(val) if val.cond() =&gt; true,
+        _ =&gt; false,
+    }
+}</code></pre>
+<h4 id="after-39"><a class="header" href="#after-39">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    matches!(scrutinee, Some(val) if val.cond())
+}</code></pre>
+<h3 id="convert_while_to_loop"><a class="header" href="#convert_while_to_loop"><code>convert_while_to_loop</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_while_to_loop.rs#L20">convert_while_to_loop.rs</a></p>
+<p>Replace a while with a loop.</p>
+<h4 id="before-40"><a class="header" href="#before-40">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    ┃while cond {
+        foo();
+    }
+}</code></pre>
+<h4 id="after-40"><a class="header" href="#after-40">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    loop {
+        if !cond {
+            break;
+        }
+        foo();
+    }
+}</code></pre>
+<h3 id="destructure_struct_binding"><a class="header" href="#destructure_struct_binding"><code>destructure_struct_binding</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/destructure_struct_binding.rs#L19">destructure_struct_binding.rs</a></p>
+<p>Destructures a struct binding in place.</p>
+<h4 id="before-41"><a class="header" href="#before-41">Before</a></h4>
+<pre><code class="language-rust">struct Foo {
+    bar: i32,
+    baz: i32,
+}
+fn main() {
+    let ┃foo = Foo { bar: 1, baz: 2 };
+    let bar2 = foo.bar;
+    let baz2 = &amp;foo.baz;
+}</code></pre>
+<h4 id="after-41"><a class="header" href="#after-41">After</a></h4>
+<pre><code class="language-rust">struct Foo {
+    bar: i32,
+    baz: i32,
+}
+fn main() {
+    let Foo { bar, baz } = Foo { bar: 1, baz: 2 };
+    let bar2 = bar;
+    let baz2 = &amp;baz;
+}</code></pre>
+<h3 id="destructure_tuple_binding"><a class="header" href="#destructure_tuple_binding"><code>destructure_tuple_binding</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/destructure_tuple_binding.rs#L20">destructure_tuple_binding.rs</a></p>
+<p>Destructures a tuple binding in place.</p>
+<h4 id="before-42"><a class="header" href="#before-42">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let ┃t = (1,2);
+    let v = t.0;
+}</code></pre>
+<h4 id="after-42"><a class="header" href="#after-42">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let (┃_0, _1) = (1,2);
+    let v = _0;
+}</code></pre>
+<h3 id="desugar_async_into_impl_future"><a class="header" href="#desugar_async_into_impl_future"><code>desugar_async_into_impl_future</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/toggle_async_sugar.rs#L100">toggle_async_sugar.rs</a></p>
+<p>Rewrites asynchronous function from <code>async fn</code> into <code>-&gt; impl Future</code>.
+This action does not touch the function body and therefore <code>0</code>
+block does not transform to <code>async { 0 }</code>.</p>
+<h4 id="before-43"><a class="header" href="#before-43">Before</a></h4>
+<pre><code class="language-rust">pub as┃ync fn foo() -&gt; usize {
+    0
+}</code></pre>
+<h4 id="after-43"><a class="header" href="#after-43">After</a></h4>
+<pre><code class="language-rust">pub fn foo() -&gt; impl core::future::Future&lt;Output = usize&gt; {
+    0
+}</code></pre>
+<h3 id="desugar_doc_comment"><a class="header" href="#desugar_doc_comment"><code>desugar_doc_comment</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/desugar_doc_comment.rs#L14">desugar_doc_comment.rs</a></p>
+<p>Desugars doc-comments to the attribute form.</p>
+<h4 id="before-44"><a class="header" href="#before-44">Before</a></h4>
+<pre><code class="language-rust">/// Multi-line┃
+/// comment</code></pre>
+<h4 id="after-44"><a class="header" href="#after-44">After</a></h4>
+<pre><code class="language-rust">#[doc = r"Multi-line
+comment"]</code></pre>
+<h3 id="desugar_try_expr_let_else"><a class="header" href="#desugar_try_expr_let_else"><code>desugar_try_expr_let_else</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/desugar_try_expr.rs#L39">desugar_try_expr.rs</a></p>
+<p>Replaces a <code>try</code> expression with a <code>let else</code> statement.</p>
+<h4 id="before-45"><a class="header" href="#before-45">Before</a></h4>
+<pre><code class="language-rust">fn handle() {
+    let pat = Some(true)┃?;
+}</code></pre>
+<h4 id="after-45"><a class="header" href="#after-45">After</a></h4>
+<pre><code class="language-rust">fn handle() {
+    let Some(pat) = Some(true) else {
+        return None;
+    };
+}</code></pre>
+<h3 id="desugar_try_expr_match"><a class="header" href="#desugar_try_expr_match"><code>desugar_try_expr_match</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/desugar_try_expr.rs#L19">desugar_try_expr.rs</a></p>
+<p>Replaces a <code>try</code> expression with a <code>match</code> expression.</p>
+<h4 id="before-46"><a class="header" href="#before-46">Before</a></h4>
+<pre><code class="language-rust">fn handle() {
+    let pat = Some(true)┃?;
+}</code></pre>
+<h4 id="after-46"><a class="header" href="#after-46">After</a></h4>
+<pre><code class="language-rust">fn handle() {
+    let pat = match Some(true) {
+        Some(it) =&gt; it,
+        None =&gt; return None,
+    };
+}</code></pre>
+<h3 id="expand_glob_import"><a class="header" href="#expand_glob_import"><code>expand_glob_import</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/expand_glob_import.rs#L19">expand_glob_import.rs</a></p>
+<p>Expands glob imports.</p>
+<h4 id="before-47"><a class="header" href="#before-47">Before</a></h4>
+<pre><code class="language-rust">mod foo {
+    pub struct Bar;
+    pub struct Baz;
+}
+
+use foo::*┃;
+
+fn qux(bar: Bar, baz: Baz) {}</code></pre>
+<h4 id="after-47"><a class="header" href="#after-47">After</a></h4>
+<pre><code class="language-rust">mod foo {
+    pub struct Bar;
+    pub struct Baz;
+}
+
+use foo::{Bar, Baz};
+
+fn qux(bar: Bar, baz: Baz) {}</code></pre>
+<h3 id="expand_glob_reexport"><a class="header" href="#expand_glob_reexport"><code>expand_glob_reexport</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/expand_glob_import.rs#L81">expand_glob_import.rs</a></p>
+<p>Expands non-private glob imports.</p>
+<h4 id="before-48"><a class="header" href="#before-48">Before</a></h4>
+<pre><code class="language-rust">mod foo {
+    pub struct Bar;
+    pub struct Baz;
+}
+
+pub use foo::*┃;</code></pre>
+<h4 id="after-48"><a class="header" href="#after-48">After</a></h4>
+<pre><code class="language-rust">mod foo {
+    pub struct Bar;
+    pub struct Baz;
+}
+
+pub use foo::{Bar, Baz};</code></pre>
+<h3 id="expand_record_rest_pattern"><a class="header" href="#expand_record_rest_pattern"><code>expand_record_rest_pattern</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/expand_rest_pattern.rs#L11">expand_rest_pattern.rs</a></p>
+<p>Fills fields by replacing rest pattern in record patterns.</p>
+<h4 id="before-49"><a class="header" href="#before-49">Before</a></h4>
+<pre><code class="language-rust">struct Bar { y: Y, z: Z }
+
+fn foo(bar: Bar) {
+    let Bar { ..┃ } = bar;
+}</code></pre>
+<h4 id="after-49"><a class="header" href="#after-49">After</a></h4>
+<pre><code class="language-rust">struct Bar { y: Y, z: Z }
+
+fn foo(bar: Bar) {
+    let Bar { y, z } = bar;
+}</code></pre>
+<h3 id="expand_slice_rest_pattern"><a class="header" href="#expand_slice_rest_pattern"><code>expand_slice_rest_pattern</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/expand_rest_pattern.rs#L226">expand_rest_pattern.rs</a></p>
+<p>Fills fields by replacing rest pattern in slice patterns.</p>
+<h4 id="before-50"><a class="header" href="#before-50">Before</a></h4>
+<pre><code class="language-rust">fn foo(bar: [i32; 3]) {
+    let [first, ..┃] = bar;
+}</code></pre>
+<h4 id="after-50"><a class="header" href="#after-50">After</a></h4>
+<pre><code class="language-rust">fn foo(bar: [i32; 3]) {
+    let [first, _1, _2] = bar;
+}</code></pre>
+<h3 id="expand_tuple_rest_pattern"><a class="header" href="#expand_tuple_rest_pattern"><code>expand_tuple_rest_pattern</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/expand_rest_pattern.rs#L161">expand_rest_pattern.rs</a></p>
+<p>Fills fields by replacing rest pattern in tuple patterns.</p>
+<h4 id="before-51"><a class="header" href="#before-51">Before</a></h4>
+<pre><code class="language-rust">fn foo(bar: (char, i32, i32)) {
+    let (ch, ..┃) = bar;
+}</code></pre>
+<h4 id="after-51"><a class="header" href="#after-51">After</a></h4>
+<pre><code class="language-rust">fn foo(bar: (char, i32, i32)) {
+    let (ch, _1, _2) = bar;
+}</code></pre>
+<h3 id="expand_tuple_struct_rest_pattern"><a class="header" href="#expand_tuple_struct_rest_pattern"><code>expand_tuple_struct_rest_pattern</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/expand_rest_pattern.rs#L76">expand_rest_pattern.rs</a></p>
+<p>Fills fields by replacing rest pattern in tuple struct patterns.</p>
+<h4 id="before-52"><a class="header" href="#before-52">Before</a></h4>
+<pre><code class="language-rust">struct Bar(Y, Z);
+
+fn foo(bar: Bar) {
+    let Bar(..┃) = bar;
+}</code></pre>
+<h4 id="after-52"><a class="header" href="#after-52">After</a></h4>
+<pre><code class="language-rust">struct Bar(Y, Z);
+
+fn foo(bar: Bar) {
+    let Bar(_0, _1) = bar;
+}</code></pre>
+<h3 id="extract_constant"><a class="header" href="#extract_constant"><code>extract_constant</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_variable.rs#L37">extract_variable.rs</a></p>
+<p>Extracts subexpression into a constant.</p>
+<h4 id="before-53"><a class="header" href="#before-53">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    ┃(1 + 2)┃ * 4;
+}</code></pre>
+<h4 id="after-53"><a class="header" href="#after-53">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    const ┃VAR_NAME: i32 = 1 + 2;
+    VAR_NAME * 4;
+}</code></pre>
+<h3 id="extract_expressions_from_format_string"><a class="header" href="#extract_expressions_from_format_string"><code>extract_expressions_from_format_string</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_expressions_from_format_string.rs#L14">extract_expressions_from_format_string.rs</a></p>
+<p>Move an expression out of a format string.</p>
+<h4 id="before-54"><a class="header" href="#before-54">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    print!("{var} {x + 1}┃");
+}</code></pre>
+<h4 id="after-54"><a class="header" href="#after-54">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    print!("{var} {}"┃, x + 1);
+}</code></pre>
+<h3 id="extract_function"><a class="header" href="#extract_function"><code>extract_function</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_function.rs#L40">extract_function.rs</a></p>
+<p>Extracts selected statements and comments into new function.</p>
+<h4 id="before-55"><a class="header" href="#before-55">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let n = 1;
+    ┃let m = n + 2;
+    // calculate
+    let k = m + n;┃
+    let g = 3;
+}</code></pre>
+<h4 id="after-55"><a class="header" href="#after-55">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let n = 1;
+    fun_name(n);
+    let g = 3;
+}
+
+fn ┃fun_name(n: i32) {
+    let m = n + 2;
+    // calculate
+    let k = m + n;
+}</code></pre>
+<h3 id="extract_module"><a class="header" href="#extract_module"><code>extract_module</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_module.rs#L29">extract_module.rs</a></p>
+<p>Extracts a selected region as separate module. All the references, visibility and imports are
+resolved.</p>
+<h4 id="before-56"><a class="header" href="#before-56">Before</a></h4>
+<pre><code class="language-rust">┃fn foo(name: i32) -&gt; i32 {
+    name + 1
+}┃
+
+fn bar(name: i32) -&gt; i32 {
+    name + 2
+}</code></pre>
+<h4 id="after-56"><a class="header" href="#after-56">After</a></h4>
+<pre><code class="language-rust">mod modname {
+    pub(crate) fn foo(name: i32) -&gt; i32 {
+        name + 1
+    }
+}
+
+fn bar(name: i32) -&gt; i32 {
+    name + 2
+}</code></pre>
+<h3 id="extract_static"><a class="header" href="#extract_static"><code>extract_static</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_variable.rs#L54">extract_variable.rs</a></p>
+<p>Extracts subexpression into a static.</p>
+<h4 id="before-57"><a class="header" href="#before-57">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    ┃(1 + 2)┃ * 4;
+}</code></pre>
+<h4 id="after-57"><a class="header" href="#after-57">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    static ┃VAR_NAME: i32 = 1 + 2;
+    VAR_NAME * 4;
+}</code></pre>
+<h3 id="extract_struct_from_enum_variant"><a class="header" href="#extract_struct_from_enum_variant"><code>extract_struct_from_enum_variant</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_struct_from_enum_variant.rs#L28">extract_struct_from_enum_variant.rs</a></p>
+<p>Extracts a struct from enum variant.</p>
+<h4 id="before-58"><a class="header" href="#before-58">Before</a></h4>
+<pre><code class="language-rust">enum A { ┃One(u32, u32) }</code></pre>
+<h4 id="after-58"><a class="header" href="#after-58">After</a></h4>
+<pre><code class="language-rust">struct One(u32, u32);
+
+enum A { One(One) }</code></pre>
+<h3 id="extract_type_alias"><a class="header" href="#extract_type_alias"><code>extract_type_alias</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_type_alias.rs#L11">extract_type_alias.rs</a></p>
+<p>Extracts the selected type as a type alias.</p>
+<h4 id="before-59"><a class="header" href="#before-59">Before</a></h4>
+<pre><code class="language-rust">struct S {
+    field: ┃(u8, u8, u8)┃,
+}</code></pre>
+<h4 id="after-59"><a class="header" href="#after-59">After</a></h4>
+<pre><code class="language-rust">type ┃Type = (u8, u8, u8);
+
+struct S {
+    field: Type,
+}</code></pre>
+<h3 id="extract_variable"><a class="header" href="#extract_variable"><code>extract_variable</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/extract_variable.rs#L20">extract_variable.rs</a></p>
+<p>Extracts subexpression into a variable.</p>
+<h4 id="before-60"><a class="header" href="#before-60">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    ┃(1 + 2)┃ * 4;
+}</code></pre>
+<h4 id="after-60"><a class="header" href="#after-60">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let ┃var_name = 1 + 2;
+    var_name * 4;
+}</code></pre>
+<h3 id="fix_visibility"><a class="header" href="#fix_visibility"><code>fix_visibility</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/fix_visibility.rs#L10">fix_visibility.rs</a></p>
+<p>Note that there is some duplication between this and the no_such_field diagnostic.</p>
+<p>Makes inaccessible item public.</p>
+<h4 id="before-61"><a class="header" href="#before-61">Before</a></h4>
+<pre><code class="language-rust">mod m {
+    fn frobnicate() {}
+}
+fn main() {
+    m::frobnicate┃();
+}</code></pre>
+<h4 id="after-61"><a class="header" href="#after-61">After</a></h4>
+<pre><code class="language-rust">mod m {
+    ┃pub(crate) fn frobnicate() {}
+}
+fn main() {
+    m::frobnicate();
+}</code></pre>
+<h3 id="flip_binexpr"><a class="header" href="#flip_binexpr"><code>flip_binexpr</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/flip_binexpr.rs#L9">flip_binexpr.rs</a></p>
+<p>Flips operands of a binary expression.</p>
+<h4 id="before-62"><a class="header" href="#before-62">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let _ = 90 +┃ 2;
+}</code></pre>
+<h4 id="after-62"><a class="header" href="#after-62">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let _ = 2 + 90;
+}</code></pre>
+<h3 id="flip_comma"><a class="header" href="#flip_comma"><code>flip_comma</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/flip_comma.rs#L10">flip_comma.rs</a></p>
+<p>Flips two comma-separated items.</p>
+<h4 id="before-63"><a class="header" href="#before-63">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    ((1, 2),┃ (3, 4));
+}</code></pre>
+<h4 id="after-63"><a class="header" href="#after-63">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    ((3, 4), (1, 2));
+}</code></pre>
+<h3 id="flip_or_pattern"><a class="header" href="#flip_or_pattern"><code>flip_or_pattern</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/flip_or_pattern.rs#L9">flip_or_pattern.rs</a></p>
+<p>Flips two patterns in an or-pattern.</p>
+<h4 id="before-64"><a class="header" href="#before-64">Before</a></h4>
+<pre><code class="language-rust">fn foo() {
+    let (a |┃ b) = 1;
+}</code></pre>
+<h4 id="after-64"><a class="header" href="#after-64">After</a></h4>
+<pre><code class="language-rust">fn foo() {
+    let (b | a) = 1;
+}</code></pre>
+<h3 id="flip_range_expr"><a class="header" href="#flip_range_expr"><code>flip_range_expr</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/flip_binexpr.rs#L91">flip_binexpr.rs</a></p>
+<p>Flips operands of a range expression.</p>
+<h4 id="before-65"><a class="header" href="#before-65">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let _ = 90..┃2;
+}</code></pre>
+<h4 id="after-65"><a class="header" href="#after-65">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let _ = 2..90;
+}</code></pre>
+<hr>
+<h4 id="before-66"><a class="header" href="#before-66">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let _ = 90..┃;
+}</code></pre>
+<h4 id="after-66"><a class="header" href="#after-66">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let _ = ..90;
+}</code></pre>
+<h3 id="flip_trait_bound"><a class="header" href="#flip_trait_bound"><code>flip_trait_bound</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/flip_trait_bound.rs#L9">flip_trait_bound.rs</a></p>
+<p>Flips two trait bounds.</p>
+<h4 id="before-67"><a class="header" href="#before-67">Before</a></h4>
+<pre><code class="language-rust">fn foo&lt;T: Clone +┃ Copy&gt;() { }</code></pre>
+<h4 id="after-67"><a class="header" href="#after-67">After</a></h4>
+<pre><code class="language-rust">fn foo&lt;T: Copy + Clone&gt;() { }</code></pre>
+<h3 id="generate_blanket_trait_impl"><a class="header" href="#generate_blanket_trait_impl"><code>generate_blanket_trait_impl</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_blanket_trait_impl.rs#L21">generate_blanket_trait_impl.rs</a></p>
+<p>Generate blanket trait implementation.</p>
+<h4 id="before-68"><a class="header" href="#before-68">Before</a></h4>
+<pre><code class="language-rust">trait ┃Foo&lt;T: Send&gt;: ToOwned
+where
+    Self::Owned: Default,
+{
+    fn foo(&amp;self) -&gt; T;
+
+    fn print_foo(&amp;self) {
+        println!("{}", self.foo());
+    }
+}</code></pre>
+<h4 id="after-68"><a class="header" href="#after-68">After</a></h4>
+<pre><code class="language-rust">trait Foo&lt;T: Send&gt;: ToOwned
+where
+    Self::Owned: Default,
+{
+    fn foo(&amp;self) -&gt; T;
+
+    fn print_foo(&amp;self) {
+        println!("{}", self.foo());
+    }
+}
+
+impl&lt;T: Send, T1: ToOwned + ?Sized&gt; Foo&lt;T&gt; for ┃T1
+where
+    Self::Owned: Default,
+{
+    fn foo(&amp;self) -&gt; T {
+        todo!()
+    }
+}</code></pre>
+<h3 id="generate_constant"><a class="header" href="#generate_constant"><code>generate_constant</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_constant.rs#L13">generate_constant.rs</a></p>
+<p>Generate a named constant.</p>
+<h4 id="before-69"><a class="header" href="#before-69">Before</a></h4>
+<pre><code class="language-rust">struct S { i: usize }
+impl S { pub fn new(n: usize) {} }
+fn main() {
+    let v = S::new(CAPA┃CITY);
+}</code></pre>
+<h4 id="after-69"><a class="header" href="#after-69">After</a></h4>
+<pre><code class="language-rust">struct S { i: usize }
+impl S { pub fn new(n: usize) {} }
+fn main() {
+    const CAPACITY: usize = ┃;
+    let v = S::new(CAPACITY);
+}</code></pre>
+<h3 id="generate_default_from_enum_variant"><a class="header" href="#generate_default_from_enum_variant"><code>generate_default_from_enum_variant</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_default_from_enum_variant.rs#L6">generate_default_from_enum_variant.rs</a></p>
+<p>Adds a Default impl for an enum using a variant.</p>
+<h4 id="before-70"><a class="header" href="#before-70">Before</a></h4>
+<pre><code class="language-rust">enum Version {
+ Undefined,
+ Minor┃,
+ Major,
+}</code></pre>
+<h4 id="after-70"><a class="header" href="#after-70">After</a></h4>
+<pre><code class="language-rust">enum Version {
+ Undefined,
+ Minor,
+ Major,
+}
+
+impl Default for Version {
+    fn default() -&gt; Self {
+        Self::Minor
+    }
+}</code></pre>
+<h3 id="generate_default_from_new"><a class="header" href="#generate_default_from_new"><code>generate_default_from_new</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_default_from_new.rs#L13">generate_default_from_new.rs</a></p>
+<p>Generates default implementation from new method.</p>
+<h4 id="before-71"><a class="header" href="#before-71">Before</a></h4>
+<pre><code class="language-rust">struct Example { _inner: () }
+
+impl Example {
+    pub fn n┃ew() -&gt; Self {
+        Self { _inner: () }
+    }
+}</code></pre>
+<h4 id="after-71"><a class="header" href="#after-71">After</a></h4>
+<pre><code class="language-rust">struct Example { _inner: () }
+
+impl Example {
+    pub fn new() -&gt; Self {
+        Self { _inner: () }
+    }
+}
+
+impl Default for Example {
+    fn default() -&gt; Self {
+        Self::new()
+    }
+}</code></pre>
+<h3 id="generate_delegate_methods"><a class="header" href="#generate_delegate_methods"><code>generate_delegate_methods</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_delegate_methods.rs#L17">generate_delegate_methods.rs</a></p>
+<p>Generate delegate methods.</p>
+<h4 id="before-72"><a class="header" href="#before-72">Before</a></h4>
+<pre><code class="language-rust">struct Age(u8);
+impl Age {
+    fn age(&amp;self) -&gt; u8 {
+        self.0
+    }
+}
+
+struct Person {
+    ag┃e: Age,
+}</code></pre>
+<h4 id="after-72"><a class="header" href="#after-72">After</a></h4>
+<pre><code class="language-rust">struct Age(u8);
+impl Age {
+    fn age(&amp;self) -&gt; u8 {
+        self.0
+    }
+}
+
+struct Person {
+    age: Age,
+}
+
+impl Person {
+    ┃fn age(&amp;self) -&gt; u8 {
+        self.age.age()
+    }
+}</code></pre>
+<h3 id="generate_delegate_trait"><a class="header" href="#generate_delegate_trait"><code>generate_delegate_trait</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_delegate_trait.rs#L28">generate_delegate_trait.rs</a></p>
+<p>Generate delegate trait implementation for <code>StructField</code>s.</p>
+<h4 id="before-73"><a class="header" href="#before-73">Before</a></h4>
+<pre><code class="language-rust">trait SomeTrait {
+    type T;
+    fn fn_(arg: u32) -&gt; u32;
+    fn method_(&amp;mut self) -&gt; bool;
+}
+struct A;
+impl SomeTrait for A {
+    type T = u32;
+
+    fn fn_(arg: u32) -&gt; u32 {
+        42
+    }
+
+    fn method_(&amp;mut self) -&gt; bool {
+        false
+    }
+}
+struct B {
+    a┃: A,
+}</code></pre>
+<h4 id="after-73"><a class="header" href="#after-73">After</a></h4>
+<pre><code class="language-rust">trait SomeTrait {
+    type T;
+    fn fn_(arg: u32) -&gt; u32;
+    fn method_(&amp;mut self) -&gt; bool;
+}
+struct A;
+impl SomeTrait for A {
+    type T = u32;
+
+    fn fn_(arg: u32) -&gt; u32 {
+        42
+    }
+
+    fn method_(&amp;mut self) -&gt; bool {
+        false
+    }
+}
+struct B {
+    a: A,
+}
+
+impl SomeTrait for B {
+    type T = &lt;A as SomeTrait&gt;::T;
+
+    fn fn_(arg: u32) -&gt; u32 {
+        &lt;A as SomeTrait&gt;::fn_(arg)
+    }
+
+    fn method_(&amp;mut self) -&gt; bool {
+        &lt;A as SomeTrait&gt;::method_(&amp;mut self.a)
+    }
+}</code></pre>
+<h3 id="generate_deref"><a class="header" href="#generate_deref"><code>generate_deref</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_deref.rs#L16">generate_deref.rs</a></p>
+<p>Generate <code>Deref</code> impl using the given struct field.</p>
+<h4 id="before-74"><a class="header" href="#before-74">Before</a></h4>
+<pre><code class="language-rust">struct A;
+struct B {
+   ┃a: A
+}</code></pre>
+<h4 id="after-74"><a class="header" href="#after-74">After</a></h4>
+<pre><code class="language-rust">struct A;
+struct B {
+   a: A
+}
+
+impl core::ops::Deref for B {
+    type Target = A;
+
+    fn deref(&amp;self) -&gt; &amp;Self::Target {
+        &amp;self.a
+    }
+}</code></pre>
+<h3 id="generate_derive"><a class="header" href="#generate_derive"><code>generate_derive</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_derive.rs#L10">generate_derive.rs</a></p>
+<p>Adds a new <code>#[derive()]</code> clause to a struct or enum.</p>
+<h4 id="before-75"><a class="header" href="#before-75">Before</a></h4>
+<pre><code class="language-rust">struct Point {
+    x: u32,
+    y: u32,┃
+}</code></pre>
+<h4 id="after-75"><a class="header" href="#after-75">After</a></h4>
+<pre><code class="language-rust">#[derive(┃)]
+struct Point {
+    x: u32,
+    y: u32,
+}</code></pre>
+<h3 id="generate_doc_example"><a class="header" href="#generate_doc_example"><code>generate_doc_example</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_documentation_template.rs#L77">generate_documentation_template.rs</a></p>
+<p>Generates a rustdoc example when editing an item’s documentation.</p>
+<h4 id="before-76"><a class="header" href="#before-76">Before</a></h4>
+<pre><code class="language-rust">/// Adds two numbers.┃
+pub fn add(a: i32, b: i32) -&gt; i32 { a + b }</code></pre>
+<h4 id="after-76"><a class="header" href="#after-76">After</a></h4>
+<pre><code class="language-rust">/// Adds two numbers.
+///
+/// # Examples
+///
+/// ```
+/// use ra_test_fixture::add;
+///
+/// assert_eq!(add(a, b), );
+/// ```
+pub fn add(a: i32, b: i32) -&gt; i32 { a + b }</code></pre>
+<h3 id="generate_documentation_template"><a class="header" href="#generate_documentation_template"><code>generate_documentation_template</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_documentation_template.rs#L14">generate_documentation_template.rs</a></p>
+<p>Adds a documentation template above a function definition / declaration.</p>
+<h4 id="before-77"><a class="header" href="#before-77">Before</a></h4>
+<pre><code class="language-rust">pub struct S;
+impl S {
+    pub unsafe fn set_len┃(&amp;mut self, len: usize) -&gt; Result&lt;(), std::io::Error&gt; {
+        /* ... */
+    }
+}</code></pre>
+<h4 id="after-77"><a class="header" href="#after-77">After</a></h4>
+<pre><code class="language-rust">pub struct S;
+impl S {
+    /// Sets the length of this [`S`].
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if .
+    ///
+    /// # Safety
+    ///
+    /// .
+    pub unsafe fn set_len(&amp;mut self, len: usize) -&gt; Result&lt;(), std::io::Error&gt; {
+        /* ... */
+    }
+}</code></pre>
+<h3 id="generate_enum_as_method"><a class="header" href="#generate_enum_as_method"><code>generate_enum_as_method</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_enum_projection_method.rs#L59">generate_enum_projection_method.rs</a></p>
+<p>Generate an <code>as_</code> method for this enum variant.</p>
+<h4 id="before-78"><a class="header" href="#before-78">Before</a></h4>
+<pre><code class="language-rust">enum Value {
+ Number(i32),
+ Text(String)┃,
+}</code></pre>
+<h4 id="after-78"><a class="header" href="#after-78">After</a></h4>
+<pre><code class="language-rust">enum Value {
+ Number(i32),
+ Text(String),
+}
+
+impl Value {
+    fn as_text(&amp;self) -&gt; Option&lt;&amp;String&gt; {
+        if let Self::Text(v) = self {
+            Some(v)
+        } else {
+            None
+        }
+    }
+}</code></pre>
+<h3 id="generate_enum_is_method"><a class="header" href="#generate_enum_is_method"><code>generate_enum_is_method</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_enum_is_method.rs#L12">generate_enum_is_method.rs</a></p>
+<p>Generate an <code>is_</code> method for this enum variant.</p>
+<h4 id="before-79"><a class="header" href="#before-79">Before</a></h4>
+<pre><code class="language-rust">enum Version {
+ Undefined,
+ Minor┃,
+ Major,
+}</code></pre>
+<h4 id="after-79"><a class="header" href="#after-79">After</a></h4>
+<pre><code class="language-rust">enum Version {
+ Undefined,
+ Minor,
+ Major,
+}
+
+impl Version {
+    /// Returns `true` if the version is [`Minor`].
+    ///
+    /// [`Minor`]: Version::Minor
+    #[must_use]
+    fn is_minor(&amp;self) -&gt; bool {
+        matches!(self, Self::Minor)
+    }
+}</code></pre>
+<h3 id="generate_enum_try_into_method"><a class="header" href="#generate_enum_try_into_method"><code>generate_enum_try_into_method</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_enum_projection_method.rs#L12">generate_enum_projection_method.rs</a></p>
+<p>Generate a <code>try_into_</code> method for this enum variant.</p>
+<h4 id="before-80"><a class="header" href="#before-80">Before</a></h4>
+<pre><code class="language-rust">enum Value {
+ Number(i32),
+ Text(String)┃,
+}</code></pre>
+<h4 id="after-80"><a class="header" href="#after-80">After</a></h4>
+<pre><code class="language-rust">enum Value {
+ Number(i32),
+ Text(String),
+}
+
+impl Value {
+    fn try_into_text(self) -&gt; Result&lt;String, Self&gt; {
+        if let Self::Text(v) = self {
+            Ok(v)
+        } else {
+            Err(self)
+        }
+    }
+}</code></pre>
+<h3 id="generate_enum_variant"><a class="header" href="#generate_enum_variant"><code>generate_enum_variant</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_enum_variant.rs#L11">generate_enum_variant.rs</a></p>
+<p>Adds a variant to an enum.</p>
+<h4 id="before-81"><a class="header" href="#before-81">Before</a></h4>
+<pre><code class="language-rust">enum Countries {
+    Ghana,
+}
+
+fn main() {
+    let country = Countries::Lesotho┃;
+}</code></pre>
+<h4 id="after-81"><a class="header" href="#after-81">After</a></h4>
+<pre><code class="language-rust">enum Countries {
+    Ghana,
+    Lesotho,
+}
+
+fn main() {
+    let country = Countries::Lesotho;
+}</code></pre>
+<h3 id="generate_fn_type_alias_named"><a class="header" href="#generate_fn_type_alias_named"><code>generate_fn_type_alias_named</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_fn_type_alias.rs#L11">generate_fn_type_alias.rs</a></p>
+<p>Generate a type alias for the function with named parameters.</p>
+<h4 id="before-82"><a class="header" href="#before-82">Before</a></h4>
+<pre><code class="language-rust">unsafe fn fo┃o(n: i32) -&gt; i32 { 42i32 }</code></pre>
+<h4 id="after-82"><a class="header" href="#after-82">After</a></h4>
+<pre><code class="language-rust">type ${0:FooFn} = unsafe fn(n: i32) -&gt; i32;
+
+unsafe fn foo(n: i32) -&gt; i32 { 42i32 }</code></pre>
+<h3 id="generate_fn_type_alias_unnamed"><a class="header" href="#generate_fn_type_alias_unnamed"><code>generate_fn_type_alias_unnamed</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_fn_type_alias.rs#L25">generate_fn_type_alias.rs</a></p>
+<p>Generate a type alias for the function with unnamed parameters.</p>
+<h4 id="before-83"><a class="header" href="#before-83">Before</a></h4>
+<pre><code class="language-rust">unsafe fn fo┃o(n: i32) -&gt; i32 { 42i32 }</code></pre>
+<h4 id="after-83"><a class="header" href="#after-83">After</a></h4>
+<pre><code class="language-rust">type ${0:FooFn} = unsafe fn(i32) -&gt; i32;
+
+unsafe fn foo(n: i32) -&gt; i32 { 42i32 }</code></pre>
+<h3 id="generate_from_impl_for_enum"><a class="header" href="#generate_from_impl_for_enum"><code>generate_from_impl_for_enum</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_from_impl_for_enum.rs#L10">generate_from_impl_for_enum.rs</a></p>
+<p>Adds a From impl for this enum variant with one tuple field.</p>
+<h4 id="before-84"><a class="header" href="#before-84">Before</a></h4>
+<pre><code class="language-rust">enum A { ┃One(u32) }</code></pre>
+<h4 id="after-84"><a class="header" href="#after-84">After</a></h4>
+<pre><code class="language-rust">enum A { One(u32) }
+
+impl From&lt;u32&gt; for A {
+    fn from(v: u32) -&gt; Self {
+        Self::One(v)
+    }
+}</code></pre>
+<h3 id="generate_function"><a class="header" href="#generate_function"><code>generate_function</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_function.rs#L30">generate_function.rs</a></p>
+<p>Adds a stub function with a signature matching the function under the cursor.</p>
+<h4 id="before-85"><a class="header" href="#before-85">Before</a></h4>
+<pre><code class="language-rust">struct Baz;
+fn baz() -&gt; Baz { Baz }
+fn foo() {
+    bar┃("", baz());
+}
+</code></pre>
+<h4 id="after-85"><a class="header" href="#after-85">After</a></h4>
+<pre><code class="language-rust">struct Baz;
+fn baz() -&gt; Baz { Baz }
+fn foo() {
+    bar("", baz());
+}
+
+fn bar(arg: &amp;'static str, baz: Baz) ${0:-&gt; _} {
+    todo!()
+}
+</code></pre>
+<h3 id="generate_getter"><a class="header" href="#generate_getter"><code>generate_getter</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter_or_setter.rs#L77">generate_getter_or_setter.rs</a></p>
+<p>Generate a getter method.</p>
+<h4 id="before-86"><a class="header" href="#before-86">Before</a></h4>
+<pre><code class="language-rust">struct Person {
+    nam┃e: String,
+}</code></pre>
+<h4 id="after-86"><a class="header" href="#after-86">After</a></h4>
+<pre><code class="language-rust">struct Person {
+    name: String,
+}
+
+impl Person {
+    fn ┃name(&amp;self) -&gt; &amp;str {
+        &amp;self.name
+    }
+}</code></pre>
+<h3 id="generate_getter_mut"><a class="header" href="#generate_getter_mut"><code>generate_getter_mut</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter_or_setter.rs#L131">generate_getter_or_setter.rs</a></p>
+<p>Generate a mut getter method.</p>
+<h4 id="before-87"><a class="header" href="#before-87">Before</a></h4>
+<pre><code class="language-rust">struct Person {
+    nam┃e: String,
+}</code></pre>
+<h4 id="after-87"><a class="header" href="#after-87">After</a></h4>
+<pre><code class="language-rust">struct Person {
+    name: String,
+}
+
+impl Person {
+    fn ┃name_mut(&amp;mut self) -&gt; &amp;mut String {
+        &amp;mut self.name
+    }
+}</code></pre>
+<h3 id="generate_impl"><a class="header" href="#generate_impl"><code>generate_impl</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_impl.rs#L31">generate_impl.rs</a></p>
+<p>Adds a new inherent impl for a type.</p>
+<h4 id="before-88"><a class="header" href="#before-88">Before</a></h4>
+<pre><code class="language-rust">struct Ctx┃&lt;T: Clone&gt; {
+    data: T,
+}</code></pre>
+<h4 id="after-88"><a class="header" href="#after-88">After</a></h4>
+<pre><code class="language-rust">struct Ctx&lt;T: Clone&gt; {
+    data: T,
+}
+
+impl&lt;T: Clone&gt; Ctx&lt;T&gt; {┃}</code></pre>
+<h3 id="generate_impl_trait"><a class="header" href="#generate_impl_trait"><code>generate_impl_trait</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_impl.rs#L136">generate_impl.rs</a></p>
+<p>Adds this trait impl for a type.</p>
+<h4 id="before-89"><a class="header" href="#before-89">Before</a></h4>
+<pre><code class="language-rust">trait ┃Foo {
+    fn foo(&amp;self) -&gt; i32;
+}</code></pre>
+<h4 id="after-89"><a class="header" href="#after-89">After</a></h4>
+<pre><code class="language-rust">trait Foo {
+    fn foo(&amp;self) -&gt; i32;
+}
+
+impl Foo for ${1:_} {
+    fn foo(&amp;self) -&gt; i32 {
+        ┃todo!()
+    }
+}</code></pre>
+<h3 id="generate_is_empty_from_len"><a class="header" href="#generate_is_empty_from_len"><code>generate_is_empty_from_len</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_is_empty_from_len.rs#L12">generate_is_empty_from_len.rs</a></p>
+<p>Generates is_empty implementation from the len method.</p>
+<h4 id="before-90"><a class="header" href="#before-90">Before</a></h4>
+<pre><code class="language-rust">struct MyStruct { data: Vec&lt;String&gt; }
+
+impl MyStruct {
+    #[must_use]
+    p┃ub fn len(&amp;self) -&gt; usize {
+        self.data.len()
+    }
+}</code></pre>
+<h4 id="after-90"><a class="header" href="#after-90">After</a></h4>
+<pre><code class="language-rust">struct MyStruct { data: Vec&lt;String&gt; }
+
+impl MyStruct {
+    #[must_use]
+    pub fn len(&amp;self) -&gt; usize {
+        self.data.len()
+    }
+
+    #[must_use]
+    pub fn is_empty(&amp;self) -&gt; bool {
+        self.len() == 0
+    }
+}</code></pre>
+<h3 id="generate_mut_trait_impl"><a class="header" href="#generate_mut_trait_impl"><code>generate_mut_trait_impl</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_mut_trait_impl.rs#L13">generate_mut_trait_impl.rs</a></p>
+<p>Adds a IndexMut impl from the <code>Index</code> trait.</p>
+<h4 id="before-91"><a class="header" href="#before-91">Before</a></h4>
+<pre><code class="language-rust">pub enum Axis { X = 0, Y = 1, Z = 2 }
+
+impl&lt;T&gt; core::ops::Index┃&lt;Axis&gt; for [T; 3] {
+    type Output = T;
+
+    fn index(&amp;self, index: Axis) -&gt; &amp;Self::Output {
+        &amp;self[index as usize]
+    }
+}</code></pre>
+<h4 id="after-91"><a class="header" href="#after-91">After</a></h4>
+<pre><code class="language-rust">pub enum Axis { X = 0, Y = 1, Z = 2 }
+
+┃impl&lt;T&gt; core::ops::IndexMut&lt;Axis&gt; for [T; 3] {
+    fn index_mut(&amp;mut self, index: Axis) -&gt; &amp;mut Self::Output {
+        &amp;mut self[index as usize]
+    }
+}
+
+impl&lt;T&gt; core::ops::Index&lt;Axis&gt; for [T; 3] {
+    type Output = T;
+
+    fn index(&amp;self, index: Axis) -&gt; &amp;Self::Output {
+        &amp;self[index as usize]
+    }
+}</code></pre>
+<h3 id="generate_new"><a class="header" href="#generate_new"><code>generate_new</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_new.rs#L15">generate_new.rs</a></p>
+<p>Adds a <code>fn new</code> for a type.</p>
+<h4 id="before-92"><a class="header" href="#before-92">Before</a></h4>
+<pre><code class="language-rust">struct Ctx&lt;T: Clone&gt; {
+     data: T,┃
+}</code></pre>
+<h4 id="after-92"><a class="header" href="#after-92">After</a></h4>
+<pre><code class="language-rust">struct Ctx&lt;T: Clone&gt; {
+     data: T,
+}
+
+impl&lt;T: Clone&gt; Ctx&lt;T&gt; {
+    fn ┃new(data: T) -&gt; Self {
+        Self { data }
+    }
+}</code></pre>
+<h3 id="generate_setter"><a class="header" href="#generate_setter"><code>generate_setter</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_getter_or_setter.rs#L17">generate_getter_or_setter.rs</a></p>
+<p>Generate a setter method.</p>
+<h4 id="before-93"><a class="header" href="#before-93">Before</a></h4>
+<pre><code class="language-rust">struct Person {
+    nam┃e: String,
+}</code></pre>
+<h4 id="after-93"><a class="header" href="#after-93">After</a></h4>
+<pre><code class="language-rust">struct Person {
+    name: String,
+}
+
+impl Person {
+    fn ┃set_name(&amp;mut self, name: String) {
+        self.name = name;
+    }
+}</code></pre>
+<h3 id="generate_single_field_struct_from"><a class="header" href="#generate_single_field_struct_from"><code>generate_single_field_struct_from</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_single_field_struct_from.rs#L19">generate_single_field_struct_from.rs</a></p>
+<p>Implement From for a single field structure, ignore trivial types.</p>
+<h4 id="before-94"><a class="header" href="#before-94">Before</a></h4>
+<pre><code class="language-rust">use core::marker::PhantomData;
+struct ┃Foo&lt;T&gt; {
+    id: i32,
+    _phantom_data: PhantomData&lt;T&gt;,
+}</code></pre>
+<h4 id="after-94"><a class="header" href="#after-94">After</a></h4>
+<pre><code class="language-rust">use core::marker::PhantomData;
+struct Foo&lt;T&gt; {
+    id: i32,
+    _phantom_data: PhantomData&lt;T&gt;,
+}
+
+impl&lt;T&gt; From&lt;i32&gt; for Foo&lt;T&gt; {
+    fn from(id: i32) -&gt; Self {
+        Self { id, _phantom_data: PhantomData }
+    }
+}</code></pre>
+<h3 id="generate_trait_from_impl"><a class="header" href="#generate_trait_from_impl"><code>generate_trait_from_impl</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_trait_from_impl.rs#L14">generate_trait_from_impl.rs</a></p>
+<p>Generate trait for an already defined inherent impl and convert impl to a trait impl.</p>
+<h4 id="before-95"><a class="header" href="#before-95">Before</a></h4>
+<pre><code class="language-rust">struct Foo&lt;const N: usize&gt;([i32; N]);
+
+macro_rules! const_maker {
+    ($t:ty, $v:tt) =&gt; {
+        const CONST: $t = $v;
+    };
+}
+
+impl&lt;const N: usize&gt; Fo┃o&lt;N&gt; {
+    // Used as an associated constant.
+    const CONST_ASSOC: usize = N * 4;
+
+    fn create() -&gt; Option&lt;()&gt; {
+        Some(())
+    }
+
+    const_maker! {i32, 7}
+}</code></pre>
+<h4 id="after-95"><a class="header" href="#after-95">After</a></h4>
+<pre><code class="language-rust">struct Foo&lt;const N: usize&gt;([i32; N]);
+
+macro_rules! const_maker {
+    ($t:ty, $v:tt) =&gt; {
+        const CONST: $t = $v;
+    };
+}
+
+trait ${0:NewTrait}&lt;const N: usize&gt; {
+    // Used as an associated constant.
+    const CONST_ASSOC: usize = N * 4;
+
+    fn create() -&gt; Option&lt;()&gt;;
+
+    const_maker! {i32, 7}
+}
+
+impl&lt;const N: usize&gt; ${0:NewTrait}&lt;N&gt; for Foo&lt;N&gt; {
+    // Used as an associated constant.
+    const CONST_ASSOC: usize = N * 4;
+
+    fn create() -&gt; Option&lt;()&gt; {
+        Some(())
+    }
+
+    const_maker! {i32, 7}
+}</code></pre>
+<h3 id="generate_trait_impl"><a class="header" href="#generate_trait_impl"><code>generate_trait_impl</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/generate_impl.rs#L81">generate_impl.rs</a></p>
+<p>Adds a new trait impl for a type.</p>
+<h4 id="before-96"><a class="header" href="#before-96">Before</a></h4>
+<pre><code class="language-rust">struct ┃Ctx&lt;T: Clone&gt; {
+    data: T,
+}</code></pre>
+<h4 id="after-96"><a class="header" href="#after-96">After</a></h4>
+<pre><code class="language-rust">struct Ctx&lt;T: Clone&gt; {
+    data: T,
+}
+
+impl&lt;T: Clone&gt; ${1:_} for Ctx&lt;T&gt; {┃}</code></pre>
+<h3 id="inline_call"><a class="header" href="#inline_call"><code>inline_call</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L174">inline_call.rs</a></p>
+<p>Inlines a function or method body creating a <code>let</code> statement per parameter unless the parameter
+can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
+or if the parameter is only accessed inside the function body once.</p>
+<h4 id="before-97"><a class="header" href="#before-97">Before</a></h4>
+<pre><code class="language-rust">fn foo(name: Option&lt;&amp;str&gt;) {
+    let name = name.unwrap┃();
+}</code></pre>
+<h4 id="after-97"><a class="header" href="#after-97">After</a></h4>
+<pre><code class="language-rust">fn foo(name: Option&lt;&amp;str&gt;) {
+    let name = match name {
+            Some(val) =&gt; val,
+            None =&gt; panic!("called `Option::unwrap()` on a `None` value"),
+        };
+}</code></pre>
+<h3 id="inline_const_as_literal"><a class="header" href="#inline_const_as_literal"><code>inline_const_as_literal</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_const_as_literal.rs#L6">inline_const_as_literal.rs</a></p>
+<p>Evaluate and inline const variable as literal.</p>
+<h4 id="before-98"><a class="header" href="#before-98">Before</a></h4>
+<pre><code class="language-rust">const STRING: &amp;str = "Hello, World!";
+
+fn something() -&gt; &amp;'static str {
+    STRING┃
+}</code></pre>
+<h4 id="after-98"><a class="header" href="#after-98">After</a></h4>
+<pre><code class="language-rust">const STRING: &amp;str = "Hello, World!";
+
+fn something() -&gt; &amp;'static str {
+    "Hello, World!"
+}</code></pre>
+<h3 id="inline_into_callers"><a class="header" href="#inline_into_callers"><code>inline_into_callers</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_call.rs#L34">inline_call.rs</a></p>
+<p>Inline a function or method body into all of its callers where possible, creating a <code>let</code> statement per parameter
+unless the parameter can be inlined. The parameter will be inlined either if it the supplied argument is a simple local
+or if the parameter is only accessed inside the function body once.
+If all calls can be inlined the function will be removed.</p>
+<h4 id="before-99"><a class="header" href="#before-99">Before</a></h4>
+<pre><code class="language-rust">fn print(_: &amp;str) {}
+fn foo┃(word: &amp;str) {
+    if !word.is_empty() {
+        print(word);
+    }
+}
+fn bar() {
+    foo("안녕하세요");
+    foo("여러분");
+}</code></pre>
+<h4 id="after-99"><a class="header" href="#after-99">After</a></h4>
+<pre><code class="language-rust">fn print(_: &amp;str) {}
+
+fn bar() {
+    {
+        let word: &amp;str = "안녕하세요";
+        if !word.is_empty() {
+            print(word);
+        }
+    };
+    {
+        let word: &amp;str = "여러분";
+        if !word.is_empty() {
+            print(word);
+        }
+    };
+}</code></pre>
+<h3 id="inline_local_variable"><a class="header" href="#inline_local_variable"><code>inline_local_variable</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_local_variable.rs#L17">inline_local_variable.rs</a></p>
+<p>Inlines a local variable.</p>
+<h4 id="before-100"><a class="header" href="#before-100">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let x┃ = 1 + 2;
+    x * 4;
+}</code></pre>
+<h4 id="after-100"><a class="header" href="#after-100">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    (1 + 2) * 4;
+}</code></pre>
+<h3 id="inline_macro"><a class="header" href="#inline_macro"><code>inline_macro</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_macro.rs#L7">inline_macro.rs</a></p>
+<p>Takes a macro and inlines it one step.</p>
+<h4 id="before-101"><a class="header" href="#before-101">Before</a></h4>
+<pre><code class="language-rust">macro_rules! num {
+    (+$($t:tt)+) =&gt; (1 + num!($($t )+));
+    (-$($t:tt)+) =&gt; (-1 + num!($($t )+));
+    (+) =&gt; (1);
+    (-) =&gt; (-1);
+}
+
+fn main() {
+    let number = num┃!(+ + + - + +);
+    println!("{number}");
+}</code></pre>
+<h4 id="after-101"><a class="header" href="#after-101">After</a></h4>
+<pre><code class="language-rust">macro_rules! num {
+    (+$($t:tt)+) =&gt; (1 + num!($($t )+));
+    (-$($t:tt)+) =&gt; (-1 + num!($($t )+));
+    (+) =&gt; (1);
+    (-) =&gt; (-1);
+}
+
+fn main() {
+    let number = 1+num!(+ + - + +);
+    println!("{number}");
+}</code></pre>
+<h3 id="inline_type_alias"><a class="header" href="#inline_type_alias"><code>inline_type_alias</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_type_alias.rs#L112">inline_type_alias.rs</a></p>
+<p>Replace a type alias with its concrete type.</p>
+<h4 id="before-102"><a class="header" href="#before-102">Before</a></h4>
+<pre><code class="language-rust">type A&lt;T = u32&gt; = Vec&lt;T&gt;;
+
+fn main() {
+    let a: ┃A;
+}</code></pre>
+<h4 id="after-102"><a class="header" href="#after-102">After</a></h4>
+<pre><code class="language-rust">type A&lt;T = u32&gt; = Vec&lt;T&gt;;
+
+fn main() {
+    let a: Vec&lt;u32&gt;;
+}</code></pre>
+<h3 id="inline_type_alias_uses"><a class="header" href="#inline_type_alias_uses"><code>inline_type_alias_uses</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/inline_type_alias.rs#L26">inline_type_alias.rs</a></p>
+<p>Inline a type alias into all of its uses where possible.</p>
+<h4 id="before-103"><a class="header" href="#before-103">Before</a></h4>
+<pre><code class="language-rust">type ┃A = i32;
+fn id(x: A) -&gt; A {
+    x
+};
+fn foo() {
+    let _: A = 3;
+}</code></pre>
+<h4 id="after-103"><a class="header" href="#after-103">After</a></h4>
+<pre><code class="language-rust">
+fn id(x: i32) -&gt; i32 {
+    x
+};
+fn foo() {
+    let _: i32 = 3;
+}</code></pre>
+<h3 id="into_to_qualified_from"><a class="header" href="#into_to_qualified_from"><code>into_to_qualified_from</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/into_to_qualified_from.rs#L7">into_to_qualified_from.rs</a></p>
+<p>Convert an <code>into</code> method call to a fully qualified <code>from</code> call.</p>
+<h4 id="before-104"><a class="header" href="#before-104">Before</a></h4>
+<pre><code class="language-rust">//- minicore: from
+struct B;
+impl From&lt;i32&gt; for B {
+    fn from(a: i32) -&gt; Self {
+       B
+    }
+}
+
+fn main() -&gt; () {
+    let a = 3;
+    let b: B = a.in┃to();
+}</code></pre>
+<h4 id="after-104"><a class="header" href="#after-104">After</a></h4>
+<pre><code class="language-rust">struct B;
+impl From&lt;i32&gt; for B {
+    fn from(a: i32) -&gt; Self {
+       B
+    }
+}
+
+fn main() -&gt; () {
+    let a = 3;
+    let b: B = B::from(a);
+}</code></pre>
+<h3 id="introduce_named_lifetime"><a class="header" href="#introduce_named_lifetime"><code>introduce_named_lifetime</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/introduce_named_lifetime.rs#L14">introduce_named_lifetime.rs</a></p>
+<p>Change an anonymous lifetime to a named lifetime.</p>
+<h4 id="before-105"><a class="header" href="#before-105">Before</a></h4>
+<pre><code class="language-rust">impl Cursor&lt;'_┃&gt; {
+    fn node(self) -&gt; &amp;SyntaxNode {
+        match self {
+            Cursor::Replace(node) | Cursor::Before(node) =&gt; node,
+        }
+    }
+}</code></pre>
+<h4 id="after-105"><a class="header" href="#after-105">After</a></h4>
+<pre><code class="language-rust">impl&lt;'a&gt; Cursor&lt;'a&gt; {
+    fn node(self) -&gt; &amp;SyntaxNode {
+        match self {
+            Cursor::Replace(node) | Cursor::Before(node) =&gt; node,
+        }
+    }
+}</code></pre>
+<h3 id="introduce_named_type_parameter"><a class="header" href="#introduce_named_type_parameter"><code>introduce_named_type_parameter</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/introduce_named_type_parameter.rs#L7">introduce_named_type_parameter.rs</a></p>
+<p>Replaces <code>impl Trait</code> function argument with the named generic.</p>
+<h4 id="before-106"><a class="header" href="#before-106">Before</a></h4>
+<pre><code class="language-rust">fn foo(bar: ┃impl Bar) {}</code></pre>
+<h4 id="after-106"><a class="header" href="#after-106">After</a></h4>
+<pre><code class="language-rust">fn foo&lt;┃B: Bar&gt;(bar: B) {}</code></pre>
+<h3 id="invert_if"><a class="header" href="#invert_if"><code>invert_if</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/invert_if.rs#L13">invert_if.rs</a></p>
+<p>This transforms if expressions of the form <code>if !x {A} else {B}</code> into <code>if x {B} else {A}</code>
+This also works with <code>!=</code>. This assist can only be applied with the cursor on <code>if</code>.</p>
+<h4 id="before-107"><a class="header" href="#before-107">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    if┃ !y { A } else { B }
+}</code></pre>
+<h4 id="after-107"><a class="header" href="#after-107">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    if y { B } else { A }
+}</code></pre>
+<h3 id="line_to_block"><a class="header" href="#line_to_block"><code>line_to_block</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/convert_comment_block.rs#L9">convert_comment_block.rs</a></p>
+<p>Converts comments between block and single-line form.</p>
+<h4 id="before-108"><a class="header" href="#before-108">Before</a></h4>
+<pre><code class="language-rust">   // Multi-line┃
+   // comment</code></pre>
+<h4 id="after-108"><a class="header" href="#after-108">After</a></h4>
+<pre><code class="language-rust">  /*
+  Multi-line
+  comment
+  */</code></pre>
+<h3 id="make_raw_string"><a class="header" href="#make_raw_string"><code>make_raw_string</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/raw_string.rs#L12">raw_string.rs</a></p>
+<p>Adds <code>r#</code> to a plain string literal.</p>
+<h4 id="before-109"><a class="header" href="#before-109">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    "Hello,┃ World!";
+}</code></pre>
+<h4 id="after-109"><a class="header" href="#after-109">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    r#"Hello, World!"#;
+}</code></pre>
+<h3 id="make_usual_string"><a class="header" href="#make_usual_string"><code>make_usual_string</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/raw_string.rs#L48">raw_string.rs</a></p>
+<p>Turns a raw string into a plain string.</p>
+<h4 id="before-110"><a class="header" href="#before-110">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    r#"Hello,┃ "World!""#;
+}</code></pre>
+<h4 id="after-110"><a class="header" href="#after-110">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    "Hello, \"World!\"";
+}</code></pre>
+<h3 id="merge_imports"><a class="header" href="#merge_imports"><code>merge_imports</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/merge_imports.rs#L22">merge_imports.rs</a></p>
+<p>Merges neighbor imports with a common prefix.</p>
+<h4 id="before-111"><a class="header" href="#before-111">Before</a></h4>
+<pre><code class="language-rust">use std::┃fmt::Formatter;
+use std::io;</code></pre>
+<h4 id="after-111"><a class="header" href="#after-111">After</a></h4>
+<pre><code class="language-rust">use std::{fmt::Formatter, io};</code></pre>
+<h3 id="merge_match_arms"><a class="header" href="#merge_match_arms"><code>merge_match_arms</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/merge_match_arms.rs#L12">merge_match_arms.rs</a></p>
+<p>Merges the current match arm with the following if their bodies are identical.</p>
+<h4 id="before-112"><a class="header" href="#before-112">Before</a></h4>
+<pre><code class="language-rust">enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    match action {
+        ┃Action::Move(..) =&gt; foo(),
+        Action::Stop =&gt; foo(),
+    }
+}</code></pre>
+<h4 id="after-112"><a class="header" href="#after-112">After</a></h4>
+<pre><code class="language-rust">enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    match action {
+        Action::Move(..) | Action::Stop =&gt; foo(),
+    }
+}</code></pre>
+<h3 id="merge_nested_if"><a class="header" href="#merge_nested_if"><code>merge_nested_if</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/merge_nested_if.rs#L10">merge_nested_if.rs</a></p>
+<p>This transforms if expressions of the form <code>if x { if y {A} }</code> into <code>if x &amp;&amp; y {A}</code>
+This assist can only be applied with the cursor on <code>if</code>.</p>
+<h4 id="before-113"><a class="header" href="#before-113">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+   i┃f x == 3 { if y == 4 { 1 } }
+}</code></pre>
+<h4 id="after-113"><a class="header" href="#after-113">After</a></h4>
+<pre><code class="language-rust">fn main() {
+   if x == 3 &amp;&amp; y == 4 { 1 }
+}</code></pre>
+<h3 id="move_arm_cond_to_match_guard"><a class="header" href="#move_arm_cond_to_match_guard"><code>move_arm_cond_to_match_guard</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_guard.rs#L97">move_guard.rs</a></p>
+<p>Moves if expression from match arm body into a guard.</p>
+<h4 id="before-114"><a class="header" href="#before-114">Before</a></h4>
+<pre><code class="language-rust">enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    match action {
+        Action::Move { distance } =&gt; ┃if distance &gt; 10 { foo() },
+        _ =&gt; (),
+    }
+}</code></pre>
+<h4 id="after-114"><a class="header" href="#after-114">After</a></h4>
+<pre><code class="language-rust">enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    match action {
+        Action::Move { distance } if distance &gt; 10 =&gt; foo(),
+        _ =&gt; (),
+    }
+}</code></pre>
+<h3 id="move_bounds_to_where_clause"><a class="header" href="#move_bounds_to_where_clause"><code>move_bounds_to_where_clause</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_bounds.rs#L13">move_bounds.rs</a></p>
+<p>Moves inline type bounds to a where clause.</p>
+<h4 id="before-115"><a class="header" href="#before-115">Before</a></h4>
+<pre><code class="language-rust">fn apply&lt;T, U, ┃F: FnOnce(T) -&gt; U&gt;(f: F, x: T) -&gt; U {
+    f(x)
+}</code></pre>
+<h4 id="after-115"><a class="header" href="#after-115">After</a></h4>
+<pre><code class="language-rust">fn apply&lt;T, U, F&gt;(f: F, x: T) -&gt; U where F: FnOnce(T) -&gt; U {
+    f(x)
+}</code></pre>
+<h3 id="move_const_to_impl"><a class="header" href="#move_const_to_impl"><code>move_const_to_impl</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_const_to_impl.rs#L17">move_const_to_impl.rs</a></p>
+<p>Move a local constant item in a method to impl’s associated constant. All the references will be
+qualified with <code>Self::</code>.</p>
+<h4 id="before-116"><a class="header" href="#before-116">Before</a></h4>
+<pre><code class="language-rust">struct S;
+impl S {
+    fn foo() -&gt; usize {
+        /// The answer.
+        const C┃: usize = 42;
+
+        C * C
+    }
+}</code></pre>
+<h4 id="after-116"><a class="header" href="#after-116">After</a></h4>
+<pre><code class="language-rust">struct S;
+impl S {
+    /// The answer.
+    const C: usize = 42;
+
+    fn foo() -&gt; usize {
+        Self::C * Self::C
+    }
+}</code></pre>
+<h3 id="move_from_mod_rs"><a class="header" href="#move_from_mod_rs"><code>move_from_mod_rs</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_from_mod_rs.rs#L9">move_from_mod_rs.rs</a></p>
+<p>Moves xxx/mod.rs to xxx.rs.</p>
+<h4 id="before-117"><a class="header" href="#before-117">Before</a></h4>
+<pre><code class="language-rust">//- /main.rs
+mod a;
+//- /a/mod.rs
+┃fn t() {}┃</code></pre>
+<h4 id="after-117"><a class="header" href="#after-117">After</a></h4>
+<pre><code class="language-rust">fn t() {}</code></pre>
+<h3 id="move_guard_to_arm_body"><a class="header" href="#move_guard_to_arm_body"><code>move_guard_to_arm_body</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_guard.rs#L14">move_guard.rs</a></p>
+<p>Moves match guard into match arm body.</p>
+<h4 id="before-118"><a class="header" href="#before-118">Before</a></h4>
+<pre><code class="language-rust">enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    match action {
+        Action::Move { distance } ┃if distance &gt; 10 =&gt; foo(),
+        _ =&gt; (),
+    }
+}</code></pre>
+<h4 id="after-118"><a class="header" href="#after-118">After</a></h4>
+<pre><code class="language-rust">enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    match action {
+        Action::Move { distance } =&gt; if distance &gt; 10 {
+            foo()
+        },
+        _ =&gt; (),
+    }
+}</code></pre>
+<h3 id="move_module_to_file"><a class="header" href="#move_module_to_file"><code>move_module_to_file</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_module_to_file.rs#L14">move_module_to_file.rs</a></p>
+<p>Moves inline module’s contents to a separate file.</p>
+<h4 id="before-119"><a class="header" href="#before-119">Before</a></h4>
+<pre><code class="language-rust">mod ┃foo {
+    fn t() {}
+}</code></pre>
+<h4 id="after-119"><a class="header" href="#after-119">After</a></h4>
+<pre><code class="language-rust">mod foo;</code></pre>
+<h3 id="move_to_mod_rs"><a class="header" href="#move_to_mod_rs"><code>move_to_mod_rs</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/move_to_mod_rs.rs#L9">move_to_mod_rs.rs</a></p>
+<p>Moves xxx.rs to xxx/mod.rs.</p>
+<h4 id="before-120"><a class="header" href="#before-120">Before</a></h4>
+<pre><code class="language-rust">//- /main.rs
+mod a;
+//- /a.rs
+┃fn t() {}┃</code></pre>
+<h4 id="after-120"><a class="header" href="#after-120">After</a></h4>
+<pre><code class="language-rust">fn t() {}</code></pre>
+<h3 id="normalize_import"><a class="header" href="#normalize_import"><code>normalize_import</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/normalize_import.rs#L9">normalize_import.rs</a></p>
+<p>Normalizes an import.</p>
+<h4 id="before-121"><a class="header" href="#before-121">Before</a></h4>
+<pre><code class="language-rust">use┃ std::{io, {fmt::Formatter}};</code></pre>
+<h4 id="after-121"><a class="header" href="#after-121">After</a></h4>
+<pre><code class="language-rust">use std::{fmt::Formatter, io};</code></pre>
+<h3 id="promote_local_to_const"><a class="header" href="#promote_local_to_const"><code>promote_local_to_const</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/promote_local_to_const.rs#L14">promote_local_to_const.rs</a></p>
+<p>Promotes a local variable to a const item changing its name to a <code>SCREAMING_SNAKE_CASE</code> variant
+if the local uses no non-const expressions.</p>
+<h4 id="before-122"><a class="header" href="#before-122">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let foo┃ = true;
+
+    if foo {
+        println!("It's true");
+    } else {
+        println!("It's false");
+    }
+}</code></pre>
+<h4 id="after-122"><a class="header" href="#after-122">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    const ┃FOO: bool = true;
+
+    if FOO {
+        println!("It's true");
+    } else {
+        println!("It's false");
+    }
+}</code></pre>
+<h3 id="pull_assignment_up"><a class="header" href="#pull_assignment_up"><code>pull_assignment_up</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/pull_assignment_up.rs#L14">pull_assignment_up.rs</a></p>
+<p>Extracts variable assignment to outside an if or match statement.</p>
+<h4 id="before-123"><a class="header" href="#before-123">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let mut foo = 6;
+
+    if true {
+        ┃foo = 5;
+    } else {
+        foo = 4;
+    }
+}</code></pre>
+<h4 id="after-123"><a class="header" href="#after-123">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let mut foo = 6;
+
+    foo = if true {
+        5
+    } else {
+        4
+    };
+}</code></pre>
+<h3 id="qualify_method_call"><a class="header" href="#qualify_method_call"><code>qualify_method_call</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/qualify_method_call.rs#L10">qualify_method_call.rs</a></p>
+<p>Replaces the method call with a qualified function call.</p>
+<h4 id="before-124"><a class="header" href="#before-124">Before</a></h4>
+<pre><code class="language-rust">struct Foo;
+impl Foo {
+    fn foo(&amp;self) {}
+}
+fn main() {
+    let foo = Foo;
+    foo.fo┃o();
+}</code></pre>
+<h4 id="after-124"><a class="header" href="#after-124">After</a></h4>
+<pre><code class="language-rust">struct Foo;
+impl Foo {
+    fn foo(&amp;self) {}
+}
+fn main() {
+    let foo = Foo;
+    Foo::foo(&amp;foo);
+}</code></pre>
+<h3 id="qualify_path"><a class="header" href="#qualify_path"><code>qualify_path</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/qualify_path.rs#L23">qualify_path.rs</a></p>
+<p>If the name is unresolved, provides all possible qualified paths for it.</p>
+<h4 id="before-125"><a class="header" href="#before-125">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let map = HashMap┃::new();
+}</code></pre>
+<h4 id="after-125"><a class="header" href="#after-125">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let map = std::collections::HashMap::new();
+}</code></pre>
+<h3 id="reformat_number_literal"><a class="header" href="#reformat_number_literal"><code>reformat_number_literal</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/number_representation.rs#L7">number_representation.rs</a></p>
+<p>Adds or removes separators from integer literal.</p>
+<h4 id="before-126"><a class="header" href="#before-126">Before</a></h4>
+<pre><code class="language-rust">const _: i32 = 1012345┃;</code></pre>
+<h4 id="after-126"><a class="header" href="#after-126">After</a></h4>
+<pre><code class="language-rust">const _: i32 = 1_012_345;</code></pre>
+<h3 id="remove_dbg"><a class="header" href="#remove_dbg"><code>remove_dbg</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/remove_dbg.rs#L11">remove_dbg.rs</a></p>
+<p>Removes <code>dbg!()</code> macro call.</p>
+<h4 id="before-127"><a class="header" href="#before-127">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let x = ┃dbg!(42 * dbg!(4 + 2));┃
+}</code></pre>
+<h4 id="after-127"><a class="header" href="#after-127">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let x = 42 * (4 + 2);
+}</code></pre>
+<h3 id="remove_else_branches"><a class="header" href="#remove_else_branches"><code>remove_else_branches</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/remove_else_branches.rs#L5">remove_else_branches.rs</a></p>
+<p>Removes the <code>else</code> keyword and else branches.</p>
+<h4 id="before-128"><a class="header" href="#before-128">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    if true {
+        let _ = 2;
+    } ┃else {
+        unreachable!();
+    }
+}</code></pre>
+<h4 id="after-128"><a class="header" href="#after-128">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    if true {
+        let _ = 2;
+    }
+}</code></pre>
+<hr>
+<h4 id="before-129"><a class="header" href="#before-129">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let _x = 2 ┃else { unreachable!() };
+}</code></pre>
+<h4 id="after-129"><a class="header" href="#after-129">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let _x = 2;
+}</code></pre>
+<h3 id="remove_hash"><a class="header" href="#remove_hash"><code>remove_hash</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/raw_string.rs#L116">raw_string.rs</a></p>
+<p>Removes a hash from a raw string literal.</p>
+<h4 id="before-130"><a class="header" href="#before-130">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    r#"Hello,┃ World!"#;
+}</code></pre>
+<h4 id="after-130"><a class="header" href="#after-130">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    r"Hello, World!";
+}</code></pre>
+<h3 id="remove_mut"><a class="header" href="#remove_mut"><code>remove_mut</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/remove_mut.rs#L5">remove_mut.rs</a></p>
+<p>Removes the <code>mut</code> keyword.</p>
+<h4 id="before-131"><a class="header" href="#before-131">Before</a></h4>
+<pre><code class="language-rust">impl Walrus {
+    fn feed(&amp;mut┃ self, amount: u32) {}
+}</code></pre>
+<h4 id="after-131"><a class="header" href="#after-131">After</a></h4>
+<pre><code class="language-rust">impl Walrus {
+    fn feed(&amp;self, amount: u32) {}
+}</code></pre>
+<h3 id="remove_parentheses"><a class="header" href="#remove_parentheses"><code>remove_parentheses</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/remove_parentheses.rs#L9">remove_parentheses.rs</a></p>
+<p>Removes redundant parentheses.</p>
+<h4 id="before-132"><a class="header" href="#before-132">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    _ = ┃(2) + 2;
+}</code></pre>
+<h4 id="after-132"><a class="header" href="#after-132">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    _ = 2 + 2;
+}</code></pre>
+<h3 id="remove_underscore_from_used_variables"><a class="header" href="#remove_underscore_from_used_variables"><code>remove_underscore_from_used_variables</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/remove_underscore.rs#L10">remove_underscore.rs</a></p>
+<p>Removes underscore from used variables.</p>
+<h4 id="before-133"><a class="header" href="#before-133">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let mut _┃foo = 1;
+    _foo = 2;
+}</code></pre>
+<h4 id="after-133"><a class="header" href="#after-133">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let mut foo = 1;
+    foo = 2;
+}</code></pre>
+<h3 id="remove_unused_imports"><a class="header" href="#remove_unused_imports"><code>remove_unused_imports</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/remove_unused_imports.rs#L20">remove_unused_imports.rs</a></p>
+<p>Removes any use statements in the current selection that are unused.</p>
+<h4 id="before-134"><a class="header" href="#before-134">Before</a></h4>
+<pre><code class="language-rust">struct X();
+mod foo {
+    use super::X┃;
+}</code></pre>
+<h4 id="after-134"><a class="header" href="#after-134">After</a></h4>
+<pre><code class="language-rust">struct X();
+mod foo {
+}</code></pre>
+<h3 id="remove_unused_param"><a class="header" href="#remove_unused_param"><code>remove_unused_param</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/remove_unused_param.rs#L15">remove_unused_param.rs</a></p>
+<p>Removes unused function parameter.</p>
+<h4 id="before-135"><a class="header" href="#before-135">Before</a></h4>
+<pre><code class="language-rust">fn frobnicate(x: i32┃) {}
+
+fn main() {
+    frobnicate(92);
+}</code></pre>
+<h4 id="after-135"><a class="header" href="#after-135">After</a></h4>
+<pre><code class="language-rust">fn frobnicate() {}
+
+fn main() {
+    frobnicate();
+}</code></pre>
+<h3 id="reorder_fields"><a class="header" href="#reorder_fields"><code>reorder_fields</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/reorder_fields.rs#L8">reorder_fields.rs</a></p>
+<p>Reorder the fields of record literals and record patterns in the same order as in
+the definition.</p>
+<h4 id="before-136"><a class="header" href="#before-136">Before</a></h4>
+<pre><code class="language-rust">struct Foo {foo: i32, bar: i32};
+const test: Foo = ┃Foo {bar: 0, foo: 1}</code></pre>
+<h4 id="after-136"><a class="header" href="#after-136">After</a></h4>
+<pre><code class="language-rust">struct Foo {foo: i32, bar: i32};
+const test: Foo = Foo {foo: 1, bar: 0}</code></pre>
+<h3 id="reorder_impl_items"><a class="header" href="#reorder_impl_items"><code>reorder_impl_items</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/reorder_impl_items.rs#L11">reorder_impl_items.rs</a></p>
+<p>Reorder the items of an <code>impl Trait</code>. The items will be ordered
+in the same order as in the trait definition.</p>
+<h4 id="before-137"><a class="header" href="#before-137">Before</a></h4>
+<pre><code class="language-rust">trait Foo {
+    type A;
+    const B: u8;
+    fn c();
+}
+
+struct Bar;
+┃impl Foo for Bar┃ {
+    const B: u8 = 17;
+    fn c() {}
+    type A = String;
+}</code></pre>
+<h4 id="after-137"><a class="header" href="#after-137">After</a></h4>
+<pre><code class="language-rust">trait Foo {
+    type A;
+    const B: u8;
+    fn c();
+}
+
+struct Bar;
+impl Foo for Bar {
+    type A = String;
+    const B: u8 = 17;
+    fn c() {}
+}</code></pre>
+<h3 id="replace_arith_with_checked"><a class="header" href="#replace_arith_with_checked"><code>replace_arith_with_checked</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_arith_op.rs#L9">replace_arith_op.rs</a></p>
+<p>Replaces arithmetic on integers with the <code>checked_*</code> equivalent.</p>
+<h4 id="before-138"><a class="header" href="#before-138">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+  let x = 1 ┃+ 2;
+}</code></pre>
+<h4 id="after-138"><a class="header" href="#after-138">After</a></h4>
+<pre><code class="language-rust">fn main() {
+  let x = 1.checked_add(2);
+}</code></pre>
+<h3 id="replace_arith_with_saturating"><a class="header" href="#replace_arith_with_saturating"><code>replace_arith_with_saturating</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_arith_op.rs#L28">replace_arith_op.rs</a></p>
+<p>Replaces arithmetic on integers with the <code>saturating_*</code> equivalent.</p>
+<h4 id="before-139"><a class="header" href="#before-139">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+  let x = 1 ┃+ 2;
+}</code></pre>
+<h4 id="after-139"><a class="header" href="#after-139">After</a></h4>
+<pre><code class="language-rust">fn main() {
+  let x = 1.saturating_add(2);
+}</code></pre>
+<h3 id="replace_arith_with_wrapping"><a class="header" href="#replace_arith_with_wrapping"><code>replace_arith_with_wrapping</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_arith_op.rs#L50">replace_arith_op.rs</a></p>
+<p>Replaces arithmetic on integers with the <code>wrapping_*</code> equivalent.</p>
+<h4 id="before-140"><a class="header" href="#before-140">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+  let x = 1 ┃+ 2;
+}</code></pre>
+<h4 id="after-140"><a class="header" href="#after-140">After</a></h4>
+<pre><code class="language-rust">fn main() {
+  let x = 1.wrapping_add(2);
+}</code></pre>
+<h3 id="replace_char_with_string"><a class="header" href="#replace_char_with_string"><code>replace_char_with_string</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_string_with_char.rs#L52">replace_string_with_char.rs</a></p>
+<p>Replace a char literal with a string literal.</p>
+<h4 id="before-141"><a class="header" href="#before-141">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    find('{┃');
+}</code></pre>
+<h4 id="after-141"><a class="header" href="#after-141">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    find("{");
+}</code></pre>
+<h3 id="replace_derive_with_manual_impl"><a class="header" href="#replace_derive_with_manual_impl"><code>replace_derive_with_manual_impl</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_derive_with_manual_impl.rs#L20">replace_derive_with_manual_impl.rs</a></p>
+<p>Converts a <code>derive</code> impl into a manual one.</p>
+<h4 id="before-142"><a class="header" href="#before-142">Before</a></h4>
+<pre><code class="language-rust">#[derive(Deb┃ug, Display)]
+struct S;</code></pre>
+<h4 id="after-142"><a class="header" href="#after-142">After</a></h4>
+<pre><code class="language-rust">#[derive(Display)]
+struct S;
+
+impl Debug for S {
+    ┃fn fmt(&amp;self, f: &amp;mut Formatter) -&gt; Result&lt;()&gt; {
+        f.debug_struct("S").finish()
+    }
+}</code></pre>
+<h3 id="replace_if_let_with_match"><a class="header" href="#replace_if_let_with_match"><code>replace_if_let_with_match</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_if_let_with_match.rs#L19">replace_if_let_with_match.rs</a></p>
+<p>Replaces a <code>if let</code> expression with a <code>match</code> expression.</p>
+<h4 id="before-143"><a class="header" href="#before-143">Before</a></h4>
+<pre><code class="language-rust">enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    ┃if let Action::Move { distance } = action {
+        foo(distance)
+    } else {
+        bar()
+    }
+}</code></pre>
+<h4 id="after-143"><a class="header" href="#after-143">After</a></h4>
+<pre><code class="language-rust">enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    match action {
+        Action::Move { distance } =&gt; foo(distance),
+        _ =&gt; bar(),
+    }
+}</code></pre>
+<h3 id="replace_is_some_with_if_let_some"><a class="header" href="#replace_is_some_with_if_let_some"><code>replace_is_some_with_if_let_some</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_is_method_with_if_let_method.rs#L7">replace_is_method_with_if_let_method.rs</a></p>
+<p>Replace <code>if x.is_some()</code> with <code>if let Some(_tmp) = x</code> or <code>if x.is_ok()</code> with <code>if let Ok(_tmp) = x</code>.</p>
+<h4 id="before-144"><a class="header" href="#before-144">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    let x = Some(1);
+    if x.is_som┃e() {}
+}</code></pre>
+<h4 id="after-144"><a class="header" href="#after-144">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let x = Some(1);
+    if let Some(${0:x1}) = x {}
+}</code></pre>
+<h3 id="replace_let_with_if_let"><a class="header" href="#replace_let_with_if_let"><code>replace_let_with_if_let</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_let_with_if_let.rs#L13">replace_let_with_if_let.rs</a></p>
+<p>Replaces <code>let</code> with an <code>if let</code>.</p>
+<h4 id="before-145"><a class="header" href="#before-145">Before</a></h4>
+<pre><code class="language-rust">
+fn main(action: Action) {
+    ┃let x = compute();
+}
+
+fn compute() -&gt; Option&lt;i32&gt; { None }</code></pre>
+<h4 id="after-145"><a class="header" href="#after-145">After</a></h4>
+<pre><code class="language-rust">
+fn main(action: Action) {
+    if let Some(x) = compute() {
+    }
+}
+
+fn compute() -&gt; Option&lt;i32&gt; { None }</code></pre>
+<h3 id="replace_match_with_if_let"><a class="header" href="#replace_match_with_if_let"><code>replace_match_with_if_let</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_if_let_with_match.rs#L193">replace_if_let_with_match.rs</a></p>
+<p>Replaces a binary <code>match</code> with a wildcard pattern with an <code>if let</code> expression.</p>
+<h4 id="before-146"><a class="header" href="#before-146">Before</a></h4>
+<pre><code class="language-rust">enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    ┃match action {
+        Action::Move { distance } =&gt; foo(distance),
+        _ =&gt; bar(),
+    }
+}</code></pre>
+<h4 id="after-146"><a class="header" href="#after-146">After</a></h4>
+<pre><code class="language-rust">enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    if let Action::Move { distance } = action {
+        foo(distance)
+    } else {
+        bar()
+    }
+}</code></pre>
+<h3 id="replace_named_generic_with_impl"><a class="header" href="#replace_named_generic_with_impl"><code>replace_named_generic_with_impl</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_named_generic_with_impl.rs#L16">replace_named_generic_with_impl.rs</a></p>
+<p>Replaces named generic with an <code>impl Trait</code> in function argument.</p>
+<h4 id="before-147"><a class="header" href="#before-147">Before</a></h4>
+<pre><code class="language-rust">fn new&lt;P┃: AsRef&lt;Path&gt;&gt;(location: P) -&gt; Self {}</code></pre>
+<h4 id="after-147"><a class="header" href="#after-147">After</a></h4>
+<pre><code class="language-rust">fn new(location: impl AsRef&lt;Path&gt;) -&gt; Self {}</code></pre>
+<h3 id="replace_qualified_name_with_use"><a class="header" href="#replace_qualified_name_with_use"><code>replace_qualified_name_with_use</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_qualified_name_with_use.rs#L15">replace_qualified_name_with_use.rs</a></p>
+<p>Adds a use statement for a given fully-qualified name.</p>
+<h4 id="before-148"><a class="header" href="#before-148">Before</a></h4>
+<pre><code class="language-rust">fn process(map: std::collections::┃HashMap&lt;String, String&gt;) {}</code></pre>
+<h4 id="after-148"><a class="header" href="#after-148">After</a></h4>
+<pre><code class="language-rust">use std::collections::HashMap;
+
+fn process(map: HashMap&lt;String, String&gt;) {}</code></pre>
+<h3 id="replace_string_with_char"><a class="header" href="#replace_string_with_char"><code>replace_string_with_char</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_string_with_char.rs#L10">replace_string_with_char.rs</a></p>
+<p>Replace string literal with char literal.</p>
+<h4 id="before-149"><a class="header" href="#before-149">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    find("{┃");
+}</code></pre>
+<h4 id="after-149"><a class="header" href="#after-149">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    find('{');
+}</code></pre>
+<h3 id="replace_turbofish_with_explicit_type"><a class="header" href="#replace_turbofish_with_explicit_type"><code>replace_turbofish_with_explicit_type</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_turbofish_with_explicit_type.rs#L12">replace_turbofish_with_explicit_type.rs</a></p>
+<p>Converts <code>::&lt;_&gt;</code> to an explicit type assignment.</p>
+<h4 id="before-150"><a class="header" href="#before-150">Before</a></h4>
+<pre><code class="language-rust">fn make&lt;T&gt;() -&gt; T { ) }
+fn main() {
+    let a = make┃::&lt;i32&gt;();
+}</code></pre>
+<h4 id="after-150"><a class="header" href="#after-150">After</a></h4>
+<pre><code class="language-rust">fn make&lt;T&gt;() -&gt; T { ) }
+fn main() {
+    let a: i32 = make();
+}</code></pre>
+<h3 id="replace_with_eager_method"><a class="header" href="#replace_with_eager_method"><code>replace_with_eager_method</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_method_eager_lazy.rs#L98">replace_method_eager_lazy.rs</a></p>
+<p>Replace <code>unwrap_or_else</code> with <code>unwrap_or</code> and <code>ok_or_else</code> with <code>ok_or</code>.</p>
+<h4 id="before-151"><a class="header" href="#before-151">Before</a></h4>
+<pre><code class="language-rust">fn foo() {
+    let a = Some(1);
+    a.unwra┃p_or_else(|| 2);
+}</code></pre>
+<h4 id="after-151"><a class="header" href="#after-151">After</a></h4>
+<pre><code class="language-rust">fn foo() {
+    let a = Some(1);
+    a.unwrap_or(2);
+}</code></pre>
+<h3 id="replace_with_lazy_method"><a class="header" href="#replace_with_lazy_method"><code>replace_with_lazy_method</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/replace_method_eager_lazy.rs#L10">replace_method_eager_lazy.rs</a></p>
+<p>Replace <code>unwrap_or</code> with <code>unwrap_or_else</code> and <code>ok_or</code> with <code>ok_or_else</code>.</p>
+<h4 id="before-152"><a class="header" href="#before-152">Before</a></h4>
+<pre><code class="language-rust">fn foo() {
+    let a = Some(1);
+    a.unwra┃p_or(2);
+}</code></pre>
+<h4 id="after-152"><a class="header" href="#after-152">After</a></h4>
+<pre><code class="language-rust">fn foo() {
+    let a = Some(1);
+    a.unwrap_or_else(|| 2);
+}</code></pre>
+<h3 id="sort_items"><a class="header" href="#sort_items"><code>sort_items</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/sort_items.rs#L12">sort_items.rs</a></p>
+<p>Sorts item members alphabetically: fields, enum variants and methods.</p>
+<h4 id="before-153"><a class="header" href="#before-153">Before</a></h4>
+<pre><code class="language-rust">struct ┃Foo┃ { second: u32, first: String }</code></pre>
+<h4 id="after-153"><a class="header" href="#after-153">After</a></h4>
+<pre><code class="language-rust">struct Foo { first: String, second: u32 }</code></pre>
+<hr>
+<h4 id="before-154"><a class="header" href="#before-154">Before</a></h4>
+<pre><code class="language-rust">trait ┃Bar┃ {
+    fn second(&amp;self) -&gt; u32;
+    fn first(&amp;self) -&gt; String;
+}</code></pre>
+<h4 id="after-154"><a class="header" href="#after-154">After</a></h4>
+<pre><code class="language-rust">trait Bar {
+    fn first(&amp;self) -&gt; String;
+    fn second(&amp;self) -&gt; u32;
+}</code></pre>
+<hr>
+<h4 id="before-155"><a class="header" href="#before-155">Before</a></h4>
+<pre><code class="language-rust">struct Baz;
+impl ┃Baz┃ {
+    fn second(&amp;self) -&gt; u32;
+    fn first(&amp;self) -&gt; String;
+}</code></pre>
+<h4 id="after-155"><a class="header" href="#after-155">After</a></h4>
+<pre><code class="language-rust">struct Baz;
+impl Baz {
+    fn first(&amp;self) -&gt; String;
+    fn second(&amp;self) -&gt; u32;
+}</code></pre>
+<hr>
+<p>There is a difference between sorting enum variants:</p>
+<h4 id="before-156"><a class="header" href="#before-156">Before</a></h4>
+<pre><code class="language-rust">enum ┃Animal┃ {
+  Dog(String, f64),
+  Cat { weight: f64, name: String },
+}</code></pre>
+<h4 id="after-156"><a class="header" href="#after-156">After</a></h4>
+<pre><code class="language-rust">enum Animal {
+  Cat { weight: f64, name: String },
+  Dog(String, f64),
+}</code></pre>
+<p>and sorting a single enum struct variant:</p>
+<h4 id="before-157"><a class="header" href="#before-157">Before</a></h4>
+<pre><code class="language-rust">enum Animal {
+  Dog(String, f64),
+  Cat ┃{ weight: f64, name: String }┃,
+}</code></pre>
+<h4 id="after-157"><a class="header" href="#after-157">After</a></h4>
+<pre><code class="language-rust">enum Animal {
+  Dog(String, f64),
+  Cat { name: String, weight: f64 },
+}</code></pre>
+<h3 id="split_import"><a class="header" href="#split_import"><code>split_import</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/split_import.rs#L5">split_import.rs</a></p>
+<p>Wraps the tail of import into braces.</p>
+<h4 id="before-158"><a class="header" href="#before-158">Before</a></h4>
+<pre><code class="language-rust">use std::┃collections::HashMap;</code></pre>
+<h4 id="after-158"><a class="header" href="#after-158">After</a></h4>
+<pre><code class="language-rust">use std::{collections::HashMap};</code></pre>
+<h3 id="sugar_impl_future_into_async"><a class="header" href="#sugar_impl_future_into_async"><code>sugar_impl_future_into_async</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/toggle_async_sugar.rs#L10">toggle_async_sugar.rs</a></p>
+<p>Rewrites asynchronous function from <code>-&gt; impl Future</code> into <code>async fn</code>.
+This action does not touch the function body and therefore <code>async { 0 }</code>
+block does not transform to just <code>0</code>.</p>
+<h4 id="before-159"><a class="header" href="#before-159">Before</a></h4>
+<pre><code class="language-rust">pub fn foo() -&gt; impl core::future::F┃uture&lt;Output = usize&gt; {
+    async { 0 }
+}</code></pre>
+<h4 id="after-159"><a class="header" href="#after-159">After</a></h4>
+<pre><code class="language-rust">pub async fn foo() -&gt; usize {
+    async { 0 }
+}</code></pre>
+<h3 id="toggle_ignore"><a class="header" href="#toggle_ignore"><code>toggle_ignore</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/toggle_ignore.rs#L8">toggle_ignore.rs</a></p>
+<p>Adds <code>#[ignore]</code> attribute to the test.</p>
+<h4 id="before-160"><a class="header" href="#before-160">Before</a></h4>
+<pre><code class="language-rust">┃#[test]
+fn arithmetics {
+    assert_eq!(2 + 2, 5);
+}</code></pre>
+<h4 id="after-160"><a class="header" href="#after-160">After</a></h4>
+<pre><code class="language-rust">#[test]
+#[ignore]
+fn arithmetics {
+    assert_eq!(2 + 2, 5);
+}</code></pre>
+<h3 id="toggle_macro_delimiter"><a class="header" href="#toggle_macro_delimiter"><code>toggle_macro_delimiter</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/toggle_macro_delimiter.rs#L10">toggle_macro_delimiter.rs</a></p>
+<p>Change macro delimiters in the order of <code>( -&gt; { -&gt; [ -&gt; (</code>.</p>
+<h4 id="before-161"><a class="header" href="#before-161">Before</a></h4>
+<pre><code class="language-rust">macro_rules! sth {
+    () =&gt; {};
+}
+
+sth!┃( );</code></pre>
+<h4 id="after-161"><a class="header" href="#after-161">After</a></h4>
+<pre><code class="language-rust">macro_rules! sth {
+    () =&gt; {};
+}
+
+sth!{ }</code></pre>
+<h3 id="unmerge_imports"><a class="header" href="#unmerge_imports"><code>unmerge_imports</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unmerge_imports.rs#L12">unmerge_imports.rs</a></p>
+<p>Extracts a use item from a use list into a standalone use list.</p>
+<h4 id="before-162"><a class="header" href="#before-162">Before</a></h4>
+<pre><code class="language-rust">use std::fmt::{Debug, Display┃};</code></pre>
+<h4 id="after-162"><a class="header" href="#after-162">After</a></h4>
+<pre><code class="language-rust">use std::fmt::{Debug};
+use std::fmt::Display;</code></pre>
+<h3 id="unmerge_match_arm"><a class="header" href="#unmerge_match_arm"><code>unmerge_match_arm</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unmerge_match_arm.rs#L9">unmerge_match_arm.rs</a></p>
+<p>Splits the current match with a <code>|</code> pattern into two arms with identical bodies.</p>
+<h4 id="before-163"><a class="header" href="#before-163">Before</a></h4>
+<pre><code class="language-rust">enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    match action {
+        Action::Move(..) ┃| Action::Stop =&gt; foo(),
+    }
+}</code></pre>
+<h4 id="after-163"><a class="header" href="#after-163">After</a></h4>
+<pre><code class="language-rust">enum Action { Move { distance: u32 }, Stop }
+
+fn handle(action: Action) {
+    match action {
+        Action::Move(..) =&gt; foo(),
+        Action::Stop =&gt; foo(),
+    }
+}</code></pre>
+<h3 id="unnecessary_async"><a class="header" href="#unnecessary_async"><code>unnecessary_async</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unnecessary_async.rs#L17">unnecessary_async.rs</a></p>
+<p>Removes the <code>async</code> mark from functions which have no <code>.await</code> in their body.
+Looks for calls to the functions and removes the <code>.await</code> on the call site.</p>
+<h4 id="before-164"><a class="header" href="#before-164">Before</a></h4>
+<pre><code class="language-rust">pub asy┃nc fn foo() {}
+pub async fn bar() { foo().await }</code></pre>
+<h4 id="after-164"><a class="header" href="#after-164">After</a></h4>
+<pre><code class="language-rust">pub fn foo() {}
+pub async fn bar() { foo() }</code></pre>
+<h3 id="unqualify_method_call"><a class="header" href="#unqualify_method_call"><code>unqualify_method_call</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unqualify_method_call.rs#L9">unqualify_method_call.rs</a></p>
+<p>Transforms universal function call syntax into a method call.</p>
+<h4 id="before-165"><a class="header" href="#before-165">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    std::ops::Add::add┃(1, 2);
+}</code></pre>
+<h4 id="after-165"><a class="header" href="#after-165">After</a></h4>
+<pre><code class="language-rust">use std::ops::Add;
+
+fn main() {
+    1.add(2);
+}</code></pre>
+<h3 id="unwrap_block"><a class="header" href="#unwrap_block"><code>unwrap_block</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unwrap_block.rs#L14">unwrap_block.rs</a></p>
+<p>This assist removes if…else, for, while and loop control statements to just keep the body.</p>
+<h4 id="before-166"><a class="header" href="#before-166">Before</a></h4>
+<pre><code class="language-rust">fn foo() {
+    if true {┃
+        println!("foo");
+    }
+}</code></pre>
+<h4 id="after-166"><a class="header" href="#after-166">After</a></h4>
+<pre><code class="language-rust">fn foo() {
+    println!("foo");
+}</code></pre>
+<h3 id="unwrap_option_return_type"><a class="header" href="#unwrap_option_return_type"><code>unwrap_option_return_type</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unwrap_return_type.rs#L14">unwrap_return_type.rs</a></p>
+<p>Unwrap the function’s return type.</p>
+<h4 id="before-167"><a class="header" href="#before-167">Before</a></h4>
+<pre><code class="language-rust">fn foo() -&gt; Option&lt;i32&gt;┃ { Some(42i32) }</code></pre>
+<h4 id="after-167"><a class="header" href="#after-167">After</a></h4>
+<pre><code class="language-rust">fn foo() -&gt; i32 { 42i32 }</code></pre>
+<h3 id="unwrap_result_return_type"><a class="header" href="#unwrap_result_return_type"><code>unwrap_result_return_type</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unwrap_return_type.rs#L27">unwrap_return_type.rs</a></p>
+<p>Unwrap the function’s return type.</p>
+<h4 id="before-168"><a class="header" href="#before-168">Before</a></h4>
+<pre><code class="language-rust">fn foo() -&gt; Result&lt;i32&gt;┃ { Ok(42i32) }</code></pre>
+<h4 id="after-168"><a class="header" href="#after-168">After</a></h4>
+<pre><code class="language-rust">fn foo() -&gt; i32 { 42i32 }</code></pre>
+<h3 id="unwrap_tuple"><a class="header" href="#unwrap_tuple"><code>unwrap_tuple</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unwrap_tuple.rs#L8">unwrap_tuple.rs</a></p>
+<p>Unwrap the tuple to different variables.</p>
+<h4 id="before-169"><a class="header" href="#before-169">Before</a></h4>
+<pre><code class="language-rust">fn main() {
+    ┃let (foo, bar) = ("Foo", "Bar");
+}</code></pre>
+<h4 id="after-169"><a class="header" href="#after-169">After</a></h4>
+<pre><code class="language-rust">fn main() {
+    let foo = "Foo";
+    let bar = "Bar";
+}</code></pre>
+<h3 id="unwrap_type_to_generic_arg"><a class="header" href="#unwrap_type_to_generic_arg"><code>unwrap_type_to_generic_arg</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/unwrap_type_to_generic_arg.rs#L9">unwrap_type_to_generic_arg.rs</a></p>
+<p>This assist unwraps a type into its generic type argument.</p>
+<h4 id="before-170"><a class="header" href="#before-170">Before</a></h4>
+<pre><code class="language-rust">fn foo() -&gt; ┃Option&lt;i32&gt; {
+    todo!()
+}</code></pre>
+<h4 id="after-170"><a class="header" href="#after-170">After</a></h4>
+<pre><code class="language-rust">fn foo() -&gt; i32 {
+    todo!()
+}</code></pre>
+<h3 id="wrap_return_type_in_option"><a class="header" href="#wrap_return_type_in_option"><code>wrap_return_type_in_option</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/wrap_return_type.rs#L17">wrap_return_type.rs</a></p>
+<p>Wrap the function’s return type into Option.</p>
+<h4 id="before-171"><a class="header" href="#before-171">Before</a></h4>
+<pre><code class="language-rust">fn foo() -&gt; i32┃ { 42i32 }</code></pre>
+<h4 id="after-171"><a class="header" href="#after-171">After</a></h4>
+<pre><code class="language-rust">fn foo() -&gt; Option&lt;i32&gt; { Some(42i32) }</code></pre>
+<h3 id="wrap_return_type_in_result"><a class="header" href="#wrap_return_type_in_result"><code>wrap_return_type_in_result</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/wrap_return_type.rs#L30">wrap_return_type.rs</a></p>
+<p>Wrap the function’s return type into Result.</p>
+<h4 id="before-172"><a class="header" href="#before-172">Before</a></h4>
+<pre><code class="language-rust">fn foo() -&gt; i32┃ { 42i32 }</code></pre>
+<h4 id="after-172"><a class="header" href="#after-172">After</a></h4>
+<pre><code class="language-rust">fn foo() -&gt; Result&lt;i32, ${0:_}&gt; { Ok(42i32) }</code></pre>
+<h3 id="wrap_unwrap_cfg_attr"><a class="header" href="#wrap_unwrap_cfg_attr"><code>wrap_unwrap_cfg_attr</code></a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/wrap_unwrap_cfg_attr.rs#L10">wrap_unwrap_cfg_attr.rs</a></p>
+<p>Wraps an attribute to a cfg_attr attribute or unwraps a cfg_attr attribute to the inner attributes.</p>
+<h4 id="before-173"><a class="header" href="#before-173">Before</a></h4>
+<pre><code class="language-rust">#[derive┃(Debug)]
+struct S {
+   field: i32
+}</code></pre>
+<h4 id="after-173"><a class="header" href="#after-173">After</a></h4>
+<pre><code class="language-rust">#[cfg_attr(┃, derive(Debug))]
+struct S {
+   field: i32
+}</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="features.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="diagnostics.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="features.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="diagnostics.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+        <script>
+            window.playground_line_numbers = true;
+        </script>
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="ace-2a3cd908.js"></script>
+        <script src="mode-rust-2c9d5c9a.js"></script>
+        <script src="editor-16ca416c.js"></script>
+        <script src="theme-dawn-4493f9c8.js"></script>
+        <script src="theme-tomorrow_night-9dbe62a9.js"></script>
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

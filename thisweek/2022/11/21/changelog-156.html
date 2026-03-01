@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #156</title>
+  <meta name="description"
+    content="Commit: 2656297Release: 2022-11-21">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2022/11/21/changelog-156.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #156</h1>
+<div class="post-meta sect1">
+  Nov 21, 2022
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/26562973b3482a635416b2b663a13016d4d90e20"><code>2656297</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2022-11-21"><code>2022-11-21</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13290"><code>#13290</code></a> (first contribution) support multiple targets for <code>checkOnSave</code> (with cargo 1.64+):</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/7951708/192122707-7a00606a-e581-4534-b9d5-b81c92694e8e.png" alt="Screenshot showing an editor highlighting two warnings in code gated for different targets on one side and the `cargo check` output on the other side, with the same warnings. It also shows how to configure multiple targets as a `build.target` array in `.cargo/config.toml`.">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13633"><code>#13633</code></a> allow viewing the full compiler diagnostic in a readonly textview:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/202780459-f751f65d-2b1b-4dc3-9685-100d65ebf6a0.gif" alt="Screen cast showing  a compilation error in VS Code. The diagnostics pop-up has a `Click here for full compiler diagnostic` link which, when clicked, displays the `rustc` output in another tab, including the ASCII art showing the various spans of the error.">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13629"><code>#13629</code></a> make "Remove <code>dbg!()</code>" work on selections.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13642"><code>#13642</code></a> don&#8217;t emit associated consts with a value in "Implement missing members".</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13622"><code>#13622</code></a> include generic parameters in GAT completions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13623"><code>#13623</code></a> strip comments and attributes off all trait item completions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13624"><code>#13624</code></a> resolve inference variable before applying adjustments.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13639"><code>#13639</code></a> fix <code>proc-macro-srv</code> search paths for Arch Linux.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13641"><code>#13641</code></a> fix some format expression parsing edge-cases.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13615"><code>#13615</code></a> (first contribution) bump some crates to bring support for the new Tier 3 Windows targets.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13653"><code>#13653</code></a> (first contribution) fix typo in anchor.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13649"><code>#13649</code></a> (first contribution) improve grammar of <code>architecture.md</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13625"><code>#13625</code></a> update <code>proc-macro-srv</code> tests.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13632"><code>#13632</code></a> make it more obvious which SCIP features are not yet emitted.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

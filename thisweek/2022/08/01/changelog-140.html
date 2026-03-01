@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #140</title>
+  <meta name="description"
+    content="Commit: 2b472f6Release: 2022-08-01">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2022/08/01/changelog-140.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #140</h1>
+<div class="post-meta sect1">
+  Aug 1, 2022
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/2b472f6684bb1958274995d12b2c50310d88cc52"><code>2b472f6</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2022-08-01"><code>2022-08-01</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="an-update-on-proc-macros"><a class="anchor" href="#an-update-on-proc-macros"></a>An Update on Proc Macros</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Rust toolchains newer than <code>2022-07-29</code> contain a proc macro server that should be compatible with macros built by the matching compiler.
+Since today&#8217;s release, the server is automatically detected by and used <code>rust-analyzer</code>.
+This means that, from now on, proc macros will keep working when the <code>proc_macro</code> crate changes.</p>
+</div>
+<div class="paragraph">
+<p>For more details, you can read @fasterthanlime&#8217;s <a href="https://fasterthanli.me/articles/proc-macro-support-in-rust-analyzer-for-nightly-rustc-versions#what-s-next">blog post</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12864"><code>#12864</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/12881"><code>#12881</code></a> resolve derive helper attributes in IDE layer:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/180647125-98cae13b-a7b4-446b-8a64-fae014f982e2.png" alt="180647125 98cae13b a7b4 446b 8a64 fae014f982e2">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/180642110-699bdc73-e1f3-4692-94f2-21544f824ab9.png" alt="180642110 699bdc73 e1f3 4692 94f2 21544f824ab9">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12858"><code>#12858</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/12878"><code>#12878</code></a> add <code>rust-analyzer-proc-macro-srv</code> binary and use it if found in sysroot.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12856"><code>#12856</code></a> spawn a <code>proc-macro-srv</code> instance per Cargo workspace.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12877"><code>#12877</code></a> (first contribution) insert whitespace when inlining a function defined in a macro.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12886"><code>#12886</code></a> cache the resulting file in <code>Semantics::original_ast_node</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12887"><code>#12887</code></a> don&#8217;t duplicate existing <code>&amp;mut</code> in completions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12895"><code>#12895</code></a> compte completions after type anchors.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12830"><code>#12830</code></a> insert references in the correct position in macros.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12898"><code>#12898</code></a> don&#8217;t add unnecessary brackets in pattern completions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12899"><code>#12899</code></a> offer completions in path qualifier position.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12901"><code>#12901</code></a> don&#8217;t complete marker traits in expression position.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12906"><code>#12906</code></a> complete paths of existing record expressions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12913"><code>#12913</code></a> fix highlight injection with doc comments.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12891"><code>#12891</code></a> increase stack size on macro expander thread.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12890"><code>#12890</code></a> assume condition/iterable is missing if there is only a <code>BlockExpr</code> in <code>for</code> and <code>while</code> loops.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12902"><code>#12902</code></a> sort <code>ItemScope::entries</code> results.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12900"><code>#12900</code></a> use <code>cargo ws rename</code> to rename crates for publishing.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12903"><code>#12903</code></a> only run rainbow highlighting test on 64-bit Unix.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12904"><code>#12904</code></a> be more explicit when filtering built-in completions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12915"><code>#12915</code></a> update <code>xtask promote</code> and release instructions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12871"><code>#12871</code></a> sync from <code>rust-lang/rust</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #129.5</title>
+  <meta name="description"
+    content="Commit: 7e95c14Release: 2022-05-17">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2022/05/17/changelog-129-5.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #129.5</h1>
+<div class="post-meta sect1">
+  May 17, 2022
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/7e95c14ea730c6b06f5760c8c92e69b9a6def828"><code>7e95c14</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2022-05-17"><code>2022-05-17</code></a></p>
+</div>
+<div class="paragraph">
+<p>Bonus Release 🎉</p>
+</div>
+<div class="paragraph">
+<p>This release increments the VS Code extension version to fix installation problems on the stable channel.</p>
+</div>
+<div class="paragraph">
+<p>The VS Code extension version of this release is <code>v0.3.1059</code>.
+It corresponds to the nightly release <code>v0.4.1058</code>.</p>
+</div>
+<div class="paragraph">
+<p>If you get a "Server returned 404" error when upgrading, try uninstalling and reinstalling the extension.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12253"><code>#12253</code></a> Add binding mode inlay hints</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/168427387-2f299438-a0cc-496b-a9a5-d689ef6a2b55.png" alt="168427387 2f299438 a0cc 496b a9a5 d689ef6a2b55">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12244"><code>#12244</code></a> Show inlay hints after a <code>}</code> to indicate the closed item</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1786438/168338713-4cedef50-3611-4667-aa6a-49e154ec16a7.png" alt="168338713 4cedef50 3611 4667 aa6a 49e154ec16a7">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12274"><code>#12274</code></a> <a href="https://github.com/rust-analyzer/rust-analyzer/pull/12275"><code>#12275</code></a> Handle getters and setters in documentation template assist</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12276"><code>#12276</code></a> Improve Generate <code>Deref</code> impl assist</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12285"><code>#12285</code></a> Implement inlay hint tooltips</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1786438/168842815-0c814163-25ab-4a63-aae6-bd63e3562857.gif" alt="168842815 0c814163 25ab 4a63 aae6 bd63e3562857">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12272"><code>#12272</code></a> Fix signature help LSP offset conversion</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12289"><code>#12289</code></a> Fix incorrect config key in client config update</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12271"><code>#12271</code></a> Fix type mismatch error with <code>Box</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12284"><code>#12284</code></a> Cleanup lifetime elision hints</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12292"><code>#12292</code></a> Bump extension version</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

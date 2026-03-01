@@ -1,0 +1,1231 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Configuration - rust-analyzer</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-05b71aa6.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-6c762e67.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">rust-analyzer</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/tree/master/docs/book" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/edit/master/docs/book/src/configuration.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="configuration"><a class="header" href="#configuration">Configuration</a></h1>
+<p><strong>Source:</strong>
+<a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/rust-analyzer/src/config.rs">config.rs</a></p>
+<p>The <a href="./installation.html">Installation</a> section contains details on
+configuration for some of the editors. In general <code>rust-analyzer</code> is
+configured via LSP messages, which means that it’s up to the editor to
+decide on the exact format and location of configuration files.</p>
+<p>Some clients, such as <a href="./vs_code.html">VS Code</a> or <a href="./other_editors.html#coc-rust-analyzer">COC plugin in
+Vim</a> provide <code>rust-analyzer</code> specific configuration
+UIs. Others may require you to know a bit more about the interaction
+with <code>rust-analyzer</code>.</p>
+<p>For the latter category, it might help to know that the initial
+configuration is specified as a value of the <code>initializationOptions</code>
+field of the <a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#initialize"><code>InitializeParams</code> message, in the LSP
+protocol</a>.
+The spec says that the field type is <code>any?</code>, but <code>rust-analyzer</code> is
+looking for a JSON object that is constructed using settings from the
+list below. Name of the setting, ignoring the <code>rust-analyzer.</code> prefix,
+is used as a path, and value of the setting becomes the JSON property
+value.</p>
+<p>For example, a very common configuration is to enable proc-macro
+support, can be achieved by sending this JSON:</p>
+<pre><code class="language-json">{
+  "cargo": {
+    "buildScripts": {
+      "enable": true,
+    },
+  },
+  "procMacro": {
+    "enable": true,
+  }
+}
+</code></pre>
+<p>Please consult your editor’s documentation to learn more about how to
+configure <a href="https://microsoft.github.io/language-server-protocol/">LSP
+servers</a>.</p>
+<p>To verify which configuration is actually used by <code>rust-analyzer</code>, set
+<code>RA_LOG</code> environment variable to <code>rust_analyzer=info</code> and look for
+config-related messages. Logs should show both the JSON that
+<code>rust-analyzer</code> sees as well as the updated config.</p>
+<p>(Work in progress:) It is also possible to place configuration in a
+<code>rust-analyzer.toml</code> file. It should be located in the project root or in your
+user configuration directory (e.g. <code>~/.config/rust-analyzer/</code>). This is a work in
+progress, many configuration options aren’t supported yet.</p>
+<p>This is the list of config options <code>rust-analyzer</code> supports:</p>
+<h2 id="assist.emitMustUse"><a class="header" href="#assist.emitMustUse">rust-analyzer.assist.emitMustUse</a></h2>
+<p>Default: <code>false</code></p>
+<p>Insert #[must_use] when generating <code>as_</code> methods for enum variants.</p>
+<h2 id="assist.expressionFillDefault"><a class="header" href="#assist.expressionFillDefault">rust-analyzer.assist.expressionFillDefault</a></h2>
+<p>Default: <code>"todo"</code></p>
+<p>Placeholder expression to use for missing expressions in assists.</p>
+<h2 id="assist.preferSelf"><a class="header" href="#assist.preferSelf">rust-analyzer.assist.preferSelf</a></h2>
+<p>Default: <code>false</code></p>
+<p>Prefer to use <code>Self</code> over the type name when inserting a type (e.g. in “fill match arms” assist).</p>
+<h2 id="assist.termSearch.borrowcheck"><a class="header" href="#assist.termSearch.borrowcheck">rust-analyzer.assist.termSearch.borrowcheck</a></h2>
+<p>Default: <code>true</code></p>
+<p>Enable borrow checking for term search code assists. If set to false, also there will be
+more suggestions, but some of them may not borrow-check.</p>
+<h2 id="assist.termSearch.fuel"><a class="header" href="#assist.termSearch.fuel">rust-analyzer.assist.termSearch.fuel</a></h2>
+<p>Default: <code>1800</code></p>
+<p>Term search fuel in “units of work” for assists (Defaults to 1800).</p>
+<h2 id="cachePriming.enable"><a class="header" href="#cachePriming.enable">rust-analyzer.cachePriming.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Warm up caches on project load.</p>
+<h2 id="cachePriming.numThreads"><a class="header" href="#cachePriming.numThreads">rust-analyzer.cachePriming.numThreads</a></h2>
+<p>Default: <code>"physical"</code></p>
+<p>How many worker threads to handle priming caches. The default <code>0</code> means to pick
+automatically.</p>
+<h2 id="cargo.allTargets"><a class="header" href="#cargo.allTargets">rust-analyzer.cargo.allTargets</a></h2>
+<p>Default: <code>true</code></p>
+<p>Pass <code>--all-targets</code> to cargo invocation.</p>
+<h2 id="cargo.autoreload"><a class="header" href="#cargo.autoreload">rust-analyzer.cargo.autoreload</a></h2>
+<p>Default: <code>true</code></p>
+<p>Automatically refresh project info via <code>cargo metadata</code> on
+<code>Cargo.toml</code> or <code>.cargo/config.toml</code> changes.</p>
+<h2 id="cargo.buildScripts.enable"><a class="header" href="#cargo.buildScripts.enable">rust-analyzer.cargo.buildScripts.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Run build scripts (<code>build.rs</code>) for more precise code analysis.</p>
+<h2 id="cargo.buildScripts.invocationStrategy"><a class="header" href="#cargo.buildScripts.invocationStrategy">rust-analyzer.cargo.buildScripts.invocationStrategy</a></h2>
+<p>Default: <code>"per_workspace"</code></p>
+<p>Specifies the invocation strategy to use when running the build scripts command.
+If <code>per_workspace</code> is set, the command will be executed for each Rust workspace with the
+workspace as the working directory.
+If <code>once</code> is set, the command will be executed once with the opened project as the
+working directory.
+This config only has an effect when <code>#rust-analyzer.cargo.buildScripts.overrideCommand#</code>
+is set.</p>
+<h2 id="cargo.buildScripts.overrideCommand"><a class="header" href="#cargo.buildScripts.overrideCommand">rust-analyzer.cargo.buildScripts.overrideCommand</a></h2>
+<p>Default: <code>null</code></p>
+<p>Override the command rust-analyzer uses to run build scripts and
+build procedural macros. The command is required to output json
+and should therefore include <code>--message-format=json</code> or a similar
+option.</p>
+<p>If there are multiple linked projects/workspaces, this command is invoked for
+each of them, with the working directory being the workspace root
+(i.e., the folder containing the <code>Cargo.toml</code>). This can be overwritten
+by changing <code>#rust-analyzer.cargo.buildScripts.invocationStrategy#</code>.</p>
+<p>By default, a cargo invocation will be constructed for the configured
+targets and features, with the following base command line:</p>
+<pre><code class="language-bash">cargo check --quiet --workspace --message-format=json --all-targets --keep-going
+</code></pre>
+<p>Note: The option must be specified as an array of command line arguments, with
+the first argument being the name of the command to run.</p>
+<h2 id="cargo.buildScripts.rebuildOnSave"><a class="header" href="#cargo.buildScripts.rebuildOnSave">rust-analyzer.cargo.buildScripts.rebuildOnSave</a></h2>
+<p>Default: <code>true</code></p>
+<p>Rerun proc-macros building/build-scripts running when proc-macro
+or build-script sources change and are saved.</p>
+<h2 id="cargo.buildScripts.useRustcWrapper"><a class="header" href="#cargo.buildScripts.useRustcWrapper">rust-analyzer.cargo.buildScripts.useRustcWrapper</a></h2>
+<p>Default: <code>true</code></p>
+<p>Use <code>RUSTC_WRAPPER=rust-analyzer</code> when running build scripts to
+avoid checking unnecessary things.</p>
+<h2 id="cargo.cfgs"><a class="header" href="#cargo.cfgs">rust-analyzer.cargo.cfgs</a></h2>
+<p>Default:</p>
+<pre><code class="language-json">[
+  "debug_assertions",
+  "miri"
+]
+</code></pre>
+<p>List of cfg options to enable with the given values.</p>
+<p>To enable a name without a value, use <code>"key"</code>.
+To enable a name with a value, use <code>"key=value"</code>.
+To disable, prefix the entry with a <code>!</code>.</p>
+<h2 id="cargo.extraArgs"><a class="header" href="#cargo.extraArgs">rust-analyzer.cargo.extraArgs</a></h2>
+<p>Default: <code>[]</code></p>
+<p>Extra arguments that are passed to every cargo invocation.</p>
+<h2 id="cargo.extraEnv"><a class="header" href="#cargo.extraEnv">rust-analyzer.cargo.extraEnv</a></h2>
+<p>Default: <code>{}</code></p>
+<p>Extra environment variables that will be set when running cargo, rustc
+or other commands within the workspace. Useful for setting RUSTFLAGS.</p>
+<h2 id="cargo.features"><a class="header" href="#cargo.features">rust-analyzer.cargo.features</a></h2>
+<p>Default: <code>[]</code></p>
+<p>List of features to activate.</p>
+<p>Set this to <code>"all"</code> to pass <code>--all-features</code> to cargo.</p>
+<h2 id="cargo.noDefaultFeatures"><a class="header" href="#cargo.noDefaultFeatures">rust-analyzer.cargo.noDefaultFeatures</a></h2>
+<p>Default: <code>false</code></p>
+<p>Whether to pass <code>--no-default-features</code> to cargo.</p>
+<h2 id="cargo.noDeps"><a class="header" href="#cargo.noDeps">rust-analyzer.cargo.noDeps</a></h2>
+<p>Default: <code>false</code></p>
+<p>Whether to skip fetching dependencies. If set to “true”, the analysis is performed
+entirely offline, and Cargo metadata for dependencies is not fetched.</p>
+<h2 id="cargo.sysroot"><a class="header" href="#cargo.sysroot">rust-analyzer.cargo.sysroot</a></h2>
+<p>Default: <code>"discover"</code></p>
+<p>Relative path to the sysroot, or “discover” to try to automatically find it via
+“rustc –print sysroot”.</p>
+<p>Unsetting this disables sysroot loading.</p>
+<p>This option does not take effect until rust-analyzer is restarted.</p>
+<h2 id="cargo.sysrootSrc"><a class="header" href="#cargo.sysrootSrc">rust-analyzer.cargo.sysrootSrc</a></h2>
+<p>Default: <code>null</code></p>
+<p>Relative path to the sysroot library sources. If left unset, this will default to
+<code>{cargo.sysroot}/lib/rustlib/src/rust/library</code>.</p>
+<p>This option does not take effect until rust-analyzer is restarted.</p>
+<h2 id="cargo.target"><a class="header" href="#cargo.target">rust-analyzer.cargo.target</a></h2>
+<p>Default: <code>null</code></p>
+<p>Compilation target override (target tuple).</p>
+<h2 id="cargo.targetDir"><a class="header" href="#cargo.targetDir">rust-analyzer.cargo.targetDir</a></h2>
+<p>Default: <code>null</code></p>
+<p>Optional path to a rust-analyzer specific target directory.
+This prevents rust-analyzer’s <code>cargo check</code> and initial build-script and proc-macro
+building from locking the <code>Cargo.lock</code> at the expense of duplicating build artifacts.</p>
+<p>Set to <code>true</code> to use a subdirectory of the existing target directory or
+set to a path relative to the workspace to use that path.</p>
+<h2 id="cfg.setTest"><a class="header" href="#cfg.setTest">rust-analyzer.cfg.setTest</a></h2>
+<p>Default: <code>true</code></p>
+<p>Set <code>cfg(test)</code> for local crates. Defaults to true.</p>
+<h2 id="checkOnSave"><a class="header" href="#checkOnSave">rust-analyzer.checkOnSave</a></h2>
+<p>Default: <code>true</code></p>
+<p>Run the check command for diagnostics on save.</p>
+<h2 id="check.allTargets"><a class="header" href="#check.allTargets">rust-analyzer.check.allTargets</a></h2>
+<p>Default: <code>null</code></p>
+<p>Check all targets and tests (<code>--all-targets</code>). Defaults to
+<code>#rust-analyzer.cargo.allTargets#</code>.</p>
+<h2 id="check.command"><a class="header" href="#check.command">rust-analyzer.check.command</a></h2>
+<p>Default: <code>"check"</code></p>
+<p>Cargo command to use for <code>cargo check</code>.</p>
+<h2 id="check.extraArgs"><a class="header" href="#check.extraArgs">rust-analyzer.check.extraArgs</a></h2>
+<p>Default: <code>[]</code></p>
+<p>Extra arguments for <code>cargo check</code>.</p>
+<h2 id="check.extraEnv"><a class="header" href="#check.extraEnv">rust-analyzer.check.extraEnv</a></h2>
+<p>Default: <code>{}</code></p>
+<p>Extra environment variables that will be set when running <code>cargo check</code>.
+Extends <code>#rust-analyzer.cargo.extraEnv#</code>.</p>
+<h2 id="check.features"><a class="header" href="#check.features">rust-analyzer.check.features</a></h2>
+<p>Default: <code>null</code></p>
+<p>List of features to activate. Defaults to
+<code>#rust-analyzer.cargo.features#</code>.</p>
+<p>Set to <code>"all"</code> to pass <code>--all-features</code> to Cargo.</p>
+<h2 id="check.ignore"><a class="header" href="#check.ignore">rust-analyzer.check.ignore</a></h2>
+<p>Default: <code>[]</code></p>
+<p>List of <code>cargo check</code> (or other command specified in <code>check.command</code>) diagnostics to ignore.</p>
+<p>For example for <code>cargo check</code>: <code>dead_code</code>, <code>unused_imports</code>, <code>unused_variables</code>,…</p>
+<h2 id="check.invocationStrategy"><a class="header" href="#check.invocationStrategy">rust-analyzer.check.invocationStrategy</a></h2>
+<p>Default: <code>"per_workspace"</code></p>
+<p>Specifies the invocation strategy to use when running the check command.
+If <code>per_workspace</code> is set, the command will be executed for each workspace.
+If <code>once</code> is set, the command will be executed once.
+This config only has an effect when <code>#rust-analyzer.check.overrideCommand#</code>
+is set.</p>
+<h2 id="check.noDefaultFeatures"><a class="header" href="#check.noDefaultFeatures">rust-analyzer.check.noDefaultFeatures</a></h2>
+<p>Default: <code>null</code></p>
+<p>Whether to pass <code>--no-default-features</code> to Cargo. Defaults to
+<code>#rust-analyzer.cargo.noDefaultFeatures#</code>.</p>
+<h2 id="check.overrideCommand"><a class="header" href="#check.overrideCommand">rust-analyzer.check.overrideCommand</a></h2>
+<p>Default: <code>null</code></p>
+<p>Override the command rust-analyzer uses instead of <code>cargo check</code> for
+diagnostics on save. The command is required to output json and
+should therefore include <code>--message-format=json</code> or a similar option
+(if your client supports the <code>colorDiagnosticOutput</code> experimental
+capability, you can use <code>--message-format=json-diagnostic-rendered-ansi</code>).</p>
+<p>If you’re changing this because you’re using some tool wrapping
+Cargo, you might also want to change
+<code>#rust-analyzer.cargo.buildScripts.overrideCommand#</code>.</p>
+<p>If there are multiple linked projects/workspaces, this command is invoked for
+each of them, with the working directory being the workspace root
+(i.e., the folder containing the <code>Cargo.toml</code>). This can be overwritten
+by changing <code>#rust-analyzer.check.invocationStrategy#</code>.</p>
+<p>It supports two interpolation syntaxes, both mainly intended to be used with
+<a href="./non_cargo_based_projects.html">non-Cargo build systems</a>:</p>
+<ul>
+<li>If <code>{saved_file}</code> is part of the command, rust-analyzer will pass
+the absolute path of the saved file to the provided command.
+(A previous version, <code>$saved_file</code>, also works.)</li>
+<li>If <code>{label}</code> is part of the command, rust-analyzer will pass the
+Cargo package ID, which can be used with <code>cargo check -p</code>, or a build label from
+<code>rust-project.json</code>. If <code>{label}</code> is included, rust-analyzer behaves much like
+<a href="#check.workspace"><code>"rust-analyzer.check.workspace": false</code></a>.</li>
+</ul>
+<p>An example command would be:</p>
+<pre><code class="language-bash">cargo check --workspace --message-format=json --all-targets
+</code></pre>
+<p>Note: The option must be specified as an array of command line arguments, with
+the first argument being the name of the command to run.</p>
+<h2 id="check.targets"><a class="header" href="#check.targets">rust-analyzer.check.targets</a></h2>
+<p>Default: <code>null</code></p>
+<p>Check for specific targets. Defaults to <code>#rust-analyzer.cargo.target#</code> if empty.</p>
+<p>Can be a single target, e.g. <code>"x86_64-unknown-linux-gnu"</code> or a list of targets, e.g.
+<code>["aarch64-apple-darwin", "x86_64-apple-darwin"]</code>.</p>
+<p>Aliased as <code>"checkOnSave.targets"</code>.</p>
+<h2 id="check.workspace"><a class="header" href="#check.workspace">rust-analyzer.check.workspace</a></h2>
+<p>Default: <code>true</code></p>
+<p>Whether <code>--workspace</code> should be passed to <code>cargo check</code>.
+If false, <code>-p &lt;package&gt;</code> will be passed instead if applicable. In case it is not, no
+check will be performed.</p>
+<h2 id="completion.addSemicolonToUnit"><a class="header" href="#completion.addSemicolonToUnit">rust-analyzer.completion.addSemicolonToUnit</a></h2>
+<p>Default: <code>true</code></p>
+<p>Automatically add a semicolon when completing unit-returning functions.</p>
+<p>In <code>match</code> arms it completes a comma instead.</p>
+<h2 id="completion.autoAwait.enable"><a class="header" href="#completion.autoAwait.enable">rust-analyzer.completion.autoAwait.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show method calls and field accesses completions with <code>await</code> prefixed to them when
+completing on a future.</p>
+<h2 id="completion.autoIter.enable"><a class="header" href="#completion.autoIter.enable">rust-analyzer.completion.autoIter.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show method call completions with <code>iter()</code> or <code>into_iter()</code> prefixed to them when
+completing on a type that has them.</p>
+<h2 id="completion.autoimport.enable"><a class="header" href="#completion.autoimport.enable">rust-analyzer.completion.autoimport.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show completions that automatically add imports when completed.</p>
+<p>Note that your client must specify the <code>additionalTextEdits</code> LSP client capability to
+truly have this feature enabled.</p>
+<h2 id="completion.autoimport.exclude"><a class="header" href="#completion.autoimport.exclude">rust-analyzer.completion.autoimport.exclude</a></h2>
+<p>Default:</p>
+<pre><code class="language-json">[
+  {
+    "path": "core::borrow::Borrow",
+    "type": "methods"
+  },
+  {
+    "path": "core::borrow::BorrowMut",
+    "type": "methods"
+  }
+]
+</code></pre>
+<p>A list of full paths to items to exclude from auto-importing completions.</p>
+<p>Traits in this list won’t have their methods suggested in completions unless the trait
+is in scope.</p>
+<p>You can either specify a string path which defaults to type “always” or use the more
+verbose form <code>{ "path": "path::to::item", type: "always" }</code>.</p>
+<p>For traits the type “methods” can be used to only exclude the methods but not the trait
+itself.</p>
+<p>This setting also inherits <code>#rust-analyzer.completion.excludeTraits#</code>.</p>
+<h2 id="completion.autoself.enable"><a class="header" href="#completion.autoself.enable">rust-analyzer.completion.autoself.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show method calls and field access completions with <code>self</code> prefixed to them when
+inside a method.</p>
+<h2 id="completion.callable.snippets"><a class="header" href="#completion.callable.snippets">rust-analyzer.completion.callable.snippets</a></h2>
+<p>Default: <code>"fill_arguments"</code></p>
+<p>Add parenthesis and argument snippets when completing function.</p>
+<h2 id="completion.excludeTraits"><a class="header" href="#completion.excludeTraits">rust-analyzer.completion.excludeTraits</a></h2>
+<p>Default: <code>[]</code></p>
+<p>A list of full paths to traits whose methods to exclude from completion.</p>
+<p>Methods from these traits won’t be completed, even if the trait is in scope. However,
+they will still be suggested on expressions whose type is <code>dyn Trait</code>, <code>impl Trait</code> or
+<code>T where T: Trait</code>.</p>
+<p>Note that the trait themselves can still be completed.</p>
+<h2 id="completion.fullFunctionSignatures.enable"><a class="header" href="#completion.fullFunctionSignatures.enable">rust-analyzer.completion.fullFunctionSignatures.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Show full function / method signatures in completion docs.</p>
+<h2 id="completion.hideDeprecated"><a class="header" href="#completion.hideDeprecated">rust-analyzer.completion.hideDeprecated</a></h2>
+<p>Default: <code>false</code></p>
+<p>Omit deprecated items from completions. By default they are marked as deprecated but not
+hidden.</p>
+<h2 id="completion.limit"><a class="header" href="#completion.limit">rust-analyzer.completion.limit</a></h2>
+<p>Default: <code>null</code></p>
+<p>Maximum number of completions to return. If <code>None</code>, the limit is infinite.</p>
+<h2 id="completion.postfix.enable"><a class="header" href="#completion.postfix.enable">rust-analyzer.completion.postfix.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show postfix snippets like <code>dbg</code>, <code>if</code>, <code>not</code>, etc.</p>
+<h2 id="completion.privateEditable.enable"><a class="header" href="#completion.privateEditable.enable">rust-analyzer.completion.privateEditable.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Show completions of private items and fields that are defined in the current workspace
+even if they are not visible at the current position.</p>
+<h2 id="completion.snippets.custom"><a class="header" href="#completion.snippets.custom">rust-analyzer.completion.snippets.custom</a></h2>
+<p>Default:</p>
+<pre><code class="language-json">{
+  "Ok": {
+    "postfix": "ok",
+    "body": "Ok(${receiver})",
+    "description": "Wrap the expression in a `Result::Ok`",
+    "scope": "expr"
+  },
+  "Box::pin": {
+    "postfix": "pinbox",
+    "body": "Box::pin(${receiver})",
+    "requires": "std::boxed::Box",
+    "description": "Put the expression into a pinned `Box`",
+    "scope": "expr"
+  },
+  "Arc::new": {
+    "postfix": "arc",
+    "body": "Arc::new(${receiver})",
+    "requires": "std::sync::Arc",
+    "description": "Put the expression into an `Arc`",
+    "scope": "expr"
+  },
+  "Some": {
+    "postfix": "some",
+    "body": "Some(${receiver})",
+    "description": "Wrap the expression in an `Option::Some`",
+    "scope": "expr"
+  },
+  "Err": {
+    "postfix": "err",
+    "body": "Err(${receiver})",
+    "description": "Wrap the expression in a `Result::Err`",
+    "scope": "expr"
+  },
+  "Rc::new": {
+    "postfix": "rc",
+    "body": "Rc::new(${receiver})",
+    "requires": "std::rc::Rc",
+    "description": "Put the expression into an `Rc`",
+    "scope": "expr"
+  }
+}
+</code></pre>
+<p>Custom completion snippets.</p>
+<h2 id="completion.termSearch.enable"><a class="header" href="#completion.termSearch.enable">rust-analyzer.completion.termSearch.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Enable term search based snippets like <code>Some(foo.bar().baz())</code>.</p>
+<h2 id="completion.termSearch.fuel"><a class="header" href="#completion.termSearch.fuel">rust-analyzer.completion.termSearch.fuel</a></h2>
+<p>Default: <code>1000</code></p>
+<p>Term search fuel in “units of work” for autocompletion (Defaults to 1000).</p>
+<h2 id="diagnostics.disabled"><a class="header" href="#diagnostics.disabled">rust-analyzer.diagnostics.disabled</a></h2>
+<p>Default: <code>[]</code></p>
+<p>List of rust-analyzer diagnostics to disable.</p>
+<h2 id="diagnostics.enable"><a class="header" href="#diagnostics.enable">rust-analyzer.diagnostics.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show native rust-analyzer diagnostics.</p>
+<h2 id="diagnostics.experimental.enable"><a class="header" href="#diagnostics.experimental.enable">rust-analyzer.diagnostics.experimental.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Show experimental rust-analyzer diagnostics that might have more false positives than
+usual.</p>
+<h2 id="diagnostics.remapPrefix"><a class="header" href="#diagnostics.remapPrefix">rust-analyzer.diagnostics.remapPrefix</a></h2>
+<p>Default: <code>{}</code></p>
+<p>Map of prefixes to be substituted when parsing diagnostic file paths. This should be the
+reverse mapping of what is passed to <code>rustc</code> as <code>--remap-path-prefix</code>.</p>
+<h2 id="diagnostics.styleLints.enable"><a class="header" href="#diagnostics.styleLints.enable">rust-analyzer.diagnostics.styleLints.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Run additional style lints.</p>
+<h2 id="diagnostics.warningsAsHint"><a class="header" href="#diagnostics.warningsAsHint">rust-analyzer.diagnostics.warningsAsHint</a></h2>
+<p>Default: <code>[]</code></p>
+<p>List of warnings that should be displayed with hint severity.</p>
+<p>The warnings will be indicated by faded text or three dots in code and will not show up
+in the <code>Problems Panel</code>.</p>
+<h2 id="diagnostics.warningsAsInfo"><a class="header" href="#diagnostics.warningsAsInfo">rust-analyzer.diagnostics.warningsAsInfo</a></h2>
+<p>Default: <code>[]</code></p>
+<p>List of warnings that should be displayed with info severity.</p>
+<p>The warnings will be indicated by a blue squiggly underline in code and a blue icon in
+the <code>Problems Panel</code>.</p>
+<h2 id="document.symbol.search.excludeLocals"><a class="header" href="#document.symbol.search.excludeLocals">rust-analyzer.document.symbol.search.excludeLocals</a></h2>
+<p>Default: <code>true</code></p>
+<p>Exclude all locals from document symbol search.</p>
+<h2 id="files.exclude"><a class="header" href="#files.exclude">rust-analyzer.files.exclude</a></h2>
+<p>Default: <code>[]</code></p>
+<p>List of files to ignore</p>
+<p>These paths (file/directories) will be ignored by rust-analyzer. They are relative to
+the workspace root, and globs are not supported. You may also need to add the folders to
+Code’s <code>files.watcherExclude</code>.</p>
+<h2 id="files.watcher"><a class="header" href="#files.watcher">rust-analyzer.files.watcher</a></h2>
+<p>Default: <code>"client"</code></p>
+<p>Controls file watching implementation.</p>
+<h2 id="gotoImplementations.filterAdjacentDerives"><a class="header" href="#gotoImplementations.filterAdjacentDerives">rust-analyzer.gotoImplementations.filterAdjacentDerives</a></h2>
+<p>Default: <code>false</code></p>
+<p>If this is <code>true</code>, when “Goto Implementations” and in “Implementations” lens, are triggered on a <code>struct</code> or <code>enum</code> or <code>union</code>, we filter out trait implementations that originate from <code>derive</code>s above the type.</p>
+<h2 id="highlightRelated.branchExitPoints.enable"><a class="header" href="#highlightRelated.branchExitPoints.enable">rust-analyzer.highlightRelated.branchExitPoints.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Highlight related return values while the cursor is on any <code>match</code>, <code>if</code>, or match arm
+arrow (<code>=&gt;</code>).</p>
+<h2 id="highlightRelated.breakPoints.enable"><a class="header" href="#highlightRelated.breakPoints.enable">rust-analyzer.highlightRelated.breakPoints.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Highlight related references while the cursor is on <code>break</code>, <code>loop</code>, <code>while</code>, or <code>for</code>
+keywords.</p>
+<h2 id="highlightRelated.closureCaptures.enable"><a class="header" href="#highlightRelated.closureCaptures.enable">rust-analyzer.highlightRelated.closureCaptures.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Highlight all captures of a closure while the cursor is on the <code>|</code> or move keyword of a closure.</p>
+<h2 id="highlightRelated.exitPoints.enable"><a class="header" href="#highlightRelated.exitPoints.enable">rust-analyzer.highlightRelated.exitPoints.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Highlight all exit points while the cursor is on any <code>return</code>, <code>?</code>, <code>fn</code>, or return type
+arrow (<code>-&gt;</code>).</p>
+<h2 id="highlightRelated.references.enable"><a class="header" href="#highlightRelated.references.enable">rust-analyzer.highlightRelated.references.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Highlight related references while the cursor is on any identifier.</p>
+<h2 id="highlightRelated.yieldPoints.enable"><a class="header" href="#highlightRelated.yieldPoints.enable">rust-analyzer.highlightRelated.yieldPoints.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Highlight all break points for a loop or block context while the cursor is on any
+<code>async</code> or <code>await</code> keywords.</p>
+<h2 id="hover.actions.debug.enable"><a class="header" href="#hover.actions.debug.enable">rust-analyzer.hover.actions.debug.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show <code>Debug</code> action. Only applies when <code>#rust-analyzer.hover.actions.enable#</code> is set.</p>
+<h2 id="hover.actions.enable"><a class="header" href="#hover.actions.enable">rust-analyzer.hover.actions.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show HoverActions in Rust files.</p>
+<h2 id="hover.actions.gotoTypeDef.enable"><a class="header" href="#hover.actions.gotoTypeDef.enable">rust-analyzer.hover.actions.gotoTypeDef.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show <code>Go to Type Definition</code> action. Only applies when
+<code>#rust-analyzer.hover.actions.enable#</code> is set.</p>
+<h2 id="hover.actions.implementations.enable"><a class="header" href="#hover.actions.implementations.enable">rust-analyzer.hover.actions.implementations.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show <code>Implementations</code> action. Only applies when <code>#rust-analyzer.hover.actions.enable#</code>
+is set.</p>
+<h2 id="hover.actions.references.enable"><a class="header" href="#hover.actions.references.enable">rust-analyzer.hover.actions.references.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Show <code>References</code> action. Only applies when <code>#rust-analyzer.hover.actions.enable#</code> is
+set.</p>
+<h2 id="hover.actions.run.enable"><a class="header" href="#hover.actions.run.enable">rust-analyzer.hover.actions.run.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show <code>Run</code> action. Only applies when <code>#rust-analyzer.hover.actions.enable#</code> is set.</p>
+<h2 id="hover.actions.updateTest.enable"><a class="header" href="#hover.actions.updateTest.enable">rust-analyzer.hover.actions.updateTest.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show <code>Update Test</code> action. Only applies when <code>#rust-analyzer.hover.actions.enable#</code> and
+<code>#rust-analyzer.hover.actions.run.enable#</code> are set.</p>
+<h2 id="hover.documentation.enable"><a class="header" href="#hover.documentation.enable">rust-analyzer.hover.documentation.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show documentation on hover.</p>
+<h2 id="hover.documentation.keywords.enable"><a class="header" href="#hover.documentation.keywords.enable">rust-analyzer.hover.documentation.keywords.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show keyword hover popups. Only applies when
+<code>#rust-analyzer.hover.documentation.enable#</code> is set.</p>
+<h2 id="hover.dropGlue.enable"><a class="header" href="#hover.dropGlue.enable">rust-analyzer.hover.dropGlue.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show drop glue information on hover.</p>
+<h2 id="hover.links.enable"><a class="header" href="#hover.links.enable">rust-analyzer.hover.links.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Use markdown syntax for links on hover.</p>
+<h2 id="hover.maxSubstitutionLength"><a class="header" href="#hover.maxSubstitutionLength">rust-analyzer.hover.maxSubstitutionLength</a></h2>
+<p>Default: <code>20</code></p>
+<p>Show what types are used as generic arguments in calls etc. on hover, and limit the max
+length to show such types, beyond which they will be shown with ellipsis.</p>
+<p>This can take three values: <code>null</code> means “unlimited”, the string <code>"hide"</code> means to not
+show generic substitutions at all, and a number means to limit them to X characters.</p>
+<p>The default is 20 characters.</p>
+<h2 id="hover.memoryLayout.alignment"><a class="header" href="#hover.memoryLayout.alignment">rust-analyzer.hover.memoryLayout.alignment</a></h2>
+<p>Default: <code>"hexadecimal"</code></p>
+<p>How to render the align information in a memory layout hover.</p>
+<h2 id="hover.memoryLayout.enable"><a class="header" href="#hover.memoryLayout.enable">rust-analyzer.hover.memoryLayout.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show memory layout data on hover.</p>
+<h2 id="hover.memoryLayout.niches"><a class="header" href="#hover.memoryLayout.niches">rust-analyzer.hover.memoryLayout.niches</a></h2>
+<p>Default: <code>false</code></p>
+<p>How to render the niche information in a memory layout hover.</p>
+<h2 id="hover.memoryLayout.offset"><a class="header" href="#hover.memoryLayout.offset">rust-analyzer.hover.memoryLayout.offset</a></h2>
+<p>Default: <code>"hexadecimal"</code></p>
+<p>How to render the offset information in a memory layout hover.</p>
+<h2 id="hover.memoryLayout.padding"><a class="header" href="#hover.memoryLayout.padding">rust-analyzer.hover.memoryLayout.padding</a></h2>
+<p>Default: <code>null</code></p>
+<p>How to render the padding information in a memory layout hover.</p>
+<h2 id="hover.memoryLayout.size"><a class="header" href="#hover.memoryLayout.size">rust-analyzer.hover.memoryLayout.size</a></h2>
+<p>Default: <code>"both"</code></p>
+<p>How to render the size information in a memory layout hover.</p>
+<h2 id="hover.show.enumVariants"><a class="header" href="#hover.show.enumVariants">rust-analyzer.hover.show.enumVariants</a></h2>
+<p>Default: <code>5</code></p>
+<p>How many variants of an enum to display when hovering on. Show none if empty.</p>
+<h2 id="hover.show.fields"><a class="header" href="#hover.show.fields">rust-analyzer.hover.show.fields</a></h2>
+<p>Default: <code>5</code></p>
+<p>How many fields of a struct, variant or union to display when hovering on. Show none if
+empty.</p>
+<h2 id="hover.show.traitAssocItems"><a class="header" href="#hover.show.traitAssocItems">rust-analyzer.hover.show.traitAssocItems</a></h2>
+<p>Default: <code>null</code></p>
+<p>How many associated items of a trait to display when hovering a trait.</p>
+<h2 id="imports.granularity.enforce"><a class="header" href="#imports.granularity.enforce">rust-analyzer.imports.granularity.enforce</a></h2>
+<p>Default: <code>false</code></p>
+<p>Enforce the import granularity setting for all files. If set to false rust-analyzer will
+try to keep import styles consistent per file.</p>
+<h2 id="imports.granularity.group"><a class="header" href="#imports.granularity.group">rust-analyzer.imports.granularity.group</a></h2>
+<p>Default: <code>"crate"</code></p>
+<p>How imports should be grouped into use statements.</p>
+<h2 id="imports.group.enable"><a class="header" href="#imports.group.enable">rust-analyzer.imports.group.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Group inserted imports by the <a href="https://rust-analyzer.github.io/book/features.html#auto-import">following
+order</a>. Groups are
+separated by newlines.</p>
+<h2 id="imports.merge.glob"><a class="header" href="#imports.merge.glob">rust-analyzer.imports.merge.glob</a></h2>
+<p>Default: <code>true</code></p>
+<p>Allow import insertion to merge new imports into single path glob imports like <code>use std::fmt::*;</code>.</p>
+<h2 id="imports.preferNoStd"><a class="header" href="#imports.preferNoStd">rust-analyzer.imports.preferNoStd</a></h2>
+<p>Default: <code>false</code></p>
+<p>Prefer to unconditionally use imports of the core and alloc crate, over the std crate.</p>
+<h2 id="imports.preferPrelude"><a class="header" href="#imports.preferPrelude">rust-analyzer.imports.preferPrelude</a></h2>
+<p>Default: <code>false</code></p>
+<p>Prefer import paths containing a <code>prelude</code> module.</p>
+<h2 id="imports.prefix"><a class="header" href="#imports.prefix">rust-analyzer.imports.prefix</a></h2>
+<p>Default: <code>"crate"</code></p>
+<p>The path structure for newly inserted paths to use.</p>
+<h2 id="imports.prefixExternPrelude"><a class="header" href="#imports.prefixExternPrelude">rust-analyzer.imports.prefixExternPrelude</a></h2>
+<p>Default: <code>false</code></p>
+<p>Prefix external (including std, core) crate imports with <code>::</code>.</p>
+<p>E.g. <code>use ::std::io::Read;</code>.</p>
+<h2 id="inlayHints.bindingModeHints.enable"><a class="header" href="#inlayHints.bindingModeHints.enable">rust-analyzer.inlayHints.bindingModeHints.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Show inlay type hints for binding modes.</p>
+<h2 id="inlayHints.chainingHints.enable"><a class="header" href="#inlayHints.chainingHints.enable">rust-analyzer.inlayHints.chainingHints.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show inlay type hints for method chains.</p>
+<h2 id="inlayHints.closingBraceHints.enable"><a class="header" href="#inlayHints.closingBraceHints.enable">rust-analyzer.inlayHints.closingBraceHints.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show inlay hints after a closing <code>}</code> to indicate what item it belongs to.</p>
+<h2 id="inlayHints.closingBraceHints.minLines"><a class="header" href="#inlayHints.closingBraceHints.minLines">rust-analyzer.inlayHints.closingBraceHints.minLines</a></h2>
+<p>Default: <code>25</code></p>
+<p>Minimum number of lines required before the <code>}</code> until the hint is shown (set to 0 or 1
+to always show them).</p>
+<h2 id="inlayHints.closureCaptureHints.enable"><a class="header" href="#inlayHints.closureCaptureHints.enable">rust-analyzer.inlayHints.closureCaptureHints.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Show inlay hints for closure captures.</p>
+<h2 id="inlayHints.closureReturnTypeHints.enable"><a class="header" href="#inlayHints.closureReturnTypeHints.enable">rust-analyzer.inlayHints.closureReturnTypeHints.enable</a></h2>
+<p>Default: <code>"never"</code></p>
+<p>Show inlay type hints for return types of closures.</p>
+<h2 id="inlayHints.closureStyle"><a class="header" href="#inlayHints.closureStyle">rust-analyzer.inlayHints.closureStyle</a></h2>
+<p>Default: <code>"impl_fn"</code></p>
+<p>Closure notation in type and chaining inlay hints.</p>
+<h2 id="inlayHints.discriminantHints.enable"><a class="header" href="#inlayHints.discriminantHints.enable">rust-analyzer.inlayHints.discriminantHints.enable</a></h2>
+<p>Default: <code>"never"</code></p>
+<p>Show enum variant discriminant hints.</p>
+<h2 id="inlayHints.expressionAdjustmentHints.disableReborrows"><a class="header" href="#inlayHints.expressionAdjustmentHints.disableReborrows">rust-analyzer.inlayHints.expressionAdjustmentHints.disableReborrows</a></h2>
+<p>Default: <code>true</code></p>
+<p>Disable reborrows in expression adjustments inlay hints.</p>
+<p>Reborrows are a pair of a builtin deref then borrow, i.e. <code>&amp;*</code>. They are inserted by the compiler but are mostly useless to the programmer.</p>
+<p>Note: if the deref is not builtin (an overloaded deref), or the borrow is <code>&amp;raw const</code>/<code>&amp;raw mut</code>, they are not removed.</p>
+<h2 id="inlayHints.expressionAdjustmentHints.enable"><a class="header" href="#inlayHints.expressionAdjustmentHints.enable">rust-analyzer.inlayHints.expressionAdjustmentHints.enable</a></h2>
+<p>Default: <code>"never"</code></p>
+<p>Show inlay hints for type adjustments.</p>
+<h2 id="inlayHints.expressionAdjustmentHints.hideOutsideUnsafe"><a class="header" href="#inlayHints.expressionAdjustmentHints.hideOutsideUnsafe">rust-analyzer.inlayHints.expressionAdjustmentHints.hideOutsideUnsafe</a></h2>
+<p>Default: <code>false</code></p>
+<p>Hide inlay hints for type adjustments outside of <code>unsafe</code> blocks.</p>
+<h2 id="inlayHints.expressionAdjustmentHints.mode"><a class="header" href="#inlayHints.expressionAdjustmentHints.mode">rust-analyzer.inlayHints.expressionAdjustmentHints.mode</a></h2>
+<p>Default: <code>"prefix"</code></p>
+<p>Show inlay hints as postfix ops (<code>.*</code> instead of <code>*</code>, etc).</p>
+<h2 id="inlayHints.genericParameterHints.const.enable"><a class="header" href="#inlayHints.genericParameterHints.const.enable">rust-analyzer.inlayHints.genericParameterHints.const.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show const generic parameter name inlay hints.</p>
+<h2 id="inlayHints.genericParameterHints.lifetime.enable"><a class="header" href="#inlayHints.genericParameterHints.lifetime.enable">rust-analyzer.inlayHints.genericParameterHints.lifetime.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Show generic lifetime parameter name inlay hints.</p>
+<h2 id="inlayHints.genericParameterHints.type.enable"><a class="header" href="#inlayHints.genericParameterHints.type.enable">rust-analyzer.inlayHints.genericParameterHints.type.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Show generic type parameter name inlay hints.</p>
+<h2 id="inlayHints.implicitDrops.enable"><a class="header" href="#inlayHints.implicitDrops.enable">rust-analyzer.inlayHints.implicitDrops.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Show implicit drop hints.</p>
+<h2 id="inlayHints.implicitSizedBoundHints.enable"><a class="header" href="#inlayHints.implicitSizedBoundHints.enable">rust-analyzer.inlayHints.implicitSizedBoundHints.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Show inlay hints for the implied type parameter <code>Sized</code> bound.</p>
+<h2 id="inlayHints.impliedDynTraitHints.enable"><a class="header" href="#inlayHints.impliedDynTraitHints.enable">rust-analyzer.inlayHints.impliedDynTraitHints.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show inlay hints for the implied <code>dyn</code> keyword in trait object types.</p>
+<h2 id="inlayHints.lifetimeElisionHints.enable"><a class="header" href="#inlayHints.lifetimeElisionHints.enable">rust-analyzer.inlayHints.lifetimeElisionHints.enable</a></h2>
+<p>Default: <code>"never"</code></p>
+<p>Show inlay type hints for elided lifetimes in function signatures.</p>
+<h2 id="inlayHints.lifetimeElisionHints.useParameterNames"><a class="header" href="#inlayHints.lifetimeElisionHints.useParameterNames">rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames</a></h2>
+<p>Default: <code>false</code></p>
+<p>Prefer using parameter names as the name for elided lifetime hints if possible.</p>
+<h2 id="inlayHints.maxLength"><a class="header" href="#inlayHints.maxLength">rust-analyzer.inlayHints.maxLength</a></h2>
+<p>Default: <code>25</code></p>
+<p>Maximum length for inlay hints. Set to null to have an unlimited length.</p>
+<p><strong>Note:</strong> This is mostly a hint, and we don’t guarantee to strictly follow the limit.</p>
+<h2 id="inlayHints.parameterHints.enable"><a class="header" href="#inlayHints.parameterHints.enable">rust-analyzer.inlayHints.parameterHints.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show function parameter name inlay hints at the call site.</p>
+<h2 id="inlayHints.parameterHints.missingArguments.enable"><a class="header" href="#inlayHints.parameterHints.missingArguments.enable">rust-analyzer.inlayHints.parameterHints.missingArguments.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Show parameter name inlay hints for missing arguments at the call site.</p>
+<h2 id="inlayHints.rangeExclusiveHints.enable"><a class="header" href="#inlayHints.rangeExclusiveHints.enable">rust-analyzer.inlayHints.rangeExclusiveHints.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Show exclusive range inlay hints.</p>
+<h2 id="inlayHints.reborrowHints.enable"><a class="header" href="#inlayHints.reborrowHints.enable">rust-analyzer.inlayHints.reborrowHints.enable</a></h2>
+<p>Default: <code>"never"</code></p>
+<p>Show inlay hints for compiler inserted reborrows.</p>
+<p>This setting is deprecated in favor of
+#rust-analyzer.inlayHints.expressionAdjustmentHints.enable#.</p>
+<h2 id="inlayHints.renderColons"><a class="header" href="#inlayHints.renderColons">rust-analyzer.inlayHints.renderColons</a></h2>
+<p>Default: <code>true</code></p>
+<p>Whether to render leading colons for type hints, and trailing colons for parameter hints.</p>
+<h2 id="inlayHints.typeHints.enable"><a class="header" href="#inlayHints.typeHints.enable">rust-analyzer.inlayHints.typeHints.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show inlay type hints for variables.</p>
+<h2 id="inlayHints.typeHints.hideClosureInitialization"><a class="header" href="#inlayHints.typeHints.hideClosureInitialization">rust-analyzer.inlayHints.typeHints.hideClosureInitialization</a></h2>
+<p>Default: <code>false</code></p>
+<p>Hide inlay type hints for <code>let</code> statements that initialize to a closure.</p>
+<p>Only applies to closures with blocks, same as
+<code>#rust-analyzer.inlayHints.closureReturnTypeHints.enable#</code>.</p>
+<h2 id="inlayHints.typeHints.hideClosureParameter"><a class="header" href="#inlayHints.typeHints.hideClosureParameter">rust-analyzer.inlayHints.typeHints.hideClosureParameter</a></h2>
+<p>Default: <code>false</code></p>
+<p>Hide inlay parameter type hints for closures.</p>
+<h2 id="inlayHints.typeHints.hideInferredTypes"><a class="header" href="#inlayHints.typeHints.hideInferredTypes">rust-analyzer.inlayHints.typeHints.hideInferredTypes</a></h2>
+<p>Default: <code>false</code></p>
+<p>Hide inlay type hints for inferred types.</p>
+<h2 id="inlayHints.typeHints.hideNamedConstructor"><a class="header" href="#inlayHints.typeHints.hideNamedConstructor">rust-analyzer.inlayHints.typeHints.hideNamedConstructor</a></h2>
+<p>Default: <code>false</code></p>
+<p>Hide inlay type hints for constructors.</p>
+<h2 id="interpret.tests"><a class="header" href="#interpret.tests">rust-analyzer.interpret.tests</a></h2>
+<p>Default: <code>false</code></p>
+<p>Enable the experimental support for interpreting tests.</p>
+<h2 id="joinLines.joinAssignments"><a class="header" href="#joinLines.joinAssignments">rust-analyzer.joinLines.joinAssignments</a></h2>
+<p>Default: <code>true</code></p>
+<p>Join lines merges consecutive declaration and initialization of an assignment.</p>
+<h2 id="joinLines.joinElseIf"><a class="header" href="#joinLines.joinElseIf">rust-analyzer.joinLines.joinElseIf</a></h2>
+<p>Default: <code>true</code></p>
+<p>Join lines inserts else between consecutive ifs.</p>
+<h2 id="joinLines.removeTrailingComma"><a class="header" href="#joinLines.removeTrailingComma">rust-analyzer.joinLines.removeTrailingComma</a></h2>
+<p>Default: <code>true</code></p>
+<p>Join lines removes trailing commas.</p>
+<h2 id="joinLines.unwrapTrivialBlock"><a class="header" href="#joinLines.unwrapTrivialBlock">rust-analyzer.joinLines.unwrapTrivialBlock</a></h2>
+<p>Default: <code>true</code></p>
+<p>Join lines unwraps trivial blocks.</p>
+<h2 id="lens.debug.enable"><a class="header" href="#lens.debug.enable">rust-analyzer.lens.debug.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show <code>Debug</code> lens. Only applies when <code>#rust-analyzer.lens.enable#</code> is set.</p>
+<h2 id="lens.enable"><a class="header" href="#lens.enable">rust-analyzer.lens.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show CodeLens in Rust files.</p>
+<h2 id="lens.implementations.enable"><a class="header" href="#lens.implementations.enable">rust-analyzer.lens.implementations.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show <code>Implementations</code> lens. Only applies when <code>#rust-analyzer.lens.enable#</code> is set.</p>
+<h2 id="lens.location"><a class="header" href="#lens.location">rust-analyzer.lens.location</a></h2>
+<p>Default: <code>"above_name"</code></p>
+<p>Where to render annotations.</p>
+<h2 id="lens.references.adt.enable"><a class="header" href="#lens.references.adt.enable">rust-analyzer.lens.references.adt.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Show <code>References</code> lens for Struct, Enum, and Union. Only applies when
+<code>#rust-analyzer.lens.enable#</code> is set.</p>
+<h2 id="lens.references.enumVariant.enable"><a class="header" href="#lens.references.enumVariant.enable">rust-analyzer.lens.references.enumVariant.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Show <code>References</code> lens for Enum Variants. Only applies when
+<code>#rust-analyzer.lens.enable#</code> is set.</p>
+<h2 id="lens.references.method.enable"><a class="header" href="#lens.references.method.enable">rust-analyzer.lens.references.method.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Show <code>Method References</code> lens. Only applies when <code>#rust-analyzer.lens.enable#</code> is set.</p>
+<h2 id="lens.references.trait.enable"><a class="header" href="#lens.references.trait.enable">rust-analyzer.lens.references.trait.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Show <code>References</code> lens for Trait. Only applies when <code>#rust-analyzer.lens.enable#</code> is
+set.</p>
+<h2 id="lens.run.enable"><a class="header" href="#lens.run.enable">rust-analyzer.lens.run.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show <code>Run</code> lens. Only applies when <code>#rust-analyzer.lens.enable#</code> is set.</p>
+<h2 id="lens.updateTest.enable"><a class="header" href="#lens.updateTest.enable">rust-analyzer.lens.updateTest.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show <code>Update Test</code> lens. Only applies when <code>#rust-analyzer.lens.enable#</code> and
+<code>#rust-analyzer.lens.run.enable#</code> are set.</p>
+<h2 id="linkedProjects"><a class="header" href="#linkedProjects">rust-analyzer.linkedProjects</a></h2>
+<p>Default: <code>[]</code></p>
+<p>Disable project auto-discovery in favor of explicitly specified set of projects.</p>
+<p>Elements must be paths pointing to <code>Cargo.toml</code>, <code>rust-project.json</code>, <code>.rs</code> files (which
+will be treated as standalone files) or JSON objects in <code>rust-project.json</code> format.</p>
+<h2 id="lru.capacity"><a class="header" href="#lru.capacity">rust-analyzer.lru.capacity</a></h2>
+<p>Default: <code>null</code></p>
+<p>Number of syntax trees rust-analyzer keeps in memory. Defaults to 128.</p>
+<h2 id="lru.query.capacities"><a class="header" href="#lru.query.capacities">rust-analyzer.lru.query.capacities</a></h2>
+<p>Default: <code>{}</code></p>
+<p>The LRU capacity of the specified queries.</p>
+<h2 id="notifications.cargoTomlNotFound"><a class="header" href="#notifications.cargoTomlNotFound">rust-analyzer.notifications.cargoTomlNotFound</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show <code>can't find Cargo.toml</code> error message.</p>
+<h2 id="numThreads"><a class="header" href="#numThreads">rust-analyzer.numThreads</a></h2>
+<p>Default: <code>null</code></p>
+<p>The number of worker threads in the main loop. The default <code>null</code> means to pick
+automatically.</p>
+<h2 id="procMacro.attributes.enable"><a class="header" href="#procMacro.attributes.enable">rust-analyzer.procMacro.attributes.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Expand attribute macros. Requires <code>#rust-analyzer.procMacro.enable#</code> to be set.</p>
+<h2 id="procMacro.enable"><a class="header" href="#procMacro.enable">rust-analyzer.procMacro.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Enable support for procedural macros, implies <code>#rust-analyzer.cargo.buildScripts.enable#</code>.</p>
+<h2 id="procMacro.ignored"><a class="header" href="#procMacro.ignored">rust-analyzer.procMacro.ignored</a></h2>
+<p>Default: <code>{}</code></p>
+<p>These proc-macros will be ignored when trying to expand them.</p>
+<p>This config takes a map of crate names with the exported proc-macro names to ignore as values.</p>
+<h2 id="procMacro.processes"><a class="header" href="#procMacro.processes">rust-analyzer.procMacro.processes</a></h2>
+<p>Default: <code>1</code></p>
+<p>Number of proc-macro server processes to spawn.</p>
+<p>Controls how many independent <code>proc-macro-srv</code> processes rust-analyzer
+runs in parallel to handle macro expansion.</p>
+<h2 id="procMacro.server"><a class="header" href="#procMacro.server">rust-analyzer.procMacro.server</a></h2>
+<p>Default: <code>null</code></p>
+<p>Internal config, path to proc-macro server executable.</p>
+<h2 id="profiling.memoryProfile"><a class="header" href="#profiling.memoryProfile">rust-analyzer.profiling.memoryProfile</a></h2>
+<p>Default: <code>null</code></p>
+<p>The path where to save memory profiling output.</p>
+<p><strong>Note:</strong> Memory profiling is not enabled by default in rust-analyzer builds, you need to build
+from source for it.</p>
+<h2 id="references.excludeImports"><a class="header" href="#references.excludeImports">rust-analyzer.references.excludeImports</a></h2>
+<p>Default: <code>false</code></p>
+<p>Exclude imports from find-all-references.</p>
+<h2 id="references.excludeTests"><a class="header" href="#references.excludeTests">rust-analyzer.references.excludeTests</a></h2>
+<p>Default: <code>false</code></p>
+<p>Exclude tests from find-all-references and call-hierarchy.</p>
+<h2 id="rename.showConflicts"><a class="header" href="#rename.showConflicts">rust-analyzer.rename.showConflicts</a></h2>
+<p>Default: <code>true</code></p>
+<p>Whether to warn when a rename will cause conflicts (change the meaning of the code).</p>
+<h2 id="runnables.bench.command"><a class="header" href="#runnables.bench.command">rust-analyzer.runnables.bench.command</a></h2>
+<p>Default: <code>"bench"</code></p>
+<p>Subcommand used for bench runnables instead of <code>bench</code>.</p>
+<h2 id="runnables.bench.overrideCommand"><a class="header" href="#runnables.bench.overrideCommand">rust-analyzer.runnables.bench.overrideCommand</a></h2>
+<p>Default: <code>null</code></p>
+<p>Override the command used for bench runnables.
+The first element of the array should be the program to execute (for example, <code>cargo</code>).</p>
+<p>Use the placeholders <code>${package}</code>, <code>${target_arg}</code>, <code>${target}</code>, <code>${test_name}</code> to dynamically
+replace the package name, target option (such as <code>--bin</code> or <code>--example</code>), the target name and
+the test name (name of test function or test mod path).</p>
+<h2 id="runnables.command"><a class="header" href="#runnables.command">rust-analyzer.runnables.command</a></h2>
+<p>Default: <code>null</code></p>
+<p>Command to be executed instead of ‘cargo’ for runnables.</p>
+<h2 id="runnables.doctest.overrideCommand"><a class="header" href="#runnables.doctest.overrideCommand">rust-analyzer.runnables.doctest.overrideCommand</a></h2>
+<p>Default: <code>null</code></p>
+<p>Override the command used for bench runnables.
+The first element of the array should be the program to execute (for example, <code>cargo</code>).</p>
+<p>Use the placeholders <code>${package}</code>, <code>${target_arg}</code>, <code>${target}</code>, <code>${test_name}</code> to dynamically
+replace the package name, target option (such as <code>--bin</code> or <code>--example</code>), the target name and
+the test name (name of test function or test mod path).</p>
+<h2 id="runnables.extraArgs"><a class="header" href="#runnables.extraArgs">rust-analyzer.runnables.extraArgs</a></h2>
+<p>Default: <code>[]</code></p>
+<p>Additional arguments to be passed to cargo for runnables such as
+tests or binaries. For example, it may be <code>--release</code>.</p>
+<h2 id="runnables.extraTestBinaryArgs"><a class="header" href="#runnables.extraTestBinaryArgs">rust-analyzer.runnables.extraTestBinaryArgs</a></h2>
+<p>Default:</p>
+<pre><code class="language-json">[
+  "--nocapture"
+]
+</code></pre>
+<p>Additional arguments to be passed through Cargo to launched tests, benchmarks, or
+doc-tests.</p>
+<p>Unless the launched target uses a
+<a href="https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-harness-field">custom test harness</a>,
+they will end up being interpreted as options to
+<a href="https://doc.rust-lang.org/rustc/tests/index.html#cli-arguments"><code>rustc</code>’s built-in test harness (“libtest”)</a>.</p>
+<h2 id="runnables.test.command"><a class="header" href="#runnables.test.command">rust-analyzer.runnables.test.command</a></h2>
+<p>Default: <code>"test"</code></p>
+<p>Subcommand used for test runnables instead of <code>test</code>.</p>
+<h2 id="runnables.test.overrideCommand"><a class="header" href="#runnables.test.overrideCommand">rust-analyzer.runnables.test.overrideCommand</a></h2>
+<p>Default: <code>null</code></p>
+<p>Override the command used for test runnables.
+The first element of the array should be the program to execute (for example, <code>cargo</code>).</p>
+<p>Use the placeholders <code>${package}</code>, <code>${target_arg}</code>, <code>${target}</code>, <code>${test_name}</code> to dynamically
+replace the package name, target option (such as <code>--bin</code> or <code>--example</code>), the target name and
+the test name (name of test function or test mod path).</p>
+<h2 id="rustc.source"><a class="header" href="#rustc.source">rust-analyzer.rustc.source</a></h2>
+<p>Default: <code>null</code></p>
+<p>Path to the Cargo.toml of the rust compiler workspace, for usage in rustc_private
+projects, or “discover” to try to automatically find it if the <code>rustc-dev</code> component
+is installed.</p>
+<p>Any project which uses rust-analyzer with the rustcPrivate
+crates must set <code>[package.metadata.rust-analyzer] rustc_private=true</code> to use it.</p>
+<p>This option does not take effect until rust-analyzer is restarted.</p>
+<h2 id="rustfmt.extraArgs"><a class="header" href="#rustfmt.extraArgs">rust-analyzer.rustfmt.extraArgs</a></h2>
+<p>Default: <code>[]</code></p>
+<p>Additional arguments to <code>rustfmt</code>.</p>
+<h2 id="rustfmt.overrideCommand"><a class="header" href="#rustfmt.overrideCommand">rust-analyzer.rustfmt.overrideCommand</a></h2>
+<p>Default: <code>null</code></p>
+<p>Advanced option, fully override the command rust-analyzer uses for
+formatting. This should be the equivalent of <code>rustfmt</code> here, and
+not that of <code>cargo fmt</code>. The file contents will be passed on the
+standard input and the formatted result will be read from the
+standard output.</p>
+<p>Note: The option must be specified as an array of command line arguments, with
+the first argument being the name of the command to run.</p>
+<h2 id="rustfmt.rangeFormatting.enable"><a class="header" href="#rustfmt.rangeFormatting.enable">rust-analyzer.rustfmt.rangeFormatting.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Enables the use of rustfmt’s unstable range formatting command for the
+<code>textDocument/rangeFormatting</code> request. The rustfmt option is unstable and only
+available on a nightly build.</p>
+<h2 id="semanticHighlighting.comments.enable"><a class="header" href="#semanticHighlighting.comments.enable">rust-analyzer.semanticHighlighting.comments.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Use semantic tokens for comments.</p>
+<p>In some editors (e.g. vscode) semantic tokens override other highlighting grammars.
+By disabling semantic tokens for comments, other grammars can be used to highlight
+their contents.</p>
+<h2 id="semanticHighlighting.doc.comment.inject.enable"><a class="header" href="#semanticHighlighting.doc.comment.inject.enable">rust-analyzer.semanticHighlighting.doc.comment.inject.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Inject additional highlighting into doc comments.</p>
+<p>When enabled, rust-analyzer will highlight rust source in doc comments as well as intra
+doc links.</p>
+<h2 id="semanticHighlighting.nonStandardTokens"><a class="header" href="#semanticHighlighting.nonStandardTokens">rust-analyzer.semanticHighlighting.nonStandardTokens</a></h2>
+<p>Default: <code>true</code></p>
+<p>Emit non-standard tokens and modifiers</p>
+<p>When enabled, rust-analyzer will emit tokens and modifiers that are not part of the
+standard set of semantic tokens.</p>
+<h2 id="semanticHighlighting.operator.enable"><a class="header" href="#semanticHighlighting.operator.enable">rust-analyzer.semanticHighlighting.operator.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Use semantic tokens for operators.</p>
+<p>When disabled, rust-analyzer will emit semantic tokens only for operator tokens when
+they are tagged with modifiers.</p>
+<h2 id="semanticHighlighting.operator.specialization.enable"><a class="header" href="#semanticHighlighting.operator.specialization.enable">rust-analyzer.semanticHighlighting.operator.specialization.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Use specialized semantic tokens for operators.</p>
+<p>When enabled, rust-analyzer will emit special token types for operator tokens instead
+of the generic <code>operator</code> token type.</p>
+<h2 id="semanticHighlighting.punctuation.enable"><a class="header" href="#semanticHighlighting.punctuation.enable">rust-analyzer.semanticHighlighting.punctuation.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Use semantic tokens for punctuation.</p>
+<p>When disabled, rust-analyzer will emit semantic tokens only for punctuation tokens when
+they are tagged with modifiers or have a special role.</p>
+<h2 id="semanticHighlighting.punctuation.separate.macro.bang"><a class="header" href="#semanticHighlighting.punctuation.separate.macro.bang">rust-analyzer.semanticHighlighting.punctuation.separate.macro.bang</a></h2>
+<p>Default: <code>false</code></p>
+<p>When enabled, rust-analyzer will emit a punctuation semantic token for the <code>!</code> of macro
+calls.</p>
+<h2 id="semanticHighlighting.punctuation.specialization.enable"><a class="header" href="#semanticHighlighting.punctuation.specialization.enable">rust-analyzer.semanticHighlighting.punctuation.specialization.enable</a></h2>
+<p>Default: <code>false</code></p>
+<p>Use specialized semantic tokens for punctuation.</p>
+<p>When enabled, rust-analyzer will emit special token types for punctuation tokens instead
+of the generic <code>punctuation</code> token type.</p>
+<h2 id="semanticHighlighting.strings.enable"><a class="header" href="#semanticHighlighting.strings.enable">rust-analyzer.semanticHighlighting.strings.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Use semantic tokens for strings.</p>
+<p>In some editors (e.g. vscode) semantic tokens override other highlighting grammars.
+By disabling semantic tokens for strings, other grammars can be used to highlight
+their contents.</p>
+<h2 id="signatureInfo.detail"><a class="header" href="#signatureInfo.detail">rust-analyzer.signatureInfo.detail</a></h2>
+<p>Default: <code>"full"</code></p>
+<p>Show full signature of the callable. Only shows parameters if disabled.</p>
+<h2 id="signatureInfo.documentation.enable"><a class="header" href="#signatureInfo.documentation.enable">rust-analyzer.signatureInfo.documentation.enable</a></h2>
+<p>Default: <code>true</code></p>
+<p>Show documentation.</p>
+<h2 id="typing.triggerChars"><a class="header" href="#typing.triggerChars">rust-analyzer.typing.triggerChars</a></h2>
+<p>Default: <code>"=."</code></p>
+<p>Specify the characters allowed to invoke special on typing triggers.</p>
+<ul>
+<li>typing <code>=</code> after <code>let</code> tries to smartly add <code>;</code> if <code>=</code> is followed by an existing
+expression</li>
+<li>typing <code>=</code> between two expressions adds <code>;</code> when in statement position</li>
+<li>typing <code>=</code> to turn an assignment into an equality comparison removes <code>;</code> when in
+expression position</li>
+<li>typing <code>.</code> in a chain method call auto-indents</li>
+<li>typing <code>{</code> or <code>(</code> in front of an expression inserts a closing <code>}</code> or <code>)</code> after the
+expression</li>
+<li>typing <code>{</code> in a use item adds a closing <code>}</code> in the right place</li>
+<li>typing <code>&gt;</code> to complete a return type <code>-&gt;</code> will insert a whitespace after it</li>
+<li>typing <code>&lt;</code> in a path or type position inserts a closing <code>&gt;</code> after the path or type.</li>
+</ul>
+<h2 id="vfs.extraIncludes"><a class="header" href="#vfs.extraIncludes">rust-analyzer.vfs.extraIncludes</a></h2>
+<p>Default: <code>[]</code></p>
+<p>Additional paths to include in the VFS. Generally for code that is
+generated or otherwise managed by a build system outside of Cargo,
+though Cargo might be the eventual consumer.</p>
+<h2 id="workspace.discoverConfig"><a class="header" href="#workspace.discoverConfig">rust-analyzer.workspace.discoverConfig</a></h2>
+<p>Default: <code>null</code></p>
+<p>Configure a command that rust-analyzer can invoke to
+obtain configuration.</p>
+<p>This is an alternative to manually generating
+<code>rust-project.json</code>: it enables rust-analyzer to generate
+rust-project.json on the fly, and regenerate it when
+switching or modifying projects.</p>
+<p>This is an object with three fields:</p>
+<ul>
+<li>
+<p><code>command</code>: the shell command to invoke</p>
+</li>
+<li>
+<p><code>filesToWatch</code>: which build system-specific files should
+be watched to trigger regenerating the configuration</p>
+</li>
+<li>
+<p><code>progressLabel</code>: the name of the command, used in
+progress indicators in the IDE</p>
+</li>
+</ul>
+<p>Here’s an example of a valid configuration:</p>
+<pre><code class="language-json">"rust-analyzer.workspace.discoverConfig": {
+    "command": [
+        "rust-project",
+        "develop-json",
+        "{arg}"
+    ],
+    "progressLabel": "buck2/rust-project",
+    "filesToWatch": [
+        "BUCK"
+    ]
+}
+</code></pre>
+<h2 id="argument-substitutions"><a class="header" href="#argument-substitutions">Argument Substitutions</a></h2>
+<p>If <code>command</code> includes the argument <code>{arg}</code>, that argument will be substituted
+with the JSON-serialized form of the following enum:</p>
+<pre><code class="language-norun">#[derive(PartialEq, Clone, Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub enum DiscoverArgument {
+   Path(AbsPathBuf),
+   Buildfile(AbsPathBuf),
+}
+</code></pre>
+<p>rust-analyzer will use the path invocation to find and
+generate a <code>rust-project.json</code> and therefore a
+workspace. Example:</p>
+<pre><code class="language-norun">rust-project develop-json '{ "path": "myproject/src/main.rs" }'
+</code></pre>
+<p>rust-analyzer will use build file invocations to update an
+existing workspace. Example:</p>
+<p>Or with a build file and the configuration above:</p>
+<pre><code class="language-norun">rust-project develop-json '{ "buildfile": "myproject/BUCK" }'
+</code></pre>
+<p>As a reference for implementors, buck2’s <code>rust-project</code>
+will likely be useful:
+<a href="https://github.com/facebook/buck2/tree/main/integrations/rust-project">https://github.com/facebook/buck2/tree/main/integrations/rust-project</a>.</p>
+<h2 id="discover-command-output"><a class="header" href="#discover-command-output">Discover Command Output</a></h2>
+<p><strong>Warning</strong>: This format is provisional and subject to change.</p>
+<p>The discover command should output JSON objects, one per
+line (JSONL format). These objects should correspond to
+this Rust data type:</p>
+<pre><code class="language-norun">#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(tag = "kind")]
+#[serde(rename_all = "snake_case")]
+enum DiscoverProjectData {
+    Finished { buildfile: Utf8PathBuf, project: ProjectJsonData },
+    Error { error: String, source: Option&lt;String&gt; },
+    Progress { message: String },
+}
+</code></pre>
+<p>For example, a progress event:</p>
+<pre><code class="language-json">{"kind":"progress","message":"generating rust-project.json"}
+</code></pre>
+<p>A finished event can look like this (expanded and
+commented for readability):</p>
+<pre><code class="language-json">{
+    // the internally-tagged representation of the enum.
+    "kind": "finished",
+    // the file used by a non-Cargo build system to define
+    // a package or target.
+    "buildfile": "rust-analyzer/BUCK",
+    // the contents of a rust-project.json, elided for brevity
+    "project": {
+        "sysroot": "foo",
+        "crates": []
+    }
+}
+</code></pre>
+<p>Only the finished event is required, but the other
+variants are encouraged to give users more feedback about
+progress or errors.</p>
+<h2 id="workspace.symbol.search.excludeImports"><a class="header" href="#workspace.symbol.search.excludeImports">rust-analyzer.workspace.symbol.search.excludeImports</a></h2>
+<p>Default: <code>false</code></p>
+<p>Exclude all imports from workspace symbol search.</p>
+<p>In addition to regular imports (which are always excluded),
+this option removes public imports (better known as re-exports)
+and removes imports that rename the imported symbol.</p>
+<h2 id="workspace.symbol.search.kind"><a class="header" href="#workspace.symbol.search.kind">rust-analyzer.workspace.symbol.search.kind</a></h2>
+<p>Default: <code>"only_types"</code></p>
+<p>Workspace symbol search kind.</p>
+<h2 id="workspace.symbol.search.limit"><a class="header" href="#workspace.symbol.search.limit">rust-analyzer.workspace.symbol.search.limit</a></h2>
+<p>Default: <code>128</code></p>
+<p>Limits the number of items returned from a workspace symbol search (Defaults to 128).
+Some clients like vs-code issue new searches on result filtering and don’t require all results to be returned in the initial search.
+Other clients requires all results upfront and might require a higher limit.</p>
+<h2 id="workspace.symbol.search.scope"><a class="header" href="#workspace.symbol.search.scope">rust-analyzer.workspace.symbol.search.scope</a></h2>
+<p>Default: <code>"workspace"</code></p>
+<p>Workspace symbol search scope.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="faq.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="non_cargo_based_projects.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="faq.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="non_cargo_based_projects.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+        <script>
+            window.playground_line_numbers = true;
+        </script>
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="ace-2a3cd908.js"></script>
+        <script src="mode-rust-2c9d5c9a.js"></script>
+        <script src="editor-16ca416c.js"></script>
+        <script src="theme-dawn-4493f9c8.js"></script>
+        <script src="theme-tomorrow_night-9dbe62a9.js"></script>
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

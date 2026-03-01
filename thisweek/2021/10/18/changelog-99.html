@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #99</title>
+  <meta name="description"
+    content="Commit: 91cbda4Release: 2021-10-18">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2021/10/18/changelog-99.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #99</h1>
+<div class="post-meta sect1">
+  Oct 18, 2021
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/91cbda43c2af82b9377eff70a21f59ade18cd23c"><code>91cbda4</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2021-10-18"><code>2021-10-18</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sponsors"><a class="anchor" href="#sponsors"></a>Sponsors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Become a sponsor:</strong> On <a href="https://opencollective.com/rust-analyzer/">OpenCollective</a> or
+<a href="https://github.com/sponsors/rust-analyzer">GitHub Sponsors</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10529"><code>#10529</code></a> generate <code>PartialOrd</code> implementations:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/137682192-12f729c3-c70b-456e-9b6c-a92fa4ea275f.gif" alt="137682192 12f729c3 c70b 456e 9b6c a92fa4ea275f">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10434"><code>#10434</code></a> allow <code>Locate parent module</code> in <code>Cargo.toml</code>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/137682837-46cb51b3-f6fa-41b1-b947-ae65f9a6509c.gif" alt="137682837 46cb51b3 f6fa 41b1 b947 ae65f9a6509c">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10539"><code>#10539</code></a> add "Generate delegate methods" assist:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/137555191-2f9ff184-a235-4afb-87c7-aa03cea4a96f.gif" alt="137555191 2f9ff184 a235 4afb 87c7 aa03cea4a96f">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10546"><code>#10546</code></a> implement "Promote local to const" assist:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/137555943-51a11a43-5e8f-4309-8178-417b677d74ad.gif" alt="137555943 51a11a43 5e8f 4309 8178 417b677d74ad">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10417"><code>#10417</code></a> add "Unwrap <code>Result</code> return type" assist:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/137636737-06a3d47d-f647-45dd-85a2-fe0579ef24a7.gif" alt="137636737 06a3d47d f647 45dd 85a2 fe0579ef24a7">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10519"><code>#10519</code></a> (first contribution) set <code>toolinfo</code> in LSIF export.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10522"><code>#10522</code></a> (first contribution) fix serialization of <code>SignatureHelp</code> response.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10534"><code>#10534</code></a> (first contribution) improve logo rendering on dark backgrounds.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10538"><code>#10538</code></a> (first contribution) make brace matching prefer the one to the right of the cursor.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10542"><code>#10542</code></a> (first contribution) use workspace <code>cargo</code> to fetch <code>rust-src</code> metadata.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10543"><code>#10543</code></a> (first contribution) narrow "Add missing match arms" assist range.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10491"><code>#10491</code></a> (first contribution) support nested type in "Replace <code>if-let</code> with <code>match</code>".</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10533"><code>#10533</code></a> fix <code>AssistContext</code> panic on sole whitespace selection.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10503"><code>#10503</code></a> only include targets of packages that are workspace members.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10517"><code>#10517</code></a> report <code>cargo check</code> failures.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10552"><code>#10552</code></a> fix "Missing fields" diagnostic fix replacing wrong text ranges.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10557"><code>#10557</code></a> fix qualified path completion not completing macros.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10562"><code>#10562</code></a> fix clippy attribute completions always inserting <code>clippy::</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10569"><code>#10569</code></a> skip non clippy completions when completing a clippy path.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10532"><code>#10532</code></a> (first contribution) rename <code>descend_into_macros</code> functions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10525"><code>#10525</code></a> regenerate lints and features.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10526"><code>#10526</code></a> improve user snippet import performance.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10528"><code>#10528</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/10533"><code>#10533</code></a> make selections in assists with trailing/leading whitespace more forgiving.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10423"><code>#10423</code></a> refactor for <code>mdbook</code> plugin.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10309"><code>#10309</code></a> use <code>ControlFlow</code> in "Extract function" assist.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10558"><code>#10558</code></a> refactor lifetime completion context fields.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10561"><code>#10561</code></a> don&#8217;t turn local names into strings in <code>CompletionContext</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

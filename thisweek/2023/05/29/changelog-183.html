@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #183</title>
+  <meta name="description"
+    content="Commit: 505fd09Release: 2023-05-29 (v0.3.1533)">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2023/05/29/changelog-183.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #183</h1>
+<div class="post-meta sect1">
+  May 29, 2023
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/505fd09f9e020b096d014e68b667268e743c2dd6"><code>505fd09</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2023-05-29"><code>2023-05-29</code></a> (<code>v0.3.1533</code>)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14866"><code>#14866</code></a> (first contribution) add Markdown syntax highlighting to doc-comments in VS Code:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1593486/239751755-c84f2e83-faea-47ca-853d-3728a07b2b66.png" alt="Screenshot showing Markdown highlighting in a block comment">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14849"><code>#14849</code></a> implement symbol search by alias:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/20956650/241207491-f2d13661-3cd5-4779-b40f-56e6d3efdef1.gif" alt="Screen recording of symbol search including aliases">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14816"><code>#14816</code></a> add assist to replace a named generic parameter with impl trait:</p>
+<div class="videoblock">
+<div class="content">
+<video src="https://user-images.githubusercontent.com/308347/241656231-9724e2bc-570b-43eb-b0fa-1895e3c02394.mp4" controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14916"><code>#14916</code></a> add diagnostic for incorrect <code>_</code> expressions:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/241656740-4527db7f-d14b-454e-890a-abe874ff4437.png" alt="Screenshot of an error on `let _s: String = _;">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14752"><code>#14752</code></a> (first contribution) fix indentation in <code>generate_derive</code>, <code>add_missing_impl_members</code> and <code>add_missing_default_members</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14878"><code>#14878</code></a> implement <code>${count()}</code> metavariable expressions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14872"><code>#14872</code></a> introduce new type variable when expectation for ref pattern is not a reference.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14891"><code>#14891</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/14897"><code>#14897</code></a> evaluate <code>UnevaluatedConst</code> during unification.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14913"><code>#14913</code></a> evaluate <code>UnevaluatedConst</code> before trait solving.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14890"><code>#14890</code></a> use <code>::core</code> instead of <code>$crate</code> in <code>option_env!</code> expansion.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14893"><code>#14893</code></a> fix <code>need-mut</code> false positive in closure capture of match scrutinee.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14874"><code>#14874</code></a> change how <code>#![cfg(FALSE)]</code> behaves on crate root.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14895"><code>#14895</code></a> don&#8217;t try to determine type of token inside macro calls.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14904"><code>#14904</code></a> render size, align and offset hover values in hex.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14906"><code>#14906</code></a> add a toggle to disable the dependency explorer.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14910"><code>#14910</code></a> filter out unused cargo features from config.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14894"><code>#14894</code></a> (first contribution) allow overriding the SCIP output path.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14914"><code>#14914</code></a> (first contribution) update outdated <code>rustup</code> installation instructions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14859"><code>#14859</code></a> specify thread types using Quality of Service API.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14880"><code>#14880</code></a> remove double lookups from <code>Interned</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14881"><code>#14881</code></a> replace <code>Display</code> impl for <code>Name</code> to support interning.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14889"><code>#14889</code></a> add context to "overly long loop" message.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14901"><code>#14901</code></a> move flycheck and config errors to status notification.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14909"><code>#14909</code></a> run CI on nightly rust when <code>proc-macro-*</code> crates change.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14755"><code>#14755</code></a> fix a TODO and some Clippy lints.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

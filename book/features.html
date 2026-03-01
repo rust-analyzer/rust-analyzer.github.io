@@ -1,0 +1,1261 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Features - rust-analyzer</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-05b71aa6.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-6c762e67.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">rust-analyzer</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/tree/master/docs/book" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/edit/master/docs/book/src/features.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="features"><a class="header" href="#features">Features</a></h1>
+<h3 id="annotations"><a class="header" href="#annotations">Annotations</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/annotations.rs#L20">annotations.rs</a></p>
+<p>Provides user with annotations above items for looking up references or impl blocks
+and running/debugging binaries.</p>
+<p><img src="https://user-images.githubusercontent.com/48062697/113020672-b7c34f00-917a-11eb-8f6e-858735660a0e.png" alt="Annotations"></p>
+<h3 id="auto-import"><a class="header" href="#auto-import">Auto Import</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-assists/src/handlers/auto_import.rs#L17">auto_import.rs</a></p>
+<p>Using the <code>auto-import</code> assist it is possible to insert missing imports for unresolved items.
+When inserting an import it will do so in a structured manner by keeping imports grouped,
+separated by a newline in the following order:</p>
+<ul>
+<li><code>std</code> and <code>core</code></li>
+<li>External Crates</li>
+<li>Current Crate, paths prefixed by <code>crate</code></li>
+<li>Current Module, paths prefixed by <code>self</code></li>
+<li>Super Module, paths prefixed by <code>super</code></li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-rust">use std::fs::File;
+
+use itertools::Itertools;
+use syntax::ast;
+
+use crate::utils::insert_use;
+
+use self::auto_import;
+
+use super::AssistContext;</code></pre>
+<h4 id="import-granularity"><a class="header" href="#import-granularity">Import Granularity</a></h4>
+<p>It is possible to configure how use-trees are merged with the <code>imports.granularity.group</code> setting.
+It has the following configurations:</p>
+<ul>
+<li><code>crate</code>: Merge imports from the same crate into a single use statement. This kind of
+nesting is only supported in Rust versions later than 1.24.</li>
+<li><code>module</code>: Merge imports from the same module into a single use statement.</li>
+<li><code>item</code>: Don’t merge imports at all, creating one import per item.</li>
+<li><code>preserve</code>: Do not change the granularity of any imports. For auto-import this has the same
+effect as <code>item</code>.</li>
+<li><code>one</code>: Merge all imports into a single use statement as long as they have the same visibility
+and attributes.</li>
+</ul>
+<p>In <code>VS Code</code> the configuration for this is <code>rust-analyzer.imports.granularity.group</code>.</p>
+<h4 id="import-prefix"><a class="header" href="#import-prefix">Import Prefix</a></h4>
+<p>The style of imports in the same crate is configurable through the <code>imports.prefix</code> setting.
+It has the following configurations:</p>
+<ul>
+<li><code>crate</code>: This setting will force paths to be always absolute, starting with the <code>crate</code>
+prefix, unless the item is defined outside of the current crate.</li>
+<li><code>self</code>: This setting will force paths that are relative to the current module to always
+start with <code>self</code>. This will result in paths that always start with either <code>crate</code>, <code>self</code>,
+<code>super</code> or an extern crate identifier.</li>
+<li><code>plain</code>: This setting does not impose any restrictions in imports.</li>
+</ul>
+<p>In <code>VS Code</code> the configuration for this is <code>rust-analyzer.imports.prefix</code>.</p>
+<p><img src="https://user-images.githubusercontent.com/48062697/113020673-b85be580-917a-11eb-9022-59585f35d4f8.gif" alt="Auto Import"></p>
+<h3 id="child-modules"><a class="header" href="#child-modules">Child Modules</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/child_modules.rs#L10">child_modules.rs</a></p>
+<p>Navigates to the child modules of the current module.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: Locate child modules</strong></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="completion-with-autoimport"><a class="header" href="#completion-with-autoimport">Completion With Autoimport</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/completions/flyimport.rs#L20">flyimport.rs</a></p>
+<p>When completing names in the current scope, proposes additional imports from other modules or crates,
+if they can be qualified in the scope, and their name contains all symbols from the completion input.</p>
+<p>To be considered applicable, the name must contain all input symbols in the given order, not necessarily adjacent.
+If any input symbol is not lowercased, the name must contain all symbols in exact case; otherwise the containing is checked case-insensitively.</p>
+<pre><code>fn main() {
+    pda$0
+}
+# pub mod std { pub mod marker { pub struct PhantomData { } } }
+</code></pre>
+<p>-&gt;</p>
+<pre><code>use std::marker::PhantomData;
+
+fn main() {
+    PhantomData
+}
+# pub mod std { pub mod marker { pub struct PhantomData { } } }
+</code></pre>
+<p>Also completes associated items, that require trait imports.
+If any unresolved and/or partially-qualified path precedes the input, it will be taken into account.
+Currently, only the imports with their import path ending with the whole qualifier will be proposed
+(no fuzzy matching for qualifier).</p>
+<pre><code>mod foo {
+    pub mod bar {
+        pub struct Item;
+
+        impl Item {
+            pub const TEST_ASSOC: usize = 3;
+        }
+    }
+}
+
+fn main() {
+    bar::Item::TEST_A$0
+}
+</code></pre>
+<p>-&gt;</p>
+<pre><code>use foo::bar;
+
+mod foo {
+    pub mod bar {
+        pub struct Item;
+
+        impl Item {
+            pub const TEST_ASSOC: usize = 3;
+        }
+    }
+}
+
+fn main() {
+    bar::Item::TEST_ASSOC
+}
+</code></pre>
+<p>NOTE: currently, if an assoc item comes from a trait that’s not currently imported, and it also has an unresolved and/or partially-qualified path,
+no imports will be proposed.</p>
+<h4 id="fuzzy-search-details"><a class="header" href="#fuzzy-search-details">Fuzzy search details</a></h4>
+<p>To avoid an excessive amount of the results returned, completion input is checked for inclusion in the names only
+(i.e. in <code>HashMap</code> in the <code>std::collections::HashMap</code> path).
+For the same reasons, avoids searching for any path imports for inputs with their length less than 2 symbols
+(but shows all associated items for any input length).</p>
+<h4 id="import-configuration"><a class="header" href="#import-configuration">Import configuration</a></h4>
+<p>It is possible to configure how use-trees are merged with the <code>imports.granularity.group</code> setting.
+Mimics the corresponding behavior of the <code>Auto Import</code> feature.</p>
+<h4 id="lsp-and-performance-implications"><a class="header" href="#lsp-and-performance-implications">LSP and performance implications</a></h4>
+<p>The feature is enabled only if the LSP client supports LSP protocol version 3.16+ and reports the <code>additionalTextEdits</code>
+(case-sensitive) resolve client capability in its client capabilities.
+This way the server is able to defer the costly computations, doing them for a selected completion item only.
+For clients with no such support, all edits have to be calculated on the completion request, including the fuzzy search completion ones,
+which might be slow ergo the feature is automatically disabled.</p>
+<h4 id="feature-toggle"><a class="header" href="#feature-toggle">Feature toggle</a></h4>
+<p>The feature can be forcefully turned off in the settings with the <code>rust-analyzer.completion.autoimport.enable</code> flag.
+Note that having this flag set to <code>true</code> does not guarantee that the feature is enabled: your client needs to have the corresponding
+capability enabled.</p>
+<h3 id="completions-attribute"><a class="header" href="#completions-attribute">Completions Attribute</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/hir-def/src/lib.rs#L1289">lib.rs</a>
+Crate authors can opt their type out of completions in some cases.
+This is done with the <code>#[rust_analyzer::completions(...)]</code> attribute.</p>
+<p>All completable things support <code>#[rust_analyzer::completions(ignore_flyimport)]</code>,
+which causes the thing to get excluded from flyimport completion. It will still
+be completed when in scope. This is analogous to the setting <code>rust-analyzer.completion.autoimport.exclude</code>
+with <code>"type": "always"</code>.</p>
+<p>In addition, traits support two more modes: <code>#[rust_analyzer::completions(ignore_flyimport_methods)]</code>,
+which means the trait itself may still be flyimported but its methods won’t, and
+<code>#[rust_analyzer::completions(ignore_methods)]</code>, which means the methods won’t be completed even when
+the trait is in scope (but the trait itself may still be completed). The methods will still be completed
+on <code>dyn Trait</code>, <code>impl Trait</code> or where the trait is specified in bounds. These modes correspond to
+the settings <code>rust-analyzer.completion.autoimport.exclude</code> with <code>"type": "methods"</code> and
+<code>rust-analyzer.completion.excludeTraits</code>, respectively.</p>
+<p>Malformed attributes will be ignored without warnings.</p>
+<p>Note that users have no way to override this attribute, so be careful and only include things
+users definitely do not want to be completed!</p>
+<h3 id="debug-itemtree"><a class="header" href="#debug-itemtree">Debug ItemTree</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/view_item_tree.rs#L4">view_item_tree.rs</a></p>
+<p>Displays the ItemTree of the currently open file, for debugging.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: Debug ItemTree</strong></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="expand-macro-recursively"><a class="header" href="#expand-macro-recursively">Expand Macro Recursively</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/expand_macro.rs#L18">expand_macro.rs</a></p>
+<p>Shows the full macro expansion of the macro at the current caret position.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: Expand macro recursively at caret</strong></td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/48062697/113020648-b3973180-917a-11eb-84a9-ecb921293dc5.gif" alt="Expand Macro Recursively"></p>
+<h3 id="expand-and-shrink-selection"><a class="header" href="#expand-and-shrink-selection">Expand and Shrink Selection</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/extend_selection.rs#L15">extend_selection.rs</a></p>
+<p>Extends or shrinks the current selection to the encompassing syntactic construct
+(expression, statement, item, module, etc). It works with multiple cursors.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Shortcut</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><kbd>Alt+Shift+→</kbd>, <kbd>Alt+Shift+←</kbd></td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/48062697/113020651-b42fc800-917a-11eb-8a4f-cf1a07859fac.gif" alt="Expand and Shrink Selection"></p>
+<h3 id="file-structure"><a class="header" href="#file-structure">File Structure</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/file_structure.rs#L31">file_structure.rs</a></p>
+<p>Provides a tree of the symbols defined in the file. Can be used to</p>
+<ul>
+<li>fuzzy search symbol in a file (super useful)</li>
+<li>draw breadcrumbs to describe the context around the cursor</li>
+<li>draw outline of the file</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Shortcut</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><kbd>Ctrl+Shift+O</kbd></td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/48062697/113020654-b42fc800-917a-11eb-8388-e7dc4d92b02e.gif" alt="File Structure"></p>
+<h3 id="find-all-references"><a class="header" href="#find-all-references">Find All References</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/references.rs#L70">references.rs</a></p>
+<p>Shows all references of the item at the cursor location. This includes:</p>
+<ul>
+<li>Direct references to variables, functions, types, etc.</li>
+<li>Constructor/initialization references when cursor is on struct/enum definition tokens</li>
+<li>References in patterns and type contexts</li>
+<li>References through dereferencing and borrowing</li>
+<li>References in macro expansions</li>
+</ul>
+<p>Special handling for constructors:</p>
+<ul>
+<li>When the cursor is on <code>{</code>, <code>(</code>, or <code>;</code> in a struct/enum definition</li>
+<li>When the cursor is on the type name in a struct/enum definition
+These cases will show only constructor/initialization usages of the type</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Shortcut</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><kbd>Shift+Alt+F12</kbd></td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/48062697/113020670-b7c34f00-917a-11eb-8003-370ac5f2b3cb.gif" alt="Find All References"></p>
+<h3 id="folding"><a class="header" href="#folding">Folding</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/folding_ranges.rs#L42">folding_ranges.rs</a></p>
+<p>Defines folding regions for curly braced blocks, runs of consecutive use, mod, const or static
+items, and <code>region</code> / <code>endregion</code> comment markers.</p>
+<h3 id="format-string-completion"><a class="header" href="#format-string-completion">Format String Completion</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/completions/postfix/format_like.rs#L0">format_like.rs</a></p>
+<p><code>"Result {result} is {2 + 2}"</code> is expanded to the <code>"Result {} is {}", result, 2 + 2</code>.</p>
+<p>The following postfix snippets are available:</p>
+<ul>
+<li><code>format</code> -&gt; <code>format!(...)</code></li>
+<li><code>panic</code> -&gt; <code>panic!(...)</code></li>
+<li><code>println</code> -&gt; <code>println!(...)</code></li>
+<li><code>log</code>:
+** <code>logd</code> -&gt; <code>log::debug!(...)</code>
+** <code>logt</code> -&gt; <code>log::trace!(...)</code>
+** <code>logi</code> -&gt; <code>log::info!(...)</code>
+** <code>logw</code> -&gt; <code>log::warn!(...)</code>
+** <code>loge</code> -&gt; <code>log::error!(...)</code></li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/48062697/113020656-b560f500-917a-11eb-87de-02991f61beb8.gif" alt="Format String Completion"></p>
+<h3 id="go-to-declaration"><a class="header" href="#go-to-declaration">Go to Declaration</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/goto_declaration.rs#L13">goto_declaration.rs</a></p>
+<p>Navigates to the declaration of an identifier.</p>
+<p>This is the same as <code>Go to Definition</code> with the following exceptions:</p>
+<ul>
+<li>outline modules will navigate to the <code>mod name;</code> item declaration</li>
+<li>trait assoc items will navigate to the assoc item of the trait declaration as opposed to the trait impl</li>
+<li>fields in patterns will navigate to the field declaration of the struct, union or variant</li>
+</ul>
+<h3 id="go-to-definition"><a class="header" href="#go-to-definition">Go to Definition</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/goto_definition.rs#L32">goto_definition.rs</a></p>
+<p>Navigates to the definition of an identifier.</p>
+<p>For outline modules, this will navigate to the source file of the module.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Shortcut</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><kbd>F12</kbd></td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/48062697/113065563-025fbe00-91b1-11eb-83e4-a5a703610b23.gif" alt="Go to Definition"></p>
+<h3 id="go-to-implementation"><a class="header" href="#go-to-implementation">Go to Implementation</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/goto_implementation.rs#L15">goto_implementation.rs</a></p>
+<p>Navigates to the impl items of types.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Shortcut</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><kbd>Ctrl+F12</kbd></td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/48062697/113065566-02f85480-91b1-11eb-9288-aaad8abd8841.gif" alt="Go to Implementation"></p>
+<h3 id="go-to-type-definition"><a class="header" href="#go-to-type-definition">Go to Type Definition</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/goto_type_definition.rs#L7">goto_type_definition.rs</a></p>
+<p>Navigates to the type of an identifier.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>Go to Type Definition</strong></td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/48062697/113020657-b560f500-917a-11eb-9007-0f809733a338.gif" alt="Go to Type Definition"></p>
+<h3 id="highlight-related"><a class="header" href="#highlight-related">Highlight Related</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/highlight_related.rs#L45">highlight_related.rs</a></p>
+<p>Highlights constructs related to the thing under the cursor:</p>
+<ol>
+<li>if on an identifier, highlights all references to that identifier in the current file
+<ul>
+<li>additionally, if the identifier is a trait in a where clause, type parameter trait bound or use item, highlights all references to that trait’s assoc items in the corresponding scope</li>
+</ul>
+</li>
+<li>if on an <code>async</code> or <code>await</code> token, highlights all yield points for that async context</li>
+<li>if on a <code>return</code> or <code>fn</code> keyword, <code>?</code> character or <code>-&gt;</code> return type arrow, highlights all exit points for that context</li>
+<li>if on a <code>break</code>, <code>loop</code>, <code>while</code> or <code>for</code> token, highlights all break points for that loop or block context</li>
+<li>if on a <code>move</code> or <code>|</code> token that belongs to a closure, highlights all captures of the closure.</li>
+</ol>
+<p>Note: <code>?</code>, <code>|</code> and <code>-&gt;</code> do not currently trigger this behavior in the VSCode editor.</p>
+<h3 id="hover"><a class="header" href="#hover">Hover</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/hover.rs#L125">hover.rs</a></p>
+<p>Shows additional information, like the type of an expression or the documentation for a definition when “focusing” code.
+Focusing is usually hovering with a mouse, but can also be triggered with a shortcut.</p>
+<p><img src="https://user-images.githubusercontent.com/48062697/113020658-b5f98b80-917a-11eb-9f88-3dbc27320c95.gif" alt="Hover"></p>
+<h3 id="inlay-hints"><a class="header" href="#inlay-hints">Inlay Hints</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/inlay_hints.rs#L47">inlay_hints.rs</a></p>
+<p>rust-analyzer shows additional information inline with the source code.
+Editors usually render this using read-only virtual text snippets interspersed with code.</p>
+<p>rust-analyzer by default shows hints for</p>
+<ul>
+<li>types of local variables</li>
+<li>names of function arguments</li>
+<li>names of const generic parameters</li>
+<li>types of chained expressions</li>
+</ul>
+<p>Optionally, one can enable additional hints for</p>
+<ul>
+<li>return types of closure expressions</li>
+<li>elided lifetimes</li>
+<li>compiler inserted reborrows</li>
+<li>names of generic type and lifetime parameters</li>
+</ul>
+<p>Note: inlay hints for function argument names are heuristically omitted to reduce noise and will not appear if
+any of the
+<a href="https://github.com/rust-lang/rust-analyzer/blob/6b8b8ff4c56118ddee6c531cde06add1aad4a6af/crates/ide/src/inlay_hints/param_name.rs#L92-L99">following criteria</a>
+are met:</p>
+<ul>
+<li>the parameter name is a suffix of the function’s name</li>
+<li>the argument is a qualified constructing or call expression where the qualifier is an ADT</li>
+<li>exact argument&lt;-&gt;parameter match(ignoring leading underscore) or parameter is a prefix/suffix
+of argument with _ splitting it off</li>
+<li>the parameter name starts with <code>ra_fixture</code></li>
+<li>the parameter name is a
+<a href="https://github.com/rust-lang/rust-analyzer/blob/6b8b8ff4c56118ddee6c531cde06add1aad4a6af/crates/ide/src/inlay_hints/param_name.rs#L200">well known name</a>
+in a unary function</li>
+<li>the parameter name is a
+<a href="https://github.com/rust-lang/rust-analyzer/blob/6b8b8ff4c56118ddee6c531cde06add1aad4a6af/crates/ide/src/inlay_hints/param_name.rs#L201">single character</a>
+in a unary function</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/48062697/113020660-b5f98b80-917a-11eb-8d70-3be3fd558cdd.png" alt="Inlay hints"></p>
+<h3 id="interpret-a-function-static-or-const"><a class="header" href="#interpret-a-function-static-or-const">Interpret A Function, Static Or Const.</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/interpret.rs#L7">interpret.rs</a></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: Interpret</strong></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="join-lines"><a class="header" href="#join-lines">Join Lines</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/join_lines.rs#L20">join_lines.rs</a></p>
+<p>Join selected lines into one, smartly fixing up whitespace, trailing commas, and braces.</p>
+<p>See <a href="https://user-images.githubusercontent.com/1711539/124515923-4504e800-dde9-11eb-8d58-d97945a1a785.gif">this gif</a> for the cases handled specially by joined lines.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: Join lines</strong></td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/48062697/113020661-b6922200-917a-11eb-87c4-b75acc028f11.gif" alt="Join Lines"></p>
+<h3 id="macro-brace-style-attribute"><a class="header" href="#macro-brace-style-attribute">Macro Brace Style Attribute</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/hir/src/lib.rs#L3530">lib.rs</a>
+Crate authors can declare the preferred brace style for their macro. This will affect how completion
+insert calls to it.</p>
+<p>This is only supported on function-like macros.</p>
+<p>To do that, insert the <code>#[rust_analyzer::macro_style(style)]</code> attribute on the macro (for proc macros,
+insert it for the macro’s function). <code>style</code> can be one of:</p>
+<ul>
+<li><code>braces</code> for <code>{...}</code> style.</li>
+<li><code>brackets</code> for <code>[...]</code> style.</li>
+<li><code>parentheses</code> for <code>(...)</code> style.</li>
+</ul>
+<p>Malformed attributes will be ignored without warnings.</p>
+<p>Note that users have no way to override this attribute, so be careful and only include things
+users definitely do not want to be completed!</p>
+<h3 id="magic-completions"><a class="header" href="#magic-completions">Magic Completions</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/lib.rs#L85">lib.rs</a></p>
+<p>In addition to usual reference completion, rust-analyzer provides some ✨magic✨
+completions as well:</p>
+<p>Keywords like <code>if</code>, <code>else</code> <code>while</code>, <code>loop</code> are completed with braces, and cursor
+is placed at the appropriate position. Even though <code>if</code> is easy to type, you
+still want to complete it, to get <code> { }</code> for free! <code>return</code> is inserted with a
+space or <code>;</code> depending on the return type of the function.</p>
+<p>When completing a function call, <code>()</code> are automatically inserted. If a function
+takes arguments, the cursor is positioned inside the parenthesis.</p>
+<p>There are postfix completions, which can be triggered by typing something like
+<code>foo().if</code>. The word after <code>.</code> determines postfix completion. Possible variants are:</p>
+<ul>
+<li><code>expr.if</code> -&gt; <code>if expr {}</code> or <code>if let ... {}</code> for <code>Option</code> or <code>Result</code></li>
+<li><code>expr.match</code> -&gt; <code>match expr {}</code></li>
+<li><code>expr.while</code> -&gt; <code>while expr {}</code> or <code>while let ... {}</code> for <code>Option</code> or <code>Result</code></li>
+<li><code>expr.ref</code> -&gt; <code>&amp;expr</code></li>
+<li><code>expr.refm</code> -&gt; <code>&amp;mut expr</code></li>
+<li><code>expr.let</code> -&gt; <code>let $0 = expr;</code></li>
+<li><code>expr.lete</code> -&gt; <code>let $1 = expr else { $0 };</code></li>
+<li><code>expr.letm</code> -&gt; <code>let mut $0 = expr;</code></li>
+<li><code>expr.not</code> -&gt; <code>!expr</code></li>
+<li><code>expr.dbg</code> -&gt; <code>dbg!(expr)</code></li>
+<li><code>expr.dbgr</code> -&gt; <code>dbg!(&amp;expr)</code></li>
+<li><code>expr.call</code> -&gt; <code>(expr)</code></li>
+</ul>
+<p>There also snippet completions:</p>
+<h4 id="expressions"><a class="header" href="#expressions">Expressions</a></h4>
+<ul>
+<li><code>pd</code> -&gt; <code>eprintln!(" = {:?}", );</code></li>
+<li><code>ppd</code> -&gt; <code>eprintln!(" = {:#?}", );</code></li>
+</ul>
+<h4 id="items"><a class="header" href="#items">Items</a></h4>
+<ul>
+<li><code>tfn</code> -&gt; <code>#[test] fn feature(){}</code></li>
+<li><code>tmod</code> -&gt;</li>
+</ul>
+<pre><code class="language-rust">#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_name() {}
+}</code></pre>
+<p>And the auto import completions, enabled with the <code>rust-analyzer.completion.autoimport.enable</code> setting and the corresponding LSP client capabilities.
+Those are the additional completion options with automatic <code>use</code> import and options from all project importable items,
+fuzzy matched against the completion input.</p>
+<p><img src="https://user-images.githubusercontent.com/48062697/113020667-b72ab880-917a-11eb-8778-716cf26a0eb3.gif" alt="Magic Completions"></p>
+<h3 id="matching-brace"><a class="header" href="#matching-brace">Matching Brace</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/matching_brace.rs#L6">matching_brace.rs</a></p>
+<p>If the cursor is on any brace (<code>&lt;&gt;(){}[]||</code>) which is a part of a brace-pair,
+moves cursor to the matching brace. It uses the actual parser to determine
+braces, so it won’t confuse generics with comparisons.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: Find matching brace</strong></td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/48062697/113065573-04298180-91b1-11eb-8dec-d4e2a202f304.gif" alt="Matching Brace"></p>
+<h3 id="memory-usage"><a class="header" href="#memory-usage">Memory Usage</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-db/src/apply_change.rs#L16">apply_change.rs</a></p>
+<p>Clears rust-analyzer’s internal database and prints memory usage statistics.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: Memory Usage (Clears Database)</strong></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="move-item"><a class="header" href="#move-item">Move Item</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/move_item.rs#L16">move_item.rs</a></p>
+<p>Move item under cursor or selection up and down.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: Move item up</strong></td></tr>
+<tr><td>VS Code</td><td><strong>rust-analyzer: Move item down</strong></td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/48062697/113065576-04298180-91b1-11eb-91ce-4505e99ed598.gif" alt="Move Item"></p>
+<h3 id="on-enter"><a class="header" href="#on-enter">On Enter</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/typing/on_enter.rs#L16">on_enter.rs</a></p>
+<p>rust-analyzer can override <kbd>Enter</kbd> key to make it smarter:</p>
+<ul>
+<li><kbd>Enter</kbd> inside triple-slash comments automatically inserts <code>///</code></li>
+<li><kbd>Enter</kbd> in the middle or after a trailing space in <code>//</code> inserts <code>//</code></li>
+<li><kbd>Enter</kbd> inside <code>//!</code> doc comments automatically inserts <code>//!</code></li>
+<li><kbd>Enter</kbd> after <code>{</code> indents contents and closing <code>}</code> of single-line block</li>
+</ul>
+<p>This action needs to be assigned to shortcut explicitly.</p>
+<p>Note that, depending on the other installed extensions, this feature can visibly slow down typing.
+Similarly, if rust-analyzer crashes or stops responding, <code>Enter</code> might not work.
+In that case, you can still press <code>Shift-Enter</code> to insert a newline.</p>
+<h4 id="vs-code"><a class="header" href="#vs-code">VS Code</a></h4>
+<p>Add the following to <code>keybindings.json</code>:</p>
+<pre><code class="language-json">{
+  "key": "Enter",
+  "command": "rust-analyzer.onEnter",
+  "when": "editorTextFocus &amp;&amp; !suggestWidgetVisible &amp;&amp; editorLangId == rust"
+}
+</code></pre>
+<p>When using the Vim plugin:</p>
+<pre><code class="language-json">{
+  "key": "Enter",
+  "command": "rust-analyzer.onEnter",
+  "when": "editorTextFocus &amp;&amp; !suggestWidgetVisible &amp;&amp; editorLangId == rust &amp;&amp; vim.mode == 'Insert'"
+}
+</code></pre>
+<p><img src="https://user-images.githubusercontent.com/48062697/113065578-04c21800-91b1-11eb-82b8-22b8c481e645.gif" alt="On Enter"></p>
+<h3 id="on-typing-assists"><a class="header" href="#on-typing-assists">On Typing Assists</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/typing.rs#L47">typing.rs</a></p>
+<p>Some features trigger on typing certain characters:</p>
+<ul>
+<li>typing <code>let =</code> tries to smartly add <code>;</code> if <code>=</code> is followed by an existing expression</li>
+<li>typing <code>=</code> between two expressions adds <code>;</code> when in statement position</li>
+<li>typing <code>=</code> to turn an assignment into an equality comparison removes <code>;</code> when in expression position</li>
+<li>typing <code>.</code> in a chain method call auto-indents</li>
+<li>typing <code>{</code> or <code>(</code> in front of an expression inserts a closing <code>}</code> or <code>)</code> after the expression</li>
+<li>typing <code>{</code> in a use item adds a closing <code>}</code> in the right place</li>
+<li>typing <code>&gt;</code> to complete a return type <code>-&gt;</code> will insert a whitespace after it</li>
+</ul>
+<h4 id="vs-code-1"><a class="header" href="#vs-code-1">VS Code</a></h4>
+<p>Add the following to <code>settings.json</code>:</p>
+<pre><code class="language-json">"editor.formatOnType": true,
+</code></pre>
+<p><img src="https://user-images.githubusercontent.com/48062697/113166163-69758500-923a-11eb-81ee-eb33ec380399.gif" alt="On Typing Assists">
+<img src="https://user-images.githubusercontent.com/48062697/113171066-105c2000-923f-11eb-87ab-f4a263346567.gif" alt="On Typing Assists"></p>
+<h3 id="open-docs"><a class="header" href="#open-docs">Open Docs</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/doc_links.rs#L136">doc_links.rs</a></p>
+<p>Retrieve a links to documentation for the given symbol.</p>
+<p>The simplest way to use this feature is via the context menu. Right-click on
+the selected item. The context menu opens. Select <strong>Open Docs</strong>.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: Open Docs</strong></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="parent-module"><a class="header" href="#parent-module">Parent Module</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/parent_module.rs#L14">parent_module.rs</a></p>
+<p>Navigates to the parent module of the current module.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: Locate parent module</strong></td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/48062697/113065580-04c21800-91b1-11eb-9a32-00086161c0bd.gif" alt="Parent Module"></p>
+<h3 id="related-tests"><a class="header" href="#related-tests">Related Tests</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L191">runnables.rs</a></p>
+<p>Provides a sneak peek of all tests where the current item is used.</p>
+<p>The simplest way to use this feature is via the context menu. Right-click on
+the selected item. The context menu opens. Select <strong>Peek Related Tests</strong>.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: Peek Related Tests</strong></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="rename"><a class="header" href="#rename">Rename</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/rename.rs#L112">rename.rs</a></p>
+<p>Renames the item below the cursor and all of its references</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Shortcut</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><kbd>F2</kbd></td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/48062697/113065582-055aae80-91b1-11eb-8ade-2b58e6d81883.gif" alt="Rename"></p>
+<h3 id="run"><a class="header" href="#run">Run</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/runnables.rs#L118">runnables.rs</a></p>
+<p>Shows a popup suggesting to run a test/benchmark/binary <strong>at the current cursor
+location</strong>. Super useful for repeatedly running just a single test. Do bind this
+to a shortcut!</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: Run</strong></td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/48062697/113065583-055aae80-91b1-11eb-958f-d67efcaf6a2f.gif" alt="Run"></p>
+<h3 id="semantic-syntax-highlighting"><a class="header" href="#semantic-syntax-highlighting">Semantic Syntax Highlighting</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/syntax_highlighting.rs#L69">syntax_highlighting.rs</a></p>
+<p>rust-analyzer highlights the code semantically.
+For example, <code>Bar</code> in <code>foo::Bar</code> might be colored differently depending on whether <code>Bar</code> is an enum or a trait.
+rust-analyzer does not specify colors directly, instead it assigns a tag (like <code>struct</code>) and a set of modifiers (like <code>declaration</code>) to each token.
+It’s up to the client to map those to specific colors.</p>
+<p>The general rule is that a reference to an entity gets colored the same way as the entity itself.
+We also give special modifier for <code>mut</code> and <code>&amp;mut</code> local variables.</p>
+<h4 id="token-tags"><a class="header" href="#token-tags">Token Tags</a></h4>
+<p>Rust-analyzer currently emits the following token tags:</p>
+<ul>
+<li>For items:</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th></th></tr>
+</thead>
+<tbody>
+<tr><td>attribute</td><td>Emitted for attribute macros.</td></tr>
+<tr><td>enum</td><td>Emitted for enums.</td></tr>
+<tr><td>function</td><td>Emitted for free-standing functions.</td></tr>
+<tr><td>derive</td><td>Emitted for derive macros.</td></tr>
+<tr><td>macro</td><td>Emitted for function-like macros.</td></tr>
+<tr><td>method</td><td>Emitted for associated functions, also knowns as methods.</td></tr>
+<tr><td>namespace</td><td>Emitted for modules.</td></tr>
+<tr><td>struct</td><td>Emitted for structs.</td></tr>
+<tr><td>trait</td><td>Emitted for traits.</td></tr>
+<tr><td>typeAlias</td><td>Emitted for type aliases and <code>Self</code> in <code>impl</code>s.</td></tr>
+<tr><td>union</td><td>Emitted for unions.</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>For literals:</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th></th></tr>
+</thead>
+<tbody>
+<tr><td>boolean</td><td>Emitted for the boolean literals <code>true</code> and <code>false</code>.</td></tr>
+<tr><td>character</td><td>Emitted for character literals.</td></tr>
+<tr><td>number</td><td>Emitted for numeric literals.</td></tr>
+<tr><td>string</td><td>Emitted for string literals.</td></tr>
+<tr><td>escapeSequence</td><td>Emitted for escaped sequences inside strings like <code>\n</code>.</td></tr>
+<tr><td>formatSpecifier</td><td>Emitted for format specifiers <code>{:?}</code> in <code>format!</code>-like macros.</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>For operators:</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th></th></tr>
+</thead>
+<tbody>
+<tr><td>operator</td><td>Emitted for general operators.</td></tr>
+<tr><td>arithmetic</td><td>Emitted for the arithmetic operators <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>.</td></tr>
+<tr><td>bitwise</td><td>Emitted for the bitwise operators <code>|</code>, <code>&amp;</code>, <code>!</code>, <code>^</code>, <code>|=</code>, <code>&amp;=</code>, <code>^=</code>.</td></tr>
+<tr><td>comparison</td><td>Emitted for the comparison oerators <code>&gt;</code>, <code>&lt;</code>, <code>==</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>!=</code>.</td></tr>
+<tr><td>logical</td><td>Emitted for the logical operators <code>||</code>, <code>&amp;&amp;</code>, <code>!</code>.</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>For punctuation:</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th></th></tr>
+</thead>
+<tbody>
+<tr><td>punctuation</td><td>Emitted for general punctuation.</td></tr>
+<tr><td>attributeBracket</td><td>Emitted for attribute invocation brackets, that is the <code>#[</code> and <code>]</code> tokens.</td></tr>
+<tr><td>angle</td><td>Emitted for <code>&lt;&gt;</code> angle brackets.</td></tr>
+<tr><td>brace</td><td>Emitted for <code>{}</code> braces.</td></tr>
+<tr><td>bracket</td><td>Emitted for <code>[]</code> brackets.</td></tr>
+<tr><td>parenthesis</td><td>Emitted for <code>()</code> parentheses.</td></tr>
+<tr><td>colon</td><td>Emitted for the <code>:</code> token.</td></tr>
+<tr><td>comma</td><td>Emitted for the <code>,</code> token.</td></tr>
+<tr><td>dot</td><td>Emitted for the <code>.</code> token.</td></tr>
+<tr><td>semi</td><td>Emitted for the <code>;</code> token.</td></tr>
+<tr><td>macroBang</td><td>Emitted for the <code>!</code> token in macro calls.</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li></li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th></th></tr>
+</thead>
+<tbody>
+<tr><td>builtinAttribute</td><td>Emitted for names to builtin attributes in attribute path, the <code>repr</code> in <code>#[repr(u8)]</code> for example.</td></tr>
+<tr><td>builtinType</td><td>Emitted for builtin types like <code>u32</code>, <code>str</code> and <code>f32</code>.</td></tr>
+<tr><td>comment</td><td>Emitted for comments.</td></tr>
+<tr><td>constParameter</td><td>Emitted for const parameters.</td></tr>
+<tr><td>deriveHelper</td><td>Emitted for derive helper attributes.</td></tr>
+<tr><td>enumMember</td><td>Emitted for enum variants.</td></tr>
+<tr><td>generic</td><td>Emitted for generic tokens that have no mapping.</td></tr>
+<tr><td>keyword</td><td>Emitted for keywords.</td></tr>
+<tr><td>label</td><td>Emitted for labels.</td></tr>
+<tr><td>lifetime</td><td>Emitted for lifetimes.</td></tr>
+<tr><td>parameter</td><td>Emitted for non-self function parameters.</td></tr>
+<tr><td>property</td><td>Emitted for struct and union fields.</td></tr>
+<tr><td>selfKeyword</td><td>Emitted for the self function parameter and self path-specifier.</td></tr>
+<tr><td>selfTypeKeyword</td><td>Emitted for the Self type parameter.</td></tr>
+<tr><td>toolModule</td><td>Emitted for tool modules.</td></tr>
+<tr><td>typeParameter</td><td>Emitted for type parameters.</td></tr>
+<tr><td>unresolvedReference</td><td>Emitted for unresolved references, names that rust-analyzer can’t find the definition of.</td></tr>
+<tr><td>variable</td><td>Emitted for locals, constants and statics.</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="token-modifiers"><a class="header" href="#token-modifiers">Token Modifiers</a></h4>
+<p>Token modifiers allow to style some elements in the source code more precisely.</p>
+<p>Rust-analyzer currently emits the following token modifiers:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th></th></tr>
+</thead>
+<tbody>
+<tr><td>async</td><td>Emitted for async functions and the <code>async</code> and <code>await</code> keywords.</td></tr>
+<tr><td>attribute</td><td>Emitted for tokens inside attributes.</td></tr>
+<tr><td>callable</td><td>Emitted for locals whose types implements one of the <code>Fn*</code> traits.</td></tr>
+<tr><td>constant</td><td>Emitted for const.</td></tr>
+<tr><td>consuming</td><td>Emitted for locals that are being consumed when use in a function call.</td></tr>
+<tr><td>controlFlow</td><td>Emitted for control-flow related tokens, this includes th <code>?</code> operator.</td></tr>
+<tr><td>crateRoot</td><td>Emitted for crate names, like <code>serde</code> and <code>crate</code>.</td></tr>
+<tr><td>declaration</td><td>Emitted for names of definitions, like <code>foo</code> in <code>fn foo(){}</code>.</td></tr>
+<tr><td>defaultLibrary</td><td>Emitted for items from built-in crates (std, core, alloc, test and proc_macro).</td></tr>
+<tr><td>documentation</td><td>Emitted for documentation comment.</td></tr>
+<tr><td>injected</td><td>Emitted for doc-string injected highlighting like rust source blocks in documentation.</td></tr>
+<tr><td>intraDocLink</td><td>Emitted for intra doc links in doc-string.</td></tr>
+<tr><td>library</td><td>Emitted for items that are defined outside of the current crate.</td></tr>
+<tr><td>macro</td><td>Emitted for tokens inside macro call.</td></tr>
+<tr><td>mutable</td><td>Emitted for mutable locals and statics as well as functions taking <code>&amp;mut self</code>.</td></tr>
+<tr><td>public</td><td>Emitted for items that are from the current crate and are <code>pub</code>.</td></tr>
+<tr><td>reference</td><td>Emitted for locals behind a reference and functions taking <code>self</code> by reference.</td></tr>
+<tr><td>static</td><td>Emitted for “static” functions, also known as functions that do not take a <code>self</code> param, as well as statics and consts.</td></tr>
+<tr><td>trait</td><td>Emitted for associated trait item.</td></tr>
+<tr><td>unsafe</td><td>Emitted for unsafe operations, like unsafe function calls, as well as the <code>unsafe</code> token.</td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/48062697/113164457-06cfb980-9239-11eb-819b-0f93e646acf8.png" alt="Semantic Syntax Highlighting">
+<img src="https://user-images.githubusercontent.com/48062697/113187625-f7f50100-9250-11eb-825e-91c58f236071.png" alt="Semantic Syntax Highlighting"></p>
+<h3 id="show-dependency-tree"><a class="header" href="#show-dependency-tree">Show Dependency Tree</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/fetch_crates.rs#L13">fetch_crates.rs</a></p>
+<p>Shows a view tree with all the dependencies of this project</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Panel Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>Rust Dependencies</strong></td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/5748995/229394139-2625beab-f4c9-484b-84ed-ad5dee0b1e1a.png" alt="Show Dependency Tree"></p>
+<h3 id="show-syntax-tree"><a class="header" href="#show-syntax-tree">Show Syntax Tree</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/view_syntax_tree.rs#L14">view_syntax_tree.rs</a></p>
+<p>Shows a tree view with the syntax tree of the current file</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Panel Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>Rust Syntax Tree</strong></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="status"><a class="header" href="#status">Status</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/status.rs#L7">status.rs</a></p>
+<p>Shows internal statistic about memory usage of rust-analyzer.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: Status</strong></td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/48062697/113065584-05f34500-91b1-11eb-98cc-5c196f76be7f.gif" alt="Status"></p>
+<h3 id="structural-search-and-replace"><a class="header" href="#structural-search-and-replace">Structural Search and Replace</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-ssr/src/lib.rs#L6">lib.rs</a></p>
+<p>Search and replace with named wildcards that will match any expression, type, path, pattern or item.
+The syntax for a structural search replace command is <code>&lt;search_pattern&gt; ==&gt;&gt; &lt;replace_pattern&gt;</code>.
+A <code>$&lt;name&gt;</code> placeholder in the search pattern will match any AST node and <code>$&lt;name&gt;</code> will reference it in the replacement.
+Within a macro call, a placeholder will match up until whatever token follows the placeholder.</p>
+<p>All paths in both the search pattern and the replacement template must resolve in the context
+in which this command is invoked. Paths in the search pattern will then match the code if they
+resolve to the same item, even if they’re written differently. For example if we invoke the
+command in the module <code>foo</code> with a pattern of <code>Bar</code>, then code in the parent module that refers
+to <code>foo::Bar</code> will match.</p>
+<p>Paths in the replacement template will be rendered appropriately for the context in which the
+replacement occurs. For example if our replacement template is <code>foo::Bar</code> and we match some
+code in the <code>foo</code> module, we’ll insert just <code>Bar</code>.</p>
+<p>Inherent method calls should generally be written in UFCS form. e.g. <code>foo::Bar::baz($s, $a)</code> will
+match <code>$s.baz($a)</code>, provided the method call <code>baz</code> resolves to the method <code>foo::Bar::baz</code>. When a
+placeholder is the receiver of a method call in the search pattern (e.g. <code>$s.foo()</code>), but not in
+the replacement template (e.g. <code>bar($s)</code>), then *, &amp; and &amp;mut will be added as needed to mirror
+whatever autoderef and autoref was happening implicitly in the matched code.</p>
+<p>The scope of the search / replace will be restricted to the current selection if any, otherwise
+it will apply to the whole workspace.</p>
+<p>Placeholders may be given constraints by writing them as <code>${&lt;name&gt;:&lt;constraint1&gt;:&lt;constraint2&gt;...}</code>.</p>
+<p>Supported constraints:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Constraint</th><th>Restricts placeholder</th></tr>
+</thead>
+<tbody>
+<tr><td>kind(literal)</td><td>Is a literal (e.g. <code>42</code> or <code>"forty two"</code>)</td></tr>
+<tr><td>not(a)</td><td>Negates the constraint <code>a</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>Available via the command <code>rust-analyzer.ssr</code>.</p>
+<pre><code class="language-rust">// Using structural search replace command [foo($a, $b) ==&gt;&gt; ($a).foo($b)]
+
+// BEFORE
+String::from(foo(y + 5, z))
+
+// AFTER
+String::from((y + 5).foo(z))</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: Structural Search Replace</strong></td></tr>
+</tbody>
+</table>
+</div>
+<p>Also available as an assist, by writing a comment containing the structural
+search and replace rule. You will only see the assist if the comment can
+be parsed as a valid structural search and replace rule.</p>
+<pre><code class="language-rust">// Place the cursor on the line below to see the assist 💡.
+// foo($a, $b) ==&gt;&gt; ($a).foo($b)</code></pre>
+<h3 id="user-snippet-completions"><a class="header" href="#user-snippet-completions">User Snippet Completions</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-completion/src/snippet.rs#L5">snippet.rs</a></p>
+<p>rust-analyzer allows the user to define custom (postfix)-snippets that may depend on items to be accessible for the current scope to be applicable.</p>
+<p>A custom snippet can be defined by adding it to the <code>rust-analyzer.completion.snippets.custom</code> object respectively.</p>
+<pre><code class="language-json">{
+  "rust-analyzer.completion.snippets.custom": {
+    "thread spawn": {
+      "prefix": ["spawn", "tspawn"],
+      "body": [
+        "thread::spawn(move || {",
+        "\t$0",
+        "});",
+      ],
+      "description": "Insert a thread::spawn call",
+      "requires": "std::thread",
+      "scope": "expr",
+    }
+  }
+}
+</code></pre>
+<p>In the example above:</p>
+<ul>
+<li>
+<p><code>"thread spawn"</code> is the name of the snippet.</p>
+</li>
+<li>
+<p><code>prefix</code> defines one or more trigger words that will trigger the snippets completion.
+Using <code>postfix</code> will instead create a postfix snippet.</p>
+</li>
+<li>
+<p><code>body</code> is one or more lines of content joined via newlines for the final output.</p>
+</li>
+<li>
+<p><code>description</code> is an optional description of the snippet, if unset the snippet name will be used.</p>
+</li>
+<li>
+<p><code>requires</code> is an optional list of item paths that have to be resolvable in the current crate where the completion is rendered.</p>
+</li>
+</ul>
+<h3 id="view-crate-graph"><a class="header" href="#view-crate-graph">View Crate Graph</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/view_crate_graph.rs#L10">view_crate_graph.rs</a></p>
+<p>Renders the currently loaded crate graph as an SVG graphic. Requires the <code>dot</code> tool, which
+is part of graphviz, to be installed.</p>
+<p>Only workspace crates are included, no crates.io dependencies or sysroot crates.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: View Crate Graph</strong></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="view-hir"><a class="header" href="#view-hir">View Hir</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/view_hir.rs#L5">view_hir.rs</a></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: View Hir</strong></td></tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://user-images.githubusercontent.com/48062697/113065588-068bdb80-91b1-11eb-9a78-0b4ef1e972fb.gif" alt="View Hir"></p>
+<h3 id="view-memory-layout"><a class="header" href="#view-memory-layout">View Memory Layout</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/view_memory_layout.rs#L73">view_memory_layout.rs</a></p>
+<p>Displays the recursive memory layout of a datatype.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: View Memory Layout</strong></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="view-mir"><a class="header" href="#view-mir">View Mir</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide/src/view_mir.rs#L5">view_mir.rs</a></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Action Name</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><strong>rust-analyzer: View Mir</strong></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="workspace-symbol"><a class="header" href="#workspace-symbol">Workspace Symbol</a></h3>
+<p><strong>Source:</strong>  <a href="https://github.com/rust-lang/rust-analyzer/blob/master/crates/ide-db/src/symbol_index.rs#L194">symbol_index.rs</a></p>
+<p>Uses fuzzy-search to find types, modules and functions by name across your
+project and dependencies. This is <strong>the</strong> most useful feature, which improves code
+navigation tremendously. It mostly works on top of the built-in LSP
+functionality, however <code>#</code> and <code>*</code> symbols can be used to narrow down the
+search. Specifically,</p>
+<ul>
+<li><code>Foo</code> searches for <code>Foo</code> type in the current workspace</li>
+<li><code>foo#</code> searches for <code>foo</code> function in the current workspace</li>
+<li><code>Foo*</code> searches for <code>Foo</code> type among dependencies, including <code>stdlib</code></li>
+<li><code>foo#*</code> searches for <code>foo</code> function among dependencies</li>
+</ul>
+<p>That is, <code>#</code> switches from “types” to all symbols, <code>*</code> switches from the current
+workspace to dependencies.</p>
+<p>This also supports general Rust path syntax with the usual rules.</p>
+<p>Note that paths do not currently work in VSCode due to the editor never
+sending the special symbols to the language server. Some other editors might not support the # or</p>
+<ul>
+<li>search either, instead, you can configure the filtering via the
+<code>rust-analyzer.workspace.symbol.search.scope</code> and <code>rust-analyzer.workspace.symbol.search.kind</code>
+settings. Symbols prefixed with <code>__</code> are hidden from the search results unless configured
+otherwise.</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Editor</th><th>Shortcut</th></tr>
+</thead>
+<tbody>
+<tr><td>VS Code</td><td><kbd>Ctrl+T</kbd></td></tr>
+</tbody>
+</table>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="privacy.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="assists.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="privacy.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="assists.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+        <script>
+            window.playground_line_numbers = true;
+        </script>
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="ace-2a3cd908.js"></script>
+        <script src="mode-rust-2c9d5c9a.js"></script>
+        <script src="editor-16ca416c.js"></script>
+        <script src="theme-dawn-4493f9c8.js"></script>
+        <script src="theme-tomorrow_night-9dbe62a9.js"></script>
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

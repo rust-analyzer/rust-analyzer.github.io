@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #182</title>
+  <meta name="description"
+    content="Commit: 7ac161cRelease: 2023-05-22 (v0.3.1524)">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2023/05/22/changelog-182.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #182</h1>
+<div class="post-meta sect1">
+  May 22, 2023
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/7ac161ce77dfa31dc39337c2543a1d777e70c16e"><code>7ac161c</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2023-05-22"><code>2023-05-22</code></a> (<code>v0.3.1524</code>)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14775"><code>#14775</code></a> add <code>#[doc(alias(..))]</code>-based method completions:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/108802164/237368212-e7c69bb9-3da6-4d8f-a09b-fece1bdd1c0e.png" alt="Screenshot showing completion for method aliases">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14811"><code>#14811</code></a> render hover actions for closure captures and signature:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/239809224-3df598fc-2203-41d8-8afa-3f0a0a360e00.png" alt="Screenshot showing a closure hover with 'Go to' links for returned and captured types, and also its signature">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14812"><code>#14812</code></a> highlight used associated trait items when cursor is on trait import or trait bound:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/239808933-634a3e29-d79b-4f20-8370-64944e7c9f72.png" alt="&quot;Screenshot showing usages of a trait items">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14789"><code>#14789</code></a> add <code>moved-out-of-ref</code> diagnostic:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/239815832-c54aaa32-7814-4d19-be4d-88e465a068ed.png" alt="Screenshot showing a diagnostic when a local is moved out of a reference">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14845"><code>#14845</code></a> add layout info for enum variant and locals:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/239808173-1f4a2da1-8137-4661-9407-1a3615d38a07.png" alt="Screenshot showing the size of an enum variant on hover">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14837"><code>#14837</code></a> support C string literals.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14787"><code>#14787</code></a> MIR episode 5, lower slice patterns and anonymous <code>const</code> blocks.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14848"><code>#14848</code></a> (first contribution) traverse <code>else</code> blocks of <code>let-else</code> in <code>preorder_expr</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14809"><code>#14809</code></a> support <code>#[macro_use(name, &#8230;&#8203;)]</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14824"><code>#14824</code></a> diagnose non-value <code>return</code> and <code>break</code> type mismatches.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14825"><code>#14825</code></a> fix evaluation of negation for floating point types.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14828"><code>#14828</code></a> process <code>macro_use</code> prelude in semantic scope resolver.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14823"><code>#14823</code></a> only render discriminant hints for data-carrying enums with primitive <code>repr</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14822"><code>#14822</code></a> force-disable the <code>augmentsSyntaxTokens</code> capability on VS Code.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14802"><code>#14802</code></a> fix layout for <code>hir_ty::Ty</code> and friends.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14820"><code>#14820</code></a> expand <code>format_args!</code> with more details.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14851"><code>#14851</code></a> handle match scrutinee in closure captures.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14855"><code>#14855</code></a> consider block impls in <code>lookup_impl_assoc_item_for_trait_ref</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14863"><code>#14863</code></a> consider all tokens in macro calls when analyzing locals.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14746"><code>#14746</code></a> parse unstable associated return type bounds.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14794"><code>#14794</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/14818"><code>#14818</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/14835"><code>#14835</code></a> restructure <code>InlayHint</code>, no longer derive properties from its kind.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14810"><code>#14810</code></a> inline handlers module.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14834"><code>#14834</code></a> do less file parsing for symbol index generation.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14836"><code>#14836</code></a> bump <code>rustc_lexer</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14843"><code>#14843</code></a> partially support panic message in <code>MirEvalError</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14847"><code>#14847</code></a> reduce MIR memory usage.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14857"><code>#14857</code></a> shrink <code>ProcMacroExpander</code> from 8 to 4 bytes.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14819"><code>#14819</code></a> fix division by zero in <code>analysis-stats</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #121</title>
+  <meta name="description"
+    content="Commit: b594f9cRelease: 2022-03-21">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2022/03/21/changelog-121.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #121</h1>
+<div class="post-meta sect1">
+  Mar 21, 2022
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/b594f9c441cf12319d10c14ba6a511d5c9db1b87"><code>b594f9c</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2022-03-21"><code>2022-03-21</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sponsors"><a class="anchor" href="#sponsors"></a>Sponsors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Become a sponsor:</strong> On <a href="https://opencollective.com/rust-analyzer/">OpenCollective</a> or
+<a href="https://github.com/sponsors/rust-analyzer">GitHub Sponsors</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11731"><code>#11731</code></a> add return type hints for closures with block bodies (enable with <code>rust-analyzer.inlayHints.closureReturnTypeHints</code>):</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/158839001-de6ec76d-e4e9-4c70-98e0-2c0c4a62b42c.png" alt="158839001 de6ec76d e4e9 4c70 98e0 2c0c4a62b42c">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11755"><code>#11755</code></a> implement lifetime elision hints (enable with <code>rust-analyzer.inlayHints.lifetimeElisionHints</code> and <code>rust-analyzer.inlayHints.lifetimeElisionHints.useParameterNames</code>):</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/159134856-e2c75d2d-f17c-45c7-9a78-3da5ee8b1acd.png" alt="159134856 e2c75d2d f17c 45c7 9a78 3da5ee8b1acd">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/159134857-30fac3a1-825e-4f49-ba9b-9fa0bb215694.png" alt="159134857 30fac3a1 825e 4f49 ba9b 9fa0bb215694">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11771"><code>#11771</code></a> visualize compiler inserted reborrows via inlay hints (enable using <code>rust-analyzer.inlayHints.reborrowHints</code>):</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/159165178-baaf968a-4381-468e-933f-5326ca1b203d.png" alt="159165178 baaf968a 4381 468e 933f 5326ca1b203d">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11760"><code>#11760</code></a> provide signature help when editing generic args:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1786438/159067106-3917a355-ca77-4d23-ad56-945dcc945425.png" alt="159067106 3917a355 ca77 4d23 ad56 945dcc945425">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11774"><code>#11774</code></a> tag macro calls as unsafe if they expand to unsafe expressions:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/159177375-619c59fb-565f-42cd-a2f5-73c2c11e77e6.png" alt="159177375 619c59fb 565f 42cd a2f5 73c2c11e77e6">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11690"><code>#11690</code></a> add <code>Inline type alias</code> assist:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1277939/158020510-fed78b5c-4c7e-46d1-9151-3044a29b9990.gif" alt="158020510 fed78b5c 4c7e 46d1 9151 3044a29b9990">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1277939/158020516-8a2deb6d-c6ec-4adf-a15b-c514fc97dc43.gif" alt="158020516 8a2deb6d c6ec 4adf a15b c514fc97dc43">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11713"><code>#11713</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/11753"><code>#11753</code></a> complete associated consts in patterns.</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/159210559-f93461b2-9d05-4f44-a31d-0d91ec3d822d.png" alt="159210559 f93461b2 9d05 4f44 a31d 0d91ec3d822d">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11688"><code>#11688</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/11718"><code>#11718</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/11735"><code>#11735</code></a> (partially) add const generics support.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11708"><code>#11708</code></a> (first contribution) update manual for inlay hint customization</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11739"><code>#11739</code></a> (first contribution) emit <code>#[must_use]</code> in <code>Generate getter</code> and <code>generate_is_empty_from_len</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11737"><code>#11737</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/11741"><code>#11741</code></a> emit <code>#[must_use]</code> in <code>Generate new</code> and <code>Generate enum is_variant</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11714"><code>#11714</code></a> fix completions in <code>for</code> loop patterns.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11720"><code>#11720</code></a> mark chaining hints as types.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11694"><code>#11694</code></a> preserve <code>break</code> and <code>continue</code> labels in <code>Extract to function</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11743"><code>#11743</code></a> properly unify receivers during method resolution.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11750"><code>#11750</code></a> fix runnables trying to add doc tests in the crate root from <code>#[macro_export]</code> macros.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11765"><code>#11765</code></a> fix closure hints using macro ranges.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11710"><code>#11710</code></a> fix crash when parsing <code>/etc/os-release</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11700"><code>#11700</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/11727"><code>#11727</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/11734"><code>#11734</code></a> bump <code>xshell</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11775"><code>#11775</code></a> treat <code>global_asm</code> and <code>asm</code> macros as unsafe.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11726"><code>#11726</code></a> more <code>ide_completion</code> refactoring.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11752"><code>#11752</code></a> allow explicitly specifying end of fixture annotations.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11761"><code>#11761</code></a> rename call info to signature help.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
