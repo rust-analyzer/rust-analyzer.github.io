@@ -1,0 +1,23 @@
+= Changelog #317
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:566fe415d158452c72feb026f43e8d81e249ccb0[] +
+Release: release:2026-03-02[] (`v0.3.2811`)
+
+== Fixes
+
+* pr:21699[] enable diagnostic for adding auto traits by casting `*dyn Tr`.
+* pr:21654[] mark the RHS of compound assignments as `ExprIsRead::Yes`.
+* pr:21725[] fix wrong condition in `Visibility::min`.
+* pr:21669[] support `Span::parent` in proc macro expansion.
+* pr:21716[] use `-Zlockfile-path` on pre-release 1.95 toolchains as well.
+* pr:21708[] don't panic on invalid LSP notifications.
+* pr:21706[] don't duplicate enum variants in pattern completion.
+* pr:21698[] fix scrutinee indent in `replace_if_let_with_match`.
+
+== Internal Improvements
+
+* pr:21710[], pr:21720[] (first contribution) migrate `fix_visibility` and `generate_derive` assists to `SyntaxEditor`.
+* pr:21681[] skip `rustfmt` test if nightly toolchain is missing.

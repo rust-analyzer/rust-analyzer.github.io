@@ -23,7 +23,7 @@ Release: release:2026-02-23[] (`v0.3.2803`)
 * pr:21688[] correctly parenthesize inverted condition in `convert_bool_then`.
 * pr:20353[] support selecting only a subset of fields in `generate_getter_or_setter`.
 * pr:21389[] handle references better in `convert_to_guarded_return`, `replace_if_let_with_match` and `replace_let_with_if_let`.
-* pr:21657[] support `Span::span_source` in proc macro expansion.
+* pr:21657[] support `Span::source` in proc macro expansion.
 
 == Internal Improvements
 
