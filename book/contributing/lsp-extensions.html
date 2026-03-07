@@ -1,0 +1,1008 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>LSP Extensions - rust-analyzer</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-05b71aa6.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-6c762e67.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">rust-analyzer</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/tree/master/docs/book" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/edit/master/docs/book/src/contributing/lsp-extensions.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <!---
+lsp/ext.rs hash: 235f56089da3dbb5
+
+If you need to change the above hash to make the test pass, please check if you
+need to adjust this doc as well and ping this issue:
+
+  https://github.com/rust-lang/rust-analyzer/issues/4604
+
+--->
+<h1 id="lsp-extensions"><a class="header" href="#lsp-extensions">LSP Extensions</a></h1>
+<p>This document describes LSP extensions used by rust-analyzer.
+It’s a best effort document, when in doubt, consult the source (and send a PR with clarification ;-) ).
+We aim to upstream all non Rust-specific extensions to the protocol, but this is not a top priority.
+All capabilities are enabled via the <code>experimental</code> field of <code>ClientCapabilities</code> or <code>ServerCapabilities</code>.
+Requests which we hope to upstream live under <code>experimental/</code> namespace.
+Requests, which are likely to always remain specific to <code>rust-analyzer</code> are under <code>rust-analyzer/</code> namespace.</p>
+<p>If you want to be notified about the changes to this document, subscribe to <a href="https://github.com/rust-lang/rust-analyzer/issues/4604">#4604</a>.</p>
+<h2 id="configuration-in-initializationoptions"><a class="header" href="#configuration-in-initializationoptions">Configuration in <code>initializationOptions</code></a></h2>
+<p><strong>Upstream Issue:</strong> <a href="https://github.com/microsoft/language-server-protocol/issues/567">https://github.com/microsoft/language-server-protocol/issues/567</a></p>
+<p>The <code>initializationOptions</code> field of the <code>InitializeParams</code> of the initialization request should contain the <code>"rust-analyzer"</code> section of the configuration.</p>
+<p><code>rust-analyzer</code> normally sends a <code>"workspace/configuration"</code> request with <code>{ "items": ["rust-analyzer"] }</code> payload.
+However, the server can’t do this during initialization.
+At the same time some essential configuration parameters are needed early on, before servicing requests.
+For this reason, we ask that <code>initializationOptions</code> contains the configuration, as if the server did make a <code>"workspace/configuration"</code> request.</p>
+<p>If a language client does not know about <code>rust-analyzer</code>’s configuration options it can get sensible defaults by doing any of the following:</p>
+<ul>
+<li>Not sending <code>initializationOptions</code></li>
+<li>Sending <code>"initializationOptions": null</code></li>
+<li>Sending <code>"initializationOptions": {}</code></li>
+</ul>
+<h2 id="snippet-textedit"><a class="header" href="#snippet-textedit">Snippet <code>TextEdit</code></a></h2>
+<p><strong>Upstream Issue:</strong> <a href="https://github.com/microsoft/language-server-protocol/issues/724">https://github.com/microsoft/language-server-protocol/issues/724</a></p>
+<p><strong>Experimental Client Capability:</strong> <code>{ "snippetTextEdit": boolean }</code></p>
+<p>If this capability is set, <code>WorkspaceEdit</code>s returned from <code>codeAction</code> requests and <code>TextEdit</code>s returned from <code>textDocument/onTypeFormatting</code> requests might contain <code>SnippetTextEdit</code>s instead of usual <code>TextEdit</code>s:</p>
+<pre><code class="language-typescript">interface SnippetTextEdit extends TextEdit {
+    insertTextFormat?: InsertTextFormat;
+    annotationId?: ChangeAnnotationIdentifier;
+}
+</code></pre>
+<pre><code class="language-typescript">export interface TextDocumentEdit {
+    textDocument: OptionalVersionedTextDocumentIdentifier;
+    edits: (TextEdit | SnippetTextEdit)[];
+}
+</code></pre>
+<p>When applying such code action or text edit, the editor should insert snippet, with tab stops and placeholders.
+At the moment, rust-analyzer guarantees that only a single <code>TextDocumentEdit</code> will have edits which can be <code>InsertTextFormat.Snippet</code>.
+Any additional <code>TextDocumentEdit</code>s will only have edits which are <code>InsertTextFormat.PlainText</code>.</p>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
+<p>“Add <code>derive</code>” code action transforms <code>struct S;</code> into <code>#[derive($0)] struct S;</code></p>
+<h3 id="unresolved-questions"><a class="header" href="#unresolved-questions">Unresolved Questions</a></h3>
+<ul>
+<li>Where exactly are <code>SnippetTextEdit</code>s allowed (only in code actions at the moment)?</li>
+<li>Can snippets span multiple files (so far, no)?</li>
+</ul>
+<h2 id="codeaction-groups"><a class="header" href="#codeaction-groups"><code>CodeAction</code> Groups</a></h2>
+<p><strong>Upstream Issue:</strong> <a href="https://github.com/microsoft/language-server-protocol/issues/994">https://github.com/microsoft/language-server-protocol/issues/994</a></p>
+<p><strong>Experimental Client Capability:</strong> <code>{ "codeActionGroup": boolean }</code></p>
+<p>If this capability is set, <code>CodeAction</code>s returned from the server contain an additional field, <code>group</code>:</p>
+<pre><code class="language-typescript">interface CodeAction {
+    title: string;
+    group?: string;
+    ...
+}
+</code></pre>
+<p>All code-actions with the same <code>group</code> should be grouped under single (extendable) entry in lightbulb menu.
+The set of actions <code>[ { title: "foo" }, { group: "frobnicate", title: "bar" }, { group: "frobnicate", title: "baz" }]</code> should be rendered as</p>
+<pre><code>💡
+  +-------------+
+  | foo         |
+  +-------------+-----+
+  | frobnicate &gt;| bar |
+  +-------------+-----+
+                | baz |
+                +-----+
+</code></pre>
+<p>Alternatively, selecting <code>frobnicate</code> could present a user with an additional menu to choose between <code>bar</code> and <code>baz</code>.</p>
+<h3 id="example-1"><a class="header" href="#example-1">Example</a></h3>
+<pre><code class="language-rust">fn main() {
+    let x: Entry/*cursor here*/ = todo!();
+}</code></pre>
+<p>Invoking code action at this position will yield two code actions for importing <code>Entry</code> from either <code>collections::HashMap</code> or <code>collection::BTreeMap</code>, grouped under a single “import” group.</p>
+<h3 id="unresolved-questions-1"><a class="header" href="#unresolved-questions-1">Unresolved Questions</a></h3>
+<ul>
+<li>Is a fixed two-level structure enough?</li>
+<li>Should we devise a general way to encode custom interaction protocols for GUI refactorings?</li>
+</ul>
+<h2 id="parent-module"><a class="header" href="#parent-module">Parent Module</a></h2>
+<p><strong>Upstream Issue:</strong> <a href="https://github.com/microsoft/language-server-protocol/issues/1002">https://github.com/microsoft/language-server-protocol/issues/1002</a></p>
+<p><strong>Experimental Server Capability:</strong> <code>{ "parentModule": boolean }</code></p>
+<p>This request is sent from client to server to handle “Goto Parent Module” editor action.</p>
+<p><strong>Method:</strong> <code>experimental/parentModule</code></p>
+<p><strong>Request:</strong> <code>TextDocumentPositionParams</code></p>
+<p><strong>Response:</strong> <code>Location | Location[] | LocationLink[] | null</code></p>
+<h3 id="example-2"><a class="header" href="#example-2">Example</a></h3>
+<pre><code class="language-rust">// src/main.rs
+mod foo;
+// src/foo.rs
+
+/* cursor here*/</code></pre>
+<p><code>experimental/parentModule</code> returns a single <code>Link</code> to the <code>mod foo;</code> declaration.</p>
+<h3 id="unresolved-question"><a class="header" href="#unresolved-question">Unresolved Question</a></h3>
+<ul>
+<li>An alternative would be to use a more general “gotoSuper” request, which would work for super methods, super classes and super modules.
+This is the approach IntelliJ Rust is taking.
+However, experience shows that super module (which generally has a feeling of navigation between files) should be separate.
+If you want super module, but the cursor happens to be inside an overridden function, the behavior with single “gotoSuper” request is surprising.</li>
+</ul>
+<h2 id="join-lines"><a class="header" href="#join-lines">Join Lines</a></h2>
+<p><strong>Upstream Issue:</strong> <a href="https://github.com/microsoft/language-server-protocol/issues/992">https://github.com/microsoft/language-server-protocol/issues/992</a></p>
+<p><strong>Experimental Server Capability:</strong> <code>{ "joinLines": boolean }</code></p>
+<p>This request is sent from client to server to handle “Join Lines” editor action.</p>
+<p><strong>Method:</strong> <code>experimental/joinLines</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-typescript">interface JoinLinesParams {
+    textDocument: TextDocumentIdentifier,
+    /// Currently active selections/cursor offsets.
+    /// This is an array to support multiple cursors.
+    ranges: Range[],
+}
+</code></pre>
+<p><strong>Response:</strong> <code>TextEdit[]</code></p>
+<h3 id="example-3"><a class="header" href="#example-3">Example</a></h3>
+<pre><code class="language-rust">fn main() {
+    /*cursor here*/let x = {
+        92
+    };
+}</code></pre>
+<p><code>experimental/joinLines</code> yields (curly braces are automagically removed)</p>
+<pre><code class="language-rust">fn main() {
+    let x = 92;
+}</code></pre>
+<h3 id="unresolved-question-1"><a class="header" href="#unresolved-question-1">Unresolved Question</a></h3>
+<ul>
+<li>What is the position of the cursor after <code>joinLines</code>?
+Currently, this is left to editor’s discretion, but it might be useful to specify on the server via snippets.
+However, it then becomes unclear how it works with multi cursor.</li>
+</ul>
+<h2 id="on-enter"><a class="header" href="#on-enter">On Enter</a></h2>
+<p><strong>Upstream Issue:</strong> <a href="https://github.com/microsoft/language-server-protocol/issues/1001">https://github.com/microsoft/language-server-protocol/issues/1001</a></p>
+<p><strong>Experimental Server Capability:</strong> <code>{ "onEnter": boolean }</code></p>
+<p>This request is sent from client to server to handle the <kbd>Enter</kbd> key press.</p>
+<p><strong>Method:</strong> <code>experimental/onEnter</code></p>
+<p><strong>Request:</strong>: <code>TextDocumentPositionParams</code></p>
+<p><strong>Response:</strong></p>
+<pre><code class="language-typescript">SnippetTextEdit[]
+</code></pre>
+<h3 id="example-4"><a class="header" href="#example-4">Example</a></h3>
+<pre><code class="language-rust">fn main() {
+    // Some /*cursor here*/ docs
+    let x = 92;
+}</code></pre>
+<p><code>experimental/onEnter</code> returns the following snippet</p>
+<pre><code class="language-rust">fn main() {
+    // Some
+    // $0 docs
+    let x = 92;
+}</code></pre>
+<p>The primary goal of <code>onEnter</code> is to handle automatic indentation when opening a new line.
+This is not yet implemented.
+The secondary goal is to handle fixing up syntax, like continuing doc strings and comments, and escaping <code>\n</code> in string literals.</p>
+<p>As proper cursor positioning is raison d’être for <code>onEnter</code>, it uses <code>SnippetTextEdit</code>.</p>
+<h3 id="unresolved-question-2"><a class="header" href="#unresolved-question-2">Unresolved Question</a></h3>
+<ul>
+<li>How to deal with synchronicity of the request?
+One option is to require the client to block until the server returns the response.
+Another option is to do a operational transforms style merging of edits from client and server.
+A third option is to do a record-replay: client applies heuristic on enter immediately, then applies all user’s keypresses.
+When the server is ready with the response, the client rollbacks all the changes and applies the recorded actions on top of the correct response.</li>
+<li>How to deal with multiple carets?</li>
+<li>Should we extend this to arbitrary typed events and not just <code>onEnter</code>?</li>
+</ul>
+<h2 id="structural-search-replace-ssr"><a class="header" href="#structural-search-replace-ssr">Structural Search Replace (SSR)</a></h2>
+<p><strong>Experimental Server Capability:</strong> <code>{ "ssr": boolean }</code></p>
+<p>This request is sent from client to server to handle structural search replace – automated syntax tree based transformation of the source.</p>
+<p><strong>Method:</strong> <code>experimental/ssr</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-typescript">interface SsrParams {
+    /// Search query.
+    /// The specific syntax is specified outside of the protocol.
+    query: string,
+    /// If true, only check the syntax of the query and don't compute the actual edit.
+    parseOnly: boolean,
+    /// The current text document. This and `position` will be used to determine in what scope
+    /// paths in `query` should be resolved.
+    textDocument: TextDocumentIdentifier;
+    /// Position where SSR was invoked.
+    position: Position;
+    /// Current selections. Search/replace will be restricted to these if non-empty.
+    selections: Range[];
+}
+</code></pre>
+<p><strong>Response:</strong></p>
+<pre><code class="language-typescript">WorkspaceEdit
+</code></pre>
+<h3 id="example-5"><a class="header" href="#example-5">Example</a></h3>
+<p>SSR with query <code>foo($a, $b) ==&gt;&gt; ($a).foo($b)</code> will transform, eg <code>foo(y + 5, z)</code> into <code>(y + 5).foo(z)</code>.</p>
+<h3 id="unresolved-question-3"><a class="header" href="#unresolved-question-3">Unresolved Question</a></h3>
+<ul>
+<li>Probably needs search without replace mode</li>
+<li>Needs a way to limit the scope to certain files.</li>
+</ul>
+<h2 id="matching-brace"><a class="header" href="#matching-brace">Matching Brace</a></h2>
+<p><strong>Upstream Issue:</strong> <a href="https://github.com/microsoft/language-server-protocol/issues/999">https://github.com/microsoft/language-server-protocol/issues/999</a></p>
+<p><strong>Experimental Server Capability:</strong> <code>{ "matchingBrace": boolean }</code></p>
+<p>This request is sent from client to server to handle “Matching Brace” editor action.</p>
+<p><strong>Method:</strong> <code>experimental/matchingBrace</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-typescript">interface MatchingBraceParams {
+    textDocument: TextDocumentIdentifier,
+    /// Position for each cursor
+    positions: Position[],
+}
+</code></pre>
+<p><strong>Response:</strong></p>
+<pre><code class="language-typescript">Position[]
+</code></pre>
+<h3 id="example-6"><a class="header" href="#example-6">Example</a></h3>
+<pre><code class="language-rust">fn main() {
+    let x: Vec&lt;()&gt;/*cursor here*/ = vec![];
+}</code></pre>
+<p><code>experimental/matchingBrace</code> yields the position of <code>&lt;</code>.
+In many cases, matching braces can be handled by the editor.
+However, some cases (like disambiguating between generics and comparison operations) need a real parser.
+Moreover, it would be cool if editors didn’t need to implement even basic language parsing</p>
+<h3 id="unresolved-question-4"><a class="header" href="#unresolved-question-4">Unresolved Question</a></h3>
+<ul>
+<li>Should we return a nested brace structure, to allow <a href="https://paredit.org/">paredit</a>-like actions of jump <em>out</em> of the current brace pair?
+This is how <code>SelectionRange</code> request works.</li>
+<li>Alternatively, should we perhaps flag certain <code>SelectionRange</code>s as being brace pairs?</li>
+</ul>
+<h2 id="runnables"><a class="header" href="#runnables">Runnables</a></h2>
+<p><strong>Upstream Issue:</strong> <a href="https://github.com/microsoft/language-server-protocol/issues/944">https://github.com/microsoft/language-server-protocol/issues/944</a></p>
+<p><strong>Experimental Server Capability:</strong> <code>{ "runnables": { "kinds": string[] } }</code></p>
+<p>This request is sent from client to server to get the list of things that can be run (tests, binaries, <code>cargo check -p</code>).</p>
+<p><strong>Method:</strong> <code>experimental/runnables</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-typescript">interface RunnablesParams {
+    textDocument: TextDocumentIdentifier;
+    /// If null, compute runnables for the whole file.
+    position?: Position;
+}
+</code></pre>
+<p><strong>Response:</strong> <code>Runnable[]</code></p>
+<pre><code class="language-typescript">interface Runnable {
+    label: string;
+    /// If this Runnable is associated with a specific function/module, etc., the location of this item
+    location?: LocationLink;
+    /// Running things is necessary technology specific, `kind` needs to be advertised via server capabilities,
+    // the type of `args` is specific to `kind`. The actual running is handled by the client.
+    kind: string;
+    args: any;
+}
+</code></pre>
+<p>rust-analyzer supports two <code>kind</code>s of runnables, <code>"cargo"</code> and <code>"shell"</code>. The <code>args</code> for <code>"cargo"</code> look like this:</p>
+<pre><code class="language-typescript">{
+    /**
+     * Environment variables to set before running the command.
+     */
+    environment?: Record&lt;string, string&gt;;
+    /**
+     * The working directory to run the command in.
+     */
+    cwd: string;
+    /**
+     * The workspace root directory of the cargo project.
+     */
+    workspaceRoot?: string;
+    /**
+     * The cargo command to run.
+     */
+    cargoArgs: string[];
+    /**
+     * Arguments to pass to the executable, these will be passed to the command after a `--` argument.
+     */
+    executableArgs: string[];
+    /**
+     * Command to execute instead of `cargo`.
+     */
+    overrideCargo?: string;
+}
+</code></pre>
+<p>The args for <code>"shell"</code> look like this:</p>
+<pre><code class="language-typescript">{
+    /**
+     * Environment variables to set before running the command.
+     */
+    environment?: Record&lt;string, string&gt;;
+    /**
+     * The working directory to run the command in.
+     */
+    cwd: string;
+    kind: string;
+    program: string;
+    args: string[];
+}
+</code></pre>
+<h2 id="test-explorer"><a class="header" href="#test-explorer">Test explorer</a></h2>
+<p><strong>Experimental Client Capability:</strong> <code>{ "testExplorer": boolean }</code></p>
+<p>If this capability is set, the <code>experimental/discoveredTests</code> notification will be sent from the
+server to the client.</p>
+<p><strong>Method:</strong> <code>experimental/discoverTest</code></p>
+<p><strong>Request:</strong> <code>DiscoverTestParams</code></p>
+<pre><code class="language-typescript">interface DiscoverTestParams {
+    // The test that we need to resolve its children. If not present,
+    // the response should return top level tests.
+    testId?: string | undefined;
+}
+</code></pre>
+<p><strong>Response:</strong> <code>DiscoverTestResults</code></p>
+<pre><code class="language-typescript">interface TestItem {
+    // A unique identifier for the test
+    id: string;
+    // The file containing this test
+    textDocument?: lc.TextDocumentIdentifier | undefined;
+    // The range in the file containing this test
+    range?: lc.Range | undefined;
+    // A human readable name for this test
+    label: string;
+    // The kind of this test item. Based on the kind,
+    // an icon is chosen by the editor.
+    kind: "package" | "module" | "test";
+    // True if this test may have children not available eagerly
+    canResolveChildren: boolean;
+    // The id of the parent test in the test tree. If not present, this test
+    // is a top level test.
+    parent?: string | undefined;
+    // The information useful for running the test. The client can use `runTest`
+    // request for simple execution, but for more complex execution forms
+    // like debugging, this field is useful.
+    // Note that this field includes some information about label and location as well, but
+    // those exist just for keeping things in sync with other methods of running runnables
+    // (for example using one consistent name in the vscode's launch.json) so for any purpose
+    // other than running tests this field should not be used.
+    runnable?: Runnable | undefined;
+};
+
+interface DiscoverTestResults {
+    // The discovered tests.
+    tests: TestItem[];
+    // For each test whose id is in this list, the response
+    // contains all tests that are children of this test, and
+    // client should remove old tests not included in the response.
+    scope: string[] | undefined;
+    // For each file whose uri is in this list, the response
+    // contains all tests that are located in this file, and
+    // client should remove old tests not included in the response.
+    scopeFile: lc.TextDocumentIdentifier[] | undefined;
+}
+</code></pre>
+<p><strong>Method:</strong> <code>experimental/discoveredTests</code></p>
+<p><strong>Notification:</strong> <code>DiscoverTestResults</code></p>
+<p>This notification is sent from the server to the client when the
+server detects changes in the existing tests. The <code>DiscoverTestResults</code> is
+the same as the one in <code>experimental/discoverTest</code> response.</p>
+<p><strong>Method:</strong> <code>experimental/runTest</code></p>
+<p><strong>Request:</strong> <code>RunTestParams</code></p>
+<pre><code class="language-typescript">interface RunTestParams {
+    // Id of the tests to be run. If a test is included, all of its children are included implicitly. If
+    // this property is undefined, then the server should simply run all tests.
+    include?: string[] | undefined;
+    // An array of test ids the user has marked as excluded from the test included in this run; exclusions
+    // should apply after inclusions.
+    // May be omitted if no exclusions were requested. Server should not run excluded tests or
+    // any children of excluded tests.
+    exclude?: string[] | undefined;
+}
+</code></pre>
+<p><strong>Response:</strong> <code>void</code></p>
+<p><strong>Method:</strong> <code>experimental/endRunTest</code></p>
+<p><strong>Notification:</strong></p>
+<p>This notification is sent from the server to the client when the current running
+session is finished. The server should not send any run notification
+after this.</p>
+<p><strong>Method:</strong> <code>experimental/abortRunTest</code></p>
+<p><strong>Notification:</strong></p>
+<p>This notification is sent from the client to the server when the user is no longer
+interested in the test results. The server should clean up its resources and send
+a <code>experimental/endRunTest</code> when it is done.</p>
+<p><strong>Method:</strong> <code>experimental/changeTestState</code></p>
+<p><strong>Notification:</strong> <code>ChangeTestStateParams</code></p>
+<pre><code class="language-typescript">type TestState = { tag: "passed" }
+    | {
+        tag: "failed";
+        // The standard error of the test, containing the panic message. Clients should
+        // render it similar to a terminal, and e.g. handle ansi colors.
+        message: string;
+    }
+    | { tag: "started" }
+    | { tag: "enqueued" }
+    | { tag: "skipped" };
+
+interface ChangeTestStateParams {
+    testId: string;
+    state: TestState;
+}
+</code></pre>
+<p><strong>Method:</strong> <code>experimental/appendOutputToRunTest</code></p>
+<p><strong>Notification:</strong> <code>string</code></p>
+<p>This notification is used for reporting messages independent of any single test and related to the run session
+in general, e.g. cargo compiling progress messages or warnings.</p>
+<h2 id="open-external-documentation"><a class="header" href="#open-external-documentation">Open External Documentation</a></h2>
+<p>This request is sent from the client to the server to obtain web and local URL(s) for documentation related to the symbol under the cursor, if available.</p>
+<p><strong>Method:</strong> <code>experimental/externalDocs</code></p>
+<p><strong>Request:</strong> <code>TextDocumentPositionParams</code></p>
+<p><strong>Response:</strong> <code>string | null</code></p>
+<h2 id="local-documentation"><a class="header" href="#local-documentation">Local Documentation</a></h2>
+<p><strong>Experimental Client Capability:</strong> <code>{ "localDocs": boolean }</code></p>
+<p>If this capability is set, the <code>Open External Documentation</code> request returned from the server will have the following structure:</p>
+<pre><code class="language-typescript">interface ExternalDocsResponse {
+    web?: string;
+    local?: string;
+}
+</code></pre>
+<h2 id="analyzer-status"><a class="header" href="#analyzer-status">Analyzer Status</a></h2>
+<p><strong>Method:</strong> <code>rust-analyzer/analyzerStatus</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-typescript">interface AnalyzerStatusParams {
+    /// If specified, show dependencies of the current file.
+    textDocument?: TextDocumentIdentifier;
+}
+</code></pre>
+<p><strong>Response:</strong> <code>string</code></p>
+<p>Returns internal status message, mostly for debugging purposes.</p>
+<h2 id="reload-workspace"><a class="header" href="#reload-workspace">Reload Workspace</a></h2>
+<p><strong>Method:</strong> <code>rust-analyzer/reloadWorkspace</code></p>
+<p><strong>Request:</strong> <code>null</code></p>
+<p><strong>Response:</strong> <code>null</code></p>
+<p>Reloads project information (that is, re-executes <code>cargo metadata</code>).</p>
+<h2 id="rebuild-proc-macros"><a class="header" href="#rebuild-proc-macros">Rebuild proc-macros</a></h2>
+<p><strong>Method:</strong> <code>rust-analyzer/rebuildProcMacros</code></p>
+<p><strong>Request:</strong> <code>null</code></p>
+<p><strong>Response:</strong> <code>null</code></p>
+<p>Rebuilds build scripts and proc-macros, and runs the build scripts to reseed the build data.</p>
+<h2 id="server-status"><a class="header" href="#server-status">Server Status</a></h2>
+<p><strong>Experimental Client Capability:</strong> <code>{ "serverStatusNotification": boolean }</code></p>
+<p><strong>Method:</strong> <code>experimental/serverStatus</code></p>
+<p><strong>Notification:</strong></p>
+<pre><code class="language-typescript">interface ServerStatusParams {
+    /// `ok` means that the server is completely functional.
+    ///
+    /// `warning` means that the server is partially functional.
+    /// It can answer correctly to most requests, but some results
+    /// might be wrong due to, for example, some missing dependencies.
+    ///
+    /// `error` means that the server is not functional. For example,
+    /// there's a fatal build configuration problem. The server might
+    /// still give correct answers to simple requests, but most results
+    /// will be incomplete or wrong.
+    health: "ok" | "warning" | "error",
+    /// Is there any pending background work which might change the status?
+    /// For example, are dependencies being downloaded?
+    quiescent: boolean,
+    /// Explanatory message to show on hover.
+    message?: string,
+}
+</code></pre>
+<p>This notification is sent from server to client.
+The client can use it to display <em>persistent</em> status to the user (in the mode line).
+It is similar to the <code>showMessage</code>, but is intended for status rather than point-in-time events.</p>
+<p>Note that this functionality is intended primarily to inform the end user about the state of the server.
+In particular, it’s valid for the client to completely ignore this extension.
+Clients are discouraged from but are allowed to use the <code>health</code> status to decide if it’s worth sending a request to the server.</p>
+<h3 id="controlling-flycheck"><a class="header" href="#controlling-flycheck">Controlling Flycheck</a></h3>
+<p>The flycheck/checkOnSave feature can be controlled via notifications sent by the client to the server.</p>
+<p><strong>Method:</strong> <code>rust-analyzer/runFlycheck</code></p>
+<p><strong>Notification:</strong></p>
+<pre><code class="language-typescript">interface RunFlycheckParams {
+    /// The text document whose cargo workspace flycheck process should be started.
+    /// If the document is null or does not belong to a cargo workspace all flycheck processes will be started.
+    textDocument: lc.TextDocumentIdentifier | null;
+}
+</code></pre>
+<p>Triggers the flycheck processes.</p>
+<p><strong>Method:</strong> <code>rust-analyzer/clearFlycheck</code></p>
+<p><strong>Notification:</strong></p>
+<pre><code class="language-typescript">interface ClearFlycheckParams {}
+</code></pre>
+<p>Clears the flycheck diagnostics.</p>
+<p><strong>Method:</strong> <code>rust-analyzer/cancelFlycheck</code></p>
+<p><strong>Notification:</strong></p>
+<pre><code class="language-typescript">interface CancelFlycheckParams {}
+</code></pre>
+<p>Cancels all running flycheck processes.</p>
+<h2 id="view-syntax-tree"><a class="header" href="#view-syntax-tree">View Syntax Tree</a></h2>
+<p><strong>Method:</strong> <code>rust-analyzer/viewSyntaxTree</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-typescript">interface ViewSyntaxTreeParams {
+    textDocument: TextDocumentIdentifier,
+}
+</code></pre>
+<p><strong>Response:</strong> <code>string</code></p>
+<p>Returns json representation of the file’s syntax tree.
+Used to create a treeView for debugging and working on rust-analyzer itself.</p>
+<h2 id="view-hir"><a class="header" href="#view-hir">View Hir</a></h2>
+<p><strong>Method:</strong> <code>rust-analyzer/viewHir</code></p>
+<p><strong>Request:</strong> <code>TextDocumentPositionParams</code></p>
+<p><strong>Response:</strong> <code>string</code></p>
+<p>Returns a textual representation of the HIR of the function containing the cursor.
+For debugging or when working on rust-analyzer itself.</p>
+<h2 id="view-mir"><a class="header" href="#view-mir">View Mir</a></h2>
+<p><strong>Method:</strong> <code>rust-analyzer/viewMir</code></p>
+<p><strong>Request:</strong> <code>TextDocumentPositionParams</code></p>
+<p><strong>Response:</strong> <code>string</code></p>
+<p>Returns a textual representation of the MIR of the function containing the cursor.
+For debugging or when working on rust-analyzer itself.</p>
+<h2 id="get-failed-obligations"><a class="header" href="#get-failed-obligations">Get Failed Obligations</a></h2>
+<p><strong>Method:</strong> <code>rust-analyzer/getFailedObligations</code></p>
+<p><strong>Request:</strong> <code>TextDocumentPositionParams</code></p>
+<p><strong>Response:</strong> <code>string</code></p>
+<p>Returns information about failed trait obligations at the given position.
+For debugging or when working on rust-analyzer itself.</p>
+<h2 id="interpret-function"><a class="header" href="#interpret-function">Interpret Function</a></h2>
+<p><strong>Method:</strong> <code>rust-analyzer/interpretFunction</code></p>
+<p><strong>Request:</strong> <code>TextDocumentPositionParams</code></p>
+<p><strong>Response:</strong> <code>string</code></p>
+<p>Tries to evaluate the function using internal rust analyzer knowledge, without compiling
+the code. Currently evaluates the function under cursor, but will give a runnable in
+future. Highly experimental.</p>
+<h2 id="view-file-text"><a class="header" href="#view-file-text">View File Text</a></h2>
+<p><strong>Method:</strong> <code>rust-analyzer/viewFileText</code></p>
+<p><strong>Request:</strong> <code>TextDocumentIdentifier</code></p>
+<p><strong>Response:</strong> <code>string</code></p>
+<p>Returns the text of a file as seen by the server.
+This is for debugging file sync problems.</p>
+<h2 id="view-itemtree"><a class="header" href="#view-itemtree">View ItemTree</a></h2>
+<p><strong>Method:</strong> <code>rust-analyzer/viewItemTree</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-typescript">interface ViewItemTreeParams {
+    textDocument: TextDocumentIdentifier,
+}
+</code></pre>
+<p><strong>Response:</strong> <code>string</code></p>
+<p>Returns a textual representation of the <code>ItemTree</code> of the currently open file, for debugging.</p>
+<h2 id="view-crate-graph"><a class="header" href="#view-crate-graph">View Crate Graph</a></h2>
+<p><strong>Method:</strong> <code>rust-analyzer/viewCrateGraph</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-typescript">interface ViewCrateGraphParams {
+    full: boolean,
+}
+</code></pre>
+<p><strong>Response:</strong> <code>string</code></p>
+<p>Renders rust-analyzer’s crate graph as an SVG image.</p>
+<p>If <code>full</code> is <code>true</code>, the graph includes non-workspace crates (crates.io dependencies as well as sysroot crates).</p>
+<h2 id="expand-macro"><a class="header" href="#expand-macro">Expand Macro</a></h2>
+<p><strong>Method:</strong> <code>rust-analyzer/expandMacro</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-typescript">interface ExpandMacroParams {
+    textDocument: TextDocumentIdentifier,
+    position: Position,
+}
+</code></pre>
+<p><strong>Response:</strong></p>
+<pre><code class="language-typescript">interface ExpandedMacro {
+    name: string,
+    expansion: string,
+}
+</code></pre>
+<p>Expands macro call at a given position.</p>
+<h2 id="hover-actions"><a class="header" href="#hover-actions">Hover Actions</a></h2>
+<p><strong>Experimental Client Capability:</strong> <code>{ "hoverActions": boolean }</code></p>
+<p>If this capability is set, <code>Hover</code> request returned from the server might contain an additional field, <code>actions</code>:</p>
+<pre><code class="language-typescript">interface Hover {
+    ...
+    actions?: CommandLinkGroup[];
+}
+
+interface CommandLink extends Command {
+    /**
+     * A tooltip for the command, when represented in the UI.
+     */
+    tooltip?: string;
+}
+
+interface CommandLinkGroup {
+    title?: string;
+    commands: CommandLink[];
+}
+</code></pre>
+<p>Such actions on the client side are appended to a hover bottom as command links:</p>
+<pre><code>  +-----------------------------+
+  | Hover content               |
+  |                             |
+  +-----------------------------+
+  | _Action1_ | _Action2_       |  &lt;- first group, no TITLE
+  +-----------------------------+
+  | TITLE _Action1_ | _Action2_ |  &lt;- second group
+  +-----------------------------+
+  ...
+</code></pre>
+<h2 id="open-cargotoml"><a class="header" href="#open-cargotoml">Open Cargo.toml</a></h2>
+<p><strong>Upstream Issue:</strong> <a href="https://github.com/rust-lang/rust-analyzer/issues/6462">https://github.com/rust-lang/rust-analyzer/issues/6462</a></p>
+<p><strong>Experimental Server Capability:</strong> <code>{ "openCargoToml": boolean }</code></p>
+<p>This request is sent from client to server to open the current project’s Cargo.toml</p>
+<p><strong>Method:</strong> <code>experimental/openCargoToml</code></p>
+<p><strong>Request:</strong> <code>OpenCargoTomlParams</code></p>
+<p><strong>Response:</strong> <code>Location | null</code></p>
+<h3 id="example-7"><a class="header" href="#example-7">Example</a></h3>
+<pre><code class="language-rust">// Cargo.toml
+[package]
+// src/main.rs
+
+/* cursor here*/</code></pre>
+<p><code>experimental/openCargoToml</code> returns a single <code>Link</code> to the start of the <code>[package]</code> keyword.</p>
+<h2 id="related-tests"><a class="header" href="#related-tests">Related tests</a></h2>
+<p>This request is sent from client to server to get the list of tests for the specified position.</p>
+<p><strong>Method:</strong> <code>rust-analyzer/relatedTests</code></p>
+<p><strong>Request:</strong> <code>TextDocumentPositionParams</code></p>
+<p><strong>Response:</strong> <code>TestInfo[]</code></p>
+<pre><code class="language-typescript">interface TestInfo {
+    runnable: Runnable;
+}
+</code></pre>
+<h2 id="hover-range"><a class="header" href="#hover-range">Hover Range</a></h2>
+<p><strong>Upstream Issue:</strong> <a href="https://github.com/microsoft/language-server-protocol/issues/377">https://github.com/microsoft/language-server-protocol/issues/377</a></p>
+<p><strong>Experimental Server Capability:</strong> { “hoverRange”: boolean }</p>
+<p>This extension allows passing a <code>Range</code> as a <code>position</code> field of <code>HoverParams</code>.
+The primary use-case is to use the hover request to show the type of the expression currently selected.</p>
+<pre><code class="language-typescript">interface HoverParams extends WorkDoneProgressParams {
+    textDocument: TextDocumentIdentifier;
+    position: Range | Position;
+}
+</code></pre>
+<p>Whenever the client sends a <code>Range</code>, it is understood as the current selection and any hover included in the range will show the type of the expression if possible.</p>
+<h3 id="example-8"><a class="header" href="#example-8">Example</a></h3>
+<pre><code class="language-rust">fn main() {
+    let expression = $01 + 2 * 3$0;
+}</code></pre>
+<p>Triggering a hover inside the selection above will show a result of <code>i32</code>.</p>
+<h2 id="move-item"><a class="header" href="#move-item">Move Item</a></h2>
+<p><strong>Upstream Issue:</strong> <a href="https://github.com/rust-lang/rust-analyzer/issues/6823">https://github.com/rust-lang/rust-analyzer/issues/6823</a></p>
+<p>This request is sent from client to server to move item under cursor or selection in some direction.</p>
+<p><strong>Method:</strong> <code>experimental/moveItem</code></p>
+<p><strong>Request:</strong> <code>MoveItemParams</code></p>
+<p><strong>Response:</strong> <code>SnippetTextEdit[]</code></p>
+<pre><code class="language-typescript">export interface MoveItemParams {
+    textDocument: TextDocumentIdentifier,
+    range: Range,
+    direction: Direction
+}
+
+export const enum Direction {
+    Up = "Up",
+    Down = "Down"
+}
+</code></pre>
+<h2 id="workspace-symbols-filtering"><a class="header" href="#workspace-symbols-filtering">Workspace Symbols Filtering</a></h2>
+<p><strong>Upstream Issue:</strong> <a href="https://github.com/microsoft/language-server-protocol/issues/941">https://github.com/microsoft/language-server-protocol/issues/941</a></p>
+<p><strong>Experimental Server Capability:</strong> <code>{ "workspaceSymbolScopeKindFiltering": boolean }</code></p>
+<p>Extends the existing <code>workspace/symbol</code> request with ability to filter symbols by broad scope and kind of symbol.
+If this capability is set, <code>workspace/symbol</code> parameter gains two new optional fields:</p>
+<pre><code class="language-typescript">interface WorkspaceSymbolParams {
+    /**
+     * Return only the symbols defined in the specified scope.
+     */
+    searchScope?: WorkspaceSymbolSearchScope;
+    /**
+     * Return only the symbols of specified kinds.
+     */
+    searchKind?: WorkspaceSymbolSearchKind;
+    ...
+}
+
+const enum WorkspaceSymbolSearchScope {
+    Workspace = "workspace",
+    WorkspaceAndDependencies = "workspaceAndDependencies"
+}
+
+const enum WorkspaceSymbolSearchKind {
+    OnlyTypes = "onlyTypes",
+    AllSymbols = "allSymbols"
+}
+</code></pre>
+<h2 id="client-commands"><a class="header" href="#client-commands">Client Commands</a></h2>
+<p><strong>Upstream Issue:</strong> <a href="https://github.com/microsoft/language-server-protocol/issues/642">https://github.com/microsoft/language-server-protocol/issues/642</a></p>
+<p><strong>Experimental Client Capability:</strong> <code>{ "commands?": ClientCommandOptions }</code></p>
+<p>Certain LSP types originating on the server, notably code lenses, embed commands.
+Commands can be serviced either by the server or by the client.
+However, the server doesn’t know which commands are available on the client.</p>
+<p>This extensions allows the client to communicate this info.</p>
+<pre><code class="language-typescript">export interface ClientCommandOptions {
+    /**
+     * The commands to be executed on the client
+     */
+    commands: string[];
+}
+</code></pre>
+<h2 id="colored-diagnostic-output"><a class="header" href="#colored-diagnostic-output">Colored Diagnostic Output</a></h2>
+<p><strong>Experimental Client Capability:</strong> <code>{ "colorDiagnosticOutput": boolean }</code></p>
+<p>If this capability is set, the “full compiler diagnostics” provided by <code>checkOnSave</code>
+will include ANSI color and style codes to render the diagnostic in a similar manner
+as <code>cargo</code>. This is translated into <code>--message-format=json-diagnostic-rendered-ansi</code>
+when flycheck is run, instead of the default <code>--message-format=json</code>.</p>
+<p>The full compiler rendered diagnostics are included in the server response
+regardless of this capability:</p>
+<pre><code class="language-typescript">// https://microsoft.github.io/language-server-protocol/specifications/specification-current#diagnostic
+export interface Diagnostic {
+    ...
+    data?: {
+        /**
+         * The human-readable compiler output as it would be printed to a terminal.
+         * Includes ANSI color and style codes if the client has set the experimental
+         * `colorDiagnosticOutput` capability.
+         */
+        rendered?: string;
+    };
+}
+</code></pre>
+<h2 id="dependency-tree"><a class="header" href="#dependency-tree">Dependency Tree</a></h2>
+<p><strong>Method:</strong> <code>rust-analyzer/fetchDependencyList</code></p>
+<p><strong>Request:</strong></p>
+<pre><code class="language-typescript">export interface FetchDependencyListParams {}
+</code></pre>
+<p><strong>Response:</strong></p>
+<pre><code class="language-typescript">export interface FetchDependencyListResult {
+    crates: {
+        name: string;
+        version: string;
+        path: string;
+    }[];
+}
+</code></pre>
+<p>Returns all crates from this workspace, so it can be used create a viewTree to help navigate the dependency tree.</p>
+<h2 id="view-recursive-memory-layout"><a class="header" href="#view-recursive-memory-layout">View Recursive Memory Layout</a></h2>
+<p><strong>Method:</strong> <code>rust-analyzer/viewRecursiveMemoryLayout</code></p>
+<p><strong>Request:</strong> <code>TextDocumentPositionParams</code></p>
+<p><strong>Response:</strong></p>
+<pre><code class="language-typescript">export interface RecursiveMemoryLayoutNode = {
+    /// Name of the item, or [ROOT], `.n` for tuples
+    item_name: string;
+    /// Full name of the type (type aliases are ignored)
+    typename: string;
+    /// Size of the type in bytes
+    size: number;
+    /// Alignment of the type in bytes
+    alignment: number;
+    /// Offset of the type relative to its parent (or 0 if it's the root)
+    offset: number;
+    /// Index of the node's parent (or -1 if it's the root)
+    parent_idx: number;
+    /// Index of the node's children (or -1 if it does not have children)
+    children_start: number;
+    /// Number of child nodes (unspecified if it does not have children)
+    children_len: number;
+};
+
+export interface RecursiveMemoryLayout = {
+    nodes: RecursiveMemoryLayoutNode[];
+};
+</code></pre>
+<p>Returns a vector of nodes representing items in the datatype as a tree, <code>RecursiveMemoryLayout::nodes[0]</code> is the root node.</p>
+<p>If <code>RecursiveMemoryLayout::nodes::length == 0</code> we could not find a suitable type.</p>
+<p>Generic Types do not give anything because they are incomplete. Fully specified generic types do not give anything if they are selected directly but do work when a child of other types <a href="https://github.com/rust-lang/rust-analyzer/issues/15010">this is consistent with other behavior</a>.</p>
+<h3 id="unresolved-questions-2"><a class="header" href="#unresolved-questions-2">Unresolved questions:</a></h3>
+<ul>
+<li>How should enums/unions be represented? currently they do not produce any children because they have multiple distinct sets of children.</li>
+<li>Should niches be represented? currently they are not reported.</li>
+<li>A visual representation of the memory layout is not specified, see the provided implementation for an example, however it may not translate well to terminal based editors or other such things.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../contributing/guide.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../contributing/setup.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../contributing/guide.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../contributing/setup.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+        <script>
+            window.playground_line_numbers = true;
+        </script>
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace-2a3cd908.js"></script>
+        <script src="../mode-rust-2c9d5c9a.js"></script>
+        <script src="../editor-16ca416c.js"></script>
+        <script src="../theme-dawn-4493f9c8.js"></script>
+        <script src="../theme-tomorrow_night-9dbe62a9.js"></script>
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

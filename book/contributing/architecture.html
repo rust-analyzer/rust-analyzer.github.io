@@ -1,0 +1,622 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Architecture - rust-analyzer</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-05b71aa6.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-6c762e67.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">rust-analyzer</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/tree/master/docs/book" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/edit/master/docs/book/src/contributing/architecture.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="architecture"><a class="header" href="#architecture">Architecture</a></h1>
+<p>This document describes the high-level architecture of rust-analyzer.
+If you want to familiarize yourself with the code base, you are just in the right place!</p>
+<p>You might also enjoy <a href="https://www.youtube.com/playlist?list=PLhb66M_x9UmrqXhQuIpWC5VgTdrGxMx3y">“Explaining Rust Analyzer”</a> series on YouTube.
+It goes deeper than what is covered in this document, but will take some time to watch.</p>
+<p>See also these implementation-related blog posts:</p>
+<ul>
+<li><a href="https://rust-analyzer.github.io/blog/2019/11/13/find-usages.html">https://rust-analyzer.github.io/blog/2019/11/13/find-usages.html</a></li>
+<li><a href="https://rust-analyzer.github.io/blog/2020/07/20/three-architectures-for-responsive-ide.html">https://rust-analyzer.github.io/blog/2020/07/20/three-architectures-for-responsive-ide.html</a></li>
+<li><a href="https://rust-analyzer.github.io/blog/2020/09/16/challenging-LR-parsing.html">https://rust-analyzer.github.io/blog/2020/09/16/challenging-LR-parsing.html</a></li>
+<li><a href="https://rust-analyzer.github.io/blog/2020/09/28/how-to-make-a-light-bulb.html">https://rust-analyzer.github.io/blog/2020/09/28/how-to-make-a-light-bulb.html</a></li>
+<li><a href="https://rust-analyzer.github.io/blog/2020/10/24/introducing-ungrammar.html">https://rust-analyzer.github.io/blog/2020/10/24/introducing-ungrammar.html</a></li>
+</ul>
+<p>For older, by now mostly outdated stuff, see the <a href="./guide.html">guide</a> and <a href="https://www.youtube.com/playlist?list=PL85XCvVPmGQho7MZkdW-wtPtuJcFpzycE">another playlist</a>.</p>
+<h2 id="birds-eye-view"><a class="header" href="#birds-eye-view">Bird’s Eye View</a></h2>
+<p><img src="https://user-images.githubusercontent.com/4789492/107129398-0ab70f00-687a-11eb-9bfc-d4eb023aec06.png" alt=""></p>
+<p>On the highest level, rust-analyzer is a thing which accepts input source code from the client and produces a structured semantic model of the code.</p>
+<p>More specifically, input data consists of a set of test files (<code>(PathBuf, String)</code> pairs) and information about project structure, captured in the so called <code>CrateGraph</code>.
+The crate graph specifies which files are crate roots, which cfg flags are specified for each crate and what dependencies exist between the crates.
+This is the input (ground) state.
+The analyzer keeps all this input data in memory and never does any IO.
+Because the input data is source code, which typically measures in tens of megabytes at most, keeping everything in memory is OK.</p>
+<p>A “structured semantic model” is basically an object-oriented representation of modules, functions and types which appear in the source code.
+This representation is fully “resolved”: all expressions have types, all references are bound to declarations, etc.
+This is derived state.</p>
+<p>The client can submit a small delta of input data (typically, a change to a single file) and get a fresh code model which accounts for changes.</p>
+<p>The underlying engine makes sure that model is computed lazily (on-demand) and can be quickly updated for small modifications.</p>
+<h2 id="entry-points"><a class="header" href="#entry-points">Entry Points</a></h2>
+<p><code>crates/rust-analyzer/src/bin/main.rs</code> contains the main function which spawns LSP.
+This is <em>the</em> entry point, but it front-loads a lot of complexity, so it’s fine to just skim through it.</p>
+<p><code>crates/rust-analyzer/src/handlers/request.rs</code> implements all LSP requests and is a great place to start if you are already familiar with LSP.</p>
+<p><code>Analysis</code> and <code>AnalysisHost</code> types define the main API for consumers of IDE services.</p>
+<h2 id="code-map"><a class="header" href="#code-map">Code Map</a></h2>
+<p>This section talks briefly about various important directories and data structures.
+Pay attention to the <strong>Architecture Invariant</strong> sections.
+They often talk about things which are deliberately absent in the source code.</p>
+<p>Note also which crates are <strong>API Boundaries</strong>.
+Remember, <a href="https://www.tedinski.com/2018/02/06/system-boundaries.html">rules at the boundary are different</a>.</p>
+<h3 id="xtask"><a class="header" href="#xtask"><code>xtask</code></a></h3>
+<p>This is rust-analyzer’s “build system”.
+We use cargo to compile rust code, but there are also various other tasks, like release management or local installation.
+They are handled by Rust code in the xtask directory.</p>
+<h3 id="editorscode"><a class="header" href="#editorscode"><code>editors/code</code></a></h3>
+<p>VS Code plugin.</p>
+<h3 id="lib"><a class="header" href="#lib"><code>lib/</code></a></h3>
+<p>rust-analyzer independent libraries which we publish to crates.io.
+It’s not heavily utilized at the moment.</p>
+<h3 id="cratesparser"><a class="header" href="#cratesparser"><code>crates/parser</code></a></h3>
+<p>It is a hand-written recursive descent parser, which produces a sequence of events like “start node X”, “finish node Y”.
+It works similarly to
+<a href="https://github.com/JetBrains/kotlin/blob/4d951de616b20feca92f3e9cc9679b2de9e65195/compiler/frontend/src/org/jetbrains/kotlin/parsing/KotlinParsing.java">kotlin’s parser</a>,
+which is a good source of inspiration for dealing with syntax errors and incomplete input.
+Original <a href="https://github.com/rust-lang/rust/blob/6b99adeb11313197f409b4f7c4083c2ceca8a4fe/src/libsyntax/parse/parser.rs">libsyntax parser</a> is what we use for the definition of the Rust language.
+<code>TreeSink</code> and <code>TokenSource</code> traits bridge the tree-agnostic parser from <code>grammar</code> with <code>rowan</code> trees.</p>
+<p><strong>Architecture Invariant:</strong> the parser is independent of the particular tree structure and particular representation of the tokens.
+It transforms one flat stream of events into another flat stream of events.
+Token independence allows us to parse out both text-based source code and <code>tt</code>-based macro input.
+Tree independence allows us to more easily vary the syntax tree implementation.
+It should also unlock efficient light-parsing approaches.
+For example, you can extract the set of names defined in a file (for typo correction) without building a syntax tree.</p>
+<p><strong>Architecture Invariant:</strong> parsing never fails, the parser produces <code>(T, Vec&lt;Error&gt;)</code> rather than <code>Result&lt;T, Error&gt;</code>.</p>
+<h3 id="cratessyntax"><a class="header" href="#cratessyntax"><code>crates/syntax</code></a></h3>
+<p>Rust syntax tree structure and parser.
+See <a href="https://github.com/rust-lang/rfcs/pull/2256">RFC</a> and <a href="./syntax.html">./syntax.md</a> for some design notes.</p>
+<ul>
+<li><a href="https://github.com/rust-analyzer/rowan">rowan</a> library is used for constructing syntax trees.</li>
+<li><code>ast</code> provides a type safe API on top of the raw <code>rowan</code> tree.</li>
+<li><code>ungrammar</code> description of the grammar, which is used to generate <code>syntax_kinds</code> and <code>ast</code> modules, using <code>cargo test -p xtask</code> command.</li>
+</ul>
+<p>Tests for ra_syntax are mostly data-driven.
+<code>test_data/parser</code> contains subdirectories with a bunch of <code>.rs</code> (test vectors) and <code>.txt</code> files with corresponding syntax trees.
+During testing, we check <code>.rs</code> against <code>.txt</code>.
+If the <code>.txt</code> file is missing, it is created (this is how you update tests).
+Additionally, running the xtask test suite with <code>cargo test -p xtask</code> will walk the grammar module and collect all <code>// test test_name</code> comments into files inside <code>test_data/parser/inline</code> directory.</p>
+<p>To update test data, run with <code>UPDATE_EXPECT</code> variable:</p>
+<pre><code class="language-bash">env UPDATE_EXPECT=1 cargo qt
+</code></pre>
+<p>After adding a new inline test you need to run <code>cargo test -p xtask</code> and also update the test data as described above.</p>
+<p>Note <a href="https://github.com/rust-lang/rust-analyzer/blob/2fb6af89eb794f775de60b82afe56b6f986c2a40/crates/ra_syntax/src/lib.rs#L190-L348"><code>api_walkthrough</code></a>
+in particular: it shows off various methods of working with syntax tree.</p>
+<p>See <a href="https://github.com/rust-lang/rust-analyzer/pull/93">#93</a> for an example PR which fixes a bug in the grammar.</p>
+<p><strong>Architecture Invariant:</strong> <code>syntax</code> crate is completely independent from the rest of rust-analyzer. It knows nothing about salsa or LSP.
+This is important because it is possible to make useful tooling using only the syntax tree.
+Without semantic information, you don’t need to be able to <em>build</em> code, which makes the tooling more robust.
+See also <a href="https://mlfbrown.com/paper.pdf">https://mlfbrown.com/paper.pdf</a>.
+You can view the <code>syntax</code> crate as an entry point to rust-analyzer.
+<code>syntax</code> crate is an <strong>API Boundary</strong>.</p>
+<p><strong>Architecture Invariant:</strong> syntax tree is a value type.
+The tree is fully determined by the contents of its syntax nodes, it doesn’t need global context (like an interner) and doesn’t store semantic info.
+Using the tree as a store for semantic info is convenient in traditional compilers, but doesn’t work nicely in the IDE.
+Specifically, assists and refactors require transforming syntax trees, and that becomes awkward if you need to do something with the semantic info.</p>
+<p><strong>Architecture Invariant:</strong> syntax tree is built for a single file.
+This is to enable parallel parsing of all files.</p>
+<p><strong>Architecture Invariant:</strong>  Syntax trees are by design incomplete and do not enforce well-formedness.
+If an AST method returns an <code>Option</code>, it <em>can</em> be <code>None</code> at runtime, even if this is forbidden by the grammar.</p>
+<h3 id="cratesbase-db"><a class="header" href="#cratesbase-db"><code>crates/base-db</code></a></h3>
+<p>We use the <a href="https://github.com/salsa-rs/salsa">salsa</a> crate for incremental and on-demand computation.
+Roughly, you can think of salsa as a key-value store, but it can also compute derived values using specified functions.
+The <code>base-db</code> crate provides basic infrastructure for interacting with salsa.
+Crucially, it defines most of the “input” queries: facts supplied by the client of the analyzer.
+Reading the docs of the <code>base_db::input</code> module should be useful: everything else is strictly derived from those inputs.</p>
+<p><strong>Architecture Invariant:</strong> particularities of the build system are <em>not</em> the part of the ground state.
+In particular, <code>base-db</code> knows nothing about cargo.
+For example, <code>cfg</code> flags are a part of <code>base_db</code>, but <code>feature</code>s are not.
+A <code>foo</code> feature is a Cargo-level concept, which is lowered by Cargo to <code>--cfg feature=foo</code> argument on the command line.
+The <code>CrateGraph</code> structure is used to represent the dependencies between the crates abstractly.</p>
+<p><strong>Architecture Invariant:</strong> <code>base-db</code> doesn’t know about file system and file paths.
+Files are represented with opaque <code>FileId</code>, there’s no operation to get an <code>std::path::Path</code> out of the <code>FileId</code>.</p>
+<h3 id="crateshir-expand-crateshir-def-crateshir_ty"><a class="header" href="#crateshir-expand-crateshir-def-crateshir_ty"><code>crates/hir-expand</code>, <code>crates/hir-def</code>, <code>crates/hir_ty</code></a></h3>
+<p>These crates are the <em>brain</em> of rust-analyzer.
+This is the compiler part of the IDE.</p>
+<p><code>hir-xxx</code> crates have a strong <a href="https://en.wikipedia.org/wiki/Entity_component_system">ECS</a> flavor, in that they work with raw ids and directly query the database.
+There’s little abstraction here.
+These crates integrate deeply with salsa and chalk.</p>
+<p>Name resolution, macro expansion and type inference all happen here.
+These crates also define various intermediate representations of the core.</p>
+<p><code>ItemTree</code> condenses a single <code>SyntaxTree</code> into a “summary” data structure, which is stable over modifications to function bodies.</p>
+<p><code>DefMap</code> contains the module tree of a crate and stores module scopes.</p>
+<p><code>Body</code> stores information about expressions.</p>
+<p><strong>Architecture Invariant:</strong> these crates are not, and will never be, an api boundary.</p>
+<p><strong>Architecture Invariant:</strong> these crates explicitly care about being incremental.
+The core invariant we maintain is “typing inside a function’s body never invalidates global derived data”.
+i.e., if you change the body of <code>foo</code>, all facts about <code>bar</code> should remain intact.</p>
+<p><strong>Architecture Invariant:</strong> hir exists only in context of particular crate instance with specific CFG flags.
+The same syntax may produce several instances of HIR if the crate participates in the crate graph more than once.</p>
+<h3 id="crateshir"><a class="header" href="#crateshir"><code>crates/hir</code></a></h3>
+<p>The top-level <code>hir</code> crate is an <strong>API Boundary</strong>.
+If you think about “using rust-analyzer as a library”, <code>hir</code> crate is most likely the façade you’ll be talking to.</p>
+<p>It wraps ECS-style internal API into a more OO-flavored API (with an extra <code>db</code> argument for each call).</p>
+<p><strong>Architecture Invariant:</strong> <code>hir</code> provides a static, fully resolved view of the code.
+While internal <code>hir-*</code> crates <em>compute</em> things, <code>hir</code>, from the outside, looks like an inert data structure.</p>
+<p><code>hir</code> also handles the delicate task of going from syntax to the corresponding <code>hir</code>.
+Remember that the mapping here is one-to-many.
+See <code>Semantics</code> type and <code>source_to_def</code> module.</p>
+<p>Note in particular a curious recursive structure in <code>source_to_def</code>.
+We first resolve the parent <em>syntax</em> node to the parent <em>hir</em> element.
+Then we ask the <em>hir</em> parent what <em>syntax</em> children does it have.
+Then we look for our node in the set of children.</p>
+<p>This is the heart of many IDE features, like goto definition, which start with figuring out the hir node at the cursor.
+This is some kind of (yet unnamed) uber-IDE pattern, as it is present in Roslyn and Kotlin as well.</p>
+<h3 id="crateside-crateside-db-crateside-assists-crateside-completion-crateside-diagnostics-crateside-ssr"><a class="header" href="#crateside-crateside-db-crateside-assists-crateside-completion-crateside-diagnostics-crateside-ssr"><code>crates/ide</code>, <code>crates/ide-db</code>, <code>crates/ide-assists</code>, <code>crates/ide-completion</code>, <code>crates/ide-diagnostics</code>, <code>crates/ide-ssr</code></a></h3>
+<p>The <code>ide</code> crate builds on top of <code>hir</code> semantic model to provide high-level IDE features like completion or goto definition.
+It is an <strong>API Boundary</strong>.
+If you want to use IDE parts of rust-analyzer via LSP, custom flatbuffers-based protocol or just as a library in your text editor, this is the right API.</p>
+<p><strong>Architecture Invariant:</strong> <code>ide</code> crate’s API is build out of POD types with public fields.
+The API uses editor’s terminology, it talks about offsets and string labels rather than in terms of definitions or types.
+It is effectively the view in MVC and viewmodel in <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel">MVVM</a>.
+All arguments and return types are conceptually serializable.
+In particular, syntax trees and hir types are generally absent from the API (but are used heavily in the implementation).
+Shout outs to LSP developers for popularizing the idea that “UI” is a good place to draw a boundary at.</p>
+<p><code>ide</code> is also the first crate which has the notion of change over time.
+<code>AnalysisHost</code> is a state to which you can transactionally <code>apply_change</code>.
+<code>Analysis</code> is an immutable snapshot of the state.</p>
+<p>Internally, <code>ide</code> is split across several crates. <code>ide-assists</code>, <code>ide-completion</code>, <code>ide-diagnostics</code> and <code>ide-ssr</code> implement large isolated features.
+<code>ide-db</code> implements common IDE functionality (notably, reference search is implemented here).
+The <code>ide</code> contains a public API/façade, as well as implementation for a plethora of smaller features.</p>
+<p><strong>Architecture Invariant:</strong> <code>ide</code> crate strives to provide a <em>perfect</em> API.
+Although at the moment it has only one consumer, the LSP server, LSP <em>does not</em> influence its API design.
+Instead, we keep in mind a hypothetical <em>ideal</em> client – an IDE tailored specifically for rust, every nook and cranny of which is packed with Rust-specific goodies.</p>
+<h3 id="cratesrust-analyzer"><a class="header" href="#cratesrust-analyzer"><code>crates/rust-analyzer</code></a></h3>
+<p>This crate defines the <code>rust-analyzer</code> binary, so it is the <strong>entry point</strong>.
+It implements the language server.</p>
+<p><strong>Architecture Invariant:</strong> <code>rust-analyzer</code> is the only crate that knows about LSP and JSON serialization.
+If you want to expose a data structure <code>X</code> from ide to LSP, don’t make it serializable.
+Instead, create a serializable counterpart in <code>rust-analyzer</code> crate and manually convert between the two.</p>
+<p><code>GlobalState</code> is the state of the server.
+The <code>main_loop</code> defines the server event loop which accepts requests and sends responses.
+Requests that modify the state or might block user’s typing are handled on the main thread.
+All other requests are processed in background.</p>
+<p><strong>Architecture Invariant:</strong> the server is stateless, a-la HTTP.
+Sometimes state needs to be preserved between requests.
+For example, “what is the <code>edit</code> for the fifth completion item of the last completion edit?”.
+For this, the second request should include enough info to re-create the context from scratch.
+This generally means including all the parameters of the original request.</p>
+<p><code>reload</code> module contains the code that handles configuration and Cargo.toml changes.
+This is a tricky business.</p>
+<p><strong>Architecture Invariant:</strong> <code>rust-analyzer</code> should be partially available even when the build is broken.
+Reloading process should not prevent IDE features from working.</p>
+<h3 id="cratestoolchain-cratesproject-model-cratesflycheck"><a class="header" href="#cratestoolchain-cratesproject-model-cratesflycheck"><code>crates/toolchain</code>, <code>crates/project-model</code>, <code>crates/flycheck</code></a></h3>
+<p>These crates deal with invoking <code>cargo</code> to learn about project structure and get compiler errors for the “check on save” feature.</p>
+<p>They use <code>crates/paths</code> heavily instead of <code>std::path</code>.
+A single <code>rust-analyzer</code> process can serve many projects, so it is important that server’s current directory does not leak.</p>
+<h3 id="cratesmbe-cratestt-cratesproc-macro-api-cratesproc-macro-srv-cratesproc-macro-srv-cli"><a class="header" href="#cratesmbe-cratestt-cratesproc-macro-api-cratesproc-macro-srv-cratesproc-macro-srv-cli"><code>crates/mbe</code>, <code>crates/tt</code>, <code>crates/proc-macro-api</code>, <code>crates/proc-macro-srv</code>, <code>crates/proc-macro-srv-cli</code></a></h3>
+<p>These crates implement macros as token tree -&gt; token tree transforms.
+They are independent from the rest of the code.</p>
+<p><code>tt</code> crate defined <code>TokenTree</code>, a single token or a delimited sequence of token trees.
+<code>mbe</code> crate contains tools for transforming between syntax trees and token tree.
+And it also handles the actual parsing and expansion of declarative macro (a-la “Macros By Example” or mbe).</p>
+<p>For proc macros, the client-server model are used.
+We start a separate process  (<code>proc-macro-srv-cli</code>) which loads and runs the proc-macros for us.
+And the client (<code>proc-macro-api</code>) provides an interface to talk to that server separately.</p>
+<p>And then token trees are passed from client, and the server will load the corresponding dynamic library (which built by <code>cargo</code>).
+And due to the fact the api for getting result from proc macro are always unstable in <code>rustc</code>,
+we maintain our own copy (and paste) of that part of code to allow us to build the whole thing in stable rust.</p>
+<p><strong>Architecture Invariant:</strong>
+Bad proc macros may panic or segfault accidentally. So we run it in another process and recover it from fatal error.
+And they may be non-deterministic which conflict how <code>salsa</code> works, so special attention is required.</p>
+<h3 id="cratescfg"><a class="header" href="#cratescfg"><code>crates/cfg</code></a></h3>
+<p>This crate is responsible for parsing, evaluation and general definition of <code>cfg</code> attributes.</p>
+<h3 id="cratesvfs-cratesvfs-notify-cratespaths"><a class="header" href="#cratesvfs-cratesvfs-notify-cratespaths"><code>crates/vfs</code>, <code>crates/vfs-notify</code>, <code>crates/paths</code></a></h3>
+<p>These crates implement a virtual file system.
+They provide consistent snapshots of the underlying file system and insulate messy OS paths.</p>
+<p><strong>Architecture Invariant:</strong> vfs doesn’t assume a single unified file system.
+i.e., a single rust-analyzer process can act as a remote server for two different machines, where the same <code>/tmp/foo.rs</code> path points to different files.
+For this reason, all path APIs generally take some existing path as a “file system witness”.</p>
+<h3 id="cratesstdx"><a class="header" href="#cratesstdx"><code>crates/stdx</code></a></h3>
+<p>This crate contains various non-rust-analyzer specific utils, which could have been in std, as well
+as copies of unstable std items we would like to make use of already.</p>
+<h3 id="cratesprofile"><a class="header" href="#cratesprofile"><code>crates/profile</code></a></h3>
+<p>This crate contains utilities for CPU and memory profiling.</p>
+<h3 id="cratesintern"><a class="header" href="#cratesintern"><code>crates/intern</code></a></h3>
+<p>This crate contains infrastructure for globally interning things via <code>Arc</code>.</p>
+<h3 id="cratesload-cargo"><a class="header" href="#cratesload-cargo"><code>crates/load-cargo</code></a></h3>
+<p>This crate exposes several utilities for loading projects, used by the main <code>rust-analyzer</code> crate
+and other downstream consumers.</p>
+<h3 id="cratesrustc-dependencies"><a class="header" href="#cratesrustc-dependencies"><code>crates/rustc-dependencies</code></a></h3>
+<p>This crate wraps the <code>rustc_*</code> crates rust-analyzer relies on and conditionally points them to
+mirrored crates-io releases such that rust-analyzer keeps building on stable.</p>
+<h3 id="cratesspan"><a class="header" href="#cratesspan"><code>crates/span</code></a></h3>
+<p>This crate exposes types and functions related to rust-analyzer’s span for macros.</p>
+<p>A span is effectively a text range relative to some item in a file with a given <code>SyntaxContext</code> (hygiene).</p>
+<h2 id="cross-cutting-concerns"><a class="header" href="#cross-cutting-concerns">Cross-Cutting Concerns</a></h2>
+<p>This sections talks about the things which are everywhere and nowhere in particular.</p>
+<h3 id="stability-guarantees"><a class="header" href="#stability-guarantees">Stability Guarantees</a></h3>
+<p>One of the reasons rust-analyzer moves relatively fast is that we don’t introduce new stability guarantees.
+Instead, as much as possible we leverage existing ones.</p>
+<p>Examples:</p>
+<ul>
+<li>The <code>ide</code> API of rust-analyzer are explicitly unstable, but the LSP interface is stable, and here we just implement a stable API managed by someone else.</li>
+<li>Rust language and Cargo are stable, and they are the primary inputs to rust-analyzer.</li>
+<li>The <code>rowan</code> library is published to crates.io, but it is deliberately kept under <code>1.0</code> and always makes semver-incompatible upgrades</li>
+</ul>
+<p>Another important example is that rust-analyzer isn’t run on CI, so, unlike <code>rustc</code> and <code>clippy</code>, it is actually ok for us to change runtime behavior.</p>
+<p>At some point we might consider opening up APIs or allowing crates.io libraries to include rust-analyzer specific annotations, but that’s going to be a big commitment on our side.</p>
+<p>Exceptions:</p>
+<ul>
+<li><code>rust-project.json</code> is a de-facto stable format for non-cargo build systems.
+It is probably ok enough, but was definitely stabilized implicitly.
+Lesson for the future: when designing API which could become a stability boundary, don’t wait for the first users until you stabilize it.
+By the time you have first users, it is already de-facto stable.
+And the users will first use the thing, and <em>then</em> inform you that now you have users.
+The sad thing is that stuff should be stable before someone uses it for the first time, or it should contain explicit opt-in.</li>
+<li>We ship some LSP extensions, and we try to keep those somewhat stable.
+Here, we need to work with a finite set of editor maintainers, so not providing rock-solid guarantees works.</li>
+</ul>
+<h3 id="code-generation"><a class="header" href="#code-generation">Code generation</a></h3>
+<p>Some components in this repository are generated through automatic processes.
+Generated code is updated automatically on <code>cargo test</code>.
+Generated code is generally committed to the git repository.</p>
+<p>In particular, we generate:</p>
+<ul>
+<li>
+<p>API for working with syntax trees (<code>syntax::ast</code>, the <a href="https://github.com/rust-analyzer/ungrammar"><code>ungrammar</code></a> crate).</p>
+</li>
+<li>
+<p>Various sections of the manual:</p>
+<ul>
+<li>features</li>
+<li>assists</li>
+<li>config</li>
+</ul>
+</li>
+<li>
+<p>Documentation tests for assists</p>
+</li>
+</ul>
+<p>See the <code>xtask\src\codegen\assists_doc_tests.rs</code> module for details.</p>
+<p><strong>Architecture Invariant:</strong> we avoid bootstrapping.
+For codegen we need to parse Rust code.
+Using rust-analyzer for that would work and would be fun, but it would also complicate the build process a lot.
+For that reason, we use syn and manual string parsing.</p>
+<h3 id="cancellation"><a class="header" href="#cancellation">Cancellation</a></h3>
+<p>Let’s say that the IDE is in the process of computing syntax highlighting, when the user types <code>foo</code>.
+What should happen?
+<code>rust-analyzer</code>s answer is that the highlighting process should be cancelled – its results are now stale, and it also blocks modification of the inputs.</p>
+<p>The salsa database maintains a global revision counter.
+When applying a change, salsa bumps this counter and waits until all other threads using salsa finish.
+If a thread does salsa-based computation and notices that the counter is incremented, it panics with a special value (see <code>Canceled::throw</code>).
+That is, rust-analyzer requires unwinding.</p>
+<p><code>ide</code> is the boundary where the panic is caught and transformed into a <code>Result&lt;T, Cancelled&gt;</code>.</p>
+<h3 id="testing"><a class="header" href="#testing">Testing</a></h3>
+<p>rust-analyzer has three interesting <a href="https://www.tedinski.com/2018/04/10/making-tests-a-positive-influence-on-design.html">system boundaries</a> to concentrate tests on.</p>
+<p>The outermost boundary is the <code>rust-analyzer</code> crate, which defines an LSP interface in terms of stdio.
+We do integration testing of this component, by feeding it with a stream of LSP requests and checking responses.
+These tests are known as “heavy”, because they interact with Cargo and read real files from disk.
+For this reason, we try to avoid writing too many tests on this boundary: in a statically typed language, it’s hard to make an error in the protocol itself if messages are themselves typed.
+Heavy tests are only run when <code>RUN_SLOW_TESTS</code> env var is set.</p>
+<p>The middle, and most important, boundary is <code>ide</code>.
+Unlike <code>rust-analyzer</code>, which exposes API, <code>ide</code> uses Rust API and is intended for use by various tools.
+A typical test creates an <code>AnalysisHost</code>, calls some <code>Analysis</code> functions and compares the results against expectation.</p>
+<p>The innermost and most elaborate boundary is <code>hir</code>.
+It has a much richer vocabulary of types than <code>ide</code>, but the basic testing setup is the same: we create a database, run some queries, assert result.</p>
+<p>For comparisons, we use the <code>expect</code> crate for snapshot testing.</p>
+<p>To test various analysis corner cases and avoid forgetting about old tests, we use so-called marks.
+See the <a href="https://docs.rs/cov-mark/latest/cov_mark/">cov_mark</a> crate documentation for more.</p>
+<p><strong>Architecture Invariant:</strong> rust-analyzer tests do not use libcore or libstd.
+All required library code must be a part of the tests.
+This ensures fast test execution.</p>
+<p><strong>Architecture Invariant:</strong> tests are data driven and do not test the API.
+Tests which directly call various API functions are a liability, because they make refactoring the API significantly more complicated.
+So most of the tests look like this:</p>
+<pre><code class="language-rust">#[track_caller]
+fn check(input: &amp;str, expect: expect_test::Expect) {
+    // The single place that actually exercises a particular API
+}
+
+#[test]
+fn foo() {
+    check("foo", expect![["bar"]]);
+}
+
+#[test]
+fn spam() {
+    check("spam", expect![["eggs"]]);
+}
+// ...and a hundred more tests that don't care about the specific API at all.</code></pre>
+<p>To specify input data, we use a single string literal in a special format, which can describe a set of rust files.
+See the <code>Fixture</code> its module for fixture examples and documentation.</p>
+<p><strong>Architecture Invariant:</strong> all code invariants are tested by <code>#[test]</code> tests.
+There’s no additional checks in CI, formatting and tidy tests are run with <code>cargo test</code>.</p>
+<p><strong>Architecture Invariant:</strong> tests do not depend on any kind of external resources, they are perfectly reproducible.</p>
+<h3 id="performance-testing"><a class="header" href="#performance-testing">Performance Testing</a></h3>
+<p>TBA, take a look at the <code>metrics</code> xtask and <code>#[test] fn benchmark_xxx()</code> functions.</p>
+<h3 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h3>
+<p><strong>Architecture Invariant:</strong> core parts of rust-analyzer (<code>ide</code>/<code>hir</code>) don’t interact with the outside world and thus can’t fail.
+Only parts touching LSP are allowed to do IO.</p>
+<p>Internals of rust-analyzer need to deal with broken code, but this is not an error condition.
+rust-analyzer is robust: various analysis compute <code>(T, Vec&lt;Error&gt;)</code> rather than <code>Result&lt;T, Error&gt;</code>.</p>
+<p>rust-analyzer is a complex long-running process.
+It will always have bugs and panics.
+But a panic in an isolated feature should not bring down the whole process.
+Each LSP-request is protected by a <code>catch_unwind</code>.
+We use <code>always</code> and <code>never</code> macros instead of <code>assert</code> to gracefully recover from impossible conditions.</p>
+<h3 id="observability"><a class="header" href="#observability">Observability</a></h3>
+<p>rust-analyzer is a long-running process, so it is important to understand what’s going on inside.
+We have several instruments for that.</p>
+<p>The event loop that runs rust-analyzer is very explicit.
+Rather than spawning futures or scheduling callbacks (open), the event loop accepts an <code>enum</code> of possible events (closed).
+It’s easy to see all the things that trigger rust-analyzer processing, together with their performance</p>
+<p>rust-analyzer includes a simple hierarchical profiler (<code>hprof</code>).
+It is enabled with <code>RA_PROFILE='*&gt;50'</code> env var (log all (<code>*</code>) actions which take more than <code>50</code> ms) and produces output like:</p>
+<pre><code>85ms - handle_completion
+    68ms - import_on_the_fly
+        67ms - import_assets::search_for_relative_paths
+             0ms - crate_def_map:wait (804 calls)
+             0ms - find_path (16 calls)
+             2ms - find_similar_imports (1 calls)
+             0ms - generic_params_query (334 calls)
+            59ms - trait_solve_query (186 calls)
+         0ms - Semantics::analyze_impl (1 calls)
+         1ms - render_resolution (8 calls)
+     0ms - Semantics::analyze_impl (5 calls)
+</code></pre>
+<p>This is cheap enough to enable in production.</p>
+<p>Similarly, we save live object counting (<code>RA_COUNT=1</code>).
+It is not cheap enough to enable in prod, and this is a bug which should be fixed.</p>
+<h3 id="configurability"><a class="header" href="#configurability">Configurability</a></h3>
+<p>rust-analyzer strives to be as configurable as possible while offering reasonable defaults where no configuration exists yet.
+The rule of thumb is to enable most features by default unless they are buggy or degrade performance too much.
+There will always be features that some people find more annoying than helpful, so giving the users the ability to tweak or disable these is a big part of offering a good user experience.
+Enabling them by default is a matter of discoverability, as many users don’t know about some features even though they are presented in the manual.
+Mind the code–architecture gap: at the moment, we are using fewer feature flags than we really should.</p>
+<h3 id="serialization"><a class="header" href="#serialization">Serialization</a></h3>
+<p>In Rust, it is easy (often too easy) to add serialization to any type by adding <code>#[derive(Serialize)]</code>.
+This easiness is misleading – serializable types impose significant backwards compatibility constraints.
+If a type is serializable, then it is a part of some IPC boundary.
+You often don’t control the other side of this boundary, so changing serializable types is hard.</p>
+<p>For this reason, the types in <code>ide</code>, <code>base_db</code> and below are not serializable by design.
+If such types need to cross an IPC boundary, then the client of rust-analyzer needs to provide a custom, client-specific serialization format.
+This isolates backwards compatibility and migration concerns to a specific client.</p>
+<p>For example, <code>rust-project.json</code> is its own format – it doesn’t include <code>CrateGraph</code> as is.
+Instead, it creates a <code>CrateGraph</code> by calling appropriate constructing functions.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../contributing/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../contributing/debugging.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../contributing/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../contributing/debugging.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+        <script>
+            window.playground_line_numbers = true;
+        </script>
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace-2a3cd908.js"></script>
+        <script src="../mode-rust-2c9d5c9a.js"></script>
+        <script src="../editor-16ca416c.js"></script>
+        <script src="../theme-dawn-4493f9c8.js"></script>
+        <script src="../theme-tomorrow_night-9dbe62a9.js"></script>
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
