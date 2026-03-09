@@ -1,0 +1,35 @@
+= Changelog #318
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:51966da92da795f1cda89bef70d7c61266d4123a[] +
+Release: release:2026-03-09[] (`v0.3.2819`)
+
+== New Features
+
+* pr:21752[] go to `From` impl when on "Go to definition" for `?`.
+
+== Fixes
+
+* pr:21745[] fix a bug in associated type lowering.
+* pr:21750[] don't use `TypingMode::PostAnalysis` for IDE method resolution.
+* pr:21747[] allow never coercions in struct update syntax.
+* pr:21726[] align `is_rust` ABI check with `rustc`.
+* pr:21705[] support expressions in `cfg_select!`.
+* pr:21728[] use correct range for `add_missing_match_arms` in macro calls.
+* pr:21719[] improve formatting in `replace_if_let_with_match`.
+* pr:21687[] offer `destructure_struct_binding` on `self` parameters.
+* pr:21671[] complete postfix `let` on references in `match` arms.
+* pr:21770[] update VFS when a watched file is deleted.
+* pr:21763[] tweak `-Zlockfile-path` pre-release check for `beta`.
+
+== Internal Improvements
+
+* pr:21782[] (first contribution) add `rust-analyzer parse --json`.
+* pr:21755[] (first contribution) add `has_pending` methods to `Incoming`/`Outgoing`/`ReqQueue` in `lsp_server`.
+* pr:21764[] improve `smol_str` API surface in anticipation for `1.0.0`.
+* pr:21774[] migrate `unqualify_method_call` assist to `SyntaxEditor`.
+* pr:21734[] replace `ast::make` in already migrated assists.
+* pr:21660[] set up `codecov`.
+* pr:21732[] define rules for LLMs.
