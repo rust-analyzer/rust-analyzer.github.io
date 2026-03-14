@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #299</title>
+  <meta name="description"
+    content="Commit: 049767eRelease: 2025-10-27 (v0.3.2658)">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2025/10/27/changelog-299.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #299</h1>
+<div class="post-meta sect1">
+  Oct 27, 2025
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/049767e6faa84b2d1a951d8f227e6ebd99d728a2"><code>049767e</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2025-10-27"><code>2025-10-27</code></a> (<code>v0.3.2658</code>)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20854"><code>#20854</code></a> (first contribution) parse script frontmatter.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20837"><code>#20837</code></a> (first contribution) expose <code>addConfiguration</code> API from the Code extension.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20329"><code>#20329</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20445"><code>#20445</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20446"><code>#20446</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20454"><code>#20454</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20470"><code>#20470</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20447"><code>#20447</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20496"><code>#20496</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20497"><code>#20497</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20502"><code>#20502</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20506"><code>#20506</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20523"><code>#20523</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20527"><code>#20527</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20537"><code>#20537</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20545"><code>#20545</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20553"><code>#20553</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20563"><code>#20563</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20586"><code>#20586</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20609"><code>#20609</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20578"><code>#20578</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20647"><code>#20647</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20645"><code>#20645</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20649"><code>#20649</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20654"><code>#20654</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20665"><code>#20665</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20671"><code>#20671</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20677"><code>#20677</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20664"><code>#20664</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20717"><code>#20717</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20728"><code>#20728</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20733"><code>#20733</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20735"><code>#20735</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20738"><code>#20738</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20765"><code>#20765</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20777"><code>#20777</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20785"><code>#20785</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20814"><code>#20814</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20834"><code>#20834</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20841"><code>#20841</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20867"><code>#20867</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20873"><code>#20873</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20882"><code>#20882</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20888"><code>#20888</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20896"><code>#20896</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20893"><code>#20893</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20895"><code>#20895</code></a> switch from Chalk to the next trait solver.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20632"><code>#20632</code></a> support navigation on primitives.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20760"><code>#20760</code></a> add <code>all</code>, <code>any</code> and <code>not</code> completions in <code>#[cfg]</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20806"><code>#20806</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20835"><code>#20835</code></a> log flycheck <code>stdout</code> and <code>stderr</code> to files.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19771"><code>#19771</code></a> add "Generate blanket trait impl" assist.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20705"><code>#20705</code></a> add "Flip range expression" assist.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19918"><code>#19918</code></a> add "Remove <code>else</code> branches" assist.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20855"><code>#20855</code></a> improve fixture support.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20583"><code>#20583</code></a> (first contribution) add <code>rust-analyzer.semanticHighlighting.comments.enable</code> option.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20697"><code>#20697</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20745"><code>#20745</code></a> (first contribution) fix negative literals in const generics.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19867"><code>#19867</code></a> (first contribution) allow <code>&amp;raw [mut | const]</code> for union fields in safe code.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20432"><code>#20432</code></a> (first contribution) improve identifier pattern handling in assists.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20891"><code>#20891</code></a> (first contribution) add <code>negation</code> semantic token type.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20425"><code>#20425</code></a> (first contribution) add parser heuristic to warn on unterminated strings.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20520"><code>#20520</code></a> add option to hide reborrows in adjustment inlay hints.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20721"><code>#20721</code></a> implement fallback properly.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20755"><code>#20755</code></a> add <code>#[doc = include_str!(…)]</code> completion.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20423"><code>#20423</code></a> make import sorting order follow the 2024 edition style.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20801"><code>#20801</code></a> small fixes for import insertion.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20866"><code>#20866</code></a> run <code>cargo metadata</code> on sysroot right from its path.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20554"><code>#20554</code></a> improve handling of the <code>env!</code> macro.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20587"><code>#20587</code></a> deduplicate methods in completion by function ID and not by name.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20803"><code>#20803</code></a> replace <code>--show-output</code> task defaults with <code>--nocapture</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20459"><code>#20459</code></a> track diagnostic generations per package.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20689"><code>#20689</code></a> make flycheck clearing dependency-aware.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20635"><code>#20635</code></a> don&#8217;t trigger two flychecks when saving files that are part of targets.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20402"><code>#20402</code></a> add more workarounds for incorrect startup diagnostics.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20787"><code>#20787</code></a> fix spurious <code>incorrect_generics_len</code> on generic enum variants used through type aliases.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20770"><code>#20770</code></a> don&#8217;t trigger <code>trait-impl-incorrect-safety</code> on unresolved traits.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20642"><code>#20642</code></a> make <code>#[target_feature]</code> safe on WASM.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20504"><code>#20504</code></a> avoid infinite recursion while lowering associated type bounds from supertraits.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20720"><code>#20720</code></a> prevent rustup from automatically installing toolchains.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20528"><code>#20528</code></a> masquerade as nightly cargo when invoking flycheck with <code>-Zscript</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20612"><code>#20612</code></a> fix "Expand macro recursively" on nested macro calls.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20517"><code>#20517</code></a> only compute unstable paths on nightly toolchains for IDE features.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20639"><code>#20639</code></a> resolve paths to snapshot test libraries absolutely.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20547"><code>#20547</code></a> don&#8217;t highlight unrelated unsafe operation on <code>unsafe</code> blocks.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20579"><code>#20579</code></a> don&#8217;t pass <code>--target</code> to <code>rustc</code> twice while fetching target data layout.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20475"><code>#20475</code></a> don&#8217;t duplicate lang items with overridden sysroot crates.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20518"><code>#20518</code></a> fix <code>else</code> completion in <code>let _ = if x {} $0</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20390"><code>#20390</code></a> add <code>if</code>-<code>else</code> completions in <code>let</code> statements and argument lists.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20620"><code>#20620</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20657"><code>#20657</code></a> add <code>else</code> keyword completion after <code>let</code> statements.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20653"><code>#20653</code></a> don&#8217;t output an empty generic parameters list in <code>generate_function</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20708"><code>#20708</code></a> fix panic in <code>destructure_struct_binding</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20702"><code>#20702</code></a> fix <code>else</code> completion before <code>else</code> keyword.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20700"><code>#20700</code></a> fix <code>extract_variable</code> on <code>if</code>-<code>let</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20709"><code>#20709</code></a> fix panic in <code>destructure_struct_binding</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20710"><code>#20710</code></a> fix shorthand fields in <code>unused_variables</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20661"><code>#20661</code></a> tighten up expected type completions in <code>if</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20507"><code>#20507</code></a> handle expected <code>return</code> type in completions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20725"><code>#20725</code></a> fix lifetime elision handling for <code>Fn</code>-style trait bounds.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20624"><code>#20624</code></a> fix <code>lifetime_bounds</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20723"><code>#20723</code></a> fix <code>bind_unused_param</code> with binding modes and underscore prefixes.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20722"><code>#20722</code></a> fix <code>pull_assignment_up</code> on chained <code>if</code>s.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20679"><code>#20679</code></a> fix type completion with nested patterns.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20592"><code>#20592</code></a> handle closures inside <code>match</code> in <code>add_braces</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20543"><code>#20543</code></a> don&#8217;t suggest invalid transformation in <code>replace_if_let_with_match</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20742"><code>#20742</code></a> don&#8217;t turn unused variables into raw identifier.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20598"><code>#20598</code></a> support <code>let</code> chains in <code>convert_to_guarded_return</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20731"><code>#20731</code></a> handle tuple and slice rest patterns in <code>expand_rest_pattern</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20729"><code>#20729</code></a> add <code>const</code> generic parameter keyword completion.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20793"><code>#20793</code></a> add missing parentheses on ambiguity in <code>missing_unsafe</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20513"><code>#20513</code></a> complete <code>let</code> in <code>let</code>-chains.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20812"><code>#20812</code></a> complete <code>self</code> parameters in associated trait functions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20805"><code>#20805</code></a> improve parse errors for <code>static</code> and <code>const</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20824"><code>#20824</code></a> fix completion type analysis in empty closures.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20817"><code>#20817</code></a> support <code>add_explicit_type</code> on parameters in <code>let</code> statements.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20816"><code>#20816</code></a> handle closure return type adjustments in <code>add_return_type</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20526"><code>#20526</code></a> support <code>let</code>-chains for <code>.let</code> completions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20788"><code>#20788</code></a> allow more string literal conversions from raw strings.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20838"><code>#20838</code></a> don&#8217;t make <code>convert_to_guarded_return</code> applicable on <code>let-else</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20758"><code>#20758</code></a> support <code>else</code> blocks with <code>!</code> return type in <code>convert_to_guarded_return</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20772"><code>#20772</code></a> support <code>match</code> inside <code>if</code> in <code>pull_assignment_up</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20673"><code>#20673</code></a> support <code>break</code> with value in completions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20858"><code>#20858</code></a> include trailing underscores when hiding inlay hints.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20872"><code>#20872</code></a> add missing rest pattern in <code>convert_named_struct_to_tuple_struct</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20880"><code>#20880</code></a> fix invalid rest pattern in <code>convert_tuple_struct_to_named_struct</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20455"><code>#20455</code></a> fix indent in <code>convert_match_to_let_else</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20509"><code>#20509</code></a> fix indent in <code>move_guard_to_arm_body</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20613"><code>#20613</code></a> fix indent in <code>unresolved_field</code> diagnostic fixes.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20845"><code>#20845</code></a> fix indent in <code>add_braces</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20850"><code>#20850</code></a> fix indent in <code>add_missing_match_arms</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20670"><code>#20670</code></a> improve incomplete statement heuristic.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20831"><code>#20831</code></a> add shorthand record field completions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20571"><code>#20571</code></a> add type keyword completions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20886"><code>#20886</code></a> improve handling of missing names in <code>MethodCallExpr</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20905"><code>#20905</code></a> fix array inhabitedness check.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20889"><code>#20889</code></a> improve field completion parentheses heuristic.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20658"><code>#20658</code></a> complete <code>else</code> in more expressions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20611"><code>#20611</code></a> add parentheses for precedence in <code>replace_arith_op</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20912"><code>#20912</code></a> complete <code>let</code> before expression in <code>if</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20764"><code>#20764</code></a> handle <code>if</code>-<code>let</code> in <code>convert_to_guarded_return</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20712"><code>#20712</code></a> handle shorthand field patterns in <code>destructure_tuple_binding</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20589"><code>#20589</code></a> place new module outside <code>impl</code> block in <code>extract_module</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20913"><code>#20913</code></a> support <code>let</code>-chains in <code>replace_is_method_with_if_let_method</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20626"><code>#20626</code></a> improve whitespace in <code>make::struct_field_list</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20534"><code>#20534</code></a> improve semicolon handling in <code>toggle_macro_delimiter</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20442"><code>#20442</code></a> only import the item in "Unqualify method call" when needed.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20686"><code>#20686</code></a> only offer <code>generate_default_from_enum_variant</code> when the variant name is completely selected.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20771"><code>#20771</code></a> offer <code>invert_if</code> on <code>else</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20844"><code>#20844</code></a> offer <code>add_braces</code> on assignments.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20599"><code>#20599</code></a> offer <code>apply_demorgan</code> on <code>!</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20456"><code>#20456</code></a> support guards in <code>replace_match_with_if_let</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20714"><code>#20714</code></a> allow trailing comma in <code>remove_dbg!</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20511"><code>#20511</code></a> don&#8217;t offer <code>convert_integer_literal</code> on selections.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20512"><code>#20512</code></a> don&#8217;t offer <code>replace_arith_op</code> on selections.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20736"><code>#20736</code></a> don&#8217;t offer <code>invert_if</code> on <code>if-let</code> chains.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20682"><code>#20682</code></a> don&#8217;t offer <code>change_visibility</code> for variant fields.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20688"><code>#20688</code></a> reduce <code>replace_is_method_with_if_let_method</code> applicability range.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20759"><code>#20759</code></a> fix casts and use typed syntax tree API in <code>convert_to_guarded_return</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20876"><code>#20876</code></a> fix <code>signature_help</code> LSP conversion creating invalid UTF-16 offsets.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20379"><code>#20379</code></a> (first contribution) consistently use <code>---</code> for horizontal rules.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20483"><code>#20483</code></a> (first contribution) optimize VS Code extension icon.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20794"><code>#20794</code></a> (first contribution) deduplicate <code>sort</code> and <code>dedup</code> calls.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20667"><code>#20667</code></a> add regression test for The One and Only Issue.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20376"><code>#20376</code></a> merge <code>Trait</code> and <code>TraitAlias</code> handling.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20399"><code>#20399</code></a> enable warning logs by default.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20706"><code>#20706</code></a> avoid allocating in <code>stdx::replace</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20730"><code>#20730</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20748"><code>#20748</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20860"><code>#20860</code></a> migrate <code>expand_record_rest_pattern</code>, <code>replace_arith_op</code> and <code>generate_single_field_struct_from</code> assists to <code>SyntaxEditor</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20796"><code>#20796</code></a> bump <code>salsa</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20852"><code>#20852</code></a> do not enable <code>force-always-assert</code> by default.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20631"><code>#20631</code></a> remove support for <code>#[register_attr]</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20804"><code>#20804</code></a> pass <code>--target</code> to <code>xtask install</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20683"><code>#20683</code></a> expose iterators over the types in <code>InferenceResult</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20669"><code>#20669</code></a> add a testing guide.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20633"><code>#20633</code></a> clarify introduction in the README and manual.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20638"><code>#20638</code></a> add FAQ entry about Cargo build lock and cache conflicts.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20560"><code>#20560</code></a> add progress bars to more places in <code>analysis-stats</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20652"><code>#20652</code></a> improve <code>rust-analyzer diagnostics</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20774"><code>#20774</code></a> build <code>x86_64-apple-darwin</code> binaries on <code>macos-14</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

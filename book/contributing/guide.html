@@ -1,0 +1,670 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Guide - rust-analyzer</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-05b71aa6.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-6c762e67.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">rust-analyzer</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/tree/master/docs/book" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/rust-lang/rust-analyzer/edit/master/docs/book/src/contributing/guide.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="guide-to-rust-analyzer"><a class="header" href="#guide-to-rust-analyzer">Guide to rust-analyzer</a></h1>
+<h2 id="about-the-guide"><a class="header" href="#about-the-guide">About the guide</a></h2>
+<p>This guide describes the current state of rust-analyzer as of the 2024-01-01 release
+(git tag <a href="https://github.com/rust-lang/rust-analyzer/tree/2024-01-01">2024-01-01</a>). Its purpose is to document various problems and
+architectural solutions related to the problem of building IDE-first compiler
+for Rust. There is a video version of this guide as well -
+however, it’s based on an older 2019-01-20 release (git tag <a href="https://github.com/rust-lang/rust-analyzer/tree/guide-2019-01">guide-2019-01</a>):
+<a href="https://youtu.be/ANKBNiSWyfc">https://youtu.be/ANKBNiSWyfc</a>.</p>
+<h2 id="the-big-picture"><a class="header" href="#the-big-picture">The big picture</a></h2>
+<p>On the highest possible level, rust-analyzer is a stateful component. A client may
+apply changes to the analyzer (new contents of <code>foo.rs</code> file is “fn main() {}”)
+and it may ask semantic questions about the current state (what is the
+definition of the identifier with offset 92 in file <code>bar.rs</code>?). Two important
+properties hold:</p>
+<ul>
+<li>
+<p>Analyzer does not do any I/O. It starts in an empty state and all input data is
+provided via <code>apply_change</code> API.</p>
+</li>
+<li>
+<p>Only queries about the current state are supported. One can, of course,
+simulate undo and redo by keeping a log of changes and inverse changes respectively.</p>
+</li>
+</ul>
+<h2 id="ide-api"><a class="header" href="#ide-api">IDE API</a></h2>
+<p>To see the bigger picture of how the IDE features work, let’s take a look at the <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/ide/src/lib.rs#L161-L213"><code>AnalysisHost</code></a> and
+<a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/ide/src/lib.rs#L220-L761"><code>Analysis</code></a> pair of types. <code>AnalysisHost</code> has three methods:</p>
+<ul>
+<li><code>default()</code> for creating an empty analysis instance</li>
+<li><code>apply_change(&amp;mut self)</code> to make changes (this is how you get from an empty
+state to something interesting)</li>
+<li><code>analysis(&amp;self)</code> to get an instance of <code>Analysis</code></li>
+</ul>
+<p><code>Analysis</code> has a ton of methods for IDEs, like <code>goto_definition</code>, or
+<code>completions</code>. Both inputs and outputs of <code>Analysis</code>’ methods are formulated in
+terms of files and offsets, and <strong>not</strong> in terms of Rust concepts like structs,
+traits, etc. The “typed” API with Rust specific types is slightly lower in the
+stack, we’ll talk about it later.</p>
+<p>The reason for this separation of <code>Analysis</code> and <code>AnalysisHost</code> is that we want to apply
+changes “uniquely”, but we might also want to fork an <code>Analysis</code> and send it to
+another thread for background processing. That is, there is only a single
+<code>AnalysisHost</code>, but there may be several (equivalent) <code>Analysis</code>.</p>
+<p>Note that all of the <code>Analysis</code> API return <code>Cancellable&lt;T&gt;</code>. This is required to
+be responsive in an IDE setting. Sometimes a long-running query is being computed
+and the user types something in the editor and asks for completion. In this
+case, we cancel the long-running computation (so it returns <code>Err(Cancelled)</code>),
+apply the change and execute request for completion. We never use stale data to
+answer requests. Under the cover, <code>AnalysisHost</code> “remembers” all outstanding
+<code>Analysis</code> instances. The <code>AnalysisHost::apply_change</code> method cancels all
+<code>Analysis</code>es, blocks until all of them are <code>Dropped</code> and then applies changes
+in-place. This may be familiar to Rustaceans who use read-write locks for interior
+mutability.</p>
+<p>Next, let’s talk about what the inputs to the <code>Analysis</code> are, precisely.</p>
+<h2 id="inputs"><a class="header" href="#inputs">Inputs</a></h2>
+<p>rust-analyzer never does any I/O itself, all inputs get passed explicitly via
+the <code>AnalysisHost::apply_change</code> method, which accepts a single argument, a
+<code>Change</code>. <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-expand/src/change.rs#L10-L42"><code>Change</code></a> is a wrapper for <code>FileChange</code> that adds proc-macro knowledge.
+<a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/base-db/src/change.rs#L14-L78"><code>FileChange</code></a> is a builder for a single change “transaction”, so it suffices
+to study its methods to understand all the input data.</p>
+<p>The <code>change_file</code> method controls the set of the input files, where each file
+has an integer id (<code>FileId</code>, picked by the client) and text (<code>Option&lt;Arc&lt;str&gt;&gt;</code>).
+Paths are tricky; they’ll be explained below, in source roots section,
+together with the <code>set_roots</code> method. The “source root” <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/base-db/src/input.rs#L38"><code>is_library</code></a> flag
+along with the concept of <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/base-db/src/change.rs#L80-L86"><code>durability</code></a> allows us to add a group of files which
+are assumed to rarely change. It’s mostly an optimization and does not change
+the fundamental picture.</p>
+<p>The <code>set_crate_graph</code> method allows us to control how the input files are partitioned
+into compilation units – crates. It also controls (in theory, not implemented
+yet) <code>cfg</code> flags. <code>CrateGraph</code> is a directed acyclic graph of crates. Each crate
+has a root <code>FileId</code>, a set of active <code>cfg</code> flags and a set of dependencies. Each
+dependency is a pair of a crate and a name. It is possible to have two crates
+with the same root <code>FileId</code> but different <code>cfg</code>-flags/dependencies. This model
+is lower than Cargo’s model of packages: each Cargo package consists of several
+targets, each of which is a separate crate (or several crates, if you try
+different feature combinations).</p>
+<p>Procedural macros are inputs as well, roughly modeled as a crate with a bunch of
+additional black box <code>dyn Fn(TokenStream) -&gt; TokenStream</code> functions.</p>
+<p>Soon we’ll talk how we build an LSP server on top of <code>Analysis</code>, but first,
+let’s deal with that paths issue.</p>
+<h2 id="source-roots-aka-filesystems-are-horrible"><a class="header" href="#source-roots-aka-filesystems-are-horrible">Source roots (a.k.a. “Filesystems are horrible”)</a></h2>
+<p>This is a non-essential section, feel free to skip.</p>
+<p>The previous section said that the filesystem path is an attribute of a file,
+but this is not the whole truth. Making it an absolute <code>PathBuf</code> will be bad for
+several reasons. First, filesystems are full of (platform-dependent) edge cases:</p>
+<ul>
+<li>It’s hard (requires a syscall) to decide if two paths are equivalent.</li>
+<li>Some filesystems are case-sensitive (e.g. macOS).</li>
+<li>Paths are not necessarily UTF-8.</li>
+<li>Symlinks can form cycles.</li>
+</ul>
+<p>Second, this might hurt the reproducibility and hermeticity of builds. In theory,
+moving a project from <code>/foo/bar/my-project</code> to <code>/spam/eggs/my-project</code> should
+not change a bit in the output. However, if the absolute path is a part of the
+input, it is at least in theory observable, and <em>could</em> affect the output.</p>
+<p>Yet another problem is that we really <em>really</em> want to avoid doing I/O, but with
+Rust the set of “input” files is not necessarily known up-front. In theory, you
+can have <code>#[path="/dev/random"] mod foo;</code>.</p>
+<p>To solve (or explicitly refuse to solve) these problems rust-analyzer uses the
+concept of a “source root”. Roughly speaking, source roots are the contents of a
+directory on a file system, like <code>/home/matklad/projects/rustraytracer/**.rs</code>.</p>
+<p>More precisely, all files (<code>FileId</code>s) are partitioned into disjoint
+<code>SourceRoot</code>s. Each file has a relative UTF-8 path within the <code>SourceRoot</code>.
+<code>SourceRoot</code> has an identity (integer ID). Crucially, the root path of the
+source root itself is unknown to the analyzer: A client is supposed to maintain a
+mapping between <code>SourceRoot</code> IDs (which are assigned by the client) and actual
+<code>PathBuf</code>s. <code>SourceRoot</code>s give a sane tree model of the file system to the
+analyzer.</p>
+<p>Note that <code>mod</code>, <code>#[path]</code> and <code>include!()</code> can only reference files from the
+same source root. It is of course possible to explicitly add extra files to
+the source root, even <code>/dev/random</code>.</p>
+<h2 id="language-server-protocol"><a class="header" href="#language-server-protocol">Language Server Protocol</a></h2>
+<p>Now let’s see how the <code>Analysis</code> API is exposed via the JSON RPC based language server protocol.
+The hard part here is managing changes (which can come either from the file system
+or from the editor) and concurrency (we want to spawn background jobs for things
+like syntax highlighting). We use the event loop pattern to manage the zoo, and
+the loop is the <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/rust-analyzer/src/main_loop.rs#L114-L140"><code>GlobalState::run</code></a> function initiated by <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/rust-analyzer/src/main_loop.rs#L31-L54"><code>main_loop</code></a> after
+<a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/rust-analyzer/src/global_state.rs#L148-L215"><code>GlobalState::new</code></a> does a one-time initialization and tearing down of the resources.</p>
+<p>Let’s walk through a typical analyzer session!</p>
+<p>First, we need to figure out what to analyze. To do this, we run <code>cargo metadata</code> to learn about Cargo packages for current workspace and dependencies,
+and we run <code>rustc --print sysroot</code> and scan the “sysroot”
+(the directory containing the current Rust toolchain’s files) to learn about crates
+like <code>std</code>. This happens in the <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/rust-analyzer/src/reload.rs#L186-L257"><code>GlobalState::fetch_workspaces</code></a> method.
+We load this configuration at the start of the server in <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/rust-analyzer/src/global_state.rs#L148-L215"><code>GlobalState::new</code></a>,
+but it’s also triggered by workspace change events and requests to reload the
+workspace from the client.</p>
+<p>The <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/project-model/src/workspace.rs#L57-L100"><code>ProjectModel</code></a> we get after this step is very Cargo and sysroot specific,
+it needs to be lowered to get the input in the form of <code>Change</code>. This happens
+in <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/rust-analyzer/src/global_state.rs#L217-L356"><code>GlobalState::process_changes</code></a> method. Specifically</p>
+<ul>
+<li>Create <code>SourceRoot</code>s for each Cargo package(s) and sysroot.</li>
+<li>Schedule a filesystem scan of the roots.</li>
+<li>Create an analyzer’s <code>Crate</code> for each Cargo <strong>target</strong> and sysroot crate.</li>
+<li>Setup dependencies between the crates.</li>
+</ul>
+<p>The results of the scan (which may take a while) will be processed in the body
+of the main loop, just like any other change. Here’s where we handle:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/rust-analyzer/src/main_loop.rs#L273">File system changes</a></li>
+<li><a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/rust-analyzer/src/main_loop.rs#L801-L803">Changes from the editor</a></li>
+</ul>
+<p>After a single loop’s turn, we group the changes into one <code>Change</code> and
+<a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/rust-analyzer/src/global_state.rs#L333">apply</a> it. This always happens on the main thread and blocks the loop.</p>
+<p>To handle requests, like <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/rust-analyzer/src/main_loop.rs#L767">“goto definition”</a>, we create an instance of the
+<code>Analysis</code> and <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/rust-analyzer/src/dispatch.rs#L138"><code>schedule</code></a> the task (which consumes <code>Analysis</code>) on the
+threadpool. <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/rust-analyzer/src/handlers/request.rs#L610-L623">The task</a> calls the corresponding <code>Analysis</code> method, while
+massaging the types into the LSP representation. Keep in mind that if we are
+executing “goto definition” on the threadpool and a new change comes in, the
+task will be canceled as soon as the main loop calls <code>apply_change</code> on the
+<code>AnalysisHost</code>.</p>
+<p>This concludes the overview of the analyzer’s programing <em>interface</em>. Next, let’s
+dig into the implementation!</p>
+<h2 id="salsa"><a class="header" href="#salsa">Salsa</a></h2>
+<p>The most straightforward way to implement an “apply change, get analysis, repeat”
+API would be to maintain the input state and to compute all possible analysis
+information from scratch after every change. This works, but scales poorly with
+the size of the project. To make this fast, we need to take advantage of the
+fact that most of the changes are small, and that analysis results are unlikely
+to change significantly between invocations.</p>
+<p>To do this we use <a href="https://github.com/salsa-rs/salsa">salsa</a>: a framework for incremental on-demand computation.
+You can skip the rest of the section if you are familiar with <code>rustc</code>’s red-green
+algorithm (which is used for incremental compilation).</p>
+<p>It’s better to refer to salsa’s docs to learn about it. Here’s a small excerpt:</p>
+<p>The key idea of salsa is that you define your program as a set of queries. Every
+query is used like a function <code>K -&gt; V</code> that maps from some key of type <code>K</code> to a value
+of type <code>V</code>. Queries come in two basic varieties:</p>
+<ul>
+<li>
+<p><strong>Inputs</strong>: the base inputs to your system. You can change these whenever you
+like.</p>
+</li>
+<li>
+<p><strong>Functions</strong>: pure functions (no side effects) that transform your inputs
+into other values. The results of queries are memoized to avoid recomputing
+them a lot. When you make changes to the inputs, we’ll figure out (fairly
+intelligently) when we can re-use these memoized values and when we have to
+recompute them.</p>
+</li>
+</ul>
+<p>For further discussion, it’s important to understand one bit of “fairly
+intelligently”. Suppose we have two functions, <code>f1</code> and <code>f2</code>, and one input,
+<code>z</code>. We call <code>f1(X)</code> which in turn calls <code>f2(Y)</code> which inspects <code>i(Z)</code>. <code>i(Z)</code>
+returns some value <code>V1</code>, <code>f2</code> uses that and returns <code>R1</code>, <code>f1</code> uses that and
+returns <code>O</code>. Now, let’s change <code>i</code> at <code>Z</code> to <code>V2</code> from <code>V1</code> and try to compute
+<code>f1(X)</code> again. Because <code>f1(X)</code> (transitively) depends on <code>i(Z)</code>, we can’t just
+reuse its value as is. However, if <code>f2(Y)</code> is <em>still</em> equal to <code>R1</code> (despite
+<code>i</code>’s change), we, in fact, <em>can</em> reuse <code>O</code> as result of <code>f1(X)</code>. And that’s how
+salsa works: it recomputes results in <em>reverse</em> order, starting from inputs and
+progressing towards outputs, stopping as soon as it sees an intermediate value
+that hasn’t changed. If this sounds confusing to you, don’t worry: it is
+confusing. This illustration by @killercup might help:</p>
+<img alt="step 1" src="https://user-images.githubusercontent.com/1711539/51460907-c5484780-1d6d-11e9-9cd2-d6f62bd746e0.png" width="50%">
+<img alt="step 2" src="https://user-images.githubusercontent.com/1711539/51460915-c9746500-1d6d-11e9-9a77-27d33a0c51b5.png" width="50%">
+<img alt="step 3" src="https://user-images.githubusercontent.com/1711539/51460920-cda08280-1d6d-11e9-8d96-a782aa57a4d4.png" width="50%">
+<img alt="step 4" src="https://user-images.githubusercontent.com/1711539/51460927-d1340980-1d6d-11e9-851e-13c149d5c406.png" width="50%">
+<h2 id="salsa-input-queries"><a class="header" href="#salsa-input-queries">Salsa Input Queries</a></h2>
+<p>All analyzer information is stored in a salsa database. <code>Analysis</code> and
+<code>AnalysisHost</code> types are essentially newtype wrappers for <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/ide-db/src/lib.rs#L69-L324"><code>RootDatabase</code></a>
+– a salsa database.</p>
+<p>Salsa input queries are defined in <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/base-db/src/lib.rs#L58-L65"><code>SourceDatabase</code></a> and <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/base-db/src/lib.rs#L76-L88"><code>SourceDatabaseExt</code></a>
+(which are a part of <code>RootDatabase</code>). They closely mirror the familiar <code>Change</code>
+structure: indeed, what <code>apply_change</code> does is it sets the values of input queries.</p>
+<h2 id="from-text-to-semantic-model"><a class="header" href="#from-text-to-semantic-model">From text to semantic model</a></h2>
+<p>The bulk of the rust-analyzer is transforming input text into a semantic model of
+Rust code: a web of entities like modules, structs, functions and traits.</p>
+<p>An important fact to realize is that (unlike most other languages like C# or
+Java) there is not a one-to-one mapping between the source code and the semantic model. A
+single function definition in the source code might result in several semantic
+functions: for example, the same source file might get included as a module in
+several crates or a single crate might be present in the compilation DAG
+several times, with different sets of <code>cfg</code>s enabled. The IDE-specific task of
+mapping source code into a semantic model is inherently imprecise for
+this reason and gets handled by the <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir/src/source_analyzer.rs"><code>source_analyzer</code></a>.</p>
+<p>The semantic interface is declared in the <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir/src/semantics.rs"><code>semantics</code></a> module. Each entity is
+identified by an integer ID and has a bunch of methods which take a salsa database
+as an argument and returns other entities (which are also IDs). Internally, these
+methods invoke various queries on the database to build the model on demand.
+Here’s <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-ty/src/db.rs#L29-L275">the list of queries</a>.</p>
+<p>The first step of building the model is parsing the source code.</p>
+<h2 id="syntax-trees"><a class="header" href="#syntax-trees">Syntax trees</a></h2>
+<p>An important property of the Rust language is that each file can be parsed in
+isolation. Unlike, say, <code>C++</code>, an <code>include</code> can’t change the meaning of the
+syntax. For this reason, rust-analyzer can build a syntax tree for each “source
+file”, which could then be reused by several semantic models if this file
+happens to be a part of several crates.</p>
+<p>The representation of syntax trees that rust-analyzer uses is similar to that of <code>Roslyn</code>
+and Swift’s new <a href="https://github.com/apple/swift/tree/5e2c815edfd758f9b1309ce07bfc01c4bc20ec23/lib/Syntax">libsyntax</a>. Swift’s docs give an excellent overview of the
+approach, so I skip this part here and instead outline the main characteristics
+of the syntax trees:</p>
+<ul>
+<li>
+<p>Syntax trees are fully lossless. Converting <strong>any</strong> text to a syntax tree and
+back is a total identity function. All whitespace and comments are explicitly
+represented in the tree.</p>
+</li>
+<li>
+<p>Syntax nodes have generic <code>(next|previous)_sibling</code>, <code>parent</code>,
+<code>(first|last)_child</code> functions. You can get from any one node to any other
+node in the file using only these functions.</p>
+</li>
+<li>
+<p>Syntax nodes know their range (start offset and length) in the file.</p>
+</li>
+<li>
+<p>Syntax nodes share the ownership of their syntax tree: if you keep a reference
+to a single function, the whole enclosing file is alive.</p>
+</li>
+<li>
+<p>Syntax trees are immutable and the cost of replacing the subtree is
+proportional to the depth of the subtree. Read Swift’s docs to learn how
+immutable + parent pointers + cheap modification is possible.</p>
+</li>
+<li>
+<p>Syntax trees are build on best-effort basis. All accessor methods return
+<code>Option</code>s. The tree for <code>fn foo</code> will contain a function declaration with
+<code>None</code> for parameter list and body.</p>
+</li>
+<li>
+<p>Syntax trees do not know the file they are built from, they only know about
+the text.</p>
+</li>
+</ul>
+<p>The implementation is based on the generic <a href="https://github.com/rust-analyzer/rowan/tree/100a36dc820eb393b74abe0d20ddf99077b61f88">rowan</a> crate on top of which a
+<a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/syntax/src/ast/generated.rs">rust-specific</a> AST is generated.</p>
+<p>The next step in constructing the semantic model is …</p>
+<h2 id="building-a-module-tree"><a class="header" href="#building-a-module-tree">Building a Module Tree</a></h2>
+<p>The algorithm for building a tree of modules is to start with a crate root
+(remember, each <code>Crate</code> from a <code>CrateGraph</code> has a <code>FileId</code>), collect all <code>mod</code>
+declarations and recursively process child modules. This is handled by the
+<a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-def/src/nameres.rs#L307-L324"><code>crate_def_map_query</code></a>, with two slight variations.</p>
+<p>First, rust-analyzer builds a module tree for all crates in a source root
+simultaneously. The main reason for this is historical (<code>module_tree</code> predates
+<code>CrateGraph</code>), but this approach also enables accounting for files which are not
+part of any crate. That is, if you create a file but do not include it as a
+submodule anywhere, you still get semantic completion, and you get a warning
+about a free-floating module (the actual warning is not implemented yet).</p>
+<p>The second difference is that <code>crate_def_map_query</code> does not <em>directly</em> depend on
+the <code>SourceDatabase::parse</code> query. Why would calling the parse directly be bad?
+Suppose the user changes the file slightly, by adding an insignificant whitespace.
+Adding whitespace changes the parse tree (because it includes whitespace),
+and that means recomputing the whole module tree.</p>
+<p>We deal with this problem by introducing an intermediate <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-def/src/nameres.rs#L326-L354"><code>block_def_map_query</code></a>.
+This query processes the syntax tree and extracts a set of declared submodule
+names. Now, changing the whitespace results in <code>block_def_map_query</code> being
+re-executed for a <em>single</em> module, but because the result of this query stays
+the same, we don’t have to re-execute <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-def/src/nameres.rs#L307-L324"><code>crate_def_map_query</code></a>. In fact, we only
+need to re-execute it when we add/remove new files or when we change mod
+declarations.</p>
+<p>We store the resulting modules in a <code>Vec</code>-based indexed arena. The indices in
+the arena becomes module IDs. And this brings us to the next topic:
+assigning IDs in the general case.</p>
+<h2 id="location-interner-pattern"><a class="header" href="#location-interner-pattern">Location Interner pattern</a></h2>
+<p>One way to assign IDs is how we’ve dealt with modules: Collect all items into a
+single array in some specific order and use the index in the array as an ID. The
+main drawback of this approach is that these IDs are not stable: Adding a new item can
+shift the IDs of all other items. This works for modules, because adding a module is
+a comparatively rare operation, but would be less convenient for, for example,
+functions.</p>
+<p>Another solution here is positional IDs: We can identify a function as “the
+function with name <code>foo</code> in a ModuleId(92) module”. Such locations are stable:
+adding a new function to the module (unless it is also named <code>foo</code>) does not
+change the location. However, such “ID” types ceases to be a <code>Copy</code>able integer and in
+general can become pretty large if we account for nesting (for example: “third parameter of
+the <code>foo</code> function of the <code>bar</code> <code>impl</code> in the <code>baz</code> module”).</p>
+<p><a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-expand/src/lib.rs#L96-L106"><code>Intern</code> and <code>Lookup</code></a> traits allows us to combine the benefits of positional and numeric
+IDs. Implementing both traits effectively creates a bidirectional append-only map
+between locations and integer IDs (typically newtype wrappers for <a href="https://docs.rs/salsa/0.16.1/salsa/struct.InternId.html"><code>salsa::InternId</code></a>)
+which can “intern” a location and return an integer ID back. The salsa database we use
+includes a couple of <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-expand/src/lib.rs#L108-L122">interners</a>. How to “garbage collect” unused locations
+is an open question.</p>
+<p>For example, we use <code>Intern</code> and <code>Lookup</code> implementations to assign IDs to
+definitions of functions, structs, enums, etc. The location, <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-def/src/lib.rs#L209-L212"><code>ItemLoc</code></a> contains
+two bits of information:</p>
+<ul>
+<li>the ID of the module which contains the definition,</li>
+<li>the ID of the specific item in the module’s source code.</li>
+</ul>
+<p>We “could” use a text offset for the location of a particular item, but that would play
+badly with salsa: offsets change after edits. So, as a rule of thumb, we avoid
+using offsets, text ranges or syntax trees as keys and values for queries. What
+we do instead is we store “index” of the item among all of the items of a file
+(so, a positional based ID, but localized to a single file).</p>
+<p>One thing we’ve glossed over for the time being is support for macros. We have
+only proof of concept handling of macros at the moment, but they are extremely
+interesting from an “assigning IDs” perspective.</p>
+<h2 id="macros-and-recursive-locations"><a class="header" href="#macros-and-recursive-locations">Macros and recursive locations</a></h2>
+<p>The tricky bit about macros is that they effectively create new source files.
+While we can use <code>FileId</code>s to refer to original files, we can’t just assign them
+willy-nilly to the pseudo files of macro expansion. Instead, we use a special
+ID, <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/span/src/lib.rs#L148-L160"><code>HirFileId</code></a> to refer to either a usual file or a macro-generated file:</p>
+<pre><code class="language-rust">enum HirFileId {
+    FileId(FileId),
+    Macro(MacroCallId),
+}</code></pre>
+<p><code>MacroCallId</code> is an interned ID that identifies a particular macro invocation.
+Simplifying, it’s a <code>HirFileId</code> of a file containing the call plus the offset
+of the macro call in the file.</p>
+<p>Note how <code>HirFileId</code> is defined in terms of <code>MacroCallId</code> which is defined in
+terms of <code>HirFileId</code>! This does not recur infinitely though: any chain of
+<code>HirFileId</code>s bottoms out in <code>HirFileId::FileId</code>, that is, some source file
+actually written by the user.</p>
+<p>Note also that in the actual implementation, the two variants are encoded in
+a single <code>u32</code>, which are differentiated by the MSB (most significant bit).
+If the MSB is 0, the value represents a <code>FileId</code>, otherwise the remaining
+31 bits represent a <code>MacroCallId</code>.</p>
+<p>Now that we understand how to identify a definition, in a source or in a
+macro-generated file, we can discuss name resolution a bit.</p>
+<h2 id="name-resolution"><a class="header" href="#name-resolution">Name resolution</a></h2>
+<p>Name resolution faces the same problem as the module tree: if we look at the
+syntax tree directly, we’ll have to recompute name resolution after every
+modification. The solution to the problem is the same: We <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-def/src/item_tree.rs#L110-L154">lower</a> the source code of
+each module into a position-independent representation which does not change if
+we modify bodies of the items. After that we <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-def/src/nameres/collector.rs#L404-L437">loop</a> resolving all imports until
+we’ve reached a fixed point.</p>
+<p>And, given all our preparation with IDs and a position-independent representation,
+it is satisfying to <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-def/src/nameres/tests/incremental.rs#L31">test</a> that typing inside function body does not invalidate
+name resolution results.</p>
+<p>An interesting fact about name resolution is that it “erases” all of the
+intermediate paths from the imports: in the end, we know which items are defined
+and which items are imported in each module, but, if the import was <code>use foo::bar::baz</code>, we deliberately forget what modules <code>foo</code> and <code>bar</code> resolve to.</p>
+<p>To serve “goto definition” requests on intermediate segments we need this info
+in the IDE, however. Luckily, we need it only for a tiny fraction of imports, so we just ask
+the module explicitly, “What does the path <code>foo::bar</code> resolve to?”. This is a
+general pattern: we try to compute the minimal possible amount of information
+during analysis while allowing IDE to ask for additional specific bits.</p>
+<p>Name resolution is also a good place to introduce another salsa pattern used
+throughout the analyzer:</p>
+<h2 id="source-map-pattern"><a class="header" href="#source-map-pattern">Source Map pattern</a></h2>
+<p>Due to an obscure edge case in completion, IDE needs to know the syntax node of
+a use statement which imported the given completion candidate. We can’t just
+store the syntax node as a part of name resolution: this will break
+incrementality, due to the fact that syntax changes after every file
+modification.</p>
+<p>We solve this problem during the lowering step of name resolution. Along with
+the <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-def/src/item_tree.rs"><code>ItemTree</code></a> output, the lowering query additionally produces an <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-expand/src/ast_id_map.rs#L136-L142"><code>AstIdMap</code></a>
+via an <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-def/src/item_tree/lower.rs#L32"><code>ast_id_map</code></a> query. The <code>ItemTree</code> contains <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-def/src/item_tree.rs#L559-L563">imports</a>, but in a
+position-independent form based on <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-expand/src/ast_id_map.rs#L29"><code>AstId</code></a>. The <code>AstIdMap</code> contains a mapping
+from position-independent <code>AstId</code>s to (position-dependent) syntax nodes.</p>
+<h2 id="type-inference"><a class="header" href="#type-inference">Type inference</a></h2>
+<p>First of all, implementation of type inference in rust-analyzer was spearheaded
+by <a href="https://github.com/flodiebold">@flodiebold</a>. <a href="https://github.com/rust-lang/rust-analyzer/pull/327">#327</a> was an awesome Christmas present, thank you, Florian!</p>
+<p>Type inference runs on per-function granularity and uses the patterns we’ve
+discussed previously.</p>
+<p>First, we <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-def/src/body.rs">lower the AST</a> of a function body into a position-independent
+representation. In this representation, each expression is assigned a
+<a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-def/src/hir.rs#L37">positional ID</a>. Alongside the lowered expression, <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-def/src/body.rs#L84-L88">a source map</a> is produced,
+which maps between expression ids and original syntax. This lowering step also
+deals with “incomplete” source trees by replacing missing expressions by an
+explicit <code>Missing</code> expression.</p>
+<p>Given the lowered body of the function, we can now run <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/hir-ty/src/infer.rs#L76-L131">type inference</a> and
+construct a mapping from <code>ExprId</code>s to types.</p>
+<h2 id="tying-it-all-together-completion"><a class="header" href="#tying-it-all-together-completion">Tying it all together: completion</a></h2>
+<p>To conclude the overview of the rust-analyzer, let’s trace the request for
+(type-inference powered!) code completion!</p>
+<p>We start by <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/rust-analyzer/src/main_loop.rs#L213">receiving a message</a> from the language client. We decode the
+message as a request for completion and <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/rust-analyzer/src/dispatch.rs#L197-L211">schedule it on the threadpool</a>. This is
+the place where we <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/rust-analyzer/src/dispatch.rs#L292">catch</a> canceled errors if, immediately after completion, the
+client sends some modification.</p>
+<p>In <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/rust-analyzer/src/handlers/request.rs#L850-L876">the handler</a>, we deserialize LSP requests into rust-analyzer specific data
+types (by converting a file url into a numeric <code>FileId</code>), <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/ide/src/lib.rs#L605-L615">ask analysis for
+completion</a> and serialize results into the LSP.</p>
+<p>The <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/ide-completion/src/lib.rs#L148-L229">completion implementation</a> is finally the place where we start doing the actual
+work. The first step is to collect the <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/ide-completion/src/context.rs#L407-L441"><code>CompletionContext</code></a> – a struct which
+describes the cursor position in terms of Rust syntax and semantics. For
+example, <code>expected_name: Option&lt;NameOrNameRef&gt;</code> is the syntactic representation
+for the expected name of what we’re completing (usually the parameter name of
+a function argument), while <code>expected_type: Option&lt;Type&gt;</code> is the semantic model
+for the expected type of what we’re completing.</p>
+<p>To construct the context, we first do an <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/ide-completion/src/context.rs#L644-L648">“IntelliJ Trick”</a>: we insert a dummy
+identifier at the cursor’s position and parse this modified file, to get a
+reasonably looking syntax tree. Then we do a bunch of “classification” routines
+to figure out the context. For example, we <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/ide-completion/src/context/analysis.rs#L463">find an parent <code>fn</code> node</a>, get a
+<a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/ide-completion/src/context/analysis.rs#L466">semantic model</a> for it (using the lossy <code>source_analyzer</code> infrastructure)
+and use it to determine the <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/ide-completion/src/context/analysis.rs#L467">expected type at the cursor position</a>.</p>
+<p>The second step is to run a <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/ide-completion/src/lib.rs#L157-L226">series of independent completion routines</a>. Let’s
+take a closer look at <a href="https://github.com/rust-lang/rust-analyzer/blob/2024-01-01/crates/ide-completion/src/completions/dot.rs#L11-L41"><code>complete_dot</code></a>, which completes fields and methods in
+<code>foo.bar|</code>. First we extract a semantic receiver type out of the <code>DotAccess</code>
+argument. Then, using the semantic model for the type, we determine if the
+receiver implements the <code>Future</code> trait, and add a <code>.await</code> completion item in
+the affirmative case. Finally, we add all fields &amp; methods from the type to
+completion.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../contributing/debugging.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../contributing/lsp-extensions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../contributing/debugging.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../contributing/lsp-extensions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+        <script>
+            window.playground_line_numbers = true;
+        </script>
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="../ace-2a3cd908.js"></script>
+        <script src="../mode-rust-2c9d5c9a.js"></script>
+        <script src="../editor-16ca416c.js"></script>
+        <script src="../theme-dawn-4493f9c8.js"></script>
+        <script src="../theme-tomorrow_night-9dbe62a9.js"></script>
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
