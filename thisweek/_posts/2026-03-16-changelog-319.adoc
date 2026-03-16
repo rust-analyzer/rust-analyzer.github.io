@@ -1,0 +1,22 @@
+= Changelog #319
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:90c8906e6443e7cee18cece9c2621a8b1c10794c[] +
+Release: release:2026-03-16[] (`v0.3.2828`)
+
+== Fixes
+
+* pr:21793[] (first contribution) handle multi-byte UTF-8 identifiers in `NameGenerator::suggest_name`.
+* pr:21767[] remove crate from `EditionedFileId`.
+* pr:21785[] allow duplicate associated type shorthand resolution if it points to the same associated type.
+* pr:21820[] infer generic args for `TraitRef` and its associated types.
+* pr:21794[] validate naming convention for union types.
+* pr:21771[] make file watcher recursive.
+
+== Internal Improvements
+
+* pr:21818[] refactor `MirLowerCtx` to use `&ExpressionStore` instead of `&Body`.
+* pr:21788[] don't re-query source roots per-crate in `analysis-stats`.
+* pr:21804[] disambiguate error messages when `proc-macro-srv` changes the working directory.
