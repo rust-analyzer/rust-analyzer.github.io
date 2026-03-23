@@ -8,7 +8,7 @@ Release: release:2023-01-23[] (`0.3.1377`)
 
 == New Features
 
-* pr:13935[] (first contribution) add assist to desugar doc-comments:
+* pr:13935[] (first contribution) add assist to desugar doc comments:
 +
 video::https://user-images.githubusercontent.com/308347/213989235-e20efab2-5e00-4e49-a81b-7adc30d54b9d.mp4[options=loop]
 * pr:13947[] add basic tooltips to adjustment hints:

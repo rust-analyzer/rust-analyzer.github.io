@@ -35,7 +35,7 @@ image::https://user-images.githubusercontent.com/3757771/211927799-023e48ee-7cdd
 
 * pr:13843[] (first contribution) add missing `await` in generated delegate methods.
 * pr:13753[] (first contribution) increase proc macro expansion token limit (fixes the visitors in `swc`).
-* pr:13940[] (first contribution) fix a panic in the `match`-to-`let-else` assist.
+* pr:13940[] (first contribution) fix a panic in the `match`-to-`let`-`else` assist.
 * pr:13763[] add type bounds to generated `#[derive]` implementations.
 * pr:13891[] keep whitespace in extracted functions.
 * pr:13890[] unescape inline module names when resolving modules.

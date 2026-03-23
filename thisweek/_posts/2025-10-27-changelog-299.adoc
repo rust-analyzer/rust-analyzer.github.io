@@ -83,7 +83,7 @@ Release: release:2025-10-27[] (`v0.3.2658`)
 * pr:20816[] handle closure return type adjustments in `add_return_type`.
 * pr:20526[] support `let`-chains for `.let` completions.
 * pr:20788[] allow more string literal conversions from raw strings.
-* pr:20838[] don't make `convert_to_guarded_return` applicable on `let-else`.
+* pr:20838[] don't make `convert_to_guarded_return` applicable on `let`-`else`.
 * pr:20758[] support `else` blocks with `!` return type in `convert_to_guarded_return`.
 * pr:20772[] support `match` inside `if` in `pull_assignment_up`.
 * pr:20673[] support `break` with value in completions.

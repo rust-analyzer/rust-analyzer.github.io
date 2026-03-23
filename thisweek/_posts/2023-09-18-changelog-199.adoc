@@ -11,7 +11,7 @@ Release: release:2023-09-18[] (`v0.3.1665`)
 * pr:15597[] (first contribution) update field shorthands in `promote_local_to_const`.
 * pr:15232[] disallow renaming of non-local items.
 * pr:15601[] "temporarily" skip declaration checks in derive expansions.
-* pr:15625[] don't skip closure captures after `let-else`.
+* pr:15625[] don't skip closure captures after `let`-`else`.
 * pr:15611[] prefer stable paths in import path.
 * pr:15606[] fix `above_whole_item` lens location breaking lenses.
 

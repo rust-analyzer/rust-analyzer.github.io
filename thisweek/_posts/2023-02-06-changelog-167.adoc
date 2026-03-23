@@ -9,7 +9,7 @@ Release: release:2023-02-06[] (`0.3.1394`)
 == New Features
 
 * pr:14065[] support generic functions in the `generate_function` assist.
-* pr:14057[] handle complex patterns in `match` to `let-else` assist.
+* pr:14057[] handle complex patterns in `match` to `let`-`else` assist.
 * pr:14063[] drop support for the 1.58 proc-macro ABI.
 
 == Fixes

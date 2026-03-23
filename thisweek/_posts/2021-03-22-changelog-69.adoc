@@ -102,7 +102,7 @@ image::https://user-images.githubusercontent.com/308347/111970065-8e178180-8b03-
 * pr:8034[] implement `Crate::transitive_reverse_dependencies`.
 * pr:8042[] (first contribution) add `rustc-perf` version to the metrics JSON.
 * pr:8061[] structural editing API can automatically insert whitespace in simple cases.
-* pr:8059[] support `cfg_attr` in doc-comment syntax highlighting.
+* pr:8059[] support `cfg_attr` in doc comment syntax highlighting.
 * pr:8065[] handle block doc comments better.
 * pr:8069[] support highlight injection in block doc comments.
 * pr:8080[] change `ItemTree` API to accommodate creating an `ItemTree` per block expression.

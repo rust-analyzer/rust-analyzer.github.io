@@ -28,7 +28,7 @@ image::https://user-images.githubusercontent.com/308347/239808173-1f4a2da1-8137-
 
 == Fixes
 
-* pr:14848[] (first contribution) traverse `else` blocks of `let-else` in `preorder_expr`.
+* pr:14848[] (first contribution) traverse `else` blocks of `let`-`else` in `preorder_expr`.
 * pr:14809[] support `#[macro_use(name, ...)]`.
 * pr:14824[] diagnose non-value `return` and `break` type mismatches.
 * pr:14825[] fix evaluation of negation for floating point types.

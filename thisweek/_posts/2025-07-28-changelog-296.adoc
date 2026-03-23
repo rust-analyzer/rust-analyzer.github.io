@@ -19,7 +19,7 @@ Release: release:2025-07-28[] (`v0.3.2555`)
 * pr:20318[] ignore `Destruct` bounds again.
 * pr:20290[], pr:20315[] use temporary directory for copied lockfiles.
 * pr:20319[] consider all produced artifacts for proc macro dylib search.
-* pr:20302[] fix doc-comment folding with multi-line parameter lists.
+* pr:20302[] fix doc comment folding with multi-line parameter lists.
 * pr:20285[] use `Self` when renaming `self` parameter.
 * pr:20256[] support `Deref` in `generate_mut_trait_impl`.
 * pr:20297[] fix whitespace in `generate_trait_from_impl`.

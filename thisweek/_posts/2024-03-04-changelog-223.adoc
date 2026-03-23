@@ -26,7 +26,7 @@ Release: release:2024-03-04[] (`v0.3.1868`)
 * pr:16727[] don't highlight related associated items of supertraits.
 * pr:16702[] ignore generic arguments in intra-doc link path resolution.
 * pr:16665[] prioritize `rustup` sysroots over system ones.
-* pr:16695[] revert doc-comment highlighting.
+* pr:16695[] revert doc comment highlighting.
 
 == Internal Improvements
 

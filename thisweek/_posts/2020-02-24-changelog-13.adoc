@@ -24,7 +24,7 @@ Release: release:2020-02-24[]
 
 == Fixes
 
-* pr:3229[] fix a crash with non-ascii whitespace in doc-comments.
+* pr:3229[] fix a crash with non-ascii whitespace in doc comments.
 * pr:3228[] fix hover for for code inside macro calls.
 * pr:3233[] extend selection correctly handles commas in tuple patterns
 * pr:3239[] remove dependency on libbacktrace.

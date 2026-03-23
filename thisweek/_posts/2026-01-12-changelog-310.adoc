@@ -8,8 +8,8 @@ Release: release:2026-01-12[] (`v0.3.2753`)
 
 == New Features
 
+* pr:18043[] (first contribution) support configuring flycheck using `workspace.discoverConfig`.
 * pr:21415[], pr:21446[] allow Rust paths in symbol search.
-* pr:18043[] support configuring flycheck using `workspace.discoverConfig`.
 
 == Performance Improvements
 

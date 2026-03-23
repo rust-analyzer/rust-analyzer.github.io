@@ -8,7 +8,7 @@ Release: release:2023-05-29[] (`v0.3.1533`)
 
 == New Features
 
-* pr:14866[] (first contribution) add Markdown syntax highlighting to doc-comments in VS Code:
+* pr:14866[] (first contribution) add Markdown syntax highlighting to doc comments in VS Code:
 +
 image::https://user-images.githubusercontent.com/1593486/239751755-c84f2e83-faea-47ca-853d-3728a07b2b66.png["Screenshot showing Markdown highlighting in a block comment"]
 * pr:14849[] implement symbol search by alias:

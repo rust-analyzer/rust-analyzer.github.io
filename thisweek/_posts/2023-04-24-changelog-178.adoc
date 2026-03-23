@@ -16,7 +16,7 @@ Release: release:2023-04-24[] (`v0.3.1489`)
 * pr:14618[] (first contribution) respect `editor.parameterHints.enabled` after triggering a completion.
 * pr:14598[] fix release channel detection for unstable completion filtering.
 * pr:14619[] fix false `need-mut` positive and too large span in closures.
-* pr:14625[] fix token conversion for doc-comments.
+* pr:14625[] fix token conversion for doc comments.
 * pr:14634[] report remaining macro errors in associated item collection.
 * pr:14643[] fix const eval panic with parameter destructing.
 * pr:14603[] try to deduplicate workspaces by top level cargo workspace.

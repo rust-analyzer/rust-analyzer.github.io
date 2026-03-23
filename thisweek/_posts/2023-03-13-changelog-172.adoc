@@ -26,7 +26,7 @@ image::https://user-images.githubusercontent.com/3757771/224274817-a5a8cb0c-7bda
 * pr:14260[] tighten `replace_match_with_if_let` applicability range.
 * pr:14271[] don't trigger unresolved method/field diagnostics on types containing errors.
 * pr:14284[] highlight unresolved derives as such.
-* pr:14248[] show diagnostic for `}` followed by `else` in `let-else` statement.
+* pr:14248[] show diagnostic for `}` followed by `else` in `let`-`else` statement.
 * pr:14283[] don't send error notifications for workspace failures if server status is supported.
 * pr:14286[] fix block defmap not looking into tail expressions for macro calls.
 * pr:14291[] fix handling of multiple definition bindings in `convert_match_to_let_else`.

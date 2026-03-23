@@ -1,0 +1,51 @@
+= Changelog #320
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:b42b63f390a4dab14e6efa34a70e67f5b087cc62[] +
+Release: release:2026-03-23[] (`v0.3.2836`)
+
+== New Features
+
+* pr:21395[] change `test_name` placeholder to `executable_arg`.
+
+== Fixes
+
+* pr:21784[] remove angle brackets if all lifetime args removed in inline type alias code assist.
+* pr:21817[] fix overlapping edits in `convert_named_struct_to_tuple_struct` and `convert_tuple_struct_to_named_struct`.
+* pr:21333[] fix expected type analysis for tuple struct patterns.
+* pr:21424[] support more runnable kinds in `rust-project.json`.
+* pr:20407[] move out doc comments in `generate_trait_from_impl`.
+* pr:21768[] keep qualifiers in function parameter completions.
+* pr:21756[] support postfix `let` completions in closures.
+* pr:21839[] don't add a second semicolon after postfix completions.
+* pr:21324[] improve indentation after postfix completions.
+* pr:20594[] fix indentation in `convert_closure_to_fn`.
+* pr:20614[] offer `no_such_field` fix for empty structs.
+* pr:20762[] add fixes for `non_exhaustive_let`.
+* pr:20299[] name trait after first method in `generate_trait_from_impl`.
+* pr:21775[] offer `inline_local_variable` in `let`-chains.
+* pr:21473[] offer `unwrap_block` on `let`-`else`.
+* pr:20984[] offer `add_label_to_loop` on `for` and `while` expressions.
+* pr:20600[] offer `unwrap_tuple` on `let` expressions.
+* pr:21809[] offer `extract_variable` on some paths.
+* pr:21822[] offer `add_missing_match_arms` on commas between arms.
+* pr:21850[] offer `add_braces` on assignments.
+* pr:20628[] support nested lifetimes in `add_lifetime_to_type`.
+* pr:20625[] support multiple attributes in `wrap_unwrap_cfg_attr`.
+* pr:20566[] support partial selections in `merge_imports`.
+* pr:21787[] keep extra predicates in `replace_is_method_with_if_let_method`.
+* pr:21828[] prime caches in parallel in `scip`.
+
+== Internal Improvements
+
+* pr:21843[] (first contribution) migrate `convert_from_to_tryfrom` assist to `SyntaxEditor`.
+* pr:21847[] migrate `qualify_method_call`, `qualify_path` and `desugar_try_expr` assists to `SyntaxEditor`.
+* pr:21832[] use mappings in `SyntaxFactory` constructor methods.
+* pr:21826[] replace `ast::make` with `SyntaxFactory` in a few `ide-assists` methods.
+* pr:21848[] ignore mapping in `expr_underscore`.
+* pr:21779[] fix printing of IR types.
+* pr:21827[] don't trigger GC on slow tests.
+* pr:21795[] fix `test_loading_rust_analyzer` when rust-project.json is present.
+* pr:21796[] add https://codecov.io/[codecov.io] badge.

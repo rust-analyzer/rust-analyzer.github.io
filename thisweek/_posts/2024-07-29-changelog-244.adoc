@@ -21,7 +21,7 @@ Release: release:2024-07-29[] (`v0.3.2053`)
 * pr:17697[] support the new `cargo config get env` format.
 * pr:17709[] fix hover links.
 * pr:17713[] fix panic on unresolved index fields.
-* pr:17720[] flip the naming of the doc-comment to comment assist.
+* pr:17720[] flip the naming of the doc comment to comment assist.
 
 == Internal Improvements
 
@@ -41,4 +41,3 @@ Release: release:2024-07-29[] (`v0.3.2053`)
 * pr:17395[] remove `UnindexedProject` notification.
 
 == Others
-

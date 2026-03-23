@@ -19,6 +19,6 @@ Release: release:2023-09-04[] (`v0.3.1649`)
 * pr:15544[] shuffle some locking around.
 * pr:15549[] add a few more `db.unwind_if_cancelled()` calls.
 * pr:15548[] restructure some modules in the `rust-analyzer` crate.
-* pr:15551[] move doc-comment handling into `ide-db`.
+* pr:15551[] move doc comment handling into `ide-db`.
 * pr:15552[] bump `rustc-perf` checkout for metrics, replace `webrender`, `diesel` and `ripgrep` with newer versions.
 * pr:15553[] add `hyper` 0.14.18 to metrics.

@@ -8,7 +8,7 @@ Release: release:2024-06-03[] (`v0.3.1983`)
 
 == New Features
 
-* pr:17253[] (first contribution) add assist to toggle between normal and doc-comments.
+* pr:17253[] (first contribution) add assist to toggle between normal and doc comments.
 * pr:17258[] (first contribution) add assist to toggle async sugar.
 * pr:17328[] enable completions within derive helper attributes.
 
@@ -22,4 +22,3 @@ Release: release:2024-06-03[] (`v0.3.1983`)
 
 * pr:17278[] (first contribution) replace `command-group` with `process-wrap`.
 * pr:17337[] include path info in `AbsPathBuf::assert` panic message.
-
