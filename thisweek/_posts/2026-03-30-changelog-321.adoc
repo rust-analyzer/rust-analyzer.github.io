@@ -1,0 +1,32 @@
+= Changelog #321
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:f1297b21119565c626320c1ffc248965fffb2527[] +
+Release: release:2026-03-30[] (`v0.3.2845`)
+
+== Fixes
+
+* pr:21588[] (first contribution) fix `asm!` `sym` operand parsing for parenthesized `expr` fragments.
+* pr:21871[] revert `TyLoweringContext::store` after lowering parent defaults.
+* pr:21876[] keep value when trying to produce a `default` call.
+* pr:21904[] fix panic on trailing `|` in `unmerge_match_arm`.
+* pr:21838[] skip usages inside macro expansions in `destructure_{struct,tuple}_binding`.
+* pr:21860[], pr:21865[] wrap ascribed type in `Option<>` or `Result<>` in `desugar_try_expr` with `let` - `else`.
+* pr:21744[] keep comments in `add_missing_match_arms`.
+* pr:20681[] fix indent after fixing `trait_impl_redundant_assoc_item`.
+* pr:21411[] offer `merge_match_arms` on ambiguous identifier patterns.
+* pr:21709[] fix spurious flychecks with multiple workspaces.
+
+== Internal Improvements
+
+* pr:21874[] (first contribution) migrate `generate_default_from_new` assist to `SyntaxEditor`.
+* pr:21879[] (first contribution) fix bounds check in `debug_assert!`.
+* pr:21823[], pr:21859[], pr:21900[] implement signature type inference.
+* pr:21901[], pr:21907[] only allocate non-empty item blocks.
+* pr:21897[] remove `Arc` from `GenericParams` and `AstIdMap`.
+* pr:21872[] rename `IndentLevel::single` to `zero`.
+* pr:21856[], pr:21867[], pr:21866[], pr:21870[], pr:21884[] replace `make` in `replace_derive_with_manual_impl`, `generate_impl`, `generate_new`, `generate_trait_impl_text_intransitive` and `getter` with `SyntaxFactory`.
+* pr:21853[] extract `default_fill_expr` to `utils`.
+* pr:21862[] don't trigger GC on slow tests, take 2.
