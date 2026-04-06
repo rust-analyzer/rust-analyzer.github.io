@@ -21,7 +21,7 @@ Release: release:2026-03-23[] (`v0.3.2836`)
 * pr:21756[] support postfix `let` completions in closures.
 * pr:21839[] don't add a second semicolon after postfix completions.
 * pr:21324[] improve indentation after postfix completions.
-* pr:20594[] fix indentation in `convert_closure_to_fn`.
+* pr:20594[] fix indent in `convert_closure_to_fn`.
 * pr:20614[] offer `no_such_field` fix for empty structs.
 * pr:20762[] add fixes for `non_exhaustive_let`.
 * pr:20299[] name trait after first method in `generate_trait_from_impl`.

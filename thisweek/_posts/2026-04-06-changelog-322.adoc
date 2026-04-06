@@ -1,0 +1,58 @@
+= Changelog #322
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:38fb8f92ac15853d7fa9fb47fc2d81fdd5cd6c7e[] +
+Release: release:2026-04-06[] (`v0.3.2854`)
+
+== Universal VSIX
+
+This release adds a platform-independent VSIX that VS Code will install on platforms where rust-analyzer doesn't offer binaries.
+On supported platforms, the extension should keep working as before, but a Code bug might cause it to fail to activate.
+If that happens, you should uninstall and reintall the rust-analyzer extension.
+
+== New Features
+
+* pr:21928[] (first contribution) support macro expansion in `#[doc = ...]` attributes.
+* pr:19956[] implement `#[feature(more_qualified_paths)]`.
+* pr:21322[] add option to put type hints at the end of the line.
+* pr:19659[] add support for folding ranges in chained expressions.
+* pr:21516[] publish universal VSIX without a built-in server binary, for unsupported platforms.
+
+== Fixes
+
+* pr:21792[] (first contribution) make `matching_brace` work when cursor the cursor is not on a bracket.
+* pr:21942[] (first contribution) silence type mismatch diagnostic when type is unknown.
+* pr:21924[] (first contribution) update Neovim setup instructions.
+* pr:21915[] fix a cycle in bounds lowering.
+* pr:21935[] support `#[cfg]` on array elements.
+* pr:21926[] handle empty expressions in parameter inlay hints.
+* pr:21937[] wrap guard in parentheses in `replace_if_let_with_match`.
+* pr:21938[] fix indent in `convert_let_else_to_match`.
+* pr:21954[] handle empty `else` block in `convert_let_else_to_match`.
+* pr:21951[] report "expected type, found ``{``" in parser.
+* pr:21695[] match trait item order in `trait_impl_redundant_assoc_item`.
+* pr:21936[] handle comma at the end of argument in `extract_variable`.
+* pr:21902[] support `env!` completions in nested macro calls.
+* pr:21903[] handle negation in `if` postfix completion.
+* pr:20864[] fix naming of `self` parameter in `extract_function`.
+* pr:21919[] support labels in `convert_to_guarded_return`.
+* pr:21912[] support tail expressions in `convert_to_guarded_return`.
+* pr:21940[] support multiple snippet placeholders in VS Code extension.
+* pr:21921[] unconditionally pass `--include-ignored` for test runnables.
+* pr:21922[] use the correct project root when there are multiple workspaces.
+* pr:21844[] support file systems that don't send `Create` events.
+* pr:21881[] fix missing argument error messages for `sched_getaffinity` and `getenv` shims.
+
+== Internal Improvements
+
+* pr:21944[] remove `RootQueryDb`.
+* pr:21931[] move node mutability handling to `edit_algo`.
+* pr:21886[] replace `make` constructors with `SyntaxFactory` in `gen_trait_fn_body`.
+* pr:21930[] refactor `add_missing_impl_members` to use more of `SyntaxFactory`.
+* pr:21909[] allow disabling fixture support.
+* pr:21933[] ensure tracing is configured in slow tests.
+* pr:21806[] document when crate cycles can occur.
+* pr:21923[] set VS Code extension kind explicitly.
+* pr:21916[] bump `@vscode/vsce` and `ovsx`.

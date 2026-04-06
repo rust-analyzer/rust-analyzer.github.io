@@ -23,7 +23,7 @@ image::https://user-images.githubusercontent.com/308347/241656740-4527db7f-d14b-
 
 == Fixes
 
-* pr:14752[] (first contribution) fix indentation in `generate_derive`, `add_missing_impl_members` and `add_missing_default_members`.
+* pr:14752[] (first contribution) fix indent in `generate_derive`, `add_missing_impl_members` and `add_missing_default_members`.
 * pr:14878[] implement `${count()}` metavariable expressions.
 * pr:14872[] introduce new type variable when expectation for ref pattern is not a reference.
 * pr:14891[], pr:14897[] evaluate `UnevaluatedConst` during unification.
