@@ -1,0 +1,48 @@
+= Changelog #323
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:7b6e1249b7320e16792e31ce67bb2e5f4acd6a8b[] +
+Release: release:2026-04-13[] (`v0.3.2862`)
+
+== New Features
+
+* pr:21978[] (first contribution) enhance runnable command placeholders.
+* pr:21964[] (first contribution) allow passing extra arguments to `cargo metadata`.
+* pr:21012[], pr:21982[] complete `->` in function return position.
+
+== Fixes
+
+* pr:21995[] (first contribution) don't let Cargo `[env]` variables override the process ones.
+* pr:21970[], pr:21968[] (first contribution) load Markdown files into the VFS and watch for changes.
+* pr:21704[] (first contribution) load `rust-analyzer.toml` in virtual workspaces.
+* pr:21965[] improve handling of `+#[cfg_attr]+` and `+#[cfg]+`.
+* pr:21973[] take path context into account in `ImportAssets`.
+* pr:21962[] fix `SyntaxEditor` upmapping of nodes with mapped ancestors that aren't mapped themselves.
+* pr:21981[] emit diagnostic for ``#![cfg]``ed out crates.
+* pr:21977[] disable the fix for `missing-fields` when the fields are private.
+* pr:22009[], pr:22012[] fix spurious import completions in qualified paths with type anchors.
+* pr:21955[] add semicolon for postfix `print!`-like completions.
+* pr:21971[] check coercion, not unification, in "Fill struct fields".
+* pr:21953[] improve type mismatch "Add `Some`" fix on block-like expressions.
+* pr:21952[] improve type mismatch fixes inside macro calls.
+* pr:21920[] improve `add_missing_match_arms` labels.
+* pr:21957[] improve `onEnter`.
+* pr:22010[] fix `rustfmt` with relative custom command.
+* pr:21738[] fix stale diagnostics with custom `check` command.
+* pr:21969[] refrsh workspace when adding a Cargo config.
+
+== Internal Improvements
+
+* pr:21988[], pr:22011[], pr:21998[] add workflow to update generated lints.
+* pr:21996[] migrate `extract_struct_from_enum_variant` assist to `SyntaxEditor`.
+* pr:21993[] replace `make::trait_` with `SyntaxFactory` in `generate_trait_from_impl`.
+* pr:21997[] replace `make` constructors with `SyntaxFactory` in `generate_single_field_struct_from`.
+* pr:21975[] handle token mutability in `SyntaxEditor`.
+* pr:21960[] move `SyntaxEditor` precondition handling to its constructor.
+* pr:21972[] remove some redundant ``clone_subtree``s.
+* pr:21967[] derive `Clone, Copy, Hash` for `vfs::ChangeKind`.
+* pr:21963[] bump ESLint and TypeScript.
+* pr:21986[] fix `RecursiveMemoryLayoutNode` field names in the Code extension.
+* pr:21985[] use official npm registry for the Code extension dependencies.

@@ -10,7 +10,7 @@ Release: release:2026-04-06[] (`v0.3.2854`)
 
 This release adds a platform-independent VSIX that VS Code will install on platforms where rust-analyzer doesn't offer binaries.
 On supported platforms, the extension should keep working as before, but a Code bug might cause it to fail to activate.
-If that happens, you should uninstall and reintall the rust-analyzer extension.
+If that happens, you should uninstall and reinstall the rust-analyzer extension.
 
 == New Features
 
