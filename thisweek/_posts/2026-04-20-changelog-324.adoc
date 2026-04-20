@@ -1,0 +1,55 @@
+= Changelog #324
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:adef948679e1f550805eeb2a78d10e25c0279f54[] +
+Release: release:2026-04-20[] (`v0.3.2870`)
+
+== New Features
+
+* pr:21906[] exclude dependency and standard library results from reference search.
+* pr:21740[] support `#[rust_analyzer::prefer_underscore_import]` to import traits `as _`.
+
+== Fixes
+
+* pr:22031[] (first contribution) demote `impl` completions when an inherent `impl` block already exists.
+* pr:22083[] (first contribution) respect `#[deprecated]` when deciding if a `ModuleDef` completion is deprecated.
+* pr:22046[] (first contribution) add parser support for unstable `type const` items.
+* pr:22022[] add parser support for `impl` and `mut` restrictions.
+* pr:22096[] use `ProofTreeVisitor` for unsized coercion.
+* pr:22025[] don't add extra dereference after indexing in `extract_function`.
+* pr:22044[] don't complete unstable items that are gated by an internal feature.
+* pr:22003[] complete variants of hidden enums through public aliases.
+* pr:21999[] fix ref-completion with keyword prefix.
+* pr:22018[] enable completions inside strings in VS Code.
+* pr:22032[] allow ambiguity in associated type shorthands if they resolve to the same associated type from a supertrait.
+* pr:22087[] fix incorrect lifetime hints with `self: Self` parameter.
+* pr:22066[] recognize `#[std::prelude::vX::test]`.
+* pr:21487[] offer `extract_variable` in macro calls.
+* pr:22067[] add parentheses on record literals in `replace_let_with_if_let`.
+* pr:22030[] fix MIR evaluation of sized &T with recursive const functions.
+* pr:22073[] fix panic on empty comments in `convert_comment_block`.
+* pr:22077[] fix a panic in `replace_if_let_with_match`.
+* pr:22055[] fixes some `upvars_mentioned` issues.
+* pr:22070[] handle name conflicts in `extract_type_alias` a little better.
+
+== Internal Improvements
+
+* pr:21835[] add `hir::Type::{as_raw_ptr,is_mutable_raw_ptr}`.
+* pr:22092[] synchronize function call argument check fudging with `rustc`.
+* pr:22048[] bump `rustc` crates.
+* pr:22061[] bump `salsa`.
+* pr:22050[] represent lower coroutines to closures.
+* pr:22049[], pr:22069[] store a `SyntaxFactory` inside `SyntaxEditor`.
+* pr:22043[], pr:22095[], pr:22042[], pr:22039[] replace `ast::make` with `SyntaxFactory` in `raw_string`, `convert_range_for_to_while`, `expand_glob_import` and `generate_blanket_trait_impl`.
+* pr:22091[], pr:22036[] migrate `generate_impl_text` and `IdentPat::set_pat` to `SyntaxEditor`.
+* pr:22081[] migrate `convert_iter_for_each_to_for` assist to `SyntaxEditor`.
+* pr:22037[] remove `set_visibility`.
+* pr:22041[] remove `GenericParamsOwnerEdit`.
+* pr:22057[] remove `clone_for_update` from `move_const_to_impl`.
+* pr:22063[] remove `LineIndexDatabase`.
+* pr:22065[] fix new Clippy lints.
+* pr:22084[] slim down `MiniCore` `Debug` output.
+* pr:22074[] support `RUSTFMT_TOOLCHAIN` for `xtask codegen`.
+* pr:22029[], pr:22028[] run `rustdoc` GitHub action on PRs.
