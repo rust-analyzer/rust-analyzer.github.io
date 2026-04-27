@@ -1,0 +1,25 @@
+= Changelog #325
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:8954b66d43225e62c92e8bbcc8500191b5cceb1e[] +
+Release: release:2026-04-27[] (`v0.3.2878`)
+
+== New Features
+
+* pr:21979[] rename variables in constructors when renaming a field.
+
+== Fixes
+
+* pr:22116[] (first contribution) mark enum variants as deprecated when parent enum is deprecated.
+* pr:22101[] port call expression type checking and closure upvar inference from `rustc`.
+* pr:22107[] improve "Go to definition" on comparison operators.
+* pr:22085[] reduce relevance of deprecated items.
+
+== Internal Improvements
+
+* pr:22054[] (first contribution) de-duplicate lints.
+* pr:22104[] don't check solver's cache validity on every access.
+* pr:22105[] migrate `wrap_unwrap_cfg_attr` assist to `SyntaxEditor` and replace `ast::make` with `SyntaxFactory` in few handlers.
+* pr:22111[] group unstable features in a struct.
