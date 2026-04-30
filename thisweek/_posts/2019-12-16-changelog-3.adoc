@@ -26,4 +26,4 @@ Commit: commit:0ef8ace012b19b76ee99b283801d0d17a3b72b4b[]
 * pr:2525[] use ES2018 for VS Code extension.
 * pr:2526[] upgrade to LSP 3.15.
 * pr:2537[] lookup hir nodes by their parents, and not only by the source location.
-* pr:2561[] split  `Path` into non-generic `ModPath` and generic `Path`.
+* pr:2561[] split `Path` into non-generic `ModPath` and generic `Path`.

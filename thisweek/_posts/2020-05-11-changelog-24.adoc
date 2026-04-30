@@ -41,7 +41,7 @@ image::https://user-images.githubusercontent.com/1711539/81536600-22ee1200-936c-
 * pr:4305[] correctly handle namespaces for structs in name resolution.
 * pr:4325[] fix conversion to UTF-16 indexing for supplementary plane characters.
 * pr:4347[] fix pattern exhaustiveness checks for `!` type.
-* pr:4353[], pr:4365[] work around VS Code TextMate scope bugs, kudos to  https://github.com/georgewfraser[@georgewfraser] for tracking those down!
+* pr:4353[], pr:4365[] work around VS Code TextMate scope bugs, kudos to https://github.com/georgewfraser[@georgewfraser] for tracking those down!
 * pr:4359[], pr:4409[] fix panic in function signature.
 * pr:4346[] fix visibility checks in rename for enum variants.
 * pr:4362[] do not show runnables for main function outside of a binary target.

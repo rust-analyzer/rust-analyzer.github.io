@@ -19,7 +19,6 @@ image::https://user-images.githubusercontent.com/3757771/196205329-2df93451-c143
 * pr:13433[] revert "pr:13354[] diagnose some incorrect usages of the question mark operator".
 * pr:13463[] support const generics in built-in derive macros.
 * pr:13428[], pr:13447[] fix formatting requests hanging during start-up.
-*  handle projects sharing common dependencies in `once` strategy.
 * pr:13448[] work around a Python extension polyfill.
 * pr:13451[] handle language configuration changes properly.
 

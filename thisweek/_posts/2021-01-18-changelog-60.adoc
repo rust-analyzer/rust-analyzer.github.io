@@ -39,10 +39,10 @@ image::https://user-images.githubusercontent.com/1711539/104919876-02b92d00-59a8
 
 * Establish a steering meeting to discuss overall direction of the project.
   The meeting is held every sixth Monday at 15:00 UTC in the project's Zulip.
-  The first meeting is today. 
+  The first meeting is today.
 
 * pr:7270[] introduce new assertion mechanism: `assert_always` and `assert_never` macros.
-  Inspired by  https://www.sqlite.org/assert.html.
+  Inspired by https://www.sqlite.org/assert.html.
 * pr:7051[] check for stray `dbg!` macros.
 * pr:7219[] refactor rename name checking.
 * pr:7249[] add `cargo xtask bb` to conveniently build rust-analyzer for benchmarking.

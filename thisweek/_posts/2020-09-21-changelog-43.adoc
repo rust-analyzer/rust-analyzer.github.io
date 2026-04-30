@@ -28,6 +28,6 @@ workspaces.
 * pr:5993[] update chalk to 0.27 and add support for extern opaque types.
 * pr:5989[] refactor infrastructure for editing `use` statements.
 * pr:6024[] simplify item tree IR for extern crate.
-* pr:6025[], pr:6035[]  better error logging.
+* pr:6025[], pr:6035[] better error logging.
 * pr:6032[] update signature help protocol.
 * pr:6036[] don't re-read open files from disk when reloading a workspace.

@@ -64,7 +64,7 @@ image::https://user-images.githubusercontent.com/29989290/291000125-c06d6c93-5ca
 * clean up and enhance readability of `generate_delegate_trait`.
 * pr:16226[] expose whether the channel has been dropped in `lsp-server` errors.
 * pr:16211[] use `[workspace.lints.clippy]` to configure lints.
-* pr:16256[] only compare relevant parts in  `ide::{runnables, inlay_hints}` tests.
+* pr:16256[] only compare relevant parts in `ide::{runnables, inlay_hints}` tests.
 * pr:16260[] replace single usage of `check_expect` with `check_diagnostics`.
 * pr:16294[] fix some minor `clippy::perf` issues.
 * pr:16248[] add `proc-macro-test` crate back to the main workspace.

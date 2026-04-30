@@ -20,7 +20,7 @@ Release: release:2025-01-27[] (`v0.3.2282`)
 image::https://github.com/user-attachments/assets/3389dd73-5fb5-4d9e-af73-46d503b6aa6f["a type with nicely-formatted 2⁶³ niches"]
 * pr:19034[] don't complete `#[doc(hidden)]` enum variants and use trees.
 * pr:18976[] consider enum variants in type ns resolution.
-* pr:18988[] de-prioritize completions that add `await` and  `iter()`.
+* pr:18988[] de-prioritize completions that add `await` and `iter()`.
 * pr:19016[], pr:19018[] record glob imports in `ItemScope`.
 * pr:19028[] filter by path stability in flyimport.
 * pr:19030[] fix markdown horizontal ruler sometimes being treated as a heading.

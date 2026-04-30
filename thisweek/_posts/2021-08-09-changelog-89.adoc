@@ -57,7 +57,7 @@ image::https://user-images.githubusercontent.com/308347/128693801-51eeec03-55e5-
 
 == Internal Improvements
 
-* pr:9756[] make `resolve_doc_path` is  to resolve to macros.
+* pr:9756[] make `resolve_doc_path` able to resolve to macros.
 * pr:9757[] completion cleanups.
 * pr:9758[] explain that we don't `ref` in `style.md`.
 * pr:9759[] simplify `inline_local_variable` assist.
