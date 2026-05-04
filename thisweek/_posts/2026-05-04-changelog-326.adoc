@@ -1,0 +1,74 @@
+= Changelog #326
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:f04c37286472e3687a2d32d3d1fad2772de515a1[] +
+Release: release:2026-05-04[] (`v0.3.2887`)
+
+== New Features
+
+* pr:22238[], pr:22239[], pr:22253[] (first contributions) add `mismatched-array-pat-len` and `unused-must-use` diagnostics.
+* pr:22186[] diagnose trait errors 🎉.
+* pr:22144[], pr:22168[], pr:22145[], pr:22156[], pr:22197[], pr:22193[], pr:22202[] add `type-must-be-known`, `generic-default-refers-to-self`, `invalid-lhs-of-assignment`, `pattern-arg-in-extern-fn`, `non-exhaustive-record-expr` and `union-expr-must-have-exactly-one-field` diagnostics.
+* pr:21987[] add initial support for `gen` blocks.
+* pr:22178[] allow renaming of elided lifetimes.
+* pr:22132[], pr:22210[] add `.new` postfix completion based on expected type.
+* pr:22179[] add `unwrap_block` assist.
+
+== Performance Improvements
+
+* pr:22078[] (first contribution) store parse errors into a side table.
+* pr:22192[] keep nonce when cloning `RootDatabase`.
+* pr:22187[] don't intern `AdtDef`.
+* pr:22189[], pr:22131[], pr:22133[] drop some ``Arc``s.
+
+== Fixes
+
+* pr:22098[] (first contribution) avoid importing prelude paths when `imports.preferPrelude` is disabled.
+* pr:22134[], pr:22195[] port pattern inference from `rustc`.
+* pr:22141[] bring type inference closer to `rustc`.
+* pr:22135[] suppress inference variables in monomorphization.
+* pr:22214[] visit all expressions.
+* pr:22169[] parse `impl` restrictions after visibility.
+* pr:22170[] parse `return #[attr] expr`.
+* pr:22124[] don't pick an `impl Trait` block in `generate_function`.
+* pr:22166[] fix placement of async closure capture hints.
+* pr:22183[] propagate ABI to functions declared in extern blocks.
+* pr:22201[] improve parser recovery in `(a, , b)`.
+* pr:22058[] improve `prettify_macro_expansion`.
+* pr:22229[] add parentheses in `convert_match_to_let_else`.
+* pr:22142[] don't offer completions for already imported `Trait as _`.
+* pr:22154[] don't complete `where` after qualified paths.
+* pr:22222[] emit `else` clause in value postfix completions.
+* pr:22240[] improve indentation in trait item completion.
+* pr:22244[] handle cycles in `expand_glob_import`.
+* pr:22150[] offer `is_some_and` and `is_none_or` in `apply_demorgan_iterator`.
+* pr:22151[] handle negation in `apply_demorgan_iterator`.
+* pr:22247[] handle match arms in `unwrap_branch`.
+* pr:22217[] add semicolon after expression in `unwrap_branch`.
+* pr:22184[] offer `unwrap_branch` on non-block match arms.
+* pr:22180[] offer `replace_arith_op` on compound assignments.
+* pr:22199[] offer `convert_to_guarded_return` on `if` expression with `else if` clause.
+* pr:22079[] handle `if matches!()` in `replace_if_let_with_match`.
+* pr:22215[] fix a stack overflow when displaying projections.
+* pr:22265[] fix panic on `impl ?Sized` in `introduce_named_type_parameter`.
+* pr:22207[] fix some issues in `lower_coroutine_body_with_moved_arguments`.
+* pr:22122[] be more resilient to deleted directories in `Analysis::from_single_file`.
+
+== Internal Improvements
+
+* pr:22129[] lower non-destructuring assignments into `Pat::Expr` instead of `Pat::Path`.
+* pr:22146[] clean up string references in postfix completions.
+* pr:22190[] ignore a test that might be hanging.
+* pr:22232[] refactor the `hir-ty` generics data structures.
+* pr:22194[] refactor `InternedCoroutineClosureId`.
+* pr:22221[] fix incorrect offset with multiple indels.
+* pr:22121[] migrate `extract_function` assist to `SyntaxEditor` and remove old version of `generate_impl`.
+* pr:22125[], pr:22020[], pr:22159[] migrate `replace_qualified_name_with_use`, `inline_call` and `generate_function` assists to `SyntaxEditor`.
+* pr:22137[] migrate `convert_into_to_from` assist to `SyntaxEditor` and replace some usages of `mod_path_to_ast`.
+* pr:22241[] migrate `insert_use` and `insert_use_as_alias` to `SyntaxEditor`.
+* pr:22245[] migrate `AssocItemList::add_item` to `SyntaxEditor`.
+* pr:22243[] replace `ast::make` with `SyntaxFactory` in `to_generic_args`.
+* pr:22246[] remove `WhereClause::add_predicate`.
+* pr:22242[] remove some unused methods in `edit_in_place`.
