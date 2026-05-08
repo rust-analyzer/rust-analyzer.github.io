@@ -28,12 +28,7 @@ jobs:
           tool: mdbook@0.5
 
       - name: Clone the rust-analyzer repository
-        uses: GuillaumeFalourd/clone-github-repo-action@v2.3
-        with:
-          depth: 1
-          branch: "master"
-          owner: "rust-lang"
-          repository: "rust-analyzer"
+        run: git clone --depth 1 https://github.com/rust-lang/rust-analyzer
 
       - name: Update Rust toolchain
         run: rustup update stable
