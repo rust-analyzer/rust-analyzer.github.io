@@ -5,8 +5,11 @@ on:
       - src
   schedule:
     # Every day, to pick up the latest rust-analyzer repo changes.
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
   workflow_dispatch:
+
+env:
+  CARGO_INCREMENTAL: 0
 
 jobs:
   CI:
@@ -28,9 +31,12 @@ jobs:
         uses: GuillaumeFalourd/clone-github-repo-action@v2.3
         with:
           depth: 1
-          branch: 'master'
-          owner: 'rust-lang'
-          repository: 'rust-analyzer'
+          branch: "master"
+          owner: "rust-lang"
+          repository: "rust-analyzer"
+
+      - name: Update Rust toolchain
+        run: rustup update stable
 
       - name: Build generated.md files
         run: cd rust-analyzer && cargo xtask codegen
