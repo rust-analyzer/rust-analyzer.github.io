@@ -12,7 +12,7 @@ Release: release:2026-03-23[] (`v0.3.2836`)
 
 == Fixes
 
-* pr:21784[] remove angle brackets if all lifetime args removed in inline type alias code assist.
+* pr:21784[] (first contribution) don't keep empty `<>` after `inline_type_alias`.
 * pr:21817[] fix overlapping edits in `convert_named_struct_to_tuple_struct` and `convert_tuple_struct_to_named_struct`.
 * pr:21333[] fix expected type analysis for tuple struct patterns.
 * pr:21424[] support more runnable kinds in `rust-project.json`.

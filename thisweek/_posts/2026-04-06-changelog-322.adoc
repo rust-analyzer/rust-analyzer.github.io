@@ -35,6 +35,7 @@ If that happens, you should uninstall and reinstall the rust-analyzer extension.
 * pr:21695[] match trait item order in `trait_impl_redundant_assoc_item`.
 * pr:21936[] handle comma at the end of argument in `extract_variable`.
 * pr:21902[] support `env!` completions in nested macro calls.
+* pr:21892[] prioritize type completions with the same name as enum variants.
 * pr:21903[] handle negation in `if` postfix completion.
 * pr:20864[] fix naming of `self` parameter in `extract_function`.
 * pr:21919[] support labels in `convert_to_guarded_return`.
