@@ -1,0 +1,56 @@
+= Changelog #327
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:e266f5cab8f6525d0bc2ddccc0006418c534b5e6[] +
+Release: release:2026-05-11[] (`v0.3.2896`)
+
+== New Features
+
+* pr:22309[], pr:22334[] (first contributions) add `functional-record-update-on-non-struct` and `expected-array-or-slice-pat` diagnostics.
+* pr:22235[], pr:22326[] add `duplicate-field` diagnostic.
+* pr:22292[] add support for deref patterns.
+* pr:22259[] complete `::` in module paths.
+
+== Performance Improvements
+
+* pr:22267[] improve performance of integer-based symbols.
+* pr:22280[] cache more things related to lang items.
+
+== Fixes
+
+* pr:22303[] (first contribution) keep `ref` and `mut` when renaming bindings in macro-generated patterns.
+* pr:22284[] (first contribution) work around a `lsp-mode` configuration bug.
+* pr:22295[] (first contribution) use runnable kind to disambiguate between Cargo and shell commands.
+* pr:22272[] don't fetch diagnostics until proc macros are loaded.
+* pr:22198[] infer anonymous constants instead of signatures.
+* pr:22237[] provide an `InferCtxt` to `TyLoweringContext`.
+* pr:22319[] don't replace closure capture place types with errors if they fail to normalize.
+* pr:22285[] unify types in `ref_match` completions.
+* pr:22275[] port async block expected type inference from `rustc`.
+* pr:22271[] port array and `ref` expression inference from `rustc`.
+* pr:22299[] fix derive helper resolution.
+* pr:22290[] respect lint attributes for diagnostics that don't set their main node.
+* pr:22276[] remove usage of `references_error` in upvar inference.
+* pr:22266[] fix handling of `self` in `lower_coroutine_body_with_moved_arguments`.
+* pr:22318[] provide source map for the lowered `let self = self` binding in async functions.
+* pr:22274[] add missing lang items for the trait solver.
+* pr:22282[] handle `#[rustc_reservation_impl = "reason"]`.
+* pr:22315[] add whitespace to postfix completions in macro calls.
+* pr:22286[] use cursor position for indentation in postfix completions.
+* pr:22302[] don't split `..=` in `prettify_macro_expansion`.
+* pr:22291[] don't add associated types with defaults in `add_missing_impl_members`.
+* pr:22304[] don't offer `toggle_macro_delimiter` on inner braces.
+
+== Internal Improvements
+
+* pr:22312[] bump `rustc` crates.
+* pr:22269[] fix nested edits in `SyntaxEditor`.
+* pr:22308[], pr:22204[] migrate `split_import` and `convert_closure_to_fn` assists to `SyntaxEditor`.
+* pr:22261[] migrate `missing_fields` diagnostic to `SyntaxEditor`.
+* pr:22296[] migrate `impl Trait` completions to `SyntaxEditor`.
+* pr:22320[], pr:22321[], pr:22323[] migrate macro expansion to `SyntaxEditor`.
+* pr:22310[] remove `SourceChangeBuilder::make_mut`.
+* pr:22307[] remove `ted`-based `increase_indent` and `decrease_indent`.
+* pr:22256[] add `SyntaxEditor` version of `wrap_in_tree_list`.
