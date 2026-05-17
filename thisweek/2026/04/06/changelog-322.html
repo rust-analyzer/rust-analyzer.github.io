@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #322</title>
+  <meta name="description"
+    content="Commit: 38fb8f9Release: 2026-04-06 (v0.3.2854)">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2026/04/06/changelog-322.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #322</h1>
+<div class="post-meta sect1">
+  Apr 6, 2026
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/38fb8f92ac15853d7fa9fb47fc2d81fdd5cd6c7e"><code>38fb8f9</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2026-04-06"><code>2026-04-06</code></a> (<code>v0.3.2854</code>)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="universal-vsix"><a class="anchor" href="#universal-vsix"></a>Universal VSIX</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This release adds a platform-independent VSIX that VS Code will install on platforms where rust-analyzer doesn&#8217;t offer binaries.
+On supported platforms, the extension should keep working as before, but a Code bug might cause it to fail to activate.
+If that happens, you should uninstall and reinstall the rust-analyzer extension.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21928"><code>#21928</code></a> (first contribution) support macro expansion in <code>#[doc = &#8230;&#8203;]</code> attributes.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19956"><code>#19956</code></a> implement <code>#[feature(more_qualified_paths)]</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21322"><code>#21322</code></a> add option to put type hints at the end of the line.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19659"><code>#19659</code></a> add support for folding ranges in chained expressions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21516"><code>#21516</code></a> publish universal VSIX without a built-in server binary, for unsupported platforms.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21792"><code>#21792</code></a> (first contribution) make <code>matching_brace</code> work when cursor the cursor is not on a bracket.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21942"><code>#21942</code></a> (first contribution) silence type mismatch diagnostic when type is unknown.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21924"><code>#21924</code></a> (first contribution) update Neovim setup instructions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21915"><code>#21915</code></a> fix a cycle in bounds lowering.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21935"><code>#21935</code></a> support <code>#[cfg]</code> on array elements.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21926"><code>#21926</code></a> handle empty expressions in parameter inlay hints.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21937"><code>#21937</code></a> wrap guard in parentheses in <code>replace_if_let_with_match</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21938"><code>#21938</code></a> fix indent in <code>convert_let_else_to_match</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21954"><code>#21954</code></a> handle empty <code>else</code> block in <code>convert_let_else_to_match</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21951"><code>#21951</code></a> report "expected type, found <code>{</code>" in parser.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21695"><code>#21695</code></a> match trait item order in <code>trait_impl_redundant_assoc_item</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21936"><code>#21936</code></a> handle comma at the end of argument in <code>extract_variable</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21902"><code>#21902</code></a> support <code>env!</code> completions in nested macro calls.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21892"><code>#21892</code></a> prioritize type completions with the same name as enum variants.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21903"><code>#21903</code></a> handle negation in <code>if</code> postfix completion.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20864"><code>#20864</code></a> fix naming of <code>self</code> parameter in <code>extract_function</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21919"><code>#21919</code></a> support labels in <code>convert_to_guarded_return</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21912"><code>#21912</code></a> support tail expressions in <code>convert_to_guarded_return</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21940"><code>#21940</code></a> support multiple snippet placeholders in VS Code extension.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21921"><code>#21921</code></a> unconditionally pass <code>--include-ignored</code> for test runnables.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21922"><code>#21922</code></a> use the correct project root when there are multiple workspaces.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21844"><code>#21844</code></a> support file systems that don&#8217;t send <code>Create</code> events.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21881"><code>#21881</code></a> fix missing argument error messages for <code>sched_getaffinity</code> and <code>getenv</code> shims.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21944"><code>#21944</code></a> remove <code>RootQueryDb</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21931"><code>#21931</code></a> move node mutability handling to <code>edit_algo</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21886"><code>#21886</code></a> replace <code>make</code> constructors with <code>SyntaxFactory</code> in <code>gen_trait_fn_body</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21930"><code>#21930</code></a> refactor <code>add_missing_impl_members</code> to use more of <code>SyntaxFactory</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21909"><code>#21909</code></a> allow disabling fixture support.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21933"><code>#21933</code></a> ensure tracing is configured in slow tests.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21806"><code>#21806</code></a> document when crate cycles can occur.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21923"><code>#21923</code></a> set VS Code extension kind explicitly.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21916"><code>#21916</code></a> bump <code>@vscode/vsce</code> and <code>ovsx</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
