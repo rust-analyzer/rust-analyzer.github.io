@@ -1,0 +1,42 @@
+= Changelog #328
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:ce81cf65580fb7a52d9f9a896092746356f39320[] +
+Release: release:2026-05-18[] (`v0.3.2904`)
+
+== VS Code Extension Publishing Issue
+
+This release is not available on the VS Code Marketplace and OpenVSX due to an infrastructure issue.
+Until it's fixed, you can still download it from the GitHub release page.
+
+== New Features
+
+* pr:22347[], pr:22355[], pr:22372[], pr:22379[], pr:22380[], pr:22378[] add `invalid-range-pat-type`, `non-exhaustive-record-pat`, `method-call-illegal-sized-bound`, `fru-in-destructuring-assignment`, `cannot-be-dereferenced` and `explicit-drop-method-use` diagnostics.
+* pr:22082[], pr:22368[], pr:22384[] add pattern type support.
+
+== Performance Improvements
+
+* pr:22329[] encode the name instead of index in `EnumVariantId` for better incrementality.
+* pr:22191[] use the `LineIndex` in `RootDatabase` in the proc macro server.
+
+== Fixes
+
+* pr:22358[], pr:22381[] show `const` and `unsafe` in signature help.
+* pr:22357[] show `Run` lens for `fn main` in bench targets.
+* pr:22363[] fix false positive `trait-impl-missing-assoc_item` with `Self: Sized` bounds.
+* pr:22376[] hide duplicate completions originating from `Deref` chains.
+* pr:22367[] fix spurious reference completions.
+* pr:22386[] don't complete `::` before existing `::` in paths.
+* pr:22354[] don't drop path segment in `qualify_path`.
+* pr:22344[] handle macro calls in `extract_function`.
+* pr:22335[] add parameter to the closures produced by `replace_method_eager_lazy`.
+
+== Internal Improvements
+
+* pr:22352[] (first contribution) migrate `inline_call` assist to `SyntaxEditor`.
+* pr:22313[] refactor visiting and tracking of placeholder types.
+* pr:22328[] remove interning from `#[query_group]`.
+* pr:22119[] remove some usages of `DbInterner::conjure`.
+* pr:22391[] ignore `workspace/diagnostic/refresh` in slow tests.
