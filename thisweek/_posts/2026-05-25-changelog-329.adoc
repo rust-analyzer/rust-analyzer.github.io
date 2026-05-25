@@ -1,0 +1,39 @@
+= Changelog #329
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:de5824b6d0457b0e35cb77de2c0d99402d63770f[] +
+Release: release:2026-05-25[] (`v0.3.2913`)
+
+== New Features
+
+* pr:22406[] (first contribution) add `mutable-ref` diagnostic.
+* pr:22424[] (first contribution) add `array-pattern-without-fixed-length` diagnostic.
+* pr:22404[] add `cannot-index-into` diagnostics.
+* pr:22416[] support excluding subitems from completions.
+
+== Performance Improvements
+
+* pr:22322[] improve incrementality for modules.
+
+== Fixes
+
+* pr:22432[] (first contribution) filter package-scoped features in flycheck.
+* pr:22430[] (first contribution) saturate float to uint cast in const eval.
+* pr:22415[] (first contribution) allow wildcard parameters in foreign function declarations.
+* pr:22252[] refactor handling of generic parameters in `hir::Type`.
+* pr:22396[] support named consts in range pattern types.
+* pr:22392[] don't try autoref during method probe in path mode.
+* pr:22385[] auto-import enum variants.
+* pr:22425[] expected tuple struct pattern field in expected type completions.
+* pr:22397[] complete macro paths in macro calls.
+* pr:22399[] fix `ref_match` completions in macro calls.
+* pr:22408[] don't complete semicolon in match expression.
+* pr:22419[] use grouped annotation in `add_label_to_loop`.
+* pr:22369[] use wildcard on sad path in `replace_if_let_with_match` with guard.
+* pr:22383[] return a specific error for unimplemented built-in macros.
+
+== Internal Improvements
+
+* pr:22420[] clean up bidirectional proc macro server protocol.
