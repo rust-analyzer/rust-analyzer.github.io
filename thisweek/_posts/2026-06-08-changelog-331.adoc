@@ -1,0 +1,36 @@
+= Changelog #331
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:7ea2b259ca3fa0e97d0e8e2ec4c3f902f049cd76[] +
+Release: release:2026-06-08[] (`v0.3.2929`)
+
+== New Features
+
+* pr:22469[] (first contribution) add `infer-vars-not-allowed` diagnostic.
+* pr:22512[] (first contribution) parse unstable unnamed enum variants.
+* pr:22448[] add "Evaluate Predicate" command:
++
+video::https://github.com/user-attachments/assets/b7fd7e96-3c53-4943-8f57-95d60bff5e13[options=loop]
+* pr:22481[] lower field defaults.
+* pr:22495[] use `mimalloc` for Windows releases.
+
+== Fixes
+
+* pr:22520[] don't emit "type annotations needed" errors on `include_bytes!()`.
+* pr:22524[] parse `|` pattern types.
+* pr:22503[] try to improve completion ranking.
+* pr:22457[] dereference LHS in assignments instead of adding `&mut` in `type_mismatch` quick fix.
+* pr:22507[] hide `ra@gennew` inhaly hints.
+* pr:22508[] don't add both `drop` and `pin_drop` in `add_missing_impl_members`.
+* pr:22519[] don't add unused generic parameters in `generate_trait_from_impl`.
+* pr:22523[] handle mutable access better in `extract_function`.
+* pr:22506[] kill `proc-macro-srv` processes on shutdown.
+* pr:22522[] fix test runnables in `rust-project.json`.
+
+== Internal Improvements
+
+* pr:22510[] simplify `mir::ProjectionElem` and bring it closer the `rustc` version.
+* pr:22533[] remove AST types from `FoldKind`.
+* pr:22528[] improve panic message when `FileSourceRootInput` is missing.
