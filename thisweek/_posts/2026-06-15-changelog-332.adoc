@@ -1,0 +1,31 @@
+= Changelog #332
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:cc272809a173c2c11d0e479d639c811c1eacf049[] +
+Release: release:2026-06-15[] (`v0.3.2937`)
+
+== New Features
+
+* pr:22549[] support excluding enum variants from flyimport.
+
+== Performance Improvements
+
+* pr:22579[] defer initial workspace flycheck until cache priming completes.
+
+== Fixes
+
+* pr:22575[] (first contribution) don't count `...` as a parameter for function pointers.
+* pr:22566[] fix closure capture analysis with destructuring assignments.
+* pr:22545[] make `inline_type_alias` work on ADT definitions.
+* pr:22551[] handle macro calls in `inline_local_variable`.
+* pr:22584[] offer `inline_macro` in macro calls.
+* pr:22574[] use package id as argument to `--package` if package when not unique.
+
+== Internal Improvements
+
+* pr:21868[] (first contribution) migrate `extract_module` assist to `SyntaxEditor`.
+* pr:22571[] (first contribution) remove unnecessary feature flags from tests.
+* pr:22505[] disallow using LLMs for comments and autonomously-filed PRs or issues.
+* pr:22588[] add RFMF funding links.
