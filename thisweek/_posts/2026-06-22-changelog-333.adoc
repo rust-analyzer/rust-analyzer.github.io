@@ -1,0 +1,34 @@
+= Changelog #333
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:69ccffdb5b3570c6c14c5780bf2e8836f2209d90[] +
+Release: release:2026-06-22[] (`v0.3.2946`)
+
+== New Features
+
+* pr:22103[] add "Create Rust project" command:
++
+video::https://github.com/user-attachments/assets/2171f698-a317-4508-9b7c-b78827d29025[options=loop]
+
+== Performance Improvements
+
+* pr:22615[] don't load unnecessary path dependency files into the VFS.
+* pr:22627[] don't visit nodes multiple times during GC.
+
+== Fixes
+
+* pr:22591[] fix execution of benchmark runnables.
+* pr:22594[] fix bit/byte mismatch during const eval.
+* pr:22601[] fix crash on static constants in array length positions.
+* pr:22621[] don't panic on out-of-range integer literals in const positions.
+* pr:22599[] check for `#[cfg]` in tail expression macros.
+* pr:22486[], pr:22617[] don't complete `.await` on receivers of unknown type.
+
+== Internal Improvements
+
+* pr:22604[] don't rely on `FxHashSet` iteration order in SCIP.
+* pr:22625[] track `salsa` cancellation time in loop turn warning.
+* pr:22351[] migrate `merge_imports` to `SyntaxEditor`.
+* pr:22516[] bye-bye `ted`.
