@@ -1,0 +1,27 @@
+= Changelog #334
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:972c4e7bee140acd27e26b3e04673bfd05302f89[] +
+Release: release:2026-06-29[] (`v0.3.2955`)
+
+== New Features
+
+* pr:22466[] add `mut-ref-in-imm-ref-pat` diagnostic.
+* pr:22645[] offer quick fix adding `.await` for `type_mismatch`.
+
+== Performance Improvements
+
+* pr:22637[] bump `salsa` (saves 70 MB on `analysis-stats self`).
+
+== Fixes
+
+* pr:22640[] fix crash when hovering over anonymous consts.
+* pr:22618[] don't parenthesize `if`-`let` guards.
+
+== Internal Improvements
+
+* pr:22633[] (first contribution) mark `inline_convert_while_ascii` as unsafe.
+* pr:22115[] switch from `lsp-types` to `gen-lsp-types`.
+* pr:22658[] move `ExpandDatabase::syntax_context` to `HirFileId`.
