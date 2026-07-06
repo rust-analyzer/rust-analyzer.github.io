@@ -1,0 +1,53 @@
+= Changelog #335
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:7ae18ed96a90dbb8972fc886321651fdda80f7de[] +
+Release: release:2026-07-06[] (`v0.3.2963`)
+
+== New Features
+
+* pr:22433[] (first contribution) add `union-pat-has-rest` diagnostic.
+* pr:22665[] (first contribution) add `yield-outside-of-coroutine` diagnostic.
+* pr:22679[] add `cargo.configPath` setting.
+
+== Performance Improvements
+
+* pr:22709[] (first contribution) reduce parser joint token allocation size.
+* pr:22711[] hoist attribute qualifier segment computation.
+* pr:22708[] remove unused `StaticIndexedFile::inlay_hints` SCIP field.
+
+== Fixes
+
+* pr:22706[] (first contribution) fix const resolution in array lengths.
+* pr:22649[] (first contribution) fix `nvim-lsp` configuration example.
+* pr:22582[] only run `Drop::drop` when implemented.
+* pr:22675[] handle more instances of `#[cfg]` during lowering.
+* pr:22619[] skip impls on types with errors during method resolution.
+* pr:22673[] fix handling of coroutine parameters.
+* pr:22646[] fix crash while lowering consts with associated types.
+* pr:22715[] fix crash while invoking completions inside macro calls.
+* pr:22705[] fix crash in `extract_variable` with unresolved macro call.
+* pr:22613[] fix panic in `convert_tuple_struct_to_named_struct` on nested patterns for recursive enum.
+* pr:22674[] fix some panics in `unwrap_return_type`, `remove_underscore` and `promote_local_to_const`.
+* pr:22488[] skip associated consts with defaults and remove type bounds in `generate_blanket_trait_impl`.
+* pr:22231[] support more than two arms in `replace_match_with_if_let`.
+* pr:20362[] add missing generic parameters in `generate_default_from_enum_variant`.
+* pr:22595[] exclude leading and trailing trivia in SCIP definition ranges.
+* pr:22676[] don't use `metadata_extra_args` with the sysroot.
+* pr:22703[] include `walkthrough_create_project` into the VSIX.
+
+== Internal Improvements
+
+* pr:22685[] (first contribution) bump `itertools`.
+* pr:22639[], pr:22667[] remove input queries from `#[query_group]`.
+* pr:22700[] remove `+#[salsa::lru]+` support in `+#[query_group]+`.
+* pr:22702[], pr:22704[] remove `+#[salsa::invoke_interned]+` support from `+#[query_group]+`.
+* pr:22689[] inline `ExpandDatabase::expand_proc_macro` into its caller.
+* pr:22699[] remove `ExpandDatabase::proc_macro_span` in favor of the underlying function.
+* pr:22485[] remove `clone_for_update` from `ide-ssr`.
+* pr:22668[] add `SyntaxElement::tree_top`.
+* pr:22690[] fix non-UTF-8 string in a `smol_str` test.
+* pr:22684[], pr:22727[] document some less-known features.
+* pr:22666[] disallow AI usage for `E-easy` and `E-has-instructions` issues.
