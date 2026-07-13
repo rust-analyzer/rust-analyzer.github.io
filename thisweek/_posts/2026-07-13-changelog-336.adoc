@@ -1,0 +1,51 @@
+= Changelog #336
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:ffcdbbd9066218089aaf0d428d5bf51cadcbcf48[] +
+Release: release:2026-07-13[] (`v0.3.2971`)
+
+== New Features
+
+* pr:22734[] add quick fix for array length mismatch.
+
+== Performance Improvements
+
+* pr:22766[] share same proc macro servers between workspaces and use two processes.
+
+== Fixes
+
+* pr:22770[] (first contribution) clamp `cttz` const eval result to type width.
+* pr:22654[] improve `#[doc = macro!()]` expansion.
+* pr:22744[] don't complete `..Default::default()` when implementing `Default`.
+* pr:22736[] fix panic in `merge_imports` on trailing path separator.
+* pr:22707[] fix MIR lowering crash with error types.
+* pr:22749[] fix crash in `generate_function` with unresolved module.
+* pr:22751[] handle `#[cfg]` in tail expression macros even better.
+* pr:22683[] support Cargo 1.97 `CARGO_RESOLVER_LOCKFILE_PATH` setting.
+* pr:22735[] fix proc macros `TokenStream::from_str` for doc comments.
+* pr:22741[] add parentheses when adding reference to `dyn 'a + B`.
+* pr:22535[] prettify associated consts of trait defined by a macro.
+* pr:22726[] suggest code action fixes even if their range is elsewhere.
+* pr:22405[] recurse into container expressions for `unused-must-use`.
+* pr:22768[] handle `$` in `onEnter`.
+
+== Internal Improvements
+
+* pr:22728[] remove dead `NavigationTarget::docs` field.
+* pr:22719[] remove some more `ExpandDatabase` queries.
+* pr:22729[] migrate `ExpandDatabase::{expansion_,real_,}span_map` queries.
+* pr:22733[] make `expand_speculative` a method on `MacroCallId`.
+* pr:22717[] simplify `fn_macro::register_builtin!`.
+* pr:22739[] remove `ExpandDatabase`.
+* pr:22746[] remove `cycle_{fn,initial}` support from `#[query_group]`.
+* pr:22745[] remove `DefDatabase`.
+* pr:22774[] remove `Intern::Database` and `Lookup::Database` associated types.
+* pr:22764[] use `Expr::parse` instead of `SourceFile::parse` in `ast::make`.
+* pr:22748[] remove unnecessary `clone_for_update`.
+* pr:22581[] log a message when cache priming completes.
+* pr:22755[] support goards in `match_ast!`.
+* pr:22753[] bring `lsp_server::Response` closer to the spec.
+* pr:22635[] bump `gen-lsp-types`.
+* pr:22750[] fix new Clippy lints.
