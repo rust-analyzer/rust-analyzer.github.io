@@ -1,0 +1,58 @@
+= Changelog #337
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:cac0779549328e4bd4b808000c03307f1721f869[] +
+Release: release:2026-07-20[] (`v0.3.2981`)
+
+== New Features
+
+* pr:22283[] early late classification of lifetimes.
+* pr:22791[] re-enable auto trait inference.
+* pr:22777[] treat library files as truly immutable.
+* pr:22464[] hide private fields on hover depending on context.
+* pr:22811[] add capture hints to coroutines.
+* pr:22813[] add `return-outside-of-function` diagnostic.
+
+== Performance Improvements
+
+* pr:22862[] shrink `hir::Expr` from 56 to 48 bytes.
+* pr:22860[] pack `ExprOrPatId` when stored and shrink `ScopeData`.
+* pr:22794[] avoid an allocation when converting case in flyimport.
+
+== Fixes
+
+* pr:22634[] (first contribution) don't panic when restarting flycheck with an empty handle list.
+* pr:22822[] (first contribution) fix panic on functions and proc macros with the same name.
+* pr:22865[] (first contribution) respawn proc macro servers after stopping them.
+* pr:22784[] don't `#[macro_use]` the sysroot crates.
+* pr:22861[] record expressions in types in `ExprScope`.
+* pr:22773[] resolve non-plain paths in blocks correctly.
+* pr:22747[] reimplement the `crate_supports_no_std` syntactic heuristic.
+* pr:22832[] correctly record binding owners in coroutines.
+* pr:22825[] respect `hover.documentation.enable`.
+* pr:22852[] eagerly normalize `IntoFuture::Output` for `await`.
+* pr:22483[] don't assume array destructuring assignments with rest pattern are constant-sized.
+* pr:22857[] handle enum variants in next-solver `generics`.
+* pr:22849[] fix `syntax-bridge` panic when splitting float.
+* pr:22583[] update `render_const_using_debug_impl` for recent standard library changes.
+* pr:22804[] don't update existing parent inference results for anonymous consts.
+* pr:22810[] stop leaking bound variables from skipped binders.
+* pr:22855[] fix `InferenceContext:identity_args` using the wrong `DefId`.
+* pr:22827[] fix panic on type bounds after macro calls caused by parser recovery.
+* pr:22789[] fix invalid `pattern_matching_variant` lowering due to recovery.
+* pr:22759[], pr:22782[] use `quote!` to avoid some `unwrap` panics in `SyntaxFactory`.
+* pr:22792[] preserve whitespace from macro inputs in `extract_variable`.
+* pr:22819[] only update the status if the message is different when the client doesn't support `experimental/serverStatus`.
+
+== Internal Improvements
+
+* pr:22780[] remove `#[salsa::cycle]` support from `#[query_group]`.
+* pr:22814[] migrate `HirDatabase::borrowck` away from `#[query_group]`.
+* pr:22548[] add a few more database lifetimes.
+* pr:22534[] turn `BlockLoc` into a tracked struct, take 3.
+* pr:22779[] remove the `TreeMutator` from `SourceChangeBuilder`.
+* pr:22815[] remove manual lifetime extension.
+* pr:22778[] split out a session construct.
+* pr:22793[] use `Result` for the `lsp_server::Response` payload.

@@ -17,9 +17,9 @@ Release: release:2026-07-13[] (`v0.3.2971`)
 == Fixes
 
 * pr:22770[] (first contribution) clamp `cttz` const eval result to type width.
+* pr:22736[] (first contribution) fix panic in `merge_imports` on trailing path separator.
 * pr:22654[] improve `#[doc = macro!()]` expansion.
 * pr:22744[] don't complete `..Default::default()` when implementing `Default`.
-* pr:22736[] fix panic in `merge_imports` on trailing path separator.
 * pr:22707[] fix MIR lowering crash with error types.
 * pr:22749[] fix crash in `generate_function` with unresolved module.
 * pr:22751[] handle `#[cfg]` in tail expression macros even better.
