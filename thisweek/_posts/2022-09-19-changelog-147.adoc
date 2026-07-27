@@ -8,6 +8,7 @@ Release: release:2022-09-19[]
 == New Features
 
 * pr:13058[] (first contribution) allow setting env vars when running `cargo` (`cargo.extraEnv` and `checkOnSave.extraEnv`):
+* pr:13186[], pr:13228[] (first contribution) add `rust-analyzer.references.excludeImports` option to filter out imports on `Find all references`.
 * pr:13221[] (first contribution) add option to move lenses above doc comments (`rust-analyzer.lens.location`):
 +
 image::https://user-images.githubusercontent.com/33100798/189570298-b4fcbf9c-ee49-4b79-aae6-1037ae4f26af.png[]
@@ -15,7 +16,6 @@ image::https://user-images.githubusercontent.com/33100798/189570298-b4fcbf9c-ee4
 +
 video::https://user-images.githubusercontent.com/308347/191005574-a90501e8-950c-4620-9c99-95958c9bfea5.mp4[options=loop]
 * pr:13212[], pr:13227[] add `rust-analyzer.imports.prefer.no.std` config to unconditionally prefer `core` over `std` imports.
-* pr:13186[], pr:13228[] add `rust-analyzer.references.excludeImports` option to filter out imports on `Find all references`.
 * pr:13215[] VS Code: remove the `Toggle inlay hints` command.
 
 == Fixes

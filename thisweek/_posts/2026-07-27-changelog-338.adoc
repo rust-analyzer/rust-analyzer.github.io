@@ -1,0 +1,48 @@
+= Changelog #338
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:12c3381f0b17b8eec21075d1c72fd010996a9bda[] +
+Release: release:2026-07-27[] (`v0.3.2989`)
+
+== New Features
+
+* pr:22818[] implement lowering of HRTBs.
+* pr:22851[] add diagnostic for struct patterns with missing fields.
+* pr:22854[] record and show obligation chain for unimplemented trait diagnostics:
++
+image::https://github.com/user-attachments/assets/bcbce5d5-ff91-4747-a8d6-5c73b06f14f9["Screenshot showing the obligation chain for an unsatisfied trait bound"]
+
+== Performance Improvements
+
+* pr:22862[] shrink `hir::Expr` from 56 to 48 bytes.
+* pr:22860[] pack `ExprOrPatId` when stored and shrink `ScopeData`.
+* pr:22587[] reduce scope of cache priming.
+
+== Fixes
+
+* pr:22865[] (first contribution) respawn proc macro servers after stopping them.
+* pr:22861[] record expressions in types in `ExprScope`.
+* pr:22852[] eagerly normalize `IntoFuture::Output` for `await`.
+* pr:22849[] fix `syntax-bridge` panic when splitting float.
+* pr:22855[] fix `InferenceContext:identity_args` using the wrong `DefId`.
+* pr:22857[] handle enum variants in next-solver `generics`.
+* pr:22896[] use `bool` for the guard type in expected type analysis.
+* pr:22881[] don't interpret `+#[rust_analyzer]+` as `#[rust_analyzer::rust_fixture]`.
+* pr:22918[] prefer `alloc` over `std` paths when `preferNoStd` is set.
+* pr:22843[] fix panic when adding unknown fields to macro-defined structs.
+* pr:22892[] fix `merge_imports` panic with invalid paths.
+* pr:22919[] don't offer `replace_qualified_name_with_use` on unqualified paths.
+* pr:22924[] fix a crash in generic parameter handling.
+* pr:22923[] handle cycles in `impl_trait_with_diagnostics`.
+* pr:22905[] attach database to parallel `analysis-stats` inference workers.
+* pr:22898[] add parentheses when required in `invert_if`.
+
+== Internal Improvements
+
+* pr:22548[], pr:22611[] add a few more database lifetimes.
+* pr:22831[] migrate `HirDatabase` and remove `#[query_group]`.
+* pr:22867[] merge `WherePredicate::ForLifetimes` and `WherePredicate::TypeBound`.
+* pr:22883[] add `Module::path_segments`.
+* pr:22914[] clean up support code for pre-1.94 toolchains.
