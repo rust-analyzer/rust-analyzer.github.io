@@ -1,0 +1,53 @@
+= Changelog #339
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:b54a82b321c9617c5cf0b07ac0f12c08f7bc5902[] +
+Release: release:2026-08-03[] (`v0.3.2997`)
+
+== New Features
+
+* pr:22306[] emit `inactive-code` diagnostics in macros.
+* pr:22959[] support `CovariantUnsafeCell`.
+
+== Performance Improvements
+
+* pr:22966[] avoid having a separate query for defined opaques.
+
+== Fixes
+
+* pr:22886[] (first contribution) fix a glob import shadowing bug.
+* pr:22964[] (first contribution) show qualified paths on collisions in `type-mismatch`.
+* pr:22947[] (first contribution) fix error code for `mismatched-arg-count`.
+* pr:22977[] (first contribution) handle disallowed names in `unlinked_file`.
+* pr:22996[] (first contribution) parse multi-line component arrays in `rust-toolchain.toml`
+* pr:22743[] resolve path in all namespaces in `resolve_path`.
+* pr:22943[] mark auto traits as coinductive.
+* pr:22932[] fix a panic with large discriminant values.
+* pr:22930[] fix a panic on `<S as S>::S`.
+* pr:22933[] fix a `Semantics` panic on `include!`.
+* pr:22938[] fix a panic with HRTB closure arguments.
+* pr:22957[] hide parameter inlay hints with matching raw identifiers.
+* pr:22965[] don't allocate anonymous consts for bare paths in blocks.
+* pr:22956[] double stack size to 16MB.
+* pr:22948[] implement `slice_get_unchecked` in MIR debug execution, to fix `bitflags!`.
+* pr:22992[] don't panic on a self-referential `impl Trait` function.
+* pr:22993[] handle backslash in `r"\{foo}"`.
+* pr:23004[] parse `|| 1.. .field`.
+* pr:23003[] add reference when completing a parameter where coercion applies.
+* pr:22940[] match virtual paths by components.
+* pr:22660[] respect `references.exclude{Tests,Imports}` in references lens.
+* pr:22903[] only try to parse `discoverConfig` command stdout.
+
+== Internal Improvements
+
+* pr:22937[] (first contribution) disallow postix snippets with item scope.
+* pr:22958[] (first contribution) temporarily re-add `--lockfile-path` support.
+* pr:22909[] (first contribution) make `analysis-stats` progress bar Unicode-safe.
+* pr:22945[] store "liberated" closure signatures in `InferenceResult`.
+* pr:22864[], pr:22997[] fully port `ExprScopes` to take a visitor.
+* pr:22808[] remove `clone_for_update` and mutable rowan APIs.
+* pr:22998[] bump `rowan` to the version without mutable APIs.
+* pr:22969[] simplify `SourceChange`.
+* pr:22939[] bump `rustc_next_trait_solver`.
