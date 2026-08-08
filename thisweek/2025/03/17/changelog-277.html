@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #277</title>
+  <meta name="description"
+    content="Commit: b0632f7Release: 2025-03-17 (v0.3.2345)">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2025/03/17/changelog-277.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #277</h1>
+<div class="post-meta sect1">
+  Mar 17, 2025
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/b0632f749e6abf0f82f71755d7eaca4884c1a808"><code>b0632f7</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2025-03-17"><code>2025-03-17</code></a> (<code>v0.3.2345</code>)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="announcement"><a class="anchor" href="#announcement"></a>Announcement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This release brings two major changes, which might make it slightly <em>spicier</em> than usual.</p>
+</div>
+<div class="paragraph">
+<p>The first is upgrading to the latest version of <code>salsa</code>, the incremental evaluation framework used by rust-analyzer.
+This will make it possible to implement parallel evaluation and persistency in the future.</p>
+</div>
+<div class="paragraph">
+<p>The second change is to use <code>salsa</code> for the crate graph, making it incremental.
+Adding or removing a dependency, or editing a build script or proc macro, will now invalidate only the affected crates instead of the entire workspace.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19079"><code>#19079</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/19332"><code>#19332</code></a> warn when a rename will change the meaning of the program:</p>
+<div class="videoblock">
+<div class="content">
+<video src="https://github.com/user-attachments/assets/a201da51-a55d-4683-a4e8-14dc32b4330e" controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/18964"><code>#18964</code></a> put a new batch of <code>salsa</code> on rust-analyzer.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19337"><code>#19337</code></a> put <code>salsa</code> on the crate graph.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19271"><code>#19271</code></a> add "Convert <code>for</code> into <code>while let</code>" assist.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19344"><code>#19344</code></a> add icons to VS Code views:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://github.com/user-attachments/assets/8c7f71b6-0add-4e72-a56c-d125c990cdc8" alt="Screenshot showing an icon on the Explorer: Rust Dependencies sidebar">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19252"><code>#19252</code></a> fix syntax fixup producing invalid punctuation.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19333"><code>#19333</code></a> fix diagnostics being cleared right after being received.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19330"><code>#19330</code></a> normalize projections in evaluated const display and layout calculation.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19363"><code>#19363</code></a> display varargs in completion detail.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19325"><code>#19325</code></a> rank ADT constructors as such for completion scoring.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19326"><code>#19326</code></a> add missing name-ref parents to syntactic highlighting.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19327"><code>#19327</code></a> fix <code>path</code> macro hygiene.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19311"><code>#19311</code></a> log build script error output for Cargo projects.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19351"><code>#19351</code></a> don&#8217;t panic when the crate graph isn&#8217;t ready.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19356"><code>#19356</code></a> avoid recursively debug printing crates.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19314"><code>#19314</code></a> (first contribution) <code>impl HasSource for VariantDef</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19367"><code>#19367</code></a> drop legacy <code>salsa</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19354"><code>#19354</code></a> prepare for Return Type Notation (RTN) and add a diagnostic.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19232"><code>#19232</code></a> bump chalk to get support for async closures.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19305"><code>#19305</code></a> vendor <code>query-group-macro</code> in rust-analyzer.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19364"><code>#19364</code></a> add missing <code>with_durability</code> calls.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19368"><code>#19368</code></a> remove <code>CrateGraphBuilder::iter_mut</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19236"><code>#19236</code></a> switch to the 2024 edition.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19369"><code>#19369</code></a> do not error out for actions with no data to resolve.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19366"><code>#19366</code></a> remove legacy <code>SyntaxContextId</code> re-export.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19228"><code>#19228</code></a> split up some ADT queries.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19355"><code>#19355</code></a> render root syntax contexts more clearly.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19343"><code>#19343</code></a> make <code>GenericParamsCollector::type_or_consts</code> private.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19328"><code>#19328</code></a> run proc-macro server tests in a separate CI job.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19334"><code>#19334</code></a> remove generated mdbook files.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

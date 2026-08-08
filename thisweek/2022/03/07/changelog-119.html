@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #119</title>
+  <meta name="description"
+    content="Commit: 5fae65dRelease: 2022-03-07">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2022/03/07/changelog-119.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #119</h1>
+<div class="post-meta sect1">
+  Mar 7, 2022
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/5fae65dd28b450a437ebc800a410164c3af1d516"><code>5fae65d</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2022-03-07"><code>2022-03-07</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sponsors"><a class="anchor" href="#sponsors"></a>Sponsors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Become a sponsor:</strong> On <a href="https://opencollective.com/rust-analyzer/">OpenCollective</a> or
+<a href="https://github.com/sponsors/rust-analyzer">GitHub Sponsors</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="a-message-from-the-team"><a class="anchor" href="#a-message-from-the-team"></a>A Message from the Team</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We of the rust-analyzer team never took the opportunity to introduce ourselves, but we want to make an exception because of the current events.</p>
+</div>
+<div class="paragraph">
+<p>One of the early rust-analyzer contributors is currently in Kyiv, amidst falling missiles and artillery shells.</p>
+</div>
+<div class="paragraph">
+<p>Our friend did not ask for this, did not ask to be liberated or saved by the Russian Army.
+Neither did the other countless Ukrainians who are today at risk.
+Their fault is having been born in a country which a bully decided shouldn&#8217;t exist.</p>
+</div>
+<div class="paragraph">
+<p>In Ukraine, Putin&#8217;s army is committing war crimes, while those at home have no idea because independent journalism has been outlawed.</p>
+</div>
+<div class="paragraph">
+<p>So please, speak up.
+If you have friends or family in Russia, call and tell them what millions of people are going through.
+And consider <a href="https://mobile.twitter.com/Ukraine/status/1497294840110977024">making a donation</a> or going to a protest.</p>
+</div>
+<div class="paragraph">
+<p>Thank you and <em>Slava Ukraini!</em></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="heads-up"><a class="anchor" href="#heads-up"></a>Heads-up</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The latest Visual Studio Code version (1.65, released on March 3) has native support for inlay hints.
+We have been using a custom implementation of that, but would like to switch to the upstream one in <a href="https://github.com/rust-analyzer/rust-analyzer/pull/11445"><code>#11445</code></a>, planned to be merged next week.
+This means that the next release will require VS Code 1.65.</p>
+</div>
+<div class="paragraph">
+<p>Unfortunately, the upstream implementation brings some regressions.
+Specifically, the caret behaves differently when passing over the hint, and the styling is not necessarily better.
+In addition, Code only updates the hints about four times per second while typing, causing them to feel more sluggish.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11620"><code>#11620</code></a> support locals with multiple declaration sites:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/156833306-6bdb97ae-1fb3-4fd0-9f7d-1783c54c23a5.gif" alt="156833306 6bdb97ae 1fb3 4fd0 9f7d 1783c54c23a5">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11598"><code>#11598</code></a> parse destructuring assignments.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11609"><code>#11609</code></a> add another case to the syntax fixup code.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11140"><code>#11140</code></a> preserve order of generic args.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11616"><code>#11616</code></a> fix semantic highlighting breaking for lifetimes in macros.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11595"><code>#11595</code></a> lower string literal values.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11622"><code>#11622</code></a> show variadic args in hover function signature.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11623"><code>#11623</code></a> add type variable table to <code>InferenceTableSnapshot</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11629"><code>#11629</code></a> fix macro-calls expanding to items in <code>if</code>/<code>while</code> conditions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11630"><code>#11630</code></a> recognize <code>Self</code> as a proper keyword.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11613"><code>#11613</code></a> add <code>abort</code> to safe intrinsics list.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11593"><code>#11593</code></a> build release binaries on Ubuntu 18.04.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11610"><code>#11610</code></a> add currently failing test for #11242.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11574"><code>#11574</code></a> slightly refactor <code>TextEdit</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11631"><code>#11631</code></a> refactor <code>syntax_highlighting</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11632"><code>#11632</code></a> bring back syntax highlighting in test data.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11639"><code>#11639</code></a> re-arrange <code>ide_db</code> modules.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11633"><code>#11633</code></a> automatically change text color in logo based on dark mode.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
