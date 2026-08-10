@@ -1,0 +1,54 @@
+= Changelog #340
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:57411b3a0fb0181ed5965f6541d5ed39a9d79d4c[] +
+Release: release:2026-08-10[] (`v0.3.3005`)
+
+== New Features
+
+* pr:23082[] (first contribution) add `replace_arith_with_strict` assist.
+* pr:23043[] remove broken and incomplete borrow checker.
+* pr:23042[] support `#[rustc_must_implement_one_of]` in assists.
+
+== Performance Improvements
+
+* pr:23056[] optimize item tree memory usage (saves 29 MB on `self`).
+* pr:23001[] save an allocation in lifetime handling.
+
+== Fixes
+
+* pr:23014[] (first contribution) accept trailing `self` in paths.
+* pr:23020[] (first contribution) parse inner attributes in loop bodies.
+* pr:23070[] (first contribution) avoid adding some extra spaces to function signatures.
+* pr:23055[] allow struct literals in match guards.
+* pr:23077[] parse `0 .. | _`.
+* pr:23016[] resolve assignment LHS in its expression scope.
+* pr:23085[] merge the inference code for `let` expressions and statements.
+* pr:23008[] fix `ExprScopes` handling of expressions inside patterns.
+* pr:23017[] allow diverging RHS in destructuring assignments.
+* pr:23040[] fix upvars query for const blocks inside closures.
+* pr:23096[] don't declare a value namespace constructor for struct and enum variants if it doesn't exist.
+* pr:22899[] support macros in `#[doc]` attributes in IDE features.
+* pr:23059[] fix a panic caused by bound variables.
+* pr:22922[] don't panic on `m!('a)`.
+* pr:23019[] don't panic on `[usize; ""]`.
+* pr:22974[], pr:23034[] propagate macro expansion depth across body and block boundaries.
+* pr:23021[] always allocate anonymous consts for C strings and byte string literals.
+* pr:23032[] account for trailing line continuations in byte strings.
+* pr:23028[] preserve trailing text when `InsertReplaceEdit` is unsupported.
+* pr:23036[] make ``pub macro``s available to reverse dependencies.
+* pr:23054[] parse inline asm with keyword as operand name.
+* pr:22994[], pr:23015[] exclude unit, never and unknown types from term search.
+* pr:21846[] pass `-Zjson-target-spec` to Cargo when needed.
+
+== Internal Improvements
+
+* pr:23071[] (first contribution) support built-in derives in `Param::parent_fn`.
+* pr:23010[] install a single-threaded `rayon` pool in non-parallel `analysis-stats`.
+* pr:23037[] support quiet mode in `rust-analyzer diagnostics`.
+* pr:23041[] only show progress bars on TTYs.
+* pr:23047[] use `rustc_type_ir::try_visit`.
+* pr:23013[] bump `salsa`.
+* pr:23002[] bump `gen-lsp-types`.
