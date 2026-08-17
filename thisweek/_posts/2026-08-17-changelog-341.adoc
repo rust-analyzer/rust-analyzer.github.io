@@ -1,0 +1,37 @@
+= Changelog #341
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:bb3bbbd9e4529cbf1a6392d5953f03eb01af3792[] +
+Release: release:2026-08-17[] (`v0.3.3016`)
+
+== New Features
+
+* pr:22325[] (first contribution) support `Reborrow` and `CoerceShared` built-in derives.
+
+== Fixes
+
+* pr:23109[] (first contribution) offer `replace_arith_op` on references, too.
+* pr:23159[] (first contribution) don't panic on non-ASCII character after a short frontmatter closing fence.
+* pr:23078[] (first contribution) normalize associated types in orphan check.
+* pr:23118[] avoid panic with mismatched associated type parameters.
+* pr:23107[] fix off-by-one in lifetime binders when lowering `dyn Trait<'a>`.
+* pr:23103[] don't consider locals of async functions as upvars of the returned coroutine.
+* pr:23072[] replace unresolved type variables during impl selection.
+* pr:23138[] return an error const to the solver when consteval fails.
+* pr:23115[] lower range expressions during HIR lowering.
+* pr:23127[] handle divergence correctly in cases like `break return`.
+* pr:23120[] fix a panic in `resolve_path`.
+* pr:23117[] add parentheses in some common cases of `type_mismatch`.
+* pr:23122[] handle functions defined by macros in `inline_call`.
+* pr:22225[] check original type in `replace_arith_op`.
+* pr:23111[] ensure every workspace has a proc macro server.
+* pr:23140[] fix `rustc_private` support for `rustc_proc_macro`.
+
+== Internal Improvements
+
+* pr:23112[] avoid newlines in "overly long loop" message.
+* pr:23123[] let `pad16` take an enum instead of a bool.
+* pr:23121[] build `armhf` binaries inside a container.
+* pr:23108[] support multiple stable releases in one day.
