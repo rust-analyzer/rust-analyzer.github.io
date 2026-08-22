@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>IDEs and Macros</title>
+  <meta name="description"
+    content="In this article, we&#8217;ll discuss challenges that language servers face when supporting macros.This is interesting, because for rust-analyzer, macros are ...">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//blog/2021/11/21/ides-and-macros.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>IDEs and Macros</h1>
+<div class="post-meta sect1">
+  @matklad, Nov 21, 2021
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this article, we&#8217;ll discuss challenges that language servers face when supporting macros.
+This is interesting, because for rust-analyzer, macros are the hardest nut to crack.</p>
+</div>
+<div class="paragraph">
+<p>While we use Rust as an example, the primary motivation here is to inform future language design.
+As this is a case study rather than a thorough analysis, conclusions should be taken with a grain of salt.
+In particular, I know that Scala 3 has a revamped macro system which <em>might</em> contain all the answers, but I haven&#8217;t looked at it deeply.
+Finally, note that the text is unfairly biased <em>against</em> macros:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>I write IDEs, so macros for me are a problem to solve, rather than a tool to use.</p>
+</li>
+<li>
+<p>My personal code style tends towards preferring textual verbosity over using advanced language features, so I don&#8217;t use macros that often.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="meta-challenges"><a class="anchor" href="#meta-challenges"></a>Meta Challenges</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The most important contributing factor to complexity is non-technical.
+Macros are <em>disproportionally</em> hard to support in an IDE.
+That is, if adding macros to a batch compiler takes <code>X</code> amount of work, making them play nicely with all IDE features takes <code>X²</code>.
+This crates a pull for languages to naturally evolve more complex macro systems than can be reasonably supported by dev tooling.
+The specific issues are as follows:</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mapping-back"><a class="anchor" href="#mapping-back"></a>Mapping Back</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>First</em>, macros can compromise the end-user experience, because some IDE features are just not well-defined in the presence of macros.
+Consider this code, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="k">struct</span> <span class="n">S</span> <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="nb">u32</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">u32</span> <span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">make_S</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="n">S</span> <span class="p">{</span>
+  <span class="n">S</span> <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="mi">92</span> <span class="p">}</span> <span class="err">💡</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, a reasonable IDE feature (known as intention, code action, assist or just 💡) is to suggest adding the rest of the fields to the struct literal:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="k">struct</span> <span class="n">S</span> <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="nb">u32</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">u32</span> <span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">make_S</span><span class="p">()</span> <span class="k">-&gt;</span> <span class="n">S</span> <span class="p">{</span>
+  <span class="n">S</span> <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="mi">92</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nd">todo!</span><span class="p">()</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now, let&#8217;s add a simple compile-time reflection macro:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="k">struct</span> <span class="n">S</span> <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="nb">u32</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">u32</span> <span class="p">}</span>
+
+<span class="nd">reflect!</span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="p">{</span> <span class="mi">29</span> <span class="p">:</span><span class="n">x</span> <span class="p">}</span> <span class="n">S</span> 😂
+  <span class="p">}</span> <span class="n">S</span> <span class="o">&lt;-</span> <span class="p">()</span><span class="n">S_ekam</span> <span class="n">nf</span>
+<span class="p">];</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>What the macro does here is just to mirror every token.
+The IDE has no troubles expanding this macro.
+It also understands that, in the expansion, the <code>y</code> field is missing, and that <code>y: todo!()</code> can be added to the <em>expansion</em> as a fix.
+What the IDE can&#8217;t do, though, is to figure out what should be changed in the code that the user wrote to achieve that effect.
+Another interesting case to think about is: What if the macro just encrypts all identifiers?</p>
+</div>
+<div class="paragraph">
+<p>This is where &#8220;<em>disproportionally</em> hard&#8221; bit lies.
+In a batch compiler, code generally moves only forward through compilation phases.
+The single exception is error reporting (which should say which <em>source</em> code is erroneous), but that is solved adequately by just tracking source positions in intermediate representations.
+An IDE, in contrast, wants to modify the source code, and to do that precisely just knowing positions is not enough.</p>
+</div>
+<div class="paragraph">
+<p>What makes the problem especially hard in Rust is that, for the user, it might not be obvious which IDE features are expected to work.
+Let&#8217;s look at a variation of the above example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="nd">#[tokio::main]</span>
+<span class="k">async</span> <span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">S</span> <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="mi">92</span> <span class="p">};</span> <span class="err">💡</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>What a user sees here is just a usual Rust function with some annotation attached.
+Clearly, everything should just work, right?
+But from an IDE point of view, this example isn&#8217;t that different from the <code>reflect!</code> one.
+<code>tokio::main</code> is just an opaque bit of code which takes the tokens of the source function as an input, and produces some tokens as an output, which then replace the original function.
+It just <em>happens</em> that the semantics of the original code is mostly preserved.
+Again, <code>tokio::main</code> <em>could</em> have encrypted every identifier!</p>
+</div>
+<div class="paragraph">
+<p>So, to make thing appear to work, an IDE necessarily involves heuristics in such cases.
+Some possible options are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Just completely ignore the macro.
+This makes boring things like completion mostly work, but leads to semantic errors elsewhere.</p>
+</li>
+<li>
+<p>Expand the macro, apply IDE features to the expansion, and try to heuristically lift them to the original source code
+(this is the bit where &#8220;and now we just guess the private key used to encrypt an identifier&#8221; conceptually lives).
+This is the pedantically correct approach, but it breaks most IDE features in minor and major ways.
+What&#8217;s worse, the breakage is unexplainable to users: &#8220;I just added an annotation to the function, why I don&#8217;t get any completions?&#8221;</p>
+</li>
+<li>
+<p>In the semantic model, maintain both the precisely analyzed expanded code and the heuristically analyzed source code.
+When writing IDE features, try to intelligently use precise analysis from the expansion to augment knowledge about the source.
+This still doesn&#8217;t solve all the problems, but solves most of them good enough such that the users are now completely befuddled by those rare cases where the heuristics break down.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">First Lesson</div>
+<div class="paragraph">
+<p>Design meta programming facilities to be &#8220;append only&#8221;.
+Macros should not change the meaning of existing code.</p>
+</div>
+<div class="paragraph">
+<p>Avoid situations where what looks like normal syntax is instead an arbitrary language interpreted by a macro in a custom way.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="parallel-name-resolution"><a class="anchor" href="#parallel-name-resolution"></a>Parallel Name Resolution</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>The second</em> challenge is performance and phasing.
+Batch compilers typically compile all the code, so the natural solution of just expanding all the macros works.
+Or rather, there isn&#8217;t a problem at all here, you just write the simplest code to do the expansion and things just work.
+The situation for an IDE is quite different&#8201;&#8212;&#8201;the main reason why the IDE is capable of working with keystroke latency is that it cheats.
+It just doesn&#8217;t look at the majority of the code during code editing, and analyses the absolute minimum to provide a completion widget.
+To be able to do so, an IDE needs help from the language to understand which parts of code can be safely ignored.</p>
+</div>
+<div class="paragraph">
+<p>Read <a href="https://rust-analyzer.github.io/blog/2020/07/20/three-architectures-for-responsive-ide.html">this other article</a> to understand specific tricks IDEs can employ here.
+The most powerful idea there is that, generally, an IDE needs to know only about top-level names, and it doesn&#8217;t need to look inside e.g. function bodies most of the time.
+Ideally, an IDE processes all files in parallel, noting, for each file, which top-level names it contributes.</p>
+</div>
+<div class="paragraph">
+<p>The problem with macros, of course, is that they can contribute new top-level names.
+What&#8217;s worse, to understand <em>which</em> macro is invoked, an IDE needs to resolve its name, which depends on the set of top-level names already available.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s a rather convoluted example which shows that in Rust name resolution and macro expansion are interdependent:</p>
+</div>
+<div class="listingblock">
+<div class="title">main.rs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="k">mod</span> <span class="n">foo</span><span class="p">;</span>
+<span class="nn">foo</span><span class="p">::</span><span class="nd">declare_mod!</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="s">"foo.rs"</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">foo.rs</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+</pre></td><td class="code"><pre><span class="k">pub</span> <span class="k">struct</span> <span class="n">S</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">super</span><span class="p">::</span><span class="nn">bar</span><span class="p">::</span><span class="n">S</span> <span class="k">as</span> <span class="n">S2</span><span class="p">;</span>
+
+<span class="nd">macro_rules!</span> <span class="mi">_</span><span class="n">declare_mod</span> <span class="p">{</span>
+  <span class="p">(</span><span class="nv">$name:ident</span><span class="p">,</span> <span class="nv">$path:literal</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
+    <span class="nd">#[path</span> <span class="nd">=</span> <span class="err">$</span><span class="nd">path]</span>
+    <span class="k">pub</span> <span class="k">mod</span> <span class="nv">$name</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">pub</span><span class="p">(</span><span class="n">crate</span><span class="p">)</span> <span class="k">use</span> <span class="mi">_</span><span class="n">declare_mod</span> <span class="k">as</span> <span class="n">declare_mod</span><span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Semantics like this are what prevents rust-analyzer to just process every file in isolation.
+Instead, there are bits in rust-analyzer that are hard to parallelize and hard to make incremental, where we just accept high implementation complexity and poor runtime performance.</p>
+</div>
+<div class="paragraph">
+<p>There is an alternative&#8201;&#8212;&#8201;design meta programming such that it can work &#8220;file at a time&#8221;, and can be plugged into an embarrassingly parallel indexing phase.
+This is the design that Sorbet, a (very) fast type checker for Ruby chooses: <a href="https://youtu.be/Gdx6by6tcvw?t=804" class="bare">https://youtu.be/Gdx6by6tcvw?t=804</a>.
+I <em>really</em> like the motivation there.
+It is a given that people would love to extend the language in some way.
+It is also given that extensions wouldn&#8217;t be as carefully optimized as the core compiler.
+So let&#8217;s make sure that the overall thing is still crazy fast, even if a particular extension is slow, by just removing extensions from the hot path.
+(Compare this with VS Code architecture with out-of-process extensions, which just <em>can&#8217;t</em> block the editor&#8217;s UI).</p>
+</div>
+<div class="paragraph">
+<p>To flesh out this design bit:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>All macros used in a compilation unit must be known up-front.
+In particular, it&#8217;s not possible to define a macro in one file of a CU and use it in another.</p>
+</li>
+<li>
+<p>Macros follow simplified name resolution rules, which are intentionally different from the usual ones to allow recognizing and expanding macros <em>before</em> name resolution.
+For example, macro invocations could have a unique syntax, like <code>name!</code>, where <code>name</code> identifies a macro definition in the flat namespace of known-up-front macros.</p>
+</li>
+<li>
+<p>Macros don&#8217;t get to access anything outside of the file with the macro invocation.
+They <em>can</em> simulate name resolution for identifiers within the file, but can&#8217;t reach across files.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Here, limiting macros to local-only information is a conscious design choice.
+By limiting the power available to macros, we gain the properties we can use to make the tooling better.
+For example, a macro can&#8217;t know a type of the variable, but because it can&#8217;t do that, we know we can re-use macro expansion results when unrelated files change.</p>
+</div>
+<div class="paragraph">
+<p>An interesting hack to regain the full power of type-inspecting macros is to move the problem from the language to the tooling.
+It is possible to run a code generation step before the build, which can use the compiler as a library to do a global semantic analysis of the code written by the user.
+Based on the analysis results, the tool can write some generated code, which would then be processed by IDEs as if it was written by a human.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Second Lesson</div>
+<div class="paragraph">
+<p>Pay close attention to the interactions between name resolution and macro expansions.
+Besides well-known hygiene issues, another problem to look out for is accidentally turning name resolution from an embarrassingly parallel problem into an essentially sequential one.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="controllable-execution"><a class="anchor" href="#controllable-execution"></a>Controllable Execution</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <em>third</em> problem is that, if macros are sufficiently powerful, the can do sufficiently bad things.
+To give a simple example, here&#8217;s a macro which expands to an infinite number of &#8220;no&#8221;:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="nd">macro_rules!</span> <span class="n">m</span> <span class="p">{</span>
+	<span class="p">(</span><span class="nv">$</span><span class="p">(</span><span class="nv">$tt:tt</span><span class="p">)</span><span class="o">*</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span> <span class="nd">m!</span><span class="p">(</span><span class="nv">$</span><span class="p">(</span><span class="nv">$tt</span><span class="p">)</span><span class="o">*</span> <span class="nv">$</span><span class="p">(</span><span class="nv">$tt</span><span class="p">)</span><span class="o">*</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">}</span>
+<span class="nd">m!</span><span class="p">(</span><span class="n">no</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The behavior of the command-line compiler here is to just die with an out-of-memory error, and that&#8217;s an OK behavior for this context.
+Of course it&#8217;s better when the compiler gives a nice error message, but if it misbehaves and panics or loops infinitely on erroneous code, that is also OK&#8201;&#8212;&#8201;the user can just <code>^C</code> the process.</p>
+</div>
+<div class="paragraph">
+<p>For a long-running IDE process though, looping or eating all the memory is not an option&#8201;&#8212;&#8201;all resources need to be strictly limited.
+This is especially important given that an IDE looks at incomplete and erroneous code most of the time, so it hits far more weird edge cases than a batch compiler.</p>
+</div>
+<div class="paragraph">
+<p>Rust procedural macros are all-powerful, so rust-analyzer and IntelliJ Rust have to implement extra tricks to contain them.
+While <code>rustc</code> just loads proc-macros as shared libraries into the process, IDEs load macros into a dedicated external process which can be killed without bringing the whole IDE down.
+Adding IPC to an otherwise purely functional compiler code is technically challenging.</p>
+</div>
+<div class="paragraph">
+<p>A related problem is determinism.
+rust-analyzer assumes that all computations are deterministic, and it uses this fact to smartly forget about subsets of derived data, to save memory.
+For example, once a file is analyzed and a set of declarations is extracted out of it, rust-analyzer destroys its syntax tree.
+If the user than goes to a definition, rust-analyzer re-parses the file from source to compute precise ranges, highlights, etc.
+At this point, it is important the tree is exactly the same.
+If that&#8217;s not the case, rust-analyzer might panic because various indices from previously extracted declarations get out of sync.
+But in the presence of non-deterministic procedural macros, rust-analyzer actually <em>can</em> get a different syntax tree.
+So we have to specifically disable the logic for forgetting syntax trees for macros.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Third Lessons</div>
+<div class="paragraph">
+<p>Make sure that macros are deterministic, and can be easily limited in the amount of resources they consume.
+For a batch compiler, it&#8217;s OK to go with optimistic best-effort guarantees: &#8220;we assume that macros are deterministic and can crash otherwise&#8221;.
+IDEs have stricter availability requirements, so they have to be pessimistic: &#8220;we cannot crash, so we assume that any macro is potentially non-deterministic&#8221;.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Curiously, similar to the previous point, moving metaprogramming to a code generation build system step sidesteps the problem, as you again can optimistically assume determinism.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="recap"><a class="anchor" href="#recap"></a>Recap</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When it comes to metaprogramming, IDEs have a harder time than the batch compilers.
+To paraphrase Kernighan, if you design metaprogramming in your compiler as cleverly as possible, you are not smart enough to write an IDE for it.</p>
+</div>
+<div class="paragraph">
+<p>Some specific hard macro bits:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In a compiler, code flows forward through the compilation pipeline.
+IDE features generally flow <em>back</em>, from desugared code into the original source.
+Macros can easily make for an irreversible transformation.</p>
+</li>
+<li>
+<p>IDEs are fast because they know what to <em>not</em> look at.
+Macros can hide what is there, and increase the minimum amount of work necessary to understand an isolated bit of code.</p>
+</li>
+<li>
+<p>User-written macros can crash.
+IDEs must not crash.
+Running macros from an IDE is therefore fun :-)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
