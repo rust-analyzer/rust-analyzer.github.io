@@ -1,0 +1,29 @@
+= Changelog #342
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:5c156cdfb047ea171ba255dcdcd86236d98a389e[] +
+Release: release:2026-08-24[] (`v0.3.3025`)
+
+== New Features
+
+* pr:23147[] add `unary-operator-cannot-be-applied` diagnostic.
+
+== Performance Improvements
+
+* pr:23079[] optimize the heck out of the storage of token trees (saves 32 MB on `self`).
+
+== Fixes
+
+* pr:23186[] (first contribution) allow `asm!` label blocks to diverge.
+* pr:23202[] (first contribution) use owner expression store for anonymous consts.
+* pr:23134[] accept trailing comma on built-in macro calls.
+* pr:23201[] prevent stack overflow with recursive ADT layouts.
+
+== Internal Improvements
+
+* pr:23214[] (first contribution) use Cargo build directory for flycheck logs.
+* pr:23166[] download all build artifacts in a single step.
+* pr:23168[] drop `zigbuild` support.
+* pr:23172[] split VSIX publishing into different jobs and skip duplicates.
