@@ -1,0 +1,33 @@
+= Changelog #343
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:f8996691e991a4dc3c6f135e0fc04fc5561e4e9a[] +
+Release: release:2026-08-31[] (`v0.3.3033`)
+
+== New Features
+
+* pr:23213[] offer "Extract variable" on field names in record expressions.
+
+== Fixes
+
+* pr:23232[] (first contribution) fix inference of never type in array repeat expressions.
+* pr:23206[], pr:23257[] switch from `temp-dir` to a homemade `NamedTempFile` implementation.
+* pr:23184[] fix unsafeck for e.g. `&raw const *&raw const *&raw const *&2`.
+* pr:23162[] fix HIR lowering of associated trait function parameters.
+* pr:23176[] push a generic params scope for consts.
+* pr:23216[] fix `->` completions inside macro calls.
+* pr:22901[] strip leading asterisk from block doc comments.
+* pr:23235[] fix some subtle bugs in docs rendering.
+* pr:23245[] print the ABI of `fn` pointers.
+* pr:23229[] fix panic in `unresolved_field` when accessing numeric fields in unions.
+* pr:23212[] fix panic when dereferencing unresolved aliases.
+* pr:23250[] fix a panic on hover with types like `impl for<'b> Fn(&dyn Fn() -> &'b u8)`.
+* pr:23256[] fix hover with `impl Trait` and generics.
+* pr:23242[] fix parsing of range patterns inside parentheses.
+* pr:23238[] fix a panic on macro calls in `extract_variable`.
+
+== Internal Improvements
+
+* pr:23233[] require analysis changes made using AI to reference `rustc`.
