@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #217</title>
+  <meta name="description"
+    content="Commit: d410d4aRelease: 2024-01-22 (v0.3.1815)">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2024/01/22/changelog-217.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #217</h1>
+<div class="post-meta sect1">
+  Jan 22, 2024
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/d410d4a2baf9e99b37b03dd42f06238b14374bf7"><code>d410d4a</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2024-01-22"><code>2024-01-22</code></a> (<code>v0.3.1815</code>)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16370"><code>#16370</code></a> show additional value information when hovering over literals.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16374"><code>#16374</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/16375"><code>#16375</code></a> show implemented notable traits on hover.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16391"><code>#16391</code></a> add config to allow renaming of non-local definitions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16372"><code>#16372</code></a> add <code>One</code> import granularity.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16349"><code>#16349</code></a> add error recovery for <code>use_tree_list</code> parsing:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/71162630/295905079-30a58c40-2711-48d2-b2e5-fb208fc8636c.png" alt="Screenshot showing only one error for an unclosed brace in a use declaration">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16385"><code>#16385</code></a> fix intra-doc links.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15868"><code>#15868</code></a> infer <code>OUT_DIR</code> when workspace root contains a symlink.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16396"><code>#16396</code></a> fix panic when extracting struct from enum variant.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16378"><code>#16378</code></a> handle <code>SelfParam</code> better in "Inline call".</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16405"><code>#16405</code></a> include <code>for</code> in "Convert to guarded return".</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16314"><code>#16314</code></a> parse <code>macro_rules</code> as macro name.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16367"><code>#16367</code></a> make <code>value_ty</code> query fallible.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15636"><code>#15636</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/16383"><code>#16383</code></a> (first contribution) show which roots are being scanned in progress messages.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16196"><code>#16196</code></a> (first contribution) rename <code>generator</code> to <code>coroutine</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16409"><code>#16409</code></a> (first contribution) remove some unused code.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16350"><code>#16350</code></a> speed up line index calculation via NEON for aarch64.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16395"><code>#16395</code></a> speed up line ending normalization using <code>memchr</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16366"><code>#16366</code></a> make data queries transparent over their diagnostics variant.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16352"><code>#16352</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/16389"><code>#16389</code></a> port <code>rustfmt</code>'s algorithm for import ordering.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16351"><code>#16351</code></a> eagerly lower enum variants in <code>CrateDefMap</code> construction.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16388"><code>#16388</code></a> record <code>FnAbi</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16356"><code>#16356</code></a> add unstable config for loading the sysroot sources via <code>cargo metadata</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16380"><code>#16380</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/16387"><code>#16387</code></a> run <code>cargo metadata</code> on sysroot for CI metrics.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16384"><code>#16384</code></a> make use of some new <code>SmolStr</code> improvements.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16397"><code>#16397</code></a> refactor <code>macro_call</code> to be consistent with other parsers.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16398"><code>#16398</code></a> automatically fix Clippy lints.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16401"><code>#16401</code></a> expand lint tables and make Clippy happy.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16404"><code>#16404</code></a> work through temporarily allowed Clippy lints, part 1.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16406"><code>#16406</code></a> add <code>max_line_length</code> to <code>.editorconfig</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/16364"><code>#16364</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/16412"><code>#16412</code></a> sync from downstream.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

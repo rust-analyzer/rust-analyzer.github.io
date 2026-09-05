@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>The Heart of a Language Server</title>
+  <meta name="description"
+    content="In this post, I want to expand on one curious comment from rust-analyzer code base.You can find the comment here.">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//blog/2023/12/26/the-heart-of-a-language-server.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>The Heart of a Language Server</h1>
+<div class="post-meta sect1">
+  @matklad, Dec 26, 2023
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this post, I want to expand on one curious comment from rust-analyzer code base.
+You can find the comment <a href="https://github.com/rust-lang/rust-analyzer/blob/34cffbf1d75fb6b5cb6bc68a9854b20dc74f135d/crates/hir/src/semantics/source_to_def.rs#L3-L4">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>It describes a curious recursive algorithm that is repeated across different language-server-shaped thing:
+I&#8217;ve seen it implemented for Kotlin and C#, and implemented it myself for Rust.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s a seemingly random grab bag of IDE features:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Go to definition</p>
+</li>
+<li>
+<p>Code completion</p>
+</li>
+<li>
+<p>Run test at the cursor</p>
+</li>
+<li>
+<p>Extract variable</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>What&#8217;s common among them all?
+All these features are relative to the <em>current position</em> of the cursor!
+The input is not only the state of the code at a given point in time, but a specific location in the source of a project, like <code>src/main.rs:90:2</code>.</p>
+</div>
+<div class="paragraph">
+<p>And the first thing a language server needs to do for any of the above features is to understand what is located at the given offset, semantically speaking.
+Is it an operator, like <code>+</code>?
+Is it a name, like <code>foo</code>?
+If it is a name, in what context a name is used --- does it <em>define</em> an entity named <code>foo</code> or does it <em>refer</em> to a pre-existing entity?
+If it is a reference, then <em>what</em> entity is referenced?
+What type is it?</p>
+</div>
+<div class="paragraph">
+<p>The first step here is determining a node in the syntax tree which covers the offset.
+This is relatively straightforward:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="k">fn</span> <span class="nf">node_at_offset</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">SyntaxNode</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">u32</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">SyntaxNode</span> <span class="p">{</span>
+    <span class="k">assert</span><span class="o">!</span><span class="p">(</span><span class="n">node</span><span class="nf">.text_range</span><span class="p">()</span><span class="nf">.contains</span><span class="p">(</span><span class="n">offset</span><span class="p">));</span>
+    <span class="n">node</span><span class="nf">.children</span><span class="p">()</span>
+        <span class="nf">.find</span><span class="p">(|</span><span class="n">it</span><span class="p">|</span> <span class="n">it</span><span class="nf">.text_range</span><span class="p">()</span><span class="nf">.contains</span><span class="p">(</span><span class="n">offset</span><span class="p">))</span>
+        <span class="nf">.map</span><span class="p">(|</span><span class="n">it</span><span class="p">|</span> <span class="nf">node_at_offset</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="n">offset</span><span class="p">))</span>
+        <span class="nf">.unwrap_or</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>But the syntax tree by itself doesn&#8217;t contain enough information to drive IDE features.
+Semantic analysis is required.</p>
+</div>
+<div class="paragraph">
+<p>But the problem with semantic analysis is that it usually involves several layers of intermediate representations, which are only indirectly related to the syntax tree.
+While the syntax tree is relatively uniform, and it is possible to implement a generic traversal like the one above,
+semantic information is usually stored in a menagerie of ad-hoc data structures: trees, graphs, and plain old hash tables.</p>
+</div>
+<div class="paragraph">
+<p>Traditional compilers attach source span information to semantic elements, which could look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="k">struct</span> <span class="n">Span</span> <span class="p">{</span>
+    <span class="n">file</span><span class="p">:</span> <span class="n">PathBuf</span><span class="p">,</span>
+    <span class="n">line</span><span class="p">:</span> <span class="nb">u32</span><span class="p">,</span>
+    <span class="n">column</span><span class="p">:</span> <span class="nb">u32</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">struct</span> <span class="n">LocalVariable</span> <span class="p">{</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">InternedString</span><span class="p">,</span>
+    <span class="n">mutability</span><span class="p">:</span> <span class="n">Mutability</span><span class="p">,</span>
+    <span class="n">ty</span><span class="p">:</span> <span class="n">Type</span><span class="p">,</span>
+    <span class="n">span</span><span class="p">:</span> <span class="n">Span</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With line information in place, it <em>is</em> possible for a language server to find an appropriate semantic element for a given cursor position:
+just iterate all semantic elements there are, and find the one with the smallest span which still contains the cursor.</p>
+</div>
+<div class="paragraph">
+<p>This approach works, but has two drawbacks.</p>
+</div>
+<div class="paragraph">
+<p>The <em>first</em> drawback is that it&#8217;s too slow.
+To iterate over all semantic elements, an entire compilation unit must be analyzed, and that&#8217;s too slow, even if done incrementally.
+The core trick of a performant language server is that it avoids any analysis unless <em>absolutely</em> necessary.
+The server knows everything about the function currently on the screen, and knows almost nothing about other functions.</p>
+</div>
+<div class="paragraph">
+<p>The <em>second</em> drawback is more philosophical --- using text spans <em>erases</em> information about the underlying syntax trees.
+A <code>LocalVariable</code> didn&#8217;t originate from a particular <code>span</code> of text, it was created using a specific node in the concrete syntax tree.
+For features like "go to definition", which need to go from syntax to semantics, the approximation turns out to be good enough.
+But for refactors, it is often convenient to go in the opposite direction --- from semantics to syntax.
+To change a tuple enum to a record enum, a language server needs to find all usages of the enum in the semantic model, but then it needs to modify the syntax tree.
+And going from a <code>Span</code> back to the <code>SyntaxNode</code> is not straightforward: different syntax nodes might have the same span!</p>
+</div>
+<div class="paragraph">
+<p>For example, a <code>foo</code> is a:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>name token</p>
+</li>
+<li>
+<p>a reference</p>
+</li>
+<li>
+<p>a trivial path (<code>foo::bar</code>)</p>
+</li>
+<li>
+<p>and a path expression</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre>PATH_EXPR@20..23
+  PATH@20..23
+    PATH_SEGMENT@20..23
+      NAME_REF@20..23
+        IDENT@20..23 "foo"
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="iterative-recursive-analysis"><a class="anchor" href="#iterative-recursive-analysis"></a>Iterative Recursive Analysis</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>So, how can a language server map syntax nodes to corresponding semantic elements, so that the mapping is precise and can be computed lazily?</p>
+</div>
+<div class="paragraph">
+<p>First, every semantic element gets a <code>source_syntax</code> method that returns the original syntax node:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="k">impl</span> <span class="n">LocalVariable</span> <span class="p">{</span>
+    <span class="k">pub</span> <span class="k">fn</span> <span class="nf">source_syntax</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">SyntaxNode</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The method is implemented differently for different types.
+Sometimes, storing a reference to a syntax node is appropriate:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="k">struct</span> <span class="n">LocalVariable</span> <span class="p">{</span>
+    <span class="n">source_syntax</span><span class="p">:</span> <span class="n">SyntaxNodeId</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">impl</span> <span class="n">LocalVariable</span> <span class="p">{</span>
+    <span class="k">pub</span> <span class="k">fn</span> <span class="nf">source_syntax</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">SyntaxNode</span> <span class="p">{</span>
+        <span class="nf">node_id_to_node</span><span class="p">(</span><span class="k">self</span><span class="py">.source_syntax</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, the syntax might be computed on demand.
+For example, for local variables we might store a reference to the parent function, and the ordinal number of this local variable:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="code"><pre><span class="k">struct</span> <span class="n">LocalVariable</span> <span class="p">{</span>
+    <span class="n">parent</span><span class="p">:</span> <span class="n">Function</span><span class="p">,</span>
+    <span class="n">ordinal</span><span class="p">:</span> <span class="nb">usize</span>
+<span class="p">}</span>
+
+<span class="k">impl</span> <span class="n">LocalVariable</span> <span class="p">{</span>
+    <span class="k">pub</span> <span class="k">fn</span> <span class="nf">source_syntax</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">SyntaxNode</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="n">parent_function_syntax</span> <span class="o">=</span> <span class="k">self</span><span class="py">.parent</span><span class="nf">.source_syntax</span><span class="p">()</span>
+        <span class="n">parent_function_syntax</span>
+            <span class="nf">.descendants</span><span class="p">()</span>
+            <span class="nf">.filter</span><span class="p">(|</span><span class="n">it</span><span class="p">|</span> <span class="p">{</span>
+                <span class="n">it</span><span class="py">.kind</span> <span class="o">==</span> <span class="nn">SyntaxNodeKind</span><span class="p">::</span><span class="n">LocalVariable</span>
+            <span class="p">})</span>
+            <span class="nf">.nth</span><span class="p">(</span><span class="k">self</span><span class="py">.ordinal</span><span class="p">)</span>
+            <span class="nf">.unwrap</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Yet another pattern is to get this information from a side table:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+</pre></td><td class="code"><pre>type SyntaxMapping = HashMap&lt;LocalVariable, SyntaxNode&gt;
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In rust-analyzer all three approaches are used in various places.</p>
+</div>
+<div class="paragraph">
+<p>This solves the problem going from a semantic element to a syntax, but what we&#8217;ve started with is the opposite: from an offset like <code>main.rs:80:20</code> we go to a <code>SyntaxNode</code>, and then we need to discover the semantic element.
+The trick is to use the same solution in <em>both</em> directions:</p>
+</div>
+<div class="paragraph">
+<p>To find a semantic element for a given piece of syntax:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Look at the <em>parent</em> syntax node.</p>
+</li>
+<li>
+<p>If there is no parent, then the current syntax node corresponds to an entire file, and the appropriate semantic element is the module.</p>
+</li>
+<li>
+<p>Otherwise, <em>recursively</em> lookup semantics for the parent.</p>
+</li>
+<li>
+<p>Among all parent&#8217;s children (our siblings), find the one whose source syntax is the node we started with</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Or, in pseudocode:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre><span class="k">fn</span> <span class="nf">semantics_for_syntax</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">SyntaxNode</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">SemanticElement</span> <span class="p">{</span>
+    <span class="k">match</span> <span class="n">node</span><span class="nf">.parent</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nb">None</span> <span class="k">=&gt;</span> <span class="nf">module_for_file</span><span class="p">(</span><span class="n">node</span><span class="py">.source_file</span><span class="p">),</span>
+        <span class="nf">Some</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
+
+            <span class="c">// Recursive call</span>
+            <span class="k">let</span> <span class="n">parent_semantics</span> <span class="o">=</span> <span class="nf">semantics_for_syntax</span><span class="p">(</span><span class="n">parent</span><span class="p">);</span>
+
+            <span class="k">for</span> <span class="n">sibling</span> <span class="n">in</span> <span class="n">parent_semantics</span><span class="nf">.children</span><span class="p">()</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="n">sibling</span><span class="nf">.source_syntax</span><span class="p">()</span> <span class="o">==</span> <span class="n">node</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="n">sibling</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this formulation, a language server needs to just enough analysis to drill down to a specific node.</p>
+</div>
+<div class="paragraph">
+<p>Consider this example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="code"><pre><span class="k">struct</span> <span class="n">RangeIter</span> <span class="p">{</span>
+    <span class="n">lo</span><span class="p">:</span> <span class="nb">u32</span><span class="p">,</span>
+    <span class="n">hi</span><span class="p">:</span> <span class="nb">u32</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">impl</span> <span class="n">Iterator</span> <span class="k">for</span> <span class="n">RangeIter</span> <span class="p">{</span>
+    <span class="k">type</span> <span class="n">Item</span> <span class="o">=</span> <span class="nb">u32</span><span class="p">;</span>
+
+    <span class="k">fn</span> <span class="nf">next</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">RangeIter</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">Item</span> <span class="p">{</span>
+                            <span class="c">//  ^ Cursor here</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">impl</span> <span class="n">RangeIter</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Starting from the <code>Item</code> syntax node, the language server will consider:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the return type of the function <code>next</code>,</p>
+</li>
+<li>
+<p>the function itself,</p>
+</li>
+<li>
+<p>the <code>impl Iterator</code> block,</p>
+</li>
+<li>
+<p>the entire file.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Just enough semantic analysis will be executed to learn that a file has a struct declaration and two impl blocks, but the <em>contents</em> of the struct and the second impl block won&#8217;t be inspected at all.
+That is a huge win --- typically, source files are much more wide than they are deep.</p>
+</div>
+<div class="paragraph">
+<p>This recursion-and-loop structure is present in many language servers.
+For rust-analyzer, see the <a href="https://github.com/rust-lang/rust-analyzer/blob/34cffbf1d75fb6b5cb6bc68a9854b20dc74f135d/crates/hir/src/semantics/source_to_def.rs#L3-L4"><code>source_to_def</code></a> module,
+with many functions that convert syntax (<code>ast::</code> types) to semantics (unqualified types).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="k">fn</span> <span class="nf">type_alias_to_def</span><span class="p">(</span>
+    <span class="o">&amp;</span><span class="k">mut</span> <span class="k">self</span><span class="p">,</span>
+    <span class="n">src</span><span class="p">:</span> <span class="n">InFile</span><span class="o">&lt;</span><span class="nn">ast</span><span class="p">::</span><span class="n">TypeAlias</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Option</span><span class="o">&lt;</span><span class="n">TypeAliasId</span><span class="o">&gt;</span> <span class="p">{</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For Roslyn, one entry point to the machinery is <a href="https://github.com/dotnet/roslyn/blob/36a0c338d6621cc5fe34b79d414074a95a6a489c/src/Compilers/CSharp/Portable/Compilation/SyntaxTreeSemanticModel.cs#L1403-L1429"><code>GetDeclaredType</code></a> function.
+<code>BaseTypeDeclarationSyntax</code> is, well, syntax, while the return type <code>NamedTypeSymbol</code> is the semantic info.
+First, Roslyn looks up semantic info for syntactic parent, using <a href="https://github.com/dotnet/roslyn/blob/36a0c338d6621cc5fe34b79d414074a95a6a489c/src/Compilers/CSharp/Portable/Compilation/SyntaxTreeSemanticModel.cs#L1423"><code>GetDeclaredTypeMemberContainer</code></a>.
+Then, in <a href="https://github.com/dotnet/roslyn/blob/36a0c338d6621cc5fe34b79d414074a95a6a489c/src/Compilers/CSharp/Portable/Compilation/SyntaxTreeSemanticModel.cs#L1783"><code>GetDeclaredMember</code></a> it iterates semantic siblings and finds the one with the matching text range.</p>
+</div>
+<div class="paragraph">
+<p>For Kotlin, the entry is <a href="https://github.com/JetBrains/kotlin/blob/a288b8b00e4754a1872b164999c6d3f3b8c8994a/idea/idea-frontend-fir/idea-fir-low-level-api/src/org/jetbrains/kotlin/idea/fir/low/level/api/FirModuleResolveStateImpl.kt#L93-L125"><code>findSourceFirDeclarationByExpression</code></a>.
+This function starts with a syntax node (<code>KtExpression</code> is syntax, like all <code>Kt</code> nodes), and returns a declaration.
+It uses <code>getNonLocalContainingOrThisDeclaration</code> to get syntactic container for a current node.
+Then, <code>findSourceNonLocalFirDeclaration</code> gets <code>Fir</code> for this parent.
+Finally, <code>findElementIn</code> function traverses <code>Fir</code> children to find one with the same source we originally started with.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="limitations"><a class="anchor" href="#limitations"></a>Limitations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are two properties of the underlying languages which make this approach work:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Syntactic nesting must match semantic nesting.
+Looking at parent&#8217;s sibling makes sense only if the current element should be among the siblings.</p>
+</li>
+<li>
+<p>Getting semantic element for an entire file is trivial.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The second one is actually less true in Rust than it is in Kotlin or C#!
+In those languages, each file starts with a package declaration, which immediately mounts the file at the appropriate place in the semantic model.</p>
+</div>
+<div class="paragraph">
+<p>For Rust, a file <code>foo.rs</code> only exists semantically if some parent file includes it via <code>mod foo;</code> declaration!
+And, in general, it&#8217;s impossible to locate the parent file automatically.
+<em>Usually</em>, for <code>src/bar/foo.rs</code> the parent would be <code>src/bar.rs</code>, but, due to <code>#[path]</code> attributes which override this default, this might not be true.
+So rust-analyzer has to be less lazy than ideal here --- on every change, it reconstructs the entire module tree for a crate looking at every file, even if only a single file is currently visible.</p>
+</div>
+<div class="paragraph">
+<p>Here&#8217;s another interesting example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="k">mod</span> <span class="n">ast</span> <span class="p">{</span>
+    <span class="nd">generate_ast_from_grammar!</span><span class="p">(</span><span class="s">"FooLang.grm"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, we have a hypothetical procedural macro, which reads a grammar definition from an external file, and presumably generates a bunch of Rust types for the AST described by the grammar.
+One could dream of an IDE where, without knowing anything specific about <code>.grammar</code>, it can still find usages of AST nodes defined therein, using the span information from the procedural macro.
+This works in theory: when the macro creates Rust token trees, it can manufacture spans that point inside <code>FooLang.grm</code>, which connects Rust source with the grammar.</p>
+</div>
+<div class="paragraph">
+<p>Where this breaks down is laziness.
+When a user invokes "find usages" inside <code>FooLang.grm</code>, the IDE has no way of knowing, up-front, that the <code>generate_ast_from_grammar!("FooLang.grm")</code> macro call needs to be expanded.
+The only way this could work if the IDE conservatively expands all macros all the time.</p>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

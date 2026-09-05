@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #109</title>
+  <meta name="description"
+    content="Commit: 6831918Release: 2021-12-27">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2021/12/27/changelog-109.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #109</h1>
+<div class="post-meta sect1">
+  Dec 27, 2021
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/68319187d63707fa36d7c215ed0e444e87d9652a"><code>6831918</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2021-12-27"><code>2021-12-27</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sponsors"><a class="anchor" href="#sponsors"></a>Sponsors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Become a sponsor:</strong> On <a href="https://opencollective.com/rust-analyzer/">OpenCollective</a> or
+<a href="https://github.com/sponsors/rust-analyzer">GitHub Sponsors</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="known-issues"><a class="anchor" href="#known-issues"></a>Known Issues</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are some recent known issues related to the VS Code extension and the update mechanism:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Since last week, users running VSCodium or another open-source build of Code might have issues opening projects. This is caused by a change to bundle the server binary with the extension, instead of downloading it on the first load. Unfortunately, Open VSX, which is the marketplace used by VSCodium and other forks <a href="https://github.com/rust-analyzer/rust-analyzer/issues/11080">does not</a> support platform-specific, sometimes serving users binaries for the wrong platform. The workaround is to manually download the VSIX for your platform from GitHub releases, or to install the non-free version of Code.</p>
+</li>
+<li>
+<p>Since last Wednesday, if you install the rust-analyzer from Code, you might get an older version of the extension (<code>0.2.853</code>, from two weeks ago). This is caused by us publishing the nightlies as pre-release version to the Marketplace, which was done to avoid having to download VSIX updates from GitHub for users on the nightly channel. Unfortunately, after publishing the first pre-release version, the Marketplace <a href="https://github.com/rust-analyzer/rust-analyzer/issues/11098">stopped showing</a> the latest stable version (<code>0.2.867</code>, from last week). The workaround is to manually download the VSIX from GitHub releases, or to switch to the pre-release version, then back to the stable one which appears to fix it, probably by triggering another Code bug.</p>
+</li>
+<li>
+<p>VS Code allows installing VSIX files that don&#8217;t match your platform. Please don&#8217;t do that.</p>
+</li>
+<li>
+<p>If you&#8217;re running a 32-bit version of VS Code on a 64-bit Windows system, please install the 64-bit version of Code instead. This configuration used to work thanks to a workaround in the extension (it downloaded the 64-bit binary), but it&#8217;s no longer supported. If you are actually running 32-bit Windows, you don&#8217;t need to do anything different since that&#8217;s not a supported platform anyway.</p>
+</li>
+<li>
+<p>It&#8217;s not yet known how updating between stable versions works.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re not running one of the supported platforms, GitHub releases have a VSIX without an included server, but you&#8217;ll need to compile the server or obtain it by using <code>rustup</code>, just like before.</p>
+</div>
+<div class="paragraph">
+<p>If you have any problems, please check the version you&#8217;re running against the one published on <a href="https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer">the Marketplace</a>, check if you&#8217;ve set <code>rust-analyzer.server.path</code> (it&#8217;s not required on the supported platforms), and maybe file an issue if it still doesn&#8217;t work.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11071"><code>#11071</code></a> build and publish pre-release Code extension versions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11106"><code>#11106</code></a> remove network updates from the Code extension.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10933"><code>#10933</code></a> show values of constants in hover.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11122"><code>#11122</code></a> remove note about alpha status Code extension description.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11062"><code>#11062</code></a> don&#8217;t say "a reference to" <code>Copy</code> types in the docs created by <code>Generate getter</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11069"><code>#11069</code></a> partially fix <code>ide_db::search</code> for crate roots.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11073"><code>#11073</code></a> fix Windows not finding the PDB file.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11074"><code>#11074</code></a> bump default <code>CHALK_SOLVER_MAX_SIZE</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11083"><code>#11083</code></a> fix <code>Inline local</code> assist not working in <code>let</code> statement initializer.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11093"><code>#11093</code></a> complete <code>std::mem::drop</code> instead of <code>Drop::drop</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10484"><code>#10484</code></a> update match checking algorithm to match <code>rustc</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11065"><code>#11065</code></a> don&#8217;t kick off inference in <code>Semantics::descend_into_macros_impl</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11082"><code>#11082</code></a> do less work in <code>hir::Semantics</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11067"><code>#11067</code></a> store function parameter names in <code>ItemTree</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11086"><code>#11086</code></a> simplify completion rendering.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11089"><code>#11089</code></a> render more completions from HIR instead of AST.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11090"><code>#11090</code></a> deduplicate lowering ctx hygiene field.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11092"><code>#11092</code></a> directly use the <code>self</code> parameter in completions instead of searching for it.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11095"><code>#11095</code></a> disable unstable APIs for nightly releases.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11103"><code>#11103</code></a> improve GitHub release action.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11117"><code>#11117</code></a> replace <code>TreeSink</code> with a data structure.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11118"><code>#11118</code></a> move whitespace attachment logic to the parser crate.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11120"><code>#11120</code></a> move parser tests to the <code>parser</code> crate.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11028"><code>#11028</code></a> bump MSRV to 1.57.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
