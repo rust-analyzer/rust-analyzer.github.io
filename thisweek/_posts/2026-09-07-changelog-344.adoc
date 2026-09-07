@@ -1,0 +1,36 @@
+= Changelog #344
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:9074e9b4c6bc31d7986ccf4e22d18af70e5508da[] +
+Release: release:2026-09-07[] (`v0.3.3041`)
+
+== New Features
+
+* pr:23266[] render const values in completion label details:
++
+image::https://github.com/user-attachments/assets/baaef59e-5e32-4899-a3c9-0b3b4588f857[]
+* pr:23262[] add `missing-body` diagnostic.
+
+== Performance Improvements
+
+* pr:23190[] don't lower the signature again in inference, fetch it from other queries instead.
+
+== Fixes
+
+* pr:23297[] (first contribution) follow symlinks when scanning the sysroot for proc macro dylibs.
+* pr:23279[] fix printing of float bit patterns on hover.
+* pr:23249[] accept `Self` as non-leading path segment in attribute paths.
+* pr:23246[] allow inner attributes on blocks in tuple expressions.
+* pr:22662[] avoid type unification errors in term search.
+* pr:23163[] fix parsing of `self::` in function param list.
+* pr:23270[] fix handling of `#[unsafe()]` attributes without inner meta.
+
+== Internal Improvements
+
+* pr:23248[] (first contribution) use `cargo install --locked`.
+* pr:23265[] (first contribution) reduce the scope of the marketplace tokens.
+* pr:23218[] store doc comments as their own node and not as `COMMENT` trivia.
+* pr:23271[] merge `Expr::Unsafe` into `Expr::Block`.
+* pr:23292[] make `NamedTempFile` writable on creation.

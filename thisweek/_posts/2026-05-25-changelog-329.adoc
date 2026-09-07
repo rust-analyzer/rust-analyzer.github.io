@@ -10,7 +10,7 @@ Release: release:2026-05-25[] (`v0.3.2913`)
 
 * pr:22406[] (first contribution) add `mutable-ref` diagnostic.
 * pr:22424[] (first contribution) add `array-pattern-without-fixed-length` diagnostic.
-* pr:22404[] add `cannot-index-into` diagnostics.
+* pr:22404[] add `cannot-index-into` diagnostic.
 * pr:22416[] support excluding subitems from completions.
 
 == Performance Improvements
