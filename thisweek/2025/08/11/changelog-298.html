@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #298</title>
+  <meta name="description"
+    content="Commit: 9db0550Release: 2025-08-11 (v0.3.2577)">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2025/08/11/changelog-298.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #298</h1>
+<div class="post-meta sect1">
+  Aug 11, 2025
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/9db05508ed08a4c952017769b45b57c4ad505872"><code>9db0550</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2025-08-11"><code>2025-08-11</code></a> (<code>v0.3.2577</code>)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="an-update-on-the-next-trait-solver"><a class="anchor" href="#an-update-on-the-next-trait-solver"></a>An Update on the Next Trait Solver</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We are very close to switching from <code>chalk</code> to the next trait solver, which will be shared with <code>rustc</code>.
+<code>chalk</code> is <em>de-facto</em> unmaintained, and sharing the code with the compiler will greatly improve trait solving accuracy and fix long-standing issues in <code>rust-analyzer</code>.
+This will also let us enable more on-the-fly diagnostics (currently marked as experimental), and even significantly improve performance.</p>
+</div>
+<div class="paragraph">
+<p>However, in order to avoid regressions, we will suspend the weekly releases until the new solver is stabilized.
+In the meanwhile, please test the pre-release versions (nightlies) and report any issues or improvements you notice, either on <a href="https://github.com/rust-lang/rust-analyzer/issues">GitHub Issues</a>, <a href="https://github.com/rust-lang/rust-analyzer/discussions/20426">GitHub Discussions</a>, or <a href="https://rust-lang.zulipchat.com/#narrow/channel/185405-t-compiler.2Frust-analyzer/topic/New.20Trait.20Solver.20feedback">Zulip</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20420"><code>#20420</code></a> (first contribution) add config option to exclude locals from document symbol search.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20381"><code>#20381</code></a> check expected type for assignments in completions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20382"><code>#20382</code></a> correctly go to <code>impl From</code> from <code>into()</code> even inside macros.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20387"><code>#20387</code></a> do not remove the original token when descending into derives.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20412"><code>#20412</code></a> properly handle names matching identifiers in <code>generate_function</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20418"><code>#20418</code></a> fix <code>extract_expressions_from_format_string</code> on <code>write!</code> calls.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20354"><code>#20354</code></a> remove no-op calls in <code>remove_dbg</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20384"><code>#20384</code></a> fix external docs URL for exported macros.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20417"><code>#20417</code></a> (first contribution) fix parsing of trait bound polarity and <code>for</code>-binders.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20419"><code>#20419</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20429"><code>#20429</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/20434"><code>#20434</code></a> make flycheck generational.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20385"><code>#20385</code></a> migrate <code>expand_glob_import</code> assist to <code>SyntaxEditor</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20373"><code>#20373</code></a> generate an <code>ast::Module</code>, not <code>String</code>, in <code>extract_module</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20383"><code>#20383</code></a> remove <code>ted</code> from <code>replace_named_generic_with_impl</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20380"><code>#20380</code></a> remove <code>add_attr</code> from <code>edit_in_place</code> because it use <code>ted</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20409"><code>#20409</code></a> add <code>write!</code> and <code>writeln!</code> to <code>minicore</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20400"><code>#20400</code></a> disable error reporting when clamping a position.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20393"><code>#20393</code></a> fix non-LSP compliant <code>Response</code> definition.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20392"><code>#20392</code></a> report the incorrect payload when failing to deserialize LSP messages.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20389"><code>#20389</code></a> slim down compile-time artifact progress reports.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

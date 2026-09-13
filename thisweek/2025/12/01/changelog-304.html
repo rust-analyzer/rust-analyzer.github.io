@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #304</title>
+  <meta name="description"
+    content="Commit: d646b23Release: 2025-12-01 (v0.3.2702)">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2025/12/01/changelog-304.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #304</h1>
+<div class="post-meta sect1">
+  Dec 1, 2025
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/d646b23f000d099d845f999c2c1e05b15d9cdc78"><code>d646b23</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2025-12-01"><code>2025-12-01</code></a> (<code>v0.3.2702</code>)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21027"><code>#21027</code></a> (first contribution) build releases with static CRT for <code>-windows-msvc</code> targets.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21121"><code>#21121</code></a> add basic support for declarative attribute and derive macros.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20125"><code>#20125</code></a> display inferred placeholder types inlay hints and use them in "Extract type as type alias".</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21077"><code>#21077</code></a> (first contribution) handle more block types and show modifiers in closing brace inlay hints.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21151"><code>#21151</code></a> don&#8217;t run cache priming when disabled.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21095"><code>#21095</code></a> fix iterator completions after auto-deref.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20937"><code>#20937</code></a> don&#8217;t suggest duplicate <code>const</code> completions after <code>raw</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20976"><code>#20976</code></a> fix completion after inner attributes.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21144"><code>#21144</code></a> fix completion after <code>extern</code> and add <code>crate</code> completion.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21028"><code>#21028</code></a> complete enum aliases in patterns.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21126"><code>#21126</code></a> fix parameter info with missing arguments.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20163"><code>#20163</code></a> use per-token, not global, edition in the parser.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20164"><code>#20164</code></a> pass the per-token, not global, edition when expanding declarative macros.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20217"><code>#20217</code></a> use root hygiene for speculative resolution.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21170"><code>#21170</code></a> support multiple <code>enable</code>d features in <code>#[target_feature]</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21159"><code>#21159</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/21172"><code>#21172</code></a> rewrite <code>dyn Trait</code> lowering to follow rustc.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20685"><code>#20685</code></a> support multiple variants in <code>generate_enum_{is,projection}_method</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20967"><code>#20967</code></a> offer <code>replace_method_eager_lazy</code> on <code>and</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21141"><code>#21141</code></a> set <code>enclosing_range</code> in the SCIP index.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21131"><code>#21131</code></a> check snippet capabilities in <code>#[cfg(…)]</code> key completion.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21023"><code>#21023</code></a> fix handling of cloned elements in <code>SyntaxEditor</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21147"><code>#21147</code></a> show a dropdown in the UI for <code>rust-analyzer.imports.granularity.group</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20892"><code>#20892</code></a> reintroduce attribute rewrite.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21097"><code>#21097</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/21145"><code>#21145</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/21146"><code>#21146</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/21154"><code>#21154</code></a> reimplement proc macro server token trees as immutable, to speed up concatenation.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/20986"><code>#20986</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/21133"><code>#21133</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/21135"><code>#21135</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/21139"><code>#21139</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/21179"><code>#21179</code></a> integrate <code>postcard</code> into the proc-macro server.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21149"><code>#21149</code></a> use a single query per crate for lang items.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21167"><code>#21167</code></a> shrink <code>InferenceResult</code> by ~40 bytes.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21169"><code>#21169</code></a> use new <code>salsa</code> API for <code>infer</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21115"><code>#21115</code></a> bump <code>rustc</code> crates.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21177"><code>#21177</code></a> fix <code>SmolStr</code> pretty-printing for <code>Repr::Static</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

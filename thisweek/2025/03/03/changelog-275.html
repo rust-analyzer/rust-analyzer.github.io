@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #275</title>
+  <meta name="description"
+    content="Commit: 81ff38fRelease: 2025-03-03 (v0.3.2328)">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2025/03/03/changelog-275.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #275</h1>
+<div class="post-meta sect1">
+  Mar 3, 2025
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/81ff38f53b9a14ac608feb30b21ed42a41d016c6"><code>81ff38f</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2025-03-03"><code>2025-03-03</code></a> (<code>v0.3.2328</code>)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="announcement"><a class="anchor" href="#announcement"></a>Announcement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The x86-64, AArch64 and ARM Linux binaries now target GLIBC 2.28, and will keep doing so for the foreseeable future, which might be until June 2029.</p>
+</div>
+<div class="paragraph">
+<p>In addition, this version drops support for toolchains older than 1.82.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/18987"><code>#18987</code></a> calculate drop glue and show it on hover.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19259"><code>#19259</code></a> add "flip or-pattern" assist.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19230"><code>#19230</code></a> set up Zig on CI and start using it in rust-analyzer.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19197"><code>#19197</code></a> (first contribution) update <code>insta</code> inline snapshot using <code>cargo insta</code> when clicking "Update Test" runnable.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19246"><code>#19246</code></a> (first contribution) add anchor for intra-doc links to associated items.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19266"><code>#19266</code></a> (first contribution) add <code>identifier</code> to pull diagnostic LSP capabilities.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19211"><code>#19211</code></a> include private items in completions for local crates.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19223"><code>#19223</code></a> support target features implications in <code>target_feature</code> 1.1.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19204"><code>#19204</code></a> allow <code>package/feature</code> format for features.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19241"><code>#19241</code></a> map crate ids for proc macros in sysroot crate graph construction.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19249"><code>#19249</code></a> avoid unnecessary parentheses in prefix adjustment hints.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19250"><code>#19250</code></a> use precedence calculation for parentheses in <code>inline_local_variable</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19221"><code>#19221</code></a> add tab stop to impl body in <code>generate_trait_impl</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19239"><code>#19239</code></a> (first contribution) configure out performance counters on <code>ohos</code> to fix compilation.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19096"><code>#19096</code></a> allow <code>rust-project.json</code> to specify sysroot workspace.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19225"><code>#19225</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/19171"><code>#19171</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/19253"><code>#19253</code></a> migrate <code>remove_mut</code>, <code>remove_parentheses</code>, <code>remove_unused_param</code>, <code>apply_demorgan</code> and <code>convert_bool_then</code> assists to <code>SyntaxEditor</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19251"><code>#19251</code></a> remove syntax editing from parenthesis computation.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19257"><code>#19257</code></a> clean up syntax highlighting.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19219"><code>#19219</code></a> vendor <code>always-assert</code> into <code>stdx</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19237"><code>#19237</code></a> enable doctests.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19218"><code>#19218</code></a> make release builds from source non-incremental.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/19194"><code>#19194</code></a> bump VS Code extension deps.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

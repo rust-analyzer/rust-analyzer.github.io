@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>rust-analyzer in 2021</title>
+  <meta name="description"
+    content="In case this post piques your interest in contributing, consider checking out the Explaining rust-analyzer series on YouTube, the development docs on GitHub ...">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//blog/2021/12/30/2021-recap.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>rust-analyzer in 2021</h1>
+<div class="post-meta sect1">
+  Dec 30, 2021
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In case this post piques your interest in contributing, consider checking out the <a href="https://www.youtube.com/playlist?list=PLhb66M_x9UmrqXhQuIpWC5VgTdrGxMx3y">Explaining rust-analyzer</a> series on YouTube, the development docs <a href="https://github.com/rust-analyzer/rust-analyzer/tree/master/docs/dev">on GitHub</a> or visit our <a href="https://rust-lang.zulipchat.com/#narrow/stream/185405-t-compiler.2Frust-analyzer">Zulip stream</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A lot has happened this year, so we want to take a brief look back at what we have achieved and what has yet to come.</p>
+</div>
+<div class="paragraph">
+<p>Unfortunately, we did not manage to make rust-analyzer an official Rust project in 2021. But if all goes well this should change at the start of the coming year.</p>
+</div>
+<div class="paragraph">
+<p>We started the year out by trying out a different meeting style from our usual weekly syncs on <a href="https://rust-lang.zulipchat.com/#narrow/stream/185405-t-compiler.2Frust-analyzer/topic/weekly.20sync-up">Zulip</a>. We now have six-weeks sprints, with a steering meeting between them, where the working group gets together and discusses what topics and issues to focus on next.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="proc-macros-and-attributes"><a class="anchor" href="#proc-macros-and-attributes"></a>(Proc-)Macros and Attributes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Probably one of the biggest improvements that landed this year was attribute
+proc-macro support, implemented in <a href="https://github.com/rust-analyzer/rust-analyzer/pull/9128">#9128</a>. Attributes are used pervasively in some Rust codebases, usually expanding to enough new items (functions, <code>impl</code> blocks etc.), and are essential in making the IDE work without significantly degrading the user experience. It took us roughly four months until we felt comfortable enough to enable their expansion <a href="https://github.com/rust-analyzer/rust-analyzer/pull/10366">by default</a>, the main reason being the amount of code that had to be adapted to properly support them.
+While this feature mostly works nowadays, there is still one big problem we are facing, that of how attributes can interact with incomplete code. This is described in issue <a href="https://github.com/rust-analyzer/rust-analyzer/issues/11014">#11014</a> in more detail, but attribute proc macros fail to expand when they encounter syntax errors, as is often the case when the user is typing. Of course, function-like proc macros are affected in a similar way. We are still unsure about how to address this problem, so if you have any thoughts on the matter please comment on the linked issue.</p>
+</div>
+<div class="paragraph">
+<p>Attributes aside, a lot of improvements landed for proc-macros in general. We enabled <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8032">proc-macros by default</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7412">started loading proc-macros asynchronously</a> and added support for <a href="https://github.com/rust-analyzer/rust-analyzer/pull/9550">multiple proc-macro ABIs</a>, a finicky feature. The Rust proc-macro ABI is deliberately outside of usual stability guarantees. It constantly evolves, but with every change it breaks our proc-macro server. To counteract this we now try to at least support ~3 ABI versions which nominally correspond to the latest stable, beta and nightly toolchains. In practice, we support much older versions: 1.47 and later, at this moment.</p>
+</div>
+<div class="paragraph">
+<p>It&#8217;s worth pointing out that parts of our proc macro infrastructure are used by <a href="https://intellij-rust.github.io">IntelliJ Rust</a>. It&#8217;s a great example of cross-pollination of ideas between the two projects&#8201;&#8212;&#8201;our <code>proc_macro_srv</code> is based on a design originally implemented in IntelliJ Rust!</p>
+</div>
+<div class="paragraph">
+<p>Finally, declarative macros also saw some love. We switched to an <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7513">NFA parser</a> which brings us closer to how rustc handles them, added basic support for <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8212">macro 2.0</a> and <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8462">type position macros</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="local-item-resolution"><a class="anchor" href="#local-item-resolution"></a>Local Item Resolution</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Rust offers the ability to define new items inside of functions, consts and statics, making them effectively unnameable outside of these items. This idiom is seldom seen but is still useful at times. This is another piece of the language that is tricky to support, as an IDE wants to be lazy and only look at the big picture to understand a file&#8217;s structure. Unfortunately, local items require us to look inside function bodies and the like.</p>
+</div>
+<div class="paragraph">
+<p>As such, finding a compromise took some work:
+<a href="https://github.com/rust-analyzer/rust-analyzer/pull/7336">#7336</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7359">#7359</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7366">#7366</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7375">#7375</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7426">#7426</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7431">#7431</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7466">#7466</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7480">#7480</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7481">#7481</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7482">#7482</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7485">#7485</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7518">#7518</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7525">#7525</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7541">#7541</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7544">#7544</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7554">#7554</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7555">#7555</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7557">#7557</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7559">#7559</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7561">#7561</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7568">#7568</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7575">#7575</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7627">#7627</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/9244">#9244</a>.
+The final piece, enabling it all, landed in <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7614">#7614</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="chalk-integration"><a class="anchor" href="#chalk-integration"></a>Chalk integration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We managed to switch our type representation to the one used by <a href="https://github.com/rust-lang/chalk">chalk</a>, avoiding the need to convert between them every time we invoke the trait solver.</p>
+</div>
+<div class="paragraph">
+<p>This work was done over a bunch of different pull requests: <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7804">#7804</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7813">#7813</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7814">#7814</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7816">#7816</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7823">#7823</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7826">#7826</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7833">#7833</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7870">#7870</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8016">#8016</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/7998">#7998</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8001">#8001</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8018">#8018</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8038">#8038</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8136">#8136</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8190">#8190</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8139">#8139</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8309">#8309</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8327">#8327</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8856">#8856</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8921">#8921</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8938">#8938</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8856">#8856</a>, and we were finally able to fully move over in <a href="https://github.com/rust-analyzer/rust-analyzer/pull/8419">#8419</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="const-generic-params"><a class="anchor" href="#const-generic-params"></a>Const Generic Params</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We started working on basic const generics support, tracking issue <a href="https://github.com/rust-analyzer/rust-analyzer/issues/8655">#8655</a>. This is one of the major pieces left for us to properly support, but also one of the more difficult ones. This problem becomes more and more apparent as libraries are switching over to using them. A notable example being <code>nalgebra</code>, which rust-analyzer is completely confused by.</p>
+</div>
+<div class="paragraph">
+<p>For an ideal experience we would need to evaluate expressions in const generic position like rustc does. Unlike rustc though, we are unable to use <a href="https://github.com/rust-lang/miri/"><code>miri</code></a>. The reason for that is the fact that we do not share the internal data structures that the compiler and miri make use of, nor do we plan to do so in the near future. Because of this, we are required to build our own basic evaluator.</p>
+</div>
+<div class="paragraph">
+<p>This isn&#8217;t the only problem we have. As it currently stands, the majority of rust-analyzer&#8217;s type checking codebase doesn&#8217;t even know about const generics (or lifetimes), and just assumes that only type parameters exist.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mutable-immutable-syntax-trees"><a class="anchor" href="#mutable-immutable-syntax-trees"></a>Mutable Immutable Syntax Trees</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/rust-analyzer/rowan">Rowan</a>, our concrete syntax tree crate, has been adjusted to allow creating mutable copies of the immutable syntax trees. For more in-depth information behind this, check out <a href="https://github.com/rust-analyzer/rust-analyzer/issues/6857">this issue</a>.</p>
+</div>
+<div class="paragraph">
+<p>To put it short, the assists like to take existing syntax in a file, modify it slightly, then paste back the result, changing only a few parts of the code. What most assists did before was to reconstruct the output syntax trees out of the original tree nodes, with the changes inserted or left out. This is unfortunately a tedious process depending on the type of syntax node that has to be edited. These mutable immutable trees now allow us to instead mutably clone a tree, modify it in-place and paste this modified tree back as is.</p>
+</div>
+<div class="paragraph">
+<p>This does not come without its own problems of course, with the main one being that iterating while mutating, which is now possible, will now panic or produce an incorrect tree.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the-code-extension-and-server-downloads"><a class="anchor" href="#the-code-extension-and-server-downloads"></a>The Code extension and server downloads</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The final releases of the year brought two important changes to the way the language server binary is acquired. Until now, the extension called the GitHub API to find a matching release, and downloaded the server from there. In addition, if you opted in to the nightly channel, every day the extension would search for an updated VSIX.</p>
+</div>
+<div class="paragraph">
+<p>While this suited us well for a long time, it had some downsides:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>edge cases like MITM HTTPS proxies with untrusted certificates never worked</p>
+</li>
+<li>
+<p>not being able to replace running executable on Windows (in case you had two running instances) has been a major source of complaints</p>
+</li>
+<li>
+<p>Code checks for extension updates automatically, but the server was downloaded on activation. Many users had an unpleasant surprise when opening a Rust project without a working Internet connection.</p>
+</li>
+<li>
+<p>GitHub Actions has been increasingly unreliable lately causing the nightly builds to fail very often. This broke the extension for users running the nightlies.</p>
+</li>
+<li>
+<p>the download and update code brought a lot of non-essential complexity and even exposed a Node.js bug</p>
+</li>
+<li>
+<p>the required client-side dependencies increased the surface for supply chain attacks</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>So when the Marketplace added support for platform-specific and pre-release extensions, we starting using it with <a href="https://github.com/rust-analyzer/rust-analyzer/pull/11053">#11053</a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/11071">#11071</a> and <a href="https://github.com/rust-analyzer/rust-analyzer/pull/11071">#11106</a>. On a related note, we also <a href="https://github.com/rust-analyzer/rust-analyzer/pull/10903">replaced</a> the client-side unit testing framework with a bit of custom code, dropping our transitive dependencies by the dozens.</p>
+</div>
+<div class="paragraph">
+<p>Unfortunately, the update changes exposed some issues with both the Code Marketplace and Open VSX (used by open-source builds of Code). This is discussed in detail <a href="https://rust-analyzer.github.io/thisweek/2021/12/27/changelog-109.html#known-issues">here</a>, the gist being that you currently need to take manual action when installing or updating the extension. The two issues have been reported upstream, so we hope they will be fixed soon.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="general-ide-experience-improvements"><a class="anchor" href="#general-ide-experience-improvements"></a>General IDE Experience Improvements</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We now support standalone Rust files (<a href="https://github.com/rust-analyzer/rust-analyzer/pull/8955">#8955</a>), so just opening a single file should allow you to use most of rust-analyzer&#8217;s functionality that is not reliant on cargo.</p>
+</div>
+<div class="paragraph">
+<p>We also improved and added a bunch of smaller features, some noteworthy ones are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7297">Flyimport Completions for Trait Associated Items</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10458">Custom User Snippet Completions</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7335">Region Folding</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7799">Related Test Peeking</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8054">Move Item Command</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8801">Crate Graph View</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8873">Import Granularity Guessing</a></p>
+</li>
+<li>
+<p>Highlighting <a href="https://github.com/rust-analyzer/rust-analyzer/pull/9375">Function Exit and Yield Points</a> and <a href="https://github.com/rust-analyzer/rust-analyzer/pull/9396">Loop Break Points</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8774">Respect <code>.cargo/config.toml</code></a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>An impressive ~37 new assists have been implemented, some by the main contributors, but most by newcomers:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7310">Add Lifetime to Type</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7824">Add Type Ascription</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10362">Convert <code>a/mod.rs</code> into <code>a.rs</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/9837">Convert <code>bool::then</code> to <code>if</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7741">Convert <code>for</code> Loop to <code>Iterator::for_each</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/9816">Convert <code>if</code> to <code>bool::then</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8295">Convert <code>Into</code> Impl to <code>From</code> Impl</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7956">Convert <code>Iterator::for_each</code> to <code>for</code> Loop</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7777">Convert Between Line and Block Comments</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10211">Convert File Module to Directory</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10998">Convert Number Representation</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8317">Convert Tuple Struct to Named Struct</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/9855">Destructure Pattern into Tuple Pattern</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7130">Extract Assignment</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7535">Extract Function</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/9939">Extract module</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8210">Extract Type Alias</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8037">Generate <code>fn is_empty</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10459">Generate Constant</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7800">Generate Default Impl</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10539">Generate Delegate Methods</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/8467">Generate Deref Impl</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10951">Generate Documentation Templates</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7562">Generate Enum Match</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7677">Generate Enum Match 2</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7617">Generate Getter and Setter</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/9804">Generate Method</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7131">Inline Function</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10352">Inline into Callers</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10546">Promote Local to Const</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10602">Qualify method call</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10476">Replace <code>?</code> with <code>match</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10629">Replace Turbofish with Explicit Type</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/6809">Sort Impl Functions by Trait definition</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/9735">Sort Members Lexicographically</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/7289">Unmerge Use</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10417">Unwrap <code>Result</code> Return Type</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="conclusion"><a class="anchor" href="#conclusion"></a>Conclusion</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We made a bunch of progress this year, finishing up work on important functionality pieces as well as quality of life changes. But there is still a lot more to be done, as a quick look at the <a href="https://github.com/rust-analyzer/rust-analyzer/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3AArchitecture">issue tracker</a> may tell.</p>
+</div>
+<div class="paragraph">
+<p>A big thanks to everyone supporting the project, be it through donations, contributions or cheers. We wish you a fortunate next year 🎉.</p>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
