@@ -1,0 +1,25 @@
+= Changelog #345
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:682a84e95b5a52cf06e9822fcaa4f628738554bf[] +
+Release: release:2026-09-14[] (`v0.3.3049`)
+
+== Fixes
+
+* pr:23300[] (first contribution) fix doc comment offset calculation.
+* pr:23307[] drop support for const blocks in patterns.
+* pr:23333[], pr:23340[] fix `incorrect_case` false positives on raw identifiers.
+* pr:23330[] fix panic on `{"$": ""}`.
+* pr:23295[] fix panic on doc comments attached to literal expressions.
+* pr:23315[] fix `Type` owner mismatches between anonymous consts.
+* pr:23352[] fix an `Type::impls_trait` panic with built-in derives of generic types.
+* pr:23323[] fix stack overflow with recursive eager macros.
+* pr:23317[] don't fill the body of `Drop::drop` and `#[rustc_must_implement_one_of]` items.
+* pr:23318[] skip unstable methods in "Implement default members".
+
+== Internal Improvements
+
+* pr:23311[] clean up some ``#[allow]``s.
+* pr:23325[] remove the `interner` and `db` arguments from `empty` and `default_types`.
