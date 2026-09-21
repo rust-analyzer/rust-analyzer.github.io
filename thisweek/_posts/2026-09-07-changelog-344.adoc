@@ -10,7 +10,7 @@ Release: release:2026-09-07[] (`v0.3.3041`)
 
 * pr:23266[] render const values in completion label details:
 +
-image::https://github.com/user-attachments/assets/baaef59e-5e32-4899-a3c9-0b3b4588f857[]
+image::https://github.com/user-attachments/assets/baaef59e-5e32-4899-a3c9-0b3b4588f857["Screenshot showing core::f32::consts completions with a lot of decimals"]
 * pr:23262[] add `missing-body` diagnostic.
 
 == Performance Improvements

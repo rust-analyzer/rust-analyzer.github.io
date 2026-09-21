@@ -1,0 +1,26 @@
+= Changelog #346
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:aaddfb73fd95f2c0bf001b474dca91ae28bcce3a[] +
+Release: release:2026-09-21[] (`v0.3.3057`)
+
+== New Features
+
+* pr:23384[] support completions inside `cfg!()`:
++
+image::https://github.com/user-attachments/assets/fdad41ee-e2c3-41a8-ac94-b660f024b765["Screenshot showing if cfg!(any(target_)) completions"]
+
+== Fixes
+
+* pr:23375[] (first contribution) watch include roots recursively only once, on directory.
+* pr:23370[] (first contribution) fix broken server binary check.
+* pr:23359[] (first contribution) cache macro-expanded roots when climbing ancestors.
+* pr:23367[] work around a panic when the trait solver re-enters itself.
+* pr:23368[] return an early error on unsupported string binary operations.
+* pr:23360[] include working directory when discovery command fails.
+
+== Internal Improvements
+
+* pr:23308[] refactor `SyntaxContext` to not reimplement `salsa` macros.
