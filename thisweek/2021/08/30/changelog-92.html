@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #92</title>
+  <meta name="description"
+    content="Commit: d15f646Release: 2021-08-30">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2021/08/30/changelog-92.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #92</h1>
+<div class="post-meta sect1">
+  Aug 30, 2021
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/d15f646ff17e2da0d4e8dc2754ba83213cf1a8bb"><code>d15f646</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2021-08-30"><code>2021-08-30</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sponsors"><a class="anchor" href="#sponsors"></a>Sponsors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Become a sponsor:</strong> On <a href="https://opencollective.com/rust-analyzer/">OpenCollective</a> or
+<a href="https://github.com/sponsors/rust-analyzer">GitHub Sponsors</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10008"><code>#10008</code></a> highlight declarations and references for both definitions in field shorthands:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/131287051-f42dce5e-2892-44fe-ba9e-04347f2c5d66.png" alt="131287051 f42dce5e 2892 44fe ba9e 04347f2c5d66">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/9994"><code>#9994</code></a> make <code>Generate function</code> work for static methods:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/62165556/130415812-57192e15-eab9-4596-92ec-b102c3b3bcd2.gif" alt="130415812 57192e15 eab9 4596 92ec b102c3b3bcd2">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/9993"><code>#9993</code></a> merge assignments in <code>Join lines</code>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/16212576/130366571-3ebb1753-f8d5-4884-be8f-222cda71a2a7.gif" alt="130366571 3ebb1753 f8d5 4884 be8f 222cda71a2a7">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10014"><code>#10014</code></a> expand derive macros under cursor in <code>Expand Macro Recursively</code>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/130638252-5125d41f-2cc0-48fa-af77-9a7f85016438.png" alt="130638252 5125d41f 2cc0 48fa af77 9a7f85016438">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/130638250-debe0a1a-2584-426a-8377-72d6d46276eb.png" alt="130638250 debe0a1a 2584 426a 8377 72d6d46276eb">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/9970"><code>#9970</code></a> implement attribute input token mapping and fix attribute item token mapping:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/130328577-4c1ad72c-51b1-47c3-8d3d-3242ec44a355.png" alt="130328577 4c1ad72c 51b1 47c3 8d3d 3242ec44a355">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10067"><code>#10067</code></a> downmap tokens to all token descendants instead of just the first:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/3757771/131233056-7e645b1d-b82f-468c-bf19-d3335a2cf7c2.png" alt="131233056 7e645b1d b82f 468c bf19 d3335a2cf7c2">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10059"><code>#10059</code></a> enable diagnostics in <code>const</code> and <code>static</code> items.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10004"><code>#10004</code></a> update <code>rowan</code> to fix a memory leak.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10032"><code>#10032</code></a> fix false positive <code>missing unsafe</code> diagnostic on nightly toolchains.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10057"><code>#10057</code></a> remove incorrect assertion in <code>Extract function</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10001"><code>#10001</code></a> fix sorting of enum variants.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10024"><code>#10024</code></a> fix reporting of build script errors.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10029"><code>#10029</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/10030"><code>#10030</code></a> improve <code>Expand Macro Recursively</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10055"><code>#10055</code></a> don&#8217;t use fake text range in original node search as is in completions.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10053"><code>#10053</code></a> (first contribution) remove workaround for old Node versions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10062"><code>#10062</code></a> (first contribution) set <code>esbuild</code> target to Node 14.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/9944"><code>#9944</code></a> introduce in-place indenting API.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/9999"><code>#9999</code></a> use single env var to control all benchmarks.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10010"><code>#10010</code></a> use idiomatic form of assertions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10025"><code>#10025</code></a> don&#8217;t mutate syntax trees when preparing proc-macro input.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10069"><code>#10069</code></a> use <code>ManuallyDrop</code> in <code>RootDatabase</code> to improve build times.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/10066"><code>#10066</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/10071"><code>#10071</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/10074"><code>#10074</code></a> slightly improve compile times.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
