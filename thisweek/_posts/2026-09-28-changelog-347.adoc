@@ -1,0 +1,37 @@
+= Changelog #347
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:03fcb77246f2568adb0e9b2fa60d19c6cc1686f4[] +
+Release: release:2026-09-28[] (`v0.3.3065`)
+
+== New Features
+
+* pr:23390[] support hover on `#[cfg]` predicates:
++
+image::https://github.com/user-attachments/assets/cca84d98-b03f-4c0e-b5d7-302db3998ed1["Screenshot showing a feature=in-rust-tree predicate evaluating to false"]
+
+== Fixes
+
+* pr:23407[] (first contribution) prioritize required items in trait autocomplete.
+* pr:23410[] (first contribution) keep semantic token cache on refresh.
+* pr:23416[] (first contribution) fix safe to unsafe function coercion.
+* pr:23185[] fix const eval casting of single-variant enums.
+* pr:23421[] report undefined behavior when reading the discriminant of an uninhabited enum.
+* pr:23409[] fix panic in async closures with HRTB.
+* pr:23365[] show trait impl when hovering on methods.
+* pr:23382[] complete `#[cfg(false)]`.
+* pr:23413[] de-duplicate `+#[derive]+` and `+#[test]+` in completions.
+* pr:23399[] don't duplicate parentheses in attribute completions.
+* pr:23395[], pr:23414[] complete strings in `#[cfg]` values.
+* pr:23406[], pr:23405[] check for matching types in type alias and const completions.
+* pr:23408[] don't prioritize unknown types in completions.
+
+== Internal Improvements
+
+* pr:23351[] (first contribution) simplify Windows path encoding.
+* pr:23398[] add `GenericSubstitution::all_types`.
+* pr:23386[] activate extension even when the server fails to start.
+* pr:23391[] ignore nightly date string in `xtask codegen`.
+* pr:23429[] use GitHub self-repository syntax for release action.
