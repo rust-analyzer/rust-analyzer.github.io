@@ -1,0 +1,20 @@
+= Changelog #348
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:65ac641199d5b0dacb075c4db95f0bfe784d0386[] +
+Release: release:2026-10-05[] (`v0.3.3073`)
+
+== Fixes
+
+* pr:23464[] (first contribution) use sub-unification roots in `type_var_is_sized`.
+* pr:23462[] (first contribution) offer "Generate variant" on `Self`.
+* pr:23468[] offer `let` and `letm` completions in arm and closure expressions.
+
+== Internal Improvements
+
+* pr:23197[] some small cleanups and micro-optimizations.
+* pr:23196[] don't lower the same types twice `hir-ty`.
+* pr:23419[] don't compute hover information for SCIP.
+* pr:23448[], pr:23449[], pr:23455[] pin `unicode-ident`.
