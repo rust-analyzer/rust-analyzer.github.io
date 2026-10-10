@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #161</title>
+  <meta name="description"
+    content="Commit: 74ae2ddRelease: 2022-12-26">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2022/12/26/changelog-161.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #161</h1>
+<div class="post-meta sect1">
+  Dec 26, 2022
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/74ae2dd3039cd80fc77e4ed0c0a206be6660dd9a"><code>74ae2dd</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2022-12-26"><code>2022-12-26</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13699"><code>#13699</code></a> implement location links for type inlay hints (disabled until Code 1.76 release because of a bug):</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/45197576/204583381-4f69201a-a222-477e-8c01-8e739d0cbe80.gif" alt="Screen recording showing clicking on inlay hint parts">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13817"><code>#13817</code></a> add option to hide adjustment hints outside of <code>unsafe</code> blocks and functions:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/38225716/208986376-d607de62-8290-4e16-b7fe-15b762dc5f60.png" alt="Screenshot showing an &lt;unsize&gt;&amp;raw mut * on the RHS of let ptr: *mut \[u8\] = &amp;mut \[\]">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13805"><code>#13805</code></a> (first contribution) complete enum variants without parens when snippets are disabled.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13794"><code>#13794</code></a> fix "parser seems stuck" panics when parsing colossal files.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13795"><code>#13795</code></a> use the correct edition when formatting code in path dependencies.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13800"><code>#13800</code></a> don&#8217;t match <code>let</code> expressions and inline <code>const</code>s in <code>expr</code> MBE fragments.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13820"><code>#13820</code></a> fix binding mode hints always adding parentheses to or-patterns.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13831"><code>#13831</code></a> don&#8217;t autofill associated type trait bounds when generating an implementation.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13764"><code>#13764</code></a> correctly check for redundant parentheses in the <code>remove_parentheses</code> assist.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13806"><code>#13806</code></a> skip hints for identity (<code>T</code> &#8594; <code>T</code>) adjustments.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13814"><code>#13814</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/13818"><code>#13818</code></a> calculate the <code>TargetDataLayout</code> correctly for the selected target.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13840"><code>#13840</code></a> handle lifetime variables in <code>CallableSig</code> query.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13828"><code>#13828</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/13829"><code>#13829</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/13835"><code>#13835</code></a> (first contributions) fix <code>redundant_clone</code>, <code>explicit_auto_deref</code>, <code>uninlined_format_args</code> clippy warnings.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13830"><code>#13830</code></a> use a default derives and <code>strip_prefix</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13771"><code>#13771</code></a> add <code>xtask</code> command for publishing release notes on GitHub Releases.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13804"><code>#13804</code></a> split inlay hints into modules by type.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/13822"><code>#13822</code></a> thread <code>FamousDefs</code> through the inlay hints.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

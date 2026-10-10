@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #323</title>
+  <meta name="description"
+    content="Commit: 7b6e124Release: 2026-04-13 (v0.3.2862)">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2026/04/13/changelog-323.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #323</h1>
+<div class="post-meta sect1">
+  Apr 13, 2026
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/7b6e1249b7320e16792e31ce67bb2e5f4acd6a8b"><code>7b6e124</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2026-04-13"><code>2026-04-13</code></a> (<code>v0.3.2862</code>)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21978"><code>#21978</code></a> (first contribution) enhance runnable command placeholders.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21964"><code>#21964</code></a> (first contribution) allow passing extra arguments to <code>cargo metadata</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21012"><code>#21012</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/21982"><code>#21982</code></a> complete <code>&#8594;</code> in function return position.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21995"><code>#21995</code></a> (first contribution) don&#8217;t let Cargo <code>[env]</code> variables override the process ones.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21970"><code>#21970</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/21968"><code>#21968</code></a> (first contribution) load Markdown files into the VFS and watch for changes.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21704"><code>#21704</code></a> (first contribution) load <code>rust-analyzer.toml</code> in virtual workspaces.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21965"><code>#21965</code></a> improve handling of <code>#[cfg_attr]</code> and <code>#[cfg]</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21973"><code>#21973</code></a> take path context into account in <code>ImportAssets</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21962"><code>#21962</code></a> fix <code>SyntaxEditor</code> upmapping of nodes with mapped ancestors that aren&#8217;t mapped themselves.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21981"><code>#21981</code></a> emit diagnostic for <code>#![cfg]</code>ed out crates.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21977"><code>#21977</code></a> disable the fix for <code>missing-fields</code> when the fields are private.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22009"><code>#22009</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22012"><code>#22012</code></a> fix spurious import completions in qualified paths with type anchors.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21955"><code>#21955</code></a> add semicolon for postfix <code>print!</code>-like completions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21971"><code>#21971</code></a> check coercion, not unification, in "Fill struct fields".</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21953"><code>#21953</code></a> improve type mismatch "Add `Some`" fix on block-like expressions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21952"><code>#21952</code></a> improve type mismatch fixes inside macro calls.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21920"><code>#21920</code></a> improve <code>add_missing_match_arms</code> labels.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21957"><code>#21957</code></a> improve <code>onEnter</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22010"><code>#22010</code></a> fix <code>rustfmt</code> with relative custom command.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21738"><code>#21738</code></a> fix stale diagnostics with custom <code>check</code> command.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21969"><code>#21969</code></a> refrsh workspace when adding a Cargo config.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21988"><code>#21988</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22011"><code>#22011</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/21998"><code>#21998</code></a> add workflow to update generated lints.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21996"><code>#21996</code></a> migrate <code>extract_struct_from_enum_variant</code> assist to <code>SyntaxEditor</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21993"><code>#21993</code></a> replace <code>make::trait_</code> with <code>SyntaxFactory</code> in <code>generate_trait_from_impl</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21997"><code>#21997</code></a> replace <code>make</code> constructors with <code>SyntaxFactory</code> in <code>generate_single_field_struct_from</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21975"><code>#21975</code></a> handle token mutability in <code>SyntaxEditor</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21960"><code>#21960</code></a> move <code>SyntaxEditor</code> precondition handling to its constructor.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21972"><code>#21972</code></a> remove some redundant <code>clone_subtree</code>s.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21967"><code>#21967</code></a> derive <code>Clone, Copy, Hash</code> for <code>vfs::ChangeKind</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21963"><code>#21963</code></a> bump ESLint and TypeScript.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21986"><code>#21986</code></a> fix <code>RecursiveMemoryLayoutNode</code> field names in the Code extension.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21985"><code>#21985</code></a> use official npm registry for the Code extension dependencies.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
