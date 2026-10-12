@@ -1,0 +1,33 @@
+= Changelog #349
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:2ad81e72b7e978cb800dffe1bcce5c9f98032acf[] +
+Release: release:2026-10-12[] (`v0.3.3081`)
+
+== New Features
+
+* pr:23452[], pr:23487[] don't complete argument list when a callable is expected.
+* pr:23473[] complete turbofish at call sites when needed.
+
+== Fixes
+
+* pr:23443[] (first contribution) fix panic with escape sequences inside `#[doc]`.
+* pr:23422[] (first contribution) fix panic on malformed `let` pattern with mismatched arm arities.
+* pr:23061[] implement `opaques_with_sub_unified_hidden_type`, fixing type mismatches in recursive async functions.
+* pr:23476[] handle downcasts in enum closure capture.
+* pr:23477[] improve parser recovery after attributes at the end of blocks.
+* pr:23456[] ignore leading and trailing underscores in completion name matching.
+* pr:23467[] improve incomplete statement completion heuristic.
+* pr:23486[] fix completions under inner doc comments.
+* pr:22982[] offer `let` completions in macro calls which expand to statements.
+* pr:23441[] update paths after extracting trait into a module.
+
+== Internal Improvements
+
+* pr:23483[] (first contribution) sync target feature implications from `rustc_target`.
+* pr:23482[] port recent closure capture inference changes from rustc.
+* pr:23444[] attach HIR database in `rust-analyzer unresolved-references`.
+* pr:23485[], pr:23494[] use trusted publishing for `lib` and `autopublish` crates.
+* pr:23434[] make fixtures work in `check_with_base_items`.
