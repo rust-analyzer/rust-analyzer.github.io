@@ -1,0 +1,34 @@
+= Changelog #350
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:5ec20d044dbf04895877a55921ddc0ae6e73e127[] +
+Release: release:2026-10-19[] (`v0.3.3089`)
+
+== New Features
+
+* pr:23428[] support inlining functions into macro calls.
+
+== Performance Improvements
+
+* pr:23207[] querify some functions called by the trait solver.
+
+== Fixes
+
+* pr:23513[] (first contribution) fix a `viewMir` panic in code containing field projections.
+* pr:23500[] allow `_ = return else {};`.
+* pr:23508[] update enum niche decoding to match `rustc`.
+* pr:23179[] fix handling of generic params in anonymous consts.
+* pr:23504[] fix a stack overflow when computing the layout of recursive structs.
+* pr:23523[] improve attribute completion when missing snippet support.
+* pr:23507[] quote attribute values `cfg!()` completions.
+* pr:22185[] handle tail expressions in the `type-mismatch` quick fix.
+* pr:23493[] don't offer `add_turbo_fish` for lifetimes.
+* pr:23173[] disambiguate SCIP monikers in crates with multiple targets.
+
+== Internal Improvements
+
+* pr:23488[] (first contribution) pin GitHub actions by hash.
+* pr:23503[] (first contribution) pass `rustc` path to `unstable-book-gen`.
+* pr:23181[] break up `hir-ty` up, part 1.
