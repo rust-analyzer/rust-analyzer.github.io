@@ -1,0 +1,23 @@
+= Changelog #351
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:0c4d74686b21f2b3bd8872b6d3cf36ad2e740d49[] +
+Release: release:2026-10-26[] (`v0.3.3097`)
+
+== Fixes
+
+* pr:23533[] (first contribution) emit `invalid-range-pat-type` range patterns with invalid inferred types.
+* pr:23231[] fix a panic in `inline_call` with usages in macro calls.
+* pr:23518[] escape keyword module name completions.
+* pr:23529[] offer `main` and `lib` modules in completion.
+* pr:23489[] compute ref-match on undotted `self`.
+* pr:23424[] fix some `NamedTempFile` issues on Windows.
+* pr:23296[] search manifest ancestors for the lockfile when fetching Cargo metadata.
+* pr:23552[] fix status message reporting for clients not supporting `experimental/serverStatusNotification`.
+
+== Internal Improvements
+
+* pr:23484[] set up automated sync of target feature implications.
+* pr:23536[], pr:23535[], pr:23532[] publish a new version of `smol_str`.
