@@ -1,0 +1,28 @@
+= Changelog #352
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:b98172d80f0da12bbde3d6733c274e17cb6417aa[] +
+Release: release:2026-11-02[] (`v0.3.3105`)
+
+== New Features
+
+* pr:23573[], pr:23572[] bump `rustc_lexer` and handle forced keywords (`k#`).
+
+== Performance Improvements
+
+* pr:23228[] add `ThinMap`, a map that uses `ThinVec` when the length is small (saves 38 MB on `self`).
+
+== Fixes
+
+* pr:23534[] (first contribution) fix push diagnostics.
+* pr:23495[] fix a panic on by projection types.
+* pr:23562[] don't complete `f(*&val)`.
+* pr:23586[] fix lowering of `yield` in `async gen`.
+
+== Internal Improvements
+
+* pr:23588[] use macOS 15 runners and bump deployment target.
+* pr:23577[] remove `InferenceResult.error_ty`.
+* pr:23576[] bump `rowan`.
