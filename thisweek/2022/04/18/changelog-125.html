@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #125</title>
+  <meta name="description"
+    content="Commit: 65fbe0aRelease: 2022-04-18">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2022/04/18/changelog-125.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #125</h1>
+<div class="post-meta sect1">
+  Apr 18, 2022
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/65fbe0a8d17fc257f037f4dd465bff69a3d3054a"><code>65fbe0a</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2022-04-18"><code>2022-04-18</code></a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="announcement"><a class="anchor" href="#announcement"></a>Announcement</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Since this week, <code>rust-analyzer</code> has <a href="https://github.com/rust-lang/rust-analyzer">a new home</a>!
+The repository now lives in the <code>rust-lang</code> GitHub organization.
+If you&#8217;re an existing user or contributor there&#8217;s no need to take action but if you encounter any glitches, please keep calm and report them.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11935"><code>#11935</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/12006"><code>#12006</code></a> switch to LSP inlay hints (requires VS Code 1.66).</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11961"><code>#11961</code></a> deprioritize already-imported names in <code>use</code> items:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1786438/162790376-6b133925-7cf9-46c5-b0e2-d8c3cba61d47.png" alt="162790376 6b133925 7cf9 46c5 b0e2 d8c3cba61d47">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11971"><code>#11971</code></a> add trailing <code>;</code> when typing <code>=</code> in assignment:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1786438/163022079-1ed114ef-7c75-490f-a8ed-731a13f0b44d.gif" alt="163022079 1ed114ef 7c75 490f a8ed 731a13f0b44d">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11956"><code>#11956</code></a> allow customizing the command for running build scripts.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12014"><code>#12014</code></a> attempt to format <code>expand_macro</code> output with <code>rustfmt</code> if possible.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11957"><code>#11957</code></a> (first contribution) fix GAT panics.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11883"><code>#11883</code></a> move module directory on rename.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11967"><code>#11967</code></a> fix trait impl completions not triggering after <code>fn</code>/<code>const</code>/<code>type</code>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/1786438/162996087-56540f5e-a6be-4111-a4a5-8de21f483a5e.png" alt="162996087 56540f5e a6be 4111 a4a5 8de21f483a5e">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11969"><code>#11969</code></a> add trailing <code>;</code> when completing associated const/type in trait impl.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11992"><code>#11992</code></a> resolve <code>uN::method</code> even when <code>use std::uN;</code> is present.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11993"><code>#11993</code></a> enable ADT keyword completions in block expressions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12000"><code>#12000</code></a> tag <code>macro_rules</code> macro bang with <code>MacroBang</code> tag.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12001"><code>#12001</code></a> do reference search on all downmapped tokens with the same kind only.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12002"><code>#12002</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/12008"><code>#12008</code></a> fix source root panic in global state when switching git branches.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11991"><code>#11991</code></a> fix completion detail for async functions and RPITs.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12011"><code>#12011</code></a> show <code>impl Trait</code> in argument position in completion details.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12013"><code>#12013</code></a> support <code>associated_const_equality</code> in parser.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11980"><code>#11980</code></a> (first contribution) update repository URL.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11964"><code>#11964</code></a> unset test feature in rustc source crates.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11970"><code>#11970</code></a> bump chalk to fix most type mismatches in the <code>rust-analyzer</code> repo.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11958"><code>#11958</code></a> show config deserialization failures on start up.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11960"><code>#11960</code></a> show more project building errors to the user.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11990"><code>#11990</code></a> improve <code>ItemTree</code> pretty print output.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/11999"><code>#11999</code></a> update feature list in VS Code extension README.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12003"><code>#12003</code></a> remove duplicated crate id field from <code>hir::Type</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12005"><code>#12005</code></a> remove frequent <code>Arc&lt;Body&gt;</code> clones in type checking.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/12009"><code>#12009</code></a> add more visibility into why the project gets reloaded.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

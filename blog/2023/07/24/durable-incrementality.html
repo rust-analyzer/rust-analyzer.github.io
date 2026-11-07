@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Durable Incrementality</title>
+  <meta name="description"
+    content="Salsa is an incremental computation engine used by rust-analyzer.In this post, I will describe a particular optimization implemented in Salsa&#8201;&#8212;&#...">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//blog/2023/07/24/durable-incrementality.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Durable Incrementality</h1>
+<div class="post-meta sect1">
+  @matklad, Jul 24, 2023
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/salsa-rs/salsa">Salsa</a> is an incremental computation engine used by rust-analyzer.
+In this post, I will describe a particular optimization implemented in Salsa&#8201;&#8212;&#8201;durability system.
+It was <a href="https://github.com/salsa-rs/salsa/pull/180">implemented</a> quite a while ago, but only now it occurred to me that this is a nice self-contained trick, which I haven&#8217;t seen discussed elsewhere, and which is worth writing about.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s start with a bird&#8217;s eye overview of how Salsa works.
+Instrumentation is the first major component.
+When a Salsa-based program is executed, it records dependencies between between function calls.
+Afterwards, salsa gets a complete call graph like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="https://github.com/rust-analyzer/rust-analyzer.github.io/assets/1711539/22d029d0-86f1-429d-b8c6-9eefd46d0ed0" alt="22d029d0 86f1 429d b8c6 9eefd46d0ed0">
+</div>
+</div>
+<div class="paragraph">
+<p>Here, square nodes signify inputs explicitly provided by the user, and round nodes are derived data computed using arbitrary Rust code.
+Round node include both the function name, as well as the value of all arguments.
+We call such bundle of function with arguments a query.
+So, <code>f("foo")</code> and <code>f("bar")</code> are two different queries.</p>
+</div>
+<div class="paragraph">
+<p>This query graph is then used to make computation incremental.
+When just one input changes, it is clear that we don&#8217;t need to recompute the whole graph.
+Salsa&#8217;s job is to figure out which queries <em>have</em> to be re-run.</p>
+</div>
+<div class="paragraph">
+<p>Salsa&#8217;s particular approach enjoys two extra properties.</p>
+</div>
+<div class="paragraph">
+<p><em>First</em>, Salsa implements early cutoff optimization.
+The most direct implementation of incremental computation would invalidate all queries that transitively depend on the changed input, and then re-run those queries (re-using results which do not depend on that input).
+But it is possible to do better.
+It may be the case that, even if one input to a query changes, the result is still the same.
+For example, when parsing a file into an AST, changing the input source code to include an extra whitespace does not change the AST structure.
+Early cutoff takes advantages of that, and re-uses results which depend on the AST, but not on the original source file.</p>
+</div>
+<div class="paragraph">
+<p>AST computation &#8220;shields&#8221; the code higher in the stack from changes in the source code.
+That is, of course, if you don&#8217;t store positions in the AST.
+The bulk of work using an incremental system such as Salsa is figuring out things like this&#8201;&#8212;&#8201;introducing effective early cutoff shields and preventing volatile details like positions from accidentally sneaking in.</p>
+</div>
+<div class="paragraph">
+<p>The second Salsa property is laziness.
+When changing the input, one can go and eagerly mark reverse-dependencies as &#8220;this might have changed&#8221;.
+This could create redundant work&#8201;&#8212;&#8201;if two modifications arrive one-after-another in a row, invalidating everything twice is wasteful.
+Or there might be some top-level queries whose results are no longer interesting (e.g., we computed syntax highlighting for a file, but this file is no longer in the foreground in the editor).
+Instead, in Salsa the work for tracking invalidation is done when a fresh result for a query is request.</p>
+</div>
+<div class="paragraph">
+<p>More concretely, Salsa has a global version number.
+Whenever an input changes, Salsa does only two things (so, <code>O(1)</code>):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>change the input,</p>
+</li>
+<li>
+<p>increment the global version.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The rest of the work happens when Salsa runs a query.
+It compares the version in the query with the global version.
+If it is smaller, the query needs to be re-validated.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To support early cutoff, the actual implementation is a bit more complex.
+Each query carries two versions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the latest version when we ensured that the result is up-to-date,</p>
+</li>
+<li>
+<p>a potentially earlier version number when the result of the query was actually different.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>I&#8217;ll leave it at that, as going deeper into the Salsa algorithm isn&#8217;t the today&#8217;s topic.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The bottom line is that, when computing a top-level query after a change, Salsa does two graph traversals.</p>
+</div>
+<div class="paragraph">
+<p>First, we flood the graph forward starting from the query, and reaching all the way down to the inputs.
+If we realize that no inputs to the current top-level query have changed, we just increment version numbers of all flooded queries.</p>
+</div>
+<div class="paragraph">
+<p>However, if at some point we hit an input that <em>was</em> changed since we looked at it last time, we start flooding the graph backwards, propagating the change and recomputing the queries.
+This backward flooding stops when we hit a query whose result is unchanged despite a changed input (early cutoff).</p>
+</div>
+<div class="paragraph">
+<p>And now we finally approach the topic of today&#8217;s article, durabilities.
+Imagine a mostly no-op build (some input was changed, but no query looked at this particular input).
+The only work Salsa needs to do here is to traverse the graph of queries and increment version numbers, no queries will be executed.
+<em>But</em> the problem is that even just the graph of queries can be pretty large!
+In the context of rust-analyzer, you could expect every function and type to create a bunch of queries, and there are a <em>lot</em> of functions and types in the standard library.</p>
+</div>
+<div class="paragraph">
+<p>And this creates a feeling that there&#8217;s still room for optimization.
+Imagine a typical rust-analyzer session, where a user types in their <code>src/lib.rs</code>.
+With the Salsa described so-far (and with the actual Salsa before durability system was implemented), any change to <code>src/lib.rs</code> necessitates checking all the queries related to standard library (which adds up to about 300ms).
+This seem wasteful: of course changing my local file can&#8217;t affect the standard library.
+But how to explain this to Salsa?
+What <em>actually</em> prevents stdlib from depending on local files?
+Somebody could have sneaked up a stray</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="rust"><table class="linenotable"><tbody><tr><td class="linenos gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nd">#[path</span> <span class="nd">=</span> <span class="s">"/home/your-user-name/projects/crab-life/src/lib.rs"</span><span class="nd">]</span>
+<span class="k">mod</span> <span class="n">we_are_watching_you</span><span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The high level idea is to divide queries into more durable and more volatile, and let the Salsa optimize accordingly.
+We can expect the queries related to the standard library change less than the queries related to the user&#8217;s code.
+Queries related to crates.io dependencies are somewhere in-between.
+Note again that a &#8220;query&#8221; includes both a particular query function and its arguments.
+We compute the same facts about stdlib code as about user&#8217;s code.
+It&#8217;s just that the facts about stdlib depend on other stdlib facts, while user code facts depend on both stdlib and user facts.</p>
+</div>
+<div class="paragraph">
+<p>To implement this idea, we go from a single version <em>number</em> to a version <em>vector</em>.
+E.g., if we have three durability levels <code>(volatile, normal, durable)</code>, then our version is a tuple of three numbers.
+Additionally, every time we increment a particular component, we also need to increment all less durable components.
+So, incrementing <code>volatile</code> increments <em>just</em> <code>volatile</code>, but incrementing <code>normal</code> increments <em>both</em> <code>volatile</code> and <code>normal</code>.</p>
+</div>
+<div class="paragraph">
+<p>Then, we manually assign a durability level to each input.
+Source files of standard library are marked as <code>durable</code>, source files of the current project are marked as <code>volatile</code>.
+For derived queries, their durability is computed as the minimum durability among the immediate inputs (which is the same as minimal durability of the ground input queries of the transitive closure).</p>
+</div>
+<div class="paragraph">
+<p>With this setup, the update-then-revalidate flow becomes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Change an input.</p>
+</li>
+<li>
+<p>Depending on the input&#8217;s durability, change one or more entries in the global version vector.</p>
+</li>
+<li>
+<p>When checking a derived query, note its durability, and compare its version against the corresponding number from the versions vector.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s re-visit the example where the user types in <code>lib.rs</code>.
+That&#8217;s a volatile input, so only one component of the version vector is incremented.
+Files from the standard library are marked as durable.
+So, when we subsequently try to validate any query related to standard library (e.g., give me all <code>Clone</code> impls in std), we notice that the durable version is the same (because this query ultimately depends only on files in the standard library), and skip over the entire query subgraph.</p>
+</div>
+<div class="paragraph">
+<p>And that&#8217;s it! That&#8217;s the durability subsystem of Salsa. If we look at it from afar, it looks a bit like we took just a step back on laziness.
+By adding just a tiny bit of invalidation which is computed eagerly (the durabilities vector), we significantly improved the efficiency of the system.</p>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

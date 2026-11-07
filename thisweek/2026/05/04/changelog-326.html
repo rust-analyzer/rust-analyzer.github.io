@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #326</title>
+  <meta name="description"
+    content="Commit: f04c372Release: 2026-05-04 (v0.3.2887)">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2026/05/04/changelog-326.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #326</h1>
+<div class="post-meta sect1">
+  May 4, 2026
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/f04c37286472e3687a2d32d3d1fad2772de515a1"><code>f04c372</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2026-05-04"><code>2026-05-04</code></a> (<code>v0.3.2887</code>)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22238"><code>#22238</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22239"><code>#22239</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22253"><code>#22253</code></a> (first contributions) add <code>mismatched-array-pat-len</code> and <code>unused-must-use</code> diagnostics.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22186"><code>#22186</code></a> diagnose trait errors 🎉.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22144"><code>#22144</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22168"><code>#22168</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22145"><code>#22145</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22156"><code>#22156</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22197"><code>#22197</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22193"><code>#22193</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22202"><code>#22202</code></a> add <code>type-must-be-known</code>, <code>generic-default-refers-to-self</code>, <code>invalid-lhs-of-assignment</code>, <code>pattern-arg-in-extern-fn</code>, <code>non-exhaustive-record-expr</code> and <code>union-expr-must-have-exactly-one-field</code> diagnostics.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/21987"><code>#21987</code></a> add initial support for <code>gen</code> blocks.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22178"><code>#22178</code></a> allow renaming of elided lifetimes.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22132"><code>#22132</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22210"><code>#22210</code></a> add <code>.new</code> postfix completion based on expected type.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22179"><code>#22179</code></a> add <code>unwrap_block</code> assist.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="performance-improvements"><a class="anchor" href="#performance-improvements"></a>Performance Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22078"><code>#22078</code></a> (first contribution) store parse errors into a side table.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22192"><code>#22192</code></a> keep nonce when cloning <code>RootDatabase</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22187"><code>#22187</code></a> don&#8217;t intern <code>AdtDef</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22189"><code>#22189</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22131"><code>#22131</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22133"><code>#22133</code></a> drop some <code>Arc</code>s.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22098"><code>#22098</code></a> (first contribution) avoid importing prelude paths when <code>imports.preferPrelude</code> is disabled.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22134"><code>#22134</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22195"><code>#22195</code></a> port pattern inference from <code>rustc</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22141"><code>#22141</code></a> bring type inference closer to <code>rustc</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22135"><code>#22135</code></a> suppress inference variables in monomorphization.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22214"><code>#22214</code></a> visit all expressions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22169"><code>#22169</code></a> parse <code>impl</code> restrictions after visibility.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22170"><code>#22170</code></a> parse <code>return #[attr] expr</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22124"><code>#22124</code></a> don&#8217;t pick an <code>impl Trait</code> block in <code>generate_function</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22166"><code>#22166</code></a> fix placement of async closure capture hints.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22183"><code>#22183</code></a> propagate ABI to functions declared in extern blocks.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22201"><code>#22201</code></a> improve parser recovery in <code>(a, , b)</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22058"><code>#22058</code></a> improve <code>prettify_macro_expansion</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22229"><code>#22229</code></a> add parentheses in <code>convert_match_to_let_else</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22142"><code>#22142</code></a> don&#8217;t offer completions for already imported <code>Trait as _</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22154"><code>#22154</code></a> don&#8217;t complete <code>where</code> after qualified paths.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22222"><code>#22222</code></a> emit <code>else</code> clause in value postfix completions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22240"><code>#22240</code></a> improve indentation in trait item completion.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22244"><code>#22244</code></a> handle cycles in <code>expand_glob_import</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22150"><code>#22150</code></a> offer <code>is_some_and</code> and <code>is_none_or</code> in <code>apply_demorgan_iterator</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22151"><code>#22151</code></a> handle negation in <code>apply_demorgan_iterator</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22247"><code>#22247</code></a> handle match arms in <code>unwrap_branch</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22217"><code>#22217</code></a> add semicolon after expression in <code>unwrap_branch</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22184"><code>#22184</code></a> offer <code>unwrap_branch</code> on non-block match arms.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22180"><code>#22180</code></a> offer <code>replace_arith_op</code> on compound assignments.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22199"><code>#22199</code></a> offer <code>convert_to_guarded_return</code> on <code>if</code> expression with <code>else if</code> clause.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22079"><code>#22079</code></a> handle <code>if matches!()</code> in <code>replace_if_let_with_match</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22215"><code>#22215</code></a> fix a stack overflow when displaying projections.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22265"><code>#22265</code></a> fix panic on <code>impl ?Sized</code> in <code>introduce_named_type_parameter</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22207"><code>#22207</code></a> fix some issues in <code>lower_coroutine_body_with_moved_arguments</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22122"><code>#22122</code></a> be more resilient to deleted directories in <code>Analysis::from_single_file</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22129"><code>#22129</code></a> lower non-destructuring assignments into <code>Pat::Expr</code> instead of <code>Pat::Path</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22146"><code>#22146</code></a> clean up string references in postfix completions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22190"><code>#22190</code></a> ignore a test that might be hanging.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22232"><code>#22232</code></a> refactor the <code>hir-ty</code> generics data structures.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22194"><code>#22194</code></a> refactor <code>InternedCoroutineClosureId</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22221"><code>#22221</code></a> fix incorrect offset with multiple indels.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22121"><code>#22121</code></a> migrate <code>extract_function</code> assist to <code>SyntaxEditor</code> and remove old version of <code>generate_impl</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22125"><code>#22125</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22020"><code>#22020</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22159"><code>#22159</code></a> migrate <code>replace_qualified_name_with_use</code>, <code>inline_call</code> and <code>generate_function</code> assists to <code>SyntaxEditor</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22137"><code>#22137</code></a> migrate <code>convert_into_to_from</code> assist to <code>SyntaxEditor</code> and replace some usages of <code>mod_path_to_ast</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22241"><code>#22241</code></a> migrate <code>insert_use</code> and <code>insert_use_as_alias</code> to <code>SyntaxEditor</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22245"><code>#22245</code></a> migrate <code>AssocItemList::add_item</code> to <code>SyntaxEditor</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22243"><code>#22243</code></a> replace <code>ast::make</code> with <code>SyntaxFactory</code> in <code>to_generic_args</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22246"><code>#22246</code></a> remove <code>WhereClause::add_predicate</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22242"><code>#22242</code></a> remove some unused methods in <code>edit_in_place</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
