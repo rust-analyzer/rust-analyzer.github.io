@@ -1,0 +1,38 @@
+= Changelog #353
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:e5e7830640558e323e89c831488a3172b58dc66d[] +
+Release: release:2026-11-09[] (`v0.3.3113`)
+
+== New Features
+
+* pr:23600[] (first contribution) add option to only show implicit drop hints for types with drop glue.
+* pr:23558[] (first contribution) remove the "Create Rust Project" button from the welcome view.
+* pr:23583[], pr:23589[], pr:23619[] add `invalid-pat-path-res`, `match-inherited-imm-ref-with-mut-ref-pat` and `unresolved-associated-type` diagnostics.
+* pr:21392[] enable `jemalloc` for Linux glibc releases.
+
+== Performance Improvements
+
+* pr:23591[] micro-optimize lang items.
+
+== Fixes
+
+* pr:23598[] (first contribution) match `rustc-unicode` locations in the problem matcher.
+* pr:23478[], pr:23631[] complete trait `dyn` in type location.
+* pr:23606[] improve emission of associated item bounds on built-in derives.
+* pr:23610[] match `rustc` coercion logic.
+* pr:23608[] fix a panic in MIR evaluation.
+* pr:23579[] don't suggest unreachable paths for struct literals.
+* pr:23615[] fix `#[repr(i28)]` completion.
+* pr:23620[] offer `destructure_struct_binding` on wildcard patterns.
+* pr:23592[] offer `generate_doc_example` on re-exported item.
+* pr:23554[] fix GAT bounds position after `move_bounds_to_where_clause`.
+* pr:23616[] fix a panic on casts in `apply_demorgan`.
+* pr:23602[] fix a panic in `generate_function` when generics are present.
+
+== Internal Improvements
+
+* pr:23623[] store `{Type,Const}ParamId` in `keys::{TYPE,CONST}_PARAM`.
+* pr:23514[] merge `expect-test` into the rust-analyzer repo.
