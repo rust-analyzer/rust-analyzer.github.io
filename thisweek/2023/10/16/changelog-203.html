@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #203</title>
+  <meta name="description"
+    content="Commit: 6572ec8Release: 2023-10-16 (v0.3.1697)">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2023/10/16/changelog-203.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #203</h1>
+<div class="post-meta sect1">
+  Oct 16, 2023
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/6572ec8d94c83f8cc6afe0069269abeddc37c25e"><code>6572ec8</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2023-10-16"><code>2023-10-16</code></a> (<code>v0.3.1697</code>)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15728"><code>#15728</code></a> (first contribution) VS Code: support opening local documentation if available:</p>
+<div class="videoblock">
+<div class="content">
+<video src="https://user-images.githubusercontent.com/9659253/273422126-715b84dd-4f14-4ba0-a904-749b847eb3d5.webm" controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15743"><code>#15743</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/15752"><code>#15752</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/15755"><code>#15755</code></a> (first contribution) add assist to convert <code>is_some</code> / <code>is_ok</code> and to <code>if let</code>:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/71162630/275121299-a7866efe-2d54-488b-903e-9df039f34a7e.gif" alt="&quot;Screen recording showing an assist that rewrites `if a.is_some()` to `if let Some(_tmp) = a`" width="and similarly for `is_ok`">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15681"><code>#15681</code></a> (first contribution) add <code>rust-analyzer.rust.analyzerTargetDir</code> option to use <code>rust-analyzer</code> specific target directory.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15696"><code>#15696</code></a> add tuple return to tuple struct assist:</p>
+<div class="videoblock">
+<div class="content">
+<video src="https://user-images.githubusercontent.com/52933714/271883958-2803ff58-fde3-4144-9495-7c7c7e139075.webm" controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15744"><code>#15744</code></a> (first contribution) add diagnostics for char and byte literal errors:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/275412431-12ddaf06-1d10-4e77-b566-ba8a1b9aff0d.png" alt="Screenshot showing errors on invalid char and byte literal">
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15713"><code>#15713</code></a> offer prefix match flyimport completions for one and two character paths:</p>
+<div class="imageblock">
+<div class="content">
+<img src="https://user-images.githubusercontent.com/308347/275410445-6db5ecf5-8ba2-47fb-82fb-508176a5207a.png" alt="Screenshot showing `IpAddr`, `Ipv4Addr` and `Ipv6Addr` completions for `Ip`">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15745"><code>#15745</code></a> (first contribution) add Zed to the manual IDE list.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15725"><code>#15725</code></a> fix automatic <code>rustc</code> / <code>rustdoc</code> lint generation.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15618"><code>#15618</code></a> port <code>anymap</code> to <code>stdx</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15760"><code>#15760</code></a> make some <code>mir::ProjectionStore</code> methods public.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15762"><code>#15762</code></a> try to use deploy key in the metrics workflow.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/15691"><code>#15691</code></a> update <code>rustc_abi</code> dependency.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

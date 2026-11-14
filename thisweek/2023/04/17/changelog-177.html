@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #177</title>
+  <meta name="description"
+    content="Commit: bab80daRelease: 2023-04-17 (v0.3.1481)">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2023/04/17/changelog-177.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #177</h1>
+<div class="post-meta sect1">
+  Apr 17, 2023
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/bab80dae445fd576cb4cc22ba208e9fbc39dc18d"><code>bab80da</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2023-04-17"><code>2023-04-17</code></a> (<code>v0.3.1481</code>)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14533"><code>#14533</code></a> make inlay hints insertable:</p>
+<div class="videoblock">
+<div class="content">
+<video src="https://user-images.githubusercontent.com/308347/232406455-ce7e7eed-9f6e-4cca-a574-938d90e22017.mp4" controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14561"><code>#14561</code></a> map tokens from <code>include!</code> expansion to the included file:</p>
+<div class="videoblock">
+<div class="content">
+<video src="https://user-images.githubusercontent.com/308347/232407988-7c526795-78b7-4802-90c1-0a9e200f7d95.mp4" controls loop>
+Your browser does not support the video tag.
+</video>
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14470"><code>#14470</code></a> compute closure captures.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14549"><code>#14549</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/14551"><code>#14551</code></a> don&#8217;t suggest unstable items on stable toolchain.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14536"><code>#14536</code></a> (first contribution) restrict the applicability range of <code>Sort trait items</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14540"><code>#14540</code></a> (first contribution) allow extracting function from single brace of block expression.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14579"><code>#14579</code></a> (first contribution) accept unknown notification during initialization.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14538"><code>#14538</code></a> fix project linking popup appearing for modules that can be linked to a crate.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14550"><code>#14550</code></a> fix type inference in nested closures.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14544"><code>#14544</code></a> infer types of nested RPITs.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14576"><code>#14576</code></a> fix explicit deref problems in closure capture.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14560"><code>#14560</code></a> fix view crate graph being broken due to webworker usage.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14559"><code>#14559</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/14570"><code>#14570</code></a> skip code lens resolution for mismatched document versions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14580"><code>#14580</code></a> parse more exclusive range and inline const patterns.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14547"><code>#14547</code></a> fix receiver adjustments for <code>Extract variable</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14535"><code>#14535</code></a> use the Rust file&#8217;s parent directory instead of the workspace folder when running the <code>discoverProjectCommand</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14556"><code>#14556</code></a> warn when loading sysroot fails to find the <code>core</code> library.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14446"><code>#14446</code></a> only run TypeScript CI when the VS Code extension changes.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14572"><code>#14572</code></a> encode closing delimiter span in <code>FlatTree</code>s.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14573"><code>#14573</code></a> allocate <code>ExprScope</code> entries in a single arena instead of per-<code>ScopeData</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14575"><code>#14575</code></a> put <code>Attrs</code> behind a query instead of <code>AttsWithOwner</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14574"><code>#14574</code></a> make <code>block_def_map</code> infallible.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14578"><code>#14578</code></a> make <code>inherent_impls_in_block</code> and <code>trait_impls_in_block</code> infallible.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14585"><code>#14585</code></a> make <code>ExpandDatabase::parse_macro_expansion</code> and <code>ExpandDatabase::parse_or_expand</code> infallible.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14581"><code>#14581</code></a> move layout logic from <code>hir-def</code> to <code>hir-ty</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14583"><code>#14583</code></a> report macro definition errors on the definition.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/14584"><code>#14584</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/14587"><code>#14587</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/14588"><code>#14588</code></a> report item-level macro expansion syntax errors.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

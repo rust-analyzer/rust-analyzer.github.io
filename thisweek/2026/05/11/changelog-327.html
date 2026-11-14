@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Changelog #327</title>
+  <meta name="description"
+    content="Commit: e266f5cRelease: 2026-05-11 (v0.3.2896)">
+
+  <link rel="stylesheet" href="/css/asciidoctor.css">
+  <link rel="stylesheet" href="/css/rouge-github.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <!-- dark mode -->
+  <script type="module" src="/js/nightowl.js"></script>
+
+  <link rel="canonical" href="https://rust-analyzer.github.io//thisweek/2026/05/11/changelog-327.html">
+  <link rel="alternate" type="application/rss+xml" title="rust-analyzer"
+    href="https://rust-analyzer.github.io//feed.xml">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/fav/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/fav/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/fav/favicon-16x16.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <link rel="mask-icon" href="/assets/fav/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+  
+  <header>
+    <div id="header-inner">
+      <div class="nightowl-daylight" id="header-left">
+        <a class="site-title" href="/">
+          <img src="/assets/rust-analyzer.svg" alt="rust analyzer" id="header-logo">
+        </a>
+      </div>
+      <div id="header-right">
+        <a class="nav-link" href="https://opencollective.com/rust-analyzer/">Sponsor</a>
+        <a class="nav-link" href="/manual.html">Docs</a>
+        <a class="nav-link" href="/blog">Blog</a>
+        <a class="nav-link" href="/thisweek">Changelog</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main>
+    <article>
+<h1>Changelog #327</h1>
+<div class="post-meta sect1">
+  May 11, 2026
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Commit: <a href="https://github.com/rust-analyzer/rust-analyzer/commit/e266f5cab8f6525d0bc2ddccc0006418c534b5e6"><code>e266f5c</code></a><br>
+Release: <a href="https://github.com/rust-analyzer/rust-analyzer/releases/2026-05-11"><code>2026-05-11</code></a> (<code>v0.3.2896</code>)</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="new-features"><a class="anchor" href="#new-features"></a>New Features</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22309"><code>#22309</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22334"><code>#22334</code></a> (first contributions) add <code>functional-record-update-on-non-struct</code> and <code>expected-array-or-slice-pat</code> diagnostics.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22235"><code>#22235</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22326"><code>#22326</code></a> add <code>duplicate-field</code> diagnostic.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22292"><code>#22292</code></a> add support for deref patterns.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22259"><code>#22259</code></a> complete <code>::</code> in module paths.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="performance-improvements"><a class="anchor" href="#performance-improvements"></a>Performance Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22267"><code>#22267</code></a> improve performance of integer-based symbols.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22280"><code>#22280</code></a> cache more things related to lang items.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fixes"><a class="anchor" href="#fixes"></a>Fixes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22303"><code>#22303</code></a> (first contribution) keep <code>ref</code> and <code>mut</code> when renaming bindings in macro-generated patterns.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22284"><code>#22284</code></a> (first contribution) work around a <code>lsp-mode</code> configuration bug.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22295"><code>#22295</code></a> (first contribution) use runnable kind to disambiguate between Cargo and shell commands.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22272"><code>#22272</code></a> don&#8217;t fetch diagnostics until proc macros are loaded.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22198"><code>#22198</code></a> infer anonymous constants instead of signatures.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22237"><code>#22237</code></a> provide an <code>InferCtxt</code> to <code>TyLoweringContext</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22319"><code>#22319</code></a> don&#8217;t replace closure capture place types with errors if they fail to normalize.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22285"><code>#22285</code></a> unify types in <code>ref_match</code> completions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22275"><code>#22275</code></a> port async block expected type inference from <code>rustc</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22271"><code>#22271</code></a> port array and <code>ref</code> expression inference from <code>rustc</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22299"><code>#22299</code></a> fix derive helper resolution.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22290"><code>#22290</code></a> respect lint attributes for diagnostics that don&#8217;t set their main node.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22276"><code>#22276</code></a> remove usage of <code>references_error</code> in upvar inference.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22266"><code>#22266</code></a> fix handling of <code>self</code> in <code>lower_coroutine_body_with_moved_arguments</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22318"><code>#22318</code></a> provide source map for the lowered <code>let self = self</code> binding in async functions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22274"><code>#22274</code></a> add missing lang items for the trait solver.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22282"><code>#22282</code></a> handle <code>#[rustc_reservation_impl = "reason"]</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22315"><code>#22315</code></a> add whitespace to postfix completions in macro calls.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22286"><code>#22286</code></a> use cursor position for indentation in postfix completions.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22302"><code>#22302</code></a> don&#8217;t split <code>..=</code> in <code>prettify_macro_expansion</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22291"><code>#22291</code></a> don&#8217;t add associated types with defaults in <code>add_missing_impl_members</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22304"><code>#22304</code></a> don&#8217;t offer <code>toggle_macro_delimiter</code> on inner braces.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="internal-improvements"><a class="anchor" href="#internal-improvements"></a>Internal Improvements</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22312"><code>#22312</code></a> bump <code>rustc</code> crates.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22269"><code>#22269</code></a> fix nested edits in <code>SyntaxEditor</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22308"><code>#22308</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22204"><code>#22204</code></a> migrate <code>split_import</code> and <code>convert_closure_to_fn</code> assists to <code>SyntaxEditor</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22261"><code>#22261</code></a> migrate <code>missing_fields</code> diagnostic to <code>SyntaxEditor</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22296"><code>#22296</code></a> migrate <code>impl Trait</code> completions to <code>SyntaxEditor</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22320"><code>#22320</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22321"><code>#22321</code></a>, <a href="https://github.com/rust-analyzer/rust-analyzer/pull/22323"><code>#22323</code></a> migrate macro expansion to <code>SyntaxEditor</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22310"><code>#22310</code></a> remove <code>SourceChangeBuilder::make_mut</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22307"><code>#22307</code></a> remove <code>ted</code>-based <code>increase_indent</code> and <code>decrease_indent</code>.</p>
+</li>
+<li>
+<p><a href="https://github.com/rust-analyzer/rust-analyzer/pull/22256"><code>#22256</code></a> add <code>SyntaxEditor</code> version of <code>wrap_in_tree_list</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+
+  </main>
+
+  <footer>
+    <div id="footer-inner">
+      <div class="footer-by">
+        <a href="https://ferrous-systems.com/">
+          <img class="ferrous-logo" src="/assets/ferrous-logo.png">Ferrous Systems</a>
+        &
+        <a href="https://github.com/rust-analyzer/rust-analyzer/graphs/contributors">contributors</a>
+      </div>
+
+      <div id="footer-links">
+        <a href="/feed.xml" class="footer-link">
+          <i class="fa fa-rss"></i> rss
+        </a>
+        <a href="https://github.com/rust-analyzer/rust-analyzer.github.io" class="footer-link">
+          <i class="fa fa-github"></i> src
+        </a>
+        <a href="https://opencollective.com/rust-analyzer/" class="footer-link">
+          <i class="fa fa-github"></i> sponsor
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
