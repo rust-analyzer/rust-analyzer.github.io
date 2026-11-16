@@ -1,0 +1,27 @@
+= Changelog #354
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:946b80a756ac1a1ef8882ec65e4f3199e38a23c7[] +
+Release: release:2026-11-16[] (`v0.3.3121`)
+
+== Fixes
+
+* pr:23585[] (first contribution) parse final associated functions.
+* pr:23638[] don't evaluate large `u128` values to negative floats.
+* pr:23543[] fix a panic with `for<'a>` on types using `#[derive()]`.
+* pr:23654[] add `&` for postfix `.for` completions if only references implement `IntoIterator`.
+* pr:23637[] add macOS, iOS, Android and musl `#[cfg(target)]` completions.
+* pr:23636[] don't complete `#[repr(transparent)]` after `align(...)` or `packed`.
+* pr:23649[] don't complete types in type anchors.
+* pr:23647[] complete `fn` and `unsafe` after `const`.
+
+== Internal Improvements
+
+* pr:23635[] (first contribution) add `--num-threads` to `lsif`.
+* pr:23665[] replace `builtin #` with forced keywords.
+* pr:23640[] disallow ZSTs in `ThinMap`.
+* pr:23657[] update `hir-ty/next_solver/consts` to match 0.166.
+* pr:23599[] run the bundler on the extension crate graph view.
+* pr:23639[] bump Node.js target and VS Code dependencies.
