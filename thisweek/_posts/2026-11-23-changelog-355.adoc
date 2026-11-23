@@ -1,0 +1,31 @@
+= Changelog #355
+:sectanchors:
+:experimental:
+:page-layout: post
+
+Commit: commit:37721d141370e0904033f7fc3a3abe11c446c4c1[] +
+Release: release:2026-11-23[] (`v0.3.3130`)
+
+== New Features
+
+* pr:23549[] handle custom iterator adapters in chaining inlay hints.
+
+== Performance Improvements
+
+* pr:23678[] fix accidentally quadratic type inference.
+
+== Fixes
+
+* pr:23688[] (first contribution) make sure copied lockfiles are writable.
+* pr:23685[] allow `#[notable_trait]` arguments.
+* pr:23689[] exclude proc macro crates from lang item computations.
+* pr:23694[] respect `is_workspace_member` for all crates in `rust-project.json`.
+* pr:22211[] handle const placeholders in `extract_type_alias`.
+
+== Internal Improvements
+
+* pr:23697[] remove `DbInterner::conjure` from `hir::Type` methods.
+* pr:23459[] add tests for `stdx::thread::Pool` and fix ordering issue.
+* pr:23691[] work around `PartialEq` lang item change.
+* pr:23594[] resolve `artipacked` and `template-injection` in workflows.
+* pr:23470[] use trusted publishing for the VS Code extensions.
